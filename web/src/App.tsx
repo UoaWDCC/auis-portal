@@ -1,20 +1,19 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { useState } from 'react';
-import Home from '@pages/Home';
+import { Outlet } from 'react-router-dom';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
-const router = createBrowserRouter([
-  {
-    path: '/:name',
-    element: <Home />,
-  },
-]);
-
-export default function App() {
-  const [queryClient] = useState(() => new QueryClient());
+const App = () => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-    </QueryClientProvider>
+      <>
+        <Header />
+        <main className="py-3">
+          <div className="max-w-6xl mx-auto px-4">
+            <Outlet />
+          </div>
+        </main>
+        <Footer />
+      </>
   );
 }
+
+export default App;
