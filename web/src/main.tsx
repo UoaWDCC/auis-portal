@@ -27,11 +27,6 @@ const router = createBrowserRouter(
             <Route path="/signup" element={<SignUpScreen />} />
             <Route path="/pvv" element={<PPVScreen />} />
             <Route path="/photos" element={<PhotosScreen />} />
-
-            {/* Routes for admin users */}
-            {/*<Route path="" element={<AdminRoute />}>*/}
-            {/*    <Route path="/admin/photos" element={<PhotosPage />} />*/}
-            {/*</Route>*/}
         </Route>
     )
 );
