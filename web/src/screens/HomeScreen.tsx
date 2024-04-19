@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useParams } from 'react-router';
 import urls from '@utils/urls';
 
-export default function Home() {
+export default function HomeScreen() {
   const { name } = useParams();
 
   const { data, isLoading, isError, error } = useQuery({
