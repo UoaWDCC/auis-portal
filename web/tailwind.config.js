@@ -11,6 +11,9 @@ export default {
         sans: ['Montserrat'],
         body: ['Open Sans'],
       },
+      colors: {
+        'navy-blue': '#034159',
+      }
     },
   },
   daisyui: {
