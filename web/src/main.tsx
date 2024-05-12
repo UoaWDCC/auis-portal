@@ -14,6 +14,7 @@ import LoginScreen from "./screens/LoginScreen.tsx";
 import SignUpScreen from "./screens/SignUpScreen.tsx";
 import PhotosScreen from "./screens/PhotosScreen.tsx";
 import PPVScreen from "./screens/PPVScreen.tsx";
+import CreditsScreen from './screens/CreditsScreen.tsx';
 
 
 //Add any routes for screens below
@@ -27,6 +28,7 @@ const router = createBrowserRouter(
             <Route path="/signup" element={<SignUpScreen />} />
             <Route path="/pvv" element={<PPVScreen />} />
             <Route path="/photos" element={<PhotosScreen />} />
+            <Route path="/credits" element={<CreditsScreen />} />
         </Route>
     )
 );
