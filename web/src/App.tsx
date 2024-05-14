@@ -5,13 +5,14 @@ import Footer from './components/Footer';
 const App = () => {
   return (
       <>
-        <Header />
+        {/* <Header /> */}
         <main className="py-3">
-          <div className="max-w-6xl mx-auto px-4">
+          {/* <div className="max-w-6xl mx-auto px-4"> */}
+          <div>
             <Outlet />
           </div>
         </main>
-        <Footer />
+        {/* <Footer /> */}
       </>
   );
 }
