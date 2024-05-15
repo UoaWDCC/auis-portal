@@ -10,13 +10,17 @@
     "build": "tsc",
     "start": "node dist/index.js",
     "dev": "nodemon index.ts",
-    "email": "email dev"
+    "email": "email dev",
+    "start-web": "cd ../web && npm run dev",
+    "start-api": "npm run dev",
+    "concurrently": "concurrently \"npm run start-api\" \"npm run start-web\""
   },
   "devDependencies": {
     "@types/jsonwebtoken": "^9.0.5",
     "@types/node": "^20.11.17",
     "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.18",
+    "concurrently": "^8.2.2",
     "nodemon": "^3.0.3",
     "typescript": "^5.3.3"
   },
