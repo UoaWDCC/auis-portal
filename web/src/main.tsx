@@ -14,6 +14,7 @@ import LoginScreen from "./screens/LoginScreen.tsx";
 import SignUpScreen from "./screens/SignUpScreen.tsx";
 import PhotosScreen from "./screens/PhotosScreen.tsx";
 import PPVScreen from "./screens/PPVScreen.tsx";
+import {ClerkProvider} from "@clerk/clerk-react";
 
 
 //Add any routes for screens below
@@ -30,13 +31,22 @@ const router = createBrowserRouter(
         </Route>
     )
 );
+// Import your publishable key
+const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
+
+if (!PUBLISHABLE_KEY) {
+  throw new Error("Missing Publishable Key")
+}
 
 const queryClient = new QueryClient();
 
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
-        <QueryClientProvider client={queryClient}>
-            <RouterProvider router={router} />
-        </QueryClientProvider>
+        <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
+            <QueryClientProvider client={queryClient}>
+                <RouterProvider router={router} />
+            </QueryClientProvider>
+        </ClerkProvider>
     </React.StrictMode>
 );
