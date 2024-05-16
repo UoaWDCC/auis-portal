@@ -3,16 +3,16 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 
 const App = () => {
+    // ====== KARMVEER NOTE: I CHANGED TAILWIND CLASSES HERE BECAUSE OF PADDING ISSUES and other stuff
+    // ====== CHECK IF THIS AFFECTS OTHER PEOPLES SCRRENS/BARS
   return (
-      <>
+      <div className="flex flex-col min-h-screen">
         <Header />
-        <main className="py-3">
-          <div className="max-w-6xl mx-auto px-4">
+        <main className="flex-grow flex" >
             <Outlet />
-          </div>
         </main>
         <Footer />
-      </>
+      </div>
   );
 }
 
