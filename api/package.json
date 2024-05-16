@@ -13,7 +13,7 @@
     "email": "email dev",
     "start-web": "cd ../web && npm run dev",
     "start-api": "npm run dev",
-    "concurrently": "concurrently \"npm run start-api\" \"npm run start-web\""
+    "con": "concurrently \"npm run start-api\" \"npm run start-web\""
   },
   "devDependencies": {
     "@types/jsonwebtoken": "^9.0.5",

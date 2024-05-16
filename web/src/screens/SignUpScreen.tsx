@@ -1,7 +1,12 @@
+import {SignUp} from "@clerk/clerk-react";
+
 function SignUpScreen() {
     return (
         <div>
-            <h2> Sign Up Screen</h2>
+            <h1>
+                Custom Sign Up
+            </h1>
+            <SignUp />
         </div>
     )
 }
