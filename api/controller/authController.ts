@@ -14,8 +14,10 @@ export const logIn = asyncHandler(async (req: Request, res: Response) => {
 });
 
 export const clerkSignUp = asyncHandler(async (req: Request, res: Response) => {
-    const { email } = req.body;
-    
+
+  try {
+    console.log('Webhook received:', req.body);
+    const email = req.body.data.email_addresses[0].email_address;
 
     const newUser = await db.insert(users).values({
       email,
@@ -44,4 +46,9 @@ export const clerkSignUp = asyncHandler(async (req: Request, res: Response) => {
     });
 
     res.json(newUser[0]);
+  } catch (error) {
+    console.error('Error handling webhook:', error);
+    res.status(500).send('Internal Server Error');
+  }
+    
 });
