@@ -37,7 +37,7 @@ app.use(notFound);
 app.use(errorHandler);
 
 
-const port = Number.parseInt(process.env.PORT || '3000');
+const port = Number.parseInt(process.env.PORT || '4000');
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });

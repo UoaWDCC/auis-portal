@@ -13,8 +13,9 @@ import ExecScreen from "./screens/ExecScreen.tsx";
 import SignInScreen from "./screens/SignInScreen.tsx";
 import SignUpScreen from "./screens/SignUpScreen.tsx";
 import PhotosScreen from "./screens/PhotosScreen.tsx";
-import PPVScreen from "./screens/PPVScreen.tsx";
+import PVVScreen from "./screens/PVVScreen.tsx";
 import {ClerkProvider} from "@clerk/clerk-react";
+
 
 
 //Add any routes for screens below
@@ -26,7 +27,7 @@ const router = createBrowserRouter(
             <Route path="/exec" element={<ExecScreen />} />
             <Route path="/sign-in" element={<SignInScreen />} />
             <Route path="/sign-up" element={<SignUpScreen />} />
-            <Route path="/pvv" element={<PPVScreen />} />
+            <Route path="/pvv" element={<PVVScreen />} />
             <Route path="/photos" element={<PhotosScreen />} />
         </Route>
     )
