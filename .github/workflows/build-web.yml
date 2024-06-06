@@ -21,5 +21,7 @@ jobs:
 
       - run: yarn
 
+      - run: yarn test
+
       - name: Build
         run: yarn build
