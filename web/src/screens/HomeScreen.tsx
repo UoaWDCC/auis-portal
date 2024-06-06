@@ -5,12 +5,12 @@ import { useParams } from "react-router";
 import urls from "@utils/urls";
 import auisLogo from "../assets/peacock.png";
 import auisAbbrev from "../assets/AUIS_black 3.png";
-import LoadingSpinner from "@components/LoadingSpinner";
+//import LoadingSpinner from "@components/LoadingSpinner";
 
 export default function HomeScreen() {
   const { name } = useParams();
 
-  const { data, isLoading, isError, error } = useQuery({
+  const { data, isError, error } = useQuery({
     queryKey: [QueryKeys.GetIntro, name],
     queryFn: async () => {
       const { data } = await axios(`/hello/${name}`, {
@@ -21,9 +21,10 @@ export default function HomeScreen() {
     },
   });
 
+  /** 
   if (isLoading) {
     return <LoadingSpinner />;
-  }
+  } */
   if (isError) {
     return <div>Error: {error.name}</div>;
   }
