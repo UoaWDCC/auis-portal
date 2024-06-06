@@ -10,7 +10,6 @@ import { RouterProvider } from "react-router-dom";
 
 import App from "./App.tsx";
 import "./index.css";
-
 import HomeScreen from "./screens/HomeScreen.tsx";
 import TestScreen from "./screens/Test.tsx";
 import ExecScreen from "./screens/ExecScreen.tsx";
@@ -18,6 +17,7 @@ import LoginScreen from "./screens/LoginScreen.tsx";
 import SignUpScreen from "./screens/SignUpScreen.tsx";
 import PhotosScreen from "./screens/PhotosScreen.tsx";
 import PPVScreen from "./screens/PPVScreen.tsx";
+import CreditsScreen from './screens/CreditsScreen.tsx';
 import { execs } from "./data/data.ts";
 
 //Add any routes for screens below
@@ -31,6 +31,7 @@ const router = createBrowserRouter(
       <Route path="/signup" element={<SignUpScreen />} />
       <Route path="/pvv" element={<PPVScreen />} />
       <Route path="/photos" element={<PhotosScreen />} />
+      <Route path="/credits" element={<CreditsScreen />} />
     </Route>
   )
 );
