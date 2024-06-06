@@ -2,8 +2,8 @@ name: Build DEV
 
 on:
   push:
-    branches:
-      - "**"
+    branches-ignore:
+      - "main"
 
 jobs:
   BuildApp:
