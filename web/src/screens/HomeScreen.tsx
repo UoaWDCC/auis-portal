@@ -3,6 +3,7 @@ import QueryKeys from "@utils/queryKeys";
 import axios from "axios";
 import { useParams } from "react-router";
 import urls from "@utils/urls";
+import LoadingSpinner from "@components/LoadingSpinner";
 
 export default function HomeScreen() {
   const { name } = useParams();
@@ -19,7 +20,7 @@ export default function HomeScreen() {
   });
 
   if (isLoading) {
-    return <div className="loading loading-spinner" />;
+    return <LoadingSpinner />;
   }
   if (isError) {
     return <div>Error: {error.name}</div>;
