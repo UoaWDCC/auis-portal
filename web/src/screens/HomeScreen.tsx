@@ -5,6 +5,7 @@ import { useParams } from 'react-router';
 import urls from '@utils/urls';
 import auisLogo from '../assets/peacock.png'
 import auisAbbrev from '../assets/AUIS_black 3.png'
+import LoadingSpinner from "@components/LoadingSpinner";
 
 export default function HomeScreen() {
   const { name } = useParams();
@@ -13,7 +14,7 @@ export default function HomeScreen() {
     queryKey: [QueryKeys.GetIntro, name],
     queryFn: async () => {
       const { data } = await axios(`/hello/${name}`, {
-        method: 'get',
+        method: "get",
         baseURL: urls.apiUrl,
       });
       return data;
@@ -21,7 +22,7 @@ export default function HomeScreen() {
   });
 
   if (isLoading) {
-    return <div className="loading loading-spinner" />;
+    return <LoadingSpinner />;
   }
   if (isError) {
     return <div>Error: {error.name}</div>;
