@@ -1,3 +1,25 @@
+# How To Run
+
+The following web application is built using React + Vite. To run the application in development environment follow the commands below
+
+```bash
+yarn 
+```
+```bash
+yarn dev
+```
+
+To build the application run the following command below
+```bash
+yarn build
+```
+
+To run the test, follow the command below
+```bash
+yarn test
+```
+
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
