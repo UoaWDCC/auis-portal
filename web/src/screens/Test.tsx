@@ -1,9 +1,9 @@
 function TestScreen() {
-    return (
-        <div>
-            <h2> Test Screen</h2>
-        </div>
-    )
+  return (
+    <div>
+      <h2> Test Screen</h2>
+    </div>
+  );
 }
 
-export default TestScreen
+export default TestScreen;

@@ -8,9 +8,7 @@ const App = () => {
       <Header />
       <main className="py-3">
         <div className="max-w-6xl mx-auto px-4">
-          <div>
-            <Outlet />
-          </div>
+          <Outlet />
         </div>
       </main>
       <Footer />
