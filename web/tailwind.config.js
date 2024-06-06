@@ -1,15 +1,26 @@
-import daisyui from 'daisyui';
-import themes from 'daisyui/src/theming/themes';
+import daisyui from "daisyui";
+import themes from "daisyui/src/theming/themes";
 
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   plugins: [daisyui],
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Montserrat'],
-        body: ['Open Sans'],
+        sans: ["Montserrat"],
+        body: ["Open Sans"],
+      },
+    },
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
+        sm: "480px",
+        md: "768px",
+        lg: "976px",
+        xl: "1440px",
       },
     },
   },
@@ -17,12 +28,12 @@ export default {
     themes: [
       {
         light: {
-          ...themes['light'],
-          accent: '#087df1',
+          ...themes["light"],
+          accent: "#087df1",
         },
         dark: {
-          ...themes['dark'],
-          accent: '#087df1',
+          ...themes["dark"],
+          accent: "#087df1",
         },
       },
     ],
