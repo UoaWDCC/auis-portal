@@ -22,8 +22,6 @@ FROM base as build
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y build-essential node-gyp pkg-config python-is-python3 ca-certificates fuse3 sqlite3
 
-COPY --from=flyio/litefs:0.5 /usr/local/bin/litefs /usr/local/bin/litefs
-
 # Install node modules
 COPY --link package.json yarn.lock ./
 RUN yarn install --frozen-lockfile --production=false
@@ -45,14 +43,5 @@ COPY --from=build /app /app
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 1337
-# Set environment variables directly in Dockerfile
-ENV HOST=0.0.0.0
-ENV PORT=1337
-ENV APP_KEYS=vaEOk0CuEZmG8/uZAw6n7A==,BNF7ZAJF6tvG8E8oDte9wg==,rCVDv1cLeXxhf4Q6GFN2kQ==,zIWtoLzYiPhiCnfgwlMmYw==
-ENV API_TOKEN_SALT=7w67Lb9IjfLwJicbkTN0Yw==
-ENV ADMIN_JWT_SECRET=TxtJWG4j4eKppUS2OPIFXA==
-ENV TRANSFER_TOKEN_SALT=CyegCPvHAZbV+RajcOuYUg==
-ENV DATABASE_CLIENT=sqlite
-ENV DATABASE_FILENAME=.tmp/data.db
-ENV JWT_SECRET=7eQX6q8WAof7LOi7+uQf8A==
+
 CMD [ "yarn", "run", "start" ]
