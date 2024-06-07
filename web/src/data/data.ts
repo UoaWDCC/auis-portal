@@ -44,3 +44,7 @@ export const execs: Exec[] = [
     bio: "Consectetur adipiscing elit...",
   },
 ];
+
+export const FacebookLink = "https://www.facebook.com/auis.uoa/";
+export const InstagramLink =
+  "https://www.instagram.com/au.indiansociety/?hl=en";
