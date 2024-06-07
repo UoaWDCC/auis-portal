@@ -29,7 +29,7 @@ COPY --link . .
 
 # Set build time environment variables
 ENV VITE_API_URL="https://wdcc-auis-api.fly.dev"
-#ENV VITE_STRAPI_URL="https://auis-strapi.fly.dev/"
+ENV VITE_STRAPI_URL="https://auis-strapi.fly.dev/"
 
 # Build application
 RUN yarn run build
