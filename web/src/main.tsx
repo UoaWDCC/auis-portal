@@ -17,8 +17,7 @@ import LoginScreen from "./screens/LoginScreen.tsx";
 import SignUpScreen from "./screens/SignUpScreen.tsx";
 import PhotosScreen from "./screens/PhotosScreen.tsx";
 import PPVScreen from "./screens/PPVScreen.tsx";
-import CreditsScreen from './screens/CreditsScreen.tsx';
-import { execs } from "./data/data.ts";
+import CreditsScreen from "./screens/CreditsScreen.tsx";
 
 //Add any routes for screens below
 const router = createBrowserRouter(
@@ -26,7 +25,7 @@ const router = createBrowserRouter(
     <Route path="/" element={<App />}>
       <Route index={true} element={<HomeScreen />} />
       <Route path="/test" element={<TestScreen />} />
-      <Route path="/exec" element={<ExecScreen execs={execs} />} />
+      <Route path="/exec" element={<ExecScreen />} />
       <Route path="/login" element={<LoginScreen />} />
       <Route path="/signup" element={<SignUpScreen />} />
       <Route path="/pvv" element={<PPVScreen />} />

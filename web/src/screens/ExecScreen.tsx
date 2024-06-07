@@ -1,8 +1,17 @@
-import { Props } from "../types/types";
+import LoadingSpinner from "@components/LoadingSpinner";
+import useFetch from "../hooks/useFetch";
+import { Exec } from "../types/types";
 
-function ExecScreen({ execs }: Props) {
+function ExecScreen() {
+  const { loading, data, error } = useFetch(
+    `${import.meta.env.VITE_STRAPI_URL}/api/execs?populate=*`
+  );
+  if (loading) return <LoadingSpinner />;
+  if (error) return <div>{error}</div>;
+  const execs: Exec[] = mapToExec(data);
+
   return (
-    <div>
+    <div className="mt-20">
       <h1>Meet the Execs</h1>
       <div className="grid grid-cols-2 gap-10">
         {execs.map((exec) => (
@@ -10,7 +19,7 @@ function ExecScreen({ execs }: Props) {
             <div className="flex items-center">
               <img
                 className="rounded-full max-w-40 max-h-40 mr-4"
-                src={exec.image}
+                src={`${import.meta.env.VITE_STRAPI_URL}${exec.image}`}
                 alt="exec image"
               />
               <div>
@@ -27,3 +36,15 @@ function ExecScreen({ execs }: Props) {
 }
 
 export default ExecScreen;
+
+const mapToExec = (data: any): Exec[] => {
+  return data.data.map((item: any) => {
+    return {
+      id: item.id,
+      name: item.attributes.name,
+      bio: item.attributes.bio,
+      position: item.attributes.position,
+      image: item.attributes.image.data.attributes.url,
+    };
+  });
+};
