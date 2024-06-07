@@ -9,7 +9,7 @@ describe("mapToExec", () => {
         {
           id: 1,
           attributes: {
-            name: "John Doe",
+            name: "Guryash",
             bio: "A great leader",
             position: "President",
             image: {
@@ -27,7 +27,7 @@ describe("mapToExec", () => {
     const expected: Exec[] = [
       {
         id: 1,
-        name: "John Doe",
+        name: "Guryash",
         bio: "A great leader",
         position: "President",
         image: "/uploads/john_doe.jpg",
@@ -43,7 +43,7 @@ describe("mapToExec", () => {
         {
           id: 1,
           attributes: {
-            name: "Jane Doe",
+            name: "Guryash",
             bio: "A great vice president",
             position: "Vice President",
             image: null,
@@ -55,7 +55,7 @@ describe("mapToExec", () => {
     const expected: Exec[] = [
       {
         id: 1,
-        name: "Jane Doe",
+        name: "Guryash",
         bio: "A great vice president",
         position: "Vice President",
         image: "",
@@ -105,7 +105,7 @@ describe("mapToExec", () => {
         {
           id: 1,
           attributes: {
-            name: "John Smith",
+            name: "Guryash",
             bio: null,
             position: "Secretary",
             image: {
@@ -123,7 +123,7 @@ describe("mapToExec", () => {
     const expected: Exec[] = [
       {
         id: 1,
-        name: "John Smith",
+        name: "Guryash",
         bio: "",
         position: "Secretary",
         image: "/uploads/john_smith.jpg",
@@ -139,7 +139,7 @@ describe("mapToExec", () => {
         {
           id: 1,
           attributes: {
-            name: "John Smith",
+            name: "Guryash",
             bio: "A great secretary",
             position: null,
             image: {
@@ -157,7 +157,7 @@ describe("mapToExec", () => {
     const expected: Exec[] = [
       {
         id: 1,
-        name: "John Smith",
+        name: "Guryash",
         bio: "A great secretary",
         position: "",
         image: "/uploads/john_smith.jpg",
