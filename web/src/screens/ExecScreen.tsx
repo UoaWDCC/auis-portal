@@ -1,6 +1,7 @@
 import LoadingSpinner from "@components/LoadingSpinner";
 import useFetch from "../hooks/useFetch";
 import { Exec } from "../types/types";
+import { mapToExec } from "@utils/mapToExec";
 
 function ExecScreen() {
   const { loading, data, error } = useFetch(
@@ -36,15 +37,3 @@ function ExecScreen() {
 }
 
 export default ExecScreen;
-
-const mapToExec = (data: any): Exec[] => {
-  return data.data.map((item: any) => {
-    return {
-      id: item.id,
-      name: item.attributes.name,
-      bio: item.attributes.bio,
-      position: item.attributes.position,
-      image: item.attributes.image.data.attributes.url,
-    };
-  });
-};
