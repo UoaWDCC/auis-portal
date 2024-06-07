@@ -1,7 +1,8 @@
 import { FaFacebook, FaInstagram } from "react-icons/fa";
 import peacockLogo from "../assets/peacock-logo.png";
 import whiteName from "../assets/auis_white.png";
-import { FacebookLink, InstagramLink } from "../data/data";
+import { FacebookLink, InstagramLink, LinkedinLink } from "../data/data";
+import { AiOutlineLinkedin } from "react-icons/ai";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -35,6 +36,12 @@ const Footer = () => {
           <a href={InstagramLink} rel="noreferrer" target="_blank">
             <FaInstagram
               className="hover:-translate-y-1 transition-transform cursor-pointer text-white"
+              size={40}
+            />
+          </a>
+          <a href={LinkedinLink} rel="noreferrer" target="_blank">
+            <AiOutlineLinkedin
+              className="hover:-translate-y-1 transition-transform cursor pointer text-white"
               size={40}
             />
           </a>

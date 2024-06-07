@@ -48,3 +48,4 @@ export const execs: Exec[] = [
 export const FacebookLink = "https://www.facebook.com/auis.uoa/";
 export const InstagramLink =
   "https://www.instagram.com/au.indiansociety/?hl=en";
+export const LinkedinLink = "https://www.linkedin.com/company/auindiansociety/";
