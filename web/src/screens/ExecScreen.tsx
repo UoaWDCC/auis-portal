@@ -20,7 +20,7 @@ function ExecScreen() {
             <div className="flex items-center">
               <img
                 className="rounded-full max-w-40 max-h-40 mr-4"
-                src={`${import.meta.env.VITE_STRAPI_URL}${exec.image}`}
+                src={`${exec.image}`}
                 alt="exec image"
               />
               <div>
