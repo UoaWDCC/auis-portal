@@ -3,6 +3,7 @@ import { render, screen } from "@testing-library/react";
 import React from "react";
 import TestScreen from "../src/screens/Test";
 import { describe } from "node:test";
+import '@testing-library/jest-dom'
 
 describe("TestScreen component", () => {
   it("should display the 'Test' message", () => {

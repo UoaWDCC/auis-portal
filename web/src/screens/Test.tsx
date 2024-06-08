@@ -1,3 +1,5 @@
+// import {SignedIn, SignedOut, SignInButton, UserButton} from "@clerk/clerk-react";
+
 function TestScreen() {
   return (
     <div>
@@ -5,5 +7,20 @@ function TestScreen() {
     </div>
   );
 }
+// function TestScreen() {
+//     return (
+//         <div className="flex justify-between">
+//             <h2> Test Screen</h2>
+//             <header>
+//                 <SignedOut>
+//                     <SignInButton/>
+//                 </SignedOut>
+//                 <SignedIn>
+//                     <UserButton/>
+//                 </SignedIn>
+//             </header>
+//         </div>
+//     )
+// }
 
 export default TestScreen;
