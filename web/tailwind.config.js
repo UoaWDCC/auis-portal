@@ -7,6 +7,13 @@ export default {
   plugins: [daisyui],
   theme: {
     extend: {
+      colors: {
+        "primary-green": "#158807",
+        "primary-orange": "#FC8700",
+        "primary-blue": "#012D37",
+        "secondary-blue": "#034159",
+        "tertiary-blue" : "#CAF1FF",
+      },
       fontFamily: {
         sans: ["Montserrat"],
         body: ["Open Sans"],
@@ -28,11 +35,11 @@ export default {
     themes: [
       {
         light: {
-          ...themes["light"],
+          ...themes.light,
           accent: "#087df1",
         },
         dark: {
-          ...themes["dark"],
+          ...themes.dark,
           accent: "#087df1",
         },
       },

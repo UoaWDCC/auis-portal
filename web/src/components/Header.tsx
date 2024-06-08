@@ -16,11 +16,11 @@ function Header() {
   ];
 
   return (
-    <header className="w-full bg-[#034159] fixed top-0 z-50 shadow h-[90px] px-[15px] flex items-center justify-between">
+    <header className="w-full bg-secondary-blue z-50 shadow h-[70px] px-[15px] flex items-center justify-between">
       <div className="flex items-center justify-between w-full lg:w-auto">
         <a className="flex items-center" href="/">
           <img
-            className="object-contain w-[70px] h-[70px]"
+            className="object-contain w-[60px] h-[60px]"
             src={peacockLogo}
             alt="Peacock Logo"
           />
@@ -31,7 +31,7 @@ function Header() {
           />
         </a>
         <div className="lg:hidden">
-          <button onClick={() => setNavBar(!navBar)}>
+          <button type="button" onClick={() => setNavBar(!navBar)}>
             {navBar ? (
               <IoMdClose className="text-white" size={40} />
             ) : (
@@ -41,19 +41,20 @@ function Header() {
         </div>
       </div>
       <nav
-        className={`fixed top-0 right-0 h-full bg-[#034159] p-8 z-40 transform transition-transform ${
+        className={`fixed top-0 right-0 h-full bg-secondary-blue p-8 z-40 transform transition-transform ${
           navBar ? "translate-x-0" : "translate-x-full"
         } lg:static lg:transform-none lg:p-0 lg:bg-transparent lg:flex lg:items-center lg:w-auto`}
       >
         <button
+        type="button"
           className="absolute top-4 right-4 lg:hidden"
           onClick={() => setNavBar(false)}
         >
           <IoMdClose className="text-white" size={40} />
         </button>
         <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-5 lg:mt-0 mt-10 text-xl text-white">
-          {titles.map((label, index) => (
-            <li key={index} className="list-none">
+          {titles.map((label) => (
+            <li key={label.page} className="list-none">
               <Link
                 to={label.page}
                 className={`${
@@ -68,7 +69,8 @@ function Header() {
           <div className="flex flex-col lg:flex-row items-center gap-8 mt-4 lg:mt-0 lg:ml-8">
             <a href="/login">
               <button
-                className="bg-[#FC8700] hover:bg-[#fc7300] text-black px-[18px] py-[10px] text-xl"
+              type="button"
+                className="bg-primary-orange hover:bg-[#fc7300] text-black px-[18px] py-[10px] text-xl"
                 style={{ borderRadius: "10px" }}
               >
                 Log-in
@@ -76,7 +78,8 @@ function Header() {
             </a>
             <a href="/signup">
               <button
-                className="bg-[#FC8700] hover:bg-[#fc7300] text-black px-[18px] py-[10px] text-xl"
+              type="button"
+                className="bg-primary-orange hover:bg-[#fc7300] text-black px-[18px] py-[10px] text-xl"
                 style={{ borderRadius: "10px" }}
               >
                 Sign-up

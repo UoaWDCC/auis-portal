@@ -6,8 +6,8 @@ const App = () => {
   return (
     <>
       <Header />
-      <main className="py-3">
-        <div className="max-w-6xl mx-auto px-4">
+      <main>
+        <div>
           <Outlet />
         </div>
       </main>
