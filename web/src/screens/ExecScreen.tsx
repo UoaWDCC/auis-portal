@@ -8,7 +8,7 @@ function ExecScreen() {
     `${import.meta.env.VITE_STRAPI_URL}/api/execs?populate=*`
   );
   if (loading) return <LoadingSpinner />;
-  if (error) return <div>{error}</div>;
+  if (error) return <div>CMS Offline</div>;
   const execs: Exec[] = mapToExec(data);
 
   return (
