@@ -3,11 +3,12 @@ import { render, screen } from "@testing-library/react";
 import React from "react";
 import TestScreen from "../src/screens/Test";
 import { describe } from "node:test";
+import '@testing-library/jest-dom'
 
-// describe("TestScreen component", () => {
-//   it("should display the 'Test' message", () => {
-//     render(<TestScreen />);
-//     const message = screen.getByText(/Test/i);
-//     expect(message).toBeInTheDocument();
-//   });
-// });
+describe("TestScreen component", () => {
+  it("should display the 'Test' message", () => {
+    render(<TestScreen />);
+    const message = screen.getByText(/Test/i);
+    expect(message).toBeInTheDocument();
+  });
+});
