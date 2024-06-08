@@ -1,9 +1,9 @@
 function PVVScreen() {
-    return (
-        <div>
-            <h2> PPV Screen</h2>
-        </div>
-    )
+  return (
+    <div>
+      <h2> PPV Screen</h2>
+    </div>
+  );
 }
 
-export default PVVScreen
+export default PVVScreen;

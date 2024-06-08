@@ -16,4 +16,4 @@ function TestScreen() {
     )
 }
 
-export default TestScreen
+export default TestScreen;

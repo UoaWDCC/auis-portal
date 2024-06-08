@@ -17,7 +17,7 @@ function SignUpScreen() {
                     </div>
                 </div>
 
-                <div className="w-px bg-gray-300 mt-15"></div>
+                <div className="w-px bg-gray-300 mt-15">a</div>
 
                 <div className="flex flex-1 items-center justify-center mt-15">
                     <SignUp/>

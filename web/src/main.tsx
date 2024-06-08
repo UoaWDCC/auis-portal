@@ -1,20 +1,22 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { RouterProvider } from 'react-router-dom';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+} from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { RouterProvider } from "react-router-dom";
 
-import App from './App.tsx';
-import './index.css';
-
-import HomeScreen from "./screens/HomeScreen.tsx"
-import TestScreen from "./screens/Test.tsx"
+import App from "./App.tsx";
+import "./index.css";
+import HomeScreen from "./screens/HomeScreen.tsx";
+import TestScreen from "./screens/Test.tsx";
 import ExecScreen from "./screens/ExecScreen.tsx";
-import SignInScreen from "./screens/SignInScreen.tsx";
 import SignUpScreen from "./screens/SignUpScreen.tsx";
 import PhotosScreen from "./screens/PhotosScreen.tsx";
 import PVVScreen from "./screens/PVVScreen.tsx";
-import {ClerkProvider} from "@clerk/clerk-react";
+import LoginScreen from "./screens/LoginScreen.tsx";
 
 
 
@@ -25,8 +27,8 @@ const router = createBrowserRouter(
             <Route index={true} element={<HomeScreen />} />
             <Route path="/test" element={<TestScreen />} />
             <Route path="/exec" element={<ExecScreen />} />
-            <Route path="/sign-in" element={<SignInScreen />} />
-            <Route path="/sign-up" element={<SignUpScreen />} />
+            <Route path="/login" element={<LoginScreen />} />
+            <Route path="/signup" element={<SignUpScreen />} />
             <Route path="/pvv" element={<PVVScreen />} />
             <Route path="/photos" element={<PhotosScreen />} />
         </Route>
@@ -40,14 +42,12 @@ if (!PUBLISHABLE_KEY) {
 }
 
 const queryClient = new QueryClient();
+const root = document.getElementById("root") as HTMLElement
 
-
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(root).render(
     <React.StrictMode>
-        <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
-            <QueryClientProvider client={queryClient}>
-                <RouterProvider router={router} />
-            </QueryClientProvider>
-        </ClerkProvider>
+        <QueryClientProvider client={queryClient}>
+            <RouterProvider router={router} />
+        </QueryClientProvider>
     </React.StrictMode>
 );
