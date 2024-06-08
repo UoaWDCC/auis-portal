@@ -1,7 +1,12 @@
 import { FaFacebook, FaInstagram } from "react-icons/fa";
 import peacockLogo from "../assets/peacock-logo.png";
 import whiteName from "../assets/auis_white.png";
-import { FacebookLink, InstagramLink, LinkedinLink, githubLink } from "../data/data";
+import {
+  FacebookLink,
+  InstagramLink,
+  LinkedinLink,
+  githubLink,
+} from "../data/data";
 import { AiOutlineGithub, AiOutlineLinkedin } from "react-icons/ai";
 
 const Footer = () => {
