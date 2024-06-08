@@ -12,7 +12,7 @@ import { AiOutlineGithub, AiOutlineLinkedin } from "react-icons/ai";
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   return (
-    <footer className="w-full bg-[#034159] flex flex-col justify-between px-4 sm:px-6 md:px-8 bottom-0">
+    <footer className="w-full bg-secondary-blue flex flex-col justify-between px-4 sm:px-6 md:px-8 bottom-0">
       <div className="flex justify-between items-center py-3">
         <div className="text-lg text-white flex items-center">
           <img

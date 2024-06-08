@@ -1,10 +1,10 @@
 import auisLogo from "../assets/peacock.png";
-import auisAbbrev from "../assets/AUIS_black 3.png";
+import auisAbbrev from "../assets/AUIS_black_3.png";
 
 export default function Hero() {
   return (
     <>
-      <div className=" min-h-[calc(100vh-70px)] bg-gradient-to-br from-orange-500 to-orange-50">
+      <div className=" min-h-[calc(100vh-70px)] bg-gradient-to-br from-primary-orange to-white">
         <div className="p-4 flex-row">
           <div className="grid grid-cols-1 md:grid-cols-2 place-items-center">
             <div className="grid grid-rows-3 place-items-center">
@@ -16,7 +16,7 @@ export default function Hero() {
               <p className="py: text-3xl text-black text-center font-bold justify-self-stretch pt-6">
                 Not a member?
               </p>
-              <div className="btn text-red-50 justify-self-stretch">
+              <div className="btn text-white justify-self-stretch">
                 Sign-Up
               </div>
             </div>

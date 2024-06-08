@@ -16,7 +16,7 @@ function Header() {
   ];
 
   return (
-    <header className="w-full bg-[#034159] z-50 shadow h-[70px] px-[15px] flex items-center justify-between">
+    <header className="w-full bg-secondary-blue z-50 shadow h-[70px] px-[15px] flex items-center justify-between">
       <div className="flex items-center justify-between w-full lg:w-auto">
         <a className="flex items-center" href="/">
           <img
@@ -41,7 +41,7 @@ function Header() {
         </div>
       </div>
       <nav
-        className={`fixed top-0 right-0 h-full bg-[#034159] p-8 z-40 transform transition-transform ${
+        className={`fixed top-0 right-0 h-full bg-secondary-blue p-8 z-40 transform transition-transform ${
           navBar ? "translate-x-0" : "translate-x-full"
         } lg:static lg:transform-none lg:p-0 lg:bg-transparent lg:flex lg:items-center lg:w-auto`}
       >
@@ -70,7 +70,7 @@ function Header() {
             <a href="/login">
               <button
               type="button"
-                className="bg-[#FC8700] hover:bg-[#fc7300] text-black px-[18px] py-[10px] text-xl"
+                className="bg-primary-orange hover:bg-[#fc7300] text-black px-[18px] py-[10px] text-xl"
                 style={{ borderRadius: "10px" }}
               >
                 Log-in
@@ -79,7 +79,7 @@ function Header() {
             <a href="/signup">
               <button
               type="button"
-                className="bg-[#FC8700] hover:bg-[#fc7300] text-black px-[18px] py-[10px] text-xl"
+                className="bg-primary-orange hover:bg-[#fc7300] text-black px-[18px] py-[10px] text-xl"
                 style={{ borderRadius: "10px" }}
               >
                 Sign-up
