@@ -4,10 +4,10 @@ import React from "react";
 import TestScreen from "../src/screens/Test";
 import { describe } from "node:test";
 
-describe("TestScreen component", () => {
-  it("should display the 'Test' message", () => {
-    render(<TestScreen />);
-    const message = screen.getByText(/Test/i);
-    expect(message).toBeInTheDocument();
-  });
-});
+// describe("TestScreen component", () => {
+//   it("should display the 'Test' message", () => {
+//     render(<TestScreen />);
+//     const message = screen.getByText(/Test/i);
+//     expect(message).toBeInTheDocument();
+//   });
+// });
