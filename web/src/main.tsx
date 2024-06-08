@@ -36,8 +36,9 @@ const router = createBrowserRouter(
 );
 
 const queryClient = new QueryClient();
+const root = document.getElementById("root") as HTMLElement
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
+ReactDOM.createRoot(root).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />

@@ -1,6 +1,6 @@
 import LoadingSpinner from "@components/LoadingSpinner";
 import useFetch from "../hooks/useFetch";
-import { Exec } from "../types/types";
+import type { Exec } from "../types/types";
 import { mapToExec } from "@utils/mapToExec";
 
 function ExecScreen() {
@@ -21,7 +21,7 @@ function ExecScreen() {
               <img
                 className="rounded-full max-w-40 max-h-40 mr-4"
                 src={`${exec.image}`}
-                alt="exec image"
+                alt="exec information"
               />
               <div>
                 <h1 className="text-xl font-bold">{exec.name}</h1>
