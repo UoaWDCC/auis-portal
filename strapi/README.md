@@ -19,6 +19,9 @@ docker compose up
 
 Then on another terminal
 ```bash
+yarn
+```
+```bash
 yarn develop
 ```
 
