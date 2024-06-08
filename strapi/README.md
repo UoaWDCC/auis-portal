@@ -6,6 +6,7 @@ In order to run Strapi locally, there are a few things you need to setup first. 
 ```bash
 cd strapi
 ```
+## How to run Postgres
 
 ```bash
 cd postgres
@@ -14,6 +15,7 @@ cd postgres
 docker compose up
 ```
 
+## How to run Strapi
 
 Then on another terminal
 ```bash
