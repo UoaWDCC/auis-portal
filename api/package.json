@@ -11,9 +11,9 @@
     "start": "node dist/index.js",
     "dev": "nodemon index.ts",
     "email": "email dev",
-    "start-web": "cd ../web && npm run dev",
-    "start-api": "npm run dev",
-    "con": "concurrently \"npm run start-api\" \"npm run start-web\""
+    "start-web": "cd ../web && yarn run dev",
+    "start-api": "yarn run dev",
+    "con": "concurrently \"yarn run start-api\" \"yarn run start-web\""
   },
   "devDependencies": {
     "@types/jsonwebtoken": "^9.0.5",
