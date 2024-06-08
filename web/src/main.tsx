@@ -17,6 +17,7 @@ import SignUpScreen from "./screens/SignUpScreen.tsx";
 import PhotosScreen from "./screens/PhotosScreen.tsx";
 import PVVScreen from "./screens/PVVScreen.tsx";
 import LoginScreen from "./screens/LoginScreen.tsx";
+import { ClerkProvider } from "@clerk/clerk-react";
 
 
 
@@ -46,8 +47,10 @@ const root = document.getElementById("root") as HTMLElement
 
 ReactDOM.createRoot(root).render(
     <React.StrictMode>
-        <QueryClientProvider client={queryClient}>
-            <RouterProvider router={router} />
-        </QueryClientProvider>
+       <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
+          <QueryClientProvider client={queryClient}>
+              <RouterProvider router={router} />
+          </QueryClientProvider>
+        </ClerkProvider>
     </React.StrictMode>
 );
