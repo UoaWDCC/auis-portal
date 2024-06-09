@@ -3,10 +3,13 @@
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'auis-strapi'
+app = 'wdcc-auis-strapi-production'
 primary_region = 'syd'
 
 [build]
+  # dockerfile contains build time non-sensitive env vars
+  dockerfile = "Dockerfile"
+
 [http_service]
   internal_port = 1337
   force_https = true
