@@ -34,4 +34,4 @@ jobs:
       - run: flyctl deploy --remote-only --config fly.production.toml
         working-directory: ./strapi
         env:
-          FLY_API_TOKEN: ${{ secrets.FLY_API_PRODUCTION_API_TOKEN }}
+          FLY_API_TOKEN: ${{ secrets.FLY_STRAPI_PRODUCTION_API_TOKEN }}
