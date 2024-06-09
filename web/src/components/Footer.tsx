@@ -13,8 +13,8 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
   return (
     <footer className="w-full bg-secondary-blue flex flex-col justify-between px-4 sm:px-6 md:px-8 bottom-0">
-      <div className="flex justify-between items-center py-3">
-        <div className="text-lg text-white flex items-center">
+      <div className="flex flex-col md:flex-row justify-between items-center py-3">
+        <div className="text-lg text-white flex items-center mb-4 md:mb-0">
           <img
             src={peacockLogo}
             alt="logo"
@@ -46,13 +46,13 @@ const Footer = () => {
           </a>
           <a href={LinkedinLink} rel="noreferrer" target="_blank">
             <AiOutlineLinkedin
-              className="hover:-translate-y-1 transition-transform cursor pointer text-white"
+              className="hover:-translate-y-1 transition-transform cursor-pointer text-white"
               size={40}
             />
           </a>
           <a href={githubLink} rel="noreferrer" target="_blank">
             <AiOutlineGithub
-              className="hover:-translate-y-1 transition-transform cursor pointer text-white"
+              className="hover:-translate-y-1 transition-transform cursor-pointer text-white"
               size={40}
             />
           </a>
