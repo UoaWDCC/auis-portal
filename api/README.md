@@ -37,4 +37,8 @@ In order to visualise the database, there are two ways that we can do it. Firstl
 yarn db:visualise
 ```
 
-Finally, the db.ts is where the configuration file is for the Drizzle and Postgres database that allows us to export the database and perform queries against the database in drizzle syntax. To use the database and schema, visit the lib.ts file inside of the api/db/config which shows an example of how to query the database.
+Finally, the db.ts is where the configuration file is for the Drizzle and Postgres database that allows us to export the database and perform queries against the database in drizzle syntax.
+
+## Structure
+
+There is a gateway folder that shows an example of how to query the database using Drizzle. Any queries to the database should be done in this gateway folder where the name of the file is the name of the function that performs the query.
