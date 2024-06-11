@@ -13,7 +13,12 @@
     "email": "email dev",
     "start-web": "cd ../web && yarn run dev",
     "start-api": "yarn run dev",
-    "con": "concurrently \"yarn run start-api\" \"yarn run start-web\""
+    "con": "concurrently \"yarn run start-api\" \"yarn run start-web\"",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "node -r esbuild-register ./scripts/migrate.ts",
+    "db:seed": "node -r esbuild-register ./scripts/seed.ts",
+    "db": "yarn db:generate && yarn db:migrate",
+    "db:visualise": "drizzle-kit studio"
   },
   "devDependencies": {
     "@types/jsonwebtoken": "^9.0.5",
