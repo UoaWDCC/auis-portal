@@ -42,3 +42,11 @@ Finally, the db.ts is where the configuration file is for the Drizzle and Postgr
 ## Structure
 
 There is a gateway folder that shows an example of how to query the database using Drizzle. Any queries to the database should be done in this gateway folder where the name of the file is the name of the function that performs the query.
+
+## Tools
+
+There is a yarn script called yarn watch-types that would automatically create corresponding backend types for your front-end project (./web/src/types/backend-types.ts) whenever you make changes to the types file inside this api project. To run this follow the command below
+
+```bash
+yarn watch-types
+```

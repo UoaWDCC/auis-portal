@@ -1,8 +1,8 @@
 {
-  "name": "passport-api",
+  "name": "auis-api",
   "version": "0.0.0",
   "main": "index.js",
-  "repository": "https://github.com/UoAWDCC/passport",
+  "repository": "https://github.com/UoAWDCC/auis-portal",
   "author": "WDCC Projects <projects@wdcc.co.nz>",
   "license": "MIT",
   "private": true,
