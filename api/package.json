@@ -18,7 +18,9 @@
     "db:migrate": "node -r esbuild-register ./scripts/migrate.ts",
     "db:seed": "node -r esbuild-register ./scripts/seed.ts",
     "db": "yarn db:generate && yarn db:migrate",
-    "db:visualise": "drizzle-kit studio"
+    "db:visualise": "drizzle-kit studio",
+    "generate-types": "quicktype ../api/types/types.ts -o ../web/src/types/backend-types.ts",
+    "watch-types": "nodemon -e ts -x \"npm run generate-types\""
   },
   "devDependencies": {
     "@types/jsonwebtoken": "^9.0.5",
@@ -42,7 +44,9 @@
     "express-cors": "^0.0.3",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.1.1",
+    "onchange": "^7.1.0",
     "postgres": "^3.4.4",
+    "quicktype": "^23.0.170",
     "ts-node": "^10.9.2",
     "zod": "^3.22.4"
   },
