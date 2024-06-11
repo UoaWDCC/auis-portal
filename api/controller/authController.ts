@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import asyncHandler from "../middleware/asyncHandler";
 
-import db from "../db/config/db";
+import { db } from "../db/config/db";
 import { users } from "../models/users";
 import { sql } from "drizzle-orm";
 
