@@ -29,7 +29,7 @@ RUN --mount=type=secret,id=DATABASE_HOST \
     --mount=type=secret,id=DATABASE_USERNAME \
     --mount=type=secret,id=DATABASE_PASSWORD \
     DATABASE_HOST="$(cat /run/secrets/DATABASE_HOST)" \
-    DATABASE_PORT ="$(cat /run/secrets/DATABASE_PORT)" \
+    DATABASE_PORT="$(cat /run/secrets/DATABASE_PORT)" \
     DATABASE_USERNAME="$(cat /run/secrets/DATABASE_USERNAME)" \
     DATABASE_PASSWORD="$(cat /run/secrets/DATABASE_PASSWORD)" 
 
