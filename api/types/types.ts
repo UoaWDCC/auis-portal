@@ -1,5 +1,6 @@
 export interface User {
   name: string;
+  description: string;
   email: string;
   year_of_study: number;
 }
