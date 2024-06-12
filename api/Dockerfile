@@ -23,15 +23,16 @@ RUN apt-get update -qq && \
 COPY --link package.json yarn.lock ./
 RUN yarn install --frozen-lockfile
 
-# Mount secrets into Dockerfile and set environment variables
-RUN --mount=type=secret,id=DATABASE_HOST \
-    --mount=type=secret,id=DATABASE_PORT \
-    --mount=type=secret,id=DATABASE_USERNAME \
-    --mount=type=secret,id=DATABASE_PASSWORD \
-    DATABASE_HOST="$(cat /run/secrets/DATABASE_HOST)" \
-    DATABASE_PORT="$(cat /run/secrets/DATABASE_PORT)" \
-    DATABASE_USERNAME="$(cat /run/secrets/DATABASE_USERNAME)" \
-    DATABASE_PASSWORD="$(cat /run/secrets/DATABASE_PASSWORD)" 
+ARG DATABASE_HOST
+ARG DATABASE_PORT
+ARG DATABASE_USERNAME
+ARG DATABASE_PASSWORD
+  
+# Set environment variables
+ENV DATABASE_HOST=${DATABASE_HOST}
+ENV DATABASE_PORT=${DATABASE_PORT}
+ENV DATABASE_USERNAME=${DATABASE_USERNAME}
+ENV DATABASE_PASSWORD=${DATABASE_PASSWORD}
 
 # Copy drizzle configuration file
 COPY drizzle.config.ts .
@@ -52,6 +53,9 @@ COPY db/migrations ./db/migrations
 
 #Need to run the migration
 RUN yarn run db:migrate
+
+#Runs the seed script to populate some data
+RUN yarn run db:seed
 
 # Copy application code
 COPY --link . .

@@ -38,7 +38,10 @@ app.use("/api", userRoutes); //Demo Route on how to work with Drizzle
 app.use(notFound);
 app.use(errorHandler);
 
-const port = Number.parseInt(process.env.PORT || "4000");
-app.listen(port, () => {
+//const port = Number.parseInt(process.env.PORT || "4000");
+const port = 3000; // Or whichever port your application listens on
+
+// Specify the host parameter as '0.0.0.0' to listen on all network interfaces
+app.listen(port, "0.0.0.0", () => {
   console.log(`Listening on port ${port}`);
 });
