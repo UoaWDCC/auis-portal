@@ -23,7 +23,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: superfly/flyctl-actions/setup-flyctl@master
-      - run: flyctl deploy --remote-only --config fly.production.toml --build-secret DATABASE_HOST=${{ secrets.DATABASE_HOST }} --build-secret DATABASE_PORT=${{ secrets.DATABASE_PORT }} --build-secret DATABASE_USERNAME=${{ secrets.DATABASE_PORT }} --build-secret DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }}
+      - run: flyctl deploy --remote-only --config fly.staging.toml --build-secret DATABASE_HOST=${{ secrets.DATABASE_HOST }} --build-secret DATABASE_PORT=${{ secrets.DATABASE_PORT }} --build-secret DATABASE_USERNAME=${{ secrets.DATABASE_PORT }} --build-secret DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }}
         working-directory: ./api
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_STAGING_API_TOKEN }}
