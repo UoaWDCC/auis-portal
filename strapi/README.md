@@ -2,7 +2,7 @@
 
 ### How To Run
 
-In order to run Strapi locally, This assumes that the current working directory is
+In order to run Strapi locally, Make sure you first have the database running. Then, this assumes that the current working directory is
 
 ```bash
 cd strapi
