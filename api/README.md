@@ -1,3 +1,20 @@
+## How To Run
+
+First of all, the api is running on port 3000 and make sure you have the database up and running since that is what the backend will be connecting with. Once you have that running, follow the commands below
+
+To install dependencies
+```bash
+yarn
+```
+To run the development server
+```bash
+yarn dev
+```
+To run production build
+```bash
+yarn build
+```
+
 ## Technologies
 
 This documentation would explain what Drizzle is as well as how to this folder structure operates to get the code connected to the database.
