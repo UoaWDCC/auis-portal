@@ -9,16 +9,19 @@ const main = async () => {
     await db.insert(users).values([
       {
         name: "Harsheel Singh",
+        description: "test",
         email: "hsin212@aucklanduni.ac.nz",
         year_of_study: 4,
       },
       {
         name: "Guryash Matharu",
+        description: "test",
         email: "gmat222@aucklanduni.ac.nz",
         year_of_study: 4,
       },
       {
         name: "Naren Rohan",
+        description: "test",
         email: "nroh555@aucklanduni.ac.nz",
         year_of_study: 4,
       },

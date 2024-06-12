@@ -1,9 +1,31 @@
 {
-  "id": "5b348000-c684-4411-aab1-0e11cdf048de",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "eacdc473-daff-49b5-b3b3-6ec496149653",
+  "prevId": "5b348000-c684-4411-aab1-0e11cdf048de",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
+    "public.students": {
+      "name": "students",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
     "public.users": {
       "name": "users",
       "schema": "",

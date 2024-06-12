@@ -1,4 +1,5 @@
 export interface User {
+    description:   string;
     email:         string;
     name:          string;
     year_of_study: number;
