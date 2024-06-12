@@ -17,6 +17,7 @@ import SignUpScreen from "./screens/SignUpScreen.tsx";
 import PhotosScreen from "./screens/PhotosScreen.tsx";
 import PVVScreen from "./screens/PVVScreen.tsx";
 import LoginScreen from "./screens/LoginScreen.tsx";
+import InformationScreen from "./screens/InformationScreen.tsx";
 import { ClerkProvider } from "@clerk/clerk-react";
 
 
@@ -30,6 +31,7 @@ const router = createBrowserRouter(
             <Route path="/exec" element={<ExecScreen />} />
             <Route path="/login" element={<LoginScreen />} />
             <Route path="/signup" element={<SignUpScreen />} />
+            <Route path="/user-info" element={<InformationScreen />} />
             <Route path="/pvv" element={<PVVScreen />} />
             <Route path="/photos" element={<PhotosScreen />} />
         </Route>

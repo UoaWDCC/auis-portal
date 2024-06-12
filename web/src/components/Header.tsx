@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { IoMdClose, IoMdMenu } from "react-icons/io";
 import peacockLogo from "../assets/peacock-logo.png";
 import whiteName from "../assets/auis_white.png";
+import {SignedIn, SignedOut, SignOutButton} from "@clerk/clerk-react";
 
 function Header() {
   const [navBar, setNavBar] = useState(false);
@@ -67,24 +68,34 @@ function Header() {
             </li>
           ))}
           <div className="flex flex-col lg:flex-row items-center gap-8 mt-4 lg:mt-0 lg:ml-8">
-            <a href="/login">
-              <button
-              type="button"
-                className="bg-primary-orange hover:bg-[#fc7300] text-black px-[18px] py-[10px] text-xl"
-                style={{ borderRadius: "10px" }}
-              >
-                Log-in
-              </button>
-            </a>
-            <a href="/signup">
-              <button
-              type="button"
-                className="bg-primary-orange hover:bg-[#fc7300] text-black px-[18px] py-[10px] text-xl"
-                style={{ borderRadius: "10px" }}
-              >
-                Sign-up
-              </button>
-            </a>
+            <SignedOut>
+              <a href="/login">
+                <button
+                    type="button"
+                    className="bg-primary-orange hover:bg-[#fc7300] text-black px-[18px] py-[10px] text-xl"
+                    style={{ borderRadius: "10px" }}
+                >
+                  Log-in
+                </button>
+              </a>
+              <a href="/signup">
+                <button
+                    type="button"
+                    className="bg-primary-orange hover:bg-[#fc7300] text-black px-[18px] py-[10px] text-xl"
+                    style={{ borderRadius: "10px" }}
+                >
+                  Sign-up
+                </button>
+              </a>
+            </SignedOut>
+            <SignedIn >
+              <div className="bg-primary-orange hover:bg-[#fc7300] text-black px-[18px] py-[10px] text-xl"
+                   style={{ borderRadius: "10px" }}>
+                <SignOutButton />
+              </div>
+
+            </SignedIn>
+
           </div>
         </div>
       </nav>

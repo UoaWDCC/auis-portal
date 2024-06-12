@@ -5,16 +5,16 @@ function SignUpScreen() {
         <div className="flex-grow flex flex-col h-full ">
             <div className="flex flex-grow justify-center ">
 
-                <div className="flex flex-col flex-1 items-center justify-center text-center p-4 "
+                <div className="flex flex-col flex-1 items-center justify-top text-center pt-20 "
                      style={{
                          background: 'linear-gradient(to top, #fda642 50%, #ffffff 100%)',
                      }}
                 >
                     <div className="mb-5">
-                        <img src="/src/assets/react.svg" alt="Descriptive Text" className="min-w-1000 min-h-1000" />
+                        <img src="/src/assets/peacock.png" alt="Descriptive Text" className="max-w-[300px] max-h-[300px] " />
                     </div>
                     <div>
-                        <h1>AUIS</h1>
+                        <img src="/src/assets/AUIS_black_3.png" alt="Descriptive Text" className="max-w-xs max-h-xs" />
                     </div>
                 </div>
                 <div className="flex flex-1 items-center justify-center ">
