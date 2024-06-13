@@ -5,9 +5,9 @@ function LoginScreen() {
         <div className="flex-grow flex flex-col h-full">
             <div className="flex flex-grow justify-center">
                 <div className="flex flex-1 items-center justify-center">
-                    <SignIn />
+                    <SignIn  />
                 </div>
-                <div className="flex flex-col flex-1 items-center justify-top text-center pt-20"
+                <div className="flex flex-col flex-1 items-center justify-top text-center pt-20 "
                      style={{
                          background: 'linear-gradient(to top, #ccf2ff 50%, #ffffff 100%)',
                      }}

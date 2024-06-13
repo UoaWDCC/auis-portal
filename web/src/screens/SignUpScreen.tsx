@@ -18,7 +18,7 @@ function SignUpScreen() {
                     </div>
                 </div>
                 <div className="flex flex-1 items-center justify-center ">
-                    <SignUp />
+                    <SignUp afterSignUpUrl="/user-info"/>
                 </div>
             </div>
         </div>
