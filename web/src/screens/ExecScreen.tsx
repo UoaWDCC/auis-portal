@@ -1,12 +1,11 @@
 import LoadingSpinner from "@components/LoadingSpinner";
-import useFetch from "../hooks/useFetch";
 import type { Exec } from "../types/types";
 import { mapToExec } from "@utils/mapToExec";
+import { useQuery } from "@apollo/client";
+import { GET_EXECS } from "../graphql/queries";
 
 function ExecScreen() {
-  const { loading, data, error } = useFetch(
-    `${import.meta.env.VITE_STRAPI_URL}/api/execs?populate=*`
-  );
+  const { loading, data, error } = useQuery(GET_EXECS);
   if (loading) return <LoadingSpinner />;
   if (error) return <div>CMS Offline</div>;
   const execs: Exec[] = mapToExec(data);
