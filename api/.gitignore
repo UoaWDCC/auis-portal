@@ -43,6 +43,10 @@ build/Release
 node_modules/
 jspm_packages/
 
+#Migrations
+db/migrations/
+db/migrations/meta/
+
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
 
