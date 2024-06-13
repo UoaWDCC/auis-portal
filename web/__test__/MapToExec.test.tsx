@@ -5,23 +5,25 @@ import { Exec } from "../src/types/types";
 describe("mapToExec", () => {
   it("should map valid data correctly", () => {
     const data = {
-      data: [
-        {
-          id: 1,
-          attributes: {
-            name: "Guryash",
-            bio: "A great leader",
-            position: "President",
-            image: {
-              data: {
-                attributes: {
-                  url: "/uploads/john_doe.jpg",
+      execs: {
+        data: [
+          {
+            id: 1,
+            attributes: {
+              name: "Guryash",
+              bio: "A great leader",
+              position: "President",
+              image: {
+                data: {
+                  attributes: {
+                    url: "/uploads/john_doe.jpg",
+                  },
                 },
               },
             },
           },
-        },
-      ],
+        ],
+      },
     };
 
     const expected: Exec[] = [
@@ -39,17 +41,19 @@ describe("mapToExec", () => {
 
   it("should handle missing image field gracefully", () => {
     const data = {
-      data: [
-        {
-          id: 1,
-          attributes: {
-            name: "Guryash",
-            bio: "A great vice president",
-            position: "Vice President",
-            image: null,
+      execs: {
+        data: [
+          {
+            id: 1,
+            attributes: {
+              name: "Guryash",
+              bio: "A great vice president",
+              position: "Vice President",
+              image: null,
+            },
           },
-        },
-      ],
+        ],
+      },
     };
 
     const expected: Exec[] = [
@@ -67,23 +71,25 @@ describe("mapToExec", () => {
 
   it("should handle missing name field gracefully", () => {
     const data = {
-      data: [
-        {
-          id: 1,
-          attributes: {
-            name: null,
-            bio: "A great treasurer",
-            position: "Treasurer",
-            image: {
-              data: {
-                attributes: {
-                  url: "/uploads/jane_doe.jpg",
+      execs: {
+        data: [
+          {
+            id: 1,
+            attributes: {
+              name: null,
+              bio: "A great treasurer",
+              position: "Treasurer",
+              image: {
+                data: {
+                  attributes: {
+                    url: "/uploads/jane_doe.jpg",
+                  },
                 },
               },
             },
           },
-        },
-      ],
+        ],
+      },
     };
 
     const expected: Exec[] = [
@@ -101,23 +107,25 @@ describe("mapToExec", () => {
 
   it("should handle missing bio field gracefully", () => {
     const data = {
-      data: [
-        {
-          id: 1,
-          attributes: {
-            name: "Guryash",
-            bio: null,
-            position: "Secretary",
-            image: {
-              data: {
-                attributes: {
-                  url: "/uploads/john_smith.jpg",
+      execs: {
+        data: [
+          {
+            id: 1,
+            attributes: {
+              name: "Guryash",
+              bio: null,
+              position: "Secretary",
+              image: {
+                data: {
+                  attributes: {
+                    url: "/uploads/john_smith.jpg",
+                  },
                 },
               },
             },
           },
-        },
-      ],
+        ],
+      },
     };
 
     const expected: Exec[] = [
@@ -135,23 +143,25 @@ describe("mapToExec", () => {
 
   it("should handle missing position field gracefully", () => {
     const data = {
-      data: [
-        {
-          id: 1,
-          attributes: {
-            name: "Guryash",
-            bio: "A great secretary",
-            position: null,
-            image: {
-              data: {
-                attributes: {
-                  url: "/uploads/john_smith.jpg",
+      execs: {
+        data: [
+          {
+            id: 1,
+            attributes: {
+              name: "Guryash",
+              bio: "A great secretary",
+              position: null,
+              image: {
+                data: {
+                  attributes: {
+                    url: "/uploads/john_smith.jpg",
+                  },
                 },
               },
             },
           },
-        },
-      ],
+        ],
+      },
     };
 
     const expected: Exec[] = [
@@ -169,12 +179,14 @@ describe("mapToExec", () => {
 
   it("should handle completely missing attributes gracefully", () => {
     const data = {
-      data: [
-        {
-          id: 1,
-          attributes: null,
-        },
-      ],
+      execs: {
+        data: [
+          {
+            id: 1,
+            attributes: null,
+          },
+        ],
+      },
     };
 
     const expected: Exec[] = [
