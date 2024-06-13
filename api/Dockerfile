@@ -46,13 +46,8 @@ COPY scripts ./scripts
 #Copy db config script from api directory
 COPY db ./db
 
-#Need to run the generation 
-RUN yarn run db:generate
-
-COPY db/migrations ./db/migrations
-
-#Need to run the migration
-RUN yarn run db:migrate
+#Need to run the generation and migration
+RUN yarn run db
 
 #Runs the seed script to populate some data
 RUN yarn run db:seed
