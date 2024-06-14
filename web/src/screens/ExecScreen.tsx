@@ -1,4 +1,5 @@
 import LoadingSpinner from "@components/LoadingSpinner";
+import ReactMarkdown from "react-markdown";
 import type { Exec } from "../types/types";
 import { mapToExec } from "@utils/mapToExec";
 import { useQuery } from "@apollo/client";
@@ -26,6 +27,7 @@ function ExecScreen() {
                 <h1 className="text-xl font-bold">{exec.name}</h1>
                 <h2 className="text-lg">{exec.position}</h2>
                 <p className="text-base">{exec.bio}</p>
+                <ReactMarkdown>**Test**</ReactMarkdown>
               </div>
             </div>
           </div>
