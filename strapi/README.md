@@ -1,26 +1,21 @@
 # 🚀 Getting started with Strapi
 
 ### How To Run
-In order to run Strapi locally, there are a few things you need to setup first. Strapi is connected to a postgres database to store the data and hence a postgres database needs to be provisioned. Follow the commands below to get started. This assumes that the current working directory is 
+
+In order to run Strapi locally, Make sure you first have the database running. Then, this assumes that the current working directory is
 
 ```bash
 cd strapi
-```
-## How to run Postgres
-
-```bash
-cd postgres
-```
-```bash
-docker compose up
 ```
 
 ## How to run Strapi
 
 Then on another terminal
+
 ```bash
 yarn
 ```
+
 ```bash
 yarn develop
 ```

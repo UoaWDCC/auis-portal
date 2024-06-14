@@ -12,7 +12,6 @@ WORKDIR /app
 ARG YARN_VERSION=1.22.19
 RUN npm install -g yarn@$YARN_VERSION --force
 
-
 # Throw-away build stage to reduce size of final image
 FROM base as install 
 
@@ -23,6 +22,35 @@ RUN apt-get update -qq && \
 # Install node modules
 COPY --link package.json yarn.lock ./
 RUN yarn install --frozen-lockfile
+
+ARG DATABASE_HOST
+ARG DATABASE_PORT
+ARG DATABASE_USERNAME
+ARG DATABASE_PASSWORD
+  
+# Set environment variables
+ENV DATABASE_HOST=${DATABASE_HOST}
+ENV DATABASE_PORT=${DATABASE_PORT}
+ENV DATABASE_USERNAME=${DATABASE_USERNAME}
+ENV DATABASE_PASSWORD=${DATABASE_PASSWORD}
+
+# Copy drizzle configuration file
+COPY drizzle.config.ts .
+
+# Copy schemas folder from api directory
+COPY schemas ./schemas
+
+#Copy migrate script from api directory
+COPY scripts ./scripts
+
+#Copy db config script from api directory
+COPY db ./db
+
+#Need to run the generation and migration
+RUN yarn run db
+
+#Runs the seed script to populate some data
+RUN yarn run db:seed
 
 # Copy application code
 COPY --link . .

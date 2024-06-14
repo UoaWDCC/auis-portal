@@ -26,12 +26,11 @@ RUN yarn install --frozen-lockfile --production=false
 # Copy application code
 COPY --link . .
 
+ENV VITE_API_URL="https://wdcc-auis-api-staging.fly.dev"
+ENV VITE_STRAPI_URL="https://wdcc-auis-strapi-staging.fly.dev"
+
 # Mount secrets into Dockerfile and set environment variables
-RUN --mount=type=secret,id=VITE_API_URL \
-    --mount=type=secret,id=VITE_STRAPI_URL \
-    --mount=type=secret,id=VITE_CLERK_PUBLISHABLE_KEY \
-    VITE_API_URL="$(cat /run/secrets/VITE_API_URL)" \
-    VITE_STRAPI_URL="$(cat /run/secrets/VITE_STRAPI_URL)" \
+RUN  --mount=type=secret,id=VITE_CLERK_PUBLISHABLE_KEY \
     VITE_CLERK_PUBLISHABLE_KEY="$(cat /run/secrets/VITE_CLERK_PUBLISHABLE_KEY)" \
     yarn run build
 

@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { RouterProvider } from "react-router-dom";
+import { ApolloProvider } from "@apollo/client";
 
 import App from "./App.tsx";
 import "./index.css";
@@ -19,11 +20,11 @@ import PVVScreen from "./screens/PVVScreen.tsx";
 import LoginScreen from "./screens/LoginScreen.tsx";
 import InformationScreen from "./screens/InformationScreen.tsx";
 import { ClerkProvider } from "@clerk/clerk-react";
-
-
+import { graphqlClient } from "./graphql/client.ts";
 
 //Add any routes for screens below
 const router = createBrowserRouter(
+
     createRoutesFromElements(
         <Route path="/"  element={<App />}>
             <Route index={true} element={<HomeScreen />} />
@@ -36,23 +37,26 @@ const router = createBrowserRouter(
             <Route path="/photos" element={<PhotosScreen />} />
         </Route>
     )
+
 );
 // Import your publishable key
-const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
+const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
 if (!PUBLISHABLE_KEY) {
-  throw new Error("Missing Publishable Key")
+  throw new Error("Missing Publishable Key");
 }
 
 const queryClient = new QueryClient();
-const root = document.getElementById("root") as HTMLElement
+const root = document.getElementById("root") as HTMLElement;
 
 ReactDOM.createRoot(root).render(
-    <React.StrictMode>
-       <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
-          <QueryClientProvider client={queryClient}>
-              <RouterProvider router={router} />
-          </QueryClientProvider>
-        </ClerkProvider>
-    </React.StrictMode>
+  <React.StrictMode>
+    <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
+      <ApolloProvider client={graphqlClient}>
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider router={router} />
+        </QueryClientProvider>
+      </ApolloProvider>
+    </ClerkProvider>
+  </React.StrictMode>
 );
