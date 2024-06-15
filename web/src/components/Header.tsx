@@ -33,9 +33,9 @@ function Header() {
         <div className="lg:hidden">
           <button type="button" onClick={() => setNavBar(!navBar)}>
             {navBar ? (
-              <IoMdClose className="text-white" size={40} />
+              <IoMdClose data-testid="close" className="text-white" size={40} />
             ) : (
-              <IoMdMenu className="text-white" size={40} />
+              <IoMdMenu data-testid="menu" className="text-white" size={40} />
             )}
           </button>
         </div>
@@ -46,7 +46,7 @@ function Header() {
         } lg:static lg:transform-none lg:p-0 lg:bg-transparent lg:flex lg:items-center lg:w-auto`}
       >
         <button
-        type="button"
+          type="button"
           className="absolute top-4 right-4 lg:hidden"
           onClick={() => setNavBar(false)}
         >
@@ -69,7 +69,7 @@ function Header() {
           <div className="flex flex-col lg:flex-row items-center gap-8 mt-4 lg:mt-0 lg:ml-8">
             <a href="/login">
               <button
-              type="button"
+                type="button"
                 className="bg-primary-orange hover:bg-[#fc7300] text-black px-[18px] py-[10px] text-xl"
                 style={{ borderRadius: "10px" }}
               >
@@ -78,7 +78,7 @@ function Header() {
             </a>
             <a href="/signup">
               <button
-              type="button"
+                type="button"
                 className="bg-primary-orange hover:bg-[#fc7300] text-black px-[18px] py-[10px] text-xl"
                 style={{ borderRadius: "10px" }}
               >
