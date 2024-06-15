@@ -1,4 +1,3 @@
-import LoadingSpinner from "@components/LoadingSpinner";
 import ReactMarkdown from "react-markdown";
 import type { Exec } from "../types/types";
 import { mapToExec } from "../utils/mapToExec";
