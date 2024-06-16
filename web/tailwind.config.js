@@ -13,6 +13,8 @@ export default {
         "primary-blue": "#012D37",
         "secondary-blue": "#034159",
         "tertiary-blue" : "#CAF1FF",
+        "AUIS-teal": "#0F4A57",
+        "AUIS-dark-teal": "#07242F",
       },
       fontFamily: {
         sans: ["Montserrat"],
