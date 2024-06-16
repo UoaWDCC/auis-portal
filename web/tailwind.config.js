@@ -7,6 +7,11 @@ export default {
   plugins: [daisyui],
   theme: {
     extend: {
+      dropShadow: {
+        glow: [
+          "0px 0px 5px rgba(255,255, 255, 0.35)"
+        ]
+      },
       colors: {
         "primary-green": "#158807",
         "primary-orange": "#FC8700",
