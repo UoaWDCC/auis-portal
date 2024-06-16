@@ -1,8 +1,13 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import Footer from "../src/components/Footer";
 import "@testing-library/jest-dom";
+
+// Mock the Socials component
+vi.mock("../src/components/Socials", () => ({
+  default: () => <div>Socials Component</div>,
+}));
 
 describe("Footer component", () => {
   it("should render the logo images", () => {
@@ -12,10 +17,9 @@ describe("Footer component", () => {
     expect(peacockLogo).toBeInTheDocument();
   });
 
-  it("should render the current year", () => {
+  it("renders Socials component correctly", () => {
     render(<Footer />);
-    const currentYear = new Date().getFullYear();
-    const expectedText = `© AUIS ${currentYear}. All Rights Reserved`;
-    expect(screen.getByText(expectedText)).toBeInTheDocument();
+    const socialsComponent = screen.getByText("Socials Component");
+    expect(socialsComponent).toBeInTheDocument();
   });
 });
