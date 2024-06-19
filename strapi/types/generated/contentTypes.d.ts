@@ -1205,6 +1205,37 @@ export interface ApiTicketTicket extends Schema.CollectionType {
   };
 }
 
+export interface ApiUserTicketUserTicket extends Schema.CollectionType {
+  collectionName: 'user_tickets';
+  info: {
+    singularName: 'user-ticket';
+    pluralName: 'user-tickets';
+    displayName: 'User_Ticket';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    User_Ticket_Code: Attribute.Integer & Attribute.Required & Attribute.Unique;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::user-ticket.user-ticket',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::user-ticket.user-ticket',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiValueValue extends Schema.CollectionType {
   collectionName: 'values';
   info: {
@@ -1266,6 +1297,7 @@ declare module '@strapi/types' {
       'api::social.social': ApiSocialSocial;
       'api::some-photo.some-photo': ApiSomePhotoSomePhoto;
       'api::ticket.ticket': ApiTicketTicket;
+      'api::user-ticket.user-ticket': ApiUserTicketUserTicket;
       'api::value.value': ApiValueValue;
     }
   }

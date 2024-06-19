@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "user_tickets",
+  "info": {
+    "singularName": "user-ticket",
+    "pluralName": "user-tickets",
+    "displayName": "User_Ticket",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "User_Ticket_Code": {
+      "type": "integer",
+      "unique": true,
+      "required": true
+    }
+  }
+}
