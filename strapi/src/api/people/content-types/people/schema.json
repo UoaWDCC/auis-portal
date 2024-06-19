@@ -1,0 +1,60 @@
+{
+  "kind": "collectionType",
+  "collectionName": "peoples",
+  "info": {
+    "singularName": "people",
+    "pluralName": "peoples",
+    "displayName": "People"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "type": "string",
+      "required": true
+    },
+    "Email": {
+      "type": "string",
+      "required": true
+    },
+    "University_ID": {
+      "type": "string",
+      "required": true
+    },
+    "UPI": {
+      "type": "string",
+      "required": true
+    },
+    "Institution": {
+      "type": "string",
+      "required": true
+    },
+    "Year_Of_Study": {
+      "type": "string",
+      "required": true
+    },
+    "Study_Field": {
+      "type": "string",
+      "required": true
+    },
+    "Is_Member": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "Status": {
+      "type": "enumeration",
+      "enum": [
+        "Domestic",
+        "International"
+      ],
+      "required": true
+    },
+    "Member_Expiry_Date": {
+      "type": "date",
+      "required": true
+    }
+  }
+}

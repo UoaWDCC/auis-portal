@@ -930,6 +930,48 @@ export interface ApiPartnerPartner extends Schema.CollectionType {
   };
 }
 
+export interface ApiPeoplePeople extends Schema.CollectionType {
+  collectionName: 'peoples';
+  info: {
+    singularName: 'people';
+    pluralName: 'peoples';
+    displayName: 'People';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Name: Attribute.String & Attribute.Required;
+    Email: Attribute.String & Attribute.Required;
+    University_ID: Attribute.String & Attribute.Required;
+    UPI: Attribute.String & Attribute.Required;
+    Institution: Attribute.String & Attribute.Required;
+    Year_Of_Study: Attribute.String & Attribute.Required;
+    Study_Field: Attribute.String & Attribute.Required;
+    Is_Member: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
+    Status: Attribute.Enumeration<['Domestic', 'International']> &
+      Attribute.Required;
+    Member_Expiry_Date: Attribute.Date & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::people.people',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::people.people',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiPreviousTeamPreviousTeam extends Schema.CollectionType {
   collectionName: 'previous_teams';
   info: {
@@ -1097,6 +1139,7 @@ declare module '@strapi/types' {
       'api::exec.exec': ApiExecExec;
       'api::introduction.introduction': ApiIntroductionIntroduction;
       'api::partner.partner': ApiPartnerPartner;
+      'api::people.people': ApiPeoplePeople;
       'api::previous-team.previous-team': ApiPreviousTeamPreviousTeam;
       'api::social.social': ApiSocialSocial;
       'api::some-photo.some-photo': ApiSomePhotoSomePhoto;
