@@ -1053,6 +1053,37 @@ export interface ApiPreviousTeamPreviousTeam extends Schema.CollectionType {
   };
 }
 
+export interface ApiQuestionQuestion extends Schema.CollectionType {
+  collectionName: 'questions';
+  info: {
+    singularName: 'question';
+    pluralName: 'questions';
+    displayName: 'Question';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Question: Attribute.String & Attribute.Required;
+    Check_For_Member_Email: Attribute.Boolean;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::question.question',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::question.question',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiSocialSocial extends Schema.CollectionType {
   collectionName: 'socials';
   info: {
@@ -1185,6 +1216,7 @@ declare module '@strapi/types' {
       'api::partner.partner': ApiPartnerPartner;
       'api::people.people': ApiPeoplePeople;
       'api::previous-team.previous-team': ApiPreviousTeamPreviousTeam;
+      'api::question.question': ApiQuestionQuestion;
       'api::social.social': ApiSocialSocial;
       'api::some-photo.some-photo': ApiSomePhotoSomePhoto;
       'api::value.value': ApiValueValue;
