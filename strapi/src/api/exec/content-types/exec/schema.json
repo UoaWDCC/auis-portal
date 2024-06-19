@@ -4,34 +4,41 @@
   "info": {
     "singularName": "exec",
     "pluralName": "execs",
-    "displayName": "Exec"
+    "displayName": "Exec",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "name": {
+    "Name": {
       "type": "string",
       "required": true
     },
-    "bio": {
+    "Description": {
       "type": "text",
       "required": true
     },
-    "position": {
+    "Position": {
       "type": "string",
       "required": true
     },
-    "image": {
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ],
+    "Image": {
       "type": "media",
-      "multiple": false
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "Role": {
+      "type": "enumeration",
+      "enum": [
+        "President",
+        "Executive"
+      ],
+      "required": true
     }
   }
 }
