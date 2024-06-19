@@ -34,24 +34,6 @@ ENV DATABASE_PORT=${DATABASE_PORT}
 ENV DATABASE_USERNAME=${DATABASE_USERNAME}
 ENV DATABASE_PASSWORD=${DATABASE_PASSWORD}
 
-# Copy drizzle configuration file
-COPY drizzle.config.ts .
-
-# Copy schemas folder from api directory
-COPY schemas ./schemas
-
-#Copy migrate script from api directory
-COPY scripts ./scripts
-
-#Copy db config script from api directory
-COPY db ./db
-
-#Need to run the generation and migration
-RUN yarn run db
-
-#Runs the seed script to populate some data
-RUN yarn run db:seed
-
 # Copy application code
 COPY --link . .
 
