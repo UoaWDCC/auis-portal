@@ -892,6 +892,41 @@ export interface ApiIntroductionIntroduction extends Schema.CollectionType {
   };
 }
 
+export interface ApiPartnerPartner extends Schema.CollectionType {
+  collectionName: 'partners';
+  info: {
+    singularName: 'partner';
+    pluralName: 'partners';
+    displayName: 'Partner ';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Type: Attribute.Enumeration<['Gold', 'Silver', 'Bronze']> &
+      Attribute.Required;
+    Image: Attribute.Media<'images'> & Attribute.Required;
+    Name: Attribute.String & Attribute.Required;
+    Location: Attribute.Text & Attribute.Required;
+    Description: Attribute.Text & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::partner.partner',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::partner.partner',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiSomePhotoSomePhoto extends Schema.CollectionType {
   collectionName: 'some_photos';
   info: {
@@ -987,6 +1022,7 @@ declare module '@strapi/types' {
       'api::event-gallery.event-gallery': ApiEventGalleryEventGallery;
       'api::exec.exec': ApiExecExec;
       'api::introduction.introduction': ApiIntroductionIntroduction;
+      'api::partner.partner': ApiPartnerPartner;
       'api::some-photo.some-photo': ApiSomePhotoSomePhoto;
       'api::value.value': ApiValueValue;
     }
