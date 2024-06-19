@@ -968,6 +968,39 @@ export interface ApiPreviousTeamPreviousTeam extends Schema.CollectionType {
   };
 }
 
+export interface ApiSocialSocial extends Schema.CollectionType {
+  collectionName: 'socials';
+  info: {
+    singularName: 'social';
+    pluralName: 'socials';
+    displayName: 'Social';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Type: Attribute.Enumeration<
+      ['Instagram', 'Facebook', 'Email', 'LinkedIn', 'TikTok']
+    >;
+    Link: Attribute.String & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::social.social',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::social.social',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiSomePhotoSomePhoto extends Schema.CollectionType {
   collectionName: 'some_photos';
   info: {
@@ -1065,6 +1098,7 @@ declare module '@strapi/types' {
       'api::introduction.introduction': ApiIntroductionIntroduction;
       'api::partner.partner': ApiPartnerPartner;
       'api::previous-team.previous-team': ApiPreviousTeamPreviousTeam;
+      'api::social.social': ApiSocialSocial;
       'api::some-photo.some-photo': ApiSomePhotoSomePhoto;
       'api::value.value': ApiValueValue;
     }
