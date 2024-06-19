@@ -4,7 +4,8 @@
   "info": {
     "singularName": "question",
     "pluralName": "questions",
-    "displayName": "Question"
+    "displayName": "Question",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -16,7 +17,21 @@
       "required": true
     },
     "Check_For_Member_Email": {
-      "type": "boolean"
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "Ticket_ID": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::ticket.ticket",
+      "inversedBy": "Question_ID"
+    },
+    "Answer_ID": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::answer.answer",
+      "mappedBy": "Question_ID"
     }
   }
 }

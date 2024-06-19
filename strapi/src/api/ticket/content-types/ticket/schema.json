@@ -4,7 +4,8 @@
   "info": {
     "singularName": "ticket",
     "pluralName": "tickets",
-    "displayName": "Ticket"
+    "displayName": "Ticket",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -17,11 +18,11 @@
     },
     "Discount_Code": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "Discount_Price": {
       "type": "decimal",
-      "required": true
+      "required": false
     },
     "Price": {
       "type": "decimal",
@@ -57,6 +58,24 @@
       "type": "boolean",
       "default": false,
       "required": true
+    },
+    "Question_ID": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::question.question",
+      "mappedBy": "Ticket_ID"
+    },
+    "Event_ID": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::event.event",
+      "inversedBy": "Ticket_ID"
+    },
+    "People_Ticket_ID": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::user-ticket.user-ticket",
+      "mappedBy": "Ticket_ID"
     }
   }
 }

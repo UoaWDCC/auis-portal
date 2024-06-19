@@ -794,12 +794,23 @@ export interface ApiAnswerAnswer extends Schema.CollectionType {
     singularName: 'answer';
     pluralName: 'answers';
     displayName: 'Answer';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
     Answer: Attribute.Text & Attribute.Required;
+    People_ID: Attribute.Relation<
+      'api::answer.answer',
+      'manyToOne',
+      'api::people.people'
+    >;
+    Question_ID: Attribute.Relation<
+      'api::answer.answer',
+      'manyToOne',
+      'api::question.question'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -824,6 +835,7 @@ export interface ApiEventEvent extends Schema.CollectionType {
     singularName: 'event';
     pluralName: 'events';
     displayName: 'Event';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -831,7 +843,7 @@ export interface ApiEventEvent extends Schema.CollectionType {
   attributes: {
     Title: Attribute.String & Attribute.Required;
     Description: Attribute.Text & Attribute.Required;
-    Subtitle: Attribute.String & Attribute.Required;
+    Subtitle: Attribute.String;
     Location: Attribute.String & Attribute.Required;
     Location_Link: Attribute.String;
     Event_Date_Start: Attribute.DateTime & Attribute.Required;
@@ -843,6 +855,11 @@ export interface ApiEventEvent extends Schema.CollectionType {
     Image: Attribute.Media<'images'> & Attribute.Required;
     Terms_And_Conditions: Attribute.Text & Attribute.Required;
     Event_Capacity_Remaining: Attribute.Integer & Attribute.Required;
+    Ticket_ID: Attribute.Relation<
+      'api::event.event',
+      'oneToMany',
+      'api::ticket.ticket'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1009,6 +1026,7 @@ export interface ApiPeoplePeople extends Schema.CollectionType {
     singularName: 'people';
     pluralName: 'peoples';
     displayName: 'People';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -1016,17 +1034,28 @@ export interface ApiPeoplePeople extends Schema.CollectionType {
   attributes: {
     Name: Attribute.String & Attribute.Required;
     Email: Attribute.String & Attribute.Required;
-    University_ID: Attribute.String & Attribute.Required;
-    UPI: Attribute.String & Attribute.Required;
-    Institution: Attribute.String & Attribute.Required;
-    Year_Of_Study: Attribute.String & Attribute.Required;
-    Study_Field: Attribute.String & Attribute.Required;
+    University_ID: Attribute.String;
+    UPI: Attribute.String;
+    Year_Of_Study: Attribute.String;
+    Study_Field: Attribute.String;
     Is_Member: Attribute.Boolean &
       Attribute.Required &
       Attribute.DefaultTo<false>;
     Status: Attribute.Enumeration<['Domestic', 'International']> &
       Attribute.Required;
     Member_Expiry_Date: Attribute.Date & Attribute.Required;
+    People_Ticket_ID: Attribute.Relation<
+      'api::people.people',
+      'oneToMany',
+      'api::user-ticket.user-ticket'
+    >;
+    Answer_ID: Attribute.Relation<
+      'api::people.people',
+      'oneToMany',
+      'api::answer.answer'
+    >;
+    Institution: Attribute.Enumeration<['UoA', 'AUT', 'Other', 'None']> &
+      Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1089,13 +1118,26 @@ export interface ApiQuestionQuestion extends Schema.CollectionType {
     singularName: 'question';
     pluralName: 'questions';
     displayName: 'Question';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
     Question: Attribute.String & Attribute.Required;
-    Check_For_Member_Email: Attribute.Boolean;
+    Check_For_Member_Email: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
+    Ticket_ID: Attribute.Relation<
+      'api::question.question',
+      'manyToOne',
+      'api::ticket.ticket'
+    >;
+    Answer_ID: Attribute.Relation<
+      'api::question.question',
+      'oneToMany',
+      'api::answer.answer'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1195,14 +1237,15 @@ export interface ApiTicketTicket extends Schema.CollectionType {
     singularName: 'ticket';
     pluralName: 'tickets';
     displayName: 'Ticket';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
     Name: Attribute.String & Attribute.Required;
-    Discount_Code: Attribute.String & Attribute.Required;
-    Discount_Price: Attribute.Decimal & Attribute.Required;
+    Discount_Code: Attribute.String;
+    Discount_Price: Attribute.Decimal;
     Price: Attribute.Decimal & Attribute.Required;
     Is_Member_Only: Attribute.Boolean &
       Attribute.Required &
@@ -1217,6 +1260,21 @@ export interface ApiTicketTicket extends Schema.CollectionType {
     Is_Ticket_Live: Attribute.Boolean &
       Attribute.Required &
       Attribute.DefaultTo<false>;
+    Question_ID: Attribute.Relation<
+      'api::ticket.ticket',
+      'oneToMany',
+      'api::question.question'
+    >;
+    Event_ID: Attribute.Relation<
+      'api::ticket.ticket',
+      'manyToOne',
+      'api::event.event'
+    >;
+    People_Ticket_ID: Attribute.Relation<
+      'api::ticket.ticket',
+      'oneToMany',
+      'api::user-ticket.user-ticket'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1240,14 +1298,26 @@ export interface ApiUserTicketUserTicket extends Schema.CollectionType {
   info: {
     singularName: 'user-ticket';
     pluralName: 'user-tickets';
-    displayName: 'User_Ticket';
+    displayName: 'People_Ticket';
     description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    User_Ticket_Code: Attribute.Integer & Attribute.Required & Attribute.Unique;
+    People_Ticket_Code: Attribute.Integer &
+      Attribute.Required &
+      Attribute.Unique;
+    People_ID: Attribute.Relation<
+      'api::user-ticket.user-ticket',
+      'manyToOne',
+      'api::people.people'
+    >;
+    Ticket_ID: Attribute.Relation<
+      'api::user-ticket.user-ticket',
+      'manyToOne',
+      'api::ticket.ticket'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

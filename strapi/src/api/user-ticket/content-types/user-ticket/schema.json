@@ -4,7 +4,7 @@
   "info": {
     "singularName": "user-ticket",
     "pluralName": "user-tickets",
-    "displayName": "User_Ticket",
+    "displayName": "People_Ticket",
     "description": ""
   },
   "options": {
@@ -12,10 +12,22 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "User_Ticket_Code": {
+    "People_Ticket_Code": {
       "type": "integer",
       "unique": true,
       "required": true
+    },
+    "People_ID": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::people.people",
+      "inversedBy": "People_Ticket_ID"
+    },
+    "Ticket_ID": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::ticket.ticket",
+      "inversedBy": "People_Ticket_ID"
     }
   }
 }

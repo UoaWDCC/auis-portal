@@ -4,7 +4,8 @@
   "info": {
     "singularName": "event",
     "pluralName": "events",
-    "displayName": "Event"
+    "displayName": "Event",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -21,7 +22,7 @@
     },
     "Subtitle": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "Location": {
       "type": "string",
@@ -48,12 +49,12 @@
       "required": true
     },
     "Image": {
-      "allowedTypes": [
-        "images"
-      ],
       "type": "media",
       "multiple": false,
-      "required": true
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
     },
     "Terms_And_Conditions": {
       "type": "text",
@@ -62,6 +63,12 @@
     "Event_Capacity_Remaining": {
       "type": "integer",
       "required": true
+    },
+    "Ticket_ID": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::ticket.ticket",
+      "mappedBy": "Event_ID"
     }
   }
 }

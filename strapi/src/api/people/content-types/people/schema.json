@@ -4,7 +4,8 @@
   "info": {
     "singularName": "people",
     "pluralName": "peoples",
-    "displayName": "People"
+    "displayName": "People",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -21,23 +22,19 @@
     },
     "University_ID": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "UPI": {
       "type": "string",
-      "required": true
-    },
-    "Institution": {
-      "type": "string",
-      "required": true
+      "required": false
     },
     "Year_Of_Study": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "Study_Field": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "Is_Member": {
       "type": "boolean",
@@ -54,6 +51,28 @@
     },
     "Member_Expiry_Date": {
       "type": "date",
+      "required": true
+    },
+    "People_Ticket_ID": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::user-ticket.user-ticket",
+      "mappedBy": "People_ID"
+    },
+    "Answer_ID": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::answer.answer",
+      "mappedBy": "People_ID"
+    },
+    "Institution": {
+      "type": "enumeration",
+      "enum": [
+        "UoA",
+        "AUT",
+        "Other",
+        "None"
+      ],
       "required": true
     }
   }
