@@ -788,6 +788,49 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiEventEvent extends Schema.CollectionType {
+  collectionName: 'events';
+  info: {
+    singularName: 'event';
+    pluralName: 'events';
+    displayName: 'Event';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Title: Attribute.String & Attribute.Required;
+    Description: Attribute.Text & Attribute.Required;
+    Subtitle: Attribute.String & Attribute.Required;
+    Location: Attribute.String & Attribute.Required;
+    Location_Link: Attribute.String;
+    Event_Date_Start: Attribute.DateTime & Attribute.Required;
+    Event_Date_End: Attribute.DateTime & Attribute.Required;
+    Event_Capacity: Attribute.Integer & Attribute.Required;
+    Is_Live: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
+    Image: Attribute.Media<'images'> & Attribute.Required;
+    Terms_And_Conditions: Attribute.Text & Attribute.Required;
+    Event_Capacity_Remaining: Attribute.Integer & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::event.event',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::event.event',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiEventGalleryEventGallery extends Schema.CollectionType {
   collectionName: 'event_galleries';
   info: {
@@ -1135,6 +1178,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::event.event': ApiEventEvent;
       'api::event-gallery.event-gallery': ApiEventGalleryEventGallery;
       'api::exec.exec': ApiExecExec;
       'api::introduction.introduction': ApiIntroductionIntroduction;

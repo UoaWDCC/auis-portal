@@ -1,0 +1,67 @@
+{
+  "kind": "collectionType",
+  "collectionName": "events",
+  "info": {
+    "singularName": "event",
+    "pluralName": "events",
+    "displayName": "Event"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Title": {
+      "type": "string",
+      "required": true
+    },
+    "Description": {
+      "type": "text",
+      "required": true
+    },
+    "Subtitle": {
+      "type": "string",
+      "required": true
+    },
+    "Location": {
+      "type": "string",
+      "required": true
+    },
+    "Location_Link": {
+      "type": "string"
+    },
+    "Event_Date_Start": {
+      "type": "datetime",
+      "required": true
+    },
+    "Event_Date_End": {
+      "type": "datetime",
+      "required": true
+    },
+    "Event_Capacity": {
+      "type": "integer",
+      "required": true
+    },
+    "Is_Live": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "Image": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    },
+    "Terms_And_Conditions": {
+      "type": "text",
+      "required": true
+    },
+    "Event_Capacity_Remaining": {
+      "type": "integer",
+      "required": true
+    }
+  }
+}
