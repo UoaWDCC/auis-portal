@@ -387,6 +387,48 @@ export interface ApiExecExec extends Schema.CollectionType {
   };
 }
 
+export interface ApiSomePhotoSomePhoto extends Schema.CollectionType {
+  collectionName: 'some_photos';
+  info: {
+    singularName: 'some-photo';
+    pluralName: 'some-photos';
+    displayName: 'Some_Photo';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Image: Attribute.Media<'images'> & Attribute.Required;
+    Title: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 10;
+      }>;
+    Year: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        minLength: 4;
+        maxLength: 4;
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::some-photo.some-photo',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::some-photo.some-photo',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -824,6 +866,7 @@ declare module '@strapi/types' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'api::exec.exec': ApiExecExec;
+      'api::some-photo.some-photo': ApiSomePhotoSomePhoto;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
