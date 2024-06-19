@@ -930,6 +930,44 @@ export interface ApiPartnerPartner extends Schema.CollectionType {
   };
 }
 
+export interface ApiPreviousTeamPreviousTeam extends Schema.CollectionType {
+  collectionName: 'previous_teams';
+  info: {
+    singularName: 'previous-team';
+    pluralName: 'previous-teams';
+    displayName: 'Previous_Team';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Name: Attribute.String & Attribute.Required;
+    Role: Attribute.Enumeration<['President', 'Executive']> &
+      Attribute.Required;
+    Year: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        minLength: 4;
+        maxLength: 4;
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::previous-team.previous-team',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::previous-team.previous-team',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiSomePhotoSomePhoto extends Schema.CollectionType {
   collectionName: 'some_photos';
   info: {
@@ -1026,6 +1064,7 @@ declare module '@strapi/types' {
       'api::exec.exec': ApiExecExec;
       'api::introduction.introduction': ApiIntroductionIntroduction;
       'api::partner.partner': ApiPartnerPartner;
+      'api::previous-team.previous-team': ApiPreviousTeamPreviousTeam;
       'api::some-photo.some-photo': ApiSomePhotoSomePhoto;
       'api::value.value': ApiValueValue;
     }
