@@ -1,0 +1,41 @@
+{
+  "kind": "collectionType",
+  "collectionName": "introductions",
+  "info": {
+    "singularName": "introduction",
+    "pluralName": "introductions",
+    "displayName": "Introduction",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Description": {
+      "type": "richtext",
+      "required": true
+    },
+    "Events": {
+      "type": "string",
+      "required": true,
+      "minLength": 1,
+      "maxLength": 4,
+      "regex": "([1-9]|[1-9][0-9]|[1-9][0-9][0-9]|[1-9][0-9][0-9][0-9])"
+    },
+    "Members": {
+      "type": "string",
+      "regex": "([1-9]|[1-9][0-9]|[1-9][0-9][0-9]|[1-9][0-9][0-9][0-9])",
+      "required": true,
+      "minLength": 1,
+      "maxLength": 5
+    },
+    "Followers": {
+      "type": "string",
+      "regex": "([1-9]|[1-9][0-9]|[1-9][0-9][0-9]|[1-9][0-9][0-9][0-9])",
+      "required": true,
+      "minLength": 1,
+      "maxLength": 6
+    }
+  }
+}

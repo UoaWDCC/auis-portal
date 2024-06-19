@@ -843,6 +843,55 @@ export interface ApiExecExec extends Schema.CollectionType {
   };
 }
 
+export interface ApiIntroductionIntroduction extends Schema.CollectionType {
+  collectionName: 'introductions';
+  info: {
+    singularName: 'introduction';
+    pluralName: 'introductions';
+    displayName: 'Introduction';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Description: Attribute.RichText & Attribute.Required;
+    Events: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        minLength: 1;
+        maxLength: 4;
+      }>;
+    Members: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        minLength: 1;
+        maxLength: 5;
+      }>;
+    Followers: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        minLength: 1;
+        maxLength: 6;
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::introduction.introduction',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::introduction.introduction',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiSomePhotoSomePhoto extends Schema.CollectionType {
   collectionName: 'some_photos';
   info: {
@@ -905,6 +954,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::event-gallery.event-gallery': ApiEventGalleryEventGallery;
       'api::exec.exec': ApiExecExec;
+      'api::introduction.introduction': ApiIntroductionIntroduction;
       'api::some-photo.some-photo': ApiSomePhotoSomePhoto;
     }
   }
