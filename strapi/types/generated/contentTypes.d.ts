@@ -934,6 +934,38 @@ export interface ApiSomePhotoSomePhoto extends Schema.CollectionType {
   };
 }
 
+export interface ApiValueValue extends Schema.CollectionType {
+  collectionName: 'values';
+  info: {
+    singularName: 'value';
+    pluralName: 'values';
+    displayName: 'Value';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Title: Attribute.String & Attribute.Required;
+    Description: Attribute.Text & Attribute.Required;
+    Image: Attribute.Media<'images'> & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::value.value',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::value.value',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -956,6 +988,7 @@ declare module '@strapi/types' {
       'api::exec.exec': ApiExecExec;
       'api::introduction.introduction': ApiIntroductionIntroduction;
       'api::some-photo.some-photo': ApiSomePhotoSomePhoto;
+      'api::value.value': ApiValueValue;
     }
   }
 }
