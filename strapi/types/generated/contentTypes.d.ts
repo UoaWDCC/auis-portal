@@ -1159,6 +1159,52 @@ export interface ApiSomePhotoSomePhoto extends Schema.CollectionType {
   };
 }
 
+export interface ApiTicketTicket extends Schema.CollectionType {
+  collectionName: 'tickets';
+  info: {
+    singularName: 'ticket';
+    pluralName: 'tickets';
+    displayName: 'Ticket';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Name: Attribute.String & Attribute.Required;
+    Discount_Code: Attribute.String & Attribute.Required;
+    Discount_Price: Attribute.Decimal & Attribute.Required;
+    Price: Attribute.Decimal & Attribute.Required;
+    Is_Member_Only: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
+    Is_Double: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
+    Max_Number_Tickets: Attribute.Integer & Attribute.Required;
+    Number_Tickets_Left: Attribute.Integer & Attribute.Required;
+    Ticket_Description: Attribute.Text & Attribute.Required;
+    Start_Date_Ticket_Sales: Attribute.DateTime & Attribute.Required;
+    Is_Ticket_Live: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::ticket.ticket',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::ticket.ticket',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiValueValue extends Schema.CollectionType {
   collectionName: 'values';
   info: {
@@ -1219,6 +1265,7 @@ declare module '@strapi/types' {
       'api::question.question': ApiQuestionQuestion;
       'api::social.social': ApiSocialSocial;
       'api::some-photo.some-photo': ApiSomePhotoSomePhoto;
+      'api::ticket.ticket': ApiTicketTicket;
       'api::value.value': ApiValueValue;
     }
   }

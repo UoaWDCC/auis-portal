@@ -1,0 +1,62 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tickets",
+  "info": {
+    "singularName": "ticket",
+    "pluralName": "tickets",
+    "displayName": "Ticket"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "type": "string",
+      "required": true
+    },
+    "Discount_Code": {
+      "type": "string",
+      "required": true
+    },
+    "Discount_Price": {
+      "type": "decimal",
+      "required": true
+    },
+    "Price": {
+      "type": "decimal",
+      "required": true
+    },
+    "Is_Member_Only": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "Is_Double": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "Max_Number_Tickets": {
+      "type": "integer",
+      "required": true
+    },
+    "Number_Tickets_Left": {
+      "type": "integer",
+      "required": true
+    },
+    "Ticket_Description": {
+      "type": "text",
+      "required": true
+    },
+    "Start_Date_Ticket_Sales": {
+      "type": "datetime",
+      "required": true
+    },
+    "Is_Ticket_Live": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    }
+  }
+}
