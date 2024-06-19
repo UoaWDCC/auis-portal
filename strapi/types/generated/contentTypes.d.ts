@@ -824,15 +824,18 @@ export interface ApiExecExec extends Schema.CollectionType {
     singularName: 'exec';
     pluralName: 'execs';
     displayName: 'Exec';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    name: Attribute.String & Attribute.Required;
-    bio: Attribute.Text & Attribute.Required;
-    position: Attribute.String & Attribute.Required;
-    image: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    Name: Attribute.String & Attribute.Required;
+    Description: Attribute.Text & Attribute.Required;
+    Position: Attribute.String & Attribute.Required;
+    Image: Attribute.Media<'images'> & Attribute.Required;
+    Role: Attribute.Enumeration<['President', 'Executive']> &
+      Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
