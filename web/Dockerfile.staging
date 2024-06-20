@@ -26,6 +26,9 @@ RUN yarn install --frozen-lockfile --production=false
 # Copy application code
 COPY --link . .
 
+# Run tests
+RUN yarn test
+
 ENV VITE_API_URL="https://wdcc-auis-api-staging.fly.dev"
 ENV VITE_STRAPI_URL="https://wdcc-auis-strapi-staging.fly.dev"
 

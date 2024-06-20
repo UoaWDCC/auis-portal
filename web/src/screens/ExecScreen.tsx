@@ -1,9 +1,9 @@
-import LoadingSpinner from "@components/LoadingSpinner";
 import ReactMarkdown from "react-markdown";
 import type { Exec } from "../types/types";
-import { mapToExec } from "@utils/mapToExec";
+import { mapToExec } from "../utils/mapToExec";
 import { useQuery } from "@apollo/client";
 import { GET_EXECS } from "../graphql/queries";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 function ExecScreen() {
   const { loading, data, error } = useQuery(GET_EXECS);

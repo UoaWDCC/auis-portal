@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "user_tickets",
+  "info": {
+    "singularName": "user-ticket",
+    "pluralName": "user-tickets",
+    "displayName": "People_Ticket",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "People_Ticket_Code": {
+      "type": "integer",
+      "unique": true,
+      "required": true
+    },
+    "People_ID": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::people.people",
+      "inversedBy": "People_Ticket_ID"
+    },
+    "Ticket_ID": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::ticket.ticket",
+      "inversedBy": "People_Ticket_ID"
+    }
+  }
+}
