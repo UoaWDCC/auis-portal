@@ -25,3 +25,10 @@ export interface Social {
   type: string;
   link: string;
 }
+
+export interface SomePhoto {
+  id: number;
+  title: string;
+  year: string;
+  image: string;
+}

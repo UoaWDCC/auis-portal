@@ -62,6 +62,25 @@ export const GET_SOCIALS = gql`
   }
 `;
 
-export const GET_SOME_PHOTOS = "";
+export const GET_SOME_PHOTOS = gql`
+  query {
+    somePhotos {
+      data {
+        id
+        attributes {
+          Title
+          Year
+          Image {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
 
 export const GET_VALUES = "";

@@ -1,11 +1,13 @@
 // import {SignedIn, SignedOut, SignInButton, UserButton} from "@clerk/clerk-react";
 
+import SomePhotos from "../components/SomePhotos";
 import Partners from "../components/Partners";
 
 function TestScreen() {
   return (
     <div>
       <Partners />
+      <SomePhotos />
     </div>
   );
 }
