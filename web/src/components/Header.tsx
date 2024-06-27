@@ -35,17 +35,15 @@ function Header() {
             </a>
           </div>
           <div className="flex grow xl:hidden"> </div>
-          {/* TEST */}
           <div className="xl:hidden justify-center">
             <button className=" h-full" type="button" onClick={() => setNavBar(!navBar)}>
               {navBar ? (
-                <IoMdClose className="text-white" size={40} />
+                <IoMdClose data-testid="close" className="text-white" size={40} />
               ) : (
-                <IoMdMenu className="text-white mr-5 " size={40} />
+                <IoMdMenu  data-testid="menu" className="text-white mr-5 " size={40} />
               )}
             </button>
           </div>
-          {/* Nav links */}
           <nav
             className={`fixed top-0 right-0 h-full bg-secondary-blue p-8 z-40 transform transition-transform ${
               navBar ? "translate-x-0" : "translate-x-full"
@@ -72,49 +70,46 @@ function Header() {
                   </Link>
                 </li>
               ))}
-              {/* BUTTONS */}
-
-
               <div className="xl:hidden mt-8 flex flex-col xl:flex-row items-center font-bold text-xl text-white">
                 <a href="/login" className="my-2">
                   <button
+                  data-testid="Log-in"
                     type="button"
                     className=" bg-primary-green px-6 py-1 rounded-3xl "
                   >
-                    Login
+                    Log-in
                   </button>
                 </a>
                 <a href="/signup" className="my-2">
                   <button
+                  data-testid="Sign-up"
                     type="button"
                     className=" bg-primary-orange px-6 py-1 rounded-3xl "
                   >
-                    Sign up
+                    Sign-up
                   </button>
                 </a>
               </div>
             </div>
-
-            
-
           </nav>
-          {/* Buttons */}
           <div className="mr-5 hidden xl:flex">
             <div className="h-full flex flex-col xl:flex-row items-center font-bold text-xl text-white">
               <a href="/login" className="mx-4">
                 <button
+                data-testid="Log-in-mobile"
                   type="button"
                   className=" bg-primary-green px-6 py-1 rounded-3xl "
                 >
-                  Login
+                  Log-in
                 </button>
               </a>
               <a href="/signup" className="mx-4">
                 <button
+                data-testid="Sign-up-mobile"
                   type="button"
                   className=" bg-primary-orange px-6 py-1 rounded-3xl "
                 >
-                  Sign up
+                  Sign-up
                 </button>
               </a>
             </div>

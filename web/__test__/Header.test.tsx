@@ -24,17 +24,21 @@ describe("Header component", () => {
   });
 
   it("should render the navigation links", () => {
-    const navLinks = ["Events", "About Us", "Leadership Team", "Credits"];
+    const navLinks = ["Events", "About Us", "Team", "Partners", "Credits"];
     navLinks.forEach((link) => {
       expect(screen.getByText(link)).toBeInTheDocument();
     });
   });
 
   it("should render the login and signup buttons", () => {
-    const loginButton = screen.getByText("Log-in");
-    const signUpButton = screen.getByText("Sign-up");
+    const loginButton = screen.getByTestId("Log-in");
+    const signUpButton = screen.getByTestId("Sign-up");
+    const loginButtonMobile = screen.getByTestId("Log-in-mobile");
+    const signUpButtonMobile = screen.getByTestId("Sign-up-mobile");
     expect(loginButton).toBeInTheDocument();
     expect(signUpButton).toBeInTheDocument();
+    expect(loginButtonMobile).toBeInTheDocument();
+    expect(signUpButtonMobile).toBeInTheDocument();
   });
 
   it("should render the mobile menu button on small screens", () => {
@@ -64,7 +68,7 @@ describe("Header component", () => {
 
   it("should display navigation links properly on large screens", () => {
     resizeWindow(1024); // Simulate a large screen
-    const links = ["Events", "About Us", "Leadership Team", "Credits"];
+    const links = ["Events", "About Us", "Team", "Partners" , "Credits"];
     links.forEach((link) => {
       expect(screen.getByText(link)).toBeInTheDocument();
     });
