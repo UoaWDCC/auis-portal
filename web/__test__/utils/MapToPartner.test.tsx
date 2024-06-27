@@ -1,8 +1,6 @@
-// mapToPartner.test.ts
-
 import { describe, expect, it } from "vitest";
-import { mapToPartner } from "../src/utils/mapToPartner";
-import { Partner } from "../src/types/types";
+import { Partner } from "../../src/types/types";
+import { Mapper } from "../../src/utils/Mapper";
 
 describe("mapToPartner", () => {
   it("should map valid data correctly", () => {
@@ -40,7 +38,7 @@ describe("mapToPartner", () => {
       },
     ];
 
-    expect(mapToPartner(data)).toEqual(expected);
+    expect(Mapper.mapToPartner(data)).toEqual(expected);
   });
 
   it("should handle missing image field gracefully", () => {
@@ -72,7 +70,7 @@ describe("mapToPartner", () => {
       },
     ];
 
-    expect(mapToPartner(data)).toEqual(expected);
+    expect(Mapper.mapToPartner(data)).toEqual(expected);
   });
 
   it("should handle missing name field gracefully", () => {
@@ -110,7 +108,7 @@ describe("mapToPartner", () => {
       },
     ];
 
-    expect(mapToPartner(data)).toEqual(expected);
+    expect(Mapper.mapToPartner(data)).toEqual(expected);
   });
 
   it("should handle missing description field gracefully", () => {
@@ -148,7 +146,7 @@ describe("mapToPartner", () => {
       },
     ];
 
-    expect(mapToPartner(data)).toEqual(expected);
+    expect(Mapper.mapToPartner(data)).toEqual(expected);
   });
 
   it("should handle missing type field gracefully", () => {
@@ -186,7 +184,7 @@ describe("mapToPartner", () => {
       },
     ];
 
-    expect(mapToPartner(data)).toEqual(expected);
+    expect(Mapper.mapToPartner(data)).toEqual(expected);
   });
 
   it("should handle completely missing attributes gracefully", () => {
@@ -212,7 +210,7 @@ describe("mapToPartner", () => {
       },
     ];
 
-    expect(mapToPartner(data)).toEqual(expected);
+    expect(Mapper.mapToPartner(data)).toEqual(expected);
   });
 
   it("should handle missing location field gracefully", () => {
@@ -249,6 +247,6 @@ describe("mapToPartner", () => {
       },
     ];
 
-    expect(mapToPartner(data)).toEqual(expected);
+    expect(Mapper.mapToPartner(data)).toEqual(expected);
   });
 });

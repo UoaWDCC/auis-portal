@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { mapToExec } from "../src/utils/mapToExec";
-import { Exec } from "../src/types/types";
+import { Exec } from "../../src/types/types";
+import { Mapper } from "../../src/utils/Mapper";
 
 describe("mapToExec", () => {
   it("should map valid data correctly", () => {
@@ -38,7 +38,7 @@ describe("mapToExec", () => {
       },
     ];
 
-    expect(mapToExec(data)).toEqual(expected);
+    expect(Mapper.mapToExec(data)).toEqual(expected);
   });
 
   it("should handle missing image field gracefully", () => {
@@ -70,7 +70,7 @@ describe("mapToExec", () => {
       },
     ];
 
-    expect(mapToExec(data)).toEqual(expected);
+    expect(Mapper.mapToExec(data)).toEqual(expected);
   });
 
   it("should handle missing name field gracefully", () => {
@@ -108,7 +108,7 @@ describe("mapToExec", () => {
       },
     ];
 
-    expect(mapToExec(data)).toEqual(expected);
+    expect(Mapper.mapToExec(data)).toEqual(expected);
   });
 
   it("should handle missing description field gracefully", () => {
@@ -146,7 +146,7 @@ describe("mapToExec", () => {
       },
     ];
 
-    expect(mapToExec(data)).toEqual(expected);
+    expect(Mapper.mapToExec(data)).toEqual(expected);
   });
 
   it("should handle missing position field gracefully", () => {
@@ -184,7 +184,7 @@ describe("mapToExec", () => {
       },
     ];
 
-    expect(mapToExec(data)).toEqual(expected);
+    expect(Mapper.mapToExec(data)).toEqual(expected);
   });
 
   it("should handle missing role field gracefully", () => {
@@ -222,7 +222,7 @@ describe("mapToExec", () => {
       },
     ];
 
-    expect(mapToExec(data)).toEqual(expected);
+    expect(Mapper.mapToExec(data)).toEqual(expected);
   });
 
   it("should handle completely missing attributes gracefully", () => {
@@ -248,6 +248,6 @@ describe("mapToExec", () => {
       },
     ];
 
-    expect(mapToExec(data)).toEqual(expected);
+    expect(Mapper.mapToExec(data)).toEqual(expected);
   });
 });

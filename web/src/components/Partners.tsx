@@ -2,13 +2,13 @@ import { useQuery } from "@apollo/client";
 import { GET_PARTNERS } from "../graphql/queries";
 import LoadingSpinner from "./LoadingSpinner";
 import { Partner } from "../types/types";
-import { mapToPartner } from "../utils/mapToPartner";
+import { Mapper } from "../utils/Mapper";
 
 function Partners() {
   const { loading, data, error } = useQuery(GET_PARTNERS);
   if (loading) return <LoadingSpinner />;
   if (error) return <div>CMS Offline</div>;
-  const partners: Partner[] = mapToPartner(data);
+  const partners: Partner[] = Mapper.mapToPartner(data);
 
   return (
     <div className="mt-20">

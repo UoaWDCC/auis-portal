@@ -2,7 +2,7 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { describe, it, expect, beforeEach } from "vitest";
-import Header from "../src/components/Header";
+import Header from "../../src/components/Header";
 
 describe("Header component", () => {
   beforeEach(() => {

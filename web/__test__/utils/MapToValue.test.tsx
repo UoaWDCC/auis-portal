@@ -1,6 +1,6 @@
-import { mapToValue } from "../src/utils/mapToValue";
 import { describe, expect, it } from "vitest";
-import { Value } from "../src/types/types";
+import { Value } from "../../src/types/types";
+import { Mapper } from "../../src/utils/Mapper";
 
 describe("mapToValue", () => {
   it("should map valid data correctly", () => {
@@ -34,7 +34,7 @@ describe("mapToValue", () => {
       },
     ];
 
-    expect(mapToValue(data)).toEqual(expected);
+    expect(Mapper.mapToValue(data)).toEqual(expected);
   });
 
   it("should handle missing image field gracefully", () => {
@@ -62,7 +62,7 @@ describe("mapToValue", () => {
       },
     ];
 
-    expect(mapToValue(data)).toEqual(expected);
+    expect(Mapper.mapToValue(data)).toEqual(expected);
   });
 
   it("should handle missing title field gracefully", () => {
@@ -96,7 +96,7 @@ describe("mapToValue", () => {
       },
     ];
 
-    expect(mapToValue(data)).toEqual(expected);
+    expect(Mapper.mapToValue(data)).toEqual(expected);
   });
 
   it("should handle missing description field gracefully", () => {
@@ -130,7 +130,7 @@ describe("mapToValue", () => {
       },
     ];
 
-    expect(mapToValue(data)).toEqual(expected);
+    expect(Mapper.mapToValue(data)).toEqual(expected);
   });
 
   it("should handle completely missing attributes gracefully", () => {
@@ -154,6 +154,6 @@ describe("mapToValue", () => {
       },
     ];
 
-    expect(mapToValue(data)).toEqual(expected);
+    expect(Mapper.mapToValue(data)).toEqual(expected);
   });
 });

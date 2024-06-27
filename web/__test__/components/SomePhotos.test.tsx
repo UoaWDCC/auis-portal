@@ -1,8 +1,8 @@
 import { MockedProvider } from "@apollo/client/testing";
-import { GET_SOME_PHOTOS } from "../src/graphql/queries";
+import { GET_SOME_PHOTOS } from "../../src/graphql/queries";
 import { describe, expect, it } from "vitest";
 import { render, screen } from "@testing-library/react";
-import SomePhotos from "../src/components/SomePhotos";
+import SomePhotos from "../../src/components/SomePhotos";
 import React from "react";
 import { GraphQLError } from "graphql";
 

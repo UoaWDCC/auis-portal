@@ -2,13 +2,13 @@ import { useQuery } from "@apollo/client";
 import { GET_VALUES } from "../graphql/queries";
 import LoadingSpinner from "./LoadingSpinner";
 import { Value } from "../types/types";
-import { mapToValue } from "../utils/mapToValue";
+import { Mapper } from "../utils/Mapper";
 
 function Values() {
   const { loading, data, error } = useQuery(GET_VALUES);
   if (loading) return <LoadingSpinner />;
   if (error) return <div>CMS Offline</div>;
-  const values: Value[] = mapToValue(data);
+  const values: Value[] = Mapper.mapToValue(data);
 
   return (
     <div className="mt-20">

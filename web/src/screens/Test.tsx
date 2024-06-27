@@ -3,6 +3,7 @@
 import SomePhotos from "../components/SomePhotos";
 import Partners from "../components/Partners";
 import Values from "../components/Values";
+import Introductions from "@components/Introductions";
 
 function TestScreen() {
   return (
@@ -10,6 +11,7 @@ function TestScreen() {
       <Partners />
       <SomePhotos />
       <Values />
+      <Introductions />
     </div>
   );
 }

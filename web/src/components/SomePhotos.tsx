@@ -2,13 +2,13 @@ import { useQuery } from "@apollo/client";
 import { GET_SOME_PHOTOS } from "../graphql/queries";
 import LoadingSpinner from "./LoadingSpinner";
 import { SomePhoto } from "../types/types";
-import { mapToSomePhotos } from "../utils/mapToSomePhotos";
+import { Mapper } from "../utils/Mapper";
 
 function SomePhotos() {
   const { loading, data, error } = useQuery(GET_SOME_PHOTOS);
   if (loading) return <LoadingSpinner />;
   if (error) return <div>CMS Offline</div>;
-  const photos: SomePhoto[] = mapToSomePhotos(data);
+  const photos: SomePhoto[] = Mapper.mapToSomePhotos(data);
 
   return (
     <div className="mt-20">

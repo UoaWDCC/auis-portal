@@ -39,3 +39,11 @@ export interface Value {
   description: string;
   image: string;
 }
+
+export interface Introduction {
+  id: number;
+  description: string;
+  events: string;
+  members: string;
+  followers: string;
+}

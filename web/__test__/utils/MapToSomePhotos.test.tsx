@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { mapToSomePhotos } from "../src/utils/mapToSomePhotos";
-import { SomePhoto } from "../src/types/types";
+import { SomePhoto } from "../../src/types/types";
+import { Mapper } from "../../src/utils/Mapper";
 
 describe("mapToSomePhotos", () => {
   it("should map valid data correctly", () => {
@@ -54,7 +54,7 @@ describe("mapToSomePhotos", () => {
       },
     ];
 
-    expect(mapToSomePhotos(data)).toEqual(expected);
+    expect(Mapper.mapToSomePhotos(data)).toEqual(expected);
   });
 
   it("should handle missing Title field gracefully", () => {
@@ -88,7 +88,7 @@ describe("mapToSomePhotos", () => {
       },
     ];
 
-    expect(mapToSomePhotos(data)).toEqual(expected);
+    expect(Mapper.mapToSomePhotos(data)).toEqual(expected);
   });
 
   it("should handle missing Year field gracefully", () => {
@@ -122,7 +122,7 @@ describe("mapToSomePhotos", () => {
       },
     ];
 
-    expect(mapToSomePhotos(data)).toEqual(expected);
+    expect(Mapper.mapToSomePhotos(data)).toEqual(expected);
   });
 
   it("should handle missing Image field gracefully", () => {
@@ -150,7 +150,7 @@ describe("mapToSomePhotos", () => {
       },
     ];
 
-    expect(mapToSomePhotos(data)).toEqual(expected);
+    expect(Mapper.mapToSomePhotos(data)).toEqual(expected);
   });
 
   it("should handle completely missing attributes gracefully", () => {
@@ -174,6 +174,6 @@ describe("mapToSomePhotos", () => {
       },
     ];
 
-    expect(mapToSomePhotos(data)).toEqual(expected);
+    expect(Mapper.mapToSomePhotos(data)).toEqual(expected);
   });
 });

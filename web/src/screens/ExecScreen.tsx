@@ -1,15 +1,15 @@
 import ReactMarkdown from "react-markdown";
 import type { Exec } from "../types/types";
-import { mapToExec } from "../utils/mapToExec";
 import { useQuery } from "@apollo/client";
 import { GET_EXECS } from "../graphql/queries";
 import LoadingSpinner from "../components/LoadingSpinner";
+import { Mapper } from "../utils/Mapper";
 
 function ExecScreen() {
   const { loading, data, error } = useQuery(GET_EXECS);
   if (loading) return <LoadingSpinner />;
   if (error) return <div>CMS Offline</div>;
-  const execs: Exec[] = mapToExec(data);
+  const execs: Exec[] = Mapper.mapToExec(data);
 
   return (
     <div className="mt-20">

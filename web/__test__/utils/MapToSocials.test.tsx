@@ -1,8 +1,6 @@
-// mapToSocials.test.ts
-
 import { describe, expect, it } from "vitest";
-import { mapToSocials } from "../src/utils/mapToSocials";
-import { Social } from "../src/types/types";
+import { Social } from "../../src/types/types";
+import { Mapper } from "../../src/utils/Mapper";
 
 describe("mapToSocials", () => {
   it("should map valid data correctly", () => {
@@ -40,7 +38,7 @@ describe("mapToSocials", () => {
       },
     ];
 
-    expect(mapToSocials(data)).toEqual(expected);
+    expect(Mapper.mapToSocials(data)).toEqual(expected);
   });
 
   it("should handle missing Type field gracefully", () => {
@@ -66,7 +64,7 @@ describe("mapToSocials", () => {
       },
     ];
 
-    expect(mapToSocials(data)).toEqual(expected);
+    expect(Mapper.mapToSocials(data)).toEqual(expected);
   });
 
   it("should handle missing Link field gracefully", () => {
@@ -92,7 +90,7 @@ describe("mapToSocials", () => {
       },
     ];
 
-    expect(mapToSocials(data)).toEqual(expected);
+    expect(Mapper.mapToSocials(data)).toEqual(expected);
   });
 
   it("should handle completely missing attributes gracefully", () => {
@@ -115,6 +113,6 @@ describe("mapToSocials", () => {
       },
     ];
 
-    expect(mapToSocials(data)).toEqual(expected);
+    expect(Mapper.mapToSocials(data)).toEqual(expected);
   });
 });

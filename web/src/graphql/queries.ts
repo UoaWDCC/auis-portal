@@ -46,7 +46,21 @@ export const GET_PARTNERS = gql`
   }
 `;
 
-export const GET_INTRODUCTION = "";
+export const GET_INTRODUCTION = gql`
+  query {
+    introductions {
+      data {
+        id
+        attributes {
+          Description
+          Events
+          Members
+          Followers
+        }
+      }
+    }
+  }
+`;
 
 export const GET_SOCIALS = gql`
   query {

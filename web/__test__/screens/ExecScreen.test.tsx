@@ -1,25 +1,27 @@
 import { MockedProvider } from "@apollo/client/testing";
-import { GET_VALUES } from "../src/graphql/queries";
+import { GET_EXECS } from "../../src/graphql/queries";
 import { describe, expect, it } from "vitest";
 import { render, screen } from "@testing-library/react";
-import Values from "../src/components/Values";
+import ExecScreen from "../../src/screens/ExecScreen";
 import React from "react";
 import { GraphQLError } from "graphql";
 
 const mocks = [
   {
     request: {
-      query: GET_VALUES,
+      query: GET_EXECS,
     },
     result: {
       data: {
-        values: {
+        execs: {
           data: [
             {
               id: 1,
               attributes: {
-                Title: "Hate",
-                Description: "Be a Professional Hater",
+                Name: "Guryash",
+                Description: "A great leader",
+                Position: "President",
+                Role: "Goat",
                 Image: {
                   data: {
                     attributes: {
@@ -36,11 +38,11 @@ const mocks = [
   },
 ];
 
-describe("SomePhotos Component", () => {
+describe("Exec Screen", () => {
   it("renders loading", async () => {
     render(
       <MockedProvider mocks={mocks} addTypename={false}>
-        <Values />
+        <ExecScreen />
       </MockedProvider>
     );
     expect(screen.getByTestId("loading-spinner")).toBeInTheDocument();
@@ -49,24 +51,24 @@ describe("SomePhotos Component", () => {
   it("renders the mocked data", async () => {
     render(
       <MockedProvider mocks={mocks} addTypename={false}>
-        <Values />
+        <ExecScreen />
       </MockedProvider>
     );
-    expect(await screen.findByText("Hate")).toBeInTheDocument();
-    expect(
-      await screen.findByText("Be a Professional Hater")
-    ).toBeInTheDocument();
+    expect(await screen.findByText("Guryash")).toBeInTheDocument();
+    expect(await screen.findByText("A great leader")).toBeInTheDocument();
+    expect(await screen.findByText("President")).toBeInTheDocument();
+    expect(await screen.findByText("Goat")).toBeInTheDocument();
   });
   it("renders error", async () => {
     const execMock = {
       request: {
-        query: GET_VALUES,
+        query: GET_EXECS,
       },
       error: new GraphQLError("Error!"),
     };
     render(
       <MockedProvider mocks={[execMock]} addTypename={false}>
-        <Values />
+        <ExecScreen />
       </MockedProvider>
     );
     expect(await screen.findByText("CMS Offline")).toBeInTheDocument();
