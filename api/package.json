@@ -11,9 +11,6 @@
     "start": "node dist/index.js",
     "dev": "nodemon index.ts",
     "email": "email dev",
-    "start-web": "cd ../web && yarn run dev",
-    "start-api": "yarn run dev",
-    "con": "concurrently \"yarn run start-api\" \"yarn run start-web\"",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "node -r esbuild-register ./scripts/migrate.ts",
     "db:seed": "node -r esbuild-register ./scripts/seed.ts",
@@ -28,7 +25,6 @@
     "@types/node": "^20.11.17",
     "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.18",
-    "concurrently": "^8.2.2",
     "drizzle-kit": "^0.22.1",
     "nodemon": "^3.0.3",
     "typescript": "^5.3.3"
