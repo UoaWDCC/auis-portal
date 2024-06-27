@@ -30,6 +30,7 @@ If you get an error along the lines of "Incorrect Password when connecting to th
 On VS Code install the extensions: TailwindCSS Intellisense, and Biome
 
 # Credits:
+- Harsheel
 - Emma
 - Karmveer
 - Nick
