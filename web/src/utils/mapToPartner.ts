@@ -1,19 +1,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { Exec } from "../types/types";
+import type { Partner } from "../types/types";
 
 // biome-ignore lint/suspicious/noExplicitAny: Need type any for handling CMS
-export const mapToExec = (data: any): Exec[] => {
+export const mapToPartner = (data: any): Partner[] => {
   // biome-ignore lint/suspicious/noExplicitAny: Need type any for handling CMS
-  return data.execs.data.map((item: any) => {
+  return data.partners.data.map((item: any) => {
     const attributes = item.attributes || {};
     const imageUrl = attributes.Image?.data?.attributes?.url || "";
 
     return {
       id: item.id,
+      type: attributes.Type || "",
       name: attributes.Name || "",
       description: attributes.Description || "",
-      position: attributes.Position || "",
-      role: attributes.Role || "",
+      location: attributes.Location || "",
       image: imageUrl,
     };
   });

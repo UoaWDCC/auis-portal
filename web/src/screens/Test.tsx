@@ -1,9 +1,11 @@
 // import {SignedIn, SignedOut, SignInButton, UserButton} from "@clerk/clerk-react";
 
+import Partners from "../components/Partners";
+
 function TestScreen() {
   return (
     <div>
-      <h2> Test Screen</h2>
+      <Partners />
     </div>
   );
 }

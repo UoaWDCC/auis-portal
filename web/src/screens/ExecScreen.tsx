@@ -26,7 +26,8 @@ function ExecScreen() {
               <div>
                 <h1 className="text-xl font-bold">{exec.name}</h1>
                 <h2 className="text-lg">{exec.position}</h2>
-                <p className="text-base">{exec.bio}</p>
+                <p className="text-base">{exec.description}</p>
+                <p className="text-base">{exec.role}</p>
                 <ReactMarkdown>**Test**</ReactMarkdown>
               </div>
             </div>
