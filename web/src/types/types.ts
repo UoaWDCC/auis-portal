@@ -19,3 +19,9 @@ export interface Partner {
   image: string;
   location: string;
 }
+
+export interface Social {
+  id: number;
+  type: string;
+  link: string;
+}

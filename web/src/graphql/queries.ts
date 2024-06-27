@@ -48,7 +48,19 @@ export const GET_PARTNERS = gql`
 
 export const GET_INTRODUCTION = "";
 
-export const GET_SOCIALS = "";
+export const GET_SOCIALS = gql`
+  query {
+    socials {
+      data {
+        id
+        attributes {
+          Type
+          Link
+        }
+      }
+    }
+  }
+`;
 
 export const GET_SOME_PHOTOS = "";
 
