@@ -1,6 +1,5 @@
-import { BiCalendar } from "react-icons/bi";
 import { MdEvent, MdGroups, MdHandshake } from "react-icons/md";
-import { TbArcheryArrow, TbTargetArrow } from "react-icons/tb";
+import { TbTargetArrow } from "react-icons/tb";
 
 export default function Intro() {
   return (
