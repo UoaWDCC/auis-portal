@@ -2,12 +2,14 @@
 
 import SomePhotos from "../components/SomePhotos";
 import Partners from "../components/Partners";
+import Values from "../components/Values";
 
 function TestScreen() {
   return (
-    <div>
+    <div className="grid grid-cols-3 gap-1">
       <Partners />
       <SomePhotos />
+      <Values />
     </div>
   );
 }

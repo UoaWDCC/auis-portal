@@ -83,4 +83,23 @@ export const GET_SOME_PHOTOS = gql`
   }
 `;
 
-export const GET_VALUES = "";
+export const GET_VALUES = gql`
+  query {
+    values {
+      data {
+        id
+        attributes {
+          Title
+          Description
+          Image {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;

@@ -9,7 +9,6 @@ function SomePhotos() {
   if (loading) return <LoadingSpinner />;
   if (error) return <div>CMS Offline</div>;
   const photos: SomePhoto[] = mapToSomePhotos(data);
-  console.log(photos);
 
   return (
     <div className="mt-20">
