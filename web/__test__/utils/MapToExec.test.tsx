@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { mapToExec } from "../src/utils/mapToExec";
-import { Exec } from "../src/types/types";
+import { Exec } from "../../src/types/types";
+import { Mapper } from "../../src/utils/Mapper";
 
 describe("mapToExec", () => {
   it("should map valid data correctly", () => {
@@ -10,10 +10,11 @@ describe("mapToExec", () => {
           {
             id: 1,
             attributes: {
-              name: "Guryash",
-              bio: "A great leader",
-              position: "President",
-              image: {
+              Name: "Guryash",
+              Description: "A great leader",
+              Position: "President",
+              Role: "Leader",
+              Image: {
                 data: {
                   attributes: {
                     url: "/uploads/john_doe.jpg",
@@ -30,13 +31,14 @@ describe("mapToExec", () => {
       {
         id: 1,
         name: "Guryash",
-        bio: "A great leader",
+        description: "A great leader",
         position: "President",
+        role: "Leader",
         image: "/uploads/john_doe.jpg",
       },
     ];
 
-    expect(mapToExec(data)).toEqual(expected);
+    expect(Mapper.mapToExec(data)).toEqual(expected);
   });
 
   it("should handle missing image field gracefully", () => {
@@ -46,10 +48,11 @@ describe("mapToExec", () => {
           {
             id: 1,
             attributes: {
-              name: "Guryash",
-              bio: "A great vice president",
-              position: "Vice President",
-              image: null,
+              Name: "Guryash",
+              Description: "A great vice president",
+              Position: "Vice President",
+              Role: "Vice Leader",
+              Image: null,
             },
           },
         ],
@@ -60,13 +63,14 @@ describe("mapToExec", () => {
       {
         id: 1,
         name: "Guryash",
-        bio: "A great vice president",
+        description: "A great vice president",
         position: "Vice President",
+        role: "Vice Leader",
         image: "",
       },
     ];
 
-    expect(mapToExec(data)).toEqual(expected);
+    expect(Mapper.mapToExec(data)).toEqual(expected);
   });
 
   it("should handle missing name field gracefully", () => {
@@ -76,10 +80,11 @@ describe("mapToExec", () => {
           {
             id: 1,
             attributes: {
-              name: null,
-              bio: "A great treasurer",
-              position: "Treasurer",
-              image: {
+              Name: null,
+              Description: "A great treasurer",
+              Position: "Treasurer",
+              Role: "Finance",
+              Image: {
                 data: {
                   attributes: {
                     url: "/uploads/jane_doe.jpg",
@@ -96,26 +101,28 @@ describe("mapToExec", () => {
       {
         id: 1,
         name: "",
-        bio: "A great treasurer",
+        description: "A great treasurer",
         position: "Treasurer",
+        role: "Finance",
         image: "/uploads/jane_doe.jpg",
       },
     ];
 
-    expect(mapToExec(data)).toEqual(expected);
+    expect(Mapper.mapToExec(data)).toEqual(expected);
   });
 
-  it("should handle missing bio field gracefully", () => {
+  it("should handle missing description field gracefully", () => {
     const data = {
       execs: {
         data: [
           {
             id: 1,
             attributes: {
-              name: "Guryash",
-              bio: null,
-              position: "Secretary",
-              image: {
+              Name: "Guryash",
+              Description: null,
+              Position: "Secretary",
+              Role: "Organizer",
+              Image: {
                 data: {
                   attributes: {
                     url: "/uploads/john_smith.jpg",
@@ -132,13 +139,14 @@ describe("mapToExec", () => {
       {
         id: 1,
         name: "Guryash",
-        bio: "",
+        description: "",
         position: "Secretary",
+        role: "Organizer",
         image: "/uploads/john_smith.jpg",
       },
     ];
 
-    expect(mapToExec(data)).toEqual(expected);
+    expect(Mapper.mapToExec(data)).toEqual(expected);
   });
 
   it("should handle missing position field gracefully", () => {
@@ -148,10 +156,11 @@ describe("mapToExec", () => {
           {
             id: 1,
             attributes: {
-              name: "Guryash",
-              bio: "A great secretary",
-              position: null,
-              image: {
+              Name: "Guryash",
+              Description: "A great secretary",
+              Position: null,
+              Role: "Organizer",
+              Image: {
                 data: {
                   attributes: {
                     url: "/uploads/john_smith.jpg",
@@ -168,13 +177,52 @@ describe("mapToExec", () => {
       {
         id: 1,
         name: "Guryash",
-        bio: "A great secretary",
+        description: "A great secretary",
         position: "",
+        role: "Organizer",
         image: "/uploads/john_smith.jpg",
       },
     ];
 
-    expect(mapToExec(data)).toEqual(expected);
+    expect(Mapper.mapToExec(data)).toEqual(expected);
+  });
+
+  it("should handle missing role field gracefully", () => {
+    const data = {
+      execs: {
+        data: [
+          {
+            id: 1,
+            attributes: {
+              Name: "Guryash",
+              Description: "A great member",
+              Position: "Member",
+              Role: null,
+              Image: {
+                data: {
+                  attributes: {
+                    url: "/uploads/john_doe.jpg",
+                  },
+                },
+              },
+            },
+          },
+        ],
+      },
+    };
+
+    const expected: Exec[] = [
+      {
+        id: 1,
+        name: "Guryash",
+        description: "A great member",
+        position: "Member",
+        role: "",
+        image: "/uploads/john_doe.jpg",
+      },
+    ];
+
+    expect(Mapper.mapToExec(data)).toEqual(expected);
   });
 
   it("should handle completely missing attributes gracefully", () => {
@@ -193,12 +241,13 @@ describe("mapToExec", () => {
       {
         id: 1,
         name: "",
-        bio: "",
+        description: "",
         position: "",
+        role: "",
         image: "",
       },
     ];
 
-    expect(mapToExec(data)).toEqual(expected);
+    expect(Mapper.mapToExec(data)).toEqual(expected);
   });
 });

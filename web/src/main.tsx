@@ -20,6 +20,7 @@ import PVVScreen from "./screens/PVVScreen.tsx";
 import LoginScreen from "./screens/LoginScreen.tsx";
 import { ClerkProvider } from "@clerk/clerk-react";
 import { graphqlClient } from "./graphql/client.ts";
+import CreditsScreen from "./screens/CreditsScreen.tsx";
 
 //Add any routes for screens below
 const router = createBrowserRouter(
@@ -27,6 +28,7 @@ const router = createBrowserRouter(
     <Route path="/" element={<App />}>
       <Route index={true} element={<HomeScreen />} />
       <Route path="/test" element={<TestScreen />} />
+      <Route path="/credits" element={<CreditsScreen />} />
       <Route path="/exec" element={<ExecScreen />} />
       <Route path="/login" element={<LoginScreen />} />
       <Route path="/signup" element={<SignUpScreen />} />

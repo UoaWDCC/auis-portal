@@ -2,7 +2,7 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { describe, it, expect, beforeEach } from "vitest";
-import Header from "../src/components/Header";
+import Header from "../../src/components/Header";
 
 describe("Header component", () => {
   beforeEach(() => {
@@ -68,7 +68,7 @@ describe("Header component", () => {
 
   it("should display navigation links properly on large screens", () => {
     resizeWindow(1024); // Simulate a large screen
-    const links = ["Events", "About Us", "Team", "Partners" , "Credits"];
+    const links = ["Events", "About Us", "Team", "Partners", "Credits"];
     links.forEach((link) => {
       expect(screen.getByText(link)).toBeInTheDocument();
     });

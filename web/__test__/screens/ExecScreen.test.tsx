@@ -1,8 +1,8 @@
 import { MockedProvider } from "@apollo/client/testing";
-import { GET_EXECS } from "../src/graphql/queries";
+import { GET_EXECS } from "../../src/graphql/queries";
 import { describe, expect, it } from "vitest";
 import { render, screen } from "@testing-library/react";
-import ExecScreen from "../src/screens/ExecScreen";
+import ExecScreen from "../../src/screens/ExecScreen";
 import React from "react";
 import { GraphQLError } from "graphql";
 
@@ -18,10 +18,11 @@ const mocks = [
             {
               id: 1,
               attributes: {
-                name: "Guryash",
-                bio: "A great leader",
-                position: "President",
-                image: {
+                Name: "Guryash",
+                Description: "A great leader",
+                Position: "President",
+                Role: "Goat",
+                Image: {
                   data: {
                     attributes: {
                       url: "/uploads/john_doe.jpg",
@@ -56,6 +57,7 @@ describe("Exec Screen", () => {
     expect(await screen.findByText("Guryash")).toBeInTheDocument();
     expect(await screen.findByText("A great leader")).toBeInTheDocument();
     expect(await screen.findByText("President")).toBeInTheDocument();
+    expect(await screen.findByText("Goat")).toBeInTheDocument();
   });
   it("renders error", async () => {
     const execMock = {
