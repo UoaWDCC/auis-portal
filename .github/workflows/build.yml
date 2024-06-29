@@ -27,6 +27,10 @@ jobs:
       - name: Install dependencies
         run: yarn
         working-directory: ${{ matrix.project }}
+      
+      - name: Set environment variables
+        env: VITE_CLERK_PUBLISHABLE_KEY: "${{ secrets.VITE_CLERK_PUBLISHABLE_KEY }}"
+        run: echo "VITE_CLERK_PUBLISHABLE_KEY=${VITE_CLERK_PUBLISHABLE_KEY}" >> "$GITHUB_ENV"
 
       - name: Run tests
         run: yarn test
