@@ -117,3 +117,18 @@ export const GET_VALUES = gql`
     }
   }
 `;
+
+export const GET_PREVIOUS_TEAMS = gql`
+  query {
+    previousTeams {
+      data {
+        id
+        attributes {
+          Name
+          Role
+          Year
+        }
+      }
+    }
+  }
+`;

@@ -6,6 +6,7 @@ import type {
   SomePhoto,
   Value,
   Introduction,
+  PreviousTeam,
 } from "../types/types";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -90,6 +91,18 @@ export class Mapper {
         events: attributes.Events || "",
         members: attributes.Members || "",
         followers: attributes.Followers || "",
+      };
+    });
+  };
+
+  static mapToPreviousTeams = (data: any): PreviousTeam[] => {
+    return data.previousTeams.data.map((item: any) => {
+      const attributes = item.attributes || {};
+      return {
+        id: item.id,
+        name: attributes.Name || "",
+        role: attributes.Role || "",
+        year: attributes.Year || "",
       };
     });
   };
