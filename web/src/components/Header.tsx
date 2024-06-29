@@ -9,7 +9,7 @@ function Header() {
   const { pathname } = useLocation();
 
   const titles = [
-    { title: "Events", page: "/" },
+    { title: "Events", page: "/events" },
     { title: "About Us", page: "/pvv" },
     { title: "Team", page: "/exec" },
     { title: "Partners", page: "/sponsors" },
