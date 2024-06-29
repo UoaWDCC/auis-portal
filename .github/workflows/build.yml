@@ -28,6 +28,15 @@ jobs:
         run: yarn
         working-directory: ${{ matrix.project }}
 
+      - name: Set environment variables
+        env:
+          VITE_API_URL: ${{ secrets.VITE_API_URL }}
+          VITE_STRAPI_URL: ${{ secrets.VITE_STRAPI_URL }}
+          VITE_CLERK_PUBLISHABLE_KEY: ${{ secrets.VITE_CLERK_PUBLISHABLE_KEY }}
+        run: echo "VITE_API_URL=${VITE_API_URL}" >> $GITHUB_ENV
+             echo "VITE_STRAPI_URL=${VITE_STRAPI_URL}" >> $GITHUB_ENV
+             echo "VITE_CLERK_PUBLISHABLE_KEY=${VITE_CLERK_PUBLISHABLE_KEY}" >> $GITHUB_ENV
+
       - name: Run tests
         run: yarn test
         working-directory: ${{ matrix.project }}
