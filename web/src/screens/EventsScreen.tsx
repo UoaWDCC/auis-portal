@@ -4,13 +4,7 @@ import PastEvents from "@components/PastEvents";
 import UpcomingEvents from "@components/UpcomingEvents";
 import React from "react";
 
-interface placeholderData {
-  image: string;
-  title: string;
-  date: string;
-  location: string;
-  is_paid: boolean;
-}
+import { dummyPastEvents } from "../temporary/temporaryEventData";
 
 const EventsScreen = () => {
   return (
@@ -18,7 +12,7 @@ const EventsScreen = () => {
       <Header />
       {/* Upcoming events section*/}
       <UpcomingEvents is_events_page={true} />
-      <PastEvents />
+      <PastEvents pastEvents={dummyPastEvents} />
       <EventGallery />
       <div></div>
     </>
