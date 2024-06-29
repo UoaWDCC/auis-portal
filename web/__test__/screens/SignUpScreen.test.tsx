@@ -38,13 +38,13 @@ describe("Sign Up Screen", () => {
     expect(auisLogo).toBeInTheDocument();
   });
 
-  it("should close the navigation menu when a navigation link is clicked", () => {
+  it("should not render the AUIS logo on small screens", () => {
     resizeWindow(500); // Simulate a small screen
     expect(screen.queryByTestId("AUIS Logo")).toBeNull();
   });
 
-  it("should close the navigation menu when a navigation link is clicked", () => {
+  it("should not render the Peacock logo on small screens", () => {
     resizeWindow(500); // Simulate a small screen
-    expect(screen.queryByTestId("Peacock Logo")).toBeNull();
+    expect(screen.queryByTestId("AUIS Peacock Logo")).toBeNull();
   });
 });
