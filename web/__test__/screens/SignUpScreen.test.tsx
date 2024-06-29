@@ -5,6 +5,7 @@ import { describe, it, expect, beforeEach } from "vitest";
 import { ClerkProvider } from "@clerk/clerk-react";
 import SignUpScreen from "../../src/screens/SignUpScreen";
 
+
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
 describe("Sign Up Screen", () => {
