@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "socials",
+  "info": {
+    "singularName": "social",
+    "pluralName": "socials",
+    "displayName": "Social"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Type": {
+      "type": "enumeration",
+      "enum": [
+        "Instagram",
+        "Facebook",
+        "Email",
+        "LinkedIn",
+        "TikTok"
+      ]
+    },
+    "Link": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

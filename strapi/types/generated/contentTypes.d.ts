@@ -362,31 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiExecExec extends Schema.CollectionType {
-  collectionName: 'execs';
-  info: {
-    singularName: 'exec';
-    pluralName: 'execs';
-    displayName: 'Exec';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    name: Attribute.String & Attribute.Required;
-    bio: Attribute.Text & Attribute.Required;
-    position: Attribute.String & Attribute.Required;
-    image: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<'api::exec.exec', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<'api::exec.exec', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -813,6 +788,586 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiAnswerAnswer extends Schema.CollectionType {
+  collectionName: 'answers';
+  info: {
+    singularName: 'answer';
+    pluralName: 'answers';
+    displayName: 'Answer';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Answer: Attribute.Text & Attribute.Required;
+    People_ID: Attribute.Relation<
+      'api::answer.answer',
+      'manyToOne',
+      'api::people.people'
+    >;
+    Question_ID: Attribute.Relation<
+      'api::answer.answer',
+      'manyToOne',
+      'api::question.question'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::answer.answer',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::answer.answer',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiEventEvent extends Schema.CollectionType {
+  collectionName: 'events';
+  info: {
+    singularName: 'event';
+    pluralName: 'events';
+    displayName: 'Event';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Title: Attribute.String & Attribute.Required;
+    Description: Attribute.Text & Attribute.Required;
+    Subtitle: Attribute.String;
+    Location: Attribute.String & Attribute.Required;
+    Location_Link: Attribute.String;
+    Event_Date_Start: Attribute.DateTime & Attribute.Required;
+    Event_Date_End: Attribute.DateTime & Attribute.Required;
+    Event_Capacity: Attribute.Integer & Attribute.Required;
+    Is_Live: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
+    Image: Attribute.Media<'images'> & Attribute.Required;
+    Terms_And_Conditions: Attribute.Text & Attribute.Required;
+    Event_Capacity_Remaining: Attribute.Integer & Attribute.Required;
+    Ticket_ID: Attribute.Relation<
+      'api::event.event',
+      'oneToMany',
+      'api::ticket.ticket'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::event.event',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::event.event',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiEventGalleryEventGallery extends Schema.CollectionType {
+  collectionName: 'event_galleries';
+  info: {
+    singularName: 'event-gallery';
+    pluralName: 'event-galleries';
+    displayName: 'Event_Gallery';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Image: Attribute.Media<'images'> & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::event-gallery.event-gallery',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::event-gallery.event-gallery',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiExecExec extends Schema.CollectionType {
+  collectionName: 'execs';
+  info: {
+    singularName: 'exec';
+    pluralName: 'execs';
+    displayName: 'Exec';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Name: Attribute.String & Attribute.Required;
+    Description: Attribute.Text & Attribute.Required;
+    Position: Attribute.String & Attribute.Required;
+    Image: Attribute.Media<'images'> & Attribute.Required;
+    Role: Attribute.Enumeration<['President', 'Executive']> &
+      Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::exec.exec', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::exec.exec', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiIntroductionIntroduction extends Schema.CollectionType {
+  collectionName: 'introductions';
+  info: {
+    singularName: 'introduction';
+    pluralName: 'introductions';
+    displayName: 'Introduction';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Description: Attribute.RichText & Attribute.Required;
+    Events: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        minLength: 1;
+        maxLength: 4;
+      }>;
+    Members: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        minLength: 1;
+        maxLength: 5;
+      }>;
+    Followers: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        minLength: 1;
+        maxLength: 6;
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::introduction.introduction',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::introduction.introduction',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiPartnerPartner extends Schema.CollectionType {
+  collectionName: 'partners';
+  info: {
+    singularName: 'partner';
+    pluralName: 'partners';
+    displayName: 'Partner ';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Type: Attribute.Enumeration<['Gold', 'Silver', 'Bronze']> &
+      Attribute.Required;
+    Image: Attribute.Media<'images'> & Attribute.Required;
+    Name: Attribute.String & Attribute.Required;
+    Location: Attribute.Text & Attribute.Required;
+    Description: Attribute.Text & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::partner.partner',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::partner.partner',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiPeoplePeople extends Schema.CollectionType {
+  collectionName: 'peoples';
+  info: {
+    singularName: 'people';
+    pluralName: 'peoples';
+    displayName: 'People';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Name: Attribute.String & Attribute.Required;
+    Email: Attribute.String & Attribute.Required;
+    University_ID: Attribute.String;
+    UPI: Attribute.String;
+    Year_Of_Study: Attribute.String;
+    Study_Field: Attribute.String;
+    Is_Member: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
+    Status: Attribute.Enumeration<['Domestic', 'International']> &
+      Attribute.Required;
+    Member_Expiry_Date: Attribute.Date & Attribute.Required;
+    People_Ticket_ID: Attribute.Relation<
+      'api::people.people',
+      'oneToMany',
+      'api::user-ticket.user-ticket'
+    >;
+    Answer_ID: Attribute.Relation<
+      'api::people.people',
+      'oneToMany',
+      'api::answer.answer'
+    >;
+    Institution: Attribute.Enumeration<['UoA', 'AUT', 'Other', 'None']> &
+      Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::people.people',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::people.people',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiPreviousTeamPreviousTeam extends Schema.CollectionType {
+  collectionName: 'previous_teams';
+  info: {
+    singularName: 'previous-team';
+    pluralName: 'previous-teams';
+    displayName: 'Previous_Team';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Name: Attribute.String & Attribute.Required;
+    Role: Attribute.Enumeration<['President', 'Executive']> &
+      Attribute.Required;
+    Year: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        minLength: 4;
+        maxLength: 4;
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::previous-team.previous-team',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::previous-team.previous-team',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiQuestionQuestion extends Schema.CollectionType {
+  collectionName: 'questions';
+  info: {
+    singularName: 'question';
+    pluralName: 'questions';
+    displayName: 'Question';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Question: Attribute.String & Attribute.Required;
+    Check_For_Member_Email: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
+    Ticket_ID: Attribute.Relation<
+      'api::question.question',
+      'manyToOne',
+      'api::ticket.ticket'
+    >;
+    Answer_ID: Attribute.Relation<
+      'api::question.question',
+      'oneToMany',
+      'api::answer.answer'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::question.question',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::question.question',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiSocialSocial extends Schema.CollectionType {
+  collectionName: 'socials';
+  info: {
+    singularName: 'social';
+    pluralName: 'socials';
+    displayName: 'Social';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Type: Attribute.Enumeration<
+      ['Instagram', 'Facebook', 'Email', 'LinkedIn', 'TikTok']
+    >;
+    Link: Attribute.String & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::social.social',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::social.social',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiSomePhotoSomePhoto extends Schema.CollectionType {
+  collectionName: 'some_photos';
+  info: {
+    singularName: 'some-photo';
+    pluralName: 'some-photos';
+    displayName: 'Some_Photo';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Image: Attribute.Media<'images'> & Attribute.Required;
+    Title: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 10;
+      }>;
+    Year: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        minLength: 4;
+        maxLength: 4;
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::some-photo.some-photo',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::some-photo.some-photo',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiTicketTicket extends Schema.CollectionType {
+  collectionName: 'tickets';
+  info: {
+    singularName: 'ticket';
+    pluralName: 'tickets';
+    displayName: 'Ticket';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Name: Attribute.String & Attribute.Required;
+    Discount_Code: Attribute.String;
+    Discount_Price: Attribute.Decimal;
+    Price: Attribute.Decimal & Attribute.Required;
+    Is_Member_Only: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
+    Is_Double: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
+    Max_Number_Tickets: Attribute.Integer & Attribute.Required;
+    Number_Tickets_Left: Attribute.Integer & Attribute.Required;
+    Ticket_Description: Attribute.Text & Attribute.Required;
+    Start_Date_Ticket_Sales: Attribute.DateTime & Attribute.Required;
+    Is_Ticket_Live: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
+    Question_ID: Attribute.Relation<
+      'api::ticket.ticket',
+      'oneToMany',
+      'api::question.question'
+    >;
+    Event_ID: Attribute.Relation<
+      'api::ticket.ticket',
+      'manyToOne',
+      'api::event.event'
+    >;
+    People_Ticket_ID: Attribute.Relation<
+      'api::ticket.ticket',
+      'oneToMany',
+      'api::user-ticket.user-ticket'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::ticket.ticket',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::ticket.ticket',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiUserTicketUserTicket extends Schema.CollectionType {
+  collectionName: 'user_tickets';
+  info: {
+    singularName: 'user-ticket';
+    pluralName: 'user-tickets';
+    displayName: 'People_Ticket';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    People_Ticket_Code: Attribute.Integer &
+      Attribute.Required &
+      Attribute.Unique;
+    People_ID: Attribute.Relation<
+      'api::user-ticket.user-ticket',
+      'manyToOne',
+      'api::people.people'
+    >;
+    Ticket_ID: Attribute.Relation<
+      'api::user-ticket.user-ticket',
+      'manyToOne',
+      'api::ticket.ticket'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::user-ticket.user-ticket',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::user-ticket.user-ticket',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiValueValue extends Schema.CollectionType {
+  collectionName: 'values';
+  info: {
+    singularName: 'value';
+    pluralName: 'values';
+    displayName: 'Value';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Title: Attribute.String & Attribute.Required;
+    Description: Attribute.Text & Attribute.Required;
+    Image: Attribute.Media<'images'> & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::value.value',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::value.value',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -823,7 +1378,6 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::exec.exec': ApiExecExec;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
@@ -832,6 +1386,20 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::answer.answer': ApiAnswerAnswer;
+      'api::event.event': ApiEventEvent;
+      'api::event-gallery.event-gallery': ApiEventGalleryEventGallery;
+      'api::exec.exec': ApiExecExec;
+      'api::introduction.introduction': ApiIntroductionIntroduction;
+      'api::partner.partner': ApiPartnerPartner;
+      'api::people.people': ApiPeoplePeople;
+      'api::previous-team.previous-team': ApiPreviousTeamPreviousTeam;
+      'api::question.question': ApiQuestionQuestion;
+      'api::social.social': ApiSocialSocial;
+      'api::some-photo.some-photo': ApiSomePhotoSomePhoto;
+      'api::ticket.ticket': ApiTicketTicket;
+      'api::user-ticket.user-ticket': ApiUserTicketUserTicket;
+      'api::value.value': ApiValueValue;
     }
   }
 }

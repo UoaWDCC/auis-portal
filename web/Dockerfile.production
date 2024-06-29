@@ -26,6 +26,9 @@ RUN yarn install --frozen-lockfile --production=false
 # Copy application code
 COPY --link . .
 
+# Run tests
+RUN yarn test
+
 # Mount secrets into Dockerfile and set environment variables
 RUN --mount=type=secret,id=VITE_API_URL \
     --mount=type=secret,id=VITE_STRAPI_URL \

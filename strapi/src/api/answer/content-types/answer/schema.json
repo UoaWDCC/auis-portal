@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "answers",
+  "info": {
+    "singularName": "answer",
+    "pluralName": "answers",
+    "displayName": "Answer",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Answer": {
+      "type": "text",
+      "required": true
+    },
+    "People_ID": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::people.people",
+      "inversedBy": "Answer_ID"
+    },
+    "Question_ID": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::question.question",
+      "inversedBy": "Answer_ID"
+    }
+  }
+}

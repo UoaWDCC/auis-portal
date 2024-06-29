@@ -1,0 +1,79 @@
+{
+  "kind": "collectionType",
+  "collectionName": "peoples",
+  "info": {
+    "singularName": "people",
+    "pluralName": "peoples",
+    "displayName": "People",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "type": "string",
+      "required": true
+    },
+    "Email": {
+      "type": "string",
+      "required": true
+    },
+    "University_ID": {
+      "type": "string",
+      "required": false
+    },
+    "UPI": {
+      "type": "string",
+      "required": false
+    },
+    "Year_Of_Study": {
+      "type": "string",
+      "required": false
+    },
+    "Study_Field": {
+      "type": "string",
+      "required": false
+    },
+    "Is_Member": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "Status": {
+      "type": "enumeration",
+      "enum": [
+        "Domestic",
+        "International"
+      ],
+      "required": true
+    },
+    "Member_Expiry_Date": {
+      "type": "date",
+      "required": true
+    },
+    "People_Ticket_ID": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::user-ticket.user-ticket",
+      "mappedBy": "People_ID"
+    },
+    "Answer_ID": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::answer.answer",
+      "mappedBy": "People_ID"
+    },
+    "Institution": {
+      "type": "enumeration",
+      "enum": [
+        "UoA",
+        "AUT",
+        "Other",
+        "None"
+      ],
+      "required": true
+    }
+  }
+}
