@@ -58,3 +58,11 @@ export interface PreviousTeam {
 	role: string;
 	year: string;
 }
+
+export interface PreviousTeamCardProps {
+	year: string;
+	teams: {
+		Presidents: PreviousTeam[];
+		Executives: PreviousTeam[];
+	};
+}
