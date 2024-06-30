@@ -179,3 +179,16 @@ export const GET_EVENTS_GALLERY = gql`
     }
   }
 `;
+
+export const GET_ANSWERS = gql`
+  query {
+    answers {
+      data {
+        id
+        attributes {
+          Answer
+        }
+      }
+    }
+  }
+`;

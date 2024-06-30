@@ -10,6 +10,7 @@ import type {
   PreviousTeam,
   Event,
   EventGallery,
+  Answer,
 } from "../types/types";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -164,7 +165,7 @@ export class Mapper {
   };
 
   static mapToEventsGallery = (data: any): EventGallery[] => {
-    if (!data.eventsGallery || !data.eventsGallery.data || data.eventsGallery.data === 0) {
+    if (!data.eventsGallery || !data.eventsGallery.data || data.eventsGallery.data.length === 0) {
       throw new NoDataError("No data");
     } else {
       return data.eventsGallery.data.map((item: any) => {
@@ -174,6 +175,20 @@ export class Mapper {
         return {
           id: item.id,
           image: imageUrl,
+        };
+      });
+    }
+  };
+
+  static mapToAnswers = (data: any): Answer[] => {
+    if (!data.answers || !data.answers.data || data.answers.data.length === 0) {
+      throw new NoDataError("No data");
+    } else {
+      return data.answers.data.map((item: any) => {
+        const attributes = item.attributes || {};
+        return {
+          id: item.id,
+          answer: attributes.Answer || "",
         };
       });
     }

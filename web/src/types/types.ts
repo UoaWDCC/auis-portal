@@ -85,3 +85,8 @@ export interface EventGallery {
   id: number;
   image: string;
 }
+
+export interface Answer {
+  id: number;
+  answer: string;
+}
