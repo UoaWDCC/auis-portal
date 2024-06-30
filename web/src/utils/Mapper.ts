@@ -11,6 +11,7 @@ import type {
   Event,
   EventGallery,
   Answer,
+  Question,
 } from "../types/types";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -175,6 +176,22 @@ export class Mapper {
         return {
           id: item.id,
           image: imageUrl,
+        };
+      });
+    }
+  };
+
+  static mapToQuestions = (data: any): Question[] => {
+    if (!data.questions || !data.questions.data || data.questions.data.length === 0) {
+      throw new NoDataError("No data");
+    } else {
+      return data.questions.data.map((item: any) => {
+        const attributes = item.attributes || {};
+
+        return {
+          id: item.id,
+          question: attributes.Question,
+          checkForMemberEmail: attributes.Check_For_Member_Email,
         };
       });
     }

@@ -86,6 +86,12 @@ export interface EventGallery {
   image: string;
 }
 
+export interface Question {
+  id: number;
+  question: string;
+  checkForMemberEmail: boolean;
+}
+
 export interface Answer {
   id: number;
   answer: string;

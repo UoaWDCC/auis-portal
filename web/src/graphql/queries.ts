@@ -180,6 +180,20 @@ export const GET_EVENTS_GALLERY = gql`
   }
 `;
 
+export const GET_QUESTIONS = gql`
+  query {
+    questions {
+      data {
+        id
+        attributes {
+          Question
+          Check_For_Member_Email
+        }
+      }
+    }
+  }
+`; 
+
 export const GET_ANSWERS = gql`
   query {
     answers {
