@@ -160,3 +160,22 @@ export const GET_EVENTS = gql`
     }
   }
 `;
+
+export const GET_EVENTS_GALLERY = gql`
+  query {
+    eventsGallery {
+      data {
+        id
+        attributes {
+          Image {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;

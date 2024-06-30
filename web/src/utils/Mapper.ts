@@ -9,6 +9,7 @@ import type {
   Introduction,
   PreviousTeam,
   Event,
+  EventGallery,
 } from "../types/types";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -34,11 +35,7 @@ export class Mapper {
   }
 
   static mapToPartner(data: any): Partner[] {
-    if (
-      !data.partners ||
-      !data.partners.data ||
-      data.partners.data.length === 0
-    ) {
+    if (!data.partners || !data.partners.data || data.partners.data.length === 0) {
       throw new NoDataError("No data");
     } else {
       return data.partners.data.map((item: any) => {
@@ -73,11 +70,7 @@ export class Mapper {
   }
 
   static mapToSomePhotos(data: any): SomePhoto[] {
-    if (
-      !data.somePhotos ||
-      !data.somePhotos.data ||
-      data.somePhotos.data.length === 0
-    ) {
+    if (!data.somePhotos || !data.somePhotos.data || data.somePhotos.data.length === 0) {
       throw new NoDataError("No data");
     } else {
       return data.somePhotos.data.map((item: any) => {
@@ -113,11 +106,7 @@ export class Mapper {
   }
 
   static mapToIntroduction = (data: any): Introduction[] => {
-    if (
-      !data.introductions ||
-      !data.introductions.data ||
-      data.introductions.data.length === 0
-    ) {
+    if (!data.introductions || !data.introductions.data || data.introductions.data.length === 0) {
       throw new NoDataError("No data");
     } else {
       return data.introductions.data.map((item: any) => {
@@ -134,11 +123,7 @@ export class Mapper {
   };
 
   static mapToPreviousTeams = (data: any): PreviousTeam[] => {
-    if (
-      !data.previousTeams ||
-      !data.previousTeams.data ||
-      data.previousTeams.data === 0
-    ) {
+    if (!data.previousTeams || !data.previousTeams.data || data.previousTeams.data === 0) {
       throw new NoDataError("No data");
     } else {
       return data.previousTeams.data.map((item: any) => {
@@ -172,6 +157,22 @@ export class Mapper {
           eventDateEnd: attributes.Event_Date_End || "",
           isLive: attributes.Is_Live || false,
           termsAndConditions: attributes.Terms_And_Conditions || "",
+          image: imageUrl,
+        };
+      });
+    }
+  };
+
+  static mapToEventsGallery = (data: any): EventGallery[] => {
+    if (!data.eventsGallery || !data.eventsGallery.data || data.eventsGallery.data === 0) {
+      throw new NoDataError("No data");
+    } else {
+      return data.eventsGallery.data.map((item: any) => {
+        const attributes = item.attributes || {};
+        const imageUrl = attributes.Image?.data?.attributes?.url || "";
+
+        return {
+          id: item.id,
           image: imageUrl,
         };
       });

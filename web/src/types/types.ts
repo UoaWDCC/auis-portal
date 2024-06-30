@@ -12,7 +12,7 @@ export interface Props {
 }
 
 export interface ExecCardProps {
-	exec: Exec;
+  exec: Exec;
 }
 
 export interface Partner {
@@ -53,18 +53,18 @@ export interface Introduction {
 }
 
 export interface PreviousTeam {
-	id: number;
-	name: string;
-	role: string;
-	year: string;
+  id: number;
+  name: string;
+  role: string;
+  year: string;
 }
 
 export interface PreviousTeamCardProps {
-	year: string;
-	teams: {
-		Presidents: PreviousTeam[];
-		Executives: PreviousTeam[];
-	};
+  year: string;
+  teams: {
+    Presidents: PreviousTeam[];
+    Executives: PreviousTeam[];
+  };
 }
 
 export interface Event {
@@ -78,5 +78,10 @@ export interface Event {
   eventDateEnd: string;
   isLive: boolean;
   termsAndConditions: string;
+  image: string;
+}
+
+export interface EventGallery {
+  id: number;
   image: string;
 }
