@@ -11,6 +11,10 @@ export interface Props {
   execs: Exec[];
 }
 
+export interface ExecCardProps {
+	exec: Exec;
+}
+
 export interface Partner {
   id: number;
   type: string;
@@ -46,4 +50,19 @@ export interface Introduction {
   events: string;
   members: string;
   followers: string;
+}
+
+export interface PreviousTeam {
+	id: number;
+	name: string;
+	role: string;
+	year: string;
+}
+
+export interface PreviousTeamCardProps {
+	year: string;
+	teams: {
+		Presidents: PreviousTeam[];
+		Executives: PreviousTeam[];
+	};
 }
