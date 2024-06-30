@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { Exec } from "../../src/types/types";
 import { Mapper } from "../../src/utils/Mapper";
+import { NoDataError } from "../../src/classes/NoDataError";
 
 describe("mapToExec", () => {
   it("should map valid data correctly", () => {
@@ -249,5 +250,31 @@ describe("mapToExec", () => {
     ];
 
     expect(Mapper.mapToExec(data)).toEqual(expected);
+  });
+  it("should throw NoDataError when execs.data is empty", () => {
+    const data = {
+      execs: {
+        data: [],
+      },
+    };
+
+    expect(() => Mapper.mapToExec(data)).toThrow(NoDataError);
+    expect(() => Mapper.mapToExec(data)).toThrow("No data");
+  });
+
+  it("should throw NoDataError when execs is missing", () => {
+    const data = {};
+
+    expect(() => Mapper.mapToExec(data)).toThrow(NoDataError);
+    expect(() => Mapper.mapToExec(data)).toThrow("No data");
+  });
+
+  it("should throw NoDataError when execs.data is missing", () => {
+    const data = {
+      execs: {},
+    };
+
+    expect(() => Mapper.mapToExec(data)).toThrow(NoDataError);
+    expect(() => Mapper.mapToExec(data)).toThrow("No data");
   });
 });
