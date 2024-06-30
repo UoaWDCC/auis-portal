@@ -1,4 +1,3 @@
-import ReactMarkdown from "react-markdown";
 import type { Exec, PreviousTeam } from "../types/types";
 import { useQuery } from "@apollo/client";
 import { GET_EXECS, GET_PREVIOUS_TEAMS } from "../graphql/queries";
