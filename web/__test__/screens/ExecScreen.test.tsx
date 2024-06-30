@@ -5,6 +5,7 @@ import { render, screen } from "@testing-library/react";
 import ExecScreen from "../../src/screens/ExecScreen";
 import React from "react";
 import { GraphQLError } from "graphql";
+import "@testing-library/jest-dom";
 
 const mocks = [
   {
