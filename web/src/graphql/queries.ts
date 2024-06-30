@@ -132,3 +132,31 @@ export const GET_PREVIOUS_TEAMS = gql`
     }
   }
 `;
+
+export const GET_EVENTS = gql`
+  query {
+    events {
+      data {
+        id
+        attributes {
+          Title
+          Description
+          Subtitle
+          Location
+          Location_Link
+          Event_Date_Start
+          Event_Date_End
+          Is_Live
+          Terms_And_Conditions
+          Image {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;

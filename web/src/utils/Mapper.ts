@@ -8,6 +8,7 @@ import type {
   Value,
   Introduction,
   PreviousTeam,
+  Event,
 } from "../types/types";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -147,6 +148,31 @@ export class Mapper {
           name: attributes.Name || "",
           role: attributes.Role || "",
           year: attributes.Year || "",
+        };
+      });
+    }
+  };
+
+  static mapToEvents = (data: any): Event[] => {
+    if (!data.events || !data.events.data || data.events.data === 0) {
+      throw new NoDataError("No data");
+    } else {
+      return data.events.data.map((item: any) => {
+        const attributes = item.attributes || {};
+        const imageUrl = attributes.Image?.data?.attributes?.url || "";
+
+        return {
+          id: item.id,
+          title: attributes.Title || "",
+          description: attributes.Description || "",
+          subtitle: attributes.Subtitle || "",
+          location: attributes.Location || "",
+          locationLink: attributes.Location_Link || "",
+          eventDateStart: attributes.Event_Date_Start || "",
+          eventDateEnd: attributes.Event_Date_End || "",
+          isLive: attributes.Is_Live || false,
+          termsAndConditions: attributes.Terms_And_Conditions || "",
+          image: imageUrl,
         };
       });
     }

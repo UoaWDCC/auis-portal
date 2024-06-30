@@ -66,3 +66,17 @@ export interface PreviousTeamCardProps {
 		Executives: PreviousTeam[];
 	};
 }
+
+export interface Event {
+  id: number;
+  title: string;
+  description: string;
+  subtitle: string;
+  location: string;
+  locationLink: string;
+  eventDateStart: string;
+  eventDateEnd: string;
+  isLive: boolean;
+  termsAndConditions: string;
+  image: string;
+}
