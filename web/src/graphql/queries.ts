@@ -163,7 +163,7 @@ export const GET_EVENTS = gql`
 
 export const GET_EVENTS_GALLERY = gql`
   query {
-    eventsGallery {
+    events {
       data {
         id
         attributes {

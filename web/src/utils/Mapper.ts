@@ -124,7 +124,7 @@ export class Mapper {
   };
 
   static mapToPreviousTeams = (data: any): PreviousTeam[] => {
-    if (!data.previousTeams || !data.previousTeams.data || data.previousTeams.data === 0) {
+    if (!data.previousTeams || !data.previousTeams.data || data.previousTeams.data.length === 0) {
       throw new NoDataError("No data");
     } else {
       return data.previousTeams.data.map((item: any) => {
@@ -140,7 +140,7 @@ export class Mapper {
   };
 
   static mapToEvents = (data: any): Event[] => {
-    if (!data.events || !data.events.data || data.events.data === 0) {
+    if (!data.events || !data.events.data || data.events.data.length === 0) {
       throw new NoDataError("No data");
     } else {
       return data.events.data.map((item: any) => {
@@ -165,10 +165,10 @@ export class Mapper {
   };
 
   static mapToEventsGallery = (data: any): EventGallery[] => {
-    if (!data.eventsGallery || !data.eventsGallery.data || data.eventsGallery.data.length === 0) {
+    if (!data.events || !data.events.data || data.events.data.length === 0) {
       throw new NoDataError("No data");
     } else {
-      return data.eventsGallery.data.map((item: any) => {
+      return data.events.data.map((item: any) => {
         const attributes = item.attributes || {};
         const imageUrl = attributes.Image?.data?.attributes?.url || "";
 
