@@ -133,14 +133,22 @@ export class Mapper {
   };
 
   static mapToPreviousTeams = (data: any): PreviousTeam[] => {
-    return data.previousTeams.data.map((item: any) => {
-      const attributes = item.attributes || {};
-      return {
-        id: item.id,
-        name: attributes.Name || "",
-        role: attributes.Role || "",
-        year: attributes.Year || "",
-      };
-    });
+    if (
+      !data.previousTeams ||
+      !data.previousTeams.data ||
+      data.previousTeams.data === 0
+    ) {
+      throw new NoDataError("No data");
+    } else {
+      return data.previousTeams.data.map((item: any) => {
+        const attributes = item.attributes || {};
+        return {
+          id: item.id,
+          name: attributes.Name || "",
+          role: attributes.Role || "",
+          year: attributes.Year || "",
+        };
+      });
+    }
   };
 }
