@@ -40,10 +40,10 @@
     "express": "^4.18.2",
     "express-cors": "^0.0.3",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.1.1",
     "onchange": "^7.1.0",
     "postgres": "^3.4.4",
     "quicktype": "^23.0.170",
+    "stripe": "^16.1.0",
     "ts-node": "^10.9.2",
     "zod": "^3.22.4"
   },

@@ -1,6 +1,5 @@
 import express, { json } from "express";
 import cors from "cors";
-import { connect } from "mongoose";
 import { config } from "dotenv";
 
 // Import Routers
@@ -16,9 +15,6 @@ import userRoutes from "./routes/userRoutes";
 
 const app = express();
 config();
-
-// const databaseUrl: string = process.env.DATABASE_URL!;
-// connect(databaseUrl);
 
 app.use(json());
 app.use(cors());
