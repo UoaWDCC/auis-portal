@@ -25,5 +25,5 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Format code with Prettier
-        run: yarn run format:ci
+        run: yarn run format
 
