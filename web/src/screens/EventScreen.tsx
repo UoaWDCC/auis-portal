@@ -26,6 +26,16 @@ export default function EventScreen() {
   return (
     <div>
       <h1>Event Screen</h1>
+      {events.map((event) => {
+        return (
+          <h1>{event.title}</h1>
+        )
+      })}
+      {eventsGallery.map((event) => {
+        return (
+          <h1>{event.id}</h1>
+        )
+      })}
     </div>
   );
 }
