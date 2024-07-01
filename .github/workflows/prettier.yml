@@ -22,8 +22,8 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: yarn setup
+        run: yarn install --frozen-lockfile
 
       - name: Format code with Prettier
-        run: yarn prettier:ci
+        run: yarn run prettier:ci
 
