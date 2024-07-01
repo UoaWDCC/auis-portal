@@ -3,7 +3,7 @@ import * as http from "http";
 import { protect } from "../middleware/authMiddleware";
 
 // Use body-parser to retrieve the raw body as a buffer
-const bodyParser = require("body-parser");
+import bodyParser from "body-parser";
 
 // StripeJS: Load secret API key
 // TODO: @Ratchet7x5 Switch to live key based on NODE_ENV secret
