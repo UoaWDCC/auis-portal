@@ -9,7 +9,7 @@ Additional info: Stripe restricts all production web apps to run in HTTPS. HTTP 
 
 # Issues
 
-1. [Frontend] The Stripe Embedded Form does not display. 
+1. ~~[Frontend] The Stripe Embedded Form does not display.~~
 2. Strapi does not run in HTTPS. 
 
 # Todo:
