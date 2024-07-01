@@ -1,6 +1,6 @@
 import { MockedProvider } from "@apollo/client/testing";
 import { GET_EXECS, GET_PREVIOUS_TEAMS } from "../../src/graphql/queries";
-import { describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import ExecScreen from "../../src/screens/ExecScreen";
 import React from "react";
@@ -55,6 +55,19 @@ const execsMock = {
   },
 };
 
+const noExecsMock = {
+  request: {
+    query: GET_EXECS,
+  },
+  result: {
+    data: {
+      execs: {
+        data: [],
+      },
+    },
+  },
+};
+
 // Mock data for GET_PREVIOUS_TEAMS query
 const previousTeamsMock = {
   request: {
@@ -86,9 +99,28 @@ const previousTeamsMock = {
   },
 };
 
+const noPreviousTeamMock = {
+  request: {
+    query: GET_PREVIOUS_TEAMS,
+  },
+  result: {
+    data: {
+      previousTeams: {
+        data: [],
+      },
+    },
+  },
+};
+
 const mocks = [execsMock, previousTeamsMock];
+const noDataMocks = [noExecsMock, noPreviousTeamMock];
 
 describe("ExecScreen", () => {
+  beforeEach(() => {
+    vi.resetAllMocks();
+    vi.clearAllMocks();
+  });
+
   it("renders loading spinner initially", () => {
     render(
       <MockedProvider mocks={mocks} addTypename={false}>
@@ -97,7 +129,7 @@ describe("ExecScreen", () => {
         </MemoryRouter>
       </MockedProvider>
     );
-    
+
     expect(screen.getByTestId("loading-spinner")).toBeInTheDocument();
   });
 
@@ -160,5 +192,22 @@ describe("ExecScreen", () => {
     expect(await screen.findByText("John Doe")).toBeInTheDocument();
     expect(await screen.findByText("Executives")).toBeInTheDocument();
     expect(await screen.findByText("Janet Doe")).toBeInTheDocument();
+  });
+
+  it("renders no data from cms", async () => {
+    render(
+      <MockedProvider mocks={noDataMocks} addTypename={false}>
+        <MemoryRouter>
+          <ExecScreen />
+        </MemoryRouter>
+      </MockedProvider>
+    );
+
+    expect(
+      await screen.findByText("There is no execs to display")
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByText("There is no previous teams to display")
+    ).toBeInTheDocument();
   });
 });
