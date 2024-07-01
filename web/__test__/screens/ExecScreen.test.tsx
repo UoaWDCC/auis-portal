@@ -1,6 +1,6 @@
 import { MockedProvider } from "@apollo/client/testing";
 import { GET_EXECS, GET_PREVIOUS_TEAMS } from "../../src/graphql/queries";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { describe, expect, it } from "vitest";
 import { render, screen } from "@testing-library/react";
 import ExecScreen from "../../src/screens/ExecScreen";
 import React from "react";
@@ -116,11 +116,6 @@ const mocks = [execsMock, previousTeamsMock];
 const noDataMocks = [noExecsMock, noPreviousTeamMock];
 
 describe("ExecScreen", () => {
-  beforeEach(() => {
-    vi.resetAllMocks();
-    vi.clearAllMocks();
-  });
-
   it("renders loading spinner initially", () => {
     render(
       <MockedProvider mocks={mocks} addTypename={false}>
