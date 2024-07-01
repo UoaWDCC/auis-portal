@@ -5,11 +5,13 @@ import {
   EmbeddedCheckout,
 } from "@stripe/react-stripe-js";
 
-const STRIPE_PUBLISHABLE_KEY = import.meta.env.STRIPE_PUBLISH_KEY_DEV;
+const STRIPE_PUBLISHABLE_KEY = import.meta.env.VITE_STRIPE_PUBLISH_KEY_DEV;
+console.log(STRIPE_PUBLISHABLE_KEY)
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
 const stripePromise = loadStripe(`${STRIPE_PUBLISHABLE_KEY}`);
+let bodyData = { priceId: "price_1PSHWRP464csY2UpYpxvB2tk" };
 
 function CheckoutScreen() {
   const fetchClientSecret = useCallback(async () => {
@@ -18,8 +20,9 @@ function CheckoutScreen() {
       "http://localhost:3000/api/stripe/create-checkout-session",
       {
         method: "POST",
+        headers: { 'Content-Type': 'application/json' },
         // add our own priceId here later for different products
-        body: JSON.stringify({ priceId: "price_1PSHWRP464csY2UpYpxvB2tk" }),
+        body: JSON.stringify(bodyData),
       }
     )
       .then((res) => res.json())
