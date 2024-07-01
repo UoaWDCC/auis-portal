@@ -91,3 +91,16 @@ export interface Question {
   question: string;
   checkForMemberEmail: boolean;
 }
+
+export interface Ticket {
+  id: number;
+  name: string;
+  discountCode: string;
+  discountPrice: number;
+  price: number;
+  isMemberOnly: boolean;
+  isDouble: boolean;
+  ticketDescription: string;
+  startDateTicketSales: string;
+  isTicketLive: boolean;
+}

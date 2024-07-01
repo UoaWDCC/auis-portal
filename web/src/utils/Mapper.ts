@@ -11,6 +11,7 @@ import type {
   Event,
   EventGallery,
   Question,
+  Ticket,
 } from "../types/types";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -106,7 +107,7 @@ export class Mapper {
     }
   }
 
-  static mapToIntroduction = (data: any): Introduction[] => {
+  static mapToIntroduction(data: any): Introduction[] {
     if (!data.introductions || !data.introductions.data || data.introductions.data.length === 0) {
       throw new NoDataError("No data");
     } else {
@@ -121,9 +122,9 @@ export class Mapper {
         };
       });
     }
-  };
+  }
 
-  static mapToPreviousTeams = (data: any): PreviousTeam[] => {
+  static mapToPreviousTeams(data: any): PreviousTeam[] {
     if (!data.previousTeams || !data.previousTeams.data || data.previousTeams.data.length === 0) {
       throw new NoDataError("No data");
     } else {
@@ -137,9 +138,9 @@ export class Mapper {
         };
       });
     }
-  };
+  }
 
-  static mapToEvents = (data: any): Event[] => {
+  static mapToEvents(data: any): Event[] {
     if (!data.events || !data.events.data || data.events.data.length === 0) {
       throw new NoDataError("No data");
     } else {
@@ -162,9 +163,9 @@ export class Mapper {
         };
       });
     }
-  };
+  }
 
-  static mapToEventsGallery = (data: any): EventGallery[] => {
+  static mapToEventsGallery(data: any): EventGallery[] {
     if (!data.events || !data.events.data || data.events.data.length === 0) {
       throw new NoDataError("No data");
     } else {
@@ -178,9 +179,9 @@ export class Mapper {
         };
       });
     }
-  };
+  }
 
-  static mapToQuestions = (data: any): Question[] => {
+  static mapToQuestions(data: any): Question[] {
     if (!data.questions || !data.questions.data || data.questions.data.length === 0) {
       throw new NoDataError("No data");
     } else {
@@ -194,5 +195,28 @@ export class Mapper {
         };
       });
     }
-  };
+  }
+
+  static mapToTickets(data: any): Ticket[] {
+    if (!data.tickets || !data.tickets.data || data.tickets.data.length === 0) {
+      throw new NoDataError("No data");
+    } else {
+      return data.tickets.data.map((item: any) => {
+        const attributes = item.attributes || {};
+
+        return {
+          id: item.id,
+          name: attributes.Name || "",
+          discountCode: attributes.Discount_Code || "",
+          discountPrice: attributes.Discount_Price || 0,
+          price: attributes.Price || 0,
+          isMemberOnly: attributes.Is_Member_Only || false,
+          isDouble: attributes.Is_Double || false,
+          ticketDescription: attributes.Ticket_Description || "",
+          startDateTicketSales: attributes.Start_Date_Ticket_Sales || "",
+          isTicketLive: attributes.Is_Ticket_Live || false,
+        };
+      });
+    }
+  }
 }

@@ -193,3 +193,24 @@ export const GET_QUESTIONS = gql`
     }
   }
 `;
+
+export const GET_TICKETS = gql`
+  query {
+    tickets {
+      data {
+        id
+        attributes {
+          Name
+          Discount_Code
+          Discount_Price
+          Price
+          Is_Member_Only
+          Is_Double
+          Ticket_Description
+          Start_Date_Ticket_Sales
+          Is_Ticket_Live
+        }
+      }
+    }
+  }
+`;
