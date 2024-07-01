@@ -78,6 +78,7 @@ export interface Event {
   eventDateEnd: string;
   isLive: boolean;
   termsAndConditions: string;
+  eventCapacityRemaining: number;
   image: string;
 }
 

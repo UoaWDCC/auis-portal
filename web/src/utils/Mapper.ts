@@ -159,6 +159,7 @@ export class Mapper {
           eventDateEnd: attributes.Event_Date_End || "",
           isLive: attributes.Is_Live || false,
           termsAndConditions: attributes.Terms_And_Conditions || "",
+          eventCapacityRemaining: attributes.Event_Capacity_Remaining || 0,
           image: imageUrl,
         };
       });

@@ -20,6 +20,7 @@ describe("mapToEvents", () => {
               Event_Date_End: "2024-01-02",
               Is_Live: true,
               Terms_And_Conditions: "Terms and Conditions 1",
+              Event_Capacity_Remaining: 50,
               Image: {
                 data: {
                   attributes: {
@@ -45,6 +46,7 @@ describe("mapToEvents", () => {
         eventDateEnd: "2024-01-02",
         isLive: true,
         termsAndConditions: "Terms and Conditions 1",
+        eventCapacityRemaining: 50,
         image: "/uploads/event1.jpg",
       },
     ];
@@ -68,6 +70,7 @@ describe("mapToEvents", () => {
               Event_Date_End: "2024-01-02",
               Is_Live: true,
               Terms_And_Conditions: "Terms and Conditions 1",
+              Event_Capacity_Remaining: 50,
               Image: {
                 data: {
                   attributes: {
@@ -93,6 +96,7 @@ describe("mapToEvents", () => {
         eventDateEnd: "2024-01-02",
         isLive: true,
         termsAndConditions: "Terms and Conditions 1",
+        eventCapacityRemaining: 50,
         image: "/uploads/event1.jpg",
       },
     ];
@@ -116,6 +120,7 @@ describe("mapToEvents", () => {
               Event_Date_End: "2024-01-02",
               Is_Live: true,
               Terms_And_Conditions: "Terms and Conditions 1",
+              Event_Capacity_Remaining: 50,
               Image: {
                 data: {
                   attributes: {
@@ -141,6 +146,7 @@ describe("mapToEvents", () => {
         eventDateEnd: "2024-01-02",
         isLive: true,
         termsAndConditions: "Terms and Conditions 1",
+        eventCapacityRemaining: 50,
         image: "/uploads/event1.jpg",
       },
     ];
@@ -164,6 +170,7 @@ describe("mapToEvents", () => {
               Event_Date_End: "2024-01-02",
               Is_Live: true,
               Terms_And_Conditions: "Terms and Conditions 1",
+              Event_Capacity_Remaining: 50,
               Image: {
                 data: {
                   attributes: {
@@ -189,6 +196,7 @@ describe("mapToEvents", () => {
         eventDateEnd: "2024-01-02",
         isLive: true,
         termsAndConditions: "Terms and Conditions 1",
+        eventCapacityRemaining: 50,
         image: "/uploads/event1.jpg",
       },
     ];
@@ -212,6 +220,7 @@ describe("mapToEvents", () => {
               Event_Date_End: "2024-01-02",
               Is_Live: true,
               Terms_And_Conditions: "Terms and Conditions 1",
+              Event_Capacity_Remaining: 50,
               Image: {
                 data: {
                   attributes: {
@@ -237,6 +246,7 @@ describe("mapToEvents", () => {
         eventDateEnd: "2024-01-02",
         isLive: true,
         termsAndConditions: "Terms and Conditions 1",
+        eventCapacityRemaining: 50,
         image: "/uploads/event1.jpg",
       },
     ];
@@ -260,6 +270,7 @@ describe("mapToEvents", () => {
               Event_Date_End: "2024-01-02",
               Is_Live: true,
               Terms_And_Conditions: "Terms and Conditions 1",
+              Event_Capacity_Remaining: 50,
               Image: {
                 data: {
                   attributes: {
@@ -285,6 +296,7 @@ describe("mapToEvents", () => {
         eventDateEnd: "2024-01-02",
         isLive: true,
         termsAndConditions: "Terms and Conditions 1",
+        eventCapacityRemaining: 50,
         image: "/uploads/event1.jpg",
       },
     ];
@@ -308,6 +320,7 @@ describe("mapToEvents", () => {
               Event_Date_End: "2024-01-02",
               Is_Live: true,
               Terms_And_Conditions: "Terms and Conditions 1",
+              Event_Capacity_Remaining: 50,
               Image: {
                 data: {
                   attributes: {
@@ -333,6 +346,7 @@ describe("mapToEvents", () => {
         eventDateEnd: "2024-01-02",
         isLive: true,
         termsAndConditions: "Terms and Conditions 1",
+        eventCapacityRemaining: 50,
         image: "/uploads/event1.jpg",
       },
     ];
@@ -356,6 +370,7 @@ describe("mapToEvents", () => {
               Event_Date_End: null,
               Is_Live: true,
               Terms_And_Conditions: "Terms and Conditions 1",
+              Event_Capacity_Remaining: 50,
               Image: {
                 data: {
                   attributes: {
@@ -381,6 +396,7 @@ describe("mapToEvents", () => {
         eventDateEnd: "",
         isLive: true,
         termsAndConditions: "Terms and Conditions 1",
+        eventCapacityRemaining: 50,
         image: "/uploads/event1.jpg",
       },
     ];
@@ -404,6 +420,7 @@ describe("mapToEvents", () => {
               Event_Date_End: "2024-01-02",
               Is_Live: null,
               Terms_And_Conditions: "Terms and Conditions 1",
+              Event_Capacity_Remaining: 50,
               Image: {
                 data: {
                   attributes: {
@@ -429,6 +446,7 @@ describe("mapToEvents", () => {
         eventDateEnd: "2024-01-02",
         isLive: false,
         termsAndConditions: "Terms and Conditions 1",
+        eventCapacityRemaining: 50,
         image: "/uploads/event1.jpg",
       },
     ];
@@ -452,6 +470,7 @@ describe("mapToEvents", () => {
               Event_Date_End: "2024-01-02",
               Is_Live: true,
               Terms_And_Conditions: null,
+              Event_Capacity_Remaining: 50,
               Image: {
                 data: {
                   attributes: {
@@ -477,6 +496,57 @@ describe("mapToEvents", () => {
         eventDateEnd: "2024-01-02",
         isLive: true,
         termsAndConditions: "",
+        eventCapacityRemaining: 50,
+        image: "/uploads/event1.jpg",
+      },
+    ];
+
+    expect(Mapper.mapToEvents(data)).toEqual(expected);
+  });
+
+  it("should handle missing event capacity remaining field gracefully", () => {
+    const data = {
+      events: {
+        data: [
+          {
+            id: 1,
+            attributes: {
+              Title: "Title 1",
+              Description: "Description 1",
+              Subtitle: "Subtitle 1",
+              Location: "Location 1",
+              Location_Link: "http://location1.com",
+              Event_Date_Start: "2024-01-01",
+              Event_Date_End: "2024-01-02",
+              Is_Live: true,
+              Terms_And_Conditions: "Terms and Conditions 1",
+              Event_Capacity_Remaining: null,
+              Image: {
+                data: {
+                  attributes: {
+                    url: "/uploads/event1.jpg",
+                  },
+                },
+              },
+            },
+          },
+        ],
+      },
+    };
+
+    const expected: Event[] = [
+      {
+        id: 1,
+        title: "Title 1",
+        description: "Description 1",
+        subtitle: "Subtitle 1",
+        location: "Location 1",
+        locationLink: "http://location1.com",
+        eventDateStart: "2024-01-01",
+        eventDateEnd: "2024-01-02",
+        isLive: true,
+        termsAndConditions: "Terms and Conditions 1",
+        eventCapacityRemaining: 0,
         image: "/uploads/event1.jpg",
       },
     ];
@@ -500,6 +570,7 @@ describe("mapToEvents", () => {
               Event_Date_End: "2024-01-02",
               Is_Live: true,
               Terms_And_Conditions: "Terms and Conditions 1",
+              Event_Capacity_Remaining: 50,
               Image: null,
             },
           },
@@ -519,6 +590,7 @@ describe("mapToEvents", () => {
         eventDateEnd: "2024-01-02",
         isLive: true,
         termsAndConditions: "Terms and Conditions 1",
+        eventCapacityRemaining: 50,
         image: "",
       },
     ];
@@ -550,6 +622,7 @@ describe("mapToEvents", () => {
         eventDateEnd: "",
         isLive: false,
         termsAndConditions: "",
+        eventCapacityRemaining: 0,
         image: "",
       },
     ];

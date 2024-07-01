@@ -148,6 +148,7 @@ export const GET_EVENTS = gql`
           Event_Date_End
           Is_Live
           Terms_And_Conditions
+          Event_Capacity_Remaining
           Image {
             data {
               attributes {
