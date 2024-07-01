@@ -192,17 +192,4 @@ export const GET_QUESTIONS = gql`
       }
     }
   }
-`; 
-
-export const GET_ANSWERS = gql`
-  query {
-    answers {
-      data {
-        id
-        attributes {
-          Answer
-        }
-      }
-    }
-  }
 `;

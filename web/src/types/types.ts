@@ -91,8 +91,3 @@ export interface Question {
   question: string;
   checkForMemberEmail: boolean;
 }
-
-export interface Answer {
-  id: number;
-  answer: string;
-}

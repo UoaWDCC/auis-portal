@@ -10,7 +10,6 @@ import type {
   PreviousTeam,
   Event,
   EventGallery,
-  Answer,
   Question,
 } from "../types/types";
 
@@ -192,20 +191,6 @@ export class Mapper {
           id: item.id,
           question: attributes.Question || "",
           checkForMemberEmail: attributes.Check_For_Member_Email || false,
-        };
-      });
-    }
-  };
-
-  static mapToAnswers = (data: any): Answer[] => {
-    if (!data.answers || !data.answers.data || data.answers.data.length === 0) {
-      throw new NoDataError("No data");
-    } else {
-      return data.answers.data.map((item: any) => {
-        const attributes = item.attributes || {};
-        return {
-          id: item.id,
-          answer: attributes.Answer || "",
         };
       });
     }
