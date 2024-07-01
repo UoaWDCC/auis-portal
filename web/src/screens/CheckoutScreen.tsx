@@ -4,7 +4,6 @@ import {
   EmbeddedCheckoutProvider,
   EmbeddedCheckout,
 } from "@stripe/react-stripe-js";
-import axios from "axios";
 
 const STRIPE_PUBLISHABLE_KEY = import.meta.env
   .VITE_CLERK_PUBLISHABLE_KEYSTRIPE_PUBLISH_KEY_DEV;
