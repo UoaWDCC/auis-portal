@@ -6,7 +6,7 @@ import { NoDataError } from "../../src/classes/NoDataError";
 describe("mapToEventsGallery", () => {
   it("should map the valid data correctly", () => {
     const data = {
-      eventsGallery: {
+      events: {
         data: [
           {
             id: 1,
@@ -36,7 +36,7 @@ describe("mapToEventsGallery", () => {
 
   it("should handle missing image field gracefully", () => {
     const data = {
-      eventsGallery: {
+      events: {
         data: [
           {
             id: 1,
@@ -60,7 +60,7 @@ describe("mapToEventsGallery", () => {
 
   it("should handle completely missing attributes gracefully", () => {
     const data = {
-      eventsGallery: {
+      events: {
         data: [
           {
             id: 1,

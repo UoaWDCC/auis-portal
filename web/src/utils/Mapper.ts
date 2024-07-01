@@ -175,7 +175,7 @@ export class Mapper {
 
         return {
           id: item.id,
-          image: imageUrl,
+          image: imageUrl || "",
         };
       });
     }
@@ -190,8 +190,8 @@ export class Mapper {
 
         return {
           id: item.id,
-          question: attributes.Question,
-          checkForMemberEmail: attributes.Check_For_Member_Email,
+          question: attributes.Question || "",
+          checkForMemberEmail: attributes.Check_For_Member_Email || false,
         };
       });
     }
