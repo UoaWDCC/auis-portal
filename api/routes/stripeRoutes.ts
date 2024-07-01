@@ -36,12 +36,12 @@ router.post("/create-checkout-session", async (req, res) => {
   const session = await stripe.checkout.sessions.create({
     ui_mode: "embedded",
     line_items: [
-        {
-          // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
+      {
+        // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
         price: priceId,
-          quantity: 1,
-        },
-      ],
+        quantity: 1,
+      },
+    ],
     mode: "payment",
     // @Ratchet7x5 TODO: Edit link below to frontend
     // `${frontend}/checkout`
@@ -52,6 +52,7 @@ router.post("/create-checkout-session", async (req, res) => {
 });
 
 router.get("/session-status", async (req, res) => {
+  const { sessionId } = req.query;
   const session = await stripe.checkout.sessions.retrieve(req.query.session_id);
 
   res.send({
@@ -60,25 +61,34 @@ router.get("/session-status", async (req, res) => {
   });
 });
 
+// @Ratchet7x5: Template webhook code below. Possibly UNSTABLE.
+// use 'any' type for now
 const fulfillOrder = (lineItems: any) => {
   // TODO: fill me in
   console.log("Fulfilling order", lineItems);
-}
+};
 
-router.post('/webhook', bodyParser.raw({type: 'application/json'}), (req, res) => {
-  const payload = req.body;
-  const sig = req.headers['stripe-signature'];
+router.post(
+  "/webhook",
+  bodyParser.raw({ type: "application/json" }),
+  (req, res) => {
+    const payload = req.body;
+    const sig = req.headers["stripe-signature"];
 
-  let webhookEvent;
+    let webhook;
 
-  try {
-    webhookEvent = stripe.webhooks.constructEvent(payload, sig, endpointSecret);
-  } catch (err) {
-    return res.status(400).send(`Webhook Error: ` + err);
+    try {
+      webhook = stripe.webhooks.constructEvent(
+        payload,
+        sig,
+        endpointSecret
+      );
+    } catch (err) {
+      return res.status(400).send(`Webhook Error: ` + err);
+    }
+
+    res.status(200).end();
   }
-
-  res.status(200).end();
-});
-
+);
 
 export default router;
