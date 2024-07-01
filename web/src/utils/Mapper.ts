@@ -212,6 +212,7 @@ export class Mapper {
           price: attributes.Price || 0,
           isMemberOnly: attributes.Is_Member_Only || false,
           isDouble: attributes.Is_Double || false,
+          numTicketsLeft: attributes.Number_Tickets_Left || 0,
           ticketDescription: attributes.Ticket_Description || "",
           startDateTicketSales: attributes.Start_Date_Ticket_Sales || "",
           isTicketLive: attributes.Is_Ticket_Live || false,

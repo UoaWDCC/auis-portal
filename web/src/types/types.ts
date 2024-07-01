@@ -100,6 +100,7 @@ export interface Ticket {
   price: number;
   isMemberOnly: boolean;
   isDouble: boolean;
+  numTicketsLeft: number;
   ticketDescription: string;
   startDateTicketSales: string;
   isTicketLive: boolean;

@@ -206,6 +206,7 @@ export const GET_TICKETS = gql`
           Price
           Is_Member_Only
           Is_Double
+          Number_Tickets_Left
           Ticket_Description
           Start_Date_Ticket_Sales
           Is_Ticket_Live
