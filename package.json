@@ -7,7 +7,7 @@
     "setup": "yarn && cd ./web && yarn && cd ../strapi && yarn && cd ../api && yarn",
     "dev": "concurrently \"cd ./database && docker compose up\" \"cd ./web && yarn dev\" \"cd ./strapi && yarn develop\" \"cd ./api && yarn dev\"",
     "build": "cd ./web && yarn build && cd ../strapi && yarn build && cd ../api && yarn build",
-    "format": "prettier . --write",
+    "format": "prettier '**/*.{ts,tsx}' --write",
     "format:ci": "prettier '**/*.{ts,tsx}' --check"
   },
   "devDependencies": {
