@@ -25,5 +25,5 @@ jobs:
         run: yarn
 
       - name: Format code with Prettier
-        run: yarn prettier --write "**/*.{js,jsx,ts,tsx}"
+        run: yarn prettier:ci
 
