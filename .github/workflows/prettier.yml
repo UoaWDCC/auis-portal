@@ -22,7 +22,7 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: yarn
+        run: yarn setup
 
       - name: Format code with Prettier
         run: yarn prettier:ci
