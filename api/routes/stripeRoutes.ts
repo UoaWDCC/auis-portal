@@ -11,7 +11,7 @@ const stripe_secret = process.env.STRIPE_SECRET_TEST;
 const stripe = require("stripe")(`${stripe_secret}`);
 
 //frontend,  replace with process.env.domainURL. Switch based on NODE_ENV
-const domainURL = "http://localhost:5173"; 
+const domainURL = "http://localhost:5173";
 
 // needs to be in .env
 // use the Stripe CLI to generate your own endpoint and paste the value below.
@@ -27,28 +27,37 @@ const router = Router();
 // Create a checkout session based on priceId. Send a client secret back (cs_ABCD123)
 router.post("/create-checkout-session", async (req, res) => {
   // in the incoming request, we need the priceID of the item we're buying.
-  const {priceId} = req.body; //const priceId = req.body.priceId;
+  const { priceId } = req.body; //const priceId = req.body.priceId;
   //console.log(priceId);
+  console.log(req.body);
 
-  // @Ratchet7x5: Add an auth middleware to ensure that incoming requests have a bearer token (pk_test/live_ABCD12345)
-  // if no bearer token was found, send a 404 error. Also ensure user is logged in.
+  // if priceId is undefined, send a 404 back.
+  if (priceId == undefined) {
+    return res.send({ error: "priceId was undefined." }).status(404);
+  }
 
-  const session = await stripe.checkout.sessions.create({
-    ui_mode: "embedded",
-    line_items: [
-      {
-        // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-        price: priceId,
-        quantity: 1,
-      },
-    ],
-    mode: "payment",
-    // @Ratchet7x5 TODO: Edit link below to frontend
-    // `${frontend}/checkout`
-    return_url: `http://localhost:5173/checkout`,
-  });
+  try {
+    // @Ratchet7x5: Add an auth middleware to ensure that incoming requests have a bearer token (pk_test/live_ABCD12345)
+    // if no bearer token was found, send a 404 error. Also ensure user is logged in.
+    const session = await stripe.checkout.sessions.create({
+      ui_mode: "embedded",
+      line_items: [
+        {
+          // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
+          price: priceId,
+          quantity: 1,
+        },
+      ],
+      mode: "payment",
+      // @Ratchet7x5 TODO: Edit link below to frontend
+      // `${frontend}/checkout`
+      return_url: `http://localhost:5173/checkout`,
+    });
 
-  res.send({ clientSecret: session.client_secret });
+    res.send({ clientSecret: session.client_secret });
+  } catch (error) {
+    res.send({ error }).status(404);
+  }
 });
 
 router.get("/session-status", async (req, res) => {
@@ -78,11 +87,7 @@ router.post(
     let webhook;
 
     try {
-      webhook = stripe.webhooks.constructEvent(
-        payload,
-        sig,
-        endpointSecret
-      );
+      webhook = stripe.webhooks.constructEvent(payload, sig, endpointSecret);
     } catch (err) {
       return res.status(400).send(`Webhook Error: ` + err);
     }
