@@ -60,7 +60,6 @@ router.post("/create-checkout-session", async (req, res) => {
 });
 
 router.get("/session-status", async (req, res) => {
-  const { sessionId } = req.query;
   const session = await stripe.checkout.sessions.retrieve(req.query.session_id);
 
   res.send({
