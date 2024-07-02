@@ -7,7 +7,7 @@ export default function ExecCard({ exec }: ExecCardProps) {
         <div className="h-40 w-full overflow-hidden rounded-2xl px-2 pt-2">
           <img
             src={exec.image}
-            alt="Exec Image"
+            alt="Exec Images"
             className="h-full w-full rounded-xl object-cover"
           />
         </div>
