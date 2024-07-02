@@ -35,9 +35,9 @@ jobs:
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           if [ -n "$(git status --porcelain)" ]; then
-            echo "changes_detected=true" >> $GITHUB_ENV
+            echo "changes_detected=true" >> "$GITHUB_ENV"
           else
-            echo "changes_detected=false" >> $GITHUB_ENV
+            echo "changes_detected=false" >> "$GITHUB_ENV"
           fi
 
       - name: Commit and push changes
@@ -46,5 +46,4 @@ jobs:
           git add .
           git commit -m "Format code with Prettier"
           git push
-
 
