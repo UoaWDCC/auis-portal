@@ -1,9 +1,9 @@
 name: Format Code
 
 on:
-    push:
-      branches:
-        - "**" 
+  push:
+    branches:
+      - "**" 
 
 jobs:
   format:

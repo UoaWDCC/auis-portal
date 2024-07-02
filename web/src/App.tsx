@@ -1,8 +1,7 @@
-import { Outlet } from "react-router-dom";
-import Footer from "./components/Footer";
+import { Outlet } from "react-router-dom"
+import Footer from "./components/Footer"
 
 const App = () => {
-
   return (
     <>
       <main>
@@ -12,7 +11,7 @@ const App = () => {
       </main>
       <Footer />
     </>
-  );
-};
+  )
+}
 
-export default App;
+export default App
