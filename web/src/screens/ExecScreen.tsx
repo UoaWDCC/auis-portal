@@ -106,13 +106,17 @@ export default function ExecScreen() {
               <h2 className="text-3xl font-bold text-tertiary-blue">
                 PRESIDENTS
               </h2>
-              <div className="flex flex-wrap justify-center">
-                {presidents?.map((exec) => (
-                  <div key={exec.id} className="mx-3 my-5">
-                    <ExecCard exec={exec} />
-                  </div>
-                ))}
-              </div>
+              {noExecs ? (
+                <div>There is no execs to display</div>
+              ) : (
+                <div className="flex flex-wrap justify-center">
+                  {presidents?.map((exec) => (
+                    <div key={exec.id} className="mx-3 my-5">
+                      <ExecCard exec={exec} />
+                    </div>
+                  ))}
+                </div>
+              )}
               <h2 className="text-3xl font-bold text-tertiary-blue">
                 EXECUTIVE TEAM
               </h2>
