@@ -1,13 +1,13 @@
 /* 
   Example Route File
 */
-import { Router } from 'express';
-import type { Request, Response } from 'express';
-import { z } from 'zod';
+import { Router } from "express";
+import type { Request, Response } from "express";
+import { z } from "zod";
 
 const helloRoutes = Router();
 
-helloRoutes.get('/:name', async (req: Request, res: Response) => {
+helloRoutes.get("/:name", async (req: Request, res: Response) => {
   const Name = z.object({
     name: z.string(),
   });

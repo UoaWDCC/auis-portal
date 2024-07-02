@@ -38,6 +38,19 @@ const mocks = [
   },
 ];
 
+const noDataMock = {
+  request: {
+    query: GET_PARTNERS,
+  },
+  result: {
+    data: {
+      partners: {
+        data: [],
+      },
+    },
+  },
+};
+
 describe("Partner Component", () => {
   it("renders loading", async () => {
     render(
@@ -72,5 +85,15 @@ describe("Partner Component", () => {
       </MockedProvider>
     );
     expect(await screen.findByText("CMS Offline")).toBeInTheDocument();
+  });
+  it("renders no data from cms", async () => {
+    render(
+      <MockedProvider mocks={[noDataMock]} addTypename={false}>
+        <Partners />
+      </MockedProvider>
+    );
+    expect(
+      await screen.findByText("There are no partners to display")
+    ).toBeInTheDocument();
   });
 });
