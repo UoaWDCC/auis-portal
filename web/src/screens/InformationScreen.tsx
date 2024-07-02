@@ -1,9 +1,15 @@
 import UserInformationForm from "@components/UserInformationForm.tsx";
+import Header from "@components/Header.tsx";
 
 function InformationScreen() {
     return (
-        <div className="flex-grow flex flex-col justify-center  bg-gradient-to-t from-blue-500 via-blue-400 to-blue-300">
+        <div className="flex-grow flex flex-col justify-center">
+        <div className="bg-gradient-to-b from-AUIS-dark-teal to-AUIS-teal">
+            <Header />
+        </div>
+        <div className="bg-gradient-to-b from-white to-orange-100 ">
             <UserInformationForm />
+        </div>
         </div>
     );
 }

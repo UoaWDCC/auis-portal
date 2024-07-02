@@ -42,7 +42,7 @@ const FormInput: React.FC<FormInputProps> = ({
                     className={` ${className}`}
                     {...props}
                 />
-                {props.errorMessage && <span className="text-red-500">{props.errorMessage}</span>}
+                {/*{props.errorMessage && <span className="text-red-500">{props.errorMessage}</span>}*/}
             </div>
         );
     }
