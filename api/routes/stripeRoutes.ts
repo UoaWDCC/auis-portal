@@ -81,6 +81,7 @@ router.post(
   bodyParser.raw({ type: "application/json" }),
   (req, res) => {
     const payload = req.body;
+    //console.log("webhook: payload: ", payload);
     const sig = req.headers["stripe-signature"];
 
     let webhook;
