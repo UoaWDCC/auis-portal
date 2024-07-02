@@ -49,9 +49,8 @@ router.post("/create-checkout-session", async (req, res) => {
         },
       ],
       mode: "payment",
-      // @Ratchet7x5 TODO: Edit link below to frontend
-      // `${frontend}/checkout`
-      return_url: `http://localhost:5173/checkout`,
+      // @Ratchet7x5 INFO: The link below determines the redirect page after successful payment.
+      return_url: `http://localhost:5173/return?session_id={CHECKOUT_SESSION_ID}`,
     });
 
     res.send({ clientSecret: session.client_secret });
