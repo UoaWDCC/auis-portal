@@ -102,7 +102,7 @@ export default function ExecScreen() {
           <div className="max-w-screen from-AUIS-dark-teal to-AUIS-teal h-auto bg-gradient-to-b">
             <Header />
             <div className="flex flex-col items-center text-center">
-                  <h1 className="text-5xl font-bold text-white">Meet Our Team!</h1>
+              <h1 className="text-5xl font-bold text-white">Meet Our Team!</h1>
               <h3 className="my-5 px-5 text-xl text-white">
                 The faces behind AUIS that make it all happen. Hover over them
                 to find out more about them!
