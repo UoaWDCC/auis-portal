@@ -199,7 +199,7 @@ describe("ExecScreen", () => {
     )
 
     // Message should appear twice
-const noExecs = await screen.findAllByText("There is no execs to display")
+    const noExecs = await screen.findAllByText("There is no execs to display")
     expect(noExecs).toHaveLength(2)
     expect(
       await screen.findByText("There is no previous teams to display")
