@@ -3,8 +3,8 @@ import { ExecCardProps } from "../types/types"
 export default function ExecCard({ exec }: ExecCardProps) {
   return (
     <>
-      <div className="relative flex h-60 w-44 transform cursor-pointer flex-col items-center justify-between overflow-hidden rounded-2xl bg-white shadow-lg transition-transform hover:scale-105">
-        <div className="h-40 w-full overflow-hidden rounded-2xl px-2 pt-2">
+            <div className="relative flex h-60 w-44 transform cursor-pointer flex-col items-center justify-between overflow-hidden rounded-2xl bg-white shadow-lg transition-transform hover:scale-105">
+             <div className="h-40 w-full overflow-hidden rounded-2xl px-2 pt-2">
           <img
             src={exec.image}
             alt="Exec Images"
