@@ -1,11 +1,11 @@
-import { FaFacebookF, FaInstagram, FaLinkedin } from "react-icons/fa"
-import { IoMdMail } from "react-icons/io"
+import { FaFacebookF, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { IoMdMail } from "react-icons/io";
 import {
   InstagramLink,
   FacebookLink,
   EmailLink,
-  LinkedinLink
-} from "../data/data"
+  LinkedinLink,
+} from "../data/data";
 
 export default function Socials() {
   return (
@@ -58,5 +58,5 @@ export default function Socials() {
         </div>
       </div>
     </>
-  )
+  );
 }

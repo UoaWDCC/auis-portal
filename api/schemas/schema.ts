@@ -14,22 +14,22 @@ import {
   numeric,
   unique,
   date,
-  doublePrecision
-} from "drizzle-orm/pg-core"
-import { sql } from "drizzle-orm"
+  doublePrecision,
+} from "drizzle-orm/pg-core";
+import { sql } from "drizzle-orm";
 
 export const strapi_migrations = pgTable("strapi_migrations", {
   id: serial("id").primaryKey().notNull(),
   name: varchar("name", { length: 255 }),
-  time: timestamp("time", { mode: "string" })
-})
+  time: timestamp("time", { mode: "string" }),
+});
 
 export const strapi_database_schema = pgTable("strapi_database_schema", {
   id: serial("id").primaryKey().notNull(),
   schema: json("schema"),
   time: timestamp("time", { mode: "string" }),
-  hash: varchar("hash", { length: 255 })
-})
+  hash: varchar("hash", { length: 255 }),
+});
 
 export const strapi_core_store_settings = pgTable(
   "strapi_core_store_settings",
@@ -39,9 +39,9 @@ export const strapi_core_store_settings = pgTable(
     value: text("value"),
     type: varchar("type", { length: 255 }),
     environment: varchar("environment", { length: 255 }),
-    tag: varchar("tag", { length: 255 })
+    tag: varchar("tag", { length: 255 }),
   }
-)
+);
 
 export const strapi_webhooks = pgTable("strapi_webhooks", {
   id: serial("id").primaryKey().notNull(),
@@ -49,8 +49,8 @@ export const strapi_webhooks = pgTable("strapi_webhooks", {
   url: text("url"),
   headers: jsonb("headers"),
   events: jsonb("events"),
-  enabled: boolean("enabled")
-})
+  enabled: boolean("enabled"),
+});
 
 export const admin_users = pgTable(
   "admin_users",
@@ -69,7 +69,7 @@ export const admin_users = pgTable(
     created_at: timestamp("created_at", { precision: 6, mode: "string" }),
     updated_at: timestamp("updated_at", { precision: 6, mode: "string" }),
     created_by_id: integer("created_by_id"),
-    updated_by_id: integer("updated_by_id")
+    updated_by_id: integer("updated_by_id"),
   },
   (table) => {
     return {
@@ -84,16 +84,16 @@ export const admin_users = pgTable(
       admin_users_created_by_id_fk: foreignKey({
         columns: [table.created_by_id],
         foreignColumns: [table.id],
-        name: "admin_users_created_by_id_fk"
+        name: "admin_users_created_by_id_fk",
       }).onDelete("set null"),
       admin_users_updated_by_id_fk: foreignKey({
         columns: [table.updated_by_id],
         foreignColumns: [table.id],
-        name: "admin_users_updated_by_id_fk"
-      }).onDelete("set null")
-    }
+        name: "admin_users_updated_by_id_fk",
+      }).onDelete("set null"),
+    };
   }
-)
+);
 
 export const admin_permissions = pgTable(
   "admin_permissions",
@@ -107,11 +107,11 @@ export const admin_permissions = pgTable(
     created_at: timestamp("created_at", { precision: 6, mode: "string" }),
     updated_at: timestamp("updated_at", { precision: 6, mode: "string" }),
     created_by_id: integer("created_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
+      onDelete: "set null",
     }),
     updated_by_id: integer("updated_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
-    })
+      onDelete: "set null",
+    }),
   },
   (table) => {
     return {
@@ -122,10 +122,10 @@ export const admin_permissions = pgTable(
       updated_by_id_fk: index("admin_permissions_updated_by_id_fk").using(
         "btree",
         table.updated_by_id
-      )
-    }
+      ),
+    };
   }
-)
+);
 
 export const admin_roles = pgTable(
   "admin_roles",
@@ -137,11 +137,11 @@ export const admin_roles = pgTable(
     created_at: timestamp("created_at", { precision: 6, mode: "string" }),
     updated_at: timestamp("updated_at", { precision: 6, mode: "string" }),
     created_by_id: integer("created_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
+      onDelete: "set null",
     }),
     updated_by_id: integer("updated_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
-    })
+      onDelete: "set null",
+    }),
   },
   (table) => {
     return {
@@ -152,10 +152,10 @@ export const admin_roles = pgTable(
       updated_by_id_fk: index("admin_roles_updated_by_id_fk").using(
         "btree",
         table.updated_by_id
-      )
-    }
+      ),
+    };
   }
-)
+);
 
 export const strapi_api_tokens = pgTable(
   "strapi_api_tokens",
@@ -172,11 +172,11 @@ export const strapi_api_tokens = pgTable(
     created_at: timestamp("created_at", { precision: 6, mode: "string" }),
     updated_at: timestamp("updated_at", { precision: 6, mode: "string" }),
     created_by_id: integer("created_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
+      onDelete: "set null",
     }),
     updated_by_id: integer("updated_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
-    })
+      onDelete: "set null",
+    }),
   },
   (table) => {
     return {
@@ -187,10 +187,10 @@ export const strapi_api_tokens = pgTable(
       updated_by_id_fk: index("strapi_api_tokens_updated_by_id_fk").using(
         "btree",
         table.updated_by_id
-      )
-    }
+      ),
+    };
   }
-)
+);
 
 export const strapi_api_token_permissions = pgTable(
   "strapi_api_token_permissions",
@@ -200,11 +200,11 @@ export const strapi_api_token_permissions = pgTable(
     created_at: timestamp("created_at", { precision: 6, mode: "string" }),
     updated_at: timestamp("updated_at", { precision: 6, mode: "string" }),
     created_by_id: integer("created_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
+      onDelete: "set null",
     }),
     updated_by_id: integer("updated_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
-    })
+      onDelete: "set null",
+    }),
   },
   (table) => {
     return {
@@ -213,10 +213,10 @@ export const strapi_api_token_permissions = pgTable(
       ).using("btree", table.created_by_id),
       updated_by_id_fk: index(
         "strapi_api_token_permissions_updated_by_id_fk"
-      ).using("btree", table.updated_by_id)
-    }
+      ).using("btree", table.updated_by_id),
+    };
   }
-)
+);
 
 export const strapi_transfer_tokens = pgTable(
   "strapi_transfer_tokens",
@@ -232,11 +232,11 @@ export const strapi_transfer_tokens = pgTable(
     created_at: timestamp("created_at", { precision: 6, mode: "string" }),
     updated_at: timestamp("updated_at", { precision: 6, mode: "string" }),
     created_by_id: integer("created_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
+      onDelete: "set null",
     }),
     updated_by_id: integer("updated_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
-    })
+      onDelete: "set null",
+    }),
   },
   (table) => {
     return {
@@ -247,10 +247,10 @@ export const strapi_transfer_tokens = pgTable(
       updated_by_id_fk: index("strapi_transfer_tokens_updated_by_id_fk").using(
         "btree",
         table.updated_by_id
-      )
-    }
+      ),
+    };
   }
-)
+);
 
 export const strapi_transfer_token_permissions = pgTable(
   "strapi_transfer_token_permissions",
@@ -260,11 +260,11 @@ export const strapi_transfer_token_permissions = pgTable(
     created_at: timestamp("created_at", { precision: 6, mode: "string" }),
     updated_at: timestamp("updated_at", { precision: 6, mode: "string" }),
     created_by_id: integer("created_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
+      onDelete: "set null",
     }),
     updated_by_id: integer("updated_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
-    })
+      onDelete: "set null",
+    }),
   },
   (table) => {
     return {
@@ -273,10 +273,10 @@ export const strapi_transfer_token_permissions = pgTable(
       ).using("btree", table.created_by_id),
       updated_by_id_fk: index(
         "strapi_transfer_token_permissions_updated_by_id_fk"
-      ).using("btree", table.updated_by_id)
-    }
+      ).using("btree", table.updated_by_id),
+    };
   }
-)
+);
 
 export const files = pgTable(
   "files",
@@ -300,11 +300,11 @@ export const files = pgTable(
     created_at: timestamp("created_at", { precision: 6, mode: "string" }),
     updated_at: timestamp("updated_at", { precision: 6, mode: "string" }),
     created_by_id: integer("created_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
+      onDelete: "set null",
     }),
     updated_by_id: integer("updated_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
-    })
+      onDelete: "set null",
+    }),
   },
   (table) => {
     return {
@@ -338,10 +338,10 @@ export const files = pgTable(
       upload_files_updated_at_idx: index("upload_files_updated_at_index").using(
         "btree",
         table.updated_at
-      )
-    }
+      ),
+    };
   }
-)
+);
 
 export const upload_folders = pgTable(
   "upload_folders",
@@ -353,11 +353,11 @@ export const upload_folders = pgTable(
     created_at: timestamp("created_at", { precision: 6, mode: "string" }),
     updated_at: timestamp("updated_at", { precision: 6, mode: "string" }),
     created_by_id: integer("created_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
+      onDelete: "set null",
     }),
     updated_by_id: integer("updated_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
-    })
+      onDelete: "set null",
+    }),
   },
   (table) => {
     return {
@@ -374,10 +374,10 @@ export const upload_folders = pgTable(
       ),
       upload_folders_path_index: unique("upload_folders_path_index").on(
         table.path
-      )
-    }
+      ),
+    };
   }
-)
+);
 
 export const strapi_releases = pgTable(
   "strapi_releases",
@@ -391,11 +391,11 @@ export const strapi_releases = pgTable(
     created_at: timestamp("created_at", { precision: 6, mode: "string" }),
     updated_at: timestamp("updated_at", { precision: 6, mode: "string" }),
     created_by_id: integer("created_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
+      onDelete: "set null",
     }),
     updated_by_id: integer("updated_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
-    })
+      onDelete: "set null",
+    }),
   },
   (table) => {
     return {
@@ -406,10 +406,10 @@ export const strapi_releases = pgTable(
       updated_by_id_fk: index("strapi_releases_updated_by_id_fk").using(
         "btree",
         table.updated_by_id
-      )
-    }
+      ),
+    };
   }
-)
+);
 
 export const strapi_release_actions = pgTable(
   "strapi_release_actions",
@@ -424,11 +424,11 @@ export const strapi_release_actions = pgTable(
     created_at: timestamp("created_at", { precision: 6, mode: "string" }),
     updated_at: timestamp("updated_at", { precision: 6, mode: "string" }),
     created_by_id: integer("created_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
+      onDelete: "set null",
     }),
     updated_by_id: integer("updated_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
-    })
+      onDelete: "set null",
+    }),
   },
   (table) => {
     return {
@@ -439,10 +439,10 @@ export const strapi_release_actions = pgTable(
       updated_by_id_fk: index("strapi_release_actions_updated_by_id_fk").using(
         "btree",
         table.updated_by_id
-      )
-    }
+      ),
+    };
   }
-)
+);
 
 export const i18n_locale = pgTable(
   "i18n_locale",
@@ -453,11 +453,11 @@ export const i18n_locale = pgTable(
     created_at: timestamp("created_at", { precision: 6, mode: "string" }),
     updated_at: timestamp("updated_at", { precision: 6, mode: "string" }),
     created_by_id: integer("created_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
+      onDelete: "set null",
     }),
     updated_by_id: integer("updated_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
-    })
+      onDelete: "set null",
+    }),
   },
   (table) => {
     return {
@@ -468,10 +468,10 @@ export const i18n_locale = pgTable(
       updated_by_id_fk: index("i18n_locale_updated_by_id_fk").using(
         "btree",
         table.updated_by_id
-      )
-    }
+      ),
+    };
   }
-)
+);
 
 export const up_permissions = pgTable(
   "up_permissions",
@@ -481,11 +481,11 @@ export const up_permissions = pgTable(
     created_at: timestamp("created_at", { precision: 6, mode: "string" }),
     updated_at: timestamp("updated_at", { precision: 6, mode: "string" }),
     created_by_id: integer("created_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
+      onDelete: "set null",
     }),
     updated_by_id: integer("updated_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
-    })
+      onDelete: "set null",
+    }),
   },
   (table) => {
     return {
@@ -496,10 +496,10 @@ export const up_permissions = pgTable(
       updated_by_id_fk: index("up_permissions_updated_by_id_fk").using(
         "btree",
         table.updated_by_id
-      )
-    }
+      ),
+    };
   }
-)
+);
 
 export const up_roles = pgTable(
   "up_roles",
@@ -511,11 +511,11 @@ export const up_roles = pgTable(
     created_at: timestamp("created_at", { precision: 6, mode: "string" }),
     updated_at: timestamp("updated_at", { precision: 6, mode: "string" }),
     created_by_id: integer("created_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
+      onDelete: "set null",
     }),
     updated_by_id: integer("updated_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
-    })
+      onDelete: "set null",
+    }),
   },
   (table) => {
     return {
@@ -526,10 +526,10 @@ export const up_roles = pgTable(
       updated_by_id_fk: index("up_roles_updated_by_id_fk").using(
         "btree",
         table.updated_by_id
-      )
-    }
+      ),
+    };
   }
-)
+);
 
 export const up_users = pgTable(
   "up_users",
@@ -546,11 +546,11 @@ export const up_users = pgTable(
     created_at: timestamp("created_at", { precision: 6, mode: "string" }),
     updated_at: timestamp("updated_at", { precision: 6, mode: "string" }),
     created_by_id: integer("created_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
+      onDelete: "set null",
     }),
     updated_by_id: integer("updated_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
-    })
+      onDelete: "set null",
+    }),
   },
   (table) => {
     return {
@@ -561,10 +561,10 @@ export const up_users = pgTable(
       updated_by_id_fk: index("up_users_updated_by_id_fk").using(
         "btree",
         table.updated_by_id
-      )
-    }
+      ),
+    };
   }
-)
+);
 
 export const answers = pgTable(
   "answers",
@@ -575,11 +575,11 @@ export const answers = pgTable(
     updated_at: timestamp("updated_at", { precision: 6, mode: "string" }),
     published_at: timestamp("published_at", { precision: 6, mode: "string" }),
     created_by_id: integer("created_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
+      onDelete: "set null",
     }),
     updated_by_id: integer("updated_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
-    })
+      onDelete: "set null",
+    }),
   },
   (table) => {
     return {
@@ -590,10 +590,10 @@ export const answers = pgTable(
       updated_by_id_fk: index("answers_updated_by_id_fk").using(
         "btree",
         table.updated_by_id
-      )
-    }
+      ),
+    };
   }
-)
+);
 
 export const events = pgTable(
   "events",
@@ -606,11 +606,11 @@ export const events = pgTable(
     location_link: varchar("location_link", { length: 255 }),
     event_date_start: timestamp("event_date_start", {
       precision: 6,
-      mode: "string"
+      mode: "string",
     }),
     event_date_end: timestamp("event_date_end", {
       precision: 6,
-      mode: "string"
+      mode: "string",
     }),
     event_capacity: integer("event_capacity"),
     is_live: boolean("is_live"),
@@ -620,11 +620,11 @@ export const events = pgTable(
     updated_at: timestamp("updated_at", { precision: 6, mode: "string" }),
     published_at: timestamp("published_at", { precision: 6, mode: "string" }),
     created_by_id: integer("created_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
+      onDelete: "set null",
     }),
     updated_by_id: integer("updated_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
-    })
+      onDelete: "set null",
+    }),
   },
   (table) => {
     return {
@@ -635,10 +635,10 @@ export const events = pgTable(
       updated_by_id_fk: index("events_updated_by_id_fk").using(
         "btree",
         table.updated_by_id
-      )
-    }
+      ),
+    };
   }
-)
+);
 
 export const event_galleries = pgTable(
   "event_galleries",
@@ -648,11 +648,11 @@ export const event_galleries = pgTable(
     updated_at: timestamp("updated_at", { precision: 6, mode: "string" }),
     published_at: timestamp("published_at", { precision: 6, mode: "string" }),
     created_by_id: integer("created_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
+      onDelete: "set null",
     }),
     updated_by_id: integer("updated_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
-    })
+      onDelete: "set null",
+    }),
   },
   (table) => {
     return {
@@ -663,10 +663,10 @@ export const event_galleries = pgTable(
       updated_by_id_fk: index("event_galleries_updated_by_id_fk").using(
         "btree",
         table.updated_by_id
-      )
-    }
+      ),
+    };
   }
-)
+);
 
 export const execs = pgTable(
   "execs",
@@ -680,11 +680,11 @@ export const execs = pgTable(
     updated_at: timestamp("updated_at", { precision: 6, mode: "string" }),
     published_at: timestamp("published_at", { precision: 6, mode: "string" }),
     created_by_id: integer("created_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
+      onDelete: "set null",
     }),
     updated_by_id: integer("updated_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
-    })
+      onDelete: "set null",
+    }),
   },
   (table) => {
     return {
@@ -695,10 +695,10 @@ export const execs = pgTable(
       updated_by_id_fk: index("execs_updated_by_id_fk").using(
         "btree",
         table.updated_by_id
-      )
-    }
+      ),
+    };
   }
-)
+);
 
 export const introductions = pgTable(
   "introductions",
@@ -712,11 +712,11 @@ export const introductions = pgTable(
     updated_at: timestamp("updated_at", { precision: 6, mode: "string" }),
     published_at: timestamp("published_at", { precision: 6, mode: "string" }),
     created_by_id: integer("created_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
+      onDelete: "set null",
     }),
     updated_by_id: integer("updated_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
-    })
+      onDelete: "set null",
+    }),
   },
   (table) => {
     return {
@@ -727,10 +727,10 @@ export const introductions = pgTable(
       updated_by_id_fk: index("introductions_updated_by_id_fk").using(
         "btree",
         table.updated_by_id
-      )
-    }
+      ),
+    };
   }
-)
+);
 
 export const partners = pgTable(
   "partners",
@@ -744,11 +744,11 @@ export const partners = pgTable(
     updated_at: timestamp("updated_at", { precision: 6, mode: "string" }),
     published_at: timestamp("published_at", { precision: 6, mode: "string" }),
     created_by_id: integer("created_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
+      onDelete: "set null",
     }),
     updated_by_id: integer("updated_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
-    })
+      onDelete: "set null",
+    }),
   },
   (table) => {
     return {
@@ -759,10 +759,10 @@ export const partners = pgTable(
       updated_by_id_fk: index("partners_updated_by_id_fk").using(
         "btree",
         table.updated_by_id
-      )
-    }
+      ),
+    };
   }
-)
+);
 
 export const peoples = pgTable(
   "peoples",
@@ -782,11 +782,11 @@ export const peoples = pgTable(
     updated_at: timestamp("updated_at", { precision: 6, mode: "string" }),
     published_at: timestamp("published_at", { precision: 6, mode: "string" }),
     created_by_id: integer("created_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
+      onDelete: "set null",
     }),
     updated_by_id: integer("updated_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
-    })
+      onDelete: "set null",
+    }),
   },
   (table) => {
     return {
@@ -797,10 +797,10 @@ export const peoples = pgTable(
       updated_by_id_fk: index("peoples_updated_by_id_fk").using(
         "btree",
         table.updated_by_id
-      )
-    }
+      ),
+    };
   }
-)
+);
 
 export const previous_teams = pgTable(
   "previous_teams",
@@ -813,11 +813,11 @@ export const previous_teams = pgTable(
     updated_at: timestamp("updated_at", { precision: 6, mode: "string" }),
     published_at: timestamp("published_at", { precision: 6, mode: "string" }),
     created_by_id: integer("created_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
+      onDelete: "set null",
     }),
     updated_by_id: integer("updated_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
-    })
+      onDelete: "set null",
+    }),
   },
   (table) => {
     return {
@@ -828,10 +828,10 @@ export const previous_teams = pgTable(
       updated_by_id_fk: index("previous_teams_updated_by_id_fk").using(
         "btree",
         table.updated_by_id
-      )
-    }
+      ),
+    };
   }
-)
+);
 
 export const questions = pgTable(
   "questions",
@@ -843,11 +843,11 @@ export const questions = pgTable(
     updated_at: timestamp("updated_at", { precision: 6, mode: "string" }),
     published_at: timestamp("published_at", { precision: 6, mode: "string" }),
     created_by_id: integer("created_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
+      onDelete: "set null",
     }),
     updated_by_id: integer("updated_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
-    })
+      onDelete: "set null",
+    }),
   },
   (table) => {
     return {
@@ -858,10 +858,10 @@ export const questions = pgTable(
       updated_by_id_fk: index("questions_updated_by_id_fk").using(
         "btree",
         table.updated_by_id
-      )
-    }
+      ),
+    };
   }
-)
+);
 
 export const socials = pgTable(
   "socials",
@@ -873,11 +873,11 @@ export const socials = pgTable(
     updated_at: timestamp("updated_at", { precision: 6, mode: "string" }),
     published_at: timestamp("published_at", { precision: 6, mode: "string" }),
     created_by_id: integer("created_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
+      onDelete: "set null",
     }),
     updated_by_id: integer("updated_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
-    })
+      onDelete: "set null",
+    }),
   },
   (table) => {
     return {
@@ -888,10 +888,10 @@ export const socials = pgTable(
       updated_by_id_fk: index("socials_updated_by_id_fk").using(
         "btree",
         table.updated_by_id
-      )
-    }
+      ),
+    };
   }
-)
+);
 
 export const some_photos = pgTable(
   "some_photos",
@@ -903,11 +903,11 @@ export const some_photos = pgTable(
     updated_at: timestamp("updated_at", { precision: 6, mode: "string" }),
     published_at: timestamp("published_at", { precision: 6, mode: "string" }),
     created_by_id: integer("created_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
+      onDelete: "set null",
     }),
     updated_by_id: integer("updated_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
-    })
+      onDelete: "set null",
+    }),
   },
   (table) => {
     return {
@@ -918,10 +918,10 @@ export const some_photos = pgTable(
       updated_by_id_fk: index("some_photos_updated_by_id_fk").using(
         "btree",
         table.updated_by_id
-      )
-    }
+      ),
+    };
   }
-)
+);
 
 export const tickets = pgTable(
   "tickets",
@@ -938,18 +938,18 @@ export const tickets = pgTable(
     ticket_description: text("ticket_description"),
     start_date_ticket_sales: timestamp("start_date_ticket_sales", {
       precision: 6,
-      mode: "string"
+      mode: "string",
     }),
     is_ticket_live: boolean("is_ticket_live"),
     created_at: timestamp("created_at", { precision: 6, mode: "string" }),
     updated_at: timestamp("updated_at", { precision: 6, mode: "string" }),
     published_at: timestamp("published_at", { precision: 6, mode: "string" }),
     created_by_id: integer("created_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
+      onDelete: "set null",
     }),
     updated_by_id: integer("updated_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
-    })
+      onDelete: "set null",
+    }),
   },
   (table) => {
     return {
@@ -960,10 +960,10 @@ export const tickets = pgTable(
       updated_by_id_fk: index("tickets_updated_by_id_fk").using(
         "btree",
         table.updated_by_id
-      )
-    }
+      ),
+    };
   }
-)
+);
 
 export const user_tickets = pgTable(
   "user_tickets",
@@ -974,11 +974,11 @@ export const user_tickets = pgTable(
     updated_at: timestamp("updated_at", { precision: 6, mode: "string" }),
     published_at: timestamp("published_at", { precision: 6, mode: "string" }),
     created_by_id: integer("created_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
+      onDelete: "set null",
     }),
     updated_by_id: integer("updated_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
-    })
+      onDelete: "set null",
+    }),
   },
   (table) => {
     return {
@@ -989,10 +989,10 @@ export const user_tickets = pgTable(
       updated_by_id_fk: index("user_tickets_updated_by_id_fk").using(
         "btree",
         table.updated_by_id
-      )
-    }
+      ),
+    };
   }
-)
+);
 
 export const values = pgTable(
   "values",
@@ -1004,11 +1004,11 @@ export const values = pgTable(
     updated_at: timestamp("updated_at", { precision: 6, mode: "string" }),
     published_at: timestamp("published_at", { precision: 6, mode: "string" }),
     created_by_id: integer("created_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
+      onDelete: "set null",
     }),
     updated_by_id: integer("updated_by_id").references(() => admin_users.id, {
-      onDelete: "set null"
-    })
+      onDelete: "set null",
+    }),
   },
   (table) => {
     return {
@@ -1019,10 +1019,10 @@ export const values = pgTable(
       updated_by_id_fk: index("values_updated_by_id_fk").using(
         "btree",
         table.updated_by_id
-      )
-    }
+      ),
+    };
   }
-)
+);
 
 export const admin_permissions_role_links = pgTable(
   "admin_permissions_role_links",
@@ -1033,9 +1033,9 @@ export const admin_permissions_role_links = pgTable(
       { onDelete: "cascade" }
     ),
     role_id: integer("role_id").references(() => admin_roles.id, {
-      onDelete: "cascade"
+      onDelete: "cascade",
     }),
-    permission_order: doublePrecision("permission_order")
+    permission_order: doublePrecision("permission_order"),
   },
   (table) => {
     return {
@@ -1053,23 +1053,23 @@ export const admin_permissions_role_links = pgTable(
       ),
       admin_permissions_role_links_unique: unique(
         "admin_permissions_role_links_unique"
-      ).on(table.permission_id, table.role_id)
-    }
+      ).on(table.permission_id, table.role_id),
+    };
   }
-)
+);
 
 export const admin_users_roles_links = pgTable(
   "admin_users_roles_links",
   {
     id: serial("id").primaryKey().notNull(),
     user_id: integer("user_id").references(() => admin_users.id, {
-      onDelete: "cascade"
+      onDelete: "cascade",
     }),
     role_id: integer("role_id").references(() => admin_roles.id, {
-      onDelete: "cascade"
+      onDelete: "cascade",
     }),
     role_order: doublePrecision("role_order"),
-    user_order: doublePrecision("user_order")
+    user_order: doublePrecision("user_order"),
   },
   (table) => {
     return {
@@ -1088,10 +1088,10 @@ export const admin_users_roles_links = pgTable(
       ),
       admin_users_roles_links_unique: unique(
         "admin_users_roles_links_unique"
-      ).on(table.user_id, table.role_id)
-    }
+      ).on(table.user_id, table.role_id),
+    };
   }
-)
+);
 
 export const strapi_api_token_permissions_token_links = pgTable(
   "strapi_api_token_permissions_token_links",
@@ -1105,7 +1105,7 @@ export const strapi_api_token_permissions_token_links = pgTable(
       () => strapi_api_tokens.id,
       { onDelete: "cascade" }
     ),
-    api_token_permission_order: doublePrecision("api_token_permission_order")
+    api_token_permission_order: doublePrecision("api_token_permission_order"),
   },
   (table) => {
     return {
@@ -1122,10 +1122,10 @@ export const strapi_api_token_permissions_token_links = pgTable(
       ).using("btree", table.api_token_permission_order),
       strapi_api_token_permissions_token_links_unique: unique(
         "strapi_api_token_permissions_token_links_unique"
-      ).on(table.api_token_permission_id, table.api_token_id)
-    }
+      ).on(table.api_token_permission_id, table.api_token_id),
+    };
   }
-)
+);
 
 export const strapi_transfer_token_permissions_token_links = pgTable(
   "strapi_transfer_token_permissions_token_links",
@@ -1134,7 +1134,7 @@ export const strapi_transfer_token_permissions_token_links = pgTable(
     transfer_token_permission_id: integer(
       "transfer_token_permission_id"
     ).references(() => strapi_transfer_token_permissions.id, {
-      onDelete: "cascade"
+      onDelete: "cascade",
     }),
     transfer_token_id: integer("transfer_token_id").references(
       () => strapi_transfer_tokens.id,
@@ -1142,7 +1142,7 @@ export const strapi_transfer_token_permissions_token_links = pgTable(
     ),
     transfer_token_permission_order: doublePrecision(
       "transfer_token_permission_order"
-    )
+    ),
   },
   (table) => {
     return {
@@ -1158,22 +1158,22 @@ export const strapi_transfer_token_permissions_token_links = pgTable(
       ).using("btree", table.transfer_token_permission_order),
       strapi_transfer_token_permissions_token_links_unique: unique(
         "strapi_transfer_token_permissions_token_links_unique"
-      ).on(table.transfer_token_permission_id, table.transfer_token_id)
-    }
+      ).on(table.transfer_token_permission_id, table.transfer_token_id),
+    };
   }
-)
+);
 
 export const files_related_morphs = pgTable(
   "files_related_morphs",
   {
     id: serial("id").primaryKey().notNull(),
     file_id: integer("file_id").references(() => files.id, {
-      onDelete: "cascade"
+      onDelete: "cascade",
     }),
     related_id: integer("related_id"),
     related_type: varchar("related_type", { length: 255 }),
     field: varchar("field", { length: 255 }),
-    order: doublePrecision("order")
+    order: doublePrecision("order"),
   },
   (table) => {
     return {
@@ -1182,22 +1182,22 @@ export const files_related_morphs = pgTable(
         "btree",
         table.related_id
       ),
-      order_idx: index().using("btree", table.order)
-    }
+      order_idx: index().using("btree", table.order),
+    };
   }
-)
+);
 
 export const files_folder_links = pgTable(
   "files_folder_links",
   {
     id: serial("id").primaryKey().notNull(),
     file_id: integer("file_id").references(() => files.id, {
-      onDelete: "cascade"
+      onDelete: "cascade",
     }),
     folder_id: integer("folder_id").references(() => upload_folders.id, {
-      onDelete: "cascade"
+      onDelete: "cascade",
     }),
-    file_order: doublePrecision("file_order")
+    file_order: doublePrecision("file_order"),
   },
   (table) => {
     return {
@@ -1213,23 +1213,23 @@ export const files_folder_links = pgTable(
       files_folder_links_unique: unique("files_folder_links_unique").on(
         table.file_id,
         table.folder_id
-      )
-    }
+      ),
+    };
   }
-)
+);
 
 export const upload_folders_parent_links = pgTable(
   "upload_folders_parent_links",
   {
     id: serial("id").primaryKey().notNull(),
     folder_id: integer("folder_id").references(() => upload_folders.id, {
-      onDelete: "cascade"
+      onDelete: "cascade",
     }),
     inv_folder_id: integer("inv_folder_id").references(
       () => upload_folders.id,
       { onDelete: "cascade" }
     ),
-    folder_order: doublePrecision("folder_order")
+    folder_order: doublePrecision("folder_order"),
   },
   (table) => {
     return {
@@ -1247,10 +1247,10 @@ export const upload_folders_parent_links = pgTable(
       ),
       upload_folders_parent_links_unique: unique(
         "upload_folders_parent_links_unique"
-      ).on(table.folder_id, table.inv_folder_id)
-    }
+      ).on(table.folder_id, table.inv_folder_id),
+    };
   }
-)
+);
 
 export const strapi_release_actions_release_links = pgTable(
   "strapi_release_actions_release_links",
@@ -1261,9 +1261,9 @@ export const strapi_release_actions_release_links = pgTable(
       { onDelete: "cascade" }
     ),
     release_id: integer("release_id").references(() => strapi_releases.id, {
-      onDelete: "cascade"
+      onDelete: "cascade",
     }),
-    release_action_order: doublePrecision("release_action_order")
+    release_action_order: doublePrecision("release_action_order"),
   },
   (table) => {
     return {
@@ -1280,10 +1280,10 @@ export const strapi_release_actions_release_links = pgTable(
       ).using("btree", table.release_action_order),
       strapi_release_actions_release_links_unique: unique(
         "strapi_release_actions_release_links_unique"
-      ).on(table.release_action_id, table.release_id)
-    }
+      ).on(table.release_action_id, table.release_id),
+    };
   }
-)
+);
 
 export const up_permissions_role_links = pgTable(
   "up_permissions_role_links",
@@ -1294,9 +1294,9 @@ export const up_permissions_role_links = pgTable(
       { onDelete: "cascade" }
     ),
     role_id: integer("role_id").references(() => up_roles.id, {
-      onDelete: "cascade"
+      onDelete: "cascade",
     }),
-    permission_order: doublePrecision("permission_order")
+    permission_order: doublePrecision("permission_order"),
   },
   (table) => {
     return {
@@ -1314,22 +1314,22 @@ export const up_permissions_role_links = pgTable(
       ),
       up_permissions_role_links_unique: unique(
         "up_permissions_role_links_unique"
-      ).on(table.permission_id, table.role_id)
-    }
+      ).on(table.permission_id, table.role_id),
+    };
   }
-)
+);
 
 export const up_users_role_links = pgTable(
   "up_users_role_links",
   {
     id: serial("id").primaryKey().notNull(),
     user_id: integer("user_id").references(() => up_users.id, {
-      onDelete: "cascade"
+      onDelete: "cascade",
     }),
     role_id: integer("role_id").references(() => up_roles.id, {
-      onDelete: "cascade"
+      onDelete: "cascade",
     }),
-    user_order: doublePrecision("user_order")
+    user_order: doublePrecision("user_order"),
   },
   (table) => {
     return {
@@ -1342,22 +1342,22 @@ export const up_users_role_links = pgTable(
       up_users_role_links_unique: unique("up_users_role_links_unique").on(
         table.user_id,
         table.role_id
-      )
-    }
+      ),
+    };
   }
-)
+);
 
 export const answers_people_id_links = pgTable(
   "answers_people_id_links",
   {
     id: serial("id").primaryKey().notNull(),
     answer_id: integer("answer_id").references(() => answers.id, {
-      onDelete: "cascade"
+      onDelete: "cascade",
     }),
     people_id: integer("people_id").references(() => peoples.id, {
-      onDelete: "cascade"
+      onDelete: "cascade",
     }),
-    answer_order: doublePrecision("answer_order")
+    answer_order: doublePrecision("answer_order"),
   },
   (table) => {
     return {
@@ -1372,22 +1372,22 @@ export const answers_people_id_links = pgTable(
       ),
       answers_people_id_links_unique: unique(
         "answers_people_id_links_unique"
-      ).on(table.answer_id, table.people_id)
-    }
+      ).on(table.answer_id, table.people_id),
+    };
   }
-)
+);
 
 export const answers_question_id_links = pgTable(
   "answers_question_id_links",
   {
     id: serial("id").primaryKey().notNull(),
     answer_id: integer("answer_id").references(() => answers.id, {
-      onDelete: "cascade"
+      onDelete: "cascade",
     }),
     question_id: integer("question_id").references(() => questions.id, {
-      onDelete: "cascade"
+      onDelete: "cascade",
     }),
-    answer_order: doublePrecision("answer_order")
+    answer_order: doublePrecision("answer_order"),
   },
   (table) => {
     return {
@@ -1402,22 +1402,22 @@ export const answers_question_id_links = pgTable(
       ),
       answers_question_id_links_unique: unique(
         "answers_question_id_links_unique"
-      ).on(table.answer_id, table.question_id)
-    }
+      ).on(table.answer_id, table.question_id),
+    };
   }
-)
+);
 
 export const questions_ticket_id_links = pgTable(
   "questions_ticket_id_links",
   {
     id: serial("id").primaryKey().notNull(),
     question_id: integer("question_id").references(() => questions.id, {
-      onDelete: "cascade"
+      onDelete: "cascade",
     }),
     ticket_id: integer("ticket_id").references(() => tickets.id, {
-      onDelete: "cascade"
+      onDelete: "cascade",
     }),
-    question_order: doublePrecision("question_order")
+    question_order: doublePrecision("question_order"),
   },
   (table) => {
     return {
@@ -1435,22 +1435,22 @@ export const questions_ticket_id_links = pgTable(
       ),
       questions_ticket_id_links_unique: unique(
         "questions_ticket_id_links_unique"
-      ).on(table.question_id, table.ticket_id)
-    }
+      ).on(table.question_id, table.ticket_id),
+    };
   }
-)
+);
 
 export const tickets_event_id_links = pgTable(
   "tickets_event_id_links",
   {
     id: serial("id").primaryKey().notNull(),
     ticket_id: integer("ticket_id").references(() => tickets.id, {
-      onDelete: "cascade"
+      onDelete: "cascade",
     }),
     event_id: integer("event_id").references(() => events.id, {
-      onDelete: "cascade"
+      onDelete: "cascade",
     }),
-    ticket_order: doublePrecision("ticket_order")
+    ticket_order: doublePrecision("ticket_order"),
   },
   (table) => {
     return {
@@ -1466,10 +1466,10 @@ export const tickets_event_id_links = pgTable(
       tickets_event_id_links_unique: unique("tickets_event_id_links_unique").on(
         table.ticket_id,
         table.event_id
-      )
-    }
+      ),
+    };
   }
-)
+);
 
 export const user_tickets_people_id_links = pgTable(
   "user_tickets_people_id_links",
@@ -1480,9 +1480,9 @@ export const user_tickets_people_id_links = pgTable(
       { onDelete: "cascade" }
     ),
     people_id: integer("people_id").references(() => peoples.id, {
-      onDelete: "cascade"
+      onDelete: "cascade",
     }),
-    user_ticket_order: doublePrecision("user_ticket_order")
+    user_ticket_order: doublePrecision("user_ticket_order"),
   },
   (table) => {
     return {
@@ -1500,10 +1500,10 @@ export const user_tickets_people_id_links = pgTable(
       ),
       user_tickets_people_id_links_unique: unique(
         "user_tickets_people_id_links_unique"
-      ).on(table.user_ticket_id, table.people_id)
-    }
+      ).on(table.user_ticket_id, table.people_id),
+    };
   }
-)
+);
 
 export const user_tickets_ticket_id_links = pgTable(
   "user_tickets_ticket_id_links",
@@ -1514,9 +1514,9 @@ export const user_tickets_ticket_id_links = pgTable(
       { onDelete: "cascade" }
     ),
     ticket_id: integer("ticket_id").references(() => tickets.id, {
-      onDelete: "cascade"
+      onDelete: "cascade",
     }),
-    user_ticket_order: doublePrecision("user_ticket_order")
+    user_ticket_order: doublePrecision("user_ticket_order"),
   },
   (table) => {
     return {
@@ -1534,7 +1534,7 @@ export const user_tickets_ticket_id_links = pgTable(
       ),
       user_tickets_ticket_id_links_unique: unique(
         "user_tickets_ticket_id_links_unique"
-      ).on(table.user_ticket_id, table.ticket_id)
-    }
+      ).on(table.user_ticket_id, table.ticket_id),
+    };
   }
-)
+);

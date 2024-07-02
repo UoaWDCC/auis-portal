@@ -1,7 +1,7 @@
 /// <reference types="vitest" />
 /// <reference types = "vite/client" />
 
-import { defineConfig } from "vitest/config"
+import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   test: {
@@ -11,7 +11,7 @@ export default defineConfig({
     css: true,
     coverage: {
       provider: "istanbul", // or 'v8'
-      reporter: ["text", "json", "html"]
-    }
-  }
-})
+      reporter: ["text", "json", "html"],
+    },
+  },
+});

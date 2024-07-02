@@ -1,7 +1,7 @@
-import { describe, expect, it } from "vitest"
-import { Ticket } from "../../src/types/types"
-import { Mapper } from "../../src/utils/Mapper"
-import { NoDataError } from "../../src/classes/NoDataError"
+import { describe, expect, it } from "vitest";
+import { Ticket } from "../../src/types/types";
+import { Mapper } from "../../src/utils/Mapper";
+import { NoDataError } from "../../src/classes/NoDataError";
 
 describe("mapToTickets", () => {
   it("should map valid data correctly", () => {
@@ -20,12 +20,12 @@ describe("mapToTickets", () => {
               Number_Tickets_Left: 50,
               Ticket_Description: "Ticket 1 Description",
               Start_Date_Ticket_Sales: "2024-01-01",
-              Is_Ticket_Live: true
-            }
-          }
-        ]
-      }
-    }
+              Is_Ticket_Live: true,
+            },
+          },
+        ],
+      },
+    };
 
     const expected: Ticket[] = [
       {
@@ -39,12 +39,12 @@ describe("mapToTickets", () => {
         numTicketsLeft: 50,
         ticketDescription: "Ticket 1 Description",
         startDateTicketSales: "2024-01-01",
-        isTicketLive: true
-      }
-    ]
+        isTicketLive: true,
+      },
+    ];
 
-    expect(Mapper.mapToTickets(data)).toEqual(expected)
-  })
+    expect(Mapper.mapToTickets(data)).toEqual(expected);
+  });
 
   it("should handle missing name field gracefully", () => {
     const data = {
@@ -62,12 +62,12 @@ describe("mapToTickets", () => {
               Number_Tickets_Left: 50,
               Ticket_Description: "Ticket 1 Description",
               Start_Date_Ticket_Sales: "2024-01-01",
-              Is_Ticket_Live: true
-            }
-          }
-        ]
-      }
-    }
+              Is_Ticket_Live: true,
+            },
+          },
+        ],
+      },
+    };
 
     const expected: Ticket[] = [
       {
@@ -81,12 +81,12 @@ describe("mapToTickets", () => {
         numTicketsLeft: 50,
         ticketDescription: "Ticket 1 Description",
         startDateTicketSales: "2024-01-01",
-        isTicketLive: true
-      }
-    ]
+        isTicketLive: true,
+      },
+    ];
 
-    expect(Mapper.mapToTickets(data)).toEqual(expected)
-  })
+    expect(Mapper.mapToTickets(data)).toEqual(expected);
+  });
 
   it("should handle missing discount code field gracefully", () => {
     const data = {
@@ -104,12 +104,12 @@ describe("mapToTickets", () => {
               Number_Tickets_Left: 50,
               Ticket_Description: "Ticket 1 Description",
               Start_Date_Ticket_Sales: "2024-01-01",
-              Is_Ticket_Live: true
-            }
-          }
-        ]
-      }
-    }
+              Is_Ticket_Live: true,
+            },
+          },
+        ],
+      },
+    };
 
     const expected: Ticket[] = [
       {
@@ -123,12 +123,12 @@ describe("mapToTickets", () => {
         numTicketsLeft: 50,
         ticketDescription: "Ticket 1 Description",
         startDateTicketSales: "2024-01-01",
-        isTicketLive: true
-      }
-    ]
+        isTicketLive: true,
+      },
+    ];
 
-    expect(Mapper.mapToTickets(data)).toEqual(expected)
-  })
+    expect(Mapper.mapToTickets(data)).toEqual(expected);
+  });
 
   it("should handle missing discount price field gracefully", () => {
     const data = {
@@ -146,12 +146,12 @@ describe("mapToTickets", () => {
               Number_Tickets_Left: 50,
               Ticket_Description: "Ticket 1 Description",
               Start_Date_Ticket_Sales: "2024-01-01",
-              Is_Ticket_Live: true
-            }
-          }
-        ]
-      }
-    }
+              Is_Ticket_Live: true,
+            },
+          },
+        ],
+      },
+    };
 
     const expected: Ticket[] = [
       {
@@ -165,12 +165,12 @@ describe("mapToTickets", () => {
         numTicketsLeft: 50,
         ticketDescription: "Ticket 1 Description",
         startDateTicketSales: "2024-01-01",
-        isTicketLive: true
-      }
-    ]
+        isTicketLive: true,
+      },
+    ];
 
-    expect(Mapper.mapToTickets(data)).toEqual(expected)
-  })
+    expect(Mapper.mapToTickets(data)).toEqual(expected);
+  });
 
   it("should handle missing price field gracefully", () => {
     const data = {
@@ -188,12 +188,12 @@ describe("mapToTickets", () => {
               Number_Tickets_Left: 50,
               Ticket_Description: "Ticket 1 Description",
               Start_Date_Ticket_Sales: "2024-01-01",
-              Is_Ticket_Live: true
-            }
-          }
-        ]
-      }
-    }
+              Is_Ticket_Live: true,
+            },
+          },
+        ],
+      },
+    };
 
     const expected: Ticket[] = [
       {
@@ -207,12 +207,12 @@ describe("mapToTickets", () => {
         numTicketsLeft: 50,
         ticketDescription: "Ticket 1 Description",
         startDateTicketSales: "2024-01-01",
-        isTicketLive: true
-      }
-    ]
+        isTicketLive: true,
+      },
+    ];
 
-    expect(Mapper.mapToTickets(data)).toEqual(expected)
-  })
+    expect(Mapper.mapToTickets(data)).toEqual(expected);
+  });
 
   it("should handle missing is member only field gracefully", () => {
     const data = {
@@ -230,12 +230,12 @@ describe("mapToTickets", () => {
               Number_Tickets_Left: 50,
               Ticket_Description: "Ticket 1 Description",
               Start_Date_Ticket_Sales: "2024-01-01",
-              Is_Ticket_Live: true
-            }
-          }
-        ]
-      }
-    }
+              Is_Ticket_Live: true,
+            },
+          },
+        ],
+      },
+    };
 
     const expected: Ticket[] = [
       {
@@ -249,12 +249,12 @@ describe("mapToTickets", () => {
         numTicketsLeft: 50,
         ticketDescription: "Ticket 1 Description",
         startDateTicketSales: "2024-01-01",
-        isTicketLive: true
-      }
-    ]
+        isTicketLive: true,
+      },
+    ];
 
-    expect(Mapper.mapToTickets(data)).toEqual(expected)
-  })
+    expect(Mapper.mapToTickets(data)).toEqual(expected);
+  });
 
   it("should handle missing is double field gracefully", () => {
     const data = {
@@ -272,12 +272,12 @@ describe("mapToTickets", () => {
               Number_Tickets_Left: 50,
               Ticket_Description: "Ticket 1 Description",
               Start_Date_Ticket_Sales: "2024-01-01",
-              Is_Ticket_Live: true
-            }
-          }
-        ]
-      }
-    }
+              Is_Ticket_Live: true,
+            },
+          },
+        ],
+      },
+    };
 
     const expected: Ticket[] = [
       {
@@ -291,12 +291,12 @@ describe("mapToTickets", () => {
         numTicketsLeft: 50,
         ticketDescription: "Ticket 1 Description",
         startDateTicketSales: "2024-01-01",
-        isTicketLive: true
-      }
-    ]
+        isTicketLive: true,
+      },
+    ];
 
-    expect(Mapper.mapToTickets(data)).toEqual(expected)
-  })
+    expect(Mapper.mapToTickets(data)).toEqual(expected);
+  });
 
   it("should handle missing number tickets left field gracefully", () => {
     const data = {
@@ -314,12 +314,12 @@ describe("mapToTickets", () => {
               Number_Tickets_Left: null,
               Ticket_Description: "Ticket 1 Description",
               Start_Date_Ticket_Sales: "2024-01-01",
-              Is_Ticket_Live: true
-            }
-          }
-        ]
-      }
-    }
+              Is_Ticket_Live: true,
+            },
+          },
+        ],
+      },
+    };
 
     const expected: Ticket[] = [
       {
@@ -333,12 +333,12 @@ describe("mapToTickets", () => {
         numTicketsLeft: 0,
         ticketDescription: "Ticket 1 Description",
         startDateTicketSales: "2024-01-01",
-        isTicketLive: true
-      }
-    ]
+        isTicketLive: true,
+      },
+    ];
 
-    expect(Mapper.mapToTickets(data)).toEqual(expected)
-  })
+    expect(Mapper.mapToTickets(data)).toEqual(expected);
+  });
 
   it("should handle missing ticket description field gracefully", () => {
     const data = {
@@ -356,12 +356,12 @@ describe("mapToTickets", () => {
               Number_Tickets_Left: 50,
               Ticket_Description: null,
               Start_Date_Ticket_Sales: "2024-01-01",
-              Is_Ticket_Live: true
-            }
-          }
-        ]
-      }
-    }
+              Is_Ticket_Live: true,
+            },
+          },
+        ],
+      },
+    };
 
     const expected: Ticket[] = [
       {
@@ -375,12 +375,12 @@ describe("mapToTickets", () => {
         numTicketsLeft: 50,
         ticketDescription: "",
         startDateTicketSales: "2024-01-01",
-        isTicketLive: true
-      }
-    ]
+        isTicketLive: true,
+      },
+    ];
 
-    expect(Mapper.mapToTickets(data)).toEqual(expected)
-  })
+    expect(Mapper.mapToTickets(data)).toEqual(expected);
+  });
 
   it("should handle missing start date ticket sales field gracefully", () => {
     const data = {
@@ -398,12 +398,12 @@ describe("mapToTickets", () => {
               Number_Tickets_Left: 50,
               Ticket_Description: "Ticket 1 Description",
               Start_Date_Ticket_Sales: null,
-              Is_Ticket_Live: true
-            }
-          }
-        ]
-      }
-    }
+              Is_Ticket_Live: true,
+            },
+          },
+        ],
+      },
+    };
 
     const expected: Ticket[] = [
       {
@@ -417,12 +417,12 @@ describe("mapToTickets", () => {
         numTicketsLeft: 50,
         ticketDescription: "Ticket 1 Description",
         startDateTicketSales: "",
-        isTicketLive: true
-      }
-    ]
+        isTicketLive: true,
+      },
+    ];
 
-    expect(Mapper.mapToTickets(data)).toEqual(expected)
-  })
+    expect(Mapper.mapToTickets(data)).toEqual(expected);
+  });
 
   it("should handle missing is ticket live field gracefully", () => {
     const data = {
@@ -440,12 +440,12 @@ describe("mapToTickets", () => {
               Number_Tickets_Left: 50,
               Ticket_Description: "Ticket 1 Description",
               Start_Date_Ticket_Sales: "2024-01-01",
-              Is_Ticket_Live: null
-            }
-          }
-        ]
-      }
-    }
+              Is_Ticket_Live: null,
+            },
+          },
+        ],
+      },
+    };
 
     const expected: Ticket[] = [
       {
@@ -459,12 +459,12 @@ describe("mapToTickets", () => {
         numTicketsLeft: 50,
         ticketDescription: "Ticket 1 Description",
         startDateTicketSales: "2024-01-01",
-        isTicketLive: false
-      }
-    ]
+        isTicketLive: false,
+      },
+    ];
 
-    expect(Mapper.mapToTickets(data)).toEqual(expected)
-  })
+    expect(Mapper.mapToTickets(data)).toEqual(expected);
+  });
 
   it("should handle completely missing attributes gracefully", () => {
     const data = {
@@ -472,11 +472,11 @@ describe("mapToTickets", () => {
         data: [
           {
             id: 1,
-            attributes: null
-          }
-        ]
-      }
-    }
+            attributes: null,
+          },
+        ],
+      },
+    };
 
     const expected: Ticket[] = [
       {
@@ -490,37 +490,37 @@ describe("mapToTickets", () => {
         numTicketsLeft: 0,
         ticketDescription: "",
         startDateTicketSales: "",
-        isTicketLive: false
-      }
-    ]
+        isTicketLive: false,
+      },
+    ];
 
-    expect(Mapper.mapToTickets(data)).toEqual(expected)
-  })
+    expect(Mapper.mapToTickets(data)).toEqual(expected);
+  });
 
   it("should throw NoDataError when tickets.data is empty", () => {
     const data = {
       tickets: {
-        data: []
-      }
-    }
+        data: [],
+      },
+    };
 
-    expect(() => Mapper.mapToTickets(data)).toThrow(NoDataError)
-    expect(() => Mapper.mapToTickets(data)).toThrow("No data")
-  })
+    expect(() => Mapper.mapToTickets(data)).toThrow(NoDataError);
+    expect(() => Mapper.mapToTickets(data)).toThrow("No data");
+  });
 
   it("should throw NoDataError when tickets is empty", () => {
     const data = {
-      tickets: {}
-    }
+      tickets: {},
+    };
 
-    expect(() => Mapper.mapToTickets(data)).toThrow(NoDataError)
-    expect(() => Mapper.mapToTickets(data)).toThrow("No data")
-  })
+    expect(() => Mapper.mapToTickets(data)).toThrow(NoDataError);
+    expect(() => Mapper.mapToTickets(data)).toThrow("No data");
+  });
 
   it("should throw NoDataError when data is empty", () => {
-    const data = {}
+    const data = {};
 
-    expect(() => Mapper.mapToTickets(data)).toThrow(NoDataError)
-    expect(() => Mapper.mapToTickets(data)).toThrow("No data")
-  })
-})
+    expect(() => Mapper.mapToTickets(data)).toThrow(NoDataError);
+    expect(() => Mapper.mapToTickets(data)).toThrow("No data");
+  });
+});

@@ -1,4 +1,4 @@
-import { ExecCardProps } from "../types/types"
+import { ExecCardProps } from "../types/types";
 
 export default function ExecCard({ exec }: ExecCardProps) {
   return (
@@ -22,5 +22,5 @@ export default function ExecCard({ exec }: ExecCardProps) {
         </div>
       </div>
     </>
-  )
+  );
 }

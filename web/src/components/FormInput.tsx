@@ -1,12 +1,12 @@
 interface FormInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  label?: string
-  placeholder?: string
-  type?: string
-  id?: string
-  className?: string
-  name?: string
-  options?: string[]
-  errorMessage?: string
+  label?: string;
+  placeholder?: string;
+  type?: string;
+  id?: string;
+  className?: string;
+  name?: string;
+  options?: string[];
+  errorMessage?: string;
 }
 
 const FormInput: React.FC<FormInputProps> = ({
@@ -33,7 +33,7 @@ const FormInput: React.FC<FormInputProps> = ({
           ))}
         </div>
       </div>
-    )
+    );
   } else {
     return (
       <div className="form-input">
@@ -53,8 +53,8 @@ const FormInput: React.FC<FormInputProps> = ({
           <span className="text-red-500">{props.errorMessage}</span>
         )}
       </div>
-    )
+    );
   }
-}
+};
 
-export default FormInput
+export default FormInput;

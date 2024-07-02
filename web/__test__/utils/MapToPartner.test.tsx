@@ -1,7 +1,7 @@
-import { describe, expect, it } from "vitest"
-import { Partner } from "../../src/types/types"
-import { Mapper } from "../../src/utils/Mapper"
-import { NoDataError } from "../../src/classes/NoDataError"
+import { describe, expect, it } from "vitest";
+import { Partner } from "../../src/types/types";
+import { Mapper } from "../../src/utils/Mapper";
+import { NoDataError } from "../../src/classes/NoDataError";
 
 describe("mapToPartner", () => {
   it("should map valid data correctly", () => {
@@ -18,15 +18,15 @@ describe("mapToPartner", () => {
               Image: {
                 data: {
                   attributes: {
-                    url: "/uploads/partner_one.jpg"
-                  }
-                }
-              }
-            }
-          }
-        ]
-      }
-    }
+                    url: "/uploads/partner_one.jpg",
+                  },
+                },
+              },
+            },
+          },
+        ],
+      },
+    };
 
     const expected: Partner[] = [
       {
@@ -35,12 +35,12 @@ describe("mapToPartner", () => {
         name: "Partner One",
         description: "A leading business partner",
         location: "Farm",
-        image: "/uploads/partner_one.jpg"
-      }
-    ]
+        image: "/uploads/partner_one.jpg",
+      },
+    ];
 
-    expect(Mapper.mapToPartner(data)).toEqual(expected)
-  })
+    expect(Mapper.mapToPartner(data)).toEqual(expected);
+  });
 
   it("should handle missing image field gracefully", () => {
     const data = {
@@ -53,12 +53,12 @@ describe("mapToPartner", () => {
               Name: "Partner Two",
               Description: "A technology partner",
               Location: "City",
-              Image: null
-            }
-          }
-        ]
-      }
-    }
+              Image: null,
+            },
+          },
+        ],
+      },
+    };
 
     const expected: Partner[] = [
       {
@@ -67,12 +67,12 @@ describe("mapToPartner", () => {
         name: "Partner Two",
         description: "A technology partner",
         location: "City",
-        image: ""
-      }
-    ]
+        image: "",
+      },
+    ];
 
-    expect(Mapper.mapToPartner(data)).toEqual(expected)
-  })
+    expect(Mapper.mapToPartner(data)).toEqual(expected);
+  });
 
   it("should handle missing name field gracefully", () => {
     const data = {
@@ -88,15 +88,15 @@ describe("mapToPartner", () => {
               Image: {
                 data: {
                   attributes: {
-                    url: "/uploads/partner_three.jpg"
-                  }
-                }
-              }
-            }
-          }
-        ]
-      }
-    }
+                    url: "/uploads/partner_three.jpg",
+                  },
+                },
+              },
+            },
+          },
+        ],
+      },
+    };
 
     const expected: Partner[] = [
       {
@@ -105,12 +105,12 @@ describe("mapToPartner", () => {
         name: "",
         description: "A finance partner",
         location: "Town",
-        image: "/uploads/partner_three.jpg"
-      }
-    ]
+        image: "/uploads/partner_three.jpg",
+      },
+    ];
 
-    expect(Mapper.mapToPartner(data)).toEqual(expected)
-  })
+    expect(Mapper.mapToPartner(data)).toEqual(expected);
+  });
 
   it("should handle missing description field gracefully", () => {
     const data = {
@@ -126,15 +126,15 @@ describe("mapToPartner", () => {
               Image: {
                 data: {
                   attributes: {
-                    url: "/uploads/partner_four.jpg"
-                  }
-                }
-              }
-            }
-          }
-        ]
-      }
-    }
+                    url: "/uploads/partner_four.jpg",
+                  },
+                },
+              },
+            },
+          },
+        ],
+      },
+    };
 
     const expected: Partner[] = [
       {
@@ -143,12 +143,12 @@ describe("mapToPartner", () => {
         name: "Partner Four",
         description: "",
         location: "Village",
-        image: "/uploads/partner_four.jpg"
-      }
-    ]
+        image: "/uploads/partner_four.jpg",
+      },
+    ];
 
-    expect(Mapper.mapToPartner(data)).toEqual(expected)
-  })
+    expect(Mapper.mapToPartner(data)).toEqual(expected);
+  });
 
   it("should handle missing type field gracefully", () => {
     const data = {
@@ -164,15 +164,15 @@ describe("mapToPartner", () => {
               Image: {
                 data: {
                   attributes: {
-                    url: "/uploads/partner_five.jpg"
-                  }
-                }
-              }
-            }
-          }
-        ]
-      }
-    }
+                    url: "/uploads/partner_five.jpg",
+                  },
+                },
+              },
+            },
+          },
+        ],
+      },
+    };
 
     const expected: Partner[] = [
       {
@@ -181,12 +181,12 @@ describe("mapToPartner", () => {
         name: "Partner Five",
         description: "A healthcare partner",
         location: "Island",
-        image: "/uploads/partner_five.jpg"
-      }
-    ]
+        image: "/uploads/partner_five.jpg",
+      },
+    ];
 
-    expect(Mapper.mapToPartner(data)).toEqual(expected)
-  })
+    expect(Mapper.mapToPartner(data)).toEqual(expected);
+  });
 
   it("should handle completely missing attributes gracefully", () => {
     const data = {
@@ -194,11 +194,11 @@ describe("mapToPartner", () => {
         data: [
           {
             id: 6,
-            attributes: null
-          }
-        ]
-      }
-    }
+            attributes: null,
+          },
+        ],
+      },
+    };
 
     const expected: Partner[] = [
       {
@@ -207,12 +207,12 @@ describe("mapToPartner", () => {
         name: "",
         description: "",
         location: "",
-        image: ""
-      }
-    ]
+        image: "",
+      },
+    ];
 
-    expect(Mapper.mapToPartner(data)).toEqual(expected)
-  })
+    expect(Mapper.mapToPartner(data)).toEqual(expected);
+  });
 
   it("should handle missing location field gracefully", () => {
     const data = {
@@ -227,15 +227,15 @@ describe("mapToPartner", () => {
               Image: {
                 data: {
                   attributes: {
-                    url: "/uploads/partner_seven.jpg"
-                  }
-                }
-              }
-            }
-          }
-        ]
-      }
-    }
+                    url: "/uploads/partner_seven.jpg",
+                  },
+                },
+              },
+            },
+          },
+        ],
+      },
+    };
 
     const expected: Partner[] = [
       {
@@ -244,36 +244,36 @@ describe("mapToPartner", () => {
         name: "Partner Seven",
         description: "An education partner",
         location: "",
-        image: "/uploads/partner_seven.jpg"
-      }
-    ]
+        image: "/uploads/partner_seven.jpg",
+      },
+    ];
 
-    expect(Mapper.mapToPartner(data)).toEqual(expected)
-  })
+    expect(Mapper.mapToPartner(data)).toEqual(expected);
+  });
   it("should throw NoDataError when partners.data is empty", () => {
     const data = {
       partners: {
-        data: []
-      }
-    }
+        data: [],
+      },
+    };
 
-    expect(() => Mapper.mapToPartner(data)).toThrow(NoDataError)
-    expect(() => Mapper.mapToPartner(data)).toThrow("No data")
-  })
+    expect(() => Mapper.mapToPartner(data)).toThrow(NoDataError);
+    expect(() => Mapper.mapToPartner(data)).toThrow("No data");
+  });
 
   it("should throw NoDataError when partners is missing", () => {
-    const data = {}
+    const data = {};
 
-    expect(() => Mapper.mapToPartner(data)).toThrow(NoDataError)
-    expect(() => Mapper.mapToPartner(data)).toThrow("No data")
-  })
+    expect(() => Mapper.mapToPartner(data)).toThrow(NoDataError);
+    expect(() => Mapper.mapToPartner(data)).toThrow("No data");
+  });
 
   it("should throw NoDataError when partners.data is missing", () => {
     const data = {
-      partners: {}
-    }
+      partners: {},
+    };
 
-    expect(() => Mapper.mapToPartner(data)).toThrow(NoDataError)
-    expect(() => Mapper.mapToPartner(data)).toThrow("No data")
-  })
-})
+    expect(() => Mapper.mapToPartner(data)).toThrow(NoDataError);
+    expect(() => Mapper.mapToPartner(data)).toThrow("No data");
+  });
+});

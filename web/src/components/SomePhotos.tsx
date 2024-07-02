@@ -1,41 +1,41 @@
-import { useQuery } from "@apollo/client"
-import { GET_SOME_PHOTOS } from "../graphql/queries"
-import LoadingSpinner from "../components/LoadingSpinner"
-import { SomePhoto } from "../types/types"
-import { Mapper } from "../utils/Mapper"
-import { useState, useEffect } from "react"
+import { useQuery } from "@apollo/client";
+import { GET_SOME_PHOTOS } from "../graphql/queries";
+import LoadingSpinner from "../components/LoadingSpinner";
+import { SomePhoto } from "../types/types";
+import { Mapper } from "../utils/Mapper";
+import { useState, useEffect } from "react";
 
 function SomePhotos() {
   const {
     loading: photosLoading,
     data: photosData,
-    error: photosError
-  } = useQuery(GET_SOME_PHOTOS)
+    error: photosError,
+  } = useQuery(GET_SOME_PHOTOS);
 
-  const [photos, setPhotos] = useState<SomePhoto[]>([])
-  const [loading, setLoading] = useState(true)
-  const [noPhotos, setNoPhotos] = useState(false)
+  const [photos, setPhotos] = useState<SomePhoto[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [noPhotos, setNoPhotos] = useState(false);
 
   useEffect(() => {
     if (photosData) {
       try {
-        const mappedPhotos = Mapper.mapToSomePhotos(photosData)
-        setPhotos(mappedPhotos)
-        setLoading(false)
+        const mappedPhotos = Mapper.mapToSomePhotos(photosData);
+        setPhotos(mappedPhotos);
+        setLoading(false);
       } catch (error) {
-        setNoPhotos(true)
+        setNoPhotos(true);
       }
     }
-  }, [photosData])
+  }, [photosData]);
 
   useEffect(() => {
     if (!photosLoading) {
-      setLoading(false)
+      setLoading(false);
     }
-  }, [photosLoading])
+  }, [photosLoading]);
 
   if (photosError) {
-    return <div>CMS Offline</div>
+    return <div>CMS Offline</div>;
   }
 
   return (
@@ -76,7 +76,7 @@ function SomePhotos() {
         </div>
       )}
     </>
-  )
+  );
 }
 
-export default SomePhotos
+export default SomePhotos;

@@ -1,5 +1,5 @@
-import { MdEvent, MdGroups, MdHandshake } from "react-icons/md"
-import { TbTargetArrow } from "react-icons/tb"
+import { MdEvent, MdGroups, MdHandshake } from "react-icons/md";
+import { TbTargetArrow } from "react-icons/tb";
 
 export default function Intro() {
   return (
@@ -56,5 +56,5 @@ export default function Intro() {
         </div>
       </div>
     </>
-  )
+  );
 }

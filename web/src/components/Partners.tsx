@@ -1,41 +1,41 @@
-import { useQuery } from "@apollo/client"
-import { GET_PARTNERS } from "../graphql/queries"
-import LoadingSpinner from "../components/LoadingSpinner"
-import { Partner } from "../types/types"
-import { Mapper } from "../utils/Mapper"
-import { useState, useEffect } from "react"
+import { useQuery } from "@apollo/client";
+import { GET_PARTNERS } from "../graphql/queries";
+import LoadingSpinner from "../components/LoadingSpinner";
+import { Partner } from "../types/types";
+import { Mapper } from "../utils/Mapper";
+import { useState, useEffect } from "react";
 
 function Partners() {
   const {
     loading: partnersLoading,
     data: partnersData,
-    error: partnersError
-  } = useQuery(GET_PARTNERS)
+    error: partnersError,
+  } = useQuery(GET_PARTNERS);
 
-  const [partners, setPartners] = useState<Partner[]>([])
-  const [loading, setLoading] = useState(true)
-  const [noPartners, setNoPartners] = useState(false)
+  const [partners, setPartners] = useState<Partner[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [noPartners, setNoPartners] = useState(false);
 
   useEffect(() => {
     if (partnersData) {
       try {
-        const partnersList = Mapper.mapToPartner(partnersData)
-        setPartners(partnersList)
-        setLoading(false)
+        const partnersList = Mapper.mapToPartner(partnersData);
+        setPartners(partnersList);
+        setLoading(false);
       } catch (error) {
-        setNoPartners(true)
+        setNoPartners(true);
       }
     }
-  }, [partnersData])
+  }, [partnersData]);
 
   useEffect(() => {
     if (!partnersLoading) {
-      setLoading(false)
+      setLoading(false);
     }
-  }, [partnersLoading])
+  }, [partnersLoading]);
 
   if (partnersError) {
-    return <div>CMS Offline</div>
+    return <div>CMS Offline</div>;
   }
 
   return (
@@ -74,7 +74,7 @@ function Partners() {
         </div>
       )}
     </>
-  )
+  );
 }
 
-export default Partners
+export default Partners;

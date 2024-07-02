@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client"
+import { gql } from "@apollo/client";
 
 export const GET_EXECS = gql`
   query {
@@ -21,7 +21,7 @@ export const GET_EXECS = gql`
       }
     }
   }
-`
+`;
 
 export const GET_PARTNERS = gql`
   query {
@@ -44,7 +44,7 @@ export const GET_PARTNERS = gql`
       }
     }
   }
-`
+`;
 
 export const GET_INTRODUCTION = gql`
   query {
@@ -60,7 +60,7 @@ export const GET_INTRODUCTION = gql`
       }
     }
   }
-`
+`;
 
 export const GET_SOCIALS = gql`
   query {
@@ -74,7 +74,7 @@ export const GET_SOCIALS = gql`
       }
     }
   }
-`
+`;
 
 export const GET_SOME_PHOTOS = gql`
   query {
@@ -95,7 +95,7 @@ export const GET_SOME_PHOTOS = gql`
       }
     }
   }
-`
+`;
 
 export const GET_VALUES = gql`
   query {
@@ -116,7 +116,7 @@ export const GET_VALUES = gql`
       }
     }
   }
-`
+`;
 
 export const GET_PREVIOUS_TEAMS = gql`
   query {
@@ -131,7 +131,7 @@ export const GET_PREVIOUS_TEAMS = gql`
       }
     }
   }
-`
+`;
 
 export const GET_EVENTS = gql`
   query {
@@ -160,7 +160,7 @@ export const GET_EVENTS = gql`
       }
     }
   }
-`
+`;
 
 export const GET_EVENTS_GALLERY = gql`
   query {
@@ -179,7 +179,7 @@ export const GET_EVENTS_GALLERY = gql`
       }
     }
   }
-`
+`;
 
 export const GET_QUESTIONS = gql`
   query {
@@ -193,7 +193,7 @@ export const GET_QUESTIONS = gql`
       }
     }
   }
-`
+`;
 
 export const GET_TICKETS = gql`
   query {
@@ -215,4 +215,4 @@ export const GET_TICKETS = gql`
       }
     }
   }
-`
+`;

@@ -6,7 +6,7 @@ const LoadingSpinner = () => {
     >
       <div className="h-32 w-32 animate-spin rounded-full border-8 border-gray-300 border-t-[#0B7EF5]" />
     </div>
-  )
-}
+  );
+};
 
-export default LoadingSpinner
+export default LoadingSpinner;

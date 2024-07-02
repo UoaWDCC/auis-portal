@@ -1,5 +1,5 @@
-import FormInput from "@components/FormInput.tsx"
-import { useState } from "react"
+import FormInput from "@components/FormInput.tsx";
+import { useState } from "react";
 
 function UserInformationForm() {
   const [values, setValues] = useState({
@@ -9,21 +9,21 @@ function UserInformationForm() {
     graudationYear: "",
     UPI: "",
     studentID: "",
-    studyOption: ""
-  })
+    studyOption: "",
+  });
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     // Need to do validation here
-    setValues({ ...values, [e.target.name]: e.target.value })
-    console.log(values)
-  }
+    setValues({ ...values, [e.target.name]: e.target.value });
+    console.log(values);
+  };
 
-  const residencyOptions = ["International", "Domestic"]
-  const paymentOptions = ["One Semester ($8)", "Two Semesters ($15)"]
+  const residencyOptions = ["International", "Domestic"];
+  const paymentOptions = ["One Semester ($8)", "Two Semesters ($15)"];
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-    console.log("submitted")
+    e.preventDefault();
+    console.log("submitted");
   }
   return (
     <div className="flex items-center justify-center">
@@ -82,7 +82,7 @@ function UserInformationForm() {
         </form>
       </div>
     </div>
-  )
+  );
 }
 
-export default UserInformationForm
+export default UserInformationForm;

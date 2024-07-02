@@ -1,7 +1,7 @@
-import { describe, expect, it } from "vitest"
-import { Introduction } from "../../src/types/types"
-import { Mapper } from "../../src/utils/Mapper"
-import { NoDataError } from "../../src/classes/NoDataError"
+import { describe, expect, it } from "vitest";
+import { Introduction } from "../../src/types/types";
+import { Mapper } from "../../src/utils/Mapper";
+import { NoDataError } from "../../src/classes/NoDataError";
 
 describe("mapToIntroduction", () => {
   it("should map valid data correctly", () => {
@@ -14,12 +14,12 @@ describe("mapToIntroduction", () => {
               Description: "Introduction description",
               Events: "Upcoming events",
               Members: "Current members",
-              Followers: "Followers count"
-            }
-          }
-        ]
-      }
-    }
+              Followers: "Followers count",
+            },
+          },
+        ],
+      },
+    };
 
     const expected: Introduction[] = [
       {
@@ -27,12 +27,12 @@ describe("mapToIntroduction", () => {
         description: "Introduction description",
         events: "Upcoming events",
         members: "Current members",
-        followers: "Followers count"
-      }
-    ]
+        followers: "Followers count",
+      },
+    ];
 
-    expect(Mapper.mapToIntroduction(data)).toEqual(expected)
-  })
+    expect(Mapper.mapToIntroduction(data)).toEqual(expected);
+  });
 
   it("should handle missing fields gracefully", () => {
     const data = {
@@ -40,11 +40,11 @@ describe("mapToIntroduction", () => {
         data: [
           {
             id: 2,
-            attributes: null
-          }
-        ]
-      }
-    }
+            attributes: null,
+          },
+        ],
+      },
+    };
 
     const expected: Introduction[] = [
       {
@@ -52,12 +52,12 @@ describe("mapToIntroduction", () => {
         description: "",
         events: "",
         members: "",
-        followers: ""
-      }
-    ]
+        followers: "",
+      },
+    ];
 
-    expect(Mapper.mapToIntroduction(data)).toEqual(expected)
-  })
+    expect(Mapper.mapToIntroduction(data)).toEqual(expected);
+  });
 
   it("should handle null description field gracefully", () => {
     const data = {
@@ -69,12 +69,12 @@ describe("mapToIntroduction", () => {
               Description: null,
               Events: "Upcoming events",
               Members: "Current members",
-              Followers: "Followers count"
-            }
-          }
-        ]
-      }
-    }
+              Followers: "Followers count",
+            },
+          },
+        ],
+      },
+    };
 
     const expected: Introduction[] = [
       {
@@ -82,12 +82,12 @@ describe("mapToIntroduction", () => {
         description: "",
         events: "Upcoming events",
         members: "Current members",
-        followers: "Followers count"
-      }
-    ]
+        followers: "Followers count",
+      },
+    ];
 
-    expect(Mapper.mapToIntroduction(data)).toEqual(expected)
-  })
+    expect(Mapper.mapToIntroduction(data)).toEqual(expected);
+  });
 
   it("should handle null events field gracefully", () => {
     const data = {
@@ -99,12 +99,12 @@ describe("mapToIntroduction", () => {
               Description: "Introduction description",
               Events: null,
               Members: "Current members",
-              Followers: "Followers count"
-            }
-          }
-        ]
-      }
-    }
+              Followers: "Followers count",
+            },
+          },
+        ],
+      },
+    };
 
     const expected: Introduction[] = [
       {
@@ -112,12 +112,12 @@ describe("mapToIntroduction", () => {
         description: "Introduction description",
         events: "",
         members: "Current members",
-        followers: "Followers count"
-      }
-    ]
+        followers: "Followers count",
+      },
+    ];
 
-    expect(Mapper.mapToIntroduction(data)).toEqual(expected)
-  })
+    expect(Mapper.mapToIntroduction(data)).toEqual(expected);
+  });
 
   it("should handle null members field gracefully", () => {
     const data = {
@@ -129,12 +129,12 @@ describe("mapToIntroduction", () => {
               Description: "Introduction description",
               Events: "Upcoming events",
               Members: null,
-              Followers: "Followers count"
-            }
-          }
-        ]
-      }
-    }
+              Followers: "Followers count",
+            },
+          },
+        ],
+      },
+    };
 
     const expected: Introduction[] = [
       {
@@ -142,12 +142,12 @@ describe("mapToIntroduction", () => {
         description: "Introduction description",
         events: "Upcoming events",
         members: "",
-        followers: "Followers count"
-      }
-    ]
+        followers: "Followers count",
+      },
+    ];
 
-    expect(Mapper.mapToIntroduction(data)).toEqual(expected)
-  })
+    expect(Mapper.mapToIntroduction(data)).toEqual(expected);
+  });
 
   it("should handle null followers field gracefully", () => {
     const data = {
@@ -159,12 +159,12 @@ describe("mapToIntroduction", () => {
               Description: "Introduction description",
               Events: "Upcoming events",
               Members: "Current members",
-              Followers: null
-            }
-          }
-        ]
-      }
-    }
+              Followers: null,
+            },
+          },
+        ],
+      },
+    };
 
     const expected: Introduction[] = [
       {
@@ -172,12 +172,12 @@ describe("mapToIntroduction", () => {
         description: "Introduction description",
         events: "Upcoming events",
         members: "Current members",
-        followers: ""
-      }
-    ]
+        followers: "",
+      },
+    ];
 
-    expect(Mapper.mapToIntroduction(data)).toEqual(expected)
-  })
+    expect(Mapper.mapToIntroduction(data)).toEqual(expected);
+  });
 
   it("should handle completely missing attributes gracefully", () => {
     const data = {
@@ -185,11 +185,11 @@ describe("mapToIntroduction", () => {
         data: [
           {
             id: 7,
-            attributes: null
-          }
-        ]
-      }
-    }
+            attributes: null,
+          },
+        ],
+      },
+    };
 
     const expected: Introduction[] = [
       {
@@ -197,36 +197,36 @@ describe("mapToIntroduction", () => {
         description: "",
         events: "",
         members: "",
-        followers: ""
-      }
-    ]
+        followers: "",
+      },
+    ];
 
-    expect(Mapper.mapToIntroduction(data)).toEqual(expected)
-  })
+    expect(Mapper.mapToIntroduction(data)).toEqual(expected);
+  });
   it("should throw NoDataError when introductions.data is empty", () => {
     const data = {
       introductions: {
-        data: []
-      }
-    }
+        data: [],
+      },
+    };
 
-    expect(() => Mapper.mapToIntroduction(data)).toThrow(NoDataError)
-    expect(() => Mapper.mapToIntroduction(data)).toThrow("No data")
-  })
+    expect(() => Mapper.mapToIntroduction(data)).toThrow(NoDataError);
+    expect(() => Mapper.mapToIntroduction(data)).toThrow("No data");
+  });
 
   it("should throw NoDataError when introductions is missing", () => {
-    const data = {}
+    const data = {};
 
-    expect(() => Mapper.mapToIntroduction(data)).toThrow(NoDataError)
-    expect(() => Mapper.mapToIntroduction(data)).toThrow("No data")
-  })
+    expect(() => Mapper.mapToIntroduction(data)).toThrow(NoDataError);
+    expect(() => Mapper.mapToIntroduction(data)).toThrow("No data");
+  });
 
   it("should throw NoDataError when introductions.data is missing", () => {
     const data = {
-      execs: {}
-    }
+      execs: {},
+    };
 
-    expect(() => Mapper.mapToIntroduction(data)).toThrow(NoDataError)
-    expect(() => Mapper.mapToIntroduction(data)).toThrow("No data")
-  })
-})
+    expect(() => Mapper.mapToIntroduction(data)).toThrow(NoDataError);
+    expect(() => Mapper.mapToIntroduction(data)).toThrow("No data");
+  });
+});

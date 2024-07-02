@@ -1,4 +1,4 @@
-import SimpleSlider from "./SimpleSlider"
+import SimpleSlider from "./SimpleSlider";
 
 function UpcomingEvents() {
   return (
@@ -12,7 +12,7 @@ function UpcomingEvents() {
         </div>
       </div>
     </>
-  )
+  );
 }
 
-export default UpcomingEvents
+export default UpcomingEvents;

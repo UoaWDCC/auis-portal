@@ -1,7 +1,7 @@
-import auisHalfLogo from "../assets/peacock_white_side.png"
-import auisHalfLogo1 from "../assets/peacock_white_left_side.png"
-import auisAbbrev from "../assets/auis_no_depth.png"
-import Header from "./Header"
+import auisHalfLogo from "../assets/peacock_white_side.png";
+import auisHalfLogo1 from "../assets/peacock_white_left_side.png";
+import auisAbbrev from "../assets/auis_no_depth.png";
+import Header from "./Header";
 
 export default function Hero() {
   return (
@@ -51,5 +51,5 @@ export default function Hero() {
         </div>
       </div>
     </>
-  )
+  );
 }

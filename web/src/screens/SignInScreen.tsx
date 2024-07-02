@@ -1,7 +1,7 @@
-import { SignIn } from "@clerk/clerk-react"
-import Header from "../components/Header"
-import auisLogo from "../assets/peacock_white_inner_big.png"
-import auisAbbrev from "../assets/auis_no_depth.png"
+import { SignIn } from "@clerk/clerk-react";
+import Header from "../components/Header";
+import auisLogo from "../assets/peacock_white_inner_big.png";
+import auisAbbrev from "../assets/auis_no_depth.png";
 
 function SignInScreen() {
   return (
@@ -25,7 +25,7 @@ function SignInScreen() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default SignInScreen
+export default SignInScreen;

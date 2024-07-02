@@ -3,7 +3,7 @@ function CreditsScreen() {
     <div>
       <h2> Credits Screen</h2>
     </div>
-  )
+  );
 }
 
-export default CreditsScreen
+export default CreditsScreen;

@@ -1,11 +1,11 @@
-import Slider from "react-slick"
-import "slick-carousel/slick/slick.css"
-import "slick-carousel/slick/slick-theme.css"
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import {
   IoArrowBackCircleOutline,
-  IoArrowForwardCircleOutline
-} from "react-icons/io5"
-import { useRef } from "react"
+  IoArrowForwardCircleOutline,
+} from "react-icons/io5";
+import { useRef } from "react";
 
 export default function SimpleSlider() {
   var settings = {
@@ -14,17 +14,17 @@ export default function SimpleSlider() {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    arrows: false
-  }
+    arrows: false,
+  };
 
   const next = () => {
-    sliderRef.current?.slickNext()
-  }
+    sliderRef.current?.slickNext();
+  };
   const previous = () => {
-    sliderRef.current?.slickPrev()
-  }
+    sliderRef.current?.slickPrev();
+  };
 
-  const sliderRef = useRef<Slider>(null)
+  const sliderRef = useRef<Slider>(null);
 
   function SliderNoArrow() {
     return (
@@ -41,7 +41,7 @@ export default function SimpleSlider() {
           </div>
         </Slider>
       </div>
-    )
+    );
   }
 
   return (
@@ -64,5 +64,5 @@ export default function SimpleSlider() {
         </div>
       </div>
     </>
-  )
+  );
 }

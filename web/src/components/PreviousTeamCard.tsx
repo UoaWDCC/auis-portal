@@ -1,8 +1,8 @@
-import type { PreviousTeamCardProps } from "../types/types"
+import type { PreviousTeamCardProps } from "../types/types";
 
 export default function PreviousTeamCard({
   year,
-  teams
+  teams,
 }: PreviousTeamCardProps) {
   return (
     <div
@@ -43,5 +43,5 @@ export default function PreviousTeamCard({
         </div>
       )}
     </div>
-  )
+  );
 }

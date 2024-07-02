@@ -1,4 +1,4 @@
-import { SignIn } from "@clerk/clerk-react"
+import { SignIn } from "@clerk/clerk-react";
 
 function LoginScreen() {
   return (
@@ -10,7 +10,7 @@ function LoginScreen() {
         <div
           className="justify-top flex flex-1 flex-col items-center pt-20 text-center"
           style={{
-            background: "linear-gradient(to top, #ccf2ff 50%, #ffffff 100%)"
+            background: "linear-gradient(to top, #ccf2ff 50%, #ffffff 100%)",
           }}
         >
           <div className="mb-5">
@@ -30,7 +30,7 @@ function LoginScreen() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default LoginScreen
+export default LoginScreen;

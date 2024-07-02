@@ -1,8 +1,8 @@
-import peacockLogo from "../assets/peacock-logo.png"
-import Socials from "./Socials"
+import peacockLogo from "../assets/peacock-logo.png";
+import Socials from "./Socials";
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear()
+  const currentYear = new Date().getFullYear();
   return (
     <>
       <footer className="w-full bg-white px-10">
@@ -18,5 +18,5 @@ export default function Footer() {
         </div>
       </footer>
     </>
-  )
+  );
 }

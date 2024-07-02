@@ -1,20 +1,20 @@
-import { useState } from "react"
-import { useLocation, Link } from "react-router-dom"
-import peacockLogo from "../assets/peacock-logo.png"
-import auisWhiteLogo from "../assets/auis_white.png"
-import { IoMdClose, IoMdMenu } from "react-icons/io"
+import { useState } from "react";
+import { useLocation, Link } from "react-router-dom";
+import peacockLogo from "../assets/peacock-logo.png";
+import auisWhiteLogo from "../assets/auis_white.png";
+import { IoMdClose, IoMdMenu } from "react-icons/io";
 
 function Header() {
-  const [navBar, setNavBar] = useState(false)
-  const { pathname } = useLocation()
+  const [navBar, setNavBar] = useState(false);
+  const { pathname } = useLocation();
 
   const titles = [
     { title: "Events", page: "/events" },
     { title: "About Us", page: "/pvv" },
     { title: "Team", page: "/exec" },
     { title: "Partners", page: "/sponsors" },
-    { title: "Credits", page: "/credits" }
-  ]
+    { title: "Credits", page: "/credits" },
+  ];
   return (
     <>
       <header className="py-5 xl:py-8">
@@ -129,7 +129,7 @@ function Header() {
         </div>
       </header>
     </>
-  )
+  );
 }
 
-export default Header
+export default Header;

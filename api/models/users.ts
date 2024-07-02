@@ -3,8 +3,8 @@ import {
   serial,
   varchar,
   boolean,
-  timestamp
-} from "drizzle-orm/pg-core"
+  timestamp,
+} from "drizzle-orm/pg-core";
 
 export const users = pgTable("users", {
   user_id: serial("user_id").primaryKey(),
@@ -18,5 +18,5 @@ export const users = pgTable("users", {
   is_admin: boolean("is_admin").default(false),
   is_paid: boolean("is_paid").default(false),
   is_info_confirmed: boolean("is_info_confirmed").default(false),
-  created_at: timestamp("created_at").defaultNow()
-})
+  created_at: timestamp("created_at").defaultNow(),
+});

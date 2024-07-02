@@ -1,7 +1,7 @@
-import { describe, expect, it } from "vitest"
-import { Event } from "../../src/types/types"
-import { Mapper } from "../../src/utils/Mapper"
-import { NoDataError } from "../../src/classes/NoDataError"
+import { describe, expect, it } from "vitest";
+import { Event } from "../../src/types/types";
+import { Mapper } from "../../src/utils/Mapper";
+import { NoDataError } from "../../src/classes/NoDataError";
 
 describe("mapToEvents", () => {
   it("should map valid data correctly", () => {
@@ -24,15 +24,15 @@ describe("mapToEvents", () => {
               Image: {
                 data: {
                   attributes: {
-                    url: "/uploads/event1.jpg"
-                  }
-                }
-              }
-            }
-          }
-        ]
-      }
-    }
+                    url: "/uploads/event1.jpg",
+                  },
+                },
+              },
+            },
+          },
+        ],
+      },
+    };
 
     const expected: Event[] = [
       {
@@ -47,12 +47,12 @@ describe("mapToEvents", () => {
         isLive: true,
         termsAndConditions: "Terms and Conditions 1",
         eventCapacityRemaining: 50,
-        image: "/uploads/event1.jpg"
-      }
-    ]
+        image: "/uploads/event1.jpg",
+      },
+    ];
 
-    expect(Mapper.mapToEvents(data)).toEqual(expected)
-  })
+    expect(Mapper.mapToEvents(data)).toEqual(expected);
+  });
 
   it("should handle missing title field gracefully", () => {
     const data = {
@@ -74,15 +74,15 @@ describe("mapToEvents", () => {
               Image: {
                 data: {
                   attributes: {
-                    url: "/uploads/event1.jpg"
-                  }
-                }
-              }
-            }
-          }
-        ]
-      }
-    }
+                    url: "/uploads/event1.jpg",
+                  },
+                },
+              },
+            },
+          },
+        ],
+      },
+    };
 
     const expected: Event[] = [
       {
@@ -97,12 +97,12 @@ describe("mapToEvents", () => {
         isLive: true,
         termsAndConditions: "Terms and Conditions 1",
         eventCapacityRemaining: 50,
-        image: "/uploads/event1.jpg"
-      }
-    ]
+        image: "/uploads/event1.jpg",
+      },
+    ];
 
-    expect(Mapper.mapToEvents(data)).toEqual(expected)
-  })
+    expect(Mapper.mapToEvents(data)).toEqual(expected);
+  });
 
   it("should handle missing description field gracefully", () => {
     const data = {
@@ -124,15 +124,15 @@ describe("mapToEvents", () => {
               Image: {
                 data: {
                   attributes: {
-                    url: "/uploads/event1.jpg"
-                  }
-                }
-              }
-            }
-          }
-        ]
-      }
-    }
+                    url: "/uploads/event1.jpg",
+                  },
+                },
+              },
+            },
+          },
+        ],
+      },
+    };
 
     const expected: Event[] = [
       {
@@ -147,12 +147,12 @@ describe("mapToEvents", () => {
         isLive: true,
         termsAndConditions: "Terms and Conditions 1",
         eventCapacityRemaining: 50,
-        image: "/uploads/event1.jpg"
-      }
-    ]
+        image: "/uploads/event1.jpg",
+      },
+    ];
 
-    expect(Mapper.mapToEvents(data)).toEqual(expected)
-  })
+    expect(Mapper.mapToEvents(data)).toEqual(expected);
+  });
 
   it("should handle missing subtitle field gracefully", () => {
     const data = {
@@ -174,15 +174,15 @@ describe("mapToEvents", () => {
               Image: {
                 data: {
                   attributes: {
-                    url: "/uploads/event1.jpg"
-                  }
-                }
-              }
-            }
-          }
-        ]
-      }
-    }
+                    url: "/uploads/event1.jpg",
+                  },
+                },
+              },
+            },
+          },
+        ],
+      },
+    };
 
     const expected: Event[] = [
       {
@@ -197,12 +197,12 @@ describe("mapToEvents", () => {
         isLive: true,
         termsAndConditions: "Terms and Conditions 1",
         eventCapacityRemaining: 50,
-        image: "/uploads/event1.jpg"
-      }
-    ]
+        image: "/uploads/event1.jpg",
+      },
+    ];
 
-    expect(Mapper.mapToEvents(data)).toEqual(expected)
-  })
+    expect(Mapper.mapToEvents(data)).toEqual(expected);
+  });
 
   it("should handle missing location field gracefully", () => {
     const data = {
@@ -224,15 +224,15 @@ describe("mapToEvents", () => {
               Image: {
                 data: {
                   attributes: {
-                    url: "/uploads/event1.jpg"
-                  }
-                }
-              }
-            }
-          }
-        ]
-      }
-    }
+                    url: "/uploads/event1.jpg",
+                  },
+                },
+              },
+            },
+          },
+        ],
+      },
+    };
 
     const expected: Event[] = [
       {
@@ -247,12 +247,12 @@ describe("mapToEvents", () => {
         isLive: true,
         termsAndConditions: "Terms and Conditions 1",
         eventCapacityRemaining: 50,
-        image: "/uploads/event1.jpg"
-      }
-    ]
+        image: "/uploads/event1.jpg",
+      },
+    ];
 
-    expect(Mapper.mapToEvents(data)).toEqual(expected)
-  })
+    expect(Mapper.mapToEvents(data)).toEqual(expected);
+  });
 
   it("should handle missing location link field gracefully", () => {
     const data = {
@@ -274,15 +274,15 @@ describe("mapToEvents", () => {
               Image: {
                 data: {
                   attributes: {
-                    url: "/uploads/event1.jpg"
-                  }
-                }
-              }
-            }
-          }
-        ]
-      }
-    }
+                    url: "/uploads/event1.jpg",
+                  },
+                },
+              },
+            },
+          },
+        ],
+      },
+    };
 
     const expected: Event[] = [
       {
@@ -297,12 +297,12 @@ describe("mapToEvents", () => {
         isLive: true,
         termsAndConditions: "Terms and Conditions 1",
         eventCapacityRemaining: 50,
-        image: "/uploads/event1.jpg"
-      }
-    ]
+        image: "/uploads/event1.jpg",
+      },
+    ];
 
-    expect(Mapper.mapToEvents(data)).toEqual(expected)
-  })
+    expect(Mapper.mapToEvents(data)).toEqual(expected);
+  });
 
   it("should handle missing event start date field gracefully", () => {
     const data = {
@@ -324,15 +324,15 @@ describe("mapToEvents", () => {
               Image: {
                 data: {
                   attributes: {
-                    url: "/uploads/event1.jpg"
-                  }
-                }
-              }
-            }
-          }
-        ]
-      }
-    }
+                    url: "/uploads/event1.jpg",
+                  },
+                },
+              },
+            },
+          },
+        ],
+      },
+    };
 
     const expected: Event[] = [
       {
@@ -347,12 +347,12 @@ describe("mapToEvents", () => {
         isLive: true,
         termsAndConditions: "Terms and Conditions 1",
         eventCapacityRemaining: 50,
-        image: "/uploads/event1.jpg"
-      }
-    ]
+        image: "/uploads/event1.jpg",
+      },
+    ];
 
-    expect(Mapper.mapToEvents(data)).toEqual(expected)
-  })
+    expect(Mapper.mapToEvents(data)).toEqual(expected);
+  });
 
   it("should handle missing event end date field gracefully", () => {
     const data = {
@@ -374,15 +374,15 @@ describe("mapToEvents", () => {
               Image: {
                 data: {
                   attributes: {
-                    url: "/uploads/event1.jpg"
-                  }
-                }
-              }
-            }
-          }
-        ]
-      }
-    }
+                    url: "/uploads/event1.jpg",
+                  },
+                },
+              },
+            },
+          },
+        ],
+      },
+    };
 
     const expected: Event[] = [
       {
@@ -397,12 +397,12 @@ describe("mapToEvents", () => {
         isLive: true,
         termsAndConditions: "Terms and Conditions 1",
         eventCapacityRemaining: 50,
-        image: "/uploads/event1.jpg"
-      }
-    ]
+        image: "/uploads/event1.jpg",
+      },
+    ];
 
-    expect(Mapper.mapToEvents(data)).toEqual(expected)
-  })
+    expect(Mapper.mapToEvents(data)).toEqual(expected);
+  });
 
   it("should handle missing is live field gracefully", () => {
     const data = {
@@ -424,15 +424,15 @@ describe("mapToEvents", () => {
               Image: {
                 data: {
                   attributes: {
-                    url: "/uploads/event1.jpg"
-                  }
-                }
-              }
-            }
-          }
-        ]
-      }
-    }
+                    url: "/uploads/event1.jpg",
+                  },
+                },
+              },
+            },
+          },
+        ],
+      },
+    };
 
     const expected: Event[] = [
       {
@@ -447,12 +447,12 @@ describe("mapToEvents", () => {
         isLive: false,
         termsAndConditions: "Terms and Conditions 1",
         eventCapacityRemaining: 50,
-        image: "/uploads/event1.jpg"
-      }
-    ]
+        image: "/uploads/event1.jpg",
+      },
+    ];
 
-    expect(Mapper.mapToEvents(data)).toEqual(expected)
-  })
+    expect(Mapper.mapToEvents(data)).toEqual(expected);
+  });
 
   it("should handle missing terms and conditions field gracefully", () => {
     const data = {
@@ -474,15 +474,15 @@ describe("mapToEvents", () => {
               Image: {
                 data: {
                   attributes: {
-                    url: "/uploads/event1.jpg"
-                  }
-                }
-              }
-            }
-          }
-        ]
-      }
-    }
+                    url: "/uploads/event1.jpg",
+                  },
+                },
+              },
+            },
+          },
+        ],
+      },
+    };
 
     const expected: Event[] = [
       {
@@ -497,12 +497,12 @@ describe("mapToEvents", () => {
         isLive: true,
         termsAndConditions: "",
         eventCapacityRemaining: 50,
-        image: "/uploads/event1.jpg"
-      }
-    ]
+        image: "/uploads/event1.jpg",
+      },
+    ];
 
-    expect(Mapper.mapToEvents(data)).toEqual(expected)
-  })
+    expect(Mapper.mapToEvents(data)).toEqual(expected);
+  });
 
   it("should handle missing event capacity remaining field gracefully", () => {
     const data = {
@@ -524,15 +524,15 @@ describe("mapToEvents", () => {
               Image: {
                 data: {
                   attributes: {
-                    url: "/uploads/event1.jpg"
-                  }
-                }
-              }
-            }
-          }
-        ]
-      }
-    }
+                    url: "/uploads/event1.jpg",
+                  },
+                },
+              },
+            },
+          },
+        ],
+      },
+    };
 
     const expected: Event[] = [
       {
@@ -547,12 +547,12 @@ describe("mapToEvents", () => {
         isLive: true,
         termsAndConditions: "Terms and Conditions 1",
         eventCapacityRemaining: 0,
-        image: "/uploads/event1.jpg"
-      }
-    ]
+        image: "/uploads/event1.jpg",
+      },
+    ];
 
-    expect(Mapper.mapToEvents(data)).toEqual(expected)
-  })
+    expect(Mapper.mapToEvents(data)).toEqual(expected);
+  });
 
   it("should handle missing image field gracefully", () => {
     const data = {
@@ -571,12 +571,12 @@ describe("mapToEvents", () => {
               Is_Live: true,
               Terms_And_Conditions: "Terms and Conditions 1",
               Event_Capacity_Remaining: 50,
-              Image: null
-            }
-          }
-        ]
-      }
-    }
+              Image: null,
+            },
+          },
+        ],
+      },
+    };
 
     const expected: Event[] = [
       {
@@ -591,12 +591,12 @@ describe("mapToEvents", () => {
         isLive: true,
         termsAndConditions: "Terms and Conditions 1",
         eventCapacityRemaining: 50,
-        image: ""
-      }
-    ]
+        image: "",
+      },
+    ];
 
-    expect(Mapper.mapToEvents(data)).toEqual(expected)
-  })
+    expect(Mapper.mapToEvents(data)).toEqual(expected);
+  });
 
   it("should handle completely missing attributes gracefully", () => {
     const data = {
@@ -604,11 +604,11 @@ describe("mapToEvents", () => {
         data: [
           {
             id: 1,
-            attributes: null
-          }
-        ]
-      }
-    }
+            attributes: null,
+          },
+        ],
+      },
+    };
 
     const expected: Event[] = [
       {
@@ -623,37 +623,37 @@ describe("mapToEvents", () => {
         isLive: false,
         termsAndConditions: "",
         eventCapacityRemaining: 0,
-        image: ""
-      }
-    ]
+        image: "",
+      },
+    ];
 
-    expect(Mapper.mapToEvents(data)).toEqual(expected)
-  })
+    expect(Mapper.mapToEvents(data)).toEqual(expected);
+  });
 
   it("should throw NoDataError when events.data is empty", () => {
     const data = {
       events: {
-        data: []
-      }
-    }
+        data: [],
+      },
+    };
 
-    expect(() => Mapper.mapToExec(data)).toThrow(NoDataError)
-    expect(() => Mapper.mapToExec(data)).toThrow("No data")
-  })
+    expect(() => Mapper.mapToExec(data)).toThrow(NoDataError);
+    expect(() => Mapper.mapToExec(data)).toThrow("No data");
+  });
 
   it("should throw NoDataError when events is empty", () => {
     const data = {
-      events: {}
-    }
+      events: {},
+    };
 
-    expect(() => Mapper.mapToExec(data)).toThrow(NoDataError)
-    expect(() => Mapper.mapToExec(data)).toThrow("No data")
-  })
+    expect(() => Mapper.mapToExec(data)).toThrow(NoDataError);
+    expect(() => Mapper.mapToExec(data)).toThrow("No data");
+  });
 
   it("should throw NoDataError when data is empty", () => {
-    const data = {}
+    const data = {};
 
-    expect(() => Mapper.mapToExec(data)).toThrow(NoDataError)
-    expect(() => Mapper.mapToExec(data)).toThrow("No data")
-  })
-})
+    expect(() => Mapper.mapToExec(data)).toThrow(NoDataError);
+    expect(() => Mapper.mapToExec(data)).toThrow("No data");
+  });
+});
