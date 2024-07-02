@@ -3,7 +3,7 @@ function PVVScreen() {
     <div>
       <h2>PPV Screen</h2>
     </div>
-  );
+  )
 }
 
-export default PVVScreen;
+export default PVVScreen

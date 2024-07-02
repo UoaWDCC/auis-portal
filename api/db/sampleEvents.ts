@@ -10,7 +10,7 @@ const events = [
     price: 89.99,
     seatsAvailable: 1000,
     rating: 4.5,
-    numReviews: 12,
+    numReviews: 12
   },
   {
     _id: "2",
@@ -23,7 +23,7 @@ const events = [
     price: 599.99,
     seatsAvailable: 500,
     rating: 4.0,
-    numReviews: 8,
+    numReviews: 8
   },
   {
     _id: "3",
@@ -36,7 +36,7 @@ const events = [
     price: 929.99,
     seatsAvailable: 15,
     rating: 3,
-    numReviews: 12,
+    numReviews: 12
   },
   {
     _id: "4",
@@ -49,7 +49,7 @@ const events = [
     price: 399.99,
     seatsAvailable: 200,
     rating: 5,
-    numReviews: 12,
+    numReviews: 12
   },
   {
     _id: "5",
@@ -62,7 +62,7 @@ const events = [
     price: 49.99,
     seatsAvailable: 100,
     rating: 3.5,
-    numReviews: 10,
+    numReviews: 10
   },
   {
     _id: "6",
@@ -75,8 +75,8 @@ const events = [
     price: 29.99,
     seatsAvailable: 0, // Could indicate sold out or not available
     rating: 4,
-    numReviews: 12,
-  },
-];
+    numReviews: 12
+  }
+]
 
-export default events;
+export default events

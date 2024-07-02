@@ -1,5 +1,5 @@
 enum QueryKeys {
-  GetIntro = "get-intro",
+  GetIntro = "get-intro"
 }
 
-export default QueryKeys;
+export default QueryKeys

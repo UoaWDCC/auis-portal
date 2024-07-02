@@ -3,7 +3,7 @@ function PhotosScreen() {
     <div>
       <h2> PhotosScreen Screen</h2>
     </div>
-  );
+  )
 }
 
-export default PhotosScreen;
+export default PhotosScreen

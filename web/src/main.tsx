@@ -1,27 +1,27 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
+import React from "react"
+import ReactDOM from "react-dom/client"
 import {
   createBrowserRouter,
   createRoutesFromElements,
-  Route,
-} from "react-router-dom";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { RouterProvider } from "react-router-dom";
-import { ApolloProvider } from "@apollo/client";
+  Route
+} from "react-router-dom"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { RouterProvider } from "react-router-dom"
+import { ApolloProvider } from "@apollo/client"
 
-import App from "./App.tsx";
-import "./index.css";
-import HomeScreen from "./screens/HomeScreen.tsx";
-import TestScreen from "./screens/Test.tsx";
-import ExecScreen from "./screens/ExecScreen.tsx";
-import SignUpScreen from "./screens/SignUpScreen.tsx";
-import PhotosScreen from "./screens/PhotosScreen.tsx";
-import PVVScreen from "./screens/PVVScreen.tsx";
-import { ClerkProvider } from "@clerk/clerk-react";
-import { graphqlClient } from "./graphql/client.ts";
-import CreditsScreen from "./screens/CreditsScreen.tsx";
-import SignInScreen from "./screens/SignInScreen.tsx";
-import EventScreen from "./screens/EventScreen.tsx";
+import App from "./App.tsx"
+import "./index.css"
+import HomeScreen from "./screens/HomeScreen.tsx"
+import TestScreen from "./screens/Test.tsx"
+import ExecScreen from "./screens/ExecScreen.tsx"
+import SignUpScreen from "./screens/SignUpScreen.tsx"
+import PhotosScreen from "./screens/PhotosScreen.tsx"
+import PVVScreen from "./screens/PVVScreen.tsx"
+import { ClerkProvider } from "@clerk/clerk-react"
+import { graphqlClient } from "./graphql/client.ts"
+import CreditsScreen from "./screens/CreditsScreen.tsx"
+import SignInScreen from "./screens/SignInScreen.tsx"
+import EventScreen from "./screens/EventScreen.tsx"
 
 //Add any routes for screens below
 const router = createBrowserRouter(
@@ -38,16 +38,16 @@ const router = createBrowserRouter(
       <Route path="/photos" element={<PhotosScreen />} />
     </Route>
   )
-);
+)
 
-const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
+const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
 
 if (!PUBLISHABLE_KEY) {
-  throw new Error("Missing Publishable Key");
+  throw new Error("Missing Publishable Key")
 }
 
-const queryClient = new QueryClient();
-const root = document.getElementById("root") as HTMLElement;
+const queryClient = new QueryClient()
+const root = document.getElementById("root") as HTMLElement
 
 ReactDOM.createRoot(root).render(
   <React.StrictMode>
@@ -59,4 +59,4 @@ ReactDOM.createRoot(root).render(
       </ApolloProvider>
     </ClerkProvider>
   </React.StrictMode>
-);
+)

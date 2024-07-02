@@ -1,8 +1,8 @@
-import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
-import { MemoryRouter } from "react-router-dom";
-import { describe, it, expect, beforeEach } from "vitest";
-import Header from "../../src/components/Header";
+import React from "react"
+import { render, screen, fireEvent } from "@testing-library/react"
+import { MemoryRouter } from "react-router-dom"
+import { describe, it, expect, beforeEach } from "vitest"
+import Header from "../../src/components/Header"
 
 describe("Header component", () => {
   beforeEach(() => {
@@ -10,67 +10,67 @@ describe("Header component", () => {
       <MemoryRouter>
         <Header />
       </MemoryRouter>
-    );
-  });
+    )
+  })
 
   const resizeWindow = (width: number) => {
-    global.innerWidth = width;
-    fireEvent(window, new Event("resize"));
-  };
+    global.innerWidth = width
+    fireEvent(window, new Event("resize"))
+  }
 
   it("should render the logo", () => {
-    const logo = screen.getByAltText("Peacock Logo");
-    expect(logo).toBeInTheDocument();
-  });
+    const logo = screen.getByAltText("Peacock Logo")
+    expect(logo).toBeInTheDocument()
+  })
 
   it("should render the navigation links", () => {
-    const navLinks = ["Events", "About Us", "Team", "Partners", "Credits"];
+    const navLinks = ["Events", "About Us", "Team", "Partners", "Credits"]
     navLinks.forEach((link) => {
-      expect(screen.getByText(link)).toBeInTheDocument();
-    });
-  });
+      expect(screen.getByText(link)).toBeInTheDocument()
+    })
+  })
 
   it("should render the login and signup buttons", () => {
-    const loginButton = screen.getByTestId("Log-in");
-    const signUpButton = screen.getByTestId("Sign-up");
-    const loginButtonMobile = screen.getByTestId("Log-in-mobile");
-    const signUpButtonMobile = screen.getByTestId("Sign-up-mobile");
-    expect(loginButton).toBeInTheDocument();
-    expect(signUpButton).toBeInTheDocument();
-    expect(loginButtonMobile).toBeInTheDocument();
-    expect(signUpButtonMobile).toBeInTheDocument();
-  });
+    const loginButton = screen.getByTestId("Log-in")
+    const signUpButton = screen.getByTestId("Sign-up")
+    const loginButtonMobile = screen.getByTestId("Log-in-mobile")
+    const signUpButtonMobile = screen.getByTestId("Sign-up-mobile")
+    expect(loginButton).toBeInTheDocument()
+    expect(signUpButton).toBeInTheDocument()
+    expect(loginButtonMobile).toBeInTheDocument()
+    expect(signUpButtonMobile).toBeInTheDocument()
+  })
 
   it("should render the mobile menu button on small screens", () => {
-    resizeWindow(500); // Simulate a small screen
-    expect(screen.getByTestId("menu")).toBeInTheDocument();
-  });
+    resizeWindow(500) // Simulate a small screen
+    expect(screen.getByTestId("menu")).toBeInTheDocument()
+  })
 
   it("should toggle the navigation menu when the menu button is clicked", () => {
-    resizeWindow(500); // Simulate a small screen
-    const menuButton = screen.getByTestId("menu");
-    fireEvent.click(menuButton);
-    const closeButton = screen.getByTestId("close");
-    expect(closeButton).toBeInTheDocument();
+    resizeWindow(500) // Simulate a small screen
+    const menuButton = screen.getByTestId("menu")
+    fireEvent.click(menuButton)
+    const closeButton = screen.getByTestId("close")
+    expect(closeButton).toBeInTheDocument()
 
-    fireEvent.click(closeButton);
-    expect(screen.queryByTestId("close")).toBeNull();
-  });
+    fireEvent.click(closeButton)
+    expect(screen.queryByTestId("close")).toBeNull()
+  })
 
   it("should close the navigation menu when a navigation link is clicked", () => {
-    resizeWindow(500); // Simulate a small screen
-    const menuButton = screen.getByTestId("menu");
-    fireEvent.click(menuButton);
-    const link = screen.getByText("Events");
-    fireEvent.click(link);
-    expect(screen.queryByTestId("close")).toBeNull();
-  });
+    resizeWindow(500) // Simulate a small screen
+    const menuButton = screen.getByTestId("menu")
+    fireEvent.click(menuButton)
+    const link = screen.getByText("Events")
+    fireEvent.click(link)
+    expect(screen.queryByTestId("close")).toBeNull()
+  })
 
   it("should display navigation links properly on large screens", () => {
-    resizeWindow(1024); // Simulate a large screen
-    const links = ["Events", "About Us", "Team", "Partners", "Credits"];
+    resizeWindow(1024) // Simulate a large screen
+    const links = ["Events", "About Us", "Team", "Partners", "Credits"]
     links.forEach((link) => {
-      expect(screen.getByText(link)).toBeInTheDocument();
-    });
-  });
-});
+      expect(screen.getByText(link)).toBeInTheDocument()
+    })
+  })
+})

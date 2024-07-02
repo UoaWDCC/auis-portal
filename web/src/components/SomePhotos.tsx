@@ -1,41 +1,41 @@
-import { useQuery } from "@apollo/client";
-import { GET_SOME_PHOTOS } from "../graphql/queries";
-import LoadingSpinner from "../components/LoadingSpinner";
-import { SomePhoto } from "../types/types";
-import { Mapper } from "../utils/Mapper";
-import { useState, useEffect } from "react";
+import { useQuery } from "@apollo/client"
+import { GET_SOME_PHOTOS } from "../graphql/queries"
+import LoadingSpinner from "../components/LoadingSpinner"
+import { SomePhoto } from "../types/types"
+import { Mapper } from "../utils/Mapper"
+import { useState, useEffect } from "react"
 
 function SomePhotos() {
   const {
     loading: photosLoading,
     data: photosData,
-    error: photosError,
-  } = useQuery(GET_SOME_PHOTOS);
+    error: photosError
+  } = useQuery(GET_SOME_PHOTOS)
 
-  const [photos, setPhotos] = useState<SomePhoto[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [noPhotos, setNoPhotos] = useState(false);
+  const [photos, setPhotos] = useState<SomePhoto[]>([])
+  const [loading, setLoading] = useState(true)
+  const [noPhotos, setNoPhotos] = useState(false)
 
   useEffect(() => {
     if (photosData) {
       try {
-        const mappedPhotos = Mapper.mapToSomePhotos(photosData);
-        setPhotos(mappedPhotos);
-        setLoading(false);
+        const mappedPhotos = Mapper.mapToSomePhotos(photosData)
+        setPhotos(mappedPhotos)
+        setLoading(false)
       } catch (error) {
-        setNoPhotos(true);
+        setNoPhotos(true)
       }
     }
-  }, [photosData]);
+  }, [photosData])
 
   useEffect(() => {
     if (!photosLoading) {
-      setLoading(false);
+      setLoading(false)
     }
-  }, [photosLoading]);
+  }, [photosLoading])
 
   if (photosError) {
-    return <div>CMS Offline</div>;
+    return <div>CMS Offline</div>
   }
 
   return (
@@ -43,8 +43,8 @@ function SomePhotos() {
       {loading ? (
         <LoadingSpinner />
       ) : (
-        <div className="bg-white h-screen">
-          <h1 className="text-white text-5xl text-center font-bold py-12 mx-3">
+        <div className="h-screen bg-white">
+          <h1 className="mx-3 py-12 text-center text-5xl font-bold text-white">
             Our Upcoming Events!
           </h1>
           <div className="mt-20">
@@ -55,11 +55,11 @@ function SomePhotos() {
                 photos.map((photo) => (
                   <div
                     key={photo.id}
-                    className="bg-white text-black p-5 rounded-lg"
+                    className="rounded-lg bg-white p-5 text-black"
                   >
                     <div className="flex items-center">
                       <img
-                        className="rounded-full max-w-40 max-h-40 mr-4"
+                        className="mr-4 max-h-40 max-w-40 rounded-full"
                         src={`${photo.image}`}
                         alt="photo information"
                       />
@@ -76,7 +76,7 @@ function SomePhotos() {
         </div>
       )}
     </>
-  );
+  )
 }
 
-export default SomePhotos;
+export default SomePhotos

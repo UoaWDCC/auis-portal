@@ -1,9 +1,9 @@
 // import {SignedIn, SignedOut, SignInButton, UserButton} from "@clerk/clerk-react";
 
-import SomePhotos from "../components/SomePhotos";
-import Partners from "../components/Partners";
-import Values from "../components/Values";
-import Introductions from "@components/Introductions";
+import SomePhotos from "../components/SomePhotos"
+import Partners from "../components/Partners"
+import Values from "../components/Values"
+import Introductions from "@components/Introductions"
 
 function TestScreen() {
   return (
@@ -13,7 +13,7 @@ function TestScreen() {
       <Values />
       <Introductions />
     </div>
-  );
+  )
 }
 // function TestScreen() {
 //     return (
@@ -31,4 +31,4 @@ function TestScreen() {
 //     )
 // }
 
-export default TestScreen;
+export default TestScreen

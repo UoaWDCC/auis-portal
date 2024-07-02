@@ -1,41 +1,41 @@
-import { useQuery } from "@apollo/client";
-import { GET_INTRODUCTION } from "../graphql/queries";
-import LoadingSpinner from "../components/LoadingSpinner";
-import { Introduction } from "../types/types";
-import { Mapper } from "../utils/Mapper";
-import { useState, useEffect } from "react";
+import { useQuery } from "@apollo/client"
+import { GET_INTRODUCTION } from "../graphql/queries"
+import LoadingSpinner from "../components/LoadingSpinner"
+import { Introduction } from "../types/types"
+import { Mapper } from "../utils/Mapper"
+import { useState, useEffect } from "react"
 
 function Introductions() {
   const {
     loading: introLoading,
     data: introData,
-    error: introError,
-  } = useQuery(GET_INTRODUCTION);
+    error: introError
+  } = useQuery(GET_INTRODUCTION)
 
-  const [introductions, setIntroductions] = useState<Introduction[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [noIntroductions, setNoIntroductions] = useState(false);
+  const [introductions, setIntroductions] = useState<Introduction[]>([])
+  const [loading, setLoading] = useState(true)
+  const [noIntroductions, setNoIntroductions] = useState(false)
 
   useEffect(() => {
     if (introData) {
       try {
-        const intros = Mapper.mapToIntroduction(introData);
-        setIntroductions(intros);
-        setLoading(false);
+        const intros = Mapper.mapToIntroduction(introData)
+        setIntroductions(intros)
+        setLoading(false)
       } catch (error) {
-        setNoIntroductions(true);
+        setNoIntroductions(true)
       }
     }
-  }, [introData]);
+  }, [introData])
 
   useEffect(() => {
     if (!introLoading) {
-      setLoading(false);
+      setLoading(false)
     }
-  }, [introLoading]);
+  }, [introLoading])
 
   if (introError) {
-    return <div>CMS Offline</div>;
+    return <div>CMS Offline</div>
   }
 
   return (
@@ -51,7 +51,7 @@ function Introductions() {
               introductions.map((introduction) => (
                 <div
                   key={introduction.id}
-                  className="bg-white text-black p-5 rounded-lg"
+                  className="rounded-lg bg-white p-5 text-black"
                 >
                   <div className="flex items-center">
                     <div>
@@ -76,7 +76,7 @@ function Introductions() {
         </div>
       )}
     </>
-  );
+  )
 }
 
-export default Introductions;
+export default Introductions

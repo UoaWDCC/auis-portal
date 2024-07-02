@@ -3,7 +3,7 @@ name: Format Code
 on:
   push:
     branches:
-      - "**" 
+        - "**" 
 
 jobs:
   format:
@@ -25,5 +25,5 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Format code with Prettier
-        run: yarn run format
+        run: yarn format
 

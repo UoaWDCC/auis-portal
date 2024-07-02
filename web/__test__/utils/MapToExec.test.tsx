@@ -1,7 +1,7 @@
-import { describe, expect, it } from "vitest";
-import { Exec } from "../../src/types/types";
-import { Mapper } from "../../src/utils/Mapper";
-import { NoDataError } from "../../src/classes/NoDataError";
+import { describe, expect, it } from "vitest"
+import { Exec } from "../../src/types/types"
+import { Mapper } from "../../src/utils/Mapper"
+import { NoDataError } from "../../src/classes/NoDataError"
 
 describe("mapToExec", () => {
   it("should map valid data correctly", () => {
@@ -18,15 +18,15 @@ describe("mapToExec", () => {
               Image: {
                 data: {
                   attributes: {
-                    url: "/uploads/john_doe.jpg",
-                  },
-                },
-              },
-            },
-          },
-        ],
-      },
-    };
+                    url: "/uploads/john_doe.jpg"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
 
     const expected: Exec[] = [
       {
@@ -35,12 +35,12 @@ describe("mapToExec", () => {
         description: "A great leader",
         position: "President",
         role: "Leader",
-        image: "/uploads/john_doe.jpg",
-      },
-    ];
+        image: "/uploads/john_doe.jpg"
+      }
+    ]
 
-    expect(Mapper.mapToExec(data)).toEqual(expected);
-  });
+    expect(Mapper.mapToExec(data)).toEqual(expected)
+  })
 
   it("should handle missing image field gracefully", () => {
     const data = {
@@ -53,12 +53,12 @@ describe("mapToExec", () => {
               Description: "A great vice president",
               Position: "Vice President",
               Role: "Vice Leader",
-              Image: null,
-            },
-          },
-        ],
-      },
-    };
+              Image: null
+            }
+          }
+        ]
+      }
+    }
 
     const expected: Exec[] = [
       {
@@ -67,12 +67,12 @@ describe("mapToExec", () => {
         description: "A great vice president",
         position: "Vice President",
         role: "Vice Leader",
-        image: "",
-      },
-    ];
+        image: ""
+      }
+    ]
 
-    expect(Mapper.mapToExec(data)).toEqual(expected);
-  });
+    expect(Mapper.mapToExec(data)).toEqual(expected)
+  })
 
   it("should handle missing name field gracefully", () => {
     const data = {
@@ -88,15 +88,15 @@ describe("mapToExec", () => {
               Image: {
                 data: {
                   attributes: {
-                    url: "/uploads/jane_doe.jpg",
-                  },
-                },
-              },
-            },
-          },
-        ],
-      },
-    };
+                    url: "/uploads/jane_doe.jpg"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
 
     const expected: Exec[] = [
       {
@@ -105,12 +105,12 @@ describe("mapToExec", () => {
         description: "A great treasurer",
         position: "Treasurer",
         role: "Finance",
-        image: "/uploads/jane_doe.jpg",
-      },
-    ];
+        image: "/uploads/jane_doe.jpg"
+      }
+    ]
 
-    expect(Mapper.mapToExec(data)).toEqual(expected);
-  });
+    expect(Mapper.mapToExec(data)).toEqual(expected)
+  })
 
   it("should handle missing description field gracefully", () => {
     const data = {
@@ -126,15 +126,15 @@ describe("mapToExec", () => {
               Image: {
                 data: {
                   attributes: {
-                    url: "/uploads/john_smith.jpg",
-                  },
-                },
-              },
-            },
-          },
-        ],
-      },
-    };
+                    url: "/uploads/john_smith.jpg"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
 
     const expected: Exec[] = [
       {
@@ -143,12 +143,12 @@ describe("mapToExec", () => {
         description: "",
         position: "Secretary",
         role: "Organizer",
-        image: "/uploads/john_smith.jpg",
-      },
-    ];
+        image: "/uploads/john_smith.jpg"
+      }
+    ]
 
-    expect(Mapper.mapToExec(data)).toEqual(expected);
-  });
+    expect(Mapper.mapToExec(data)).toEqual(expected)
+  })
 
   it("should handle missing position field gracefully", () => {
     const data = {
@@ -164,15 +164,15 @@ describe("mapToExec", () => {
               Image: {
                 data: {
                   attributes: {
-                    url: "/uploads/john_smith.jpg",
-                  },
-                },
-              },
-            },
-          },
-        ],
-      },
-    };
+                    url: "/uploads/john_smith.jpg"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
 
     const expected: Exec[] = [
       {
@@ -181,12 +181,12 @@ describe("mapToExec", () => {
         description: "A great secretary",
         position: "",
         role: "Organizer",
-        image: "/uploads/john_smith.jpg",
-      },
-    ];
+        image: "/uploads/john_smith.jpg"
+      }
+    ]
 
-    expect(Mapper.mapToExec(data)).toEqual(expected);
-  });
+    expect(Mapper.mapToExec(data)).toEqual(expected)
+  })
 
   it("should handle missing role field gracefully", () => {
     const data = {
@@ -202,15 +202,15 @@ describe("mapToExec", () => {
               Image: {
                 data: {
                   attributes: {
-                    url: "/uploads/john_doe.jpg",
-                  },
-                },
-              },
-            },
-          },
-        ],
-      },
-    };
+                    url: "/uploads/john_doe.jpg"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
 
     const expected: Exec[] = [
       {
@@ -219,12 +219,12 @@ describe("mapToExec", () => {
         description: "A great member",
         position: "Member",
         role: "",
-        image: "/uploads/john_doe.jpg",
-      },
-    ];
+        image: "/uploads/john_doe.jpg"
+      }
+    ]
 
-    expect(Mapper.mapToExec(data)).toEqual(expected);
-  });
+    expect(Mapper.mapToExec(data)).toEqual(expected)
+  })
 
   it("should handle completely missing attributes gracefully", () => {
     const data = {
@@ -232,11 +232,11 @@ describe("mapToExec", () => {
         data: [
           {
             id: 1,
-            attributes: null,
-          },
-        ],
-      },
-    };
+            attributes: null
+          }
+        ]
+      }
+    }
 
     const expected: Exec[] = [
       {
@@ -245,36 +245,36 @@ describe("mapToExec", () => {
         description: "",
         position: "",
         role: "",
-        image: "",
-      },
-    ];
+        image: ""
+      }
+    ]
 
-    expect(Mapper.mapToExec(data)).toEqual(expected);
-  });
+    expect(Mapper.mapToExec(data)).toEqual(expected)
+  })
   it("should throw NoDataError when execs.data is empty", () => {
     const data = {
       execs: {
-        data: [],
-      },
-    };
+        data: []
+      }
+    }
 
-    expect(() => Mapper.mapToExec(data)).toThrow(NoDataError);
-    expect(() => Mapper.mapToExec(data)).toThrow("No data");
-  });
+    expect(() => Mapper.mapToExec(data)).toThrow(NoDataError)
+    expect(() => Mapper.mapToExec(data)).toThrow("No data")
+  })
 
   it("should throw NoDataError when execs is missing", () => {
-    const data = {};
+    const data = {}
 
-    expect(() => Mapper.mapToExec(data)).toThrow(NoDataError);
-    expect(() => Mapper.mapToExec(data)).toThrow("No data");
-  });
+    expect(() => Mapper.mapToExec(data)).toThrow(NoDataError)
+    expect(() => Mapper.mapToExec(data)).toThrow("No data")
+  })
 
   it("should throw NoDataError when execs.data is missing", () => {
     const data = {
-      execs: {},
-    };
+      execs: {}
+    }
 
-    expect(() => Mapper.mapToExec(data)).toThrow(NoDataError);
-    expect(() => Mapper.mapToExec(data)).toThrow("No data");
-  });
-});
+    expect(() => Mapper.mapToExec(data)).toThrow(NoDataError)
+    expect(() => Mapper.mapToExec(data)).toThrow("No data")
+  })
+})

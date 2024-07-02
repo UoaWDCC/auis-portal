@@ -1,41 +1,41 @@
-import { useQuery } from "@apollo/client";
-import { GET_VALUES } from "../graphql/queries";
-import LoadingSpinner from "../components/LoadingSpinner";
-import { Value } from "../types/types";
-import { Mapper } from "../utils/Mapper";
-import { useState, useEffect } from "react";
+import { useQuery } from "@apollo/client"
+import { GET_VALUES } from "../graphql/queries"
+import LoadingSpinner from "../components/LoadingSpinner"
+import { Value } from "../types/types"
+import { Mapper } from "../utils/Mapper"
+import { useState, useEffect } from "react"
 
 function Values() {
   const {
     loading: valuesLoading,
     data: valuesData,
-    error: valuesError,
-  } = useQuery(GET_VALUES);
+    error: valuesError
+  } = useQuery(GET_VALUES)
 
-  const [values, setValues] = useState<Value[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [noValues, setNoValues] = useState(false);
+  const [values, setValues] = useState<Value[]>([])
+  const [loading, setLoading] = useState(true)
+  const [noValues, setNoValues] = useState(false)
 
   useEffect(() => {
     if (valuesData) {
       try {
-        const mappedValues = Mapper.mapToValue(valuesData);
-        setValues(mappedValues);
-        setLoading(false);
+        const mappedValues = Mapper.mapToValue(valuesData)
+        setValues(mappedValues)
+        setLoading(false)
       } catch (error) {
-        setNoValues(true);
+        setNoValues(true)
       }
     }
-  }, [valuesData]);
+  }, [valuesData])
 
   useEffect(() => {
     if (!valuesLoading) {
-      setLoading(false);
+      setLoading(false)
     }
-  }, [valuesLoading]);
+  }, [valuesLoading])
 
   if (valuesError) {
-    return <div>CMS Offline</div>;
+    return <div>CMS Offline</div>
   }
 
   return (
@@ -51,11 +51,11 @@ function Values() {
               values.map((value) => (
                 <div
                   key={value.id}
-                  className="bg-white text-black p-5 rounded-lg"
+                  className="rounded-lg bg-white p-5 text-black"
                 >
                   <div className="flex items-center">
                     <img
-                      className="rounded-full max-w-40 max-h-40 mr-4"
+                      className="mr-4 max-h-40 max-w-40 rounded-full"
                       src={`${value.image}`}
                       alt="value information"
                     />
@@ -71,7 +71,7 @@ function Values() {
         </div>
       )}
     </>
-  );
+  )
 }
 
-export default Values;
+export default Values

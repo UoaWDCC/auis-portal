@@ -1,7 +1,7 @@
-import { describe, expect, it } from "vitest";
-import { PreviousTeam } from "../../src/types/types";
-import { Mapper } from "../../src/utils/Mapper";
-import { NoDataError } from "../../src/classes/NoDataError";
+import { describe, expect, it } from "vitest"
+import { PreviousTeam } from "../../src/types/types"
+import { Mapper } from "../../src/utils/Mapper"
+import { NoDataError } from "../../src/classes/NoDataError"
 
 describe("mapToPreviousTeams", () => {
   it("should map valid data correctly", () => {
@@ -13,24 +13,24 @@ describe("mapToPreviousTeams", () => {
             attributes: {
               Name: "Gury Singh",
               Role: "GOAT",
-              Year: "2023",
-            },
-          },
-        ],
-      },
-    };
+              Year: "2023"
+            }
+          }
+        ]
+      }
+    }
 
     const expected: PreviousTeam[] = [
       {
         id: 1,
         name: "Gury Singh",
         role: "GOAT",
-        year: "2023",
-      },
-    ];
+        year: "2023"
+      }
+    ]
 
-    expect(Mapper.mapToPreviousTeams(data)).toEqual(expected);
-  });
+    expect(Mapper.mapToPreviousTeams(data)).toEqual(expected)
+  })
 
   it("should handle missing name field gracefully", () => {
     const data = {
@@ -41,24 +41,24 @@ describe("mapToPreviousTeams", () => {
             attributes: {
               Name: null,
               Role: "GOAT",
-              Year: "2023",
-            },
-          },
-        ],
-      },
-    };
+              Year: "2023"
+            }
+          }
+        ]
+      }
+    }
 
     const expected: PreviousTeam[] = [
       {
         id: 1,
         name: "",
         role: "GOAT",
-        year: "2023",
-      },
-    ];
+        year: "2023"
+      }
+    ]
 
-    expect(Mapper.mapToPreviousTeams(data)).toEqual(expected);
-  });
+    expect(Mapper.mapToPreviousTeams(data)).toEqual(expected)
+  })
 
   it("should handle missing role field gracefully", () => {
     const data = {
@@ -69,24 +69,24 @@ describe("mapToPreviousTeams", () => {
             attributes: {
               Name: "Gury Singh",
               Role: null,
-              Year: "2023",
-            },
-          },
-        ],
-      },
-    };
+              Year: "2023"
+            }
+          }
+        ]
+      }
+    }
 
     const expected: PreviousTeam[] = [
       {
         id: 1,
         name: "Gury Singh",
         role: "",
-        year: "2023",
-      },
-    ];
+        year: "2023"
+      }
+    ]
 
-    expect(Mapper.mapToPreviousTeams(data)).toEqual(expected);
-  });
+    expect(Mapper.mapToPreviousTeams(data)).toEqual(expected)
+  })
 
   it("should handle missing year field gracefully", () => {
     const data = {
@@ -97,24 +97,24 @@ describe("mapToPreviousTeams", () => {
             attributes: {
               Name: "Gury Singh",
               Role: "GOAT",
-              Year: null,
-            },
-          },
-        ],
-      },
-    };
+              Year: null
+            }
+          }
+        ]
+      }
+    }
 
     const expected: PreviousTeam[] = [
       {
         id: 1,
         name: "Gury Singh",
         role: "GOAT",
-        year: "",
-      },
-    ];
+        year: ""
+      }
+    ]
 
-    expect(Mapper.mapToPreviousTeams(data)).toEqual(expected);
-  });
+    expect(Mapper.mapToPreviousTeams(data)).toEqual(expected)
+  })
 
   it("should handle completely missing attributes gracefully", () => {
     const data = {
@@ -122,48 +122,48 @@ describe("mapToPreviousTeams", () => {
         data: [
           {
             id: 1,
-            attributes: null,
-          },
-        ],
-      },
-    };
+            attributes: null
+          }
+        ]
+      }
+    }
 
     const expected: PreviousTeam[] = [
       {
         id: 1,
         name: "",
         role: "",
-        year: "",
-      },
-    ];
+        year: ""
+      }
+    ]
 
-    expect(Mapper.mapToPreviousTeams(data)).toEqual(expected);
-  });
+    expect(Mapper.mapToPreviousTeams(data)).toEqual(expected)
+  })
 
   it("should throw NoDataError when previousTeams.data is empty", () => {
     const data = {
       previousTeams: {
-        data: [],
-      },
-    };
+        data: []
+      }
+    }
 
-    expect(() => Mapper.mapToPreviousTeams(data)).toThrow(NoDataError);
-    expect(() => Mapper.mapToPreviousTeams(data)).toThrow("No data");
-  });
+    expect(() => Mapper.mapToPreviousTeams(data)).toThrow(NoDataError)
+    expect(() => Mapper.mapToPreviousTeams(data)).toThrow("No data")
+  })
 
   it("should throw NoDataError when previousTeams is empty", () => {
     const data = {
-      previousTeams: {},
-    };
+      previousTeams: {}
+    }
 
-    expect(() => Mapper.mapToPreviousTeams(data)).toThrow(NoDataError);
-    expect(() => Mapper.mapToPreviousTeams(data)).toThrow("No data");
-  });
+    expect(() => Mapper.mapToPreviousTeams(data)).toThrow(NoDataError)
+    expect(() => Mapper.mapToPreviousTeams(data)).toThrow("No data")
+  })
 
   it("should throw NoDataError when data is empty", () => {
-    const data = {};
+    const data = {}
 
-    expect(() => Mapper.mapToPreviousTeams(data)).toThrow(NoDataError);
-    expect(() => Mapper.mapToPreviousTeams(data)).toThrow("No data");
-  });
-});
+    expect(() => Mapper.mapToPreviousTeams(data)).toThrow(NoDataError)
+    expect(() => Mapper.mapToPreviousTeams(data)).toThrow("No data")
+  })
+})

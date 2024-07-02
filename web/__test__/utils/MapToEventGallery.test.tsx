@@ -1,7 +1,7 @@
-import { describe, expect, it } from "vitest";
-import { EventGallery } from "../../src/types/types";
-import { Mapper } from "../../src/utils/Mapper";
-import { NoDataError } from "../../src/classes/NoDataError";
+import { describe, expect, it } from "vitest"
+import { EventGallery } from "../../src/types/types"
+import { Mapper } from "../../src/utils/Mapper"
+import { NoDataError } from "../../src/classes/NoDataError"
 
 describe("mapToEventsGallery", () => {
   it("should map the valid data correctly", () => {
@@ -14,25 +14,25 @@ describe("mapToEventsGallery", () => {
               Image: {
                 data: {
                   attributes: {
-                    url: "/uploads/event1.jgp",
-                  },
-                },
-              },
-            },
-          },
-        ],
-      },
-    };
+                    url: "/uploads/event1.jgp"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
 
     const expected: EventGallery[] = [
       {
         id: 1,
-        image: "/uploads/event1.jgp",
-      },
-    ];
+        image: "/uploads/event1.jgp"
+      }
+    ]
 
-    expect(Mapper.mapToEventsGallery(data)).toEqual(expected);
-  });
+    expect(Mapper.mapToEventsGallery(data)).toEqual(expected)
+  })
 
   it("should handle missing image field gracefully", () => {
     const data = {
@@ -41,22 +41,22 @@ describe("mapToEventsGallery", () => {
           {
             id: 1,
             attributes: {
-              Image: null,
-            },
-          },
-        ],
-      },
-    };
+              Image: null
+            }
+          }
+        ]
+      }
+    }
 
     const expected: EventGallery[] = [
       {
         id: 1,
-        image: "",
-      },
-    ];
+        image: ""
+      }
+    ]
 
-    expect(Mapper.mapToEventsGallery(data)).toEqual(expected);
-  });
+    expect(Mapper.mapToEventsGallery(data)).toEqual(expected)
+  })
 
   it("should handle completely missing attributes gracefully", () => {
     const data = {
@@ -64,46 +64,46 @@ describe("mapToEventsGallery", () => {
         data: [
           {
             id: 1,
-            attributes: null,
-          },
-        ],
-      },
-    };
+            attributes: null
+          }
+        ]
+      }
+    }
 
     const expected: EventGallery[] = [
       {
         id: 1,
-        image: "",
-      },
-    ];
+        image: ""
+      }
+    ]
 
-    expect(Mapper.mapToEventsGallery(data)).toEqual(expected);
-  });
+    expect(Mapper.mapToEventsGallery(data)).toEqual(expected)
+  })
 
   it("should throw NoDataError when eventsGallery.data is empty", () => {
     const data = {
       eventsGallery: {
-        data: [],
-      },
-    };
+        data: []
+      }
+    }
 
-    expect(() => Mapper.mapToEventsGallery(data)).toThrow(NoDataError);
-    expect(() => Mapper.mapToEventsGallery(data)).toThrow("No data");
-  });
+    expect(() => Mapper.mapToEventsGallery(data)).toThrow(NoDataError)
+    expect(() => Mapper.mapToEventsGallery(data)).toThrow("No data")
+  })
 
   it("should throw NoDataError when eventsGallery is empty", () => {
     const data = {
-      eventsGallery: {},
-    };
+      eventsGallery: {}
+    }
 
-    expect(() => Mapper.mapToEventsGallery(data)).toThrow(NoDataError);
-    expect(() => Mapper.mapToEventsGallery(data)).toThrow("No data");
-  });
+    expect(() => Mapper.mapToEventsGallery(data)).toThrow(NoDataError)
+    expect(() => Mapper.mapToEventsGallery(data)).toThrow("No data")
+  })
 
   it("should throw NoDataError when data is empty", () => {
-    const data = {};
+    const data = {}
 
-    expect(() => Mapper.mapToEventsGallery(data)).toThrow(NoDataError);
-    expect(() => Mapper.mapToEventsGallery(data)).toThrow("No data");
-  });
-});
+    expect(() => Mapper.mapToEventsGallery(data)).toThrow(NoDataError)
+    expect(() => Mapper.mapToEventsGallery(data)).toThrow("No data")
+  })
+})

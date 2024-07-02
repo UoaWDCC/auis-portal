@@ -1,7 +1,7 @@
-import { describe, expect, it } from "vitest";
-import { SomePhoto } from "../../src/types/types";
-import { Mapper } from "../../src/utils/Mapper";
-import { NoDataError } from "../../src/classes/NoDataError";
+import { describe, expect, it } from "vitest"
+import { SomePhoto } from "../../src/types/types"
+import { Mapper } from "../../src/utils/Mapper"
+import { NoDataError } from "../../src/classes/NoDataError"
 
 describe("mapToSomePhotos", () => {
   it("should map valid data correctly", () => {
@@ -16,11 +16,11 @@ describe("mapToSomePhotos", () => {
               Image: {
                 data: {
                   attributes: {
-                    url: "/uploads/nature.jpg",
-                  },
-                },
-              },
-            },
+                    url: "/uploads/nature.jpg"
+                  }
+                }
+              }
+            }
           },
           {
             id: 2,
@@ -30,33 +30,33 @@ describe("mapToSomePhotos", () => {
               Image: {
                 data: {
                   attributes: {
-                    url: "/uploads/cityscape.jpg",
-                  },
-                },
-              },
-            },
-          },
-        ],
-      },
-    };
+                    url: "/uploads/cityscape.jpg"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
 
     const expected: SomePhoto[] = [
       {
         id: 1,
         title: "Nature",
         year: "2023",
-        image: "/uploads/nature.jpg",
+        image: "/uploads/nature.jpg"
       },
       {
         id: 2,
         title: "Cityscape",
         year: "2022",
-        image: "/uploads/cityscape.jpg",
-      },
-    ];
+        image: "/uploads/cityscape.jpg"
+      }
+    ]
 
-    expect(Mapper.mapToSomePhotos(data)).toEqual(expected);
-  });
+    expect(Mapper.mapToSomePhotos(data)).toEqual(expected)
+  })
 
   it("should handle missing Title field gracefully", () => {
     const data = {
@@ -70,27 +70,27 @@ describe("mapToSomePhotos", () => {
               Image: {
                 data: {
                   attributes: {
-                    url: "/uploads/abstract.jpg",
-                  },
-                },
-              },
-            },
-          },
-        ],
-      },
-    };
+                    url: "/uploads/abstract.jpg"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
 
     const expected: SomePhoto[] = [
       {
         id: 3,
         title: "",
         year: "2024",
-        image: "/uploads/abstract.jpg",
-      },
-    ];
+        image: "/uploads/abstract.jpg"
+      }
+    ]
 
-    expect(Mapper.mapToSomePhotos(data)).toEqual(expected);
-  });
+    expect(Mapper.mapToSomePhotos(data)).toEqual(expected)
+  })
 
   it("should handle missing Year field gracefully", () => {
     const data = {
@@ -104,27 +104,27 @@ describe("mapToSomePhotos", () => {
               Image: {
                 data: {
                   attributes: {
-                    url: "/uploads/portrait.jpg",
-                  },
-                },
-              },
-            },
-          },
-        ],
-      },
-    };
+                    url: "/uploads/portrait.jpg"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
 
     const expected: SomePhoto[] = [
       {
         id: 4,
         title: "Portrait",
         year: "",
-        image: "/uploads/portrait.jpg",
-      },
-    ];
+        image: "/uploads/portrait.jpg"
+      }
+    ]
 
-    expect(Mapper.mapToSomePhotos(data)).toEqual(expected);
-  });
+    expect(Mapper.mapToSomePhotos(data)).toEqual(expected)
+  })
 
   it("should handle missing Image field gracefully", () => {
     const data = {
@@ -135,24 +135,24 @@ describe("mapToSomePhotos", () => {
             attributes: {
               Title: "Abstract",
               Year: "2025",
-              Image: null,
-            },
-          },
-        ],
-      },
-    };
+              Image: null
+            }
+          }
+        ]
+      }
+    }
 
     const expected: SomePhoto[] = [
       {
         id: 5,
         title: "Abstract",
         year: "2025",
-        image: "",
-      },
-    ];
+        image: ""
+      }
+    ]
 
-    expect(Mapper.mapToSomePhotos(data)).toEqual(expected);
-  });
+    expect(Mapper.mapToSomePhotos(data)).toEqual(expected)
+  })
 
   it("should handle completely missing attributes gracefully", () => {
     const data = {
@@ -160,47 +160,47 @@ describe("mapToSomePhotos", () => {
         data: [
           {
             id: 6,
-            attributes: null,
-          },
-        ],
-      },
-    };
+            attributes: null
+          }
+        ]
+      }
+    }
 
     const expected: SomePhoto[] = [
       {
         id: 6,
         title: "",
         year: "",
-        image: "",
-      },
-    ];
+        image: ""
+      }
+    ]
 
-    expect(Mapper.mapToSomePhotos(data)).toEqual(expected);
-  });
+    expect(Mapper.mapToSomePhotos(data)).toEqual(expected)
+  })
   it("should throw NoDataError when somePhotos.data is empty", () => {
     const data = {
       somePhotos: {
-        data: [],
-      },
-    };
+        data: []
+      }
+    }
 
-    expect(() => Mapper.mapToSomePhotos(data)).toThrow(NoDataError);
-    expect(() => Mapper.mapToSomePhotos(data)).toThrow("No data");
-  });
+    expect(() => Mapper.mapToSomePhotos(data)).toThrow(NoDataError)
+    expect(() => Mapper.mapToSomePhotos(data)).toThrow("No data")
+  })
 
   it("should throw NoDataError when somePhotos is missing", () => {
-    const data = {};
+    const data = {}
 
-    expect(() => Mapper.mapToSomePhotos(data)).toThrow(NoDataError);
-    expect(() => Mapper.mapToSomePhotos(data)).toThrow("No data");
-  });
+    expect(() => Mapper.mapToSomePhotos(data)).toThrow(NoDataError)
+    expect(() => Mapper.mapToSomePhotos(data)).toThrow("No data")
+  })
 
   it("should throw NoDataError when somePhotos.data is missing", () => {
     const data = {
-      somePhotos: {},
-    };
+      somePhotos: {}
+    }
 
-    expect(() => Mapper.mapToSomePhotos(data)).toThrow(NoDataError);
-    expect(() => Mapper.mapToSomePhotos(data)).toThrow("No data");
-  });
-});
+    expect(() => Mapper.mapToSomePhotos(data)).toThrow(NoDataError)
+    expect(() => Mapper.mapToSomePhotos(data)).toThrow("No data")
+  })
+})
