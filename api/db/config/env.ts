@@ -25,7 +25,7 @@ dotenv.config();
   if (!process.env.STRIPE_SECRET_TEST) {
     throw new Error(
       `.env: Stripe Secret (Test mode) is required. Received: "${process.env.STRIPE_SECRET_TEST}"`
-    )
+    );
   }
 })();
 
@@ -34,5 +34,5 @@ export const {
   DATABASE_PORT,
   DATABASE_USERNAME,
   DATABASE_PASSWORD,
-  STRIPE_SECRET_TEST
+  STRIPE_SECRET_TEST,
 } = process.env;
