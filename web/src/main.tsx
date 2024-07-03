@@ -25,7 +25,7 @@ import CheckoutScreen from "./screens/CheckoutScreen.tsx";
 import ReturnScreen from "./screens/ReturnScreen.tsx";
 import EventScreen from "./screens/EventScreen.tsx";
 
-// @Ratchet7x5: keys etc need to be parsed before route creation. 
+// @Ratchet7x5: keys etc need to be parsed before route creation.
 const CLERK_PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
 if (!CLERK_PUBLISHABLE_KEY) {

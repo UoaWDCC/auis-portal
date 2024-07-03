@@ -6,7 +6,7 @@ import {
 } from "@stripe/react-stripe-js";
 
 const STRIPE_PUBLISHABLE_KEY = import.meta.env.VITE_STRIPE_PUBLISH_KEY_DEV;
-console.log(STRIPE_PUBLISHABLE_KEY)
+console.log(STRIPE_PUBLISHABLE_KEY);
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
@@ -20,7 +20,7 @@ function CheckoutScreen() {
       "http://localhost:3000/api/stripe/create-checkout-session",
       {
         method: "POST",
-        headers: { 'Content-Type': 'application/json' },
+        headers: { "Content-Type": "application/json" },
         // add our own priceId here later for different products
         body: JSON.stringify(bodyData),
       }

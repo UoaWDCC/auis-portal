@@ -9,7 +9,7 @@ import authRoutes from "./routes/authRoutes";
 import creditRoutes from "./routes/creditRoutes";
 import adminRoutes from "./routes/adminRoutes";
 import photoRoutes from "./routes/photoRoutes";
-import stripeRoutes from "./routes/stripeRoutes"
+import stripeRoutes from "./routes/stripeRoutes";
 
 import { errorHandler, notFound } from "./middleware/errorMiddleware";
 import userRoutes from "./routes/userRoutes";
@@ -32,7 +32,7 @@ app.use("/api/photos", photoRoutes);
 app.use("/api", userRoutes); //Demo Route on how to work with Drizzle
 
 //StripeJS
-app.use("/api/stripe", stripeRoutes)
+app.use("/api/stripe", stripeRoutes);
 
 // The custom handlers in /middleware need to be below Routes
 app.use(notFound);
