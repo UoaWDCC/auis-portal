@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { Introduction } from "../../src/types/types";
 import { Mapper } from "../../src/utils/Mapper";
+import { NoDataError } from "../../src/classes/NoDataError";
 
 describe("mapToIntroduction", () => {
   it("should map valid data correctly", () => {
@@ -201,5 +202,31 @@ describe("mapToIntroduction", () => {
     ];
 
     expect(Mapper.mapToIntroduction(data)).toEqual(expected);
+  });
+  it("should throw NoDataError when introductions.data is empty", () => {
+    const data = {
+      introductions: {
+        data: [],
+      },
+    };
+
+    expect(() => Mapper.mapToIntroduction(data)).toThrow(NoDataError);
+    expect(() => Mapper.mapToIntroduction(data)).toThrow("No data");
+  });
+
+  it("should throw NoDataError when introductions is missing", () => {
+    const data = {};
+
+    expect(() => Mapper.mapToIntroduction(data)).toThrow(NoDataError);
+    expect(() => Mapper.mapToIntroduction(data)).toThrow("No data");
+  });
+
+  it("should throw NoDataError when introductions.data is missing", () => {
+    const data = {
+      execs: {},
+    };
+
+    expect(() => Mapper.mapToIntroduction(data)).toThrow(NoDataError);
+    expect(() => Mapper.mapToIntroduction(data)).toThrow("No data");
   });
 });

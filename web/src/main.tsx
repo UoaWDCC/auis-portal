@@ -23,6 +23,7 @@ import CreditsScreen from "./screens/CreditsScreen.tsx";
 import SignInScreen from "./screens/SignInScreen.tsx";
 import CheckoutScreen from "./screens/CheckoutScreen.tsx";
 import ReturnScreen from "./screens/ReturnScreen.tsx";
+import EventScreen from "./screens/EventScreen.tsx";
 
 // @Ratchet7x5: keys etc need to be parsed before route creation. 
 const CLERK_PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
@@ -42,6 +43,7 @@ const router = createBrowserRouter(
       <Route path="/login" element={<SignInScreen />} />
       <Route path="/signup" element={<SignUpScreen />} />
       <Route path="/pvv" element={<PVVScreen />} />
+      <Route path="/events" element={<EventScreen />} />
       <Route path="/photos" element={<PhotosScreen />} />
       <Route path="/checkout" element={<CheckoutScreen />} />
       <Route path="/return" element={<ReturnScreen />} />

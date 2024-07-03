@@ -1,7 +1,6 @@
 import dotenv from "dotenv";
 
 dotenv.config();
-
 (function checkProcessEnvIntegrity() {
   if (!process.env.DATABASE_HOST) {
     throw Error(

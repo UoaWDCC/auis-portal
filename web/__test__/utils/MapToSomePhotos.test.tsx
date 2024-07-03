@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { SomePhoto } from "../../src/types/types";
 import { Mapper } from "../../src/utils/Mapper";
+import { NoDataError } from "../../src/classes/NoDataError";
 
 describe("mapToSomePhotos", () => {
   it("should map valid data correctly", () => {
@@ -175,5 +176,31 @@ describe("mapToSomePhotos", () => {
     ];
 
     expect(Mapper.mapToSomePhotos(data)).toEqual(expected);
+  });
+  it("should throw NoDataError when somePhotos.data is empty", () => {
+    const data = {
+      somePhotos: {
+        data: [],
+      },
+    };
+
+    expect(() => Mapper.mapToSomePhotos(data)).toThrow(NoDataError);
+    expect(() => Mapper.mapToSomePhotos(data)).toThrow("No data");
+  });
+
+  it("should throw NoDataError when somePhotos is missing", () => {
+    const data = {};
+
+    expect(() => Mapper.mapToSomePhotos(data)).toThrow(NoDataError);
+    expect(() => Mapper.mapToSomePhotos(data)).toThrow("No data");
+  });
+
+  it("should throw NoDataError when somePhotos.data is missing", () => {
+    const data = {
+      somePhotos: {},
+    };
+
+    expect(() => Mapper.mapToSomePhotos(data)).toThrow(NoDataError);
+    expect(() => Mapper.mapToSomePhotos(data)).toThrow("No data");
   });
 });

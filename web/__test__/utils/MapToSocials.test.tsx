@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { Social } from "../../src/types/types";
 import { Mapper } from "../../src/utils/Mapper";
+import { NoDataError } from "../../src/classes/NoDataError";
 
 describe("mapToSocials", () => {
   it("should map valid data correctly", () => {
@@ -114,5 +115,31 @@ describe("mapToSocials", () => {
     ];
 
     expect(Mapper.mapToSocials(data)).toEqual(expected);
+  });
+  it("should throw NoDataError when socials.data is empty", () => {
+    const data = {
+      socials: {
+        data: [],
+      },
+    };
+
+    expect(() => Mapper.mapToSocials(data)).toThrow(NoDataError);
+    expect(() => Mapper.mapToSocials(data)).toThrow("No data");
+  });
+
+  it("should throw NoDataError when socials is missing", () => {
+    const data = {};
+
+    expect(() => Mapper.mapToSocials(data)).toThrow(NoDataError);
+    expect(() => Mapper.mapToSocials(data)).toThrow("No data");
+  });
+
+  it("should throw NoDataError when socials.data is missing", () => {
+    const data = {
+      execs: {},
+    };
+
+    expect(() => Mapper.mapToSocials(data)).toThrow(NoDataError);
+    expect(() => Mapper.mapToSocials(data)).toThrow("No data");
   });
 });
