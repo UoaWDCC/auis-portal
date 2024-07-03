@@ -22,7 +22,7 @@ import { graphqlClient } from "./graphql/client.ts";
 import CreditsScreen from "./screens/CreditsScreen.tsx";
 import SignInScreen from "./screens/SignInScreen.tsx";
 import CheckoutScreen from "./screens/CheckoutScreen.tsx";
-import Return from "./screens/ReturnScreen.tsx";
+import ReturnScreen from "./screens/ReturnScreen.tsx";
 
 // @Ratchet7x5: keys etc need to be parsed before route creation. 
 const CLERK_PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
@@ -44,7 +44,7 @@ const router = createBrowserRouter(
       <Route path="/pvv" element={<PVVScreen />} />
       <Route path="/photos" element={<PhotosScreen />} />
       <Route path="/checkout" element={<CheckoutScreen />} />
-      <Route path="/return" element={<Return />} />
+      <Route path="/return" element={<ReturnScreen />} />
     </Route>
   )
 );

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Navigate } from "react-router";
 
-const Return = () => {
+const ReturnScreen = () => {
   const [status, setStatus] = useState(null);
   const [customerEmail, setCustomerEmail] = useState("");
 
@@ -37,4 +37,4 @@ const Return = () => {
   return null;
 };
 
-export default Return;
+export default ReturnScreen;
