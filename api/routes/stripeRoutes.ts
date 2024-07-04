@@ -79,7 +79,7 @@ const fulfillOrder = (lineItems: any) => {
 router.post(
   "/webhook",
   bodyParser.raw({ type: "application/json" }),
-  (req, res) => {
+  async (req, res) => {
     const payload = req.body;
     //console.log("webhook: payload: ", payload);
 
