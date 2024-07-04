@@ -91,7 +91,7 @@ router.post(
   bodyParser.raw({ type: "application/json" }),
   async (req, res) => {
     const payload = req.body;
-    //console.log("webhook: payload: ", payload);
+    //console.log("/webhook: payload: ", payload);
 
     // @Ratchet7x5 TODO: Check if NGINX strips this header in dev/prod
     const sig = req.headers["stripe-signature"];
