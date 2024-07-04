@@ -24,3 +24,18 @@ Additional info: Stripe restricts all production web apps to run in HTTPS. HTTP 
 # Notes:
 Schema: users = admin users for strapi
 Schema: people = users that sign up
+
+Stripe API: https://docs.stripe.com/api/
+
+Accept a payment: https://docs.stripe.com/payments/accept-a-payment?platform=web&ui=embedded-form
+
+Handle Payments: https://docs.stripe.com/payments/handling-payment-events
+
+Fulfill Orders (Webhook stuff): https://docs.stripe.com/payments/checkout/fulfill-orders
+
+Register Webhook (FOR PRODUCTION): https://docs.stripe.com/webhooks#register-webhook
+
+Product and Pricing: https://docs.stripe.com/products-prices/how-products-and-prices-work
+
+
+Get paid to your bank account (automatic, nothing to worry about): https://docs.stripe.com/payouts
