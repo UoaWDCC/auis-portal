@@ -32,7 +32,7 @@ function UserInformationForm() {
                 </h2>
 
                 <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
-                    <div className="flex space-x-4">
+                    <div className="flex space-x-7">
                         <div className="flex flex-col flex-1">
                             <label className="text-gray-700">First Name</label>
                             <FormInput placeholder="e.g Clark" id="firstName" errorMessage="First Name is Required" onChange={onChange} />
@@ -43,41 +43,41 @@ function UserInformationForm() {
                         </div>
                     </div>
 
-                    <div className="flex space-x-4">
+                    <div className="flex space-x-7">
                         <div className="flex flex-col flex-1">
-                            <label className="text-gray-700">University (or alumni)</label>
+                            <label className="text-gray-700">University (or alumni) <span role="img" aria-label="emoji">🎓</span></label>
                             <FormInput placeholder="e.g University of Auckland" id="university" errorMessage="Your University is Required" onChange={onChange} />
                         </div>
                         <div className="flex flex-col flex-1">
-                            <label className="text-gray-700">What year are you in (or alumni)</label>
+                            <label className="text-gray-700">What year are you in (or alumni) <span role="img" aria-label="emoji">📅</span></label>
                             <FormInput placeholder="e.g Year 3" id="graduationYear" errorMessage="Your Graduation Year is Required" onChange={onChange} />
                         </div>
                     </div>
 
-                    <div className="flex space-x-4">
+                    <div className="flex space-x-7">
                         <div className="flex flex-col flex-1">
-                            <label className="text-gray-700">Student ID (if you have one)</label>
+                            <label className="text-gray-700">Student ID (if you have one) <span role="img" aria-label="emoji">🆔</span></label>
                             <FormInput placeholder="e.g 1234566789.." id="studentID" onChange={onChange} />
                         </div>
                         <div className="flex flex-col flex-1">
-                            <label className="text-gray-700">UPI (if you have one)</label>
+                            <label className="text-gray-700">UPI (if you have one) <span role="img" aria-label="emoji">🆔</span></label>
                             <FormInput placeholder="e.g abcd123.." id="UPI" onChange={onChange} />
                         </div>
                     </div>
 
-                    <div className="flex space-x-4">
+                    <div className="flex space-x-7">
                         <div className="flex flex-col flex-1">
-                            <label className="text-gray-700">What are you studying?</label>
+                            <label className="text-gray-700">What are you studying? <span role="img" aria-label="emoji">📚</span></label>
                             <FormInput placeholder="e.g Software Engineering" id="studyOption" onChange={onChange} />
                         </div>
                         <div className="flex flex-col flex-1">
-                            <label className="text-gray-700">Domestic or International?</label>
+                            <label className="text-gray-700">Domestic or International? <span role="img" aria-label="emoji">🌏</span></label>
                             <FormInput type="radio" name="residency" options={residencyOptions} />
                         </div>
                     </div>
 
-                    <div className="flex flex-col space-y-4 mt-4">
-                        <label className="text-gray-700">Membership Types</label>
+                    <div className="flex flex-col items-center mt-4">
+                        <label className="text-gray-700">Membership Types <span role="img" aria-label="emoji">💳</span></label>
                         <FormInput type="radio" name="duration" options={paymentOptions} />
                     </div>
 
