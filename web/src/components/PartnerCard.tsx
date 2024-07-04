@@ -12,6 +12,12 @@ export default function PartnerCard({ partner, colour }: PartnerCardProps) {
 
   const bgColorWithOpacity = hexToRgba(colour, 0.2); // 0.2 for 20% opacity
 
+  // Function to handle the button click
+  const handleViewOnMapClick = () => {
+    const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(partner.location)}`;
+    window.open(googleMapsUrl, "_blank");
+  };
+
   return (
     <>
       <div
@@ -41,9 +47,10 @@ export default function PartnerCard({ partner, colour }: PartnerCardProps) {
         </div>
 
         <button
-          className={`bg-[${colour}] rounded-full px-5 py-2 font-bold text-white`}
+          className="bg-primary-orange rounded-full px-5 py-2 font-bold text-white"
+          onClick={handleViewOnMapClick}
         >
-          View On Map
+          View
         </button>
       </div>
     </>
