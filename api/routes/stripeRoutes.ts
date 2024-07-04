@@ -104,6 +104,23 @@ router.post(
       return res.status(400).send(`Webhook Error: ` + err);
     }
 
+    // Handle the checkout.session.completed event
+    if (webhook.type === "checkout.session.completed") {
+      // Retrieve the session. If you require line items in the response, you may include them by expanding line_items.
+      const sessionWithLineItems = await stripe.checkout.sessions.retrieve(
+        webhook.data.object.id,
+        {
+          expand: ["line_items"],
+        }
+      );
+      const lineItems = sessionWithLineItems.line_items;
+
+      console.log("/webhook: receipt_url: ");
+
+      // Fulfill the purchase...
+      fulfillOrder(lineItems);
+    }
+
     res.status(200).end();
   }
 );
