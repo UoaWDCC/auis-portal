@@ -2,7 +2,7 @@
 
 1. Install Stripe CLI and login using the AUIS acount. Refer to instructions here: https://docs.stripe.com/stripe-cli 
 2. Setup the appropriate .env files for both frontend and backend: see the #resources chat in discord. 
-3. Setup webhook by following the Stripe docs: https://docs.stripe.com/payments/checkout/fulfill-orders?lang=node
+3. Setup webhook by following the Stripe docs: https://docs.stripe.com/payments/checkout/fulfill-orders?lang=node . Ensure that you use the following code to setup the webhook listen endpoint: `stripe listen --forward-to localhost:3000/api/stripe/webhook`
 
 Additional info: Stripe restricts all production web apps to run in HTTPS. HTTP for development is fine. 
 
