@@ -9,7 +9,7 @@ services:
       POSTGRES_PASSWORD: GuryIsGoat
       POSTGRES_DB: AUIS
     ports:
-      - 5432:5432
+      - 5435:5432
     expose:
       - 5432
 
