@@ -76,6 +76,16 @@ const fulfillOrder = (lineItems: any) => {
   console.log("Fulfilling order", lineItems);
 };
 
+const createOrder = (session: any) => {
+  // TODO: fill me in
+  console.log("Creating order", session);
+};
+
+const emailCustomerAboutFailedPayment = (session: any) => {
+  // TODO: fill me in
+  console.log("Emailing customer", session);
+};
+
 router.post(
   "/webhook",
   bodyParser.raw({ type: "application/json" }),
