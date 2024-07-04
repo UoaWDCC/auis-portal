@@ -19,6 +19,7 @@ Additional info: Stripe restricts all production web apps to run in HTTPS. HTTP 
 3. Frontend: Ensure that the events page has relevant priceIds associated and is sent to /create-checkout-session. Each event page will go to a /checkout page (frontend) and will then retrieve the priceId (from react-router probably) and the checkout form will be for that specific event. 
 4. Add /api proxy to vite in frontend
 5. Check if NGINX will strip the header `['stripe-signature']` in dev/prod. 
+6. Switch to stripe secret from test key to live key based on `NODE_ENV` secret
 
 # Notes:
 Schema: users = admin users for strapi
