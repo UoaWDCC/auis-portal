@@ -25,6 +25,8 @@ Additional info: Stripe restricts all production web apps to run in HTTPS. HTTP 
 Schema: users = admin users for strapi
 Schema: people = users that sign up
 
+Stripe will pay AUIS's bank account every 7-14 days' based on Stripe's risk assessment of AUIS. 
+
 Stripe API: https://docs.stripe.com/api/
 
 Accept a payment: https://docs.stripe.com/payments/accept-a-payment?platform=web&ui=embedded-form
