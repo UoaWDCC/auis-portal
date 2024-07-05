@@ -229,7 +229,7 @@ describe("AboutUsScreen", () => {
     expect(partnerImage).toHaveAttribute("src", "/uploads/kebab.jpg");
   });
 
-	it("renders no data from cms", async () => {
+  it("renders no data from cms", async () => {
     render(
       <MockedProvider mocks={noDataMocks} addTypename={false}>
         <MemoryRouter>
@@ -241,10 +241,10 @@ describe("AboutUsScreen", () => {
     expect(
       await screen.findByText("There is no introduction to display")
     ).toBeInTheDocument();
-		expect(
+    expect(
       await screen.findByText("There is no values to display")
     ).toBeInTheDocument();
-		expect(
+    expect(
       await screen.findByText("There is no partners to display")
     ).toBeInTheDocument();
   });
