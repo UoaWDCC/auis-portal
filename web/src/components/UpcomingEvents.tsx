@@ -22,7 +22,9 @@ const UpcomingEvents: React.FC<UpcomingEventsProps> = ({
         </p>
       ) : null}
       <div className="">
-        <SimpleSlider />
+        <SimpleSlider>
+          hi 
+        </SimpleSlider>
       </div>
     </div>
   );

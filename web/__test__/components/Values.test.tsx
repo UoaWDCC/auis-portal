@@ -36,6 +36,19 @@ const mocks = [
   },
 ];
 
+const noDataMock = {
+  request: {
+    query: GET_VALUES,
+  },
+  result: {
+    data: {
+      values: {
+        data: [],
+      },
+    },
+  },
+};
+
 describe("SomePhotos Component", () => {
   it("renders loading", async () => {
     render(
@@ -70,5 +83,15 @@ describe("SomePhotos Component", () => {
       </MockedProvider>
     );
     expect(await screen.findByText("CMS Offline")).toBeInTheDocument();
+  });
+  it("renders no data from cms", async () => {
+    render(
+      <MockedProvider mocks={[noDataMock]} addTypename={false}>
+        <Values />
+      </MockedProvider>
+    );
+    expect(
+      await screen.findByText("There are no values to display")
+    ).toBeInTheDocument();
   });
 });

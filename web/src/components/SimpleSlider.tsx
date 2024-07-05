@@ -50,26 +50,28 @@ const SimpleSlider: React.FC<SimpleSliderProps> = ({ children }) => {
   };
 
   return (
-    <div className="flex">
-      <div className="flex flex-grow justify-center items-center">
-        <IoArrowBackCircleOutline
-          onClick={previous}
-          className="hidden sm:flex w-16 h-16 mx-4"
-        />
+    <>
+      <div className="flex">
+        <div className="flex flex-grow justify-center items-center">
+          <IoArrowBackCircleOutline
+            onClick={previous}
+            className="hidden sm:flex w-16 h-16 mx-4"
+          />
+        </div>
+        <div className="sm:w-[calc(100vw-14rem)] w-11/12">
+          <Slider ref={sliderRef} {...settings}>
+            <div>test</div>
+          </Slider>
+        </div>
+        <div className="flex flex-grow items-center justify-center">
+          <IoArrowForwardCircleOutline
+            onClick={next}
+            className="mx-4 hidden sm:flex h-16 w-16"
+          />
+        </div>
       </div>
-      <div className="sm:w-[calc(100vw-14rem)] w-11/12">
-        <Slider ref={sliderRef} {...settings}>
-          {children}
-        </Slider>
-      </div>
-      <div className="flex flex-grow justify-center items-center">
-        <IoArrowForwardCircleOutline
-          onClick={next}
-          className="hidden sm:flex w-16 h-16 mx-4"
-        />
-      </div>
-    </div>
+    </>
   );
-};
+}
 
 export default SimpleSlider;

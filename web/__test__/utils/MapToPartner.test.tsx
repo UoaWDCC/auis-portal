@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { Partner } from "../../src/types/types";
 import { Mapper } from "../../src/utils/Mapper";
+import { NoDataError } from "../../src/classes/NoDataError";
 
 describe("mapToPartner", () => {
   it("should map valid data correctly", () => {
@@ -248,5 +249,31 @@ describe("mapToPartner", () => {
     ];
 
     expect(Mapper.mapToPartner(data)).toEqual(expected);
+  });
+  it("should throw NoDataError when partners.data is empty", () => {
+    const data = {
+      partners: {
+        data: [],
+      },
+    };
+
+    expect(() => Mapper.mapToPartner(data)).toThrow(NoDataError);
+    expect(() => Mapper.mapToPartner(data)).toThrow("No data");
+  });
+
+  it("should throw NoDataError when partners is missing", () => {
+    const data = {};
+
+    expect(() => Mapper.mapToPartner(data)).toThrow(NoDataError);
+    expect(() => Mapper.mapToPartner(data)).toThrow("No data");
+  });
+
+  it("should throw NoDataError when partners.data is missing", () => {
+    const data = {
+      partners: {},
+    };
+
+    expect(() => Mapper.mapToPartner(data)).toThrow(NoDataError);
+    expect(() => Mapper.mapToPartner(data)).toThrow("No data");
   });
 });
