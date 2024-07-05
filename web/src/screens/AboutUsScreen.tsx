@@ -119,6 +119,17 @@ export default function AboutUsScreen() {
                 Join Us Now!
               </a>
             </div>
+
+            <div className="max-w-screen from-AUIS-dark-teal to-AUIS-teal flex h-auto flex-col items-center bg-gradient-to-b px-5 py-5 md:px-20">
+              <h1 className="text-4xl font-bold text-white">Our Values</h1>
+              <div className="flex flex-wrap justify-center">
+                {values.map((value) => (
+                  <div key={value.id} className="mx-5 my-5 xl:mx-20">
+                    <ValueCard value={value} />
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </>
       )}
