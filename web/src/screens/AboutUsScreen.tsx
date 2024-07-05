@@ -5,6 +5,7 @@ import LoadingSpinner from "../components/LoadingSpinner";
 import { Mapper } from "../utils/Mapper";
 import Header from "../components/Header";
 import { useState, useEffect } from "react";
+import ValueCard from "../components/ValueCard";
 
 export default function AboutUsScreen() {
   const {
@@ -82,8 +83,42 @@ export default function AboutUsScreen() {
         <LoadingSpinner />
       ) : (
         <>
-          <div>
-            <h1>About Us Screen</h1>
+          <div className="max-w-screen from-AUIS-dark-teal to-AUIS-teal h-auto bg-gradient-to-b">
+            <Header />
+            <div className="max-w-screen flex h-52 items-center justify-center">
+              <h1 className="text-5xl font-bold text-white md:text-7xl">
+                About Us!
+              </h1>
+            </div>
+
+            <div className="max-w-screen flex h-auto flex-col items-center bg-white px-5 py-5 text-center text-black md:px-20 lg:px-48">
+              <h2 className="text-4xl font-bold">Our Introduction</h2>
+              <p className="my-5 text-2xl">{introductions[0].description}</p>
+
+              <div className="flex w-full flex-col justify-between px-10 sm:flex-row md:w-[50rem]">
+                <div className="m-5 flex flex-col items-center text-3xl">
+                  <h6 className="font-bold">{introductions[0].events}+</h6>
+                  <h5>Events</h5>
+                </div>
+
+                <div className="m-5 flex flex-col items-center text-3xl">
+                  <h6 className="font-bold">{introductions[0].members}+</h6>
+                  <h5>Members</h5>
+                </div>
+
+                <div className="m-5 flex flex-col items-center text-3xl">
+                  <h6 className="font-bold">{introductions[0].followers}+</h6>
+                  <h5>Followers</h5>
+                </div>
+              </div>
+
+              <a
+                href="mailto:au.indiansociety@gmail.com"
+                className="bg-primary-orange my-5 rounded-full px-10 py-3 text-2xl font-bold text-white"
+              >
+                Join Us Now!
+              </a>
+            </div>
           </div>
         </>
       )}
