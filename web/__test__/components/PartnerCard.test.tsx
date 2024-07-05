@@ -32,7 +32,7 @@ describe("PartnerCard", () => {
     const originalOpen = window.open;
     window.open = vi.fn();
 
-    const viewButton = screen.getByText("View");
+    const viewButton = screen.getByText("View On Map");
     fireEvent.click(viewButton);
 
     expect(window.open).toHaveBeenCalledWith(
