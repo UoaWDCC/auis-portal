@@ -1,7 +1,7 @@
 function PVVScreen() {
   return (
     <div>
-      <h2>PPV Screen</h2>
+      <h2>About Us Screen</h2>
     </div>
   );
 }
