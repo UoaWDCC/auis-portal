@@ -1,23 +1,16 @@
 import express, { Router, json } from "express";
+import bodyParser from "body-parser";
 import * as http from "http";
 import { protect } from "../middleware/authMiddleware";
 
-// Use body-parser to retrieve the raw body as a buffer
-import bodyParser from "body-parser";
-
 // StripeJS: Load secret API key
-// TODO: @Ratchet7x5 Switch to live key based on NODE_ENV secret
-const stripe_secret = process.env.STRIPE_SECRET_TEST;
-const stripe = require("stripe")(`${stripe_secret}`);
+const stripe = require("stripe")(`${process.env.STRIPE_SECRET_TEST}`);
 
 //frontend,  replace with process.env.domainURL. Switch based on NODE_ENV
-const domainURL = "http://localhost:5173";
+const domainURL = process.env.DOMAIN_DEV;
 
-// needs to be in .env
 // use the Stripe CLI to generate your own endpoint and paste the value below.
-// I've left this value in here intentionally.
-const endpointSecret =
-  "whsec_503a5f8a18a32b5780baeef30b5bc1da329bfe71db5991e7cccc0d410710f0ab";
+const endpointSecret = process.env.STRIPE_WEBHOOK_ENDPOINT;
 
 const router = Router();
 
@@ -50,7 +43,7 @@ router.post("/create-checkout-session", async (req, res) => {
       ],
       mode: "payment",
       // @Ratchet7x5 INFO: The link below determines the redirect page after successful payment.
-      return_url: `http://localhost:5173/return?session_id={CHECKOUT_SESSION_ID}`,
+      return_url: `${domainURL}return?session_id={CHECKOUT_SESSION_ID}`,
     });
 
     res.send({ clientSecret: session.client_secret });
