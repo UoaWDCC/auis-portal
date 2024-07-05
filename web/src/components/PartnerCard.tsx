@@ -50,7 +50,7 @@ export default function PartnerCard({ partner, colour }: PartnerCardProps) {
           className="bg-primary-orange rounded-full px-5 py-2 font-bold text-white"
           onClick={handleViewOnMapClick}
         >
-          View
+          View On Map
         </button>
       </div>
     </>
