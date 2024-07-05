@@ -40,7 +40,7 @@ export default function AboutUsScreen() {
         const mappedIntros = Mapper.mapToIntroduction(introData);
         setIntroductions(mappedIntros);
       } catch (error) {
-        setNoIntroductions(false);
+        setNoIntroductions(true);
       }
     }
   }, [introData]);
@@ -51,7 +51,7 @@ export default function AboutUsScreen() {
         const mappedValues = Mapper.mapToValue(valuesData);
         setValues(mappedValues);
       } catch (error) {
-        setNoValues(false);
+        setNoValues(true);
       }
     }
   }, [valuesData]);
@@ -62,7 +62,7 @@ export default function AboutUsScreen() {
         const mappedPartners = Mapper.mapToPartner(partnersData);
         setPartners(mappedPartners);
       } catch (error) {
-        setNoPartners(false);
+        setNoPartners(true);
       }
     }
   }, [partnersData]);
@@ -93,24 +93,34 @@ export default function AboutUsScreen() {
 
             <div className="max-w-screen flex h-auto flex-col items-center bg-white px-5 py-5 text-center text-black md:px-20 lg:px-48">
               <h2 className="text-4xl font-bold">Our Introduction</h2>
-              <p className="my-5 text-2xl">{introductions[0].description}</p>
+              {noIntroductions ? (
+                <div>There is no introduction to display</div>
+              ) : (
+                <>
+                  <p className="my-5 text-2xl">
+                    {introductions[0].description}
+                  </p>
 
-              <div className="flex w-full flex-col justify-between px-10 sm:flex-row md:w-[50rem]">
-                <div className="m-5 flex flex-col items-center text-3xl">
-                  <h6 className="font-bold">{introductions[0].events}+</h6>
-                  <h5>Events</h5>
-                </div>
+                  <div className="flex w-full flex-col justify-between px-10 sm:flex-row md:w-[50rem]">
+                    <div className="m-5 flex flex-col items-center text-3xl">
+                      <h6 className="font-bold">{introductions[0].events}+</h6>
+                      <h5>Events</h5>
+                    </div>
 
-                <div className="m-5 flex flex-col items-center text-3xl">
-                  <h6 className="font-bold">{introductions[0].members}+</h6>
-                  <h5>Members</h5>
-                </div>
+                    <div className="m-5 flex flex-col items-center text-3xl">
+                      <h6 className="font-bold">{introductions[0].members}+</h6>
+                      <h5>Members</h5>
+                    </div>
 
-                <div className="m-5 flex flex-col items-center text-3xl">
-                  <h6 className="font-bold">{introductions[0].followers}+</h6>
-                  <h5>Followers</h5>
-                </div>
-              </div>
+                    <div className="m-5 flex flex-col items-center text-3xl">
+                      <h6 className="font-bold">
+                        {introductions[0].followers}+
+                      </h6>
+                      <h5>Followers</h5>
+                    </div>
+                  </div>
+                </>
+              )}
 
               <a
                 href="mailto:au.indiansociety@gmail.com"
@@ -122,24 +132,32 @@ export default function AboutUsScreen() {
 
             <div className="max-w-screen from-AUIS-dark-teal to-AUIS-teal flex h-auto flex-col items-center bg-gradient-to-b px-5 py-5 md:px-20">
               <h1 className="text-4xl font-bold text-white">Our Values</h1>
-              <div className="flex flex-wrap justify-center">
-                {values.map((value) => (
-                  <div key={value.id} className="mx-5 my-5 xl:mx-20">
-                    <ValueCard value={value} />
-                  </div>
-                ))}
-              </div>
+              {noValues ? (
+                <div>There is no values to display</div>
+              ) : (
+                <div className="flex flex-wrap justify-center">
+                  {values.map((value) => (
+                    <div key={value.id} className="mx-5 my-5 xl:mx-20">
+                      <ValueCard value={value} />
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
 
             <div className="max-w-screen flex flex-col items-center bg-white px-2 py-5">
               <h1 className="text-4xl font-bold text-black">Our Partners</h1>
-              <div className="flex flex-wrap justify-center">
-                {partners.map((partner) => (
-                  <div key={partner.id} className="m-5 w-full md:w-80">
-                    <img src={partner.image} alt="Partner Image" />
-                  </div>
-                ))}
-              </div>
+              {noPartners ? (
+                <div>There is no partners to display</div>
+              ) : (
+                <div className="flex flex-wrap justify-center">
+                  {partners.map((partner) => (
+                    <div key={partner.id} className="m-5 w-full md:w-80">
+                      <img src={partner.image} alt="Partner Image" />
+                    </div>
+                  ))}
+                </div>
+              )}
               <h3 className="text-center text-xl text-black">
                 More information about our partners{" "}
                 <span className="text-blue-500 underline">
