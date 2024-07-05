@@ -20,9 +20,8 @@ const router = Router();
 // Create a checkout session based on priceId. Send a client secret back (cs_ABCD123)
 router.post("/create-checkout-session", async (req, res) => {
   // in the incoming request, we need the priceID of the item we're buying.
-  const { priceId } = req.body; //const priceId = req.body.priceId;
+  const { priceId } = req.body;
   //console.log(priceId);
-  console.log(req.body);
 
   // if priceId is undefined, send a 404 back.
   if (priceId == undefined) {
@@ -62,15 +61,14 @@ router.get("/session-status", async (req, res) => {
   });
 });
 
-// @Ratchet7x5: Template webhook code below. Possibly UNSTABLE.
-// use 'any' type for now
+// @Ratchet7x5: use 'any' type for now
 const fulfillOrder = (lineItems: any) => {
-  // TODO: fill me in
+  // @Ratchet7x5: TODO: update a user_ticket with payment_status set to 'completed'
   console.log("Fulfilling order", lineItems);
 };
 
 const createOrder = (session: any) => {
-  // TODO: fill me in
+  // @Ratchet7x5: TODO: insert a user_ticket with payment_status set to 'awaiting'
   console.log("Creating order", session);
 };
 
