@@ -83,12 +83,14 @@ export default function AboutUsScreen() {
         <LoadingSpinner />
       ) : (
         <>
-          <div className="max-w-screen from-AUIS-dark-teal to-AUIS-teal h-auto bg-gradient-to-b">
-            <Header />
-            <div className="max-w-screen flex h-52 items-center justify-center">
-              <h1 className="text-5xl font-bold text-white md:text-7xl">
-                About Us!
-              </h1>
+          <div className="max-w-screen bg-white">
+            <div className="max-w-screen from-AUIS-dark-teal to-AUIS-teal h-auto bg-gradient-to-b">
+              <Header />
+              <div className="max-w-screen flex h-52 items-center justify-center">
+                <h1 className="text-5xl font-bold text-white md:text-7xl">
+                  About Us!
+                </h1>
+              </div>
             </div>
 
             <div className="max-w-screen flex h-auto flex-col items-center bg-white px-5 py-5 text-center text-black md:px-20 lg:px-48">
