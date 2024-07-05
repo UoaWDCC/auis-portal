@@ -130,6 +130,23 @@ export default function AboutUsScreen() {
                 ))}
               </div>
             </div>
+
+            <div className="max-w-screen flex flex-col items-center bg-white px-2 py-5">
+              <h1 className="text-4xl font-bold text-black">Our Partners</h1>
+              <div className="flex flex-wrap justify-center">
+                {partners.map((partner) => (
+                  <div key={partner.id} className="m-5 w-full md:w-80">
+                    <img src={partner.image} alt="Partner Image" />
+                  </div>
+                ))}
+              </div>
+              <h3 className="text-center text-xl text-black">
+                More information about our partners{" "}
+                <span className="text-blue-500 underline">
+                  <a href="/sponsors">here</a>
+                </span>
+              </h3>
+            </div>
           </div>
         </>
       )}
