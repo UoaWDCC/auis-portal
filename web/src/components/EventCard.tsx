@@ -7,11 +7,11 @@ interface EventProps {
 
 const EventCard: React.FC<EventProps> = ({ event }) => {
   return (
-    <div className="card p-4 bg-white shadow-md rounded-lg w-full h-full">
+    <div className="card h-full w-full rounded-lg bg-white p-4 shadow-md">
       <img
         src={event.image}
         alt={event.title}
-        className="w-full h-48 object-cover rounded-t-lg"
+        className="h-48 w-full rounded-t-lg object-cover"
       />
       <div className="card-body">
         <h5 className="card-title text-lg font-bold">{event.title}</h5>
