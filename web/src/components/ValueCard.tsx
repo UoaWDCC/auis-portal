@@ -17,7 +17,7 @@ export default function ValueCard({ value }: ValueCardProps) {
             {value.title}
           </h1>
 
-          <p className="text-md text-white my-2">{value.description}</p>
+          <p className="text-md my-2 text-white">{value.description}</p>
         </div>
       </div>
     </>
