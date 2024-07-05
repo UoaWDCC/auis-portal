@@ -44,6 +44,10 @@ export interface Value {
   image: string;
 }
 
+export interface ValueCardProps {
+  value: Value;
+}
+
 export interface Introduction {
   id: number;
   description: string;
