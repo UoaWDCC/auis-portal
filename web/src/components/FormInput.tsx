@@ -9,6 +9,7 @@ interface FormInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     name?: string;
     options?: string[];
     errorMessage?: string;
+    onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }
 
 const FormInput: React.FC<FormInputProps> = ({
@@ -23,9 +24,9 @@ const FormInput: React.FC<FormInputProps> = ({
     if (type === "radio" && options.length > 0) {
         return (
             <div className="mb-4 mt-4">
-                <div className="mt-2">
-                    {options.map((option, index) => (
-                        <label key={option} className={`inline-flex items-center ${index !== 0 ? 'ml-6' : ''}`}>
+                <div className="mt-2 flex flex-col md:flex-row md:items-center">
+                    {options.map((option: string, index: number) => (
+                        <label key={option} className={`inline-flex items-center ${index !== 0 ? 'ml-0 md:ml-6' : ''}`}>
                             <input type="radio" name={props.name} value={option} onChange={props.onChange} />
                             <span className="ml-2">{option}</span>
                         </label>
@@ -49,6 +50,6 @@ const FormInput: React.FC<FormInputProps> = ({
             </div>
         );
     }
-};
+}
 
 export default FormInput;

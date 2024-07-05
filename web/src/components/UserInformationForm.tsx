@@ -77,7 +77,7 @@ function UserInformationForm() {
                 </h2>
 
                 <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
-                    <div className="flex space-x-7">
+                    <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-7">
                         <div className="flex flex-col flex-1">
                             <label className="text-gray-700">First Name</label>
                             <FormInput
@@ -98,7 +98,7 @@ function UserInformationForm() {
                         </div>
                     </div>
 
-                    <div className="flex space-x-7">
+                    <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-7">
                         <div className="flex flex-col flex-1">
                             <label className="text-gray-700">University (or alumni) <span role="img" aria-label="emoji">🎓</span></label>
                             <FormInput
@@ -119,7 +119,7 @@ function UserInformationForm() {
                         </div>
                     </div>
 
-                    <div className="flex space-x-7">
+                    <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-7">
                         <div className="flex flex-col flex-1">
                             <label className="text-gray-700">Student ID (if you have one) <span role="img" aria-label="emoji">🆔</span></label>
                             <FormInput placeholder="e.g 1234566789.." name="studentID" onChange={onChange} />
@@ -130,7 +130,7 @@ function UserInformationForm() {
                         </div>
                     </div>
 
-                    <div className="flex space-x-7">
+                    <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-7">
                         <div className="flex flex-col flex-1">
                             <label className="text-gray-700">What are you studying? <span role="img" aria-label="emoji">📚</span></label>
                             <FormInput placeholder="e.g Software Engineering" name="studyOption" onChange={onChange} />
@@ -141,7 +141,7 @@ function UserInformationForm() {
                         </div>
                     </div>
 
-                    <div className="flex flex-col items-center mt-4">
+                    <div className="flex flex-col items-start md:items-center md:space-x-7 mt-4">
                         <label className="text-gray-700">Membership Types <span role="img" aria-label="emoji">💳</span></label>
                         <FormInput type="radio" name="duration" options={paymentOptions} errorMessage={errors.duration} onChange={onChange} />
                     </div>
