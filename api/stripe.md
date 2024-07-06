@@ -21,7 +21,7 @@ Additional info: Stripe restricts all production web apps to run in HTTPS. HTTP 
 5. Check if NGINX will strip the header `['stripe-signature']` in dev/prod. 
 6. Switch to stripe secret from test key to live key based on `NODE_ENV` secret
 7. Ask @gmat224 if we need to worry about multiple quantities of tickets purchased. 
-8. Ask @gmat224 if checkout sessions are limited to 15mins or more. By default, Stripe sets it to 24hrs. Epoch timestamp btw. https://docs.stripe.com/api/checkout/sessions/create#create_checkout_session-expires_at
+8. Set `expires_at` in `/create-checkout-session` 
 9. Ask @gmat224 if tax collection needs to be enabled for transactions. 
 
 # Notes:
