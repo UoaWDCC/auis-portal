@@ -96,19 +96,19 @@ router.post(
     // @Ratchet7x5 TODO: Check if NGINX strips this header in dev/prod
     const sig = req.headers["stripe-signature"];
 
-    let webhook;
+    let webhookEvent;
 
     try {
-      webhook = stripe.webhooks.constructEvent(payload, sig, endpointSecret);
+      webhookEvent = stripe.webhooks.constructEvent(payload, sig, endpointSecret);
     } catch (err) {
       return res.status(400).send(`Webhook Error: ` + err);
     }
 
     // Handle the checkout.session.completed event
-    if (webhook.type === "checkout.session.completed") {
+    if (webhookEvent.type === "checkout.session.completed") {
       // Retrieve the session. If you require line items in the response, you may include them by expanding line_items.
       const sessionWithLineItems = await stripe.checkout.sessions.retrieve(
-        webhook.data.object.id,
+        webhookEvent.data.object.id,
         {
           expand: ["line_items"],
         }
