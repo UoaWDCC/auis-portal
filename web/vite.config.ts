@@ -19,7 +19,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "http://localhost:3000/", // process.env.PROXY_TARGET ?? 
+        target: "http://localhost:3000/", // process.env.PROXY_TARGET ??
         changeOrigin: true,
         secure: false,
         ws: true,
