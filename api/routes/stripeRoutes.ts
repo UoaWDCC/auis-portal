@@ -4,13 +4,13 @@ import * as http from "http";
 import { protect } from "../middleware/authMiddleware";
 
 // StripeJS: Load secret API key
-const stripe = require("stripe")(`${process.env.STRIPE_SECRET_TEST}`, {
+const stripe = require("stripe")(`${process.env.STRIPE_SECRET_KEY}`, {
   apiVersion: "2024-06-20",
   typescript: true,
 });
 
-//frontend,  replace with process.env.domainURL. Switch based on NODE_ENV
-const domainURL = process.env.DOMAIN_DEV;
+//frontend
+const domainURL = process.env.DOMAIN_FRONTEND;
 
 // use the Stripe CLI to generate your own endpoint and paste the value below.
 const endpointSecret = process.env.STRIPE_WEBHOOK_ENDPOINT;
@@ -49,7 +49,8 @@ router.post("/create-checkout-session", async (req, res) => {
         },
       ],
       mode: "payment",
-      // @Ratchet7x5 INFO: The link below determines the redirect page after successful payment.
+      // @Ratchet7x5 INFO: The link below determines the 
+      // redirect page on frontend after successful payment.
       return_url: `${domainURL}return?session_id={CHECKOUT_SESSION_ID}`,
     });
 
