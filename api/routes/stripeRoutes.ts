@@ -4,7 +4,10 @@ import * as http from "http";
 import { protect } from "../middleware/authMiddleware";
 
 // StripeJS: Load secret API key
-const stripe = require("stripe")(`${process.env.STRIPE_SECRET_TEST}`);
+const stripe = require("stripe")(`${process.env.STRIPE_SECRET_TEST}`, {
+  apiVersion: "2024-06-20",
+  typescript: true,
+});
 
 //frontend,  replace with process.env.domainURL. Switch based on NODE_ENV
 const domainURL = process.env.DOMAIN_DEV;
