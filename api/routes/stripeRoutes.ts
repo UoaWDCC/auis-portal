@@ -26,6 +26,10 @@ router.post("/create-checkout-session", async (req, res) => {
   const { priceId } = req.body;
   //console.log(priceId);
 
+  // epoch time in seconds, 30mins timeout
+  let session_expiry = Math.floor(new Date().getTime() / 1000 + 30 * 60);
+  //console.log("/create-checkout-session: session_expiry", session_expiry);
+
   // if priceId is undefined, send a 404 back.
   if (priceId == undefined) {
     return res.send({ error: "priceId was undefined." }).status(404);
@@ -36,6 +40,7 @@ router.post("/create-checkout-session", async (req, res) => {
     // if no bearer token was found, send a 404 error. Also ensure user is logged in.
     const session = await stripe.checkout.sessions.create({
       ui_mode: "embedded",
+      expires_at: session_expiry,
       line_items: [
         {
           // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
