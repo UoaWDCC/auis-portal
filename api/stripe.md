@@ -27,14 +27,17 @@ Additional info: Stripe restricts all production web apps to run in HTTPS. HTTP 
 # Notes:
 Schema: users = admin users for strapi
 Schema: people = users that sign up
+Schema: user_tickets/people_tickets = tickets that the users purchase
 
-Stripe will pay AUIS's bank account every 7-14 days' based on Stripe's risk assessment of AUIS. 
+Additional info: Stripe restricts all production web apps to run in HTTPS. HTTP for development is fine. 
 
-Stripe API: https://docs.stripe.com/api/
+Stripe will pay AUIS's bank account every 7-14 days' based on Stripe's risk assessment of AUIS. Read more here: https://docs.stripe.com/payouts
 
-Accept a payment: https://docs.stripe.com/payments/accept-a-payment?platform=web&ui=embedded-form
+Stripe API Documentation: https://docs.stripe.com/api/
 
-Handle Payments: https://docs.stripe.com/payments/handling-payment-events
+Accept a payment (embedded form): https://docs.stripe.com/payments/accept-a-payment?platform=web&ui=embedded-form
+
+Handle Payments (webhook included): https://docs.stripe.com/payments/handling-payment-events
 
 Fulfill Orders (Webhook stuff): https://docs.stripe.com/payments/checkout/fulfill-orders
 
@@ -43,4 +46,3 @@ Register Webhook (FOR PRODUCTION): https://docs.stripe.com/webhooks#register-web
 Product and Pricing: https://docs.stripe.com/products-prices/how-products-and-prices-work
 
 
-Get paid to your bank account (automatic, nothing to worry about): https://docs.stripe.com/payouts
