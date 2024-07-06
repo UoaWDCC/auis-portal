@@ -49,7 +49,7 @@ router.post("/create-checkout-session", async (req, res) => {
         },
       ],
       mode: "payment",
-      // @Ratchet7x5 INFO: The link below determines the 
+      // @Ratchet7x5 INFO: The link below determines the
       // redirect page on frontend after successful payment.
       return_url: `${domainURL}return?session_id={CHECKOUT_SESSION_ID}`,
     });
