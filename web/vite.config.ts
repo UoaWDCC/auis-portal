@@ -16,4 +16,15 @@ export default defineConfig({
       "@screens": "/src/screens",
     },
   },
+  server: {
+    proxy: {
+      "/api": {
+        target: "http://localhost:3000/", // process.env.PROXY_TARGET ?? 
+        changeOrigin: true,
+        secure: false,
+        ws: true,
+        //rewrite: (path) => path.replace(/^\/api/, ""),
+      },
+    },
+  },
 });
