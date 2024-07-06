@@ -24,6 +24,11 @@ export interface Partner {
   location: string;
 }
 
+export interface PartnerCardProps {
+  colour: string;
+  partner: Partner;
+}
+
 export interface Social {
   id: number;
   type: string;

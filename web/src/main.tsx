@@ -22,6 +22,7 @@ import { graphqlClient } from "./graphql/client.ts";
 import CreditsScreen from "./screens/CreditsScreen.tsx";
 import SignInScreen from "./screens/SignInScreen.tsx";
 import EventScreen from "./screens/EventScreen.tsx";
+import PartnersScreen from "./screens/PartnersScreen.tsx";
 
 //Add any routes for screens below
 const router = createBrowserRouter(
@@ -31,6 +32,7 @@ const router = createBrowserRouter(
       <Route path="/test" element={<TestScreen />} />
       <Route path="/credits" element={<CreditsScreen />} />
       <Route path="/exec" element={<ExecScreen />} />
+      <Route path="/sponsors" element={<PartnersScreen />} />
       <Route path="/login" element={<SignInScreen />} />
       <Route path="/signup" element={<SignUpScreen />} />
       <Route path="/about-us" element={<AboutUsScreen />} />
