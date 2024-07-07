@@ -17,7 +17,23 @@ import userRoutes from "./routes/userRoutes";
 const app = express();
 config();
 
-app.use(json());
+// @Ratchet7x5: INFO: Use JSON parser for all non-webhook routes
+//              otherwise, webhook and db entries will fail
+app.use(
+  (
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ): void => {
+    if (req.originalUrl === "/api/stripe/webhook") {
+      console.log(req.originalUrl);
+      next();
+    } else {
+      express.json()(req, res, next);
+    }
+  }
+);
+
 app.use(cors());
 app.use(express.static("public"));
 
