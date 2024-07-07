@@ -1,10 +1,12 @@
 import express, { Router, json } from "express";
 import bodyParser from "body-parser";
+import { db } from "../db/config/db";
 import * as http from "http";
 import { protect } from "../middleware/authMiddleware";
+import Stripe from "stripe";
 
 // StripeJS: Load secret API key
-const stripe = require("stripe")(`${process.env.STRIPE_SECRET_KEY}`, {
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
   apiVersion: "2024-06-20",
   typescript: true,
 });
@@ -13,7 +15,7 @@ const stripe = require("stripe")(`${process.env.STRIPE_SECRET_KEY}`, {
 const domainURL = process.env.DOMAIN_FRONTEND;
 
 // use the Stripe CLI to generate your own endpoint and paste the value below.
-const endpointSecret = process.env.STRIPE_WEBHOOK_ENDPOINT;
+const endpointSecret: string = process.env.STRIPE_WEBHOOK_ENDPOINT as string;
 
 const router = Router();
 
@@ -61,12 +63,14 @@ router.post("/create-checkout-session", async (req, res) => {
 });
 
 router.get("/session-status", async (req, res) => {
-  const session = await stripe.checkout.sessions.retrieve(req.query.session_id);
+  const session = await stripe.checkout.sessions.retrieve(
+    req.query.session_id as string
+  );
   //console.log("session-status: ", session);
 
   res.send({
     status: session.status,
-    customer_email: session.customer_details.email,
+    customer_email: session.customer_details?.email,
   });
 });
 
@@ -88,44 +92,39 @@ const emailCustomerAboutFailedPayment = (session: any) => {
 
 router.post(
   "/webhook",
-  bodyParser.raw({ type: "application/json" }),
-  async (req, res) => {
-    const payload = req.body;
-    //console.log("/webhook: payload: ", payload);
+  // Stripe requires the raw body to construct the event
+  express.raw({ type: "application/json" }),
+  (req: express.Request, res: express.Response): void => {
+    const sig = req.headers["stripe-signature"] as string | string[] | Buffer;
 
-    // @Ratchet7x5 TODO: Check if NGINX strips this header in dev/prod
-    const sig = req.headers["stripe-signature"];
-
-    let webhookEvent;
+    let event: Stripe.Event;
 
     try {
-      webhookEvent = stripe.webhooks.constructEvent(
-        payload,
-        sig,
-        endpointSecret
-      );
+      event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
     } catch (err) {
-      return res.status(400).send(`Webhook Error: ` + err);
+      // On error, log and return the error message
+      console.log(`Error message: ${err}`);
+      res.status(400).send(`Webhook Error: ${err}`);
+      return;
     }
 
-    // Handle the checkout.session.completed event
-    if (webhookEvent.type === "checkout.session.completed") {
-      // Retrieve the session. If you require line items in the response, you may include them by expanding line_items.
-      const sessionWithLineItems = await stripe.checkout.sessions.retrieve(
-        webhookEvent.data.object.id,
-        {
-          expand: ["line_items"],
-        }
-      );
-      const lineItems = sessionWithLineItems.line_items;
+    // Successfully constructed event
+    console.log("Success:", event.id);
 
-      console.log("/webhook: receipt_url: ");
-
-      // Fulfill the purchase...
-      fulfillOrder(lineItems);
+    // Cast event data to Stripe object
+    if (event.type === "payment_intent.succeeded") {
+      const stripeObject: Stripe.PaymentIntent = event.data
+        .object as Stripe.PaymentIntent;
+      console.log(`PaymentIntent status: ${stripeObject.status}`);
+    } else if (event.type === "charge.succeeded") {
+      const charge = event.data.object as Stripe.Charge;
+      console.log(`Charge id: ${charge.id}`);
+    } else {
+      console.warn(`Unhandled event type: ${event.type}`);
     }
 
-    res.status(200).end();
+    // Return a response to acknowledge receipt of the event
+    res.json({ received: true });
   }
 );
 
