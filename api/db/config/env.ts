@@ -22,11 +22,6 @@ dotenv.config();
       `.env: DATABASE_PASSWORD is required. Received: "${process.env.DATABASE_PASSWORD}"`
     );
   }
-  if (!process.env.STRIPE_SECRET_KEY) {
-    throw new Error(
-      `.env: Stripe Secret Key is required. Received: "${process.env.STRIPE_SECRET_TEST}"`
-    );
-  }
 })();
 
 export const {
@@ -34,5 +29,4 @@ export const {
   DATABASE_PORT,
   DATABASE_USERNAME,
   DATABASE_PASSWORD,
-  STRIPE_SECRET_KEY,
 } = process.env;
