@@ -55,6 +55,19 @@ const execsMock = {
   },
 };
 
+const noExecsMock = {
+  request: {
+    query: GET_EXECS,
+  },
+  result: {
+    data: {
+      execs: {
+        data: [],
+      },
+    },
+  },
+};
+
 // Mock data for GET_PREVIOUS_TEAMS query
 const previousTeamsMock = {
   request: {
@@ -86,7 +99,21 @@ const previousTeamsMock = {
   },
 };
 
+const noPreviousTeamMock = {
+  request: {
+    query: GET_PREVIOUS_TEAMS,
+  },
+  result: {
+    data: {
+      previousTeams: {
+        data: [],
+      },
+    },
+  },
+};
+
 const mocks = [execsMock, previousTeamsMock];
+const noDataMocks = [noExecsMock, noPreviousTeamMock];
 
 describe("ExecScreen", () => {
   it("renders loading spinner initially", () => {
@@ -97,7 +124,7 @@ describe("ExecScreen", () => {
         </MemoryRouter>
       </MockedProvider>
     );
-    
+
     expect(screen.getByTestId("loading-spinner")).toBeInTheDocument();
   });
 
@@ -160,5 +187,22 @@ describe("ExecScreen", () => {
     expect(await screen.findByText("John Doe")).toBeInTheDocument();
     expect(await screen.findByText("Executives")).toBeInTheDocument();
     expect(await screen.findByText("Janet Doe")).toBeInTheDocument();
+  });
+
+  it("renders no data from cms", async () => {
+    render(
+      <MockedProvider mocks={noDataMocks} addTypename={false}>
+        <MemoryRouter>
+          <ExecScreen />
+        </MemoryRouter>
+      </MockedProvider>
+    );
+
+    // Message should appear twice
+    const noExecs = await screen.findAllByText("There is no execs to display");
+    expect(noExecs).toHaveLength(2);
+    expect(
+      await screen.findByText("There is no previous teams to display")
+    ).toBeInTheDocument();
   });
 });

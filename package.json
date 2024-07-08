@@ -6,10 +6,14 @@
   "scripts": {
     "setup": "yarn && cd ./web && yarn && cd ../strapi && yarn && cd ../api && yarn",
     "dev": "concurrently \"cd ./database && docker compose up\" \"cd ./web && yarn dev\" \"cd ./strapi && yarn develop\" \"cd ./api && yarn dev\"",
-    "build": "cd ./web && yarn build && cd ../strapi && yarn build && cd ../api && yarn build"
+    "build": "cd ./web && yarn build && cd ../strapi && yarn build && cd ../api && yarn build",
+    "format": "prettier '**/*.{ts,tsx}' --write",
+    "format:ci": "prettier '**/*.{ts,tsx}' --check"
   },
   "devDependencies": {
-    "concurrently": "^8.2.2"
+    "concurrently": "^8.2.2",
+    "prettier": "^3.3.2",
+    "prettier-plugin-tailwindcss": "^0.6.5"
   },
   "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }

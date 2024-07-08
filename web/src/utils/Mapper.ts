@@ -37,7 +37,11 @@ export class Mapper {
   }
 
   static mapToPartner(data: any): Partner[] {
-    if (!data.partners || !data.partners.data || data.partners.data.length === 0) {
+    if (
+      !data.partners ||
+      !data.partners.data ||
+      data.partners.data.length === 0
+    ) {
       throw new NoDataError("No data");
     } else {
       return data.partners.data.map((item: any) => {
@@ -72,7 +76,11 @@ export class Mapper {
   }
 
   static mapToSomePhotos(data: any): SomePhoto[] {
-    if (!data.somePhotos || !data.somePhotos.data || data.somePhotos.data.length === 0) {
+    if (
+      !data.somePhotos ||
+      !data.somePhotos.data ||
+      data.somePhotos.data.length === 0
+    ) {
       throw new NoDataError("No data");
     } else {
       return data.somePhotos.data.map((item: any) => {
@@ -108,7 +116,11 @@ export class Mapper {
   }
 
   static mapToIntroduction(data: any): Introduction[] {
-    if (!data.introductions || !data.introductions.data || data.introductions.data.length === 0) {
+    if (
+      !data.introductions ||
+      !data.introductions.data ||
+      data.introductions.data.length === 0
+    ) {
       throw new NoDataError("No data");
     } else {
       return data.introductions.data.map((item: any) => {
@@ -125,7 +137,11 @@ export class Mapper {
   }
 
   static mapToPreviousTeams(data: any): PreviousTeam[] {
-    if (!data.previousTeams || !data.previousTeams.data || data.previousTeams.data.length === 0) {
+    if (
+      !data.previousTeams ||
+      !data.previousTeams.data ||
+      data.previousTeams.data.length === 0
+    ) {
       throw new NoDataError("No data");
     } else {
       return data.previousTeams.data.map((item: any) => {
@@ -183,7 +199,11 @@ export class Mapper {
   }
 
   static mapToQuestions(data: any): Question[] {
-    if (!data.questions || !data.questions.data || data.questions.data.length === 0) {
+    if (
+      !data.questions ||
+      !data.questions.data ||
+      data.questions.data.length === 0
+    ) {
       throw new NoDataError("No data");
     } else {
       return data.questions.data.map((item: any) => {

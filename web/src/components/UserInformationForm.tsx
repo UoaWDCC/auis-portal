@@ -28,8 +28,8 @@ function UserInformationForm() {
         setErrors({ ...errors, [e.target.name]: "" });
     };
 
-    const residencyOptions = ["International", "Domestic"];
-    const paymentOptions = ["One Semester ($8)", "Two Semesters ($15)"];
+  const residencyOptions = ["International", "Domestic"];
+  const paymentOptions = ["One Semester ($8)", "Two Semesters ($15)"];
 
     const validate = () => {
         const newErrors = {
@@ -146,7 +146,7 @@ function UserInformationForm() {
                         <FormInput type="radio" name="duration" options={paymentOptions} errorMessage={errors.duration} onChange={onChange} />
                     </div>
 
-                    <button className="w-full bg-black text-white py-2 rounded-lg hover:bg-gray-800 mt-6">
+                    <button type="button" className="w-full bg-black text-white py-2 rounded-lg hover:bg-gray-800 mt-6">
                         Purchase membership
                     </button>
                 </form>
