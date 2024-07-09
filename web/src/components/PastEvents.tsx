@@ -9,7 +9,7 @@ interface PastEventsProps {
 const PastEvents: React.FC<PastEventsProps> = ({ pastEvents }) => {
   return (
     <div className="bg-white pb-20">
-      <h1 className="text-black text-5xl text-center font-bold py-12 mx-3">
+      <h1 className="mx-3 py-12 text-center text-5xl font-bold text-black">
         Past Events
       </h1>
       <SimpleSlider>
