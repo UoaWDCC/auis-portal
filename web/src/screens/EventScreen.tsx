@@ -3,6 +3,10 @@ import { GET_EVENTS, GET_EVENTS_GALLERY } from "../graphql/queries";
 import LoadingSpinner from "../components/LoadingSpinner";
 import type { Event, EventGallery } from "../types/types";
 import { Mapper } from "../utils/Mapper";
+import Header from "@components/Header";
+import PastEvents from "@components/PastEvents";
+import SomePhotos from "@components/SomePhotos";
+import UpcomingEventsList from "@components/UpcomingEventsList";
 
 export default function EventScreen() {
   const {
@@ -24,19 +28,46 @@ export default function EventScreen() {
     return <div>CMS Offline</div>;
   }
 
-  const events: Event[] = Mapper.mapToEvents(eventsData);
-  const eventsGallery: EventGallery[] =
-    Mapper.mapToEventsGallery(eventGalleryData);
+  const events = Mapper.mapToEvents(eventsData);
+  const eventsGallery = Mapper.mapToEventsGallery(eventGalleryData);
 
-  return (
-    <div>
-      <h1>Event Screen</h1>
-      {events.map((event) => {
-        return <h1>{event.title}</h1>;
-      })}
-      {eventsGallery.map((event) => {
-        return <h1>{event.id}</h1>;
-      })}
-    </div>
-  );
-}
+  const currentDate = new Date();
+
+  const { upcomingEvents, pastEvents } = events.reduce<{
+    upcomingEvents: Event[];
+    pastEvents: Event[];
+  }>((acc, event) => {
+    const eventDate = new Date(event.eventDateStart);
+    if (eventDate >= currentDate) {
+      acc.upcomingEvents.push(event);
+    } else {
+      acc.pastEvents.push(event);
+    }
+    return acc;
+  }, { upcomingEvents: [], pastEvents: [] });
+
+
+    return (
+      <div className="h-auto">
+        <div className="max-w-screen h-auto bg-white">
+          <div className="max-w-screen from-AUIS-dark-teal to-AUIS-teal h-auto bg-gradient-to-b">
+            <Header />
+            <div className="flex flex-col items-center text-center text-white">
+              <h1 className="text-4xl font-bold md:text-6xl">Our Upcoming Events!</h1>
+              <h3 className="my-5 text-sm text-AUIS-light-teal py-2">
+                Our exciting new events lined up just for you.
+              </h3>
+            </div>
+            <div className="w-full h-auto flex flex-row items-center justify-center bg-transparent pb-10">
+              <div className="w-11/12 lg:w-3/4">
+               <UpcomingEventsList upcomingEvents={upcomingEvents} />
+              </div>
+            </div>
+          </div>
+          <PastEvents pastEvents={pastEvents} />
+          <SomePhotos />
+        </div>
+      </div>
+    );
+};
+    

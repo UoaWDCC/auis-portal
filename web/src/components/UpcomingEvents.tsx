@@ -1,31 +1,20 @@
-import SimpleSlider from "./SimpleSlider";
+import UpcomingEventsList from "./UpcomingEventsList";
+import { Event } from "../types/types";
 
 interface UpcomingEventsProps {
-  is_events_page?: boolean;
+  upcomingEvents: Event[];
 }
 
-const UpcomingEvents: React.FC<UpcomingEventsProps> = ({
-  is_events_page = false,
-}) => {
+const UpcomingEvents: React.FC<UpcomingEventsProps> = ({upcomingEvents}) => {
   return (
     <div className="from-AUIS-dark-teal to-AUIS-teal bg-gradient-to-b pb-20">
-      <h1
-        className={`text-center text-5xl font-bold text-white ${
-          is_events_page ? "py-5" : "py-10"
-        } mx-3`}
-      >
+      <h1 className="text-center text-5xl font-bold text-white py-10 mx-3">
         Our Upcoming Events!
       </h1>
-      {is_events_page ? (
-        <p className="text-AUIS-light-teal text-md mb-4 text-center">
-          Our exciting new events lined up just for you.
-        </p>
-      ) : null}
-      <div className="">
-        <SimpleSlider>hi</SimpleSlider>
-      </div>
+      <UpcomingEventsList upcomingEvents={upcomingEvents} />
     </div>
   );
 };
 
 export default UpcomingEvents;
+

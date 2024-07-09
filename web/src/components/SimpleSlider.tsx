@@ -5,10 +5,10 @@ import {
   IoArrowBackCircleOutline,
   IoArrowForwardCircleOutline,
 } from "react-icons/io5";
-import { ReactNode, useRef } from "react";
+import { useRef } from "react";
 
 interface SimpleSliderProps {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 const SimpleSlider: React.FC<SimpleSliderProps> = ({ children }) => {
@@ -50,27 +50,21 @@ const SimpleSlider: React.FC<SimpleSliderProps> = ({ children }) => {
   };
 
   return (
-    <>
-      <div className="flex">
-        <div className="flex flex-grow items-center justify-center">
-          <IoArrowBackCircleOutline
-            onClick={previous}
-            className="mx-4 hidden h-16 w-16 sm:flex"
-          />
-        </div>
-        <div className="w-11/12 sm:w-[calc(100vw-14rem)]">
-          <Slider ref={sliderRef} {...settings}>
-            <div>test</div>
-          </Slider>
-        </div>
-        <div className="flex flex-grow items-center justify-center">
-          <IoArrowForwardCircleOutline
-            onClick={next}
-            className="mx-4 hidden h-16 w-16 sm:flex"
-          />
-        </div>
+    <div className="flex items-center justify-center w-full">
+      <IoArrowBackCircleOutline
+        onClick={previous}
+        className="mx-4 hidden h-16 w-16 sm:flex"
+      />
+      <div className="w-full h-auto sm:w-[calc(100%-8rem)]">
+        <Slider ref={sliderRef} {...settings}>
+          {children}
+        </Slider>
       </div>
-    </>
+      <IoArrowForwardCircleOutline
+        onClick={next}
+        className="mx-4 hidden h-16 w-16 sm:flex"
+      />
+    </div>
   );
 };
 

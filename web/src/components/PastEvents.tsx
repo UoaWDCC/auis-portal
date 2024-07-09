@@ -1,9 +1,10 @@
 import SimpleSlider from "./SimpleSlider";
-import { placeholderData } from "../temporary/placeholderType";
 import EventCard from "./EventCard";
+import { Event } from "../types/types";
+import PastEventsList from "./PastEventsList";
 
 interface PastEventsProps {
-  pastEvents: placeholderData[];
+  pastEvents: Event[];
 }
 
 const PastEvents: React.FC<PastEventsProps> = ({ pastEvents }) => {
@@ -12,13 +13,7 @@ const PastEvents: React.FC<PastEventsProps> = ({ pastEvents }) => {
       <h1 className="mx-3 py-12 text-center text-5xl font-bold text-black">
         Past Events
       </h1>
-      <SimpleSlider>
-        {pastEvents.map((event, index) => (
-          <div key={index} className="p-2">
-            <EventCard event={event} />
-          </div>
-        ))}
-      </SimpleSlider>
+     <PastEventsList pastEvents={pastEvents}/>
     </div>
   );
 };
