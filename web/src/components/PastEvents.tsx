@@ -13,7 +13,7 @@ const PastEvents: React.FC<PastEventsProps> = ({ pastEvents }) => {
       <h1 className="mx-3 py-12 text-center text-5xl font-bold text-black">
         Past Events
       </h1>
-     <PastEventsList pastEvents={pastEvents}/>
+      <PastEventsList pastEvents={pastEvents} />
     </div>
   );
 };

@@ -36,38 +36,41 @@ export default function EventScreen() {
   const { upcomingEvents, pastEvents } = events.reduce<{
     upcomingEvents: Event[];
     pastEvents: Event[];
-  }>((acc, event) => {
-    const eventDate = new Date(event.eventDateStart);
-    if (eventDate >= currentDate) {
-      acc.upcomingEvents.push(event);
-    } else {
-      acc.pastEvents.push(event);
-    }
-    return acc;
-  }, { upcomingEvents: [], pastEvents: [] });
+  }>(
+    (acc, event) => {
+      const eventDate = new Date(event.eventDateStart);
+      if (eventDate >= currentDate) {
+        acc.upcomingEvents.push(event);
+      } else {
+        acc.pastEvents.push(event);
+      }
+      return acc;
+    },
+    { upcomingEvents: [], pastEvents: [] }
+  );
 
-
-    return (
-      <div className="h-auto">
-        <div className="max-w-screen h-auto bg-white">
-          <div className="max-w-screen from-AUIS-dark-teal to-AUIS-teal h-auto bg-gradient-to-b">
-            <Header />
-            <div className="flex flex-col items-center text-center text-white">
-              <h1 className="text-4xl font-bold md:text-6xl">Our Upcoming Events!</h1>
-              <h3 className="my-5 text-sm text-AUIS-light-teal py-2">
-                Our exciting new events lined up just for you.
-              </h3>
-            </div>
-            <div className="w-full h-auto flex flex-row items-center justify-center bg-transparent pb-10">
-              <div className="w-11/12 lg:w-3/4">
-               <UpcomingEventsList upcomingEvents={upcomingEvents} />
-              </div>
+  return (
+    <div className="h-auto">
+      <div className="max-w-screen h-auto bg-white">
+        <div className="max-w-screen from-AUIS-dark-teal to-AUIS-teal h-auto bg-gradient-to-b">
+          <Header />
+          <div className="flex flex-col items-center text-center text-white">
+            <h1 className="text-4xl font-bold md:text-6xl">
+              Our Upcoming Events!
+            </h1>
+            <h3 className="text-AUIS-light-teal my-5 py-2 text-sm">
+              Our exciting new events lined up just for you.
+            </h3>
+          </div>
+          <div className="flex h-auto w-full flex-row items-center justify-center bg-transparent pb-10">
+            <div className="w-11/12 lg:w-3/4">
+              <UpcomingEventsList upcomingEvents={upcomingEvents} />
             </div>
           </div>
-          <PastEvents pastEvents={pastEvents} />
-          <SomePhotos />
         </div>
+        <PastEvents pastEvents={pastEvents} />
+        <SomePhotos />
       </div>
-    );
-};
-    
+    </div>
+  );
+}
