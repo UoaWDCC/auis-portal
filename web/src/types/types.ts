@@ -24,6 +24,11 @@ export interface Partner {
   location: string;
 }
 
+export interface PartnerCardProps {
+  colour: string;
+  partner: Partner;
+}
+
 export interface Social {
   id: number;
   type: string;
@@ -42,6 +47,10 @@ export interface Value {
   title: string;
   description: string;
   image: string;
+}
+
+export interface ValueCardProps {
+  value: Value;
 }
 
 export interface Introduction {

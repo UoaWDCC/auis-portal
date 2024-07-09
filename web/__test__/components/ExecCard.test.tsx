@@ -2,8 +2,9 @@ import { describe, expect, it } from "vitest";
 import { render, screen } from "@testing-library/react";
 import ExecCard from "../../src/components/ExecCard";
 import React from "react";
+import { Exec } from "../../src/types/types";
 
-const mockExec = {
+const mockExec: Exec = {
   id: 1,
   image: "/uploads/john_doe.jpg",
   position: "President",
