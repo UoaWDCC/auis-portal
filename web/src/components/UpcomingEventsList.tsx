@@ -1,7 +1,7 @@
-import React from 'react'
-import SimpleSlider from './SimpleSlider';
-import { Event } from '../types/types';
-import UpcomingEventCard from './UpcomingEventCard';
+import React from "react";
+import SimpleSlider from "./SimpleSlider";
+import { Event } from "../types/types";
+import UpcomingEventCard from "./UpcomingEventCard";
 
 interface UpcomingEventsListProps {
   upcomingEvents: Event[];
