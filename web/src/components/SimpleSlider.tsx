@@ -50,12 +50,12 @@ const SimpleSlider: React.FC<SimpleSliderProps> = ({ children }) => {
   };
 
   return (
-    <div className="flex items-center justify-center w-full">
+    <div className="flex w-full items-center justify-center">
       <IoArrowBackCircleOutline
         onClick={previous}
         className="mx-4 hidden h-16 w-16 sm:flex"
       />
-      <div className="w-full h-auto sm:w-[calc(100%-8rem)]">
+      <div className="h-auto w-full sm:w-[calc(100%-8rem)]">
         <Slider ref={sliderRef} {...settings}>
           {children}
         </Slider>

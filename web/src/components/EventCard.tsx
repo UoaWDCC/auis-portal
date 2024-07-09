@@ -15,7 +15,9 @@ const EventCard: React.FC<EventProps> = ({ event }) => {
       />
       <div className="card-body">
         <h5 className="card-title text-lg font-bold">{event.title}</h5>
-        <p className="card-text text-sm">{new Date(event.eventDateStart).toLocaleTimeString()}</p>
+        <p className="card-text text-sm">
+          {new Date(event.eventDateStart).toLocaleTimeString()}
+        </p>
         <p className="card-text text-sm">{event.location}</p>
         <p className="card-text text-sm">
           {event.isLive ? "Paid Event" : "Free Event"}
