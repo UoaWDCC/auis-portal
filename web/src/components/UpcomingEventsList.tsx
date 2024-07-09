@@ -1,6 +1,5 @@
 import React from 'react'
 import SimpleSlider from './SimpleSlider';
-import EventCard from './EventCard';
 import { Event } from '../types/types';
 import UpcomingEventCard from './UpcomingEventCard';
 

@@ -1,12 +1,12 @@
 import { useQuery } from "@apollo/client";
 import { GET_EVENTS, GET_EVENTS_GALLERY } from "../graphql/queries";
 import LoadingSpinner from "../components/LoadingSpinner";
-import type { Event, EventGallery } from "../types/types";
+import type { Event } from "../types/types";
 import { Mapper } from "../utils/Mapper";
 import Header from "@components/Header";
 import PastEvents from "@components/PastEvents";
-import SomePhotos from "@components/SomePhotos";
 import UpcomingEventsList from "@components/UpcomingEventsList";
+import EventGallery from "@components/EventGallery";
 
 export default function EventScreen() {
   const {
@@ -65,7 +65,7 @@ export default function EventScreen() {
             </div>
           </div>
           <PastEvents pastEvents={pastEvents} />
-          <SomePhotos />
+          <EventGallery />
         </div>
       </div>
     );

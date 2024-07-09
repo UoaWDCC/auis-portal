@@ -1,5 +1,3 @@
-import SimpleSlider from "./SimpleSlider";
-import EventCard from "./EventCard";
 import { Event } from "../types/types";
 import PastEventsList from "./PastEventsList";
 
