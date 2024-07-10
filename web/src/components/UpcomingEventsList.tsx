@@ -1,7 +1,7 @@
-import SimpleSlider from './SimpleSlider';
-import { Event } from '../types/types';
-import UpcomingEventCard from './UpcomingEventCard';
-import { Link } from 'react-router-dom';
+import SimpleSlider from "./SimpleSlider";
+import { Event } from "../types/types";
+import UpcomingEventCard from "./UpcomingEventCard";
+import { Link } from "react-router-dom";
 
 interface UpcomingEventsListProps {
   upcomingEvents: Event[];
