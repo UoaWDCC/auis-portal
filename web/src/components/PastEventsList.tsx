@@ -12,9 +12,9 @@ const PastEventsList: React.FC<PastEventsListProps> = ({ pastEvents }) => {
     <SimpleSlider cardType="past">
       {pastEvents.map((event, index) => (
         <div key={index} className="p-2 hover:cursor-pointer">
-        <Link to={`/events/${event.id}`}>
-          <PastEventCard pastEvent={event} />
-        </Link>
+          <Link to={`/events/${event.id}`}>
+            <PastEventCard pastEvent={event} />
+          </Link>
         </div>
       ))}
     </SimpleSlider>
