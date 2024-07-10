@@ -1,3 +1,4 @@
+import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -9,23 +10,24 @@ import { useRef } from "react";
 
 interface SimpleSliderProps {
   children: React.ReactNode;
+  cardType?: 'upcoming' | 'past';
 }
 
-const SimpleSlider: React.FC<SimpleSliderProps> = ({ children }) => {
+const SimpleSlider: React.FC<SimpleSliderProps> = ({ children, cardType }) => {
   const sliderRef = useRef<Slider>(null);
 
   const settings = {
     dots: true,
     infinite: false,
     speed: 500,
-    slidesToShow: 3, // Show 3 slides at a time
+    slidesToShow: cardType === 'past' ? 1 : 3, 
     slidesToScroll: 1,
     arrows: false,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: cardType === 'past' ? 1 : 2,
           slidesToScroll: 1,
           infinite: true,
           dots: true,
@@ -56,8 +58,30 @@ const SimpleSlider: React.FC<SimpleSliderProps> = ({ children }) => {
         className="mx-4 hidden h-16 w-16 sm:flex"
       />
       <div className="h-auto w-full sm:w-[calc(100%-8rem)]">
-        <Slider ref={sliderRef} {...settings}>
-          {children}
+      <Slider ref={sliderRef} {...settings}>
+          {cardType === 'past'
+            ? React.Children.toArray(children)
+                .reduce((acc: any, child: any, index: number) => {
+                  if (index % 3 === 0) acc.push([]);
+                  acc[acc.length - 1].push(child);
+                  return acc;
+                }, [])
+                .map((group: any, index: number) => (
+                  <div key={index} className="p-2">
+                    <div className="flex flex-col">
+                      {group.map((child: any, subIndex: number) => (
+                        <div key={subIndex} className="p-2">
+                          {child}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))
+            : React.Children.map(children, (child, index) => (
+                <div key={index} className="p-2">
+                  {child}
+                </div>
+              ))}
         </Slider>
       </div>
       <IoArrowForwardCircleOutline
