@@ -12,7 +12,7 @@ const UpcomingEventsList: React.FC<UpcomingEventsListProps> = ({
 }) => {
   return (
     <>
-      <SimpleSlider cardType='upcoming'>
+      <SimpleSlider cardType="upcoming">
         {upcomingEvents.map((event, index) => (
           <div key={index} className="p-2 hover:cursor-pointer">
             <Link to={`/events/${event.id}`}>

@@ -10,7 +10,7 @@ import { useRef } from "react";
 
 interface SimpleSliderProps {
   children: React.ReactNode;
-  cardType?: 'upcoming' | 'past';
+  cardType?: "upcoming" | "past";
 }
 
 const SimpleSlider: React.FC<SimpleSliderProps> = ({ children, cardType }) => {
@@ -20,14 +20,14 @@ const SimpleSlider: React.FC<SimpleSliderProps> = ({ children, cardType }) => {
     dots: true,
     infinite: false,
     speed: 500,
-    slidesToShow: cardType === 'past' ? 1 : 3, 
+    slidesToShow: cardType === "past" ? 1 : 3,
     slidesToScroll: 1,
     arrows: false,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: cardType === 'past' ? 1 : 2,
+          slidesToShow: cardType === "past" ? 1 : 2,
           slidesToScroll: 1,
           infinite: true,
           dots: true,
@@ -58,8 +58,8 @@ const SimpleSlider: React.FC<SimpleSliderProps> = ({ children, cardType }) => {
         className="mx-4 hidden h-16 w-16 sm:flex"
       />
       <div className="h-auto w-full sm:w-[calc(100%-8rem)]">
-      <Slider ref={sliderRef} {...settings}>
-          {cardType === 'past'
+        <Slider ref={sliderRef} {...settings}>
+          {cardType === "past"
             ? React.Children.toArray(children)
                 .reduce((acc: any, child: any, index: number) => {
                   if (index % 3 === 0) acc.push([]);
