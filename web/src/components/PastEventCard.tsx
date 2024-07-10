@@ -9,15 +9,19 @@ interface PastEventCardProps {
 
 const PastEventCard: React.FC<PastEventCardProps> = ({ pastEvent }) => {
   return (
-    <div className="card h-full w-full rounded-3xl bg-white shadow-lg flex flex-col md:flex-row">
+    <div className="card flex h-full w-full flex-col rounded-3xl bg-white shadow-lg md:flex-row">
       <img
         src={pastEvent.image}
         alt={pastEvent.title}
-        className="h-fit w-full md:w-64 md:h-full object-cover rounded-t-3xl md:rounded-l-3xl md:rounded-t-none"
+        className="h-fit w-full rounded-t-3xl object-cover md:h-full md:w-64 md:rounded-l-3xl md:rounded-t-none"
       />
-      <div className="card-body p-4 flex-grow flex flex-col text-gray-500 gap-4">
-        <h5 className="card-title text-lg font-bold text-black">{pastEvent.title}</h5>
-        <p className="text-wrap h-16 md:h-10 overflow-hidden text-justify">{pastEvent.description}</p>
+      <div className="card-body flex flex-grow flex-col gap-4 p-4 text-gray-500">
+        <h5 className="card-title text-lg font-bold text-black">
+          {pastEvent.title}
+        </h5>
+        <p className="h-16 overflow-hidden text-wrap text-justify md:h-10">
+          {pastEvent.description}
+        </p>
         <div className="text-md">
           <div className="card-text flex flex-row items-center gap-2">
             <FaCalendarAlt />{" "}
