@@ -2,6 +2,7 @@ import React from 'react'
 import SimpleSlider from './SimpleSlider';
 import { Event } from '../types/types';
 import UpcomingEventCard from './UpcomingEventCard';
+import { Link } from 'react-router-dom';
 
 interface UpcomingEventsListProps {
   upcomingEvents: Event[];
@@ -14,8 +15,10 @@ const UpcomingEventsList: React.FC<UpcomingEventsListProps> = ({
     <>
       <SimpleSlider>
         {upcomingEvents.map((event, index) => (
-          <div key={index} className="p-2">
-            <UpcomingEventCard upcomingEvent={event} />
+          <div key={index} className="p-2 hover:cursor-pointer">
+            <Link to={`/events/${event.id}`}>
+              <UpcomingEventCard upcomingEvent={event} />
+            </Link>
           </div>
         ))}
       </SimpleSlider>

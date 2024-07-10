@@ -7,6 +7,7 @@ import Header from "@components/Header";
 import PastEvents from "@components/PastEvents";
 import UpcomingEventsList from "@components/UpcomingEventsList";
 import EventGallery from "@components/EventGallery";
+import PastEventsList from "@components/PastEventsList";
 
 export default function EventScreen() {
   const {
@@ -67,7 +68,11 @@ export default function EventScreen() {
               <UpcomingEventsList upcomingEvents={upcomingEvents} />
             </div>
           </div>
-          <PastEvents pastEvents={pastEvents} />
+          <div className="flex h-auto w-full flex-row items-center justify-center bg-white">
+            <div className="w-11/12 lg:w-3/4">
+              <PastEvents pastEvents={pastEvents} />
+            </div>
+          </div>
           <EventGallery />
         </div>
       </div>
