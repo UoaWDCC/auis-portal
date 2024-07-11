@@ -6,7 +6,7 @@ import { Mapper } from "../utils/Mapper";
 import Header from "@components/Header";
 import PastEvents from "@components/PastEvents";
 import UpcomingEventsList from "@components/UpcomingEventsList";
-import EventGallery from "@components/EventGallery";
+import EventGalleryComponent from "@components/EventGalleryComponent";
 
 export default function EventScreen() {
   const {
@@ -14,6 +14,7 @@ export default function EventScreen() {
     data: eventsData,
     error: eventsError,
   } = useQuery(GET_EVENTS);
+  
   const {
     loading: eventGalleryLoading,
     data: eventGalleryData,
@@ -72,7 +73,9 @@ export default function EventScreen() {
               <PastEvents pastEvents={pastEvents} />
             </div>
           </div>
-          <EventGallery />
+          <div className="">
+            <EventGalleryComponent photos={eventsGallery} />
+          </div>
         </div>
       </div>
     </div>
