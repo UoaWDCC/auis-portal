@@ -61,27 +61,27 @@ const SimpleSlider: React.FC<SimpleSliderProps> = ({ children, cardType }) => {
         <Slider ref={sliderRef} {...settings}>
           {cardType === "past"
             ? React.Children.toArray(children)
-              .reduce((acc: any, child: any, index: number) => {
-                if (index % 3 === 0) acc.push([]);
-                acc[acc.length - 1].push(child);
-                return acc;
-              }, [])
-              .map((group: any, index: number) => (
-                <div key={index} className="p-2">
-                  <div className="flex flex-col">
-                    {group.map((child: any, subIndex: number) => (
-                      <div key={subIndex} className="p-2">
-                        {child}
-                      </div>
-                    ))}
+                .reduce((acc: any, child: any, index: number) => {
+                  if (index % 3 === 0) acc.push([]);
+                  acc[acc.length - 1].push(child);
+                  return acc;
+                }, [])
+                .map((group: any, index: number) => (
+                  <div key={index} className="p-2">
+                    <div className="flex flex-col">
+                      {group.map((child: any, subIndex: number) => (
+                        <div key={subIndex} className="p-2">
+                          {child}
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              ))
+                ))
             : React.Children.map(children, (child, index) => (
-              <div key={index} className="p-2">
-                {child}
-              </div>
-            ))}
+                <div key={index} className="p-2">
+                  {child}
+                </div>
+              ))}
         </Slider>
       </div>
       <IoArrowForwardCircleOutline
