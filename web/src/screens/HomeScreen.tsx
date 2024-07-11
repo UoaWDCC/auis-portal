@@ -2,9 +2,8 @@ import Hero from "@components/Hero";
 import Intro from "@components/Intro";
 import SomePhotos from "@components/SomePhotos";
 import UpcomingEvents from "@components/UpcomingEvents";
-import { GET_EVENTS, GET_EVENTS_GALLERY } from "../graphql/queries";
+import { GET_EVENTS } from "../graphql/queries";
 import LoadingSpinner from "../components/LoadingSpinner";
-import type { Event } from "../types/types";
 import { useQuery } from "@apollo/client";
 import { Mapper } from "@utils/Mapper";
 
