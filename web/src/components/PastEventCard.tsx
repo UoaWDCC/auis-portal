@@ -25,7 +25,14 @@ const PastEventCard: React.FC<PastEventCardProps> = ({ pastEvent }) => {
         <div className="text-md">
           <div className="card-text flex flex-row items-center gap-2">
             <FaCalendarAlt />{" "}
-            {new Date(pastEvent.eventDateStart).toLocaleString()}
+            {new Date(pastEvent.eventDateStart).toLocaleString('en-NZ', {
+              day: 'numeric',
+              month: 'numeric',
+              year: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit',
+              hour12: true
+            })}
           </div>
           <div className="card-text flex flex-row items-center gap-2">
             <FaLocationDot /> {pastEvent.location}
