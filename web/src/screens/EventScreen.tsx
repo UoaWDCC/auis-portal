@@ -41,7 +41,7 @@ export default function EventScreen() {
     (acc, event) => {
       const eventDate = new Date(event.eventDateStart);
       const isEventLive = event.isLive;
-      if ((eventDate >= currentDate) && (isEventLive)) {
+      if (eventDate >= currentDate && isEventLive) {
         acc.upcomingEvents.push(event);
       } else {
         acc.pastEvents.push(event);
