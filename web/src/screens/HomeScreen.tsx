@@ -28,7 +28,8 @@ export default function HomeScreen() {
 
   const upcomingEvents = events.filter((event) => {
     const eventDate = new Date(event.eventDateStart);
-    return eventDate >= currentDate;
+    const isEventLive = event.isLive;
+    return ((eventDate >= currentDate) && (isEventLive));
   });
 
   return (
