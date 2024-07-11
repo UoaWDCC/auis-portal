@@ -27,7 +27,7 @@ const UpcomingEventCard: React.FC<UpcomingEventCardProps> = ({
     timeUntilEvent = `${differenceInMinutes} minute${differenceInMinutes > 1 ? "s" : ""}`;
   }
   return (
-    <div className="card relative h-full w-full rounded-lg bg-white shadow-md">
+    <div className="card relative h-full w-full rounded-lg bg-white shadow-md hover:bg-white/80 duration-100">
       <div className="absolute right-2 top-2 z-10 rounded-full bg-orange-500 px-3 py-1 text-base font-bold text-white shadow-sm">
         in {timeUntilEvent}
       </div>
