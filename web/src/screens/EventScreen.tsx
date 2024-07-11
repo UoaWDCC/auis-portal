@@ -14,7 +14,7 @@ export default function EventScreen() {
     data: eventsData,
     error: eventsError,
   } = useQuery(GET_EVENTS);
-  
+
   const {
     loading: eventGalleryLoading,
     data: eventGalleryData,

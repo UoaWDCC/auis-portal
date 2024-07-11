@@ -183,20 +183,24 @@ export class Mapper {
   }
 
   static mapToEventsGallery(data: any): EventGallery[] {
-    if (!data.eventGalleries || !data.eventGalleries.data || data.eventGalleries.data.length === 0) {
+    if (
+      !data.eventGalleries ||
+      !data.eventGalleries.data ||
+      data.eventGalleries.data.length === 0
+    ) {
       throw new NoDataError("No data");
     } else {
       return data.eventGalleries.data.map((item: any) => {
         const attributes = item.attributes || {};
         const imageUrl = attributes.Image?.data?.attributes?.url || "";
-  
+
         return {
           id: item.id,
           image: imageUrl || "",
         };
       });
     }
-  }  
+  }
 
   static mapToQuestions(data: any): Question[] {
     if (

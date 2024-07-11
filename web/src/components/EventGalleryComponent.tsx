@@ -1,6 +1,6 @@
-import React from 'react';
-import Masonry from 'react-masonry-css';
-import { EventGallery } from '../types/types';
+import React from "react";
+import Masonry from "react-masonry-css";
+import { EventGallery } from "../types/types";
 
 interface EventGalleryProps {
   photos: EventGallery[];
@@ -11,7 +11,7 @@ const EventGalleryComponent: React.FC<EventGalleryProps> = ({ photos }) => {
     default: 3,
     1100: 3,
     700: 2,
-    500: 1
+    500: 1,
   };
 
   return (
@@ -22,7 +22,7 @@ const EventGalleryComponent: React.FC<EventGalleryProps> = ({ photos }) => {
       <div className="flex justify-center px-4">
         <Masonry
           breakpointCols={breakpointColumnsObj}
-          className="my-masonry-grid flex w-auto -ml-4"
+          className="my-masonry-grid -ml-4 flex w-auto"
           columnClassName="my-masonry-grid_column pl-4 bg-clip-padding"
         >
           {photos.map((photo) => (
@@ -30,7 +30,7 @@ const EventGalleryComponent: React.FC<EventGalleryProps> = ({ photos }) => {
               <img
                 src={photo.image}
                 alt={`Event ${photo.id}`}
-                className="w-full h-auto object-cover rounded-lg"
+                className="h-auto w-full rounded-lg object-cover"
               />
             </div>
           ))}
