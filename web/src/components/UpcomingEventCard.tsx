@@ -42,13 +42,13 @@ const UpcomingEventCard: React.FC<UpcomingEventCardProps> = ({
         </h5>
         <div className="card-text flex flex-row items-center gap-2 text-sm">
           <FaCalendarAlt />{" "}
-          {new Date(upcomingEvent.eventDateStart).toLocaleString('en-NZ', {
-            day: 'numeric',
-            month: 'numeric',
-            year: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit',
-            hour12: true
+          {new Date(upcomingEvent.eventDateStart).toLocaleString("en-NZ", {
+            day: "numeric",
+            month: "numeric",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: true,
           })}
         </div>
         <div className="card-text flex flex-row items-center gap-2 text-sm">
