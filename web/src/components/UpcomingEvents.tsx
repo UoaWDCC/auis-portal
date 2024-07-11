@@ -11,7 +11,9 @@ const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ upcomingEvents }) => {
       <h1 className="mx-3 py-10 text-center text-5xl font-bold text-white">
         Our Upcoming Events!
       </h1>
-      <UpcomingEventsList upcomingEvents={upcomingEvents} />
+      <div className="flex justify-center items-center w-11/12 lg:w-3/4 mx-auto">
+        <UpcomingEventsList upcomingEvents={upcomingEvents} />
+      </div>
     </div>
   );
 };
