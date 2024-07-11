@@ -9,7 +9,7 @@ interface PastEventCardProps {
 
 const PastEventCard: React.FC<PastEventCardProps> = ({ pastEvent }) => {
   return (
-    <div className="card flex h-full w-full flex-col rounded-3xl bg-white shadow-md md:flex-row hover:bg-black/5 duration-100">
+    <div className="card flex h-full w-full flex-col rounded-3xl bg-white shadow-md duration-100 hover:bg-black/5 md:flex-row">
       <img
         src={pastEvent.image}
         alt={pastEvent.title}
