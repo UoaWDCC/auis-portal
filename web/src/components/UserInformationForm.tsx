@@ -211,7 +211,7 @@ function UserInformationForm() {
           </div>
 
           <button
-            type="button"
+            type="submit"
             className="mt-6 w-full rounded-lg bg-black py-2 text-white hover:bg-gray-800"
           >
             Purchase membership
