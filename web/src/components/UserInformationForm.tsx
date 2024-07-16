@@ -1,4 +1,4 @@
-import FormInput from "@components/FormInput.tsx";
+import FormInput from "../components/FormInput";
 import { useState } from "react";
 import axios from "axios";
 
