@@ -15,8 +15,12 @@ import UpcomingEventHomeCard from "./UpcomingEventHomeCard";
 
 export default function SimpleSlider() {
   const sliderRef = useRef<Slider>(null);
-  const { loading: eventsLoading, data: eventsData, error: eventsError } = useQuery(GET_EVENTS);
-  
+  const {
+    loading: eventsLoading,
+    data: eventsData,
+    error: eventsError,
+  } = useQuery(GET_EVENTS);
+
   if (eventsLoading) {
     return <LoadingSpinner />;
   }
@@ -38,22 +42,22 @@ export default function SimpleSlider() {
       {
         breakpoint: 1080,
         settings: {
-          slidesToShow: 2
-        }
+          slidesToShow: 2,
+        },
       },
       {
         breakpoint: 800,
         settings: {
-          slidesToShow: 1
-        }
-      }
-    ]
+          slidesToShow: 1,
+        },
+      },
+    ],
   };
 
   const next = () => {
     sliderRef.current?.slickNext();
   };
-  
+
   const previous = () => {
     sliderRef.current?.slickPrev();
   };
@@ -74,19 +78,19 @@ export default function SimpleSlider() {
 
   return (
     <div className="flex">
-      <div className="flex flex-grow justify-center items-center">
+      <div className="flex flex-grow items-center justify-center">
         <IoArrowBackCircleOutline
           onClick={previous}
-          className="hidden sm:flex w-16 h-16 mx-4"
+          className="mx-4 hidden h-16 w-16 sm:flex"
         />
       </div>
-      <div className="sm:w-[calc(100vw-14rem)] w-11/12">
+      <div className="w-11/12 sm:w-[calc(100vw-14rem)]">
         <SliderNoArrow />
       </div>
-      <div className="flex flex-grow justify-center items-center">
+      <div className="flex flex-grow items-center justify-center">
         <IoArrowForwardCircleOutline
           onClick={next}
-          className="hidden sm:flex w-16 h-16 mx-4"
+          className="mx-4 hidden h-16 w-16 sm:flex"
         />
       </div>
     </div>
