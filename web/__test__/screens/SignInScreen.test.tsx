@@ -11,8 +11,8 @@ describe("Sign In Screen", () => {
   beforeEach(() => {
     render(
       <MemoryRouter>
-        <ClerkProvider  publishableKey={PUBLISHABLE_KEY}>
-            <SignInScreen />
+        <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
+          <SignInScreen />
         </ClerkProvider>
       </MemoryRouter>
     );
