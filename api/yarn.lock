@@ -859,10 +859,10 @@ dotenv@^16.4.1:
   resolved "https://registry.npmjs.org/dotenv/-/dotenv-16.4.1.tgz"
   integrity sha512-CjA3y+Dr3FyFDOAMnxZEGtnW9KBR2M0JvvUtXNW+dYJL5ROWxP9DUHCwgFqpMk0OXCc0ljhaNTr2w/kutYIcHQ==
 
-drizzle-kit@^0.22.1:
-  version "0.22.1"
-  resolved "https://registry.npmjs.org/drizzle-kit/-/drizzle-kit-0.22.1.tgz"
-  integrity sha512-2at6LeHSGdhkwGtZbghtJaMUxWmeuLfX9X1O7um/SxfVbtK580h2jd59Gd5Z7TnofSS2tgmFiyEtM4fBat3KeA==
+drizzle-kit@^0.23.0:
+  version "0.23.0"
+  resolved "https://registry.yarnpkg.com/drizzle-kit/-/drizzle-kit-0.23.0.tgz#4ac8b4034a75091569666242e99df7bafd590148"
+  integrity sha512-w9jE97z193dd4jzAyj4Uv2SOh8Ydue70Ki6W0awy4bGM1aPXan6zD6Yv+nNTA6oGgNTDl2MJFxutjHG4fden5g==
   dependencies:
     "@esbuild-kit/esm-loader" "^2.5.5"
     esbuild "^0.19.7"
