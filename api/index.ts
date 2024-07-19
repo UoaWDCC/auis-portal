@@ -26,7 +26,7 @@ app.use(
     next: express.NextFunction
   ): void => {
     if (req.originalUrl === "/api/stripe/webhook") {
-      console.log(req.originalUrl);
+      //console.log(req.originalUrl);
       next();
     } else {
       express.json()(req, res, next);
