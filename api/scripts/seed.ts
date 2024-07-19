@@ -41,7 +41,7 @@ const main = async () => {
     await db.insert(events).values([
       {
         id: 0,
-        title: "Gury's Cookout",
+        title: "Gury\'s Cookout",
         description: "Let him COOK",
         event_date_start: new Date().toLocaleString(),
         event_date_end: new Date().toLocaleString(),
