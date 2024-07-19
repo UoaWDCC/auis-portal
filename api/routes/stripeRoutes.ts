@@ -1,9 +1,10 @@
 import express, { Router, json } from "express";
 import bodyParser from "body-parser";
 import { db } from "../db/config/db";
-import * as http from "http";
 import { protect } from "../middleware/authMiddleware";
 import Stripe from "stripe";
+import { user_tickets } from "../schemas/schema";
+import { sql } from "drizzle-orm";
 
 // StripeJS: Load secret API key
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
@@ -66,7 +67,7 @@ router.get("/session-status", async (req, res) => {
   const session = await stripe.checkout.sessions.retrieve(
     req.query.session_id as string
   );
-  //console.log("session-status: ", session);
+  console.log("session-status: ", session);
 
   res.send({
     status: session.status,
@@ -78,6 +79,7 @@ router.get("/session-status", async (req, res) => {
 const fulfillOrder = (lineItems: any) => {
   // @Ratchet7x5: TODO: update a user_ticket with payment_status set to 'completed'
   console.log("Fulfilling order", lineItems);
+  //db.insert(user_tickets).values({  });
 };
 
 const createOrder = (session: any) => {
@@ -94,7 +96,7 @@ router.post(
   "/webhook",
   // Stripe requires the raw body to construct the event
   express.raw({ type: "application/json" }),
-  (req: express.Request, res: express.Response): void => {
+  async (req: express.Request, res: express.Response): Promise<void> => {
     const sig = req.headers["stripe-signature"] as string | string[] | Buffer;
 
     let event: Stripe.Event;
@@ -109,18 +111,41 @@ router.post(
     }
 
     // Successfully constructed event
-    console.log("Success:", event.id);
+    //console.log("Success:", event.id);
+
+    /*
+    Account for the following events:
+    charge.succeeded
+    charge.refunded
+    charge.failed
+    checkout.session.async_payment_failed
+    checkout.session.async_payment_succeeded
+    checkout.session.completed
+    payment_intent.succeeded
+    */
 
     // Cast event data to Stripe object
-    if (event.type === "payment_intent.succeeded") {
+    /*if (event.type === "payment_intent.succeeded") {
       const stripeObject: Stripe.PaymentIntent = event.data
         .object as Stripe.PaymentIntent;
       console.log(`PaymentIntent status: ${stripeObject.status}`);
+      //insert into db
     } else if (event.type === "charge.succeeded") {
-      const charge = event.data.object as Stripe.Charge;
-      console.log(`Charge id: ${charge.id}`);
+      const charge = event.data.object; // as Stripe.Charge;
+      console.log(`/webhook: event.type: ${event.type}`);
+      console.log(
+        `/webhook: charge.succeeded: ${event.data.object.billing_details.email} ${event.data.object.paid}`
+      );
+      //insert into db
+    } else*/ if (event.type === "checkout.session.completed") {
+      const session = event.data.object;
+      console.log(`/webhook: event.type: ${event.type}`);
+      console.log(`/webhook: payment.status: ${session.payment_status}`);
+      console.log("/webhook: checkout.session.completed: ", session);
+      //insert into db
     } else {
       console.warn(`Unhandled event type: ${event.type}`);
+      console.warn(`Unhandled object: ${event.data.object}`);
     }
 
     // Return a response to acknowledge receipt of the event
