@@ -23,6 +23,8 @@ Additional info: Stripe restricts all production web apps to run in HTTPS. HTTP 
 7. Ask @gmat224 if we need to worry about multiple quantities of tickets purchased. 
 8. Set `expires_at` in `/create-checkout-session` 
 9. Ask @gmat224 if tax collection needs to be enabled for transactions. 
+10. Update `seed.ts` to use the latest tables and insert new fake data. 
+11. Move stripe related functionality to a `stripeController.ts` file. 
 
 # Notes:
 Schema: users = admin users for strapi
