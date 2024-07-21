@@ -52,7 +52,8 @@ const main = async () => {
       {
         id: 1,
         title: "Naren's Tech Workshop",
-        description: "Informative workshop where Naren walksthrough the architecture of the AUIS App. Plenty of opportunity to network with sponsor companies and pizza is served. No pineapple pizzas.",
+        description:
+          "Informative workshop where Naren walksthrough the architecture of the AUIS App. Plenty of opportunity to network with sponsor companies and pizza is served. No pineapple pizzas.",
         event_date_start: new Date().toLocaleString(),
         event_date_end: new Date().toLocaleString(),
         event_capacity: 5,
