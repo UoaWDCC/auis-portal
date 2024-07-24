@@ -25,12 +25,15 @@ const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
     },
     ref
   ) => {
-    if (type === 'radio' && options.length > 0) {
+    if (type === "radio" && options.length > 0) {
       return (
         <div className="mb-4 mt-4">
           <div className="mt-2 flex flex-col md:flex-row md:items-center">
             {options.map((option, index) => (
-              <label key={option} className={`inline-flex items-center ${index !== 0 ? "ml-0 md:ml-6" : ""}`}>
+              <label
+                key={option}
+                className={`inline-flex items-center ${index !== 0 ? "ml-0 md:ml-6" : ""}`}
+              >
                 <input type="radio" ref={ref} {...props} value={option} />
                 <span className="ml-2">{option}</span>
               </label>

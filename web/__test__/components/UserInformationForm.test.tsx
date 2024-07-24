@@ -15,10 +15,20 @@ describe("UserInformationForm Component", () => {
     const submitButton = screen.getByText(/Purchase membership/i);
     fireEvent.click(submitButton);
 
-    expect(await screen.findByText(/First Name is Required/i)).toBeInTheDocument();
-    expect(await screen.findByText(/Last Name is Required/i)).toBeInTheDocument();
-    expect(await screen.findByText(/Your University is Required/i)).toBeInTheDocument();
-    expect(await screen.findByText(/Your Graduation Year is Required/i)).toBeInTheDocument();
-    expect(await screen.findByText(/Membership Type is Required/i)).toBeInTheDocument();
+    expect(
+      await screen.findByText(/First Name is Required/i)
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByText(/Last Name is Required/i)
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByText(/Your University is Required/i)
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByText(/Your Graduation Year is Required/i)
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByText(/Membership Type is Required/i)
+    ).toBeInTheDocument();
   });
 });
