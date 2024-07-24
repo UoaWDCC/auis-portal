@@ -1,20 +1,24 @@
-import React from 'react';
-import { useForm, Controller } from 'react-hook-form';
-import axios from 'axios';
-import FormInput from '../components/FormInput';
+import React from "react";
+import { useForm, Controller } from "react-hook-form";
+import axios from "axios";
+import FormInput from "../components/FormInput";
 
 function UserInformationForm() {
-  const { handleSubmit, control, formState: { errors } } = useForm({
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
-      firstName: '',
-      lastName: '',
-      university: '',
-      graduationYear: '',
-      UPI: '',
-      studentID: '',
-      studyOption: '',
-      residency: '',
-      duration: '',
+      firstName: "",
+      lastName: "",
+      university: "",
+      graduationYear: "",
+      UPI: "",
+      studentID: "",
+      studyOption: "",
+      residency: "",
+      duration: "",
     },
   });
 
@@ -50,7 +54,10 @@ function UserInformationForm() {
           We just need a bit more info about your membership—it'll be quick!
         </h2>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col space-y-4">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex flex-col space-y-4"
+        >
           <div className="flex flex-col space-y-4 md:flex-row md:space-x-7 md:space-y-0">
             <div className="flex flex-1 flex-col">
               <label className="text-gray-700">First Name</label>
@@ -58,9 +65,13 @@ function UserInformationForm() {
                 name="firstName"
                 control={control}
                 rules={{ required: "First Name is Required" }}
-                render={({ field }) => <FormInput {...field} placeholder="e.g Clark" />}
+                render={({ field }) => (
+                  <FormInput {...field} placeholder="e.g Clark" />
+                )}
               />
-              {errors.firstName && <span className="text-red-500">{errors.firstName.message}</span>}
+              {errors.firstName && (
+                <span className="text-red-500">{errors.firstName.message}</span>
+              )}
             </div>
             <div className="flex flex-1 flex-col">
               <label className="text-gray-700">Last Name</label>
@@ -68,9 +79,13 @@ function UserInformationForm() {
                 name="lastName"
                 control={control}
                 rules={{ required: "Last Name is Required" }}
-                render={({ field }) => <FormInput {...field} placeholder="e.g Kent" />}
+                render={({ field }) => (
+                  <FormInput {...field} placeholder="e.g Kent" />
+                )}
               />
-              {errors.lastName && <span className="text-red-500">{errors.lastName.message}</span>}
+              {errors.lastName && (
+                <span className="text-red-500">{errors.lastName.message}</span>
+              )}
             </div>
           </div>
 
@@ -81,29 +96,50 @@ function UserInformationForm() {
                 name="university"
                 control={control}
                 rules={{ required: "Your University is Required" }}
-                render={({ field }) => <FormInput {...field} placeholder="e.g University of Auckland" />}
+                render={({ field }) => (
+                  <FormInput
+                    {...field}
+                    placeholder="e.g University of Auckland"
+                  />
+                )}
               />
-              {errors.university && <span className="text-red-500">{errors.university.message}</span>}
+              {errors.university && (
+                <span className="text-red-500">
+                  {errors.university.message}
+                </span>
+              )}
             </div>
             <div className="flex flex-1 flex-col">
-              <label className="text-gray-700">What year are you in (or alumni) 📅</label>
+              <label className="text-gray-700">
+                What year are you in (or alumni) 📅
+              </label>
               <Controller
                 name="graduationYear"
                 control={control}
                 rules={{ required: "Your Graduation Year is Required" }}
-                render={({ field }) => <FormInput {...field} placeholder="e.g Year 3" />}
+                render={({ field }) => (
+                  <FormInput {...field} placeholder="e.g Year 3" />
+                )}
               />
-              {errors.graduationYear && <span className="text-red-500">{errors.graduationYear.message}</span>}
+              {errors.graduationYear && (
+                <span className="text-red-500">
+                  {errors.graduationYear.message}
+                </span>
+              )}
             </div>
           </div>
 
           <div className="flex flex-col space-y-4 md:flex-row md:space-x-7 md:space-y-0">
             <div className="flex flex-1 flex-col">
-              <label className="text-gray-700">Student ID (if you have one) 🆔</label>
+              <label className="text-gray-700">
+                Student ID (if you have one) 🆔
+              </label>
               <Controller
                 name="studentID"
                 control={control}
-                render={({ field }) => <FormInput {...field} placeholder="e.g 1234566789.." />}
+                render={({ field }) => (
+                  <FormInput {...field} placeholder="e.g 1234566789.." />
+                )}
               />
             </div>
             <div className="flex flex-1 flex-col">
@@ -111,7 +147,9 @@ function UserInformationForm() {
               <Controller
                 name="UPI"
                 control={control}
-                render={({ field }) => <FormInput {...field} placeholder="e.g abcd123.." />}
+                render={({ field }) => (
+                  <FormInput {...field} placeholder="e.g abcd123.." />
+                )}
               />
             </div>
           </div>
@@ -122,18 +160,28 @@ function UserInformationForm() {
               <Controller
                 name="studyOption"
                 control={control}
-                render={({ field }) => <FormInput {...field} placeholder="e.g Software Engineering" />}
+                render={({ field }) => (
+                  <FormInput
+                    {...field}
+                    placeholder="e.g Software Engineering"
+                  />
+                )}
               />
             </div>
             <div className="flex flex-1 flex-col">
-              <label className="text-gray-700">Domestic or International? 🌏</label>
+              <label className="text-gray-700">
+                Domestic or International? 🌏
+              </label>
               <Controller
                 name="residency"
                 control={control}
                 render={({ field }) => (
                   <div className="mt-2 flex flex-col md:flex-row md:items-center">
                     {residencyOptions.map((option, index) => (
-                      <label key={option} className={`inline-flex items-center ${index !== 0 ? "ml-0 md:ml-6" : ""}`}>
+                      <label
+                        key={option}
+                        className={`inline-flex items-center ${index !== 0 ? "ml-0 md:ml-6" : ""}`}
+                      >
                         <input
                           type="radio"
                           {...field}
@@ -158,7 +206,10 @@ function UserInformationForm() {
               render={({ field }) => (
                 <div className="mt-2 flex flex-col md:flex-row md:items-center">
                   {paymentOptions.map((option, index) => (
-                    <label key={option} className={`inline-flex items-center ${index !== 0 ? "ml-0 md:ml-6" : ""}`}>
+                    <label
+                      key={option}
+                      className={`inline-flex items-center ${index !== 0 ? "ml-0 md:ml-6" : ""}`}
+                    >
                       <input
                         type="radio"
                         {...field}
@@ -171,7 +222,9 @@ function UserInformationForm() {
                 </div>
               )}
             />
-            {errors.duration && <span className="text-red-500">{errors.duration.message}</span>}
+            {errors.duration && (
+              <span className="text-red-500">{errors.duration.message}</span>
+            )}
           </div>
 
           <button
