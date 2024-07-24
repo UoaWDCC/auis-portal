@@ -1,73 +1,41 @@
-import FormInput from "../components/FormInput";
-import { useState } from "react";
-import axios from "axios";
+import React from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import axios from 'axios';
+import FormInput from '../components/FormInput';
 
 function UserInformationForm() {
-  const [values, setValues] = useState({
-    firstName: "",
-    lastName: "",
-    university: "",
-    graduationYear: "",
-    UPI: "",
-    studentID: "",
-    studyOption: "",
-    residency: "",
-    duration: "",
+  const { handleSubmit, control, formState: { errors } } = useForm({
+    defaultValues: {
+      firstName: '',
+      lastName: '',
+      university: '',
+      graduationYear: '',
+      UPI: '',
+      studentID: '',
+      studyOption: '',
+      residency: '',
+      duration: '',
+    },
   });
-
-  const [errors, setErrors] = useState({
-    firstName: "",
-    lastName: "",
-    university: "",
-    graduationYear: "",
-    duration: "",
-  });
-
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
-    setErrors({ ...errors, [e.target.name]: "" });
-  };
 
   const residencyOptions = ["International", "Domestic"];
   const paymentOptions = ["One Semester ($8)", "Two Semesters ($15)"];
 
-  const validate = () => {
-    const newErrors = {
-      firstName: values.firstName ? "" : "First Name is Required",
-      lastName: values.lastName ? "" : "Last Name is Required",
-      university: values.university ? "" : "Your University is Required",
-      graduationYear: values.graduationYear
-        ? ""
-        : "Your Graduation Year is Required",
-      duration: values.duration ? "" : "Membership Type is Required",
-    };
-    setErrors(newErrors);
+  const onSubmit = async (data: any) => {
+    try {
+      const response = await axios.post("/api/submitForm", data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-    return !Object.values(newErrors).some((error) => error);
-  };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (validate()) {
-      const payload = { ...values };
-
-      try {
-        const response = await axios.post("/api/submitForm", payload, {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-
-        if (response.status === 200) {
-          console.log("Form submitted successfully");
-        } else {
-          console.error("Form submission failed");
-        }
-      } catch (error) {
-        console.error("Error submitting form:", error);
+      if (response.status === 200) {
+        console.log("Form submitted successfully");
+      } else {
+        console.error("Form submission failed");
       }
-    } else {
-      console.log("Form has errors");
+    } catch (error) {
+      console.error("Error submitting form:", error);
     }
   };
 
@@ -82,132 +50,128 @@ function UserInformationForm() {
           We just need a bit more info about your membership—it'll be quick!
         </h2>
 
-        <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col space-y-4">
           <div className="flex flex-col space-y-4 md:flex-row md:space-x-7 md:space-y-0">
             <div className="flex flex-1 flex-col">
               <label className="text-gray-700">First Name</label>
-              <FormInput
-                placeholder="e.g Clark"
+              <Controller
                 name="firstName"
-                errorMessage={errors.firstName}
-                onChange={onChange}
+                control={control}
+                rules={{ required: "First Name is Required" }}
+                render={({ field }) => <FormInput {...field} placeholder="e.g Clark" />}
               />
+              {errors.firstName && <span className="text-red-500">{errors.firstName.message}</span>}
             </div>
             <div className="flex flex-1 flex-col">
               <label className="text-gray-700">Last Name</label>
-              <FormInput
-                placeholder="e.g Kent"
+              <Controller
                 name="lastName"
-                errorMessage={errors.lastName}
-                onChange={onChange}
+                control={control}
+                rules={{ required: "Last Name is Required" }}
+                render={({ field }) => <FormInput {...field} placeholder="e.g Kent" />}
               />
+              {errors.lastName && <span className="text-red-500">{errors.lastName.message}</span>}
             </div>
           </div>
 
           <div className="flex flex-col space-y-4 md:flex-row md:space-x-7 md:space-y-0">
             <div className="flex flex-1 flex-col">
-              <label className="text-gray-700">
-                University (or alumni){" "}
-                <span role="img" aria-label="emoji">
-                  🎓
-                </span>
-              </label>
-              <FormInput
-                placeholder="e.g University of Auckland"
+              <label className="text-gray-700">University (or alumni) 🎓</label>
+              <Controller
                 name="university"
-                errorMessage={errors.university}
-                onChange={onChange}
+                control={control}
+                rules={{ required: "Your University is Required" }}
+                render={({ field }) => <FormInput {...field} placeholder="e.g University of Auckland" />}
               />
+              {errors.university && <span className="text-red-500">{errors.university.message}</span>}
             </div>
             <div className="flex flex-1 flex-col">
-              <label className="text-gray-700">
-                What year are you in (or alumni){" "}
-                <span role="img" aria-label="emoji">
-                  📅
-                </span>
-              </label>
-              <FormInput
-                placeholder="e.g Year 3"
+              <label className="text-gray-700">What year are you in (or alumni) 📅</label>
+              <Controller
                 name="graduationYear"
-                errorMessage={errors.graduationYear}
-                onChange={onChange}
+                control={control}
+                rules={{ required: "Your Graduation Year is Required" }}
+                render={({ field }) => <FormInput {...field} placeholder="e.g Year 3" />}
               />
+              {errors.graduationYear && <span className="text-red-500">{errors.graduationYear.message}</span>}
             </div>
           </div>
 
           <div className="flex flex-col space-y-4 md:flex-row md:space-x-7 md:space-y-0">
             <div className="flex flex-1 flex-col">
-              <label className="text-gray-700">
-                Student ID (if you have one){" "}
-                <span role="img" aria-label="emoji">
-                  🆔
-                </span>
-              </label>
-              <FormInput
-                placeholder="e.g 1234566789.."
+              <label className="text-gray-700">Student ID (if you have one) 🆔</label>
+              <Controller
                 name="studentID"
-                onChange={onChange}
+                control={control}
+                render={({ field }) => <FormInput {...field} placeholder="e.g 1234566789.." />}
               />
             </div>
             <div className="flex flex-1 flex-col">
-              <label className="text-gray-700">
-                UPI (if you have one){" "}
-                <span role="img" aria-label="emoji">
-                  🆔
-                </span>
-              </label>
-              <FormInput
-                placeholder="e.g abcd123.."
+              <label className="text-gray-700">UPI (if you have one) 🆔</label>
+              <Controller
                 name="UPI"
-                onChange={onChange}
+                control={control}
+                render={({ field }) => <FormInput {...field} placeholder="e.g abcd123.." />}
               />
             </div>
           </div>
 
           <div className="flex flex-col space-y-4 md:flex-row md:space-x-7 md:space-y-0">
             <div className="flex flex-1 flex-col">
-              <label className="text-gray-700">
-                What are you studying?{" "}
-                <span role="img" aria-label="emoji">
-                  📚
-                </span>
-              </label>
-              <FormInput
-                placeholder="e.g Software Engineering"
+              <label className="text-gray-700">What are you studying? 📚</label>
+              <Controller
                 name="studyOption"
-                onChange={onChange}
+                control={control}
+                render={({ field }) => <FormInput {...field} placeholder="e.g Software Engineering" />}
               />
             </div>
             <div className="flex flex-1 flex-col">
-              <label className="text-gray-700">
-                Domestic or International?{" "}
-                <span role="img" aria-label="emoji">
-                  🌏
-                </span>
-              </label>
-              <FormInput
-                type="radio"
+              <label className="text-gray-700">Domestic or International? 🌏</label>
+              <Controller
                 name="residency"
-                options={residencyOptions}
-                onChange={onChange}
+                control={control}
+                render={({ field }) => (
+                  <div className="mt-2 flex flex-col md:flex-row md:items-center">
+                    {residencyOptions.map((option, index) => (
+                      <label key={option} className={`inline-flex items-center ${index !== 0 ? "ml-0 md:ml-6" : ""}`}>
+                        <input
+                          type="radio"
+                          {...field}
+                          value={option}
+                          checked={field.value === option}
+                        />
+                        <span className="ml-2">{option}</span>
+                      </label>
+                    ))}
+                  </div>
+                )}
               />
             </div>
           </div>
 
           <div className="mt-4 flex flex-col items-start md:items-center md:space-x-7">
-            <label className="text-gray-700">
-              Membership Types{" "}
-              <span role="img" aria-label="emoji">
-                💳
-              </span>
-            </label>
-            <FormInput
-              type="radio"
+            <label className="text-gray-700">Membership Types 💳</label>
+            <Controller
               name="duration"
-              options={paymentOptions}
-              errorMessage={errors.duration}
-              onChange={onChange}
+              control={control}
+              rules={{ required: "Membership Type is Required" }}
+              render={({ field }) => (
+                <div className="mt-2 flex flex-col md:flex-row md:items-center">
+                  {paymentOptions.map((option, index) => (
+                    <label key={option} className={`inline-flex items-center ${index !== 0 ? "ml-0 md:ml-6" : ""}`}>
+                      <input
+                        type="radio"
+                        {...field}
+                        value={option}
+                        checked={field.value === option}
+                      />
+                      <span className="ml-2">{option}</span>
+                    </label>
+                  ))}
+                </div>
+              )}
             />
+            {errors.duration && <span className="text-red-500">{errors.duration.message}</span>}
           </div>
 
           <button
