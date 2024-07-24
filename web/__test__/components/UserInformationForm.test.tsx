@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import UserInformationForm from "../../src/components/UserInformationForm";
 import React from "react";
@@ -6,25 +6,19 @@ import React from "react";
 describe("UserInformationForm Component", () => {
   it("renders the form", () => {
     render(<UserInformationForm />);
-    expect(screen.getByText(/Thanks for Joining/i)).toBeInTheDocument();
+    expect(screen.getByText(/Thanks for joining/i)).toBeInTheDocument();
   });
 
-  it("validates form fields", () => {
+  it("validates form fields", async () => {
     render(<UserInformationForm />);
 
     const submitButton = screen.getByText(/Purchase membership/i);
     fireEvent.click(submitButton);
 
-    expect(screen.getByText(/First Name is Required/i)).toBeInTheDocument();
-    expect(screen.getByText(/Last Name is Required/i)).toBeInTheDocument();
-    expect(
-      screen.getByText(/Your University is Required/i)
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(/Your Graduation Year is Required/i)
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(/Membership Type is Required/i)
-    ).toBeInTheDocument();
+    expect(await screen.findByText(/First Name is Required/i)).toBeInTheDocument();
+    expect(await screen.findByText(/Last Name is Required/i)).toBeInTheDocument();
+    expect(await screen.findByText(/Your University is Required/i)).toBeInTheDocument();
+    expect(await screen.findByText(/Your Graduation Year is Required/i)).toBeInTheDocument();
+    expect(await screen.findByText(/Membership Type is Required/i)).toBeInTheDocument();
   });
 });
