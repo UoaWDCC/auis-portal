@@ -16,11 +16,13 @@ import TestScreen from "./screens/Test.tsx";
 import ExecScreen from "./screens/ExecScreen.tsx";
 import SignUpScreen from "./screens/SignUpScreen.tsx";
 import PhotosScreen from "./screens/PhotosScreen.tsx";
-import PVVScreen from "./screens/PVVScreen.tsx";
-import LoginScreen from "./screens/LoginScreen.tsx";
+import AboutUsScreen from "./screens/AboutUsScreen.tsx";
 import { ClerkProvider } from "@clerk/clerk-react";
 import { graphqlClient } from "./graphql/client.ts";
-import PaymentScreen from "./screens/PaymentScreen.tsx";
+import CreditsScreen from "./screens/CreditsScreen.tsx";
+import SignInScreen from "./screens/SignInScreen.tsx";
+import EventScreen from "./screens/EventScreen.tsx";
+import PartnersScreen from "./screens/PartnersScreen.tsx";
 
 //Add any routes for screens below
 const router = createBrowserRouter(
@@ -28,16 +30,19 @@ const router = createBrowserRouter(
     <Route path="/" element={<App />}>
       <Route index={true} element={<HomeScreen />} />
       <Route path="/test" element={<TestScreen />} />
+      <Route path="/credits" element={<CreditsScreen />} />
       <Route path="/exec" element={<ExecScreen />} />
-      <Route path="/login" element={<LoginScreen />} />
+      <Route path="/sponsors" element={<PartnersScreen />} />
+      <Route path="/login" element={<SignInScreen />} />
       <Route path="/signup" element={<SignUpScreen />} />
-      <Route path="/pvv" element={<PVVScreen />} />
+      <Route path="/about-us" element={<AboutUsScreen />} />
+      <Route path="/events" element={<EventScreen />} />
       <Route path="/photos" element={<PhotosScreen />} />
       <Route path="/payments" element={<PaymentScreen />} />
     </Route>
   )
 );
-// Import your publishable key
+
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
 if (!PUBLISHABLE_KEY) {

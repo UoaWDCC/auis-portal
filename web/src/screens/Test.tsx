@@ -1,9 +1,17 @@
 // import {SignedIn, SignedOut, SignInButton, UserButton} from "@clerk/clerk-react";
 
+import SomePhotos from "../components/SomePhotos";
+import Partners from "../components/Partners";
+import Values from "../components/Values";
+import Introductions from "@components/Introductions";
+
 function TestScreen() {
   return (
-    <div>
-      <h2> Test Screen</h2>
+    <div className="grid grid-cols-3 gap-1">
+      <Partners />
+      <SomePhotos />
+      <Values />
+      <Introductions />
     </div>
   );
 }

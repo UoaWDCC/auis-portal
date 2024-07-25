@@ -1,11 +1,11 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
-import Footer from "../src/components/Footer";
+import Footer from "../../src/components/Footer";
 import "@testing-library/jest-dom";
 
 // Mock the Socials component
-vi.mock("../src/components/Socials", () => ({
+vi.mock("../../src/components/Socials", () => ({
   default: () => <div>Socials Component</div>,
 }));
 
