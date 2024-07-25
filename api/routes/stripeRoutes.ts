@@ -77,23 +77,6 @@ router.get("/session-status", async (req, res) => {
   });
 });
 
-// @Ratchet7x5: use 'any' type for now
-const fulfillOrder = (lineItems: any) => {
-  // @Ratchet7x5: TODO: update a user_ticket with payment_status set to 'completed'
-  console.log("Fulfilling order", lineItems);
-  //db.insert(user_tickets).values({  });
-};
-
-const createOrder = (session: any) => {
-  // @Ratchet7x5: TODO: insert a user_ticket with payment_status set to 'awaiting'
-  console.log("Creating order", session);
-};
-
-const emailCustomerAboutFailedPayment = (session: any) => {
-  // TODO: fill me in
-  console.log("Emailing customer", session);
-};
-
 router.post(
   "/webhook",
   // Stripe requires the raw body to construct the event
