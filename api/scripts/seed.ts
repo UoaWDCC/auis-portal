@@ -16,7 +16,7 @@ const main = async () => {
       {
         id: 0,
         email: "gury@go.at",
-        upi: "gmat",
+        upi: "gmat123",
         university_id: "12345",
         name: "Gury",
         is_member: true,
@@ -27,7 +27,7 @@ const main = async () => {
       {
         id: 2,
         email: "naren@go.at",
-        upi: "nrnr",
+        upi: "nrnr123",
         university_id: "23456",
         name: "Naren",
         is_member: true,
