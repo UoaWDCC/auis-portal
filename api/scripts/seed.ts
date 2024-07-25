@@ -41,13 +41,13 @@ const main = async () => {
     await db.insert(events).values([
       {
         id: 0,
-        title: "Gury's Cookout",
-        description: "Let him COOK",
+        title: "Dance Series: Shawn Thomas",
+        description: "Special dance series led by the goat himself, Guryash.",
         event_date_start: new Date().toLocaleString(),
         event_date_end: new Date().toLocaleString(),
-        event_capacity: 500,
+        event_capacity: 20,
         is_live: true,
-        event_capacity_remaining: 500,
+        event_capacity_remaining: 20,
       },
       {
         id: 1,
@@ -62,13 +62,13 @@ const main = async () => {
       },
       {
         id: 2,
-        title: "Dance Series: Shawn Thomas",
-        description: "Special dance series led by the goat himself, Guryash.",
+        title: "Gury's Cookout",
+        description: "Let him COOK",
         event_date_start: new Date().toLocaleString(),
         event_date_end: new Date().toLocaleString(),
-        event_capacity: 20,
+        event_capacity: 500,
         is_live: true,
-        event_capacity_remaining: 20,
+        event_capacity_remaining: 500,
       },
     ]);
 
