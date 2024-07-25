@@ -1,8 +1,6 @@
 import express, { Router, json } from "express";
 import { protect } from "../middleware/authMiddleware";
 import Stripe from "stripe";
-import { user_tickets } from "../schemas/schema";
-import { sql } from "drizzle-orm";
 
 // StripeJS: Load secret API key
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
@@ -60,6 +58,7 @@ router.post("/create-checkout-session", async (req, res) => {
     });
 
     res.send({ clientSecret: session.client_secret });
+    console.log(session);
   } catch (error) {
     res.send({ error }).status(404);
   }
@@ -128,9 +127,17 @@ router.post(
       console.log(`/webhook: payment.status: ${session.payment_status}`);
       console.log("/webhook: checkout.session.completed: ", session);
       //insert into db
+    } else if (event.type === "checkout.session.expired") {
+      //session expired, release reserved ticket
+      /**
+       * How do we know that the expired session was for a particular event?
+       * Example: Customer 0 checkout session for Event 0 expired. Return a ticket.
+       */
+      console.log(`/webhook: event.type: ${event.type}`);
+      console.log(`/webhook: todo: release ticket`);
     } else {
       console.warn(`Unhandled event type: ${event.type}`);
-      console.warn(`Unhandled object: ${event.data.object}`);
+      //console.warn(`Unhandled object: ${event.data.object}`);
     }
 
     // Return a response to acknowledge receipt of the event
