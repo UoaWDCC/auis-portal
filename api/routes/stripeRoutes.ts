@@ -1,6 +1,4 @@
 import express, { Router, json } from "express";
-import bodyParser from "body-parser";
-import { db } from "../db/config/db";
 import { protect } from "../middleware/authMiddleware";
 import Stripe from "stripe";
 import { user_tickets } from "../schemas/schema";
