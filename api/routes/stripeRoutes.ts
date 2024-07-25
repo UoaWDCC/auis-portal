@@ -23,13 +23,17 @@ const router = Router();
 
 // Create a checkout session based on priceId. Send a client secret back (cs_ABCD123)
 router.post("/create-checkout-session", async (req, res) => {
+  //check for an available ticket
+
+  //reserve one ticket
+
   // in the incoming request, we need the priceID of the item we're buying.
   const { priceId } = req.body;
   //console.log(priceId);
 
   // epoch time in seconds, 30mins timeout
   let session_expiry = Math.floor(new Date().getTime() / 1000 + 30 * 60);
-  //console.log("/create-checkout-session: session_expiry", session_expiry);
+  //console.log("/create-checkout-session : session_expiry", session_expiry);
 
   // if priceId is undefined, send a 404 back.
   if (priceId == undefined) {
@@ -37,7 +41,7 @@ router.post("/create-checkout-session", async (req, res) => {
   }
 
   try {
-    // @Ratchet7x5: Add an auth middleware to ensure that incoming requests have a bearer token (pk_test/live_ABCD12345)
+    // @Ratchet7x5: TODO: Add an auth middleware to ensure that incoming requests have a bearer token (pk_test/live_ABCD12345)
     // if no bearer token was found, send a 404 error. Also ensure user is logged in.
     const session = await stripe.checkout.sessions.create({
       ui_mode: "embedded",
