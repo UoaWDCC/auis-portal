@@ -35,7 +35,12 @@ router.post("/create-checkout-session", async (req, res) => {
 
   // if priceId is undefined, send a 404 back.
   if (priceId == undefined) {
-    return res.send({ error: "priceId was undefined." }).status(404);
+    return res
+      .send({
+        error:
+          "Product does not exist, or is not available for sale at the moment.",
+      })
+      .status(404);
   }
 
   try {
