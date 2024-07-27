@@ -1,5 +1,6 @@
 import express, { Router, json } from "express";
 import { protect } from "../middleware/authMiddleware";
+import { reserveTicket, releaseReservedTicket } from "../gateway/eventsGateway";
 import Stripe from "stripe";
 
 // StripeJS: Load secret API key
@@ -21,9 +22,8 @@ const router = Router();
 
 // Create a checkout session based on priceId. Send a client secret back (cs_ABCD123)
 router.post("/create-checkout-session", async (req, res) => {
-  //check for an available ticket
-
-  //reserve one ticket
+  //attempt to reserve one ticket by event's id
+  reserveTicket(0);
 
   // in the incoming request, we need the priceID of the item we're buying.
   const { priceId } = req.body;

@@ -47,7 +47,7 @@ const main = async () => {
         event_date_end: new Date().toLocaleString(),
         event_capacity: 20,
         is_live: true,
-        event_capacity_remaining: 20,
+        event_capacity_remaining: 1,
       },
       {
         id: 1,
