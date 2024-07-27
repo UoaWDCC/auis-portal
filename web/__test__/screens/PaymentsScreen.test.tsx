@@ -12,7 +12,7 @@ describe("Sign In Screen", () => {
     render(
       <MemoryRouter>
         <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
-          <PaymentScreen/>
+          <PaymentScreen />
         </ClerkProvider>
       </MemoryRouter>
     );
@@ -22,8 +22,6 @@ describe("Sign In Screen", () => {
     global.innerWidth = width;
     fireEvent(window, new Event("resize"));
   };
-
-
 
   it("should render the text", () => {
     const title = screen.getByTestId("title");
@@ -59,5 +57,4 @@ describe("Sign In Screen", () => {
     const continueButton = screen.getByTestId("button");
     expect(continueButton).toBeInTheDocument();
   });
-
 });
