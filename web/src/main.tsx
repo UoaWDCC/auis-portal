@@ -23,7 +23,7 @@ import CreditsScreen from "./screens/CreditsScreen.tsx";
 import SignInScreen from "./screens/SignInScreen.tsx";
 import EventScreen from "./screens/EventScreen.tsx";
 import PartnersScreen from "./screens/PartnersScreen.tsx";
-import PaymentSceen from "./screens/PaymentScreen.tsx";
+import PaymentScreen from "./screens/PaymentScreen.tsx";
 
 //Add any routes for screens below
 const router = createBrowserRouter(
