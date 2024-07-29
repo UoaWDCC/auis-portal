@@ -25,7 +25,7 @@ function UserInformationForm() {
   const paymentOptions = ["One Semester ($8)", "Two Semesters ($15)"];
 
   const onSubmit = async (data: any) => {
-    console.log(data);
+    
     try {
       const response = await axios.post("/api/submitForm", data, {
         headers: {
@@ -34,12 +34,13 @@ function UserInformationForm() {
       });
 
       if (response.status === 200) {
-        console.log("Form submitted successfully");
+        //Form Submission Successful
       } else {
-        console.error("Form submission failed");
+        // Form Submission Failed
       }
     } catch (error) {
-      console.error("Error submitting form:", error);
+      // Error 
+
     }
   };
 
