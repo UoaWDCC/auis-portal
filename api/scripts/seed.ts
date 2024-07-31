@@ -58,7 +58,7 @@ const main = async () => {
         event_date_end: new Date().toLocaleString(),
         event_capacity: 5,
         is_live: true,
-        event_capacity_remaining: 5,
+        event_capacity_remaining: 2,
       },
       {
         id: 2,
@@ -66,9 +66,9 @@ const main = async () => {
         description: "Let him COOK",
         event_date_start: new Date().toLocaleString(),
         event_date_end: new Date().toLocaleString(),
-        event_capacity: 500,
+        event_capacity: 20,
         is_live: true,
-        event_capacity_remaining: 500,
+        event_capacity_remaining: 4,
       },
     ]);
 
