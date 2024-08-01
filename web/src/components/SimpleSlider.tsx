@@ -6,7 +6,7 @@ import {
   IoArrowBackCircleOutline,
   IoArrowForwardCircleOutline,
 } from "react-icons/io5";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import LoadingSpinner from "./LoadingSpinner";
 import { useQuery } from "@apollo/client";
 import { Mapper } from "@utils/Mapper";
@@ -16,16 +16,33 @@ import UpcomingEventHomeCard from "./UpcomingEventHomeCard";
 export default function SimpleSlider() {
   const sliderRef = useRef<Slider>(null);
   const { loading: eventsLoading, data: eventsData, error: eventsError } = useQuery(GET_EVENTS);
+
+  const [event, setEvent] = useState<Event[]>([]);
+  const [noEvents, setNoEvents] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (eventsData) {
+      try {
+        const events = Mapper.mapToEvents(eventsData);
+        setEvent(events);
+      } catch (error) {
+        setNoEvents(true);
+      }
+    }
+  }, [eventsData]);
   
-  if (eventsLoading) {
-    return <LoadingSpinner />;
-  }
+  useEffect(() => {
+    if (!eventsLoading) {
+      setLoading(false);
+    }
+  }, [eventsLoading]);
 
   if (eventsError) {
     return <div>CMS Offline</div>;
   }
 
-  const events: Event[] = Mapper.mapToEvents(eventsData.events.data);
+  //const events: Event[] = Mapper.mapToEvents(eventsData.events.data);
 
   const settings = {
     dots: true,
@@ -60,15 +77,28 @@ export default function SimpleSlider() {
 
   function SliderNoArrow() {
     return (
-      <div>
-        <Slider ref={sliderRef} {...settings}>
-          {events.map((event) => (
-            <div key={event.id}>
-              <UpcomingEventHomeCard upcomingEvent={event} />
-            </div>
-          ))}
-        </Slider>
-      </div>
+      <>
+        {loading ? (
+          <LoadingSpinner />
+        ) : (
+        <>
+          {noEvents ? (
+            <div>There are no events to display</div>
+          ) : (
+            <div>
+              <Slider ref={sliderRef} {...settings}>
+                {event.map((events) => (
+                <div key={events.id}>
+                  <UpcomingEventHomeCard upcomingEvent={events} />
+                </div>
+            ))}
+            </Slider>
+          </div>
+          )}
+        </>
+        )}
+      </>
+      
     );
   }
 
