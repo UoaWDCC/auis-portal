@@ -22,6 +22,8 @@ const router = Router();
 
 // Create a checkout session based on priceId. Send a client secret back (cs_ABCD123)
 router.post("/create-checkout-session", async (req, res) => {
+  // @Ratchet7x5: TODO: Add the ability to reserve tickets by event id OUTSIDE the express app. 
+  //                    eg: use Strapi or something to create a link or so. 
   //attempt to reserve one ticket by event's id
   reserveTicket(0);
 

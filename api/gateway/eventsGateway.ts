@@ -19,7 +19,7 @@ async function isTicketAvailableForReserve(eventId: any) {
   //TODO: Fix the following error for this line of code:
   //remainingTickets.event_capacity_remaining > 1
   //Errors:
-  //TS2533: Object is possibly 'null' or 'undefined'"?
+  //TS2533: Object is possibly 'null' or 'undefined'?
   //'remainingTickets' is possibly 'null' or 'undefined'
 
   // Check if event_remaining_ticket > 1
