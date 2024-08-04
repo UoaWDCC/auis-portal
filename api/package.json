@@ -17,6 +17,7 @@
     "db": "yarn db:generate && yarn db:migrate",
     "db:visualise": "drizzle-kit studio",
     "db:pull": " drizzle-kit introspect --config=drizzle-schema.config.ts",
+    "db:all": "yarn db:generate && yarn db:migrate && yarn db:seed && yarn drizzle-kit studio",
     "generate-types": "quicktype ../api/types/types.ts -o ../web/src/types/backend-types.ts --just-types",
     "watch-types": "nodemon -e ts -x \"yarn generate-types\""
   },
@@ -25,7 +26,7 @@
     "@types/node": "^20.11.17",
     "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.18",
-    "drizzle-kit": "^0.22.1",
+    "drizzle-kit": "^0.23.0",
     "nodemon": "^3.0.3",
     "typescript": "^5.3.3"
   },
@@ -40,10 +41,10 @@
     "express": "^4.18.2",
     "express-cors": "^0.0.3",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.1.1",
     "onchange": "^7.1.0",
     "postgres": "^3.4.4",
     "quicktype": "^23.0.170",
+    "stripe": "^16.1.0",
     "ts-node": "^10.9.2",
     "zod": "^3.22.4"
   },
