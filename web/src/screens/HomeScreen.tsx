@@ -16,7 +16,6 @@ export default function HomeScreen() {
     error: execsError,
   } = useQuery(GET_EVENTS);
 
-
   const [executives, setExecutives] = useState<Event[]>([]);
   const [noExecs, setNoExecs] = useState(false);
   const [loading, setLoading] = useState(true);
