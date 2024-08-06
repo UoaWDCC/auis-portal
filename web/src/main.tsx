@@ -39,7 +39,7 @@ const router = createBrowserRouter(
       <Route path="/about-us" element={<AboutUsScreen />} />
       <Route path="/events" element={<EventScreen />} />
       <Route path="/photos" element={<PhotosScreen />} />
-      <Route path="/about-us" element={<AboutUsSCreen/>}/>
+      <Route path="/about-us" element={<AboutUsSCreen />} />
     </Route>
   )
 );

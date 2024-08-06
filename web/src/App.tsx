@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Footer from "./components/Footer";
-import Home from './screens/HomeScreen';
+import Home from "./screens/HomeScreen";
 
 const App = () => {
   return (
