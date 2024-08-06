@@ -6,10 +6,10 @@ import UpcomingEvents from "@components/UpcomingEvents";
 export default function HomeScreen() {
   return (
     <div>
-      <Hero/>
-      <Intro/>
-      <UpcomingEvents/>
-      <SomePhotos/>
+      <Hero />
+      <Intro />
+      <UpcomingEvents />
+      <SomePhotos />
     </div>
   );
 }

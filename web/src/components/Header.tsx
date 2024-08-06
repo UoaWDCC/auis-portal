@@ -10,81 +10,93 @@ function Header() {
 
   const titles = [
     { title: "Events", page: "/events" },
-    { title: "About Us", page: "/pvv" },
+    { title: "About Us", page: "/about-us" },
     { title: "Team", page: "/exec" },
     { title: "Partners", page: "/sponsors" },
     { title: "Credits", page: "/credits" },
   ];
   return (
     <>
-      <header className="xl:py-8 py-5">
-        <div className="bg-transparent flex">
+      <header className="py-5 xl:py-8">
+        <div className="flex bg-transparent">
           {/* Logo */}
           <div className="ml-5">
             <a className="flex items-center" href="/">
               <img
-                className="object-contain w-[50px] h-[50px] xl:w-[70px] xl:h-[70px]"
+                className="h-[50px] w-[50px] object-contain xl:h-[70px] xl:w-[70px]"
                 src={peacockLogo}
                 alt="Peacock Logo"
               />
               <img
-                className="object-contain w-[60px] h-[30px] xl:w-[120px] xl:h-[60px] ml-2"
+                className="ml-2 h-[30px] w-[60px] object-contain xl:h-[60px] xl:w-[120px]"
                 src={auisWhiteLogo}
                 alt="Logo Text"
               />
             </a>
           </div>
           <div className="flex grow xl:hidden"> </div>
-          <div className="xl:hidden justify-center">
-            <button className=" h-full" type="button" onClick={() => setNavBar(!navBar)}>
+          <div className="justify-center xl:hidden">
+            <button
+              className="h-full"
+              type="button"
+              onClick={() => setNavBar(!navBar)}
+            >
               {navBar ? (
-                <IoMdClose data-testid="close" className="text-white" size={40} />
+                <IoMdClose
+                  data-testid="close"
+                  className="text-white"
+                  size={40}
+                />
               ) : (
-                <IoMdMenu  data-testid="menu" className="text-white mr-5 " size={40} />
+                <IoMdMenu
+                  data-testid="menu"
+                  className="mr-5 text-white"
+                  size={40}
+                />
               )}
             </button>
           </div>
           <nav
-            className={`fixed top-0 right-0 h-full bg-secondary-blue p-8 z-40 transform transition-transform ${
+            className={`bg-secondary-blue fixed right-0 top-0 z-40 h-full transform p-8 transition-transform ${
               navBar ? "translate-x-0" : "translate-x-full"
-            } xl:relative xl:self-center xl:transform-none xl:p-0 xl:bg-transparent xl:items-center xl:w-auto xl:flex-grow xl:h-full`}
+            } xl:relative xl:h-full xl:w-auto xl:flex-grow xl:transform-none xl:items-center xl:self-center xl:bg-transparent xl:p-0`}
           >
             <button
               type="button"
-              className="absolute top-4 right-4 xl:hidden"
+              className="absolute right-4 top-4 xl:hidden"
               onClick={() => setNavBar(false)}
             >
               <IoMdClose className="text-white" size={40} />
             </button>
-            <div className="flex flex-col xl:flex-row xl:items-center h-full xl:justify-center text-xl font-bold text-white">
+            <div className="flex h-full flex-col text-xl font-bold text-white xl:flex-row xl:items-center xl:justify-center">
               {titles.map((label) => (
-                <li key={label.page} className="list-none my-2">
+                <li key={label.page} className="my-2 list-none">
                   <Link
                     to={label.page}
                     className={`${
-                      pathname === label.page ? " text-primary-orange" : ""
-                    } hover:bg-AUIS-teal px-3 py-2 rounded mx-3`}
+                      pathname === label.page ? "text-primary-orange" : ""
+                    } hover:bg-AUIS-teal mx-3 rounded px-3 py-2`}
                     onClick={() => setNavBar(false)}
                   >
                     {label.title}
                   </Link>
                 </li>
               ))}
-              <div className="xl:hidden mt-8 flex flex-col xl:flex-row items-center font-bold text-xl text-white">
+              <div className="mt-8 flex flex-col items-center text-xl font-bold text-white xl:hidden xl:flex-row">
                 <a href="/login" className="my-2">
                   <button
-                  data-testid="Log-in"
+                    data-testid="Log-in"
                     type="button"
-                    className=" bg-primary-green px-6 py-1 rounded-3xl "
+                    className="bg-primary-green rounded-3xl px-6 py-1"
                   >
                     Log-in
                   </button>
                 </a>
                 <a href="/signup" className="my-2">
                   <button
-                  data-testid="Sign-up"
+                    data-testid="Sign-up"
                     type="button"
-                    className=" bg-primary-orange px-6 py-1 rounded-3xl "
+                    className="bg-primary-orange rounded-3xl px-6 py-1"
                   >
                     Sign-up
                   </button>
@@ -93,21 +105,21 @@ function Header() {
             </div>
           </nav>
           <div className="mr-5 hidden xl:flex">
-            <div className="h-full flex flex-col xl:flex-row items-center font-bold text-xl text-white">
+            <div className="flex h-full flex-col items-center text-xl font-bold text-white xl:flex-row">
               <a href="/login" className="mx-4">
                 <button
-                data-testid="Log-in-mobile"
+                  data-testid="Log-in-mobile"
                   type="button"
-                  className=" bg-primary-green px-6 py-1 rounded-3xl "
+                  className="bg-primary-green rounded-3xl px-6 py-1"
                 >
                   Log-in
                 </button>
               </a>
               <a href="/signup" className="mx-4">
                 <button
-                data-testid="Sign-up-mobile"
+                  data-testid="Sign-up-mobile"
                   type="button"
-                  className=" bg-primary-orange px-6 py-1 rounded-3xl "
+                  className="bg-primary-orange rounded-3xl px-6 py-1"
                 >
                   Sign-up
                 </button>
