@@ -6,13 +6,13 @@ export default function DeveloperCard({ developer }: DeveloperCardProps) {
     <>
       <div className="bg-AUIS-dark-teal flex h-auto w-64 flex-col items-center rounded-xl p-2">
         <h1 className="text-xl font-bold text-white">{developer.name}</h1>
-        <div className="flex justify-center my-2 items-center">
+        <div className="my-2 flex items-center justify-center">
           <a
             href={developer.linkedIn}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"
-            className="flex h-full w-full px-4 items-center justify-center"
+            className="flex h-full w-full items-center justify-center px-4"
           >
             <FaLinkedin className="h-10 w-10 text-white group-hover:text-black" />
           </a>
@@ -22,7 +22,7 @@ export default function DeveloperCard({ developer }: DeveloperCardProps) {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"
-            className="flex h-full w-full px-4 items-center justify-center"
+            className="flex h-full w-full items-center justify-center px-4"
           >
             <FaGithub className="h-10 w-10 text-white group-hover:text-black" />
           </a>
