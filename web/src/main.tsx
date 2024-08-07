@@ -26,6 +26,7 @@ import ReturnScreen from "./screens/ReturnScreen.tsx";
 import EventScreen from "./screens/EventScreen.tsx";
 import InformationScreen from "./screens/InformationScreen.tsx";
 import PartnersScreen from "./screens/PartnersScreen.tsx";
+import AboutUsSCreen from "./screens/AboutUsScreen.tsx";
 
 // @Ratchet7x5: keys etc need to be parsed before route creation.
 const CLERK_PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;

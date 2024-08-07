@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { GET_SOME_PHOTOS } from "../graphql/queries";
-import LoadingSpinner from "../components/LoadingSpinner";
-import { SomePhoto } from "../types/types";
+import LoadingSpinner from "./LoadingSpinner";
+import type { SomePhoto } from "../types/types";
 import { Mapper } from "../utils/Mapper";
 import { useState, useEffect } from "react";
 
@@ -43,34 +43,75 @@ function SomePhotos() {
       {loading ? (
         <LoadingSpinner />
       ) : (
-        <div className="h-screen bg-white">
+        <div className="bg-white">
           <h1 className="mx-3 py-12 text-center text-5xl font-bold text-white">
             Our Upcoming Events!
           </h1>
-          <div className="mt-20">
-            <div className="grid grid-cols-2 gap-10">
+          <div className="mt-20 flex w-full flex-col justify-center">
+            <div className="flex flex-col justify-center lg:flex-row">
               {noPhotos ? (
                 <div>There are no photos to display</div>
               ) : (
-                photos.map((photo) => (
-                  <div
-                    key={photo.id}
-                    className="rounded-lg bg-white p-5 text-black"
-                  >
-                    <div className="flex items-center">
-                      <img
-                        className="mr-4 max-h-40 max-w-40 rounded-full"
-                        src={`${photo.image}`}
-                        alt="photo information"
-                      />
-                      <div>
-                        <h1 className="text-xl font-bold">{photo.title}</h1>
-                        <h1 className="text-xl font-bold">{photo.year}</h1>
-                      </div>
-                    </div>
+                <div className="relative flex flex-col items-center space-x-4 lg:flex-row">
+                  <div className="z-10 -rotate-3 transform rounded-lg bg-white p-4 shadow-lg transition-transform hover:rotate-0">
+                    <img
+                      src={`${photos[0].image}`}
+                      alt="event pic"
+                      className="mb-4 h-60 w-48 border-b-2 border-gray-200 object-cover"
+                    />
+                    <p className="text-center font-sans text-black">
+                      {`${photos[0].title}`}
+                    </p>
                   </div>
-                ))
+
+                  <div className="z-20 rotate-3 transform rounded-lg bg-white p-4 shadow-lg transition-transform hover:rotate-0">
+                    <img
+                      src={`${photos[0].image}`}
+                      alt="event pic"
+                      className="mb-4 h-60 w-48 border-b-2 border-gray-200 object-cover"
+                    />
+                    <p className="text-center font-sans text-black">
+                      {`${photos[0].title}`}
+                    </p>
+                  </div>
+
+                  <div className="z-30 -rotate-3 transform rounded-lg bg-white p-4 shadow-lg transition-transform hover:rotate-0">
+                    <img
+                      src={`${photos[0].image}`}
+                      alt="event pic"
+                      className="mb-4 h-60 w-48 border-b-2 border-gray-200 object-cover"
+                    />
+                    <p className="text-center font-sans text-black">
+                      {`${photos[0].title}`}
+                    </p>
+                  </div>
+
+                  <div className="z-40 rotate-3 transform rounded-lg bg-white p-4 shadow-lg transition-transform hover:rotate-0">
+                    <img
+                      src={`${photos[0].image}`}
+                      alt="event pic"
+                      className="mb-4 h-60 w-48 border-b-2 border-gray-200 object-cover"
+                    />
+                    <p className="text-center font-sans text-black">
+                      {`${photos[0].title}`}
+                    </p>
+                  </div>
+                </div>
               )}
+            </div>
+          </div>
+          <div className="flex flex-col items-center bg-white py-12">
+            <h2 className="mb-8 text-center text-4xl font-bold text-black">
+              Some Photos!
+            </h2>
+
+            <div className="mt-8 text-center">
+              <button
+                type="button"
+                className="rounded-full bg-orange-500 px-6 py-2 text-xl text-white transition-colors hover:bg-orange-600"
+              >
+                Photo Gallery!
+              </button>
             </div>
           </div>
         </div>
