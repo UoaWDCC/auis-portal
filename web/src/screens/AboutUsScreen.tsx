@@ -152,7 +152,7 @@ export default function AboutUsScreen() {
               {noPartners ? (
                 <div>There is no partners to display</div>
               ) : (
-                <div className="flex flex-wrap justify-center">
+                <div className="flex flex-wrap justify-center items-center">
                   {partners.map((partner) => (
                     <div key={partner.id} className="m-5 w-full md:w-80">
                       <img src={partner.image} alt="Partner Image" />
