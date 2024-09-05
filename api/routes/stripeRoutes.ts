@@ -1,6 +1,6 @@
 import express, { Router, json } from "express";
 import { protect } from "../middleware/authMiddleware";
-import { reserveTicket, releaseReservedTicket } from "../gateway/eventsGateway";
+import { isTicketAvailableByEventId, reserveTicket, releaseReservedTicket } from "../gateway/eventsGateway";
 import Stripe from "stripe";
 
 // StripeJS: Load secret API key
@@ -9,10 +9,8 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
   typescript: true,
 });
 
-//frontend
 const domainURL = process.env.DOMAIN_FRONTEND;
 
-// use the Stripe CLI to generate your own endpoint and paste the value below.
 const endpointSecret: string = process.env.STRIPE_WEBHOOK_ENDPOINT as string;
 
 const router = Router();
@@ -25,7 +23,11 @@ router.post("/create-checkout-session", async (req, res) => {
   // @Ratchet7x5: TODO: Add the ability to reserve tickets by event id OUTSIDE the express app.
   //                    eg: use Strapi or something to create a link or so.
   //attempt to reserve one ticket by event's id
-  reserveTicket(0);
+  let ticketAvailable = await isTicketAvailableByEventId(1);
+
+  if (ticketAvailable == false) {
+    return res.send({error: "There are no tickets available. Please come back later to see if more tickets become available."})
+  }
 
   // in the incoming request, we need the priceID of the item we're buying.
   const { priceId } = req.body;
@@ -59,13 +61,11 @@ router.post("/create-checkout-session", async (req, res) => {
         },
       ],
       mode: "payment",
-      // @Ratchet7x5 INFO: The link below determines the
-      // redirect page on frontend after successful payment.
       return_url: `${domainURL}return?session_id={CHECKOUT_SESSION_ID}`,
     });
 
     res.send({ clientSecret: session.client_secret });
-    console.log(session);
+    //console.log(session);
   } catch (error) {
     res.send({ error }).status(404);
   }
@@ -75,7 +75,7 @@ router.get("/session-status", async (req, res) => {
   const session = await stripe.checkout.sessions.retrieve(
     req.query.session_id as string
   );
-  console.log("session-status: ", session);
+  //console.log("/session-status: ", session);
 
   res.send({
     status: session.status,
@@ -104,50 +104,27 @@ router.post(
     // Successfully constructed event
     //console.log("Success:", event.id);
 
-    /*
-    Account for the following events:
-    charge.succeeded
-    charge.refunded
-    charge.failed
-    checkout.session.async_payment_failed
-    checkout.session.async_payment_succeeded
-    checkout.session.completed
-    payment_intent.succeeded
-    */
-
     // Cast event data to Stripe object
-    /*if (event.type === "payment_intent.succeeded") {
-      const stripeObject: Stripe.PaymentIntent = event.data
-        .object as Stripe.PaymentIntent;
-      console.log(`PaymentIntent status: ${stripeObject.status}`);
-      //insert into db
-    } else if (event.type === "charge.succeeded") {
-      const charge = event.data.object; // as Stripe.Charge;
-      console.log(`/webhook: event.type: ${event.type}`);
-      console.log(
-        `/webhook: charge.succeeded: ${event.data.object.billing_details.email} ${event.data.object.paid}`
-      );
-      //insert into db
-    } else*/ if (event.type === "checkout.session.completed") {
-      const session = event.data.object;
-      console.log(`/webhook: event.type: ${event.type}`);
-      console.log(`/webhook: payment.status: ${session.payment_status}`);
-      console.log("/webhook: checkout.session.completed: ", session);
-      //insert into db
+    //Only insert into DB when the payment_intent succeeds
+    if (event.type === "payment_intent.succeeded") {
+      console.log(`PaymentIntent Object:`, JSON.stringify(event.data.object, null, 2));
+
+      const stripeObject: Stripe.PaymentIntent = event.data.object as Stripe.PaymentIntent;
+      //console.log(`PaymentIntent status: ${stripeObject.status}`);
+      // insert into db
     } else if (event.type === "checkout.session.expired") {
-      //session expired, release reserved ticket
       /**
        * How do we know that the expired session was for a particular event?
-       * Example: Customer 0 checkout session for Event 0 expired. Return a ticket.
+       * Example: Customer #0 checkout session for Event #0 expired. Return a ticket.
        */
-      console.log(`/webhook: event.type: ${event.type}`);
+      //console.log(`/webhook: event.type: ${event.type}`);
       console.log(`/webhook: todo: release ticket`);
+      throw new Error("Checkout.session.expired, but no ticket was returned to the pool.")
     } else {
-      console.warn(`Unhandled event type: ${event.type}`);
+      //console.warn(`Unhandled event type: ${event.type}`);
       //console.warn(`Unhandled object: ${event.data.object}`);
     }
 
-    // Return a response to acknowledge receipt of the event
     res.json({ received: true });
   }
 );
