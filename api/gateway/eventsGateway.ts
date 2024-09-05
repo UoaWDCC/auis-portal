@@ -2,7 +2,9 @@ import { and, eq, sql, gt } from "drizzle-orm";
 import { db } from "../db/config/db";
 import { events, user_tickets, peoples } from "../schemas/schema";
 
-export async function isTicketAvailableByEventId(eventId: any): Promise<boolean> {
+export async function isTicketAvailableByEventId(
+  eventId: any
+): Promise<boolean> {
   let isTicketAvailable = false;
 
   const remainingTickets = await db.query.events.findFirst({
