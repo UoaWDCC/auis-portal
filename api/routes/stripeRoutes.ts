@@ -1,6 +1,10 @@
 import express, { Router, json } from "express";
 import { protect } from "../middleware/authMiddleware";
-import { isTicketAvailableByEventId, reserveTicket, releaseReservedTicket } from "../gateway/eventsGateway";
+import {
+  isTicketAvailableByEventId,
+  reserveTicket,
+  releaseReservedTicket,
+} from "../gateway/eventsGateway";
 import Stripe from "stripe";
 
 // StripeJS: Load secret API key
@@ -26,7 +30,10 @@ router.post("/create-checkout-session", async (req, res) => {
   let ticketAvailable = await isTicketAvailableByEventId(1);
 
   if (ticketAvailable == false) {
-    return res.send({ error: "There are no tickets available. Please come back later to see if more tickets become available." })
+    return res.send({
+      error:
+        "There are no tickets available. Please come back later to see if more tickets become available.",
+    });
   }
 
   // in the incoming request, we need the priceID of the item we're buying.
@@ -106,9 +113,13 @@ router.post(
     // Cast event data to Stripe object
     //Only insert into DB when the payment_intent succeeds
     if (event.type === "payment_intent.succeeded") {
-      console.log(`PaymentIntent Object:`, JSON.stringify(event.data.object, null, 2));
+      console.log(
+        `PaymentIntent Object:`,
+        JSON.stringify(event.data.object, null, 2)
+      );
 
-      const stripeObject: Stripe.PaymentIntent = event.data.object as Stripe.PaymentIntent;
+      const stripeObject: Stripe.PaymentIntent = event.data
+        .object as Stripe.PaymentIntent;
       //console.log(`PaymentIntent status: ${stripeObject.status}`);
       // insert into db
     } else if (event.type === "checkout.session.expired") {
@@ -118,7 +129,9 @@ router.post(
        */
       //console.log(`/webhook: event.type: ${event.type}`);
       console.log(`/webhook: todo: release ticket`);
-      throw new Error("Checkout.session.expired, but no ticket was returned to the pool.")
+      throw new Error(
+        "Checkout.session.expired, but no ticket was returned to the pool."
+      );
     } else {
       //console.warn(`Unhandled event type: ${event.type}`);
       //console.warn(`Unhandled object: ${event.data.object}`);
