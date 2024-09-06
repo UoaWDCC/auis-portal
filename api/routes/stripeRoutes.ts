@@ -26,7 +26,7 @@ router.post("/create-checkout-session", async (req, res) => {
   let ticketAvailable = await isTicketAvailableByEventId(1);
 
   if (ticketAvailable == false) {
-    return res.send({error: "There are no tickets available. Please come back later to see if more tickets become available."})
+    return res.send({ error: "There are no tickets available. Please come back later to see if more tickets become available." })
   }
 
   // in the incoming request, we need the priceID of the item we're buying.
@@ -48,19 +48,18 @@ router.post("/create-checkout-session", async (req, res) => {
   }
 
   try {
-    // @Ratchet7x5: TODO: Add an auth middleware to ensure that incoming requests have a bearer token (pk_test/live_ABCD12345)
-    // if no bearer token was found, send a 404 error. Also ensure user is logged in.
     const session = await stripe.checkout.sessions.create({
       ui_mode: "embedded",
       expires_at: session_expiry,
       line_items: [
         {
-          // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
+          // Provide the exact Price ID (pr_1234) of the product on sale
           price: priceId,
           quantity: 1,
         },
       ],
       mode: "payment",
+      currency: "NZD",
       return_url: `${domainURL}return?session_id={CHECKOUT_SESSION_ID}`,
     });
 
