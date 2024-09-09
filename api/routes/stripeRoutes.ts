@@ -44,7 +44,6 @@ router.post("/create-checkout-session", async (req, res) => {
 
   // epoch time in seconds, 30mins timeout
   let session_expiry = Math.floor(new Date().getTime() / 1000 + 30 * 60);
-  //console.log("/create-checkout-session : session_expiry", session_expiry);
 
   // if priceId is undefined, send a 404 back.
   if (priceId == undefined) {
@@ -79,7 +78,6 @@ router.post("/create-checkout-session", async (req, res) => {
     });
 
     res.send({ clientSecret: session.client_secret });
-    console.log("/create-checkout-session: Creating new session: ", session.id);
   } catch (error) {
     res.send({ error }).status(404);
   }
@@ -89,7 +87,6 @@ router.get("/session-status", async (req, res) => {
   const session = await stripe.checkout.sessions.retrieve(
     req.query.session_id as string
   );
-  //console.log("/session-status: ", session);
 
   res.send({
     status: session.status,
@@ -109,7 +106,6 @@ router.post(
     try {
       event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
     } catch (err) {
-      console.log(`Error message: ${err}`);
       res.status(400).send(`Webhook Error: ${err}`);
       return;
     }
