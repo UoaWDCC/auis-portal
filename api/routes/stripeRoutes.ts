@@ -97,30 +97,6 @@ router.get("/session-status", async (req, res) => {
   });
 });
 
-// This is only available for local development. Stripe API will take care of sessions for Production.
-// REMOVE THIS BEFORE DEPLOYMENT TO PRODUCTION!!!
-if (process.env.NODE_ENV == "development") {
-  router.post("/expire-checkout-session", async (req, res) => {
-    const session = await stripe.checkout.sessions.expire(req.body.sessionId);
-
-    res.send({
-      status: session.status,
-    });
-  });
-
-  router.get("/list-all-checkout-session", async (req, res) => {
-    // limit: defines how many "open" (in-progress sessions) should be returned.
-    let allSessions = await stripe.checkout.sessions.list({
-      status: "open",
-      limit: 100,
-    });
-
-    //const session = await stripe.checkout.sessions.expire(req.body.sessionId);
-
-    res.send(allSessions);
-  });
-}
-
 router.post(
   "/webhook",
   // Stripe requires the raw body to construct the event
