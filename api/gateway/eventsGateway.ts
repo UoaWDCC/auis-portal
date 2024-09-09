@@ -75,7 +75,7 @@ export async function completeTicketPurchase(sessionId: any) {
 
   //retrieve session from API with line_items expanded
   const checkoutSession = await stripe.checkout.sessions.retrieve(sessionId, {
-    expand: ['line_items'],
+    expand: ["line_items"],
   });
 
   console.log(
@@ -85,9 +85,9 @@ export async function completeTicketPurchase(sessionId: any) {
 
   // Check the Checkout Session's payment_status property
   // to determine if fulfillment should be peformed
-  if (checkoutSession.payment_status !== 'unpaid') {
+  if (checkoutSession.payment_status !== "unpaid") {
     // TODO: Perform fulfillment of the line items
-    db.insert(user_tickets).values({ })
+    db.insert(user_tickets).values({});
 
     // TODO: Record/save fulfillment status for this
     // Checkout Session
