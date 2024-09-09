@@ -40,14 +40,12 @@ export async function reserveTicket(eventId: any) {
       })
       .where(eq(events.id, eventId))
       .returning();
-    console.log("reserveTicket: returnValue: ", reservedTicket);
   }
 
   return reservedTicket;
 }
 
-// @Ratchet7x5: Release one ticket
-// TODO: Problem: We don't know how to check which event should have its ticket released...
+// @Ratchet7x5: Release one reserved ticket
 export async function releaseReservedTicket(eventId: any) {
   let releasedTicket;
 
@@ -59,7 +57,6 @@ export async function releaseReservedTicket(eventId: any) {
     })
     .where(eq(events.id, eventId))
     .returning();
-  console.log("reserveTicket: returnValue: ", releasedTicket);
 
   return releasedTicket;
 }
