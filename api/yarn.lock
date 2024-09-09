@@ -56,6 +56,11 @@
   dependencies:
     "@jridgewell/trace-mapping" "0.3.9"
 
+"@drizzle-team/brocli@^0.8.2":
+  version "0.8.2"
+  resolved "https://registry.yarnpkg.com/@drizzle-team/brocli/-/brocli-0.8.2.tgz#a397253fa1094b16f761b776f39dbdd119838ef7"
+  integrity sha512-zTrFENsqGvOkBOuHDC1pXCkDXNd2UhP4lI3gYGhQ1R1SPeAAfqzPsV1dcpMy4uNU6kB5VpU5NGhvwxVNETR02A==
+
 "@esbuild-kit/core-utils@^3.3.2":
   version "3.3.2"
   resolved "https://registry.npmjs.org/@esbuild-kit/core-utils/-/core-utils-3.3.2.tgz"
@@ -859,19 +864,20 @@ dotenv@^16.4.1:
   resolved "https://registry.npmjs.org/dotenv/-/dotenv-16.4.1.tgz"
   integrity sha512-CjA3y+Dr3FyFDOAMnxZEGtnW9KBR2M0JvvUtXNW+dYJL5ROWxP9DUHCwgFqpMk0OXCc0ljhaNTr2w/kutYIcHQ==
 
-drizzle-kit@^0.23.0:
-  version "0.23.0"
-  resolved "https://registry.yarnpkg.com/drizzle-kit/-/drizzle-kit-0.23.0.tgz#4ac8b4034a75091569666242e99df7bafd590148"
-  integrity sha512-w9jE97z193dd4jzAyj4Uv2SOh8Ydue70Ki6W0awy4bGM1aPXan6zD6Yv+nNTA6oGgNTDl2MJFxutjHG4fden5g==
+drizzle-kit@^0.23.2:
+  version "0.23.2"
+  resolved "https://registry.yarnpkg.com/drizzle-kit/-/drizzle-kit-0.23.2.tgz#07fdc374e5e7c2a9f580d7449e000e90603dc16b"
+  integrity sha512-NWkQ7GD2OTbQ7HzcjsaCOf3n0tlFPSEAF38fvDpwDj8jRbGWGFtN2cD8I8wp4lU+5Os/oyP2xycTKGLHdPipUw==
   dependencies:
+    "@drizzle-team/brocli" "^0.8.2"
     "@esbuild-kit/esm-loader" "^2.5.5"
     esbuild "^0.19.7"
     esbuild-register "^3.5.0"
 
-drizzle-orm@^0.31.0:
-  version "0.31.0"
-  resolved "https://registry.npmjs.org/drizzle-orm/-/drizzle-orm-0.31.0.tgz"
-  integrity sha512-Uf5a3sGOqoyC+ZpQ4NCPR373q0pHOHezIJwdumMix+3rzLdtKgRhdaOabYeqNHBB48gF3Q9rrndkNc4ddE3AWA==
+drizzle-orm@^0.32.0:
+  version "0.32.2"
+  resolved "https://registry.yarnpkg.com/drizzle-orm/-/drizzle-orm-0.32.2.tgz#a44d8703120d44ad8005c6130b0b96ef967534d3"
+  integrity sha512-3fXKzPzrgZIcnWCSLiERKN5Opf9Iagrag75snfFlKeKSYB1nlgPBshzW3Zn6dQymkyiib+xc4nIz0t8U+Xdpuw==
 
 ecdsa-sig-formatter@1.0.11:
   version "1.0.11"
