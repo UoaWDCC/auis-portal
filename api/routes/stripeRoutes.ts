@@ -109,42 +109,23 @@ router.post(
     try {
       event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
     } catch (err) {
-      // On error, log and return the error message
       console.log(`Error message: ${err}`);
       res.status(400).send(`Webhook Error: ${err}`);
       return;
     }
 
-    // Cast event data to Stripe object
     if (event.type === "checkout.session.completed") {
-      const session = event.data.object;
-      console.log("/webhook: checkout.session.completed: ", session);
-
-      //insert into db
-      completeTicketPurchase(event.data.object.id);
+      const session: Stripe.Checkout.Session = event.data.object;
+      completeTicketPurchase(session.id);
     } else if (event.type === "checkout.session.expired") {
-      /**
-       * How do we know that the expired session was for a particular event?
-       * Example: Customer #0 checkout session for Event #0 expired. Return a ticket to Event #0.
-       */
       const session = event.data.object;
-      console.log(`/webhook: event.type: ${event.type}`);
-      console.log(
-        `Expired Session Object:`,
-        JSON.stringify(event.data.object, null, 2)
-      );
-      if (event.data.object.metadata != null) {
-        console.log(
-          `/webhook: releasing one ticket to eventId: ${event.data.object.metadata["eventId"]}`
-        );
-        releaseReservedTicket(event.data.object.metadata["eventId"]);
-      } else {
-        // if it was null
+
+      if (
+        session.metadata != null &&
+        session.metadata["eventId"] != undefined
+      ) {
+        releaseReservedTicket(session.metadata["eventId"]);
       }
-      //throw new Error("Checkout.session.expired, but no ticket was returned to the pool.");
-    } else {
-      //console.warn(`Unhandled event type: ${event.type}`);
-      //console.warn(`Unhandled object: ${event.data.object}`);
     }
 
     res.json({ received: true });
