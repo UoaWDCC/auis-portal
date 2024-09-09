@@ -1,6 +1,7 @@
 import { and, eq, sql, gt } from "drizzle-orm";
 import { db } from "../db/config/db";
 import { events, user_tickets, peoples } from "../schemas/schema";
+import Stripe from "stripe";
 
 export async function isTicketAvailableByEventId(
   eventId: any
@@ -63,7 +64,32 @@ export async function releaseReservedTicket(eventId: any) {
   return releasedTicket;
 }
 
-export async function emailCustomerAboutFailedPayment(session: any) {
-  // TODO: fill me in
-  console.log("Emailing customer", session);
+export async function completeTicketPurchase(sessionId: any) {
+  const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY as string);
+
+  // TODO: Make this function safe to run multiple times,
+  // even concurrently, with the same session ID
+
+  // TODO: Make sure fulfillment hasn't already been
+  // peformed for this Checkout Session
+
+  //retrieve session from API with line_items expanded
+  const checkoutSession = await stripe.checkout.sessions.retrieve(sessionId, {
+    expand: ['line_items'],
+  });
+
+  console.log(
+    `completeTicketPurchase(): checkoutSession:`,
+    JSON.stringify(checkoutSession, null, 2)
+  );
+
+  // Check the Checkout Session's payment_status property
+  // to determine if fulfillment should be peformed
+  if (checkoutSession.payment_status !== 'unpaid') {
+    // TODO: Perform fulfillment of the line items
+    db.insert(user_tickets).values({ })
+
+    // TODO: Record/save fulfillment status for this
+    // Checkout Session
+  }
 }
