@@ -40,7 +40,6 @@ router.post("/create-checkout-session", async (req, res) => {
 
   // in the incoming request, we need the priceID of the item we're buying.
   const { priceId } = req.body;
-  //console.log(priceId);
 
   // epoch time in seconds, 30mins timeout
   let session_expiry = Math.floor(new Date().getTime() / 1000 + 30 * 60);
