@@ -31,6 +31,19 @@ const mocks = [
   },
 ];
 
+const noDataMock = {
+  request: {
+    query: GET_INTRODUCTION,
+  },
+  result: {
+    data: {
+      introductions: {
+        data: [],
+      },
+    },
+  },
+};
+
 describe("Introductions Component", () => {
   it("renders loading", async () => {
     render(
@@ -67,5 +80,15 @@ describe("Introductions Component", () => {
       </MockedProvider>
     );
     expect(await screen.findByText("CMS Offline")).toBeInTheDocument();
+  });
+  it("renders no data from cms", async () => {
+    render(
+      <MockedProvider mocks={[noDataMock]} addTypename={false}>
+        <Introductions />
+      </MockedProvider>
+    );
+    expect(
+      await screen.findByText("There is no introduction to display")
+    ).toBeInTheDocument();
   });
 });
