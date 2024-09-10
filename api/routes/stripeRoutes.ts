@@ -7,7 +7,7 @@ import {
   completeTicketPurchase,
 } from "../gateway/eventsGateway";
 import Stripe from "stripe"; //Types and Interfaces
-import { stripe } from "../stripe/stripe"; 
+import { stripe } from "../stripe/stripe";
 
 const domainURL = process.env.DOMAIN_FRONTEND;
 
