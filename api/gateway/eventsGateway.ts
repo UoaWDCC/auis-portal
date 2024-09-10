@@ -27,7 +27,7 @@ export async function isTicketAvailableByEventId(
 }
 
 // @Ratchet7x5: Reserve one ticket
-export async function reserveTicket(eventId: any) {
+export async function reserveTicket(eventId: number) {
   let canReserveTicket = await isTicketAvailableByEventId(eventId);
   let reservedTicket;
 
@@ -47,7 +47,7 @@ export async function reserveTicket(eventId: any) {
 }
 
 // @Ratchet7x5: Release one reserved ticket
-export async function releaseReservedTicket(eventId: any) {
+export async function releaseReservedTicket(eventId: number) {
   let releasedTicket;
 
   // increment event_remaining_ticket by 1
