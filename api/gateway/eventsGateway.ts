@@ -61,8 +61,7 @@ export async function releaseReservedTicket(eventId: any) {
   return releasedTicket;
 }
 
-export async function completeTicketPurchase(sessionId: any) {
-  const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY as string);
+export async function completeTicketPurchase(sessionId: string) {
 
   // TODO: Make this function safe to run multiple times,
   // even concurrently, with the same session ID
@@ -72,7 +71,7 @@ export async function completeTicketPurchase(sessionId: any) {
 
   //retrieve session from API with line_items expanded
   const checkoutSession = await stripe.checkout.sessions.retrieve(sessionId, {
-    expand: ['line_items'],
+    expand: ["line_items"],
   });
 
   console.log(
