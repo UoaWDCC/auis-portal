@@ -62,6 +62,10 @@ export async function releaseReservedTicket(eventId: any) {
 }
 
 export async function completeTicketPurchase(sessionId: string) {
+  const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY as string, {
+    apiVersion: "2024-06-20",
+    typescript: true,
+  });
 
   // TODO: Make this function safe to run multiple times,
   // even concurrently, with the same session ID
@@ -74,18 +78,9 @@ export async function completeTicketPurchase(sessionId: string) {
     expand: ["line_items"],
   });
 
-  console.log(
-    `completeTicketPurchase(): checkoutSession:`,
-    JSON.stringify(checkoutSession, null, 2)
-  );
-
   // Check the Checkout Session's payment_status property
   // to determine if fulfillment should be peformed
-  if (checkoutSession.payment_status !== 'unpaid') {
-    // TODO: Perform fulfillment of the line items
-    db.insert(user_tickets).values({ })
-
-    // TODO: Record/save fulfillment status for this
-    // Checkout Session
+  if (checkoutSession.payment_status !== "unpaid") {
+    db.insert(user_tickets).values({people_ticket_code: 0});
   }
 }
