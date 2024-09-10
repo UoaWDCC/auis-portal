@@ -6,13 +6,8 @@ import {
   releaseReservedTicket,
   completeTicketPurchase,
 } from "../gateway/eventsGateway";
-import Stripe from "stripe";
-
-// StripeJS: Load secret API key
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
-  apiVersion: "2024-06-20",
-  typescript: true,
-});
+import Stripe from "stripe"; //Types and Interfaces
+import { stripe } from "../stripe/stripe"; 
 
 const domainURL = process.env.DOMAIN_FRONTEND;
 

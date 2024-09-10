@@ -2,6 +2,7 @@ import { and, eq, sql, gt } from "drizzle-orm";
 import { db } from "../db/config/db";
 import { events, user_tickets, peoples } from "../schemas/schema";
 import Stripe from "stripe";
+import { stripe } from "../stripe/stripe";
 
 export async function isTicketAvailableByEventId(
   eventId: any
@@ -62,11 +63,6 @@ export async function releaseReservedTicket(eventId: any) {
 }
 
 export async function completeTicketPurchase(sessionId: string) {
-  const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY as string, {
-    apiVersion: "2024-06-20", 
-    typescript: true,
-  });
-
   // TODO: Make this function safe to run multiple times,
   // even concurrently, with the same session ID
 
@@ -81,6 +77,6 @@ export async function completeTicketPurchase(sessionId: string) {
   // Check the Checkout Session's payment_status property
   // to determine if fulfillment should be peformed
   if (checkoutSession.payment_status !== "unpaid") {
-    db.insert(user_tickets).values({people_ticket_code: 0});
+    db.insert(user_tickets).values({ people_ticket_code: 0 });
   }
 }
