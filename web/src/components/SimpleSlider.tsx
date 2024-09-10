@@ -1,35 +1,113 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { GET_EVENTS } from "../graphql/queries";
-import {
-  IoArrowBackCircleOutline,
-  IoArrowForwardCircleOutline,
-} from "react-icons/io5";
-import { useEffect, useRef, useState } from "react";
+import { IoArrowBackCircleOutline, IoArrowForwardCircleOutline } from "react-icons/io5";
+import { useRef } from "react";
 import LoadingSpinner from "./LoadingSpinner";
-import { useQuery } from "@apollo/client";
-import { Mapper } from "@utils/Mapper";
-import type { Event } from "../types/types";
+import { useQuery, gql } from "@apollo/client";
 import UpcomingEventHomeCard from "./UpcomingEventHomeCard";
+import { GET_EVENTS } from "../graphql/queries";
 
+// Define TypeScript interfaces
+interface EventAttributes {
+  Title: string;
+  Description: string;
+  Subtitle: string;
+  Location: string;
+  Location_Link: string;
+  Event_Date_Start: string;
+  Event_Date_End: string;
+  Is_Live: boolean;
+  Terms_And_Conditions: string;
+  Event_Capacity_Remaining: number;
+  Image: {
+    data: {
+      attributes: {
+        url: string;
+      };
+    };
+  };
+}
+
+interface RawEventData {
+  id: number;
+  attributes: EventAttributes;
+}
+
+interface Event {
+  id: number;
+  title: string;
+  description: string;
+  subtitle: string;
+  location: string;
+  locationLink: string;
+  eventDateStart: string;
+  eventDateEnd: string;
+  isLive: boolean;
+  termsAndConditions: string;
+  eventCapacityRemaining: number;
+  image: string;
+}
+
+interface EventResponseData {
+  events: {
+    data: RawEventData[];
+  };
+}
+
+// Mapper class to transform raw data
+class Mapper {
+  static mapToEvents(rawData: RawEventData[]): Event[] {
+    if (!Array.isArray(rawData)) {
+      return [];
+    }
+
+    return rawData.map(item => {
+      const { id, attributes } = item;
+
+      if (!attributes) {
+        return null;
+      }
+
+      return {
+        id,
+        title: attributes.Title,
+        description: attributes.Description,
+        subtitle: attributes.Subtitle,
+        location: attributes.Location,
+        locationLink: attributes.Location_Link,
+        eventDateStart: attributes.Event_Date_Start,
+        eventDateEnd: attributes.Event_Date_End,
+        isLive: attributes.Is_Live,
+        termsAndConditions: attributes.Terms_And_Conditions,
+        eventCapacityRemaining: attributes.Event_Capacity_Remaining,
+        image: attributes.Image.data.attributes.url,
+      } as Event;
+    }).filter((event): event is Event => event !== null); // Filter out any null results
+  }
+}
+
+// SimpleSlider component
 export default function SimpleSlider() {
   const sliderRef = useRef<Slider>(null);
-  const {
-    loading: eventsLoading,
-    data: eventsData,
-    error: eventsError,
-  } = useQuery(GET_EVENTS);
+
+  const { loading: eventsLoading, error: eventsError, data: eventsData } = useQuery<EventResponseData>(GET_EVENTS);
 
   if (eventsLoading) {
     return <LoadingSpinner />;
   }
 
   if (eventsError) {
+    console.error("GraphQL Error:", eventsError.message);
     return <div>CMS Offline</div>;
   }
 
-  //const events: Event[] = Mapper.mapToEvents(eventsData.events.data);
+  if (!eventsData || !eventsData.events || eventsData.events.data.length === 0) {
+    console.error('No data available');
+    return <div>No data available</div>;
+  }
+
+  const events = Mapper.mapToEvents(eventsData.events.data);
 
   const settings = {
     dots: true,
@@ -64,28 +142,15 @@ export default function SimpleSlider() {
 
   function SliderNoArrow() {
     return (
-      <>
-        {loading ? (
-          <LoadingSpinner />
-        ) : (
-        <>
-          {noEvents ? (
-            <div>There are no events to display</div>
-          ) : (
-            <div>
-              <Slider ref={sliderRef} {...settings}>
-                {event.map((events) => (
-                <div key={events.id}>
-                  <UpcomingEventHomeCard upcomingEvent={events} />
-                </div>
-            ))}
-            </Slider>
-          </div>
-          )}
-        </>
-        )}
-      </>
-      
+      <div>
+        <Slider ref={sliderRef} {...settings}>
+          {events.map((event) => (
+            <div key={event.id}>
+              <UpcomingEventHomeCard upcomingEvent={event} />
+            </div>
+          ))}
+        </Slider>
+      </div>
     );
   }
 
