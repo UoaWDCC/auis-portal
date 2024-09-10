@@ -63,7 +63,7 @@ export async function releaseReservedTicket(eventId: any) {
 
 export async function completeTicketPurchase(sessionId: string) {
   const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY as string, {
-    apiVersion: "2024-06-20", 
+    apiVersion: "2024-06-20",
     typescript: true,
   });
 
@@ -81,6 +81,6 @@ export async function completeTicketPurchase(sessionId: string) {
   // Check the Checkout Session's payment_status property
   // to determine if fulfillment should be peformed
   if (checkoutSession.payment_status !== "unpaid") {
-    db.insert(user_tickets).values({people_ticket_code: 0});
+    db.insert(user_tickets).values({ people_ticket_code: 0 });
   }
 }
