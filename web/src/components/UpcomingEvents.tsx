@@ -1,6 +1,5 @@
 import UpcomingEventsList from "./UpcomingEventsList";
 import { Event } from "../types/types";
-import { useEffect } from "react";
 
 interface UpcomingEventsProps {
   upcomingEvents: Event[];
