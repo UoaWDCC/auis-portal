@@ -8,18 +8,17 @@ export default {
   theme: {
     extend: {
       dropShadow: {
-        glow: [
-          "0px 0px 5px rgba(255,255, 255, 0.35)"
-        ]
+        glow: ["0px 0px 5px rgba(255,255, 255, 0.35)"],
       },
       colors: {
         "primary-green": "#158807",
         "primary-orange": "#FC8700",
         "primary-blue": "#012D37",
         "secondary-blue": "#034159",
-        "tertiary-blue" : "#CAF1FF",
+        "tertiary-blue": "#CAF1FF",
         "AUIS-teal": "#0F4A57",
         "AUIS-dark-teal": "#07242F",
+        "AUIS-light-teal": "#A0B9C0",
       },
       fontFamily: {
         sans: ["Montserrat"],

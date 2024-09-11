@@ -183,10 +183,14 @@ export class Mapper {
   }
 
   static mapToEventsGallery(data: any): EventGallery[] {
-    if (!data.events || !data.events.data || data.events.data.length === 0) {
+    if (
+      !data.eventGalleries ||
+      !data.eventGalleries.data ||
+      data.eventGalleries.data.length === 0
+    ) {
       throw new NoDataError("No data");
     } else {
-      return data.events.data.map((item: any) => {
+      return data.eventGalleries.data.map((item: any) => {
         const attributes = item.attributes || {};
         const imageUrl = attributes.Image?.data?.attributes?.url || "";
 
