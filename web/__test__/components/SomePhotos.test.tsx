@@ -5,6 +5,7 @@ import { render, screen } from "@testing-library/react";
 import SomePhotos from "../../src/components/SomePhotos";
 import React from "react";
 import { GraphQLError } from "graphql";
+import { MemoryRouter } from "react-router-dom";
 
 // Mock data with some photos
 const mocks = [
