@@ -79,7 +79,7 @@ function SomePhotos() {
             </div>
             <div className="mt-14 flex justify-center">
               <Link
-                to="/events-page"
+                to="/events"
                 className="bg-primary-orange w-fit rounded-2xl px-10 py-3 text-xl font-bold text-white hover:drop-shadow-xl hover:duration-500 hover:ease-in-out"
               >
                 Photo Gallery!

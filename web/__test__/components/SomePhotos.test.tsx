@@ -6,6 +6,7 @@ import SomePhotos from "../../src/components/SomePhotos";
 import React from "react";
 import { GraphQLError } from "graphql";
 
+// Mock data with some photos
 const mocks = [
   {
     request: {
@@ -36,6 +37,7 @@ const mocks = [
   },
 ];
 
+// Mock for no data case
 const noDataMock = {
   request: {
     query: GET_SOME_PHOTOS,
@@ -49,45 +51,69 @@ const noDataMock = {
   },
 };
 
+// Mock for error case
+const errorMock = {
+  request: {
+    query: GET_SOME_PHOTOS,
+  },
+  result: {
+    errors: [new GraphQLError("Error!")],
+  },
+};
+
 describe("SomePhotos Component", () => {
-  it("renders loading", async () => {
+  it("renders loading spinner", async () => {
     render(
-      <MockedProvider mocks={mocks} addTypename={false}>
-        <SomePhotos />
-      </MockedProvider>
+      <MemoryRouter>
+        <MockedProvider mocks={mocks} addTypename={false}>
+          <SomePhotos />
+        </MockedProvider>
+      </MemoryRouter>
     );
+    // Ensure the loading spinner is displayed
     expect(screen.getByTestId("loading-spinner")).toBeInTheDocument();
+
+    // Wait for the mocked data to load and the spinner to be removed
+    await screen.findByText("AUIS Stein");
   });
 
   it("renders the mocked data", async () => {
     render(
-      <MockedProvider mocks={mocks} addTypename={false}>
-        <SomePhotos />
-      </MockedProvider>
+      <MemoryRouter>
+        <MockedProvider mocks={mocks} addTypename={false}>
+          <SomePhotos />
+        </MockedProvider>
+      </MemoryRouter>
     );
-    expect(await screen.findByText("AUIS Stein")).toBeInTheDocument();
-    expect(await screen.findByText("2024")).toBeInTheDocument();
+
+    // Wait for the data to load
+    await screen.findByText("AUIS Stein");
+    await screen.findByText("2024");
   });
-  it("renders error", async () => {
-    const execMock = {
-      request: {
-        query: GET_SOME_PHOTOS,
-      },
-      error: new GraphQLError("Error!"),
-    };
+
+  it("renders error message", async () => {
     render(
-      <MockedProvider mocks={[execMock]} addTypename={false}>
-        <SomePhotos />
-      </MockedProvider>
+      <MemoryRouter>
+        <MockedProvider mocks={[errorMock]} addTypename={false}>
+          <SomePhotos />
+        </MockedProvider>
+      </MemoryRouter>
     );
+
+    // Wait for the error message to be displayed
     expect(await screen.findByText("CMS Offline")).toBeInTheDocument();
   });
-  it("renders no data from cms", async () => {
+
+  it("renders 'no photos' message when there is no data", async () => {
     render(
-      <MockedProvider mocks={[noDataMock]} addTypename={false}>
-        <SomePhotos />
-      </MockedProvider>
+      <MemoryRouter>
+        <MockedProvider mocks={[noDataMock]} addTypename={false}>
+          <SomePhotos />
+        </MockedProvider>
+      </MemoryRouter>
     );
+
+    // Wait for the "no photos" message to be displayed
     expect(
       await screen.findByText("There are no photos to display")
     ).toBeInTheDocument();
