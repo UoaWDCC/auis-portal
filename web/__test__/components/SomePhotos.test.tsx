@@ -65,8 +65,7 @@ describe("SomePhotos Component", () => {
         <SomePhotos />
       </MockedProvider>
     );
-    expect(await screen.findByText("AUIS Stein")).toBeInTheDocument();
-    expect(await screen.findByText("2024")).toBeInTheDocument();
+    expect(await screen.findByText("AUIS Stein 2024")).toBeInTheDocument();
   });
   it("renders error", async () => {
     const execMock = {
