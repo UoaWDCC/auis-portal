@@ -1,4 +1,4 @@
-import SimpleSlider from "./SimpleSlider";
+import SimpleSlider from "./EventSlider";
 import PastEventCard from "./PastEventCard";
 import { Event } from "../types/types";
 import { Link } from "react-router-dom";

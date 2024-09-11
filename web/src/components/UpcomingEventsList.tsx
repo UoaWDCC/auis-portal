@@ -1,4 +1,4 @@
-import SimpleSlider from "./SimpleSlider";
+import EventSlider from "./EventSlider";
 import { Event } from "../types/types";
 import UpcomingEventCard from "./UpcomingEventCard";
 import { Link } from "react-router-dom";
@@ -12,15 +12,15 @@ const UpcomingEventsList: React.FC<UpcomingEventsListProps> = ({
 }) => {
   return (
     <>
-      <SimpleSlider cardType="upcoming">
-        {upcomingEvents.map((event, index) => (
-          <div key={index} className="p-2 hover:cursor-pointer">
+      <EventSlider cardType="upcoming">
+        {upcomingEvents.map((event) => (
+          <div key={event.id} className="p-2 hover:cursor-pointer">
             <Link to={`/events/${event.id}`}>
               <UpcomingEventCard upcomingEvent={event} />
             </Link>
           </div>
         ))}
-      </SimpleSlider>
+      </EventSlider>
     </>
   );
 };
