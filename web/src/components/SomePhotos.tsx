@@ -81,15 +81,6 @@ function SomePhotos() {
             <h2 className="mb-8 text-center text-4xl font-bold text-black">
               Some Photos!
             </h2>
-
-            <div className="mt-8 text-center">
-              <button
-                type="button"
-                className="rounded-full bg-orange-500 px-6 py-2 text-xl text-white transition-colors hover:bg-orange-600"
-              >
-                Photo Gallery!
-              </button>
-            </div>
           </div>
         </div>
       )}
