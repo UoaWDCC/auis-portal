@@ -5,11 +5,11 @@ const App = () => {
   return (
     <>
       <main>
-        <div>
-          <Outlet />
-        </div>
+        <Outlet />
       </main>
-      <Footer />
+      <footer>
+        <Footer />
+      </footer>
     </>
   );
 };

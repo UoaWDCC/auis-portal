@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { GET_SOME_PHOTOS } from "../graphql/queries";
-import LoadingSpinner from "../components/LoadingSpinner";
-import { SomePhoto } from "../types/types";
+import LoadingSpinner from "./LoadingSpinner";
+import type { SomePhoto } from "../types/types";
 import { Mapper } from "../utils/Mapper";
 import { useState, useEffect } from "react";
 
@@ -43,35 +43,44 @@ function SomePhotos() {
       {loading ? (
         <LoadingSpinner />
       ) : (
-        <div className="h-screen bg-white">
+        <div className="bg-white">
           <h1 className="mx-3 py-12 text-center text-5xl font-bold text-white">
             Our Upcoming Events!
           </h1>
-          <div className="mt-20">
-            <div className="grid grid-cols-2 gap-10">
+          <div className="mt-20 flex w-full flex-col justify-center">
+            <div className="flex flex-col justify-center lg:flex-row">
               {noPhotos ? (
                 <div>There are no photos to display</div>
               ) : (
-                photos.map((photo) => (
-                  <div
-                    key={photo.id}
-                    className="rounded-lg bg-white p-5 text-black"
-                  >
-                    <div className="flex items-center">
+                <div className="relative flex flex-col items-center space-x-4 lg:flex-row">
+                  {photos.slice(0, 4).map((photo, index) => (
+                    <div
+                      key={photo.title}
+                      className={`z-${10 + index * 10} ${
+                        index % 2 === 0 ? "-rotate-3" : "rotate-3"
+                      } transform rounded-lg bg-white p-4 shadow-lg transition-transform hover:rotate-0`}
+                    >
                       <img
-                        className="mr-4 max-h-40 max-w-40 rounded-full"
-                        src={`${photo.image}`}
-                        alt="photo information"
+                        src={photo.image}
+                        alt="event pic"
+                        className="mb-4 h-60 w-48 border-b-2 border-gray-200 object-cover"
                       />
-                      <div>
-                        <h1 className="text-xl font-bold">{photo.title}</h1>
-                        <h1 className="text-xl font-bold">{photo.year}</h1>
-                      </div>
+                      <p className="text-center font-sans text-black">
+                        {photo.title}
+                      </p>
+                      <p className="text-center font-sans text-black">
+                        {photo.year}
+                      </p>
                     </div>
-                  </div>
-                ))
+                  ))}
+                </div>
               )}
             </div>
+          </div>
+          <div className="flex flex-col items-center bg-white py-12">
+            <h2 className="mb-8 text-center text-4xl font-bold text-black">
+              Some Photos!
+            </h2>
           </div>
         </div>
       )}
