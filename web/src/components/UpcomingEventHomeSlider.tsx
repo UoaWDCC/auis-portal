@@ -1,7 +1,10 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { IoArrowBackCircleOutline, IoArrowForwardCircleOutline } from "react-icons/io5";
+import {
+  IoArrowBackCircleOutline,
+  IoArrowForwardCircleOutline,
+} from "react-icons/io5";
 import { useRef } from "react";
 import LoadingSpinner from "./LoadingSpinner";
 import { useQuery, gql } from "@apollo/client";
@@ -55,43 +58,47 @@ interface EventResponseData {
   };
 }
 
-
 class Mapper {
   static mapToEvents(rawData: RawEventData[]): Event[] {
     if (!Array.isArray(rawData)) {
       return [];
     }
 
-    return rawData.map(item => {
-      const { id, attributes } = item;
+    return rawData
+      .map((item) => {
+        const { id, attributes } = item;
 
-      if (!attributes) {
-        return null;
-      }
+        if (!attributes) {
+          return null;
+        }
 
-      return {
-        id,
-        title: attributes.Title,
-        description: attributes.Description,
-        subtitle: attributes.Subtitle,
-        location: attributes.Location,
-        locationLink: attributes.Location_Link,
-        eventDateStart: attributes.Event_Date_Start,
-        eventDateEnd: attributes.Event_Date_End,
-        isLive: attributes.Is_Live,
-        termsAndConditions: attributes.Terms_And_Conditions,
-        eventCapacityRemaining: attributes.Event_Capacity_Remaining,
-        image: attributes.Image.data.attributes.url,
-      } as Event;
-    }).filter((event): event is Event => event !== null);
+        return {
+          id,
+          title: attributes.Title,
+          description: attributes.Description,
+          subtitle: attributes.Subtitle,
+          location: attributes.Location,
+          locationLink: attributes.Location_Link,
+          eventDateStart: attributes.Event_Date_Start,
+          eventDateEnd: attributes.Event_Date_End,
+          isLive: attributes.Is_Live,
+          termsAndConditions: attributes.Terms_And_Conditions,
+          eventCapacityRemaining: attributes.Event_Capacity_Remaining,
+          image: attributes.Image.data.attributes.url,
+        } as Event;
+      })
+      .filter((event): event is Event => event !== null);
   }
 }
-
 
 export default function UpcomingEventHomeSlider() {
   const sliderRef = useRef<Slider>(null);
 
-  const { loading: eventsLoading, error: eventsError, data: eventsData } = useQuery<EventResponseData>(GET_EVENTS);
+  const {
+    loading: eventsLoading,
+    error: eventsError,
+    data: eventsData,
+  } = useQuery<EventResponseData>(GET_EVENTS);
 
   if (eventsLoading) {
     return <LoadingSpinner />;
@@ -101,7 +108,11 @@ export default function UpcomingEventHomeSlider() {
     return <div>CMS Offline</div>;
   }
 
-  if (!eventsData || !eventsData.events || eventsData.events.data.length === 0) {
+  if (
+    !eventsData ||
+    !eventsData.events ||
+    eventsData.events.data.length === 0
+  ) {
     return <div>No data available</div>;
   }
 
