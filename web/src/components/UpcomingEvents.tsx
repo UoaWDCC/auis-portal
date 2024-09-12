@@ -1,4 +1,4 @@
-import SimpleSlider from "./SimpleSlider";
+import UpcomingEventHomeSlider from "./UpcomingEventHomeSlider";
 
 function UpcomingEvents() {
   return (
@@ -8,7 +8,7 @@ function UpcomingEvents() {
           Our Upcoming Events!
         </h1>
         <div className="">
-          <SimpleSlider />
+          <UpcomingEventHomeSlider />
         </div>
       </div>
     </>
