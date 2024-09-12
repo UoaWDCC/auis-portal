@@ -7,6 +7,7 @@ import LoadingSpinner from "./LoadingSpinner";
 import { useQuery, gql } from "@apollo/client";
 import UpcomingEventHomeCard from "./UpcomingEventHomeCard";
 import { GET_EVENTS } from "../graphql/queries";
+import dayjs from "dayjs";
 
 interface EventAttributes {
   Title: string;
@@ -106,6 +107,11 @@ export default function UpcomingEventHomeSlider() {
 
   const events = Mapper.mapToEvents(eventsData.events.data);
 
+  const now = dayjs(); // current date and time
+  const upcomingEvents = events
+    .filter(event => dayjs(event.eventDateStart).isAfter(now)) // only future events
+    .sort((a, b) => dayjs(a.eventDateStart).diff(dayjs(b.eventDateStart))); // sort by start date
+
   const settings = {
     dots: true,
     infinite: false,
@@ -141,7 +147,7 @@ export default function UpcomingEventHomeSlider() {
     return (
       <div>
         <Slider ref={sliderRef} {...settings}>
-          {events.map((event) => (
+          {upcomingEvents.map((event) => (
             <div key={event.id}>
               <UpcomingEventHomeCard upcomingEvent={event} />
             </div>
