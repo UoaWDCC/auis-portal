@@ -120,7 +120,7 @@ export default function UpcomingEventHomeSlider() {
 
   const now = dayjs(); // current date and time
   const upcomingEvents = events
-    .filter(event => dayjs(event.eventDateStart).isAfter(now)) // only future events
+    .filter((event) => dayjs(event.eventDateStart).isAfter(now)) // only future events
     .sort((a, b) => dayjs(a.eventDateStart).diff(dayjs(b.eventDateStart))); // sort by start date
 
   const settings = {
