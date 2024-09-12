@@ -97,12 +97,10 @@ export default function UpcomingEventHomeSlider() {
   }
 
   if (eventsError) {
-    console.error("GraphQL Error:", eventsError.message);
     return <div>CMS Offline</div>;
   }
 
   if (!eventsData || !eventsData.events || eventsData.events.data.length === 0) {
-    console.error('No data available');
     return <div>No data available</div>;
   }
 
