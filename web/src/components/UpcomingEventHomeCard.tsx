@@ -7,7 +7,9 @@ interface UpcomingEventCardProps {
 export default function UpcomingEventHomeCard({
   upcomingEvent,
 }: UpcomingEventCardProps) {
-  const formattedDate = new Date(upcomingEvent.eventDateStart).toLocaleDateString("en-NZ", {
+  const formattedDate = new Date(
+    upcomingEvent.eventDateStart
+  ).toLocaleDateString("en-NZ", {
     day: "numeric",
     month: "long",
   });
@@ -25,8 +27,8 @@ export default function UpcomingEventHomeCard({
         </h3>
       </div>
       <div className="flex justify-end py-7">
-        <div className="bg-primary-orange flex h-10 items-center justify-center rounded-[1.5rem] whitespace-nowrap">
-          <div className="py-2 px-3 text-xl font-bold text-white">
+        <div className="bg-primary-orange flex h-10 items-center justify-center whitespace-nowrap rounded-[1.5rem]">
+          <div className="px-3 py-2 text-xl font-bold text-white">
             {formattedDate}
           </div>
         </div>
