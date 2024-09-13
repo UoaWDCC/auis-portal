@@ -49,6 +49,7 @@ const router = createBrowserRouter(
       <Route path="/photos" element={<PhotosScreen />} />
       <Route path="/checkout" element={<CheckoutScreen />} />
       <Route path="/return" element={<ReturnScreen />} />
+      <Route path="/about-us" element={<AboutUsScreen />} />
     </Route>
   )
 );
