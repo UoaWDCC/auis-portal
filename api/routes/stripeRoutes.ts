@@ -114,7 +114,7 @@ router.post(
         session.metadata != null &&
         session.metadata["eventId"] != undefined
       ) {
-        releaseReservedTicket(Number(session.metadata["eventId"]));
+        releaseReservedTicket(parseInt(session.metadata["eventId"]));
       }
     }
 
