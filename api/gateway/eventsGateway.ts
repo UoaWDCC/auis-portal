@@ -1,6 +1,6 @@
 import { and, eq, sql, gt } from "drizzle-orm";
 import { db } from "../db/config/db";
-import { events, user_tickets, peoples } from "../schemas/schema";
+import { events, user_tickets, peoples, tickets } from "../schemas/schema";
 import Stripe from "stripe";
 import { stripe } from "../stripe/stripe";
 
@@ -77,6 +77,6 @@ export async function completeTicketPurchase(sessionId: string) {
   // Check the Checkout Session's payment_status property
   // to determine if fulfillment should be peformed
   if (checkoutSession.payment_status !== "unpaid") {
-    db.insert(user_tickets).values({ people_ticket_code: 0 });
+    db.insert(tickets).values({  });
   }
 }
