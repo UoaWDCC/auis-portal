@@ -77,6 +77,6 @@ export async function completeTicketPurchase(sessionId: string) {
   // Check the Checkout Session's payment_status property
   // to determine if fulfillment should be peformed
   if (checkoutSession.payment_status !== "unpaid") {
-    db.insert(tickets).values({  });
+    db.insert(tickets).values({});
   }
 }
