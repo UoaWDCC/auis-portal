@@ -20,7 +20,7 @@ const router = Router();
 
 // Create a checkout session based on priceId. Send a client secret back (cs_ABCD123)
 router.post("/create-checkout-session", async (req, res) => {
-  const eventId = 0; //const { eventId } = req.body;
+  const { eventId } = req.body;
 
   let ticketAvailable = await isTicketAvailableByEventId(eventId);
 
