@@ -11,85 +11,13 @@ import { useQuery, gql } from "@apollo/client";
 import UpcomingEventHomeCard from "./UpcomingEventHomeCard";
 import { GET_EVENTS } from "../graphql/queries";
 import dayjs from "dayjs";
+import { Mapper } from "../utils/Mapper";
+import type { Event } from "../types/types";
 
-interface EventAttributes {
-  Title: string;
-  Description: string;
-  Subtitle: string;
-  Location: string;
-  Location_Link: string;
-  Event_Date_Start: string;
-  Event_Date_End: string;
-  Is_Live: boolean;
-  Terms_And_Conditions: string;
-  Event_Capacity_Remaining: number;
-  Image: {
-    data: {
-      attributes: {
-        url: string;
-      };
-    };
-  };
-}
 
-interface RawEventData {
-  id: number;
-  attributes: EventAttributes;
-}
 
-interface Event {
-  id: number;
-  title: string;
-  description: string;
-  subtitle: string;
-  location: string;
-  locationLink: string;
-  eventDateStart: string;
-  eventDateEnd: string;
-  isLive: boolean;
-  termsAndConditions: string;
-  eventCapacityRemaining: number;
-  image: string;
-}
 
-interface EventResponseData {
-  events: {
-    data: RawEventData[];
-  };
-}
 
-class Mapper {
-  static mapToEvents(rawData: RawEventData[]): Event[] {
-    if (!Array.isArray(rawData)) {
-      return [];
-    }
-
-    return rawData
-      .map((item) => {
-        const { id, attributes } = item;
-
-        if (!attributes) {
-          return null;
-        }
-
-        return {
-          id,
-          title: attributes.Title,
-          description: attributes.Description,
-          subtitle: attributes.Subtitle,
-          location: attributes.Location,
-          locationLink: attributes.Location_Link,
-          eventDateStart: attributes.Event_Date_Start,
-          eventDateEnd: attributes.Event_Date_End,
-          isLive: attributes.Is_Live,
-          termsAndConditions: attributes.Terms_And_Conditions,
-          eventCapacityRemaining: attributes.Event_Capacity_Remaining,
-          image: attributes.Image.data.attributes.url,
-        } as Event;
-      })
-      .filter((event): event is Event => event !== null);
-  }
-}
 
 export default function UpcomingEventHomeSlider() {
   const sliderRef = useRef<Slider>(null);
@@ -98,7 +26,7 @@ export default function UpcomingEventHomeSlider() {
     loading: eventsLoading,
     error: eventsError,
     data: eventsData,
-  } = useQuery<EventResponseData>(GET_EVENTS);
+  } = useQuery<Event>(GET_EVENTS);
 
   if (eventsLoading) {
     return <LoadingSpinner />;
@@ -108,15 +36,11 @@ export default function UpcomingEventHomeSlider() {
     return <div>CMS Offline</div>;
   }
 
-  if (
-    !eventsData ||
-    !eventsData.events ||
-    eventsData.events.data.length === 0
-  ) {
+  if (!eventsData) {
     return <div>No data available</div>;
   }
 
-  const events = Mapper.mapToEvents(eventsData.events.data);
+  const events = Mapper.mapToEvents(eventsData);
 
   const now = dayjs(); // current date and time
   const upcomingEvents = events
