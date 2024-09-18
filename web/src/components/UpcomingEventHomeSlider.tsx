@@ -14,11 +14,6 @@ import dayjs from "dayjs";
 import { Mapper } from "../utils/Mapper";
 import type { Event } from "../types/types";
 
-
-
-
-
-
 export default function UpcomingEventHomeSlider() {
   const sliderRef = useRef<Slider>(null);
 
