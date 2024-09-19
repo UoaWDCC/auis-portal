@@ -27,7 +27,6 @@ function CheckoutScreen() {
 
   // can be null to options.clientSecret or options.fetchClientSecret if you are performing an initial server-side render or when generating a static site.
   const options = { fetchClientSecret };
-  console.log(options);
 
   return (
     <div id="checkout">
