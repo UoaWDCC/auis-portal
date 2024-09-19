@@ -15,7 +15,7 @@ let bodyData = { priceId: "price_1PSHWRP464csY2UpYpxvB2tk", eventId: 1 };
 function CheckoutScreen() {
   const fetchClientSecret = useCallback(async () => {
     // Create a Checkout Session
-    return await fetch("/api/stripe/create-checkout-session", {
+    return await fetch("/api/stripe/create-event-checkout", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       // add our own priceId here later for different products
