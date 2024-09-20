@@ -45,8 +45,6 @@ export const createEventCheckoutSession = asyncHandler(
       reserveTicket(0);
     }
 
-    // in the incoming request, we need the priceID of the item we're buying.
-
     // epoch time in seconds, 30mins timeout
     let session_expiry = Math.floor(new Date().getTime() / 1000 + 30 * 60);
 
