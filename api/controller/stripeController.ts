@@ -12,34 +12,43 @@ import { stripe } from "../stripe/stripe";
 // Create a checkout session based on priceId. Send a client secret back (cs_ABCD123)
 export const createEventCheckoutSession = asyncHandler(
   async (req: Request, res: Response) => {
-    const { eventId } = req.body;
+    const { priceId, eventId } = req.body;
+
+    // if priceId is undefined, send a 404 back.
+    if (priceId == undefined || priceId == "") {
+      return res
+        .send({
+          error:
+            "This event does not exist, or is not available for sale at the moment.",
+        })
+        .status(404);
+    }
+
+    //check eventId validity
+    if (!eventId || eventId == "") {
+      return res
+        .send({
+          error:
+            "This event does not exist, or is not available for sale at the moment.",
+        })
+        .status(404);
+    }
 
     let ticketAvailable = await isTicketAvailableByEventId(eventId);
 
     if (ticketAvailable == false) {
       return res.send({
         error:
-          "There are no tickets available. Please come back later to see if more tickets become available.",
+          "There are no tickets available for this event. Please come back later to see if more tickets become available.",
       });
     } else {
       reserveTicket(0);
     }
 
     // in the incoming request, we need the priceID of the item we're buying.
-    const { priceId } = req.body;
 
     // epoch time in seconds, 30mins timeout
     let session_expiry = Math.floor(new Date().getTime() / 1000 + 30 * 60);
-
-    // if priceId is undefined, send a 404 back.
-    if (priceId == undefined) {
-      return res
-        .send({
-          error:
-            "Product does not exist, or is not available for sale at the moment.",
-        })
-        .status(404);
-    }
 
     try {
       const session = await stripe.checkout.sessions.create({
