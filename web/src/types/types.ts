@@ -115,5 +115,3 @@ export interface Ticket {
   startDateTicketSales: string;
   isTicketLive: boolean;
 }
-
-
