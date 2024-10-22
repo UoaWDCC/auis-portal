@@ -74,11 +74,13 @@ const main = async () => {
         id: 2,
         title: "Gury's Cookout",
         description: "Let him COOK",
+        location: "Chef's kitchen. ",
         event_date_start: new Date().toLocaleString(),
         event_date_end: new Date().toLocaleString(),
         event_capacity: 20,
-        is_live: false,
+        is_live: true,
         event_capacity_remaining: 20,
+        terms_and_conditions: "Ain't no refunds out here. Don't tell health and safety if you get food poisoning.",
       },
     ]);
 
