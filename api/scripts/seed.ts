@@ -35,7 +35,7 @@ const main = async () => {
         name: "Naren",
         is_member: true,
         member_expiry_date: new Date(
-          new Date().setFullYear(new Date().getMonth() + 6)
+          new Date().setMonth(new Date().getMonth() + 6)
         ).toLocaleDateString(),
         institution: "UoA",
         year_of_study: "4",
@@ -80,7 +80,8 @@ const main = async () => {
         event_capacity: 20,
         is_live: true,
         event_capacity_remaining: 20,
-        terms_and_conditions: "Ain't no refunds out here. Don't tell health and safety if you get food poisoning.",
+        terms_and_conditions:
+          "Ain't no refunds out here. Don't tell health and safety if you get food poisoning.",
       },
     ]);
 
