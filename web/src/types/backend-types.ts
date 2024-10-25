@@ -1,21 +1,18 @@
 export interface User {
-  description: string;
-  email: string;
-  name: string;
-  year_of_study: number;
-}
-
-export interface UserComplex {
-  created_at: Date;
-  email: string;
-  institution?: string;
-  is_admin: boolean;
-  is_info_confirmed: boolean;
-  is_paid: boolean;
-  name: string;
-  study_field?: string;
-  uoa_id?: string;
-  upi?: string;
-  user_id: number;
-  year?: string;
+    created_at:         string;
+    created_by_id:      number | null;
+    email:              string;
+    id:                 number;
+    institution:        string;
+    is_member:          boolean;
+    member_expiry_date: string;
+    name:               string;
+    published_at:       string;
+    status:             string;
+    study_field:        string;
+    university_id:      string;
+    updated_at:         string;
+    updated_by_id:      number | null;
+    upi:                string;
+    year_of_study:      string;
 }
