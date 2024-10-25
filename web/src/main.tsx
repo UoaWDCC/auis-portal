@@ -24,6 +24,7 @@ import SignInScreen from "./screens/SignInScreen.tsx";
 import CheckoutScreen from "./screens/CheckoutScreen.tsx";
 import ReturnScreen from "./screens/ReturnScreen.tsx";
 import EventScreen from "./screens/EventScreen.tsx";
+import InformationScreen from "./screens/InformationScreen.tsx";
 import PartnersScreen from "./screens/PartnersScreen.tsx";
 
 // @Ratchet7x5: keys etc need to be parsed before route creation.
@@ -39,6 +40,7 @@ const router = createBrowserRouter(
     <Route path="/" element={<App />}>
       <Route index={true} element={<HomeScreen />} />
       <Route path="/test" element={<TestScreen />} />
+      <Route path="/events" element={<EventScreen />} />
       <Route path="/credits" element={<CreditsScreen />} />
       <Route path="/exec" element={<ExecScreen />} />
       <Route path="/sponsors" element={<PartnersScreen />} />
@@ -49,7 +51,7 @@ const router = createBrowserRouter(
       <Route path="/photos" element={<PhotosScreen />} />
       <Route path="/checkout" element={<CheckoutScreen />} />
       <Route path="/return" element={<ReturnScreen />} />
-      <Route path="/about-us" element={<AboutUsScreen />} />
+      <Route path="/user-info" element={<InformationScreen />} />
     </Route>
   )
 );

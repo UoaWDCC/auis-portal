@@ -6,7 +6,7 @@ import { NoDataError } from "../../src/classes/NoDataError";
 describe("mapToEventsGallery", () => {
   it("should map the valid data correctly", () => {
     const data = {
-      events: {
+      eventGalleries: {
         data: [
           {
             id: 1,
@@ -14,7 +14,7 @@ describe("mapToEventsGallery", () => {
               Image: {
                 data: {
                   attributes: {
-                    url: "/uploads/event1.jgp",
+                    url: "/uploads/event1.jpg",
                   },
                 },
               },
@@ -27,7 +27,7 @@ describe("mapToEventsGallery", () => {
     const expected: EventGallery[] = [
       {
         id: 1,
-        image: "/uploads/event1.jgp",
+        image: "/uploads/event1.jpg",
       },
     ];
 
@@ -36,7 +36,7 @@ describe("mapToEventsGallery", () => {
 
   it("should handle missing image field gracefully", () => {
     const data = {
-      events: {
+      eventGalleries: {
         data: [
           {
             id: 1,
@@ -60,7 +60,7 @@ describe("mapToEventsGallery", () => {
 
   it("should handle completely missing attributes gracefully", () => {
     const data = {
-      events: {
+      eventGalleries: {
         data: [
           {
             id: 1,
@@ -80,9 +80,9 @@ describe("mapToEventsGallery", () => {
     expect(Mapper.mapToEventsGallery(data)).toEqual(expected);
   });
 
-  it("should throw NoDataError when eventsGallery.data is empty", () => {
+  it("should throw NoDataError when eventGalleries.data is empty", () => {
     const data = {
-      eventsGallery: {
+      eventGalleries: {
         data: [],
       },
     };
@@ -91,9 +91,9 @@ describe("mapToEventsGallery", () => {
     expect(() => Mapper.mapToEventsGallery(data)).toThrow("No data");
   });
 
-  it("should throw NoDataError when eventsGallery is empty", () => {
+  it("should throw NoDataError when eventGalleries is empty", () => {
     const data = {
-      eventsGallery: {},
+      eventGalleries: {},
     };
 
     expect(() => Mapper.mapToEventsGallery(data)).toThrow(NoDataError);
