@@ -67,3 +67,55 @@ There is a yarn script called yarn watch-types that would automatically create c
 ```bash
 yarn watch-types
 ```
+
+# Instructions for setting up Stripe:
+
+1. Install Stripe CLI and login using the AUIS acount. Refer to instructions here: https://docs.stripe.com/stripe-cli 
+2. Setup the appropriate .env files for both frontend and backend: see the #resources chat in discord. 
+3. Setup webhook by following the Stripe docs: https://docs.stripe.com/payments/checkout/fulfill-orders?lang=node . Ensure that you use the following code to setup the webhook listen endpoint: `stripe listen --forward-to localhost:3000/api/stripe/webhook`
+
+Additional info: Stripe restricts all production web apps to run in HTTPS. HTTP for development is fine. 
+
+# Notes:
+Schema: users = admin users for strapi
+Schema: people = users that sign up
+Schema: user_tickets/people_tickets = tickets that the users purchase
+
+Additional info: Stripe restricts all production web apps to run in HTTPS. HTTP for development is fine. 
+
+Stripe will pay AUIS's bank account every 7-14 days' based on Stripe's risk assessment of AUIS. Read more here: https://docs.stripe.com/payouts
+
+Stripe API Documentation: https://docs.stripe.com/api/
+
+Accept a payment (embedded form): https://docs.stripe.com/payments/accept-a-payment?platform=web&ui=embedded-form
+
+Handle Payments (webhook included): https://docs.stripe.com/payments/handling-payment-events
+
+Fulfill Orders (Webhook stuff): https://docs.stripe.com/payments/checkout/fulfill-orders
+
+Register Webhook (FOR PRODUCTION): https://docs.stripe.com/webhooks#register-webhook
+
+Product and Pricing: https://docs.stripe.com/products-prices/how-products-and-prices-work
+
+# Instructions for setting up Clerk
+Follow Step 1: Connect except the "DEPLOY YOUR APP ONLINE" part: https://dashboard.ngrok.com/get-started/setup/windows
+
+Step 2: Run `ngrok http http://localhost:3000`. 
+Step 3: Copy the forwarding link. It should look similar to this: 
+```
+Forwarding  https://afd3-203-211-106-224.ngrok-free.app -> http://localhost:3000
+```
+Step 4: Append /api/auth/clerk-sign-up to the link and copy the link again. 
+Step 5: Login to Clerk and go to endpoints: https://dashboard.clerk.com/apps/app_2gU7eZBE5FTFFWqVOlTKxEUhvpL/instances/ins_2gU7eZwwlATKJZNWSwgbCAG9x2A/webhooks
+Step 6: Create an endpoint with the ngrok forwarding link. Ensure that you have appended: /api/auth/clerk-sign-up
+Step 7: Now try to create a new user and login. You should now see an event of type "user.created" in the console. 
+
+# Instructions for testing with Clerk:
+
+Email addresses
+Any email with the +clerk_test subaddress is a test email address. No emails will be sent, and they can be verified with the code 424242.
+
+For example:
+
+jane+clerk_test@example.com
+doe+clerk_test@example.com
