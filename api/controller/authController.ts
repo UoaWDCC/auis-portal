@@ -20,7 +20,6 @@ export const clerkSignUp = asyncHandler(async (req: Request, res: Response) => {
 
     const newUser = await db
       .insert(peoples)
-      //id, name, email, university_id, upi, year_of_study, study_field, is_member, status, member_expiry_date, institution
       .values({
         name: "",
         email,
