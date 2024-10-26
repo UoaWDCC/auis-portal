@@ -100,15 +100,9 @@ Product and Pricing: https://docs.stripe.com/products-prices/how-products-and-pr
 # Instructions for setting up Clerk
 Follow Step 1: Connect except the "DEPLOY YOUR APP ONLINE" part: https://dashboard.ngrok.com/get-started/setup/windows
 
-Step 2: Run `ngrok http http://localhost:3000`. 
-Step 3: Copy the forwarding link. It should look similar to this: 
-```
-Forwarding  https://afd3-203-211-106-224.ngrok-free.app -> http://localhost:3000
-```
-Step 4: Append /api/auth/clerk-sign-up to the link and copy the link again. 
-Step 5: Login to Clerk and go to endpoints: https://dashboard.clerk.com/apps/app_2gU7eZBE5FTFFWqVOlTKxEUhvpL/instances/ins_2gU7eZwwlATKJZNWSwgbCAG9x2A/webhooks
-Step 6: Create an endpoint with the ngrok forwarding link. Ensure that you have appended: /api/auth/clerk-sign-up
-Step 7: Now try to create a new user and login. You should now see an event of type "user.created" in the console. 
+Step 2: Run `ngrok http --url=https://gelding-trusty-exactly.ngrok-free.app 3000`. 
+
+Step 3: Now try to create a new user and login. You should now see an event of type "user.created" in the console. 
 
 # Instructions for testing with Clerk:
 
