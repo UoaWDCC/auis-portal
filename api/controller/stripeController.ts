@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import express, { Request, Response, Router, json } from "express";
 import asyncHandler from "../middleware/asyncHandler";
 import {
   isTicketAvailableByEventId,
@@ -8,6 +8,8 @@ import {
 } from "../gateway/eventsGateway";
 import Stripe from "stripe"; //Types and Interfaces
 import { stripe } from "../stripe/stripe";
+
+const endpointSecret: string = process.env.STRIPE_WEBHOOK_ENDPOINT as string;
 
 // Create a checkout session based on priceId. Send a client secret back (cs_ABCD123)
 export const createEventCheckoutSession = asyncHandler(
@@ -87,6 +89,37 @@ export const getSessionStatus = asyncHandler(
       status: session.status,
       customer_email: session.customer_details?.email,
     });
+  }
+);
+
+export const handleWebhook = asyncHandler(
+  async (req: express.Request, res: express.Response): Promise<void> => {
+    const sig = req.headers["stripe-signature"] as string | string[] | Buffer;
+
+    let event: Stripe.Event;
+
+    try {
+      event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
+    } catch (err) {
+      res.status(400).send(`Webhook Error: ${err}`);
+      return;
+    }
+
+    if (event.type === "checkout.session.completed") {
+      const session: Stripe.Checkout.Session = event.data.object;
+      completeTicketPurchase(session.id);
+    } else if (event.type === "checkout.session.expired") {
+      const session = event.data.object;
+
+      if (
+        session.metadata != null &&
+        session.metadata["eventId"] != undefined
+      ) {
+        releaseReservedTicket(parseInt(session.metadata["eventId"]));
+      }
+    }
+
+    res.json({ received: true });
   }
 );
 
