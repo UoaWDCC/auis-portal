@@ -113,3 +113,14 @@ For example:
 
 jane+clerk_test@example.com
 doe+clerk_test@example.com
+
+# Additional articles for Clerk
+https://clerk.com/docs/integrations/webhooks/overview
+
+https://clerk.com/docs/integrations/webhooks/sync-data
+
+https://ngrok.com/docs/integrations/clerk/webhooks/
+
+https://docs.svix.com/receiving/verifying-payloads/how#nodejs-express
+
+https://clerk.com/docs/deployments/overview
