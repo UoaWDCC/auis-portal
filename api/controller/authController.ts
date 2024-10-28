@@ -1,9 +1,6 @@
 import { Request, Response } from "express";
 import asyncHandler from "../middleware/asyncHandler";
-
-import { db } from "../db/config/db";
-import { peoples } from "../schemas/schema";
-import { sql } from "drizzle-orm";
+import { insertUserByEmail, deleteUserByEmail } from "../gateway/getUsers";
 
 export const signUp = asyncHandler(async (req: Request, res: Response) => {
   throw new Error("Not implemented yet");
@@ -13,33 +10,27 @@ export const logIn = asyncHandler(async (req: Request, res: Response) => {
   throw new Error("Not implemented yet");
 });
 
-export const clerkSignUp = asyncHandler(async (req: Request, res: Response) => {
-  try {
-    console.log("Webhook received:", req.body);
-    const email = req.body.data.email_addresses[0].email_address;
+export const handleWebhook = asyncHandler(
+  async (req: Request, res: Response) => {
+    try {
+      console.log("Webhook received:", req.body);
 
-    const newUser = await db
-      .insert(peoples)
-      .values({
-        name: "",
-        email,
-        university_id: "",
-        upi: "",
-        year_of_study: "",
-        study_field: "",
-        is_member: false,
-        status: "",
-        institution: "",
-      })
-      .returning({
-        id: peoples.id,
-        email: peoples.email,
-        is_member: peoples.is_member,
-      });
-
-    res.json(newUser[0]);
-  } catch (error) {
-    console.error("Error handling webhook:", error);
-    res.status(500).send("Internal Server Error");
+      if (req.body.type == "user.created") {
+        const newUserEmail: string =
+          req.body.data.email_addresses[0].email_address;
+        const newUser = await insertUserByEmail(newUserEmail);
+        console.log(newUser);
+        res.json({ received: true });
+      } else if (req.body.type == "user.deleted") {
+        console.log("received a user delete request");
+        res.json({ received: true });
+      } else if (req.body.type == "user.updated") {
+        console.log("received a user update request");
+        res.json({ received: true });
+      }
+    } catch (error) {
+      console.error("Error handling webhook:", error);
+      res.status(500).send("Internal Server Error");
+    }
   }
-});
+);
