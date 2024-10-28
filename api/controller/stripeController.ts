@@ -100,24 +100,26 @@ export const handleWebhook = asyncHandler(
 
     try {
       event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
+
+      if (event.type === "checkout.session.completed") {
+        const session: Stripe.Checkout.Session = event.data.object;
+        completeTicketPurchase(session.id);
+      } else if (event.type === "checkout.session.expired") {
+        const session = event.data.object;
+  
+        if (
+          session.metadata != null &&
+          session.metadata["eventId"] != undefined
+        ) {
+          releaseReservedTicket(parseInt(session.metadata["eventId"]));
+        }
+      }
     } catch (err) {
       res.status(400).send(`Webhook Error: ${err}`);
       return;
     }
 
-    if (event.type === "checkout.session.completed") {
-      const session: Stripe.Checkout.Session = event.data.object;
-      completeTicketPurchase(session.id);
-    } else if (event.type === "checkout.session.expired") {
-      const session = event.data.object;
 
-      if (
-        session.metadata != null &&
-        session.metadata["eventId"] != undefined
-      ) {
-        releaseReservedTicket(parseInt(session.metadata["eventId"]));
-      }
-    }
 
     res.json({ received: true });
   }
