@@ -19,18 +19,14 @@ export const handleWebhook = asyncHandler(
         const newUserEmail: string =
           req.body.data.email_addresses[0].email_address;
         const newUser = await insertUserByEmail(newUserEmail);
-        console.log(newUser);
         res.json({ received: true });
       } else if (req.body.type == "user.deleted") {
-        console.log("received a user delete request");
         res.json({ received: true });
       } else if (req.body.type == "user.updated") {
-        console.log("received a user update request");
         res.json({ received: true });
       }
     } catch (error) {
-      console.error("Error handling webhook:", error);
-      res.status(500).send("Internal Server Error");
+      res.status(500).send(`Webhook error: ${error}`);
     }
   }
 );
