@@ -13,8 +13,6 @@ export const logIn = asyncHandler(async (req: Request, res: Response) => {
 export const handleWebhook = asyncHandler(
   async (req: Request, res: Response) => {
     try {
-      console.log("Webhook received:", req.body);
-
       if (req.body.type == "user.created") {
         const newUserEmail: string =
           req.body.data.email_addresses[0].email_address;
