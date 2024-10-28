@@ -23,9 +23,9 @@ export default function HomeScreen() {
   } = useQuery(GET_EXECS);
 
   const [events, setEvents] = useState<Event[]>([]);
-  const [executives, setExecutives] = useState<Exec[]>([]);
-  const [noEvents, setNoEvents] = useState(false);
-  const [noExecs, setNoExecs] = useState(false);
+  const [/*executives*/, setExecutives] = useState<Exec[]>([]);
+  const [/*noEvents*/, setNoEvents] = useState(false);
+  const [/*noExecs*/, setNoExecs] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
