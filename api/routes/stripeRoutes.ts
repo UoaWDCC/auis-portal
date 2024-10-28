@@ -1,18 +1,10 @@
 import express, { Router, json } from "express";
 import { protect } from "../middleware/authMiddleware";
 import {
-  isTicketAvailableByEventId,
-  reserveTicket,
-  releaseReservedTicket,
-  completeTicketPurchase,
-} from "../gateway/eventsGateway";
-import {
   createEventCheckoutSession,
   getSessionStatus,
   handleWebhook,
 } from "../controller/stripeController";
-import Stripe from "stripe"; //Types and Interfaces
-import { stripe } from "../stripe/stripe";
 
 const router = Router();
 
