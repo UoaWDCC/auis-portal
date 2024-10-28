@@ -11,38 +11,63 @@ import type { Event, Exec } from "../types/types";
 
 export default function HomeScreen() {
   const {
+    loading: eventsLoading,
+    data: eventsData,
+    error: eventsError,
+  } = useQuery(GET_EVENTS);
+
+  const {
     loading: execsLoading,
     data: execsData,
     error: execsError,
-  } = useQuery(GET_EVENTS);
+  } = useQuery(GET_EXECS);
 
-  const [executives, setExecutives] = useState<Event[]>([]);
+  const [events, setEvents] = useState<Event[]>([]);
+  const [executives, setExecutives] = useState<Exec[]>([]);
+  const [noEvents, setNoEvents] = useState(false);
   const [noExecs, setNoExecs] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (eventsData) {
+      try {
+        const mappedEvents = Mapper.mapToEvents(eventsData);
+        setEvents(mappedEvents);
+      } catch (error) {
+        setNoEvents(true);
+      }
+    }
+  }, [eventsData]);
+
+  useEffect(() => {
     if (execsData) {
       try {
-        const execs = Mapper.mapToExec(execsData);
-        setExecutives(execs);
+        const mappedExecs = Mapper.mapToExec(execsData);
+        setExecutives(mappedExecs);
       } catch (error) {
         setNoExecs(true);
       }
     }
   }, [execsData]);
 
-  if (execsError || execsLoading) {
+  useEffect(() => {
+    if (!eventsLoading && !execsLoading) {
+      setLoading(false);
+    }
+  }, [eventsLoading, execsLoading]);
+
+  if (eventsError || execsError) {
     return <div>CMS Offline</div>;
   }
-
-  const events = Mapper.mapToEvents(execsData);
+  
+  if (loading) {
+    return <LoadingSpinner />;
+  }
 
   const currentDate = new Date();
-
   const upcomingEvents = events.filter((event) => {
     const eventDate = new Date(event.eventDateStart);
-    const isEventLive = event.isLive;
-    return eventDate >= currentDate && isEventLive;
+    return eventDate >= currentDate && event.isLive;
   });
 
   return (
