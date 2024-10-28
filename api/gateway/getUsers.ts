@@ -23,7 +23,7 @@ export async function insertUserByEmail(email: string): Promise<User[]> {
     throw new Error(`User with email ${email} already exists.`);
   }
 
-  const newUser = await db
+  const newUser = (await db
     .insert(peoples)
     .values({
       email,
@@ -37,7 +37,7 @@ export async function insertUserByEmail(email: string): Promise<User[]> {
       status: "",
       institution: "",
     })
-    .returning() as User[];
+    .returning()) as User[];
 
   return newUser;
 }
