@@ -59,7 +59,7 @@ export default function HomeScreen() {
   if (eventsError || execsError) {
     return <div>CMS Offline</div>;
   }
-  
+
   if (loading) {
     return <LoadingSpinner />;
   }
