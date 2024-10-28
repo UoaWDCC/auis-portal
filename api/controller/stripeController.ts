@@ -106,7 +106,7 @@ export const handleWebhook = asyncHandler(
         completeTicketPurchase(session.id);
       } else if (event.type === "checkout.session.expired") {
         const session = event.data.object;
-  
+
         if (
           session.metadata != null &&
           session.metadata["eventId"] != undefined
@@ -118,8 +118,6 @@ export const handleWebhook = asyncHandler(
       res.status(400).send(`Webhook Error: ${err}`);
       return;
     }
-
-
 
     res.json({ received: true });
   }
