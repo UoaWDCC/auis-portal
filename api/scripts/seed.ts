@@ -55,11 +55,12 @@ const main = async () => {
         ).toLocaleDateString(),
         event_date_end: new Date(
           new Date().setFullYear(new Date().getFullYear() + 1)
-        ).toLocaleDateString(),
+        ).toLocaleString(),
         event_capacity: 20,
         is_live: true,
         event_capacity_remaining: 1,
-        terms_and_conditions: "No refunds. Gotta have moves like jagger.",
+        terms_and_conditions: "No refunds.",
+        published_at: new Date().toISOString(),
       },
       {
         id: 1,
@@ -72,11 +73,12 @@ const main = async () => {
         ).toLocaleDateString(),
         event_date_end: new Date(
           new Date().setMonth(new Date().getMonth() + 6)
-        ).toLocaleDateString(),
+        ).toLocaleString(),
         event_capacity: 5,
         is_live: true,
         event_capacity_remaining: 2,
-        terms_and_conditions: "Ain't no refunds out here cuz it's free.",
+        terms_and_conditions: "No refunds.",
+        published_at: new Date().toISOString(),
       },
       {
         id: 2,
@@ -88,8 +90,8 @@ const main = async () => {
         event_capacity: 20,
         is_live: true,
         event_capacity_remaining: 20,
-        terms_and_conditions:
-          "Ain't no refunds out here. Don't tell health and safety if you get food poisoning.",
+        terms_and_conditions: "No refunds.",
+        published_at: new Date().toISOString(),
       },
     ]);
 
