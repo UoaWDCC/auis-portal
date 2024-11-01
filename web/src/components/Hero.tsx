@@ -36,7 +36,7 @@ export default function Hero({ navbar }: { navbar: JSX.Element }) {
             <div className="flex justify-center">
               <button
                 type="button"
-                className="bg-primary-orange rounded-2xl px-10 py-3 text-3xl font-bold text-white"
+                className="bg-primary-orange transition-all hover:scale-110 rounded-2xl px-10 py-3 text-3xl font-bold text-white"
                 onClick={() => {
                   navigate("/signup");
                 }}

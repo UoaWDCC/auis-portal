@@ -20,7 +20,7 @@ function Header() {
       <header className="py-5 xl:py-8">
         <div className="flex bg-transparent">
           {/* Logo */}
-          <div className="ml-5">
+          <div className="ml-5 hover:scale-105 transition-all">
             <a className="flex items-center" href="/">
               <img
                 className="h-[50px] w-[50px] object-contain xl:h-[70px] xl:w-[70px]"
@@ -75,7 +75,7 @@ function Header() {
                     to={label.page}
                     className={`${
                       pathname === label.page ? "text-primary-orange" : ""
-                    } hover:bg-AUIS-teal mx-3 rounded px-3 py-2`}
+                    } hover:bg-AUIS-teal mx-3 rounded px-3 py-2 transition-all`}
                     onClick={() => setNavBar(false)}
                   >
                     {label.title}
@@ -87,7 +87,7 @@ function Header() {
                   <button
                     data-testid="Log-in"
                     type="button"
-                    className="bg-primary-green rounded-3xl px-6 py-1"
+                    className="bg-primary-green rounded-3xl px-6 py-1 hover:scale-110 transition-all"
                   >
                     Log-in
                   </button>
@@ -96,7 +96,7 @@ function Header() {
                   <button
                     data-testid="Sign-up"
                     type="button"
-                    className="bg-primary-orange rounded-3xl px-6 py-1"
+                    className="bg-primary-orange rounded-3xl px-6 py-1 hover:scale-110 transition-all"
                   >
                     Sign-up
                   </button>
@@ -110,7 +110,7 @@ function Header() {
                 <button
                   data-testid="Log-in-mobile"
                   type="button"
-                  className="bg-primary-green rounded-3xl px-6 py-1"
+                  className="bg-primary-green rounded-3xl px-6 py-1 hover:scale-110 transition-all"
                 >
                   Log-in
                 </button>
@@ -119,7 +119,7 @@ function Header() {
                 <button
                   data-testid="Sign-up-mobile"
                   type="button"
-                  className="bg-primary-orange rounded-3xl px-6 py-1"
+                  className="bg-primary-orange rounded-3xl px-6 py-1 hover:scale-110 transition-all"
                 >
                   Sign-up
                 </button>

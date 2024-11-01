@@ -11,7 +11,7 @@ export default function Socials() {
   return (
     <>
       <div className="flex w-60 items-center justify-between py-2">
-        <div className="bg-primary-orange hover:bg-light-pink group h-10 w-10 cursor-pointer rounded-full">
+        <div className="bg-primary-orange transition-all hover:scale-110 hover:bg-AUIS-teal group h-10 w-10 cursor-pointer rounded-full">
           <a
             href={InstagramLink}
             target="_blank"
@@ -19,11 +19,11 @@ export default function Socials() {
             aria-label="Instagram"
             className="flex h-full w-full items-center justify-center"
           >
-            <FaInstagram className="text-white group-hover:text-black" />
+            <FaInstagram className="text-white" />
           </a>
         </div>
 
-        <div className="bg-primary-green hover:bg-light-pink group h-10 w-10 cursor-pointer rounded-full">
+        <div className="bg-primary-green transition-all hover:scale-110 hover:bg-AUIS-teal group h-10 w-10 cursor-pointer rounded-full">
           <a
             href={FacebookLink}
             target="_blank"
@@ -31,21 +31,21 @@ export default function Socials() {
             aria-label="Facebook"
             className="flex h-full w-full items-center justify-center"
           >
-            <FaFacebookF className="text-white group-hover:text-black" />
+            <FaFacebookF className="text-white" />
           </a>
         </div>
 
-        <div className="bg-primary-orange hover:bg-light-pink group h-10 w-10 cursor-pointer rounded-full">
+        <div className="bg-primary-orange transition-all hover:scale-110 hover:bg-AUIS-teal group h-10 w-10 cursor-pointer rounded-full">
           <a
             href={EmailLink}
             aria-label="Email"
             className="flex h-full w-full items-center justify-center"
           >
-            <IoMdMail className="text-white group-hover:text-black" />
+            <IoMdMail className="text-white" />
           </a>
         </div>
 
-        <div className="bg-primary-green hover:bg-light-pink group h-10 w-10 cursor-pointer rounded-full">
+        <div className="bg-primary-green transition-all hover:scale-110 hover:bg-AUIS-teal group h-10 w-10 cursor-pointer rounded-full">
           <a
             href={LinkedinLink}
             target="_blank"
@@ -53,7 +53,7 @@ export default function Socials() {
             aria-label="LinkedIn"
             className="flex h-full w-full items-center justify-center"
           >
-            <FaLinkedin className="text-white group-hover:text-black" />
+            <FaLinkedin className="text-white" />
           </a>
         </div>
       </div>
