@@ -8,17 +8,16 @@ import {
 } from "react-icons/io5";
 import { useRef } from "react";
 
-interface SimpleSliderProps {
+interface EventSliderProps {
   children: React.ReactNode;
   cardType?: "upcoming" | "past";
 }
 
-const SimpleSlider: React.FC<SimpleSliderProps> = ({ children, cardType }) => {
+const EventSlider: React.FC<EventSliderProps> = ({ children, cardType }) => {
   const sliderRef = useRef<Slider>(null);
 
   const settings = {
     dots: true,
-    infinite: false,
     speed: 500,
     slidesToShow: cardType === "past" ? 1 : 3,
     slidesToScroll: 1,
@@ -51,39 +50,51 @@ const SimpleSlider: React.FC<SimpleSliderProps> = ({ children, cardType }) => {
     sliderRef.current?.slickPrev();
   };
 
+  // Helper function to group children into chunks of 3 for "past" events
+  const groupChildren = (childrenArray: React.ReactNode[]) => {
+    const grouped: React.ReactNode[][] = [];
+    for (let i = 0; i < childrenArray.length; i += 3) {
+      grouped.push(childrenArray.slice(i, i + 3));
+    }
+    return grouped;
+  };
+
+  const childrenArray = Array.isArray(children) ? children : [children]; // Ensure children is always an array
+
   return (
     <div className="flex w-full items-center justify-center">
+      {/* Previous Arrow */}
       <IoArrowBackCircleOutline
         onClick={previous}
         className="mx-4 hidden h-16 w-16 text-gray-400 hover:cursor-pointer sm:flex"
       />
+
+      {/* Slider container */}
       <div className="h-auto w-full sm:w-[calc(100%-8rem)]">
         <Slider ref={sliderRef} {...settings}>
+          {/* Conditionally group past events into sets of 3 */}
           {cardType === "past"
-            ? React.Children.toArray(children)
-                .reduce((acc: any, child: any, index: number) => {
-                  if (index % 3 === 0) acc.push([]);
-                  acc[acc.length - 1].push(child);
-                  return acc;
-                }, [])
-                .map((group: any, index: number) => (
-                  <div key={index} className="p-2">
-                    <div className="flex flex-col">
-                      {group.map((child: any, subIndex: number) => (
-                        <div key={subIndex} className="p-2">
-                          {child}
-                        </div>
-                      ))}
-                    </div>
+            ? groupChildren(childrenArray).map((group, index) => (
+                <div key={index} className="p-2">
+                  <div className="flex flex-col">
+                    {group.map((child, subIndex) => (
+                      <div key={subIndex} className="p-2">
+                        {child}
+                      </div>
+                    ))}
                   </div>
-                ))
-            : React.Children.map(children, (child, index) => (
+                </div>
+              ))
+            : // For upcoming events, simply render each child
+              childrenArray.map((child, index) => (
                 <div key={index} className="p-2">
                   {child}
                 </div>
               ))}
         </Slider>
       </div>
+
+      {/* Next Arrow */}
       <IoArrowForwardCircleOutline
         onClick={next}
         className="mx-4 hidden h-16 w-16 text-gray-400 hover:cursor-pointer sm:flex"
@@ -92,4 +103,4 @@ const SimpleSlider: React.FC<SimpleSliderProps> = ({ children, cardType }) => {
   );
 };
 
-export default SimpleSlider;
+export default EventSlider;
