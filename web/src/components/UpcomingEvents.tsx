@@ -3,6 +3,7 @@ import { Event } from "../types/types";
 
 interface UpcomingEventsProps {
   upcomingEvents: Event[];
+  noEvents: boolean
 }
 
 const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ upcomingEvents }) => {
