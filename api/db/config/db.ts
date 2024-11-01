@@ -6,6 +6,7 @@ import {
   DATABASE_USERNAME,
   DATABASE_PASSWORD,
 } from "./env";
+import * as schema from "../../schemas/schema";
 
 const sql = postgres({
   host: DATABASE_HOST,
@@ -15,4 +16,4 @@ const sql = postgres({
   //database: "AUIS",
 });
 
-export const db = drizzle(sql);
+export const db = drizzle(sql, { schema });

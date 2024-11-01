@@ -1,6 +1,5 @@
 import express, { json } from "express";
 import cors from "cors";
-import { connect } from "mongoose";
 import { config } from "dotenv";
 
 // Import Routers
@@ -10,6 +9,7 @@ import authRoutes from "./routes/authRoutes";
 import creditRoutes from "./routes/creditRoutes";
 import adminRoutes from "./routes/adminRoutes";
 import photoRoutes from "./routes/photoRoutes";
+import stripeRoutes from "./routes/stripeRoutes";
 
 import { errorHandler, notFound } from "./middleware/errorMiddleware";
 import userRoutes from "./routes/userRoutes";
@@ -17,10 +17,23 @@ import userRoutes from "./routes/userRoutes";
 const app = express();
 config();
 
-// const databaseUrl: string = process.env.DATABASE_URL!;
-// connect(databaseUrl);
+// @Ratchet7x5: INFO: Use JSON parser for all non-webhook routes
+//              otherwise, webhook and db entries will fail
+app.use(
+  (
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ): void => {
+    if (req.originalUrl === "/api/stripe/webhook") {
+      //console.log(req.originalUrl);
+      next();
+    } else {
+      express.json()(req, res, next);
+    }
+  }
+);
 
-app.use(json());
 app.use(cors());
 app.use(express.static("public"));
 
@@ -33,6 +46,9 @@ app.use("/api/credits", creditRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/photos", photoRoutes);
 app.use("/api", userRoutes); //Demo Route on how to work with Drizzle
+
+//StripeJS
+app.use("/api/stripe", stripeRoutes);
 
 // The custom handlers in /middleware need to be below Routes
 app.use(notFound);

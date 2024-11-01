@@ -15,6 +15,17 @@ export interface ExecCardProps {
   exec: Exec;
 }
 
+export interface Developer {
+  id: number;
+  name: string;
+  linkedIn: string;
+  github: string;
+}
+
+export interface DeveloperCardProps {
+  developer: Developer;
+}
+
 export interface Partner {
   id: number;
   type: string;

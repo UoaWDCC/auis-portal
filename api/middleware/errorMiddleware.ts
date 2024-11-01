@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from "express";
-import { Error } from "mongoose";
 import dotenv from "dotenv";
 
 dotenv.config();
