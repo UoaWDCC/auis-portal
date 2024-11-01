@@ -39,7 +39,7 @@ if (!CLERK_PUBLISHABLE_KEY) {
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
-      <Route index={true} element={<HomeScreen navbar={<Header/>}/>} />
+      <Route index={true} element={<HomeScreen navbar={<Header />} />} />
       <Route path="/test" element={<TestScreen />} />
       <Route path="/events" element={<EventScreen />} />
       <Route path="/credits" element={<CreditsScreen />} />

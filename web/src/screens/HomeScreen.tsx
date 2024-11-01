@@ -9,7 +9,7 @@ import { Mapper } from "@utils/Mapper";
 import { useEffect, useState } from "react";
 import type { Event, SomePhoto } from "../types/types";
 
-export default function HomeScreen({navbar} : {navbar: JSX.Element}) {
+export default function HomeScreen({ navbar }: { navbar: JSX.Element }) {
   // Queries
   const {
     loading: eventsLoading,
