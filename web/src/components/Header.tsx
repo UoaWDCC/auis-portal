@@ -20,7 +20,7 @@ function Header() {
       <header className="py-5 xl:py-8">
         <div className="flex bg-transparent">
           {/* Logo */}
-          <div className="ml-5 hover:scale-105 transition-all">
+          <div className="ml-5 transition-all hover:scale-105">
             <a className="flex items-center" href="/">
               <img
                 className="h-[50px] w-[50px] object-contain xl:h-[70px] xl:w-[70px]"
@@ -87,7 +87,7 @@ function Header() {
                   <button
                     data-testid="Log-in"
                     type="button"
-                    className="bg-primary-green rounded-3xl px-6 py-1 hover:scale-110 transition-all"
+                    className="bg-primary-green rounded-3xl px-6 py-1 transition-all hover:scale-110"
                   >
                     Log-in
                   </button>
@@ -96,7 +96,7 @@ function Header() {
                   <button
                     data-testid="Sign-up"
                     type="button"
-                    className="bg-primary-orange rounded-3xl px-6 py-1 hover:scale-110 transition-all"
+                    className="bg-primary-orange rounded-3xl px-6 py-1 transition-all hover:scale-110"
                   >
                     Sign-up
                   </button>
@@ -110,7 +110,7 @@ function Header() {
                 <button
                   data-testid="Log-in-mobile"
                   type="button"
-                  className="bg-primary-green rounded-3xl px-6 py-1 hover:scale-110 transition-all"
+                  className="bg-primary-green rounded-3xl px-6 py-1 transition-all hover:scale-110"
                 >
                   Log-in
                 </button>
@@ -119,7 +119,7 @@ function Header() {
                 <button
                   data-testid="Sign-up-mobile"
                   type="button"
-                  className="bg-primary-orange rounded-3xl px-6 py-1 hover:scale-110 transition-all"
+                  className="bg-primary-orange rounded-3xl px-6 py-1 transition-all hover:scale-110"
                 >
                   Sign-up
                 </button>
