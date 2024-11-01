@@ -11,7 +11,7 @@ export default function Socials() {
   return (
     <>
       <div className="flex w-60 items-center justify-between py-2">
-        <div className="bg-primary-orange transition-all hover:scale-110 hover:bg-AUIS-teal group h-10 w-10 cursor-pointer rounded-full">
+        <div className="bg-primary-orange hover:bg-AUIS-teal group h-10 w-10 cursor-pointer rounded-full transition-all hover:scale-110">
           <a
             href={InstagramLink}
             target="_blank"
@@ -23,7 +23,7 @@ export default function Socials() {
           </a>
         </div>
 
-        <div className="bg-primary-green transition-all hover:scale-110 hover:bg-AUIS-teal group h-10 w-10 cursor-pointer rounded-full">
+        <div className="bg-primary-green hover:bg-AUIS-teal group h-10 w-10 cursor-pointer rounded-full transition-all hover:scale-110">
           <a
             href={FacebookLink}
             target="_blank"
@@ -35,7 +35,7 @@ export default function Socials() {
           </a>
         </div>
 
-        <div className="bg-primary-orange transition-all hover:scale-110 hover:bg-AUIS-teal group h-10 w-10 cursor-pointer rounded-full">
+        <div className="bg-primary-orange hover:bg-AUIS-teal group h-10 w-10 cursor-pointer rounded-full transition-all hover:scale-110">
           <a
             href={EmailLink}
             aria-label="Email"
@@ -45,7 +45,7 @@ export default function Socials() {
           </a>
         </div>
 
-        <div className="bg-primary-green transition-all hover:scale-110 hover:bg-AUIS-teal group h-10 w-10 cursor-pointer rounded-full">
+        <div className="bg-primary-green hover:bg-AUIS-teal group h-10 w-10 cursor-pointer rounded-full transition-all hover:scale-110">
           <a
             href={LinkedinLink}
             target="_blank"
