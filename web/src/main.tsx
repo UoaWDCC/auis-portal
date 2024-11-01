@@ -21,9 +21,18 @@ import { ClerkProvider } from "@clerk/clerk-react";
 import { graphqlClient } from "./graphql/client.ts";
 import CreditsScreen from "./screens/CreditsScreen.tsx";
 import SignInScreen from "./screens/SignInScreen.tsx";
+import CheckoutScreen from "./screens/CheckoutScreen.tsx";
+import ReturnScreen from "./screens/ReturnScreen.tsx";
 import EventScreen from "./screens/EventScreen.tsx";
+import InformationScreen from "./screens/InformationScreen.tsx";
 import PartnersScreen from "./screens/PartnersScreen.tsx";
-import AboutUsSCreen from "./screens/AboutUsScreen.tsx";
+
+// @Ratchet7x5: keys etc need to be parsed before route creation.
+const CLERK_PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
+
+if (!CLERK_PUBLISHABLE_KEY) {
+  throw new Error("Missing Publishable Key");
+}
 
 //Add any routes for screens below
 const router = createBrowserRouter(
@@ -40,23 +49,19 @@ const router = createBrowserRouter(
       <Route path="/about-us" element={<AboutUsScreen />} />
       <Route path="/events" element={<EventScreen />} />
       <Route path="/photos" element={<PhotosScreen />} />
-      <Route path="/about-us" element={<AboutUsSCreen />} />
+      <Route path="/checkout" element={<CheckoutScreen />} />
+      <Route path="/return" element={<ReturnScreen />} />
+      <Route path="/user-info" element={<InformationScreen />} />
     </Route>
   )
 );
-
-const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
-
-if (!PUBLISHABLE_KEY) {
-  throw new Error("Missing Publishable Key");
-}
 
 const queryClient = new QueryClient();
 const root = document.getElementById("root") as HTMLElement;
 
 ReactDOM.createRoot(root).render(
   <React.StrictMode>
-    <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
+    <ClerkProvider publishableKey={CLERK_PUBLISHABLE_KEY}>
       <ApolloProvider client={graphqlClient}>
         <QueryClientProvider client={queryClient}>
           <RouterProvider router={router} />

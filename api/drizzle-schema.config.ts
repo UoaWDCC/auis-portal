@@ -9,6 +9,9 @@ export default defineConfig({
   dbCredentials: {
     url: process.env.DATABASE_URL!,
   },
+  introspect: {
+    casing: "preserve",
+  },
   verbose: true,
   strict: true,
 });
