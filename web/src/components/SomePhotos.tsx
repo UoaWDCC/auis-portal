@@ -7,7 +7,6 @@ function SomePhotos({
   photos: SomePhoto[];
   noPhotos: boolean;
 }) {
-
   return (
     <>
       <div className="bg-white">
