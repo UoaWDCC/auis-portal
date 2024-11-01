@@ -3,11 +3,12 @@ import auisHalfLogo1 from "../assets/peacock_white_left_side.png";
 import auisAbbrev from "../assets/auis_no_depth.png";
 import Header from "./Header";
 
-export default function Hero() {
+export default function Hero({navbar}: {navbar : JSX.Element}) {
   return (
     <>
       <div className="from-AUIS-dark-teal to-AUIS-teal min-h-[calc(100vh-70px)] bg-gradient-to-b">
-        <Header />
+        {/* <Header /> */}
+        {navbar}
         <div className="flex">
           <div className="hidden min-w-[150px] md:flex">
             <img

@@ -9,8 +9,7 @@ import { Mapper } from "@utils/Mapper";
 import { useEffect, useState } from "react";
 import type { Event, SomePhoto } from "../types/types";
 
-export default function HomeScreen() {
-
+export default function HomeScreen({navbar} : {navbar: JSX.Element}) {
   // Queries
   const {
     loading: eventsLoading,
@@ -38,8 +37,8 @@ export default function HomeScreen() {
     if (!eventsLoading) {
       setLoadingEvents(false);
     }
-    if (photosError){
-      setErrorEvents(true)
+    if (photosError) {
+      setErrorEvents(true);
     }
     if (eventsData) {
       try {
@@ -56,8 +55,8 @@ export default function HomeScreen() {
       setLoadingPhotos(false);
     }
 
-    if (photosError){
-      setErrorPhotos(true)
+    if (photosError) {
+      setErrorPhotos(true);
     }
 
     if (photosData) {
@@ -68,7 +67,6 @@ export default function HomeScreen() {
         setErrorPhotos(true);
       }
     }
-
   }, [photosData, photosError, photosLoading]);
 
   // Filtering
@@ -80,14 +78,21 @@ export default function HomeScreen() {
 
   return (
     <div>
-      <Hero />
+      <Hero navbar={navbar} />
       <Intro />
       {loadingEvents ? (
         <LoadingSpinner />
       ) : (
-        <UpcomingEvents upcomingEvents={upcomingEvents} noEvents={errorEvents} />
+        <UpcomingEvents
+          upcomingEvents={upcomingEvents}
+          noEvents={errorEvents}
+        />
       )}
-      {loadingPhotos ? <LoadingSpinner /> : <SomePhotos photos={photos} noPhotos={errorPhotos}/>}
+      {loadingPhotos ? (
+        <LoadingSpinner />
+      ) : (
+        <SomePhotos photos={photos} noPhotos={errorPhotos} />
+      )}
     </div>
   );
 }
