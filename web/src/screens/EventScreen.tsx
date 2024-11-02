@@ -5,7 +5,7 @@ import type { Event } from "../types/types";
 import { Mapper } from "../utils/Mapper";
 import Header from "@components/Header";
 import PastEvents from "@components/PastEvents";
-import UpcomingEventsList from "@components/UpcomingEventsList";
+// import UpcomingEventsList from "@components/UpcomingEventsList";
 import EventGalleryComponent from "@components/EventGalleryComponent";
 
 export default function EventScreen() {
@@ -34,7 +34,7 @@ export default function EventScreen() {
 
   const currentDate = new Date();
 
-  const { upcomingEvents, pastEvents } = events.reduce<{
+  const { /*upcomingEvents,*/ pastEvents } = events.reduce<{
     upcomingEvents: Event[];
     pastEvents: Event[];
   }>(
@@ -66,7 +66,7 @@ export default function EventScreen() {
           </div>
           <div className="flex h-auto w-full flex-row items-center justify-center bg-transparent pb-10">
             <div className="w-11/12 lg:w-3/4">
-              <UpcomingEventsList upcomingEvents={upcomingEvents} />
+              {/* <UpcomingEventsList sliderRef={null} upcomingEvents={upcomingEvents} /> */}
             </div>
           </div>
           <div className="flex h-auto w-full flex-row items-center justify-center bg-white">
