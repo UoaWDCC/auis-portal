@@ -7,13 +7,14 @@ import {
 import useScreenSize from "../hooks/useScreenSize";
 import { useState } from "react";
 import { useKeenSlider } from "keen-slider/react";
+import peacockLogo from "../assets/peacock.png";
 
 interface UpcomingEventsProps {
   upcomingEvents: Event[];
   noEvents: boolean;
 }
 
-const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ upcomingEvents }) => {
+const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ upcomingEvents, noEvents }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const screenSize = useScreenSize();
 
@@ -29,6 +30,26 @@ const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ upcomingEvents }) => {
     },
   });
 
+  // Handle case with no events
+  const today = new Date()
+  const showNoEvent : Event = {id: -1,
+  title: "No Upcoming Events Right Now",
+  description: "description",
+  subtitle: "subtitle",
+  eventDateStart: today.toISOString(),
+  eventDateEnd: "termsAndConditions",
+  isLive: true,
+  termsAndConditions: "termsAndConditions",
+  eventCapacityRemaining: 0,
+  location: "University of Auckland",
+  locationLink: "locationLink",
+  image:peacockLogo}
+  const showNoEvents : Event[] = [showNoEvent, showNoEvent, showNoEvent]
+  let sliderLength = upcomingEvents.length
+  if (sliderLength === 0){
+    sliderLength = 3
+  }
+
   return (
     <div className="from-AUIS-dark-teal to-AUIS-teal bg-gradient-to-b pb-20">
       <h1 className="mx-3 py-10 text-center text-5xl font-bold text-white">
@@ -43,7 +64,7 @@ const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ upcomingEvents }) => {
         />
         <UpcomingEventsList
           sliderRef={sliderRef}
-          upcomingEvents={upcomingEvents}
+          upcomingEvents={noEvents? showNoEvents : upcomingEvents}
         />
         <RightArrow
           onClick={(e: any) =>
@@ -51,7 +72,7 @@ const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ upcomingEvents }) => {
           }
           disabled={
             currentSlide >=
-            upcomingEvents.length -
+            sliderLength -
               (screenSize.width > 640 ? (screenSize.width > 1000 ? 3 : 2) : 1)
           }
         />

@@ -20,11 +20,11 @@ const UpcomingEventCard: React.FC<UpcomingEventCardProps> = ({
 
   let timeUntilEvent;
   if (differenceInDays > 0) {
-    timeUntilEvent = `${differenceInDays} day${differenceInDays > 1 ? "s" : ""}`;
+    timeUntilEvent = `${differenceInDays} day${differenceInDays != 1 ? "s" : ""}`;
   } else if (differenceInHours > 0) {
-    timeUntilEvent = `${differenceInHours} hour${differenceInHours > 1 ? "s" : ""}`;
+    timeUntilEvent = `${differenceInHours} hour${differenceInHours != 1 ? "s" : ""}`;
   } else {
-    timeUntilEvent = `${differenceInMinutes} minute${differenceInMinutes > 1 ? "s" : ""}`;
+    timeUntilEvent = `${differenceInMinutes} minute${differenceInMinutes != 1 ? "s" : ""}`;
   }
   return (
     <div className="card relative h-full w-full rounded-lg bg-white shadow-md duration-100 hover:bg-white/80">
