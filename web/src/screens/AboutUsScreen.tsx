@@ -3,7 +3,6 @@ import { useQuery } from "@apollo/client";
 import { GET_INTRODUCTION, GET_VALUES, GET_PARTNERS } from "../graphql/queries";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { Mapper } from "../utils/Mapper";
-import Header from "../components/Header";
 import { useState, useEffect } from "react";
 import ValueCard from "../components/ValueCard";
 import { useNavigate } from "react-router";
@@ -11,6 +10,7 @@ import { useNavigate } from "react-router";
 export default function AboutUsScreen({ navbar }: { navbar: JSX.Element }) {
 
   const navigate = useNavigate();
+  
   const {
     loading: introLoading,
     data: introData,
@@ -99,7 +99,7 @@ export default function AboutUsScreen({ navbar }: { navbar: JSX.Element }) {
             <div className="max-w-screen flex h-auto flex-col items-center bg-white px-5 py-5 text-center text-black md:px-20 lg:px-48">
               <h2 className="text-4xl font-bold">Our Introduction</h2>
               {noIntroductions ? (
-                <div>There is no introduction to display</div>
+                <div className="py-10">There is no introduction to display</div>
               ) : (
                 <>
                   <p className="my-5 text-2xl">
@@ -138,7 +138,7 @@ export default function AboutUsScreen({ navbar }: { navbar: JSX.Element }) {
             <div className="max-w-screen from-AUIS-dark-teal to-AUIS-teal flex h-auto flex-col items-center bg-gradient-to-b px-5 py-5 md:px-20">
               <h1 className="text-4xl font-bold text-white">Our Values</h1>
               {noValues ? (
-                <div>There is no values to display</div>
+                <div className="py-10">There are no values to display</div>
               ) : (
                 <div className="flex flex-wrap justify-center">
                   {values.map((value) => (
@@ -153,7 +153,7 @@ export default function AboutUsScreen({ navbar }: { navbar: JSX.Element }) {
             <div className="max-w-screen flex flex-col items-center bg-white px-2 py-5">
               <h1 className="text-4xl font-bold text-black">Our Partners</h1>
               {noPartners ? (
-                <div>There is no partners to display</div>
+                <div className="py-10">There are no partners to display</div>
               ) : (
                 <div className="flex flex-wrap items-center justify-center">
                   {partners.map((partner) => (
