@@ -62,7 +62,7 @@ const UpcomingEventsList: React.FC<UpcomingEventsListProps> = ({
           </div>
         ))}
       </div>
-      
+
       {/* Loaded is needed to make sure all slider slides are loaded in */}
       {/* {loaded && instanceRef.current && (
         <>

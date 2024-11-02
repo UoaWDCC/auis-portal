@@ -1,6 +1,9 @@
 import UpcomingEventsList from "./UpcomingEventsList";
 import { Event } from "../types/types";
-import { IoArrowBackCircleOutline, IoArrowForwardCircleOutline } from "react-icons/io5";
+import {
+  IoArrowBackCircleOutline,
+  IoArrowForwardCircleOutline,
+} from "react-icons/io5";
 
 interface UpcomingEventsProps {
   upcomingEvents: Event[];
@@ -14,27 +17,29 @@ const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ upcomingEvents }) => {
         Our Upcoming Events!
       </h1>
       <div className="mx-auto flex items-center justify-center">
-      <LeftArrow
-            onClick={(e: any) =>
-              console.log("clicked")
-              // e.stopPropagation() || instanceRef.current?.next()
-            }
-            disabled={false
-              // currentSlide >=
-              // instanceRef.current.track.details.slides.length - (screenSize.width > 640 ? (screenSize.width > 1000 ? 3 : 2) : 1)
-            }
-          />
+        <LeftArrow
+          onClick={
+            (e: any) => console.log("clicked")
+            // e.stopPropagation() || instanceRef.current?.next()
+          }
+          disabled={
+            false
+            // currentSlide >=
+            // instanceRef.current.track.details.slides.length - (screenSize.width > 640 ? (screenSize.width > 1000 ? 3 : 2) : 1)
+          }
+        />
         <UpcomingEventsList upcomingEvents={upcomingEvents} />
         <RightArrow
-            onClick={(e: any) =>
-              console.log("clicked")
-              // e.stopPropagation() || instanceRef.current?.next()
-            }
-            disabled={false
-              // currentSlide >=
-              // instanceRef.current.track.details.slides.length - (screenSize.width > 640 ? (screenSize.width > 1000 ? 3 : 2) : 1)
-            }
-          />
+          onClick={
+            (e: any) => console.log("clicked")
+            // e.stopPropagation() || instanceRef.current?.next()
+          }
+          disabled={
+            false
+            // currentSlide >=
+            // instanceRef.current.track.details.slides.length - (screenSize.width > 640 ? (screenSize.width > 1000 ? 3 : 2) : 1)
+          }
+        />
       </div>
     </div>
   );
