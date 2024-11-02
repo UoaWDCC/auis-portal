@@ -9,7 +9,6 @@ import ValueCard from "../components/ValueCard";
 import { useNavigate } from "react-router";
 
 export default function AboutUsScreen({ navbar }: { navbar: JSX.Element }) {
-
   const navigate = useNavigate();
   const {
     loading: introLoading,
@@ -129,7 +128,7 @@ export default function AboutUsScreen({ navbar }: { navbar: JSX.Element }) {
 
               <button
                 onClick={() => navigate("/signup")}
-                className="bg-primary-orange my-5 rounded-full px-10 py-3 text-2xl transition-all hover:scale-110 font-bold text-white"
+                className="bg-primary-orange my-5 rounded-full px-10 py-3 text-2xl font-bold text-white transition-all hover:scale-110"
               >
                 Join Us Now!
               </button>
@@ -157,8 +156,15 @@ export default function AboutUsScreen({ navbar }: { navbar: JSX.Element }) {
               ) : (
                 <div className="flex flex-wrap items-center justify-center">
                   {partners.map((partner) => (
-                    <div key={partner.id} className="m-5 flex items-center justify-center h-full">
-                      <img src={partner.image} className=" object-fill h-56 " alt="Partner Image" />
+                    <div
+                      key={partner.id}
+                      className="m-5 flex h-full items-center justify-center"
+                    >
+                      <img
+                        src={partner.image}
+                        className="h-56 object-fill"
+                        alt="Partner Image"
+                      />
                     </div>
                   ))}
                 </div>
