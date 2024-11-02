@@ -50,7 +50,7 @@ function Header() {
               ) : (
                 <IoMdMenu
                   data-testid="menu"
-                  className="mr-5 text-white hover:scale-110 transition-all"
+                  className="mr-5 text-white transition-all hover:scale-110"
                   size={40}
                 />
               )}
@@ -66,7 +66,10 @@ function Header() {
               className="absolute right-4 top-4 xl:hidden"
               onClick={() => setNavBar(false)}
             >
-              <IoMdClose className="text-white hover:bg-AUIS-teal transition-all" size={40} />
+              <IoMdClose
+                className="hover:bg-AUIS-teal text-white transition-all"
+                size={40}
+              />
             </button>
             <div className="flex h-full flex-col text-xl font-bold text-white xl:flex-row xl:items-center xl:justify-center">
               {titles.map((label) => (
