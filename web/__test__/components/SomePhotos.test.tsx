@@ -63,8 +63,7 @@ const errorMock = {
 };
 
 describe("SomePhotos Component", () => {
-
-  it.todo('add test cases');
+  it.todo("add test cases");
 
   // it("renders loading spinner", async () => {
   //   render(
