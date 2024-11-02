@@ -3,15 +3,14 @@ import UpcomingEventCard from "./UpcomingEventCard";
 import { Link } from "react-router-dom";
 import "keen-slider/keen-slider.min.css";
 
-
 interface UpcomingEventsListProps {
-  upcomingEvents: Event[],
+  upcomingEvents: Event[];
   sliderRef: (node: HTMLElement | null) => void;
 }
 
 const UpcomingEventsList: React.FC<UpcomingEventsListProps> = ({
   upcomingEvents,
-  sliderRef
+  sliderRef,
 }) => {
   return (
     <>
