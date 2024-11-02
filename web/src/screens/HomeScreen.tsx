@@ -25,7 +25,7 @@ export default function HomeScreen({ navbar }: { navbar: JSX.Element }) {
 
   // States
   const [events, setEvents] = useState<Event[]>([]);
-  const [loadingEvents, setLoadingEvents] = useState(false);
+  const [loadingEvents, setLoadingEvents] = useState(true);
   const [errorEvents, setErrorEvents] = useState(false);
 
   const [photos, setPhotos] = useState<SomePhoto[]>([]);
