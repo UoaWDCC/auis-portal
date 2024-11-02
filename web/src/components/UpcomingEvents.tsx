@@ -14,7 +14,10 @@ interface UpcomingEventsProps {
   noEvents: boolean;
 }
 
-const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ upcomingEvents, noEvents }) => {
+const UpcomingEvents: React.FC<UpcomingEventsProps> = ({
+  upcomingEvents,
+  noEvents,
+}) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const screenSize = useScreenSize();
 
@@ -31,23 +34,25 @@ const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ upcomingEvents, noEvent
   });
 
   // Handle case with no events
-  const today = new Date()
-  const showNoEvent : Event = {id: -1,
-  title: "No Upcoming Events Right Now",
-  description: "description",
-  subtitle: "subtitle",
-  eventDateStart: today.toISOString(),
-  eventDateEnd: "termsAndConditions",
-  isLive: true,
-  termsAndConditions: "termsAndConditions",
-  eventCapacityRemaining: 0,
-  location: "University of Auckland",
-  locationLink: "locationLink",
-  image:peacockLogo}
-  const showNoEvents : Event[] = [showNoEvent, showNoEvent, showNoEvent]
-  let sliderLength = upcomingEvents.length
-  if (sliderLength === 0){
-    sliderLength = 3
+  const today = new Date();
+  const showNoEvent: Event = {
+    id: -1,
+    title: "No Upcoming Events Right Now",
+    description: "description",
+    subtitle: "subtitle",
+    eventDateStart: today.toISOString(),
+    eventDateEnd: "termsAndConditions",
+    isLive: true,
+    termsAndConditions: "termsAndConditions",
+    eventCapacityRemaining: 0,
+    location: "University of Auckland",
+    locationLink: "locationLink",
+    image: peacockLogo,
+  };
+  const showNoEvents: Event[] = [showNoEvent, showNoEvent, showNoEvent];
+  let sliderLength = upcomingEvents.length;
+  if (sliderLength === 0) {
+    sliderLength = 3;
   }
 
   return (
@@ -64,7 +69,7 @@ const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ upcomingEvents, noEvent
         />
         <UpcomingEventsList
           sliderRef={sliderRef}
-          upcomingEvents={noEvents? showNoEvents : upcomingEvents}
+          upcomingEvents={noEvents ? showNoEvents : upcomingEvents}
         />
         <RightArrow
           onClick={(e: any) =>
