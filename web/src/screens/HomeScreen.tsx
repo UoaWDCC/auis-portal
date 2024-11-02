@@ -2,14 +2,15 @@ import Hero from "@components/Hero";
 import Intro from "@components/Intro";
 import SomePhotos from "@components/SomePhotos";
 import UpcomingEvents from "@components/UpcomingEvents";
-import { GET_EVENTS, GET_EXECS } from "../graphql/queries";
+import { GET_EVENTS, GET_SOME_PHOTOS } from "../graphql/queries";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { useQuery } from "@apollo/client";
 import { Mapper } from "@utils/Mapper";
 import { useEffect, useState } from "react";
-import type { Event, Exec } from "../types/types";
+import type { Event, SomePhoto } from "../types/types";
 
-export default function HomeScreen() {
+export default function HomeScreen({ navbar }: { navbar: JSX.Element }) {
+  // Queries
   const {
     loading: eventsLoading,
     data: eventsData,
@@ -17,53 +18,58 @@ export default function HomeScreen() {
   } = useQuery(GET_EVENTS);
 
   const {
-    loading: execsLoading,
-    data: execsData,
-    error: execsError,
-  } = useQuery(GET_EXECS);
+    loading: photosLoading,
+    data: photosData,
+    error: photosError,
+  } = useQuery(GET_SOME_PHOTOS);
 
+  // States
   const [events, setEvents] = useState<Event[]>([]);
-  const [, /*executives*/ setExecutives] = useState<Exec[]>([]);
-  const [, /*noEvents*/ setNoEvents] = useState(false);
-  const [, /*noExecs*/ setNoExecs] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [loadingEvents, setLoadingEvents] = useState(true);
+  const [errorEvents, setErrorEvents] = useState(false);
 
+  const [photos, setPhotos] = useState<SomePhoto[]>([]);
+  const [loadingPhotos, setLoadingPhotos] = useState(true);
+  const [errorPhotos, setErrorPhotos] = useState(false);
+
+  // useEffect
   useEffect(() => {
+    if (!eventsLoading) {
+      setLoadingEvents(false);
+    }
+    if (photosError) {
+      setErrorEvents(true);
+    }
     if (eventsData) {
       try {
         const mappedEvents = Mapper.mapToEvents(eventsData);
         setEvents(mappedEvents);
       } catch (error) {
-        setNoEvents(true);
+        setErrorEvents(true);
       }
     }
-  }, [eventsData]);
+  }, [eventsData, eventsError, eventsLoading]);
 
   useEffect(() => {
-    if (execsData) {
+    if (!photosLoading) {
+      setLoadingPhotos(false);
+    }
+
+    if (photosError) {
+      setErrorPhotos(true);
+    }
+
+    if (photosData) {
       try {
-        const mappedExecs = Mapper.mapToExec(execsData);
-        setExecutives(mappedExecs);
+        const mappedPhotos = Mapper.mapToSomePhotos(photosData);
+        setPhotos(mappedPhotos);
       } catch (error) {
-        setNoExecs(true);
+        setErrorPhotos(true);
       }
     }
-  }, [execsData]);
+  }, [photosData, photosError, photosLoading]);
 
-  useEffect(() => {
-    if (!eventsLoading && !execsLoading) {
-      setLoading(false);
-    }
-  }, [eventsLoading, execsLoading]);
-
-  if (eventsError || execsError) {
-    return <div>CMS Offline</div>;
-  }
-
-  if (loading) {
-    return <LoadingSpinner />;
-  }
-
+  // Filtering
   const currentDate = new Date();
   const upcomingEvents = events.filter((event) => {
     const eventDate = new Date(event.eventDateStart);
@@ -72,10 +78,21 @@ export default function HomeScreen() {
 
   return (
     <div>
-      <Hero />
+      <Hero navbar={navbar} />
       <Intro />
-      <UpcomingEvents upcomingEvents={upcomingEvents} />
-      <SomePhotos />
+      {loadingEvents ? (
+        <LoadingSpinner />
+      ) : (
+        <UpcomingEvents
+          upcomingEvents={upcomingEvents}
+          noEvents={errorEvents}
+        />
+      )}
+      {loadingPhotos ? (
+        <LoadingSpinner />
+      ) : (
+        <SomePhotos photos={photos} noPhotos={errorPhotos} />
+      )}
     </div>
   );
 }
