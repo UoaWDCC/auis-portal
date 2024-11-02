@@ -3,7 +3,7 @@ import { ValueCardProps } from "../types/types";
 export default function ValueCard({ value }: ValueCardProps) {
   return (
     <>
-      <div className="flex h-auto w-96 flex-col items-center overflow-hidden rounded-3xl bg-transparent">
+      <div className="flex h-auto sm:w-96 flex-col items-center overflow-hidden rounded-3xl bg-transparent">
         <div className="h-40 w-full">
           <img
             src={value.image}

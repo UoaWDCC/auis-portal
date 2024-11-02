@@ -6,8 +6,11 @@ import { Mapper } from "../utils/Mapper";
 import Header from "../components/Header";
 import { useState, useEffect } from "react";
 import ValueCard from "../components/ValueCard";
+import { useNavigate } from "react-router";
 
-export default function AboutUsScreen() {
+export default function AboutUsScreen({ navbar }: { navbar: JSX.Element }) {
+
+  const navigate = useNavigate();
   const {
     loading: introLoading,
     data: introData,
@@ -85,7 +88,7 @@ export default function AboutUsScreen() {
         <>
           <div className="max-w-screen bg-white">
             <div className="max-w-screen from-AUIS-dark-teal to-AUIS-teal h-auto bg-gradient-to-b">
-              <Header />
+              {navbar}
               <div className="max-w-screen flex h-52 items-center justify-center">
                 <h1 className="text-5xl font-bold text-white md:text-7xl">
                   About Us!
@@ -124,12 +127,12 @@ export default function AboutUsScreen() {
                 </>
               )}
 
-              <a
-                href="mailto:au.indiansociety@gmail.com"
-                className="bg-primary-orange my-5 rounded-full px-10 py-3 text-2xl font-bold text-white"
+              <button
+                onClick={() => navigate("/signup")}
+                className="bg-primary-orange my-5 rounded-full px-10 py-3 text-2xl transition-all hover:scale-110 font-bold text-white"
               >
                 Join Us Now!
-              </a>
+              </button>
             </div>
 
             <div className="max-w-screen from-AUIS-dark-teal to-AUIS-teal flex h-auto flex-col items-center bg-gradient-to-b px-5 py-5 md:px-20">
@@ -154,8 +157,8 @@ export default function AboutUsScreen() {
               ) : (
                 <div className="flex flex-wrap items-center justify-center">
                   {partners.map((partner) => (
-                    <div key={partner.id} className="m-5 w-full md:w-80">
-                      <img src={partner.image} alt="Partner Image" />
+                    <div key={partner.id} className="m-5 flex items-center justify-center h-full">
+                      <img src={partner.image} className=" object-fill h-56 " alt="Partner Image" />
                     </div>
                   ))}
                 </div>
