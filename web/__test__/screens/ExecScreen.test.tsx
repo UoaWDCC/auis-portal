@@ -176,7 +176,7 @@ describe("ExecScreen", () => {
     render(
       <MockedProvider mocks={mocks} addTypename={false}>
         <MemoryRouter>
-          <ExecScreen  navbar={<></>}/>
+          <ExecScreen navbar={<></>} />
         </MemoryRouter>
       </MockedProvider>
     );
