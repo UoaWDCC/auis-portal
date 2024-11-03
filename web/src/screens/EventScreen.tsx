@@ -83,7 +83,6 @@ export default function EventScreen({ navbar }: { navbar: JSX.Element }) {
     { upcomingEvents: [], pastEvents: [] }
   );
 
-
   return (
     <>
       {loadingEvents || loadingGallery ? (
@@ -126,9 +125,12 @@ export default function EventScreen({ navbar }: { navbar: JSX.Element }) {
               </div>
             </div>
             {errorGallery ? (
-                <div className="py-10 text-center">There are no event photos to display</div>
-              ) : (
-            <EventGalleryComponent photos={gallery} />)}
+              <div className="py-10 text-center">
+                There are no event photos to display
+              </div>
+            ) : (
+              <EventGalleryComponent photos={gallery} />
+            )}
           </div>
         </div>
       )}
