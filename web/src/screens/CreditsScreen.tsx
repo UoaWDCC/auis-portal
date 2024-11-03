@@ -41,16 +41,16 @@ export default function CreditsScreen({ navbar }: { navbar: JSX.Element }) {
           ))}
         </div>
         <div className="flex flex-col items-center text-center">
-        <h2 className="text-tertiary-blue mt-10 text-3xl font-bold">
+          <h2 className="text-tertiary-blue mt-10 text-3xl font-bold">
             Secondary Developers
           </h2>
           <div className="flex flex-wrap justify-center">
-          {secondaryDevelopers.map((developer, index) => (
-            <div className="m-5">
-              <DeveloperCard key={index} developer={developer} />
-            </div>
-          ))}
-        </div>
+            {secondaryDevelopers.map((developer, index) => (
+              <div className="m-5">
+                <DeveloperCard key={index} developer={developer} />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </>
