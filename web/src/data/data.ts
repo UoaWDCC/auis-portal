@@ -68,20 +68,20 @@ export const secondaryDevelopers = [
   },
 ];
 
-  // Handle case with no events
-  const today = new Date();
-  const showNoEvent: Event = {
-    id: -1,
-    title: "No Upcoming Events Right Now",
-    description: "description",
-    subtitle: "subtitle",
-    eventDateStart: today.toISOString(),
-    eventDateEnd: "termsAndConditions",
-    isLive: true,
-    termsAndConditions: "termsAndConditions",
-    eventCapacityRemaining: 0,
-    location: "University of Auckland",
-    locationLink: "locationLink",
-    image: peacockLogo,
-  };
-  export const showNoEvents: Event[] = [showNoEvent, showNoEvent, showNoEvent];
+// Handle case with no events
+const today = new Date();
+const showNoEvent: Event = {
+  id: -1,
+  title: "No Upcoming Events Right Now",
+  description: "description",
+  subtitle: "subtitle",
+  eventDateStart: today.toISOString(),
+  eventDateEnd: "termsAndConditions",
+  isLive: true,
+  termsAndConditions: "termsAndConditions",
+  eventCapacityRemaining: 0,
+  location: "University of Auckland",
+  locationLink: "locationLink",
+  image: peacockLogo,
+};
+export const showNoEvents: Event[] = [showNoEvent, showNoEvent, showNoEvent];

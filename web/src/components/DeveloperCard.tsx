@@ -4,8 +4,10 @@ import { FaLinkedin, FaGithub } from "react-icons/fa";
 export default function DeveloperCard({ developer }: DeveloperCardProps) {
   return (
     <>
-      <div className="bg-AUIS-dark-teal flex h-auto w-64 flex-col items-center min-h-32 rounded-xl p-2">
-        <h1 className="text-xl font-bold text-center text-white">{developer.name}</h1>
+      <div className="bg-AUIS-dark-teal flex h-auto min-h-32 w-64 flex-col items-center rounded-xl p-2">
+        <h1 className="text-center text-xl font-bold text-white">
+          {developer.name}
+        </h1>
         <div className="my-2 flex items-center justify-center">
           <a
             href={developer.linkedIn}
