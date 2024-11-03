@@ -6,13 +6,13 @@ import "keen-slider/keen-slider.min.css";
 interface UpcomingEventsListProps {
   upcomingEvents: Event[];
   sliderRef: (node: HTMLElement | null) => void;
-  pastEvent: boolean
+  pastEvent: boolean;
 }
 
 const UpcomingEventsList: React.FC<UpcomingEventsListProps> = ({
   upcomingEvents,
   sliderRef,
-  pastEvent
+  pastEvent,
 }) => {
   return (
     <>
