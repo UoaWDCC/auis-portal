@@ -9,7 +9,7 @@ import { useNavigate } from "react-router";
 
 export default function AboutUsScreen({ navbar }: { navbar: JSX.Element }) {
   const navigate = useNavigate();
-  
+
   const {
     loading: introLoading,
     data: introData,
