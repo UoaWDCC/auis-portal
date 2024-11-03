@@ -10,7 +10,7 @@ function Header() {
 
   const titles = [
     { title: "Events", page: "/events" },
-    { title: "About Us", page: "/about-us" },
+    { title: "About Us", page: "/aboutus" },
     { title: "Team", page: "/exec" },
     { title: "Partners", page: "/sponsors" },
     { title: "Credits", page: "/credits" },

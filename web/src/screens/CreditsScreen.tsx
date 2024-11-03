@@ -1,5 +1,4 @@
 import DeveloperCard from "@components/DeveloperCard";
-import Header from "../components/Header";
 import { secondaryDevelopers, primaryDevelopers } from "../data/data";
 
 export default function CreditsScreen({ navbar }: { navbar: JSX.Element }) {

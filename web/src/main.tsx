@@ -20,7 +20,7 @@ import { graphqlClient } from "./graphql/client.ts";
 import CreditsScreen from "./screens/CreditsScreen.tsx";
 import SignInScreen from "./screens/SignInScreen.tsx";
 import CheckoutScreen from "./screens/CheckoutScreen.tsx";
-import ReturnScreen from "./screens/ReturnScreen.tsx";
+// import ReturnScreen from "./screens/ReturnScreen.tsx";
 import EventScreen from "./screens/EventScreen.tsx";
 import InformationScreen from "./screens/InformationScreen.tsx";
 import PartnersScreen from "./screens/PartnersScreen.tsx";
@@ -47,10 +47,10 @@ const router = createBrowserRouter(
       />
       <Route path="/login" element={<SignInScreen navbar={<Header />} />} />
       <Route path="/signup" element={<SignUpScreen navbar={<Header />} />} />
-      <Route path="/about-us" element={<AboutUsScreen navbar={<Header />} />} />
+      <Route path="/aboutus" element={<AboutUsScreen navbar={<Header />} />} />
       <Route path="/checkout" element={<CheckoutScreen />} />
       {/* <Route path="/return" element={<ReturnScreen />} /> */}
-      <Route path="/user-info" element={<InformationScreen />} />
+      <Route path="/userinfo" element={<InformationScreen />} />
     </Route>
   )
 );

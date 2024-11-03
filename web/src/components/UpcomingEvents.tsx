@@ -7,16 +7,18 @@ import {
 import useScreenSize from "../hooks/useScreenSize";
 import { useState } from "react";
 import { useKeenSlider } from "keen-slider/react";
-import { showNoEvents } from "../data/data";
+import { showNoPastEvents, showNoUpcomingEvents } from "../data/data";
 
 interface UpcomingEventsProps {
   upcomingEvents: Event[];
   noEvents: boolean;
+  pastEvent : boolean
 }
 
 const UpcomingEvents: React.FC<UpcomingEventsProps> = ({
   upcomingEvents,
   noEvents,
+  pastEvent
 }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const screenSize = useScreenSize();
@@ -39,10 +41,7 @@ const UpcomingEvents: React.FC<UpcomingEventsProps> = ({
   }
 
   return (
-    <div className="from-AUIS-dark-teal to-AUIS-teal bg-gradient-to-b pb-20">
-      <h1 className="mx-3 py-10 text-center text-5xl font-bold text-white">
-        Our Upcoming Events!
-      </h1>
+<div>
       <div className="mx-auto flex items-center justify-center">
         <LeftArrow
           onClick={(e: any) =>
@@ -52,7 +51,8 @@ const UpcomingEvents: React.FC<UpcomingEventsProps> = ({
         />
         <UpcomingEventsList
           sliderRef={sliderRef}
-          upcomingEvents={noEvents ? showNoEvents : upcomingEvents}
+          upcomingEvents={noEvents ? ( pastEvent? showNoPastEvents : showNoUpcomingEvents ) : upcomingEvents}
+          pastEvent = {pastEvent}
         />
         <RightArrow
           onClick={(e: any) =>

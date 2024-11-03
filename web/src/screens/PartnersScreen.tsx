@@ -4,7 +4,6 @@ import { useQuery } from "@apollo/client";
 import { GET_PARTNERS } from "../graphql/queries";
 import { Mapper } from "../utils/Mapper";
 import LoadingSpinner from "../components/LoadingSpinner";
-import Header from "../components/Header";
 import PartnerCard from "../components/PartnerCard";
 
 export default function PartnersScreen({ navbar }: { navbar: JSX.Element }) {

@@ -6,10 +6,12 @@ import dayjs from "dayjs";
 
 interface UpcomingEventCardProps {
   upcomingEvent: Event;
+  pastEvent: boolean
 }
 
 const UpcomingEventCard: React.FC<UpcomingEventCardProps> = ({
   upcomingEvent,
+  pastEvent,
 }) => {
   // Calculate the difference in time from now to the event start date
   const eventDate = dayjs(upcomingEvent.eventDateStart);
@@ -27,10 +29,11 @@ const UpcomingEventCard: React.FC<UpcomingEventCardProps> = ({
     timeUntilEvent = `${differenceInMinutes} minute${differenceInMinutes != 1 ? "s" : ""}`;
   }
   return (
-    <div className="card relative h-full w-full rounded-lg bg-white shadow-md duration-100 hover:bg-white/80">
+    <div className="card relative h-full w-full rounded-lg bg-white drop-shadow-all duration-100 hover:bg-white/80">
+      {!pastEvent ? 
       <div className="absolute right-2 top-2 z-10 rounded-full bg-orange-500 px-3 py-1 text-base font-bold text-white shadow-sm">
         in {timeUntilEvent}
-      </div>
+      </div> : <></>}
       <img
         src={upcomingEvent.image}
         alt={upcomingEvent.title}
