@@ -3,8 +3,6 @@ import { GET_EVENTS, GET_EVENTS_GALLERY } from "../graphql/queries";
 import LoadingSpinner from "../components/LoadingSpinner";
 import type { Event, EventGallery } from "../types/types";
 import { Mapper } from "../utils/Mapper";
-import PastEvents from "@components/PastEvents";
-import UpcomingEventsList from "@components/UpcomingEventsList";
 import EventGalleryComponent from "@components/EventGalleryComponent";
 import { useEffect, useState } from "react";
 import UpcomingEvents from "@components/UpcomingEvents";
@@ -85,7 +83,6 @@ export default function EventScreen({ navbar }: { navbar: JSX.Element }) {
     { upcomingEvents: [], pastEvents: [] }
   );
 
-  const pastEventss: Event[] = [];
 
   return (
     <>
@@ -128,7 +125,10 @@ export default function EventScreen({ navbar }: { navbar: JSX.Element }) {
                 />
               </div>
             </div>
-            <EventGalleryComponent photos={gallery} />
+            {errorGallery ? (
+                <div className="py-10 text-center">There are no event photos to display</div>
+              ) : (
+            <EventGalleryComponent photos={gallery} />)}
           </div>
         </div>
       )}
