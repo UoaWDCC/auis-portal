@@ -1,9 +1,8 @@
 import DeveloperCard from "@components/DeveloperCard";
 import Header from "../components/Header";
-import { developers } from "../data/data";
+import { secondaryDevelopers, primaryDevelopers } from "../data/data";
 
 export default function CreditsScreen() {
-  console.log(developers);
   return (
     <>
       <div className="max-w-screen from-AUIS-dark-teal to-AUIS-teal min-h-screen bg-gradient-to-b">
@@ -30,16 +29,28 @@ export default function CreditsScreen() {
           </h3>
 
           <h2 className="text-tertiary-blue mt-10 text-3xl font-bold">
-            Our Lovely Developers
+            Primary Developers
           </h2>
         </div>
 
         <div className="flex flex-wrap justify-center">
-          {developers.map((developer, index) => (
+          {primaryDevelopers.map((developer, index) => (
             <div className="m-5">
               <DeveloperCard key={index} developer={developer} />
             </div>
           ))}
+        </div>
+        <div className="flex flex-col items-center text-center">
+        <h2 className="text-tertiary-blue mt-10 text-3xl font-bold">
+            Secondary Developers
+          </h2>
+          <div className="flex flex-wrap justify-center">
+          {secondaryDevelopers.map((developer, index) => (
+            <div className="m-5">
+              <DeveloperCard key={index} developer={developer} />
+            </div>
+          ))}
+        </div>
         </div>
       </div>
     </>
