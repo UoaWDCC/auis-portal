@@ -41,7 +41,10 @@ const router = createBrowserRouter(
       <Route path="/events" element={<EventScreen navbar={<Header />} />} />
       <Route path="/credits" element={<CreditsScreen navbar={<Header />} />} />
       <Route path="/exec" element={<ExecScreen navbar={<Header />} />} />
-      <Route path="/sponsors" element={<PartnersScreen navbar={<Header />} />} />
+      <Route
+        path="/sponsors"
+        element={<PartnersScreen navbar={<Header />} />}
+      />
       <Route path="/login" element={<SignInScreen navbar={<Header />} />} />
       <Route path="/signup" element={<SignUpScreen navbar={<Header />} />} />
       <Route path="/about-us" element={<AboutUsScreen navbar={<Header />} />} />
