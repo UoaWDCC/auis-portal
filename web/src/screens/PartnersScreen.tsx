@@ -18,28 +18,26 @@ export default function PartnersScreen() {
   const [loadingPartners, setLoadingPartners] = useState(true);
   const [errorPartners, setErrorPartners] = useState(false);
 
-// useEffect
-useEffect(() => {
-  if (!partnersLoading) {
-    setLoadingPartners(false);
-  }
-  if (partnersError) {
-    setErrorPartners(true);
-  }
-  if (partnersData) {
-    try {
-      const mappedPartners = Mapper.mapToPartner(partnersData);
-      setPartners(mappedPartners);
-    } catch (error) {
+  // useEffect
+  useEffect(() => {
+    if (!partnersLoading) {
+      setLoadingPartners(false);
+    }
+    if (partnersError) {
       setErrorPartners(true);
     }
-  }
-}, [partnersData, partnersError, partnersLoading]);
+    if (partnersData) {
+      try {
+        const mappedPartners = Mapper.mapToPartner(partnersData);
+        setPartners(mappedPartners);
+      } catch (error) {
+        setErrorPartners(true);
+      }
+    }
+  }, [partnersData, partnersError, partnersLoading]);
 
   // Filtering the partners based on their type
-  const goldPartners = partners.filter(
-    (partner) => partner.type === "Gold"
-  );
+  const goldPartners = partners.filter((partner) => partner.type === "Gold");
   const silverPartners = partners.filter(
     (partner) => partner.type === "Silver"
   );
