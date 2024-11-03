@@ -6,7 +6,7 @@ import dayjs from "dayjs";
 
 interface UpcomingEventCardProps {
   upcomingEvent: Event;
-  pastEvent: boolean
+  pastEvent: boolean;
 }
 
 const UpcomingEventCard: React.FC<UpcomingEventCardProps> = ({
@@ -29,11 +29,14 @@ const UpcomingEventCard: React.FC<UpcomingEventCardProps> = ({
     timeUntilEvent = `${differenceInMinutes} minute${differenceInMinutes != 1 ? "s" : ""}`;
   }
   return (
-    <div className="card relative h-full w-full rounded-lg bg-white drop-shadow-all duration-100 hover:bg-white/80">
-      {!pastEvent ? 
-      <div className="absolute right-2 top-2 z-10 rounded-full bg-orange-500 px-3 py-1 text-base font-bold text-white shadow-sm">
-        in {timeUntilEvent}
-      </div> : <></>}
+    <div className="card drop-shadow-all relative h-full w-full rounded-lg bg-white duration-100 hover:bg-white/80">
+      {!pastEvent ? (
+        <div className="absolute right-2 top-2 z-10 rounded-full bg-orange-500 px-3 py-1 text-base font-bold text-white shadow-sm">
+          in {timeUntilEvent}
+        </div>
+      ) : (
+        <></>
+      )}
       <img
         src={upcomingEvent.image}
         alt={upcomingEvent.title}

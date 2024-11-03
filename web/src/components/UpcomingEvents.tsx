@@ -12,13 +12,13 @@ import { showNoPastEvents, showNoUpcomingEvents } from "../data/data";
 interface UpcomingEventsProps {
   upcomingEvents: Event[];
   noEvents: boolean;
-  pastEvent : boolean
+  pastEvent: boolean;
 }
 
 const UpcomingEvents: React.FC<UpcomingEventsProps> = ({
   upcomingEvents,
   noEvents,
-  pastEvent
+  pastEvent,
 }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const screenSize = useScreenSize();
@@ -41,7 +41,7 @@ const UpcomingEvents: React.FC<UpcomingEventsProps> = ({
   }
 
   return (
-<div>
+    <div>
       <div className="mx-auto flex items-center justify-center">
         <LeftArrow
           onClick={(e: any) =>
@@ -51,8 +51,14 @@ const UpcomingEvents: React.FC<UpcomingEventsProps> = ({
         />
         <UpcomingEventsList
           sliderRef={sliderRef}
-          upcomingEvents={noEvents ? ( pastEvent? showNoPastEvents : showNoUpcomingEvents ) : upcomingEvents}
-          pastEvent = {pastEvent}
+          upcomingEvents={
+            noEvents
+              ? pastEvent
+                ? showNoPastEvents
+                : showNoUpcomingEvents
+              : upcomingEvents
+          }
+          pastEvent={pastEvent}
         />
         <RightArrow
           onClick={(e: any) =>

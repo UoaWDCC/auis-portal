@@ -84,7 +84,11 @@ const showNoUpcomingEvent: Event = {
   locationLink: "locationLink",
   image: peacockLogo,
 };
-export const showNoUpcomingEvents: Event[] = [showNoUpcomingEvent, showNoUpcomingEvent, showNoUpcomingEvent];
+export const showNoUpcomingEvents: Event[] = [
+  showNoUpcomingEvent,
+  showNoUpcomingEvent,
+  showNoUpcomingEvent,
+];
 
 const showNoPastEvent: Event = {
   id: -1,
@@ -100,4 +104,8 @@ const showNoPastEvent: Event = {
   locationLink: "locationLink",
   image: peacockLogo,
 };
-export const showNoPastEvents: Event[] = [showNoPastEvent, showNoPastEvent, showNoPastEvent];
+export const showNoPastEvents: Event[] = [
+  showNoPastEvent,
+  showNoPastEvent,
+  showNoPastEvent,
+];
