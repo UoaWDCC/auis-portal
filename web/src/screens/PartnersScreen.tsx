@@ -7,7 +7,7 @@ import LoadingSpinner from "../components/LoadingSpinner";
 import Header from "../components/Header";
 import PartnerCard from "../components/PartnerCard";
 
-export default function PartnersScreen() {
+export default function PartnersScreen({ navbar }: { navbar: JSX.Element }) {
   const {
     loading: partnersLoading,
     data: partnersData,
@@ -53,7 +53,7 @@ export default function PartnersScreen() {
         <>
           <div className="max-w-screen h-auto bg-white">
             <div className="max-w-screen from-AUIS-dark-teal to-AUIS-teal h-72 bg-gradient-to-b">
-              <Header />
+              {navbar}
               <div className="flex flex-col items-center text-center text-white">
                 <h1 className="text-4xl font-bold md:text-6xl">Our Partners</h1>
                 <h3 className="my-5 text-2xl">

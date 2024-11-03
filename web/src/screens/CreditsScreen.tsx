@@ -2,11 +2,11 @@ import DeveloperCard from "@components/DeveloperCard";
 import Header from "../components/Header";
 import { secondaryDevelopers, primaryDevelopers } from "../data/data";
 
-export default function CreditsScreen() {
+export default function CreditsScreen({ navbar }: { navbar: JSX.Element }) {
   return (
     <>
       <div className="max-w-screen from-AUIS-dark-teal to-AUIS-teal min-h-screen bg-gradient-to-b">
-        <Header />
+        {navbar}
         <div className="flex flex-col items-center text-center">
           <h1 className="text-5xl font-bold text-white">
             The People Behind This Website

@@ -12,10 +12,8 @@ import { ApolloProvider } from "@apollo/client";
 import App from "./App.tsx";
 import "./index.css";
 import HomeScreen from "./screens/HomeScreen.tsx";
-import TestScreen from "./screens/Test.tsx";
 import ExecScreen from "./screens/ExecScreen.tsx";
 import SignUpScreen from "./screens/SignUpScreen.tsx";
-import PhotosScreen from "./screens/PhotosScreen.tsx";
 import AboutUsScreen from "./screens/AboutUsScreen.tsx";
 import { ClerkProvider } from "@clerk/clerk-react";
 import { graphqlClient } from "./graphql/client.ts";
@@ -40,18 +38,15 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route index={true} element={<HomeScreen navbar={<Header />} />} />
-      <Route path="/test" element={<TestScreen />} />
-      <Route path="/events" element={<EventScreen />} />
-      <Route path="/credits" element={<CreditsScreen />} />
-      <Route path="/exec" element={<ExecScreen />} />
-      <Route path="/sponsors" element={<PartnersScreen />} />
-      <Route path="/login" element={<SignInScreen />} />
-      <Route path="/signup" element={<SignUpScreen />} />
+      <Route path="/events" element={<EventScreen navbar={<Header />} />} />
+      <Route path="/credits" element={<CreditsScreen navbar={<Header />} />} />
+      <Route path="/exec" element={<ExecScreen navbar={<Header />} />} />
+      <Route path="/sponsors" element={<PartnersScreen navbar={<Header />} />} />
+      <Route path="/login" element={<SignInScreen navbar={<Header />} />} />
+      <Route path="/signup" element={<SignUpScreen navbar={<Header />} />} />
       <Route path="/about-us" element={<AboutUsScreen navbar={<Header />} />} />
-      <Route path="/events" element={<EventScreen />} />
-      <Route path="/photos" element={<PhotosScreen />} />
       <Route path="/checkout" element={<CheckoutScreen />} />
-      <Route path="/return" element={<ReturnScreen />} />
+      {/* <Route path="/return" element={<ReturnScreen />} /> */}
       <Route path="/user-info" element={<InformationScreen />} />
     </Route>
   )

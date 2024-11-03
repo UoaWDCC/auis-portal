@@ -8,7 +8,7 @@ import PastEvents from "@components/PastEvents";
 // import UpcomingEventsList from "@components/UpcomingEventsList";
 import EventGalleryComponent from "@components/EventGalleryComponent";
 
-export default function EventScreen() {
+export default function EventScreen({ navbar }: { navbar: JSX.Element }) {
   const {
     loading: eventsLoading,
     data: eventsData,
@@ -55,7 +55,7 @@ export default function EventScreen() {
     <div className="h-auto">
       <div className="max-w-screen h-auto bg-white">
         <div className="max-w-screen from-AUIS-dark-teal to-AUIS-teal h-auto bg-gradient-to-b">
-          <Header />
+          {navbar}
           <div className="flex flex-col items-center text-center text-white">
             <h1 className="text-4xl font-bold md:text-6xl">
               Our Upcoming Events!
