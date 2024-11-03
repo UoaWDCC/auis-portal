@@ -9,54 +9,61 @@ import PreviousTeamCard from "../components/PreviousTeamCard";
 import { useState, useEffect } from "react";
 
 export default function ExecScreen() {
+  // Queries
   const {
     loading: execsLoading,
     data: execsData,
     error: execsError,
   } = useQuery(GET_EXECS);
+
   const {
     loading: prevTeamLoading,
     data: prevTeamData,
     error: prevTeamError,
   } = useQuery(GET_PREVIOUS_TEAMS);
 
+  // States
   const [executives, setExecutives] = useState<Exec[]>([]);
+  const [loadingExecutives, setLoadingExecutives] = useState(true);
+  const [errorExecutives, setErrorExecutives] = useState(false);
+
   const [previousTeams, setPreviousTeams] = useState<PreviousTeam[]>([]);
-  const [noExecs, setNoExecs] = useState(false);
-  const [noPreviousTeams, setNoPreviousTeams] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [loadingPreviousTeams, setLoadingPreviousTeams] = useState(true);
+  const [errorPreviousTeams, setErrorPreviousTeams] = useState(false);
 
   useEffect(() => {
+    if (!execsLoading) {
+      setLoadingExecutives(false);
+    }
+    if (execsError) {
+      setErrorExecutives(true);
+    }
     if (execsData) {
       try {
-        const execs = Mapper.mapToExec(execsData);
-        setExecutives(execs);
+        const mappedExecs = Mapper.mapToExec(execsData);
+        setExecutives(mappedExecs);
       } catch (error) {
-        setNoExecs(true);
+        setErrorExecutives(true);
       }
     }
-  }, [execsData]);
+  }, [execsData, execsError, execsLoading]);
 
   useEffect(() => {
+    if (!prevTeamLoading) {
+      setLoadingPreviousTeams(false);
+    }
+    if (prevTeamError) {
+      setErrorPreviousTeams(true);
+    }
     if (prevTeamData) {
       try {
-        const teams = Mapper.mapToPreviousTeams(prevTeamData);
-        setPreviousTeams(teams);
+        const mappedPreviousTeams = Mapper.mapToPreviousTeams(prevTeamData);
+        setPreviousTeams(mappedPreviousTeams);
       } catch (error) {
-        setNoPreviousTeams(true);
+        setErrorPreviousTeams(true);
       }
     }
-  }, [prevTeamData]);
-
-  useEffect(() => {
-    if (!execsLoading && !prevTeamLoading) {
-      setLoading(false);
-    }
-  }, [execsLoading, prevTeamLoading]);
-
-  if (execsError || prevTeamError) {
-    return <div>CMS Offline</div>;
-  }
+  }, [prevTeamData, prevTeamError, prevTeamLoading]);
 
   // Filtering the execs based on their role
   const presidents = executives.filter((exec) => exec.role === "President");
@@ -97,7 +104,7 @@ export default function ExecScreen() {
 
   return (
     <>
-      {loading ? (
+      {(loadingExecutives || loadingPreviousTeams) ? (
         <LoadingSpinner />
       ) : (
         <>
@@ -110,10 +117,10 @@ export default function ExecScreen() {
                 to find out more about them!
               </h3>
               <h2 className="text-tertiary-blue text-3xl font-bold">
-                PRESIDENTS
+                PRESIDENT
               </h2>
-              {noExecs ? (
-                <div>There is no execs to display</div>
+              {errorExecutives ? (
+                <div className="py-10">There are no execs to display</div>
               ) : (
                 <div className="flex flex-wrap justify-center">
                   {presidents?.map((exec) => (
@@ -126,8 +133,8 @@ export default function ExecScreen() {
               <h2 className="text-tertiary-blue text-3xl font-bold">
                 EXECUTIVE TEAM
               </h2>
-              {noExecs ? (
-                <div>There is no execs to display</div>
+              {errorExecutives ? (
+                <div className="py-10">There are no execs to display</div>
               ) : (
                 <div className="mb-5 flex flex-wrap justify-center">
                   {otherExecutives?.map((exec) => (
@@ -144,8 +151,8 @@ export default function ExecScreen() {
             <h1 className="text-center text-5xl font-bold text-black">
               Previous Teams
             </h1>
-            {noPreviousTeams ? (
-              <div>There is no previous teams to display</div>
+            {errorPreviousTeams ? (
+              <div className="py-10">There are no previous teams to display</div>
             ) : (
               <div>
                 {sortedYears.map((year) => (

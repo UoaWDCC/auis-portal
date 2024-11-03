@@ -77,22 +77,20 @@ export default function HomeScreen({ navbar }: { navbar: JSX.Element }) {
   });
 
   return (
-    <div>
-      <Hero navbar={navbar} />
-      <Intro />
-      {loadingEvents ? (
+    <>
+      {loadingEvents || loadingPhotos ? (
         <LoadingSpinner />
       ) : (
-        <UpcomingEvents
-          upcomingEvents={upcomingEvents}
-          noEvents={errorEvents}
-        />
+        <div>
+          <Hero navbar={navbar} />
+          <Intro />
+          <UpcomingEvents
+            upcomingEvents={upcomingEvents}
+            noEvents={errorEvents}
+          />
+          <SomePhotos photos={photos} noPhotos={errorPhotos} />
+        </div>
       )}
-      {loadingPhotos ? (
-        <LoadingSpinner />
-      ) : (
-        <SomePhotos photos={photos} noPhotos={errorPhotos} />
-      )}
-    </div>
+    </>
   );
 }

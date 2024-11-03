@@ -28,60 +28,77 @@ export default function AboutUsScreen({ navbar }: { navbar: JSX.Element }) {
     error: partnersError,
   } = useQuery(GET_PARTNERS);
 
-  const [introductions, setIntroductions] = useState<Introduction[]>([]);
+  const [introduction, setIntroduction] = useState<Introduction[]>([]);
+  const [loadingIntroduction, setLoadingIntroduction] = useState(true)
+  const [errorIntroduction, setErrorIntroduction] = useState(false)
+  
   const [values, setValues] = useState<Value[]>([]);
+  const [loadingValues, setLoadingValues] = useState(true)
+  const [errorValues, setErrorValues] = useState(false)
+  
   const [partners, setPartners] = useState<Partner[]>([]);
-  const [noIntroductions, setNoIntroductions] = useState<boolean>(false);
-  const [noValues, setNoValues] = useState<boolean>(false);
-  const [noPartners, setNoPartners] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(true);
-
+  const [loadingPartners, setLoadingPartners] = useState(true)
+  const [errorPartners, setErrorPartners] = useState(false)
+  
+  // useEffect
   useEffect(() => {
+    if (!introLoading) {
+      setLoadingIntroduction(false);
+    }
+    if (introError) {
+      setErrorIntroduction(true);
+    }
     if (introData) {
       try {
-        const mappedIntros = Mapper.mapToIntroduction(introData);
-        setIntroductions(mappedIntros);
+        const mappedIntroduction = Mapper.mapToIntroduction(introData);
+        setIntroduction(mappedIntroduction);
       } catch (error) {
-        setNoIntroductions(true);
+        setErrorIntroduction(true);
       }
     }
-  }, [introData]);
+  }, [introData, introError, introLoading]);
 
   useEffect(() => {
+    if (!valuesLoading) {
+      setLoadingValues(false);
+    }
+
+    if (valuesError) {
+      setErrorValues(true);
+    }
+
     if (valuesData) {
       try {
         const mappedValues = Mapper.mapToValue(valuesData);
         setValues(mappedValues);
       } catch (error) {
-        setNoValues(true);
+        setErrorValues(true);
       }
     }
-  }, [valuesData]);
+  }, [valuesData, valuesError, valuesLoading]);
 
   useEffect(() => {
+    if (!partnersLoading) {
+      setLoadingPartners(false);
+    }
+
+    if (partnersError) {
+      setErrorPartners(true);
+    }
+
     if (partnersData) {
       try {
         const mappedPartners = Mapper.mapToPartner(partnersData);
         setPartners(mappedPartners);
       } catch (error) {
-        setNoPartners(true);
+        setErrorPartners(true);
       }
     }
-  }, [partnersData]);
-
-  useEffect(() => {
-    if (!introLoading && !valuesLoading && !partnersLoading) {
-      setLoading(false);
-    }
-  }, [introLoading, valuesLoading, partnersLoading]);
-
-  if (introError || valuesError || partnersError) {
-    return <div>CMS Offline</div>;
-  }
+  }, [partnersData, partnersError, partnersLoading]);
 
   return (
     <>
-      {loading ? (
+      {(loadingIntroduction || loadingPartners || loadingValues) ? (
         <LoadingSpinner />
       ) : (
         <>
@@ -97,28 +114,28 @@ export default function AboutUsScreen({ navbar }: { navbar: JSX.Element }) {
 
             <div className="max-w-screen flex h-auto flex-col items-center bg-white px-5 py-5 text-center text-black md:px-20 lg:px-48">
               <h2 className="text-4xl font-bold">Our Introduction</h2>
-              {noIntroductions ? (
+              {errorIntroduction ? (
                 <div className="py-10">There is no introduction to display</div>
               ) : (
                 <>
                   <p className="my-5 text-2xl">
-                    {introductions[0].description}
+                    {introduction[0].description}
                   </p>
 
                   <div className="flex w-full flex-col justify-between px-10 sm:flex-row md:w-[50rem]">
                     <div className="m-5 flex flex-col items-center text-3xl">
-                      <h6 className="font-bold">{introductions[0].events}+</h6>
+                      <h6 className="font-bold">{introduction[0].events}+</h6>
                       <h5>Events</h5>
                     </div>
 
                     <div className="m-5 flex flex-col items-center text-3xl">
-                      <h6 className="font-bold">{introductions[0].members}+</h6>
+                      <h6 className="font-bold">{introduction[0].members}+</h6>
                       <h5>Members</h5>
                     </div>
 
                     <div className="m-5 flex flex-col items-center text-3xl">
                       <h6 className="font-bold">
-                        {introductions[0].followers}+
+                        {introduction[0].followers}+
                       </h6>
                       <h5>Followers</h5>
                     </div>
@@ -136,7 +153,7 @@ export default function AboutUsScreen({ navbar }: { navbar: JSX.Element }) {
 
             <div className="max-w-screen from-AUIS-dark-teal to-AUIS-teal flex h-auto flex-col items-center bg-gradient-to-b px-5 py-5 md:px-20">
               <h1 className="text-4xl font-bold text-white">Our Values</h1>
-              {noValues ? (
+              {errorValues ? (
                 <div className="py-10">There are no values to display</div>
               ) : (
                 <div className="flex flex-wrap justify-center">
@@ -151,7 +168,7 @@ export default function AboutUsScreen({ navbar }: { navbar: JSX.Element }) {
 
             <div className="max-w-screen flex flex-col items-center bg-white px-2 py-5">
               <h1 className="text-4xl font-bold text-black">Our Partners</h1>
-              {noPartners ? (
+              {errorPartners ? (
                 <div className="py-10">There are no partners to display</div>
               ) : (
                 <div className="flex flex-wrap items-center justify-center">
