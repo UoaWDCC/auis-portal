@@ -31,6 +31,7 @@ export default function ExecScreen() {
   const [loadingPreviousTeams, setLoadingPreviousTeams] = useState(true);
   const [errorPreviousTeams, setErrorPreviousTeams] = useState(false);
 
+  // useEffect
   useEffect(() => {
     if (!execsLoading) {
       setLoadingExecutives(false);

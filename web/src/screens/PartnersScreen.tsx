@@ -15,32 +15,31 @@ export default function PartnersScreen() {
   } = useQuery(GET_PARTNERS);
 
   const [partners, setPartners] = useState<Partner[]>([]);
-  const [noPartners, setNoPartners] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [loadingPartners, setLoadingPartners] = useState(true);
+  const [errorPartners, setErrorPartners] = useState(false);
 
-  useEffect(() => {
-    if (partnersData) {
-      try {
-        const sponsors = Mapper.mapToPartner(partnersData);
-        setPartners(sponsors);
-      } catch (error) {
-        setNoPartners(true);
-      }
-    }
-  }, [partnersData]);
-
-  useEffect(() => {
-    if (!partnersLoading) {
-      setLoading(false);
-    }
-  });
-
-  if (partnersError) {
-    return <div>CMS Offline</div>;
+// useEffect
+useEffect(() => {
+  if (!partnersLoading) {
+    setLoadingPartners(false);
   }
+  if (partnersError) {
+    setErrorPartners(true);
+  }
+  if (partnersData) {
+    try {
+      const mappedPartners = Mapper.mapToPartner(partnersData);
+      setPartners(mappedPartners);
+    } catch (error) {
+      setErrorPartners(true);
+    }
+  }
+}, [partnersData, partnersError, partnersLoading]);
 
   // Filtering the partners based on their type
-  const goldPartners = partners.filter((partner) => partner.type === "Gold");
+  const goldPartners = partners.filter(
+    (partner) => partner.type === "Gold"
+  );
   const silverPartners = partners.filter(
     (partner) => partner.type === "Silver"
   );
@@ -50,7 +49,7 @@ export default function PartnersScreen() {
 
   return (
     <>
-      {loading ? (
+      {loadingPartners ? (
         <LoadingSpinner />
       ) : (
         <>
@@ -67,7 +66,7 @@ export default function PartnersScreen() {
             </div>
             <div className="max-w-screen flex h-auto flex-col items-center bg-white py-5">
               {/* Gold Partners */}
-              {noPartners ? (
+              {errorPartners ? (
                 <div className="my-5 text-center">
                   No gold partners to display
                 </div>
@@ -87,7 +86,7 @@ export default function PartnersScreen() {
               )}
 
               {/* Silver Partners */}
-              {noPartners ? (
+              {errorPartners ? (
                 <div className="my-5 text-center">
                   No silver partners to display
                 </div>
@@ -107,7 +106,7 @@ export default function PartnersScreen() {
               )}
 
               {/* Bronze Partners */}
-              {noPartners ? (
+              {errorPartners ? (
                 <div className="my-5 text-center">
                   No bronze partners to display
                 </div>
@@ -133,7 +132,7 @@ export default function PartnersScreen() {
               </h1>
               <a
                 href="mailto:au.indiansociety@gmail.com"
-                className="bg-primary-orange my-5 rounded-full px-5 py-3 text-2xl font-bold text-white"
+                className="bg-primary-orange my-5 rounded-full px-5 py-3 text-2xl font-bold text-white transition-all hover:scale-110"
               >
                 Contact Us Now!
               </a>

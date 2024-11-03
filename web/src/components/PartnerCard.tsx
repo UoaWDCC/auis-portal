@@ -24,11 +24,11 @@ export default function PartnerCard({ partner, colour }: PartnerCardProps) {
         className="flex h-auto w-72 flex-col items-center overflow-hidden rounded-2xl border-4 p-5"
         style={{ borderColor: colour, backgroundColor: bgColorWithOpacity }}
       >
-        <div className="h-auto w-full">
+        <div className="h-auto w-full flex justify-center items-center">
           <img
             src={partner.image}
             alt="Partner Image"
-            className="rounded-2xl"
+            className="rounded-2xl w-full"
           />
         </div>
 
@@ -47,7 +47,7 @@ export default function PartnerCard({ partner, colour }: PartnerCardProps) {
         </div>
 
         <button
-          className="bg-primary-orange rounded-full px-5 py-2 font-bold text-white"
+          className="bg-primary-orange hover:scale-110 transition-all rounded-full px-5 py-2 font-bold text-white"
           onClick={handleViewOnMapClick}
         >
           View On Map
