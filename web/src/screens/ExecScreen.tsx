@@ -104,7 +104,7 @@ export default function ExecScreen() {
 
   return (
     <>
-      {(loadingExecutives || loadingPreviousTeams) ? (
+      {loadingExecutives || loadingPreviousTeams ? (
         <LoadingSpinner />
       ) : (
         <>
@@ -152,7 +152,9 @@ export default function ExecScreen() {
               Previous Teams
             </h1>
             {errorPreviousTeams ? (
-              <div className="py-10">There are no previous teams to display</div>
+              <div className="py-10">
+                There are no previous teams to display
+              </div>
             ) : (
               <div>
                 {sortedYears.map((year) => (

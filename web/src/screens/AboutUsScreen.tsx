@@ -29,17 +29,17 @@ export default function AboutUsScreen({ navbar }: { navbar: JSX.Element }) {
   } = useQuery(GET_PARTNERS);
 
   const [introduction, setIntroduction] = useState<Introduction[]>([]);
-  const [loadingIntroduction, setLoadingIntroduction] = useState(true)
-  const [errorIntroduction, setErrorIntroduction] = useState(false)
-  
+  const [loadingIntroduction, setLoadingIntroduction] = useState(true);
+  const [errorIntroduction, setErrorIntroduction] = useState(false);
+
   const [values, setValues] = useState<Value[]>([]);
-  const [loadingValues, setLoadingValues] = useState(true)
-  const [errorValues, setErrorValues] = useState(false)
-  
+  const [loadingValues, setLoadingValues] = useState(true);
+  const [errorValues, setErrorValues] = useState(false);
+
   const [partners, setPartners] = useState<Partner[]>([]);
-  const [loadingPartners, setLoadingPartners] = useState(true)
-  const [errorPartners, setErrorPartners] = useState(false)
-  
+  const [loadingPartners, setLoadingPartners] = useState(true);
+  const [errorPartners, setErrorPartners] = useState(false);
+
   // useEffect
   useEffect(() => {
     if (!introLoading) {
@@ -98,7 +98,7 @@ export default function AboutUsScreen({ navbar }: { navbar: JSX.Element }) {
 
   return (
     <>
-      {(loadingIntroduction || loadingPartners || loadingValues) ? (
+      {loadingIntroduction || loadingPartners || loadingValues ? (
         <LoadingSpinner />
       ) : (
         <>
@@ -118,9 +118,7 @@ export default function AboutUsScreen({ navbar }: { navbar: JSX.Element }) {
                 <div className="py-10">There is no introduction to display</div>
               ) : (
                 <>
-                  <p className="my-5 text-2xl">
-                    {introduction[0].description}
-                  </p>
+                  <p className="my-5 text-2xl">{introduction[0].description}</p>
 
                   <div className="flex w-full flex-col justify-between px-10 sm:flex-row md:w-[50rem]">
                     <div className="m-5 flex flex-col items-center text-3xl">
