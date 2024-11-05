@@ -44,8 +44,7 @@ import { describe, expect, it } from "vitest";
 // };
 
 describe("Introductions Component", () => {
-  it.todo("add test cases"
-  )
+  it.todo("add test cases");
   // it("renders loading", async () => {
   //   render(
   //     <MockedProvider mocks={mocks} addTypename={false}>

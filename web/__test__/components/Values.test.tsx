@@ -50,7 +50,7 @@ import { describe, /*expect,*/ it } from "vitest";
 // };
 
 describe("SomePhotos Component", () => {
-  it.todo("test cases")
+  it.todo("test cases");
   // it("renders loading", async () => {
   //   render(
   //     <MockedProvider mocks={mocks} addTypename={false}>
