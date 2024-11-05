@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { render, screen } from "@testing-library/react";
-import ValueCard from "../../src/components/ValueCard";
+import ValueCard from "../../src/components/about-us-page/ValueCard";
 import React from "react";
 import { Value } from "../../src/types/types";
 

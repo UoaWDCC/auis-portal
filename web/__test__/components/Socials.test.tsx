@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
-import Socials from "../../src/components/Socials";
+import Socials from "../../src/components/navigation/Socials";
 import {
   FacebookLink,
   InstagramLink,

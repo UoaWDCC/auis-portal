@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 import { fireEvent, render, screen } from "@testing-library/react";
-import PartnerCard from "../../src/components/PartnerCard";
+import PartnerCard from "../../src/components/partner-page/PartnerCard";
 import React from "react";
 import { Partner } from "../../src/types/types";
 

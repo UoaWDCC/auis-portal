@@ -1,66 +1,66 @@
-import { MockedProvider } from "@apollo/client/testing";
+// import { MockedProvider } from "@apollo/client/testing";
 import { GET_SOME_PHOTOS } from "../../src/graphql/queries";
 import { describe, expect, it } from "vitest";
-import { render, screen } from "@testing-library/react";
-import SomePhotos from "../../src/components/SomePhotos";
-import React from "react";
+// import { render, screen } from "@testing-library/react";
+// import SomePhotos from "../../src/components/SomePhotos";
+// import React from "react";
 import { GraphQLError } from "graphql";
-import { MemoryRouter } from "react-router-dom";
+// import { MemoryRouter } from "react-router-dom";
 
-// Mock data with some photos
-const mocks = [
-  {
-    request: {
-      query: GET_SOME_PHOTOS,
-    },
-    result: {
-      data: {
-        somePhotos: {
-          data: [
-            {
-              id: 1,
-              attributes: {
-                Title: "AUIS Stein",
-                Year: "2024",
-                Image: {
-                  data: {
-                    attributes: {
-                      url: "/uploads/john_doe.jpg",
-                    },
-                  },
-                },
-              },
-            },
-          ],
-        },
-      },
-    },
-  },
-];
+// // Mock data with some photos
+// const mocks = [
+//   {
+//     request: {
+//       query: GET_SOME_PHOTOS,
+//     },
+//     result: {
+//       data: {
+//         somePhotos: {
+//           data: [
+//             {
+//               id: 1,
+//               attributes: {
+//                 Title: "AUIS Stein",
+//                 Year: "2024",
+//                 Image: {
+//                   data: {
+//                     attributes: {
+//                       url: "/uploads/john_doe.jpg",
+//                     },
+//                   },
+//                 },
+//               },
+//             },
+//           ],
+//         },
+//       },
+//     },
+//   },
+// ];
 
-// Mock for no data case
-const noDataMock = {
-  request: {
-    query: GET_SOME_PHOTOS,
-  },
-  result: {
-    data: {
-      somePhotos: {
-        data: [],
-      },
-    },
-  },
-};
+// // Mock for no data case
+// const noDataMock = {
+//   request: {
+//     query: GET_SOME_PHOTOS,
+//   },
+//   result: {
+//     data: {
+//       somePhotos: {
+//         data: [],
+//       },
+//     },
+//   },
+// };
 
-// Mock for error case
-const errorMock = {
-  request: {
-    query: GET_SOME_PHOTOS,
-  },
-  result: {
-    errors: [new GraphQLError("Error!")],
-  },
-};
+// // Mock for error case
+// const errorMock = {
+//   request: {
+//     query: GET_SOME_PHOTOS,
+//   },
+//   result: {
+//     errors: [new GraphQLError("Error!")],
+//   },
+// };
 
 describe("SomePhotos Component", () => {
   it.todo("add test cases");
