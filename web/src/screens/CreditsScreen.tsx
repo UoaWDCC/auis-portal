@@ -1,13 +1,12 @@
-import DeveloperCard from "@components/DeveloperCard";
-import Header from "../components/Header";
-import { developers } from "../data/data";
+import SecondaryDeveloperCard from "@components/credits-page/SecondaryDeveloperCard";
+import { secondaryDevelopers, primaryDevelopers } from "../data/data";
+import PrimaryDeveloperCard from "@components/credits-page/PrimaryDeveloperCard";
 
-export default function CreditsScreen() {
-  console.log(developers);
+export default function CreditsScreen({ navbar }: { navbar: JSX.Element }) {
   return (
     <>
       <div className="max-w-screen from-AUIS-dark-teal to-AUIS-teal min-h-screen bg-gradient-to-b">
-        <Header />
+        {navbar}
         <div className="flex flex-col items-center text-center">
           <h1 className="text-5xl font-bold text-white">
             The People Behind This Website
@@ -17,7 +16,7 @@ export default function CreditsScreen() {
             this site to life.
           </h3>
           <h3 className="px-5 text-xl text-white">
-            Visit{" "}
+            Click{" "}
             <a
               href="https://wdcc.co.nz/"
               target="_blank"
@@ -26,20 +25,35 @@ export default function CreditsScreen() {
             >
               here
             </a>{" "}
-            to learn more!
+            to learn more about WDCC!
           </h3>
 
           <h2 className="text-tertiary-blue mt-10 text-3xl font-bold">
-            Our Lovely Developers
+            Primary Developers
           </h2>
         </div>
 
         <div className="flex flex-wrap justify-center">
-          {developers.map((developer, index) => (
+          {primaryDevelopers.map((developer, index) => (
             <div className="m-5">
-              <DeveloperCard key={index} developer={developer} />
+              <PrimaryDeveloperCard key={index} primaryDeveloper={developer} />
             </div>
           ))}
+        </div>
+        <div className="flex flex-col items-center text-center">
+          <h2 className="text-tertiary-blue mt-10 text-3xl font-bold">
+            Secondary Developers
+          </h2>
+          <div className="flex flex-wrap justify-center">
+            {secondaryDevelopers.map((developer, index) => (
+              <div className="m-5">
+                <SecondaryDeveloperCard
+                  key={index}
+                  secondaryDeveloper={developer}
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </>

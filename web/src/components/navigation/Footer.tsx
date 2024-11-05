@@ -1,4 +1,4 @@
-import peacockLogo from "../assets/peacock-logo.png";
+import peacockLogo from "../../assets/peacock_logo.png";
 import Socials from "./Socials";
 
 export default function Footer() {

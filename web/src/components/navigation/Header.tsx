@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useLocation, Link } from "react-router-dom";
-import peacockLogo from "../assets/peacock-logo.png";
-import auisWhiteLogo from "../assets/auis_white.png";
+import peacockLogo from "../../assets/peacock_logo.png";
+import auisWhiteLogo from "../../assets/auis_white.png";
 import { IoMdClose, IoMdMenu } from "react-icons/io";
 
 function Header() {
@@ -10,7 +10,7 @@ function Header() {
 
   const titles = [
     { title: "Events", page: "/events" },
-    { title: "About Us", page: "/about-us" },
+    { title: "About Us", page: "/aboutus" },
     { title: "Team", page: "/exec" },
     { title: "Partners", page: "/sponsors" },
     { title: "Credits", page: "/credits" },

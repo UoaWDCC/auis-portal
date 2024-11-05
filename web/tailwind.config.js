@@ -4,11 +4,11 @@ import themes from "daisyui/src/theming/themes";
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
-  plugins: [daisyui],
   theme: {
     extend: {
       dropShadow: {
         glow: ["0px 0px 5px rgba(255,255, 255, 0.35)"],
+        all: ["0px 0px 5px rgba(0,0, 0, 0.15)"],
       },
       colors: {
         "primary-green": "#158807",
@@ -36,19 +36,5 @@ export default {
         xl: "1440px",
       },
     },
-  },
-  daisyui: {
-    themes: [
-      {
-        light: {
-          ...themes.light,
-          accent: "#087df1",
-        },
-        dark: {
-          ...themes.dark,
-          accent: "#087df1",
-        },
-      },
-    ],
-  },
+  }
 };

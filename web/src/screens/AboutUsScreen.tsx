@@ -3,11 +3,15 @@ import { useQuery } from "@apollo/client";
 import { GET_INTRODUCTION, GET_VALUES, GET_PARTNERS } from "../graphql/queries";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { Mapper } from "../utils/Mapper";
-import Header from "../components/Header";
 import { useState, useEffect } from "react";
-import ValueCard from "../components/ValueCard";
+import ValueCard from "../components/about-us-page/ValueCard";
+import { useNavigate } from "react-router";
 
-export default function AboutUsScreen() {
+export default function AboutUsScreen({ navbar }: { navbar: JSX.Element }) {
+  // Navigation
+  const navigate = useNavigate();
+
+  // Queries
   const {
     loading: introLoading,
     data: introData,
@@ -26,66 +30,84 @@ export default function AboutUsScreen() {
     error: partnersError,
   } = useQuery(GET_PARTNERS);
 
-  const [introductions, setIntroductions] = useState<Introduction[]>([]);
-  const [values, setValues] = useState<Value[]>([]);
-  const [partners, setPartners] = useState<Partner[]>([]);
-  const [noIntroductions, setNoIntroductions] = useState<boolean>(false);
-  const [noValues, setNoValues] = useState<boolean>(false);
-  const [noPartners, setNoPartners] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(true);
+  // States
+  const [introduction, setIntroduction] = useState<Introduction[]>([]);
+  const [loadingIntroduction, setLoadingIntroduction] = useState(true);
+  const [errorIntroduction, setErrorIntroduction] = useState(false);
 
+  const [values, setValues] = useState<Value[]>([]);
+  const [loadingValues, setLoadingValues] = useState(true);
+  const [errorValues, setErrorValues] = useState(false);
+
+  const [partners, setPartners] = useState<Partner[]>([]);
+  const [loadingPartners, setLoadingPartners] = useState(true);
+  const [errorPartners, setErrorPartners] = useState(false);
+
+  // useEffect
   useEffect(() => {
+    if (!introLoading) {
+      setLoadingIntroduction(false);
+    }
+    if (introError) {
+      setErrorIntroduction(true);
+    }
     if (introData) {
       try {
-        const mappedIntros = Mapper.mapToIntroduction(introData);
-        setIntroductions(mappedIntros);
+        const mappedIntroduction = Mapper.mapToIntroduction(introData);
+        setIntroduction(mappedIntroduction);
       } catch (error) {
-        setNoIntroductions(true);
+        setErrorIntroduction(true);
       }
     }
-  }, [introData]);
+  }, [introData, introError, introLoading]);
 
   useEffect(() => {
+    if (!valuesLoading) {
+      setLoadingValues(false);
+    }
+
+    if (valuesError) {
+      setErrorValues(true);
+    }
+
     if (valuesData) {
       try {
         const mappedValues = Mapper.mapToValue(valuesData);
         setValues(mappedValues);
       } catch (error) {
-        setNoValues(true);
+        setErrorValues(true);
       }
     }
-  }, [valuesData]);
+  }, [valuesData, valuesError, valuesLoading]);
 
   useEffect(() => {
+    if (!partnersLoading) {
+      setLoadingPartners(false);
+    }
+
+    if (partnersError) {
+      setErrorPartners(true);
+    }
+
     if (partnersData) {
       try {
         const mappedPartners = Mapper.mapToPartner(partnersData);
         setPartners(mappedPartners);
       } catch (error) {
-        setNoPartners(true);
+        setErrorPartners(true);
       }
     }
-  }, [partnersData]);
-
-  useEffect(() => {
-    if (!introLoading && !valuesLoading && !partnersLoading) {
-      setLoading(false);
-    }
-  }, [introLoading, valuesLoading, partnersLoading]);
-
-  if (introError || valuesError || partnersError) {
-    return <div>CMS Offline</div>;
-  }
+  }, [partnersData, partnersError, partnersLoading]);
 
   return (
     <>
-      {loading ? (
+      {loadingIntroduction || loadingPartners || loadingValues ? (
         <LoadingSpinner />
       ) : (
         <>
           <div className="max-w-screen bg-white">
             <div className="max-w-screen from-AUIS-dark-teal to-AUIS-teal h-auto bg-gradient-to-b">
-              <Header />
+              {navbar}
               <div className="max-w-screen flex h-52 items-center justify-center">
                 <h1 className="text-5xl font-bold text-white md:text-7xl">
                   About Us!
@@ -95,28 +117,26 @@ export default function AboutUsScreen() {
 
             <div className="max-w-screen flex h-auto flex-col items-center bg-white px-5 py-5 text-center text-black md:px-20 lg:px-48">
               <h2 className="text-4xl font-bold">Our Introduction</h2>
-              {noIntroductions ? (
-                <div>There is no introduction to display</div>
+              {errorIntroduction ? (
+                <div className="py-10">There is no introduction to display</div>
               ) : (
                 <>
-                  <p className="my-5 text-2xl">
-                    {introductions[0].description}
-                  </p>
+                  <p className="my-5 text-2xl">{introduction[0].description}</p>
 
                   <div className="flex w-full flex-col justify-between px-10 sm:flex-row md:w-[50rem]">
                     <div className="m-5 flex flex-col items-center text-3xl">
-                      <h6 className="font-bold">{introductions[0].events}+</h6>
+                      <h6 className="font-bold">{introduction[0].events}+</h6>
                       <h5>Events</h5>
                     </div>
 
                     <div className="m-5 flex flex-col items-center text-3xl">
-                      <h6 className="font-bold">{introductions[0].members}+</h6>
+                      <h6 className="font-bold">{introduction[0].members}+</h6>
                       <h5>Members</h5>
                     </div>
 
                     <div className="m-5 flex flex-col items-center text-3xl">
                       <h6 className="font-bold">
-                        {introductions[0].followers}+
+                        {introduction[0].followers}+
                       </h6>
                       <h5>Followers</h5>
                     </div>
@@ -124,18 +144,18 @@ export default function AboutUsScreen() {
                 </>
               )}
 
-              <a
-                href="mailto:au.indiansociety@gmail.com"
-                className="bg-primary-orange my-5 rounded-full px-10 py-3 text-2xl font-bold text-white"
+              <button
+                onClick={() => navigate("/signup")}
+                className="bg-primary-orange my-5 rounded-full px-10 py-3 text-2xl font-bold text-white transition-all hover:scale-110"
               >
                 Join Us Now!
-              </a>
+              </button>
             </div>
 
             <div className="max-w-screen from-AUIS-dark-teal to-AUIS-teal flex h-auto flex-col items-center bg-gradient-to-b px-5 py-5 md:px-20">
               <h1 className="text-4xl font-bold text-white">Our Values</h1>
-              {noValues ? (
-                <div>There is no values to display</div>
+              {errorValues ? (
+                <div className="py-10">There are no values to display</div>
               ) : (
                 <div className="flex flex-wrap justify-center">
                   {values.map((value) => (
@@ -149,13 +169,20 @@ export default function AboutUsScreen() {
 
             <div className="max-w-screen flex flex-col items-center bg-white px-2 py-5">
               <h1 className="text-4xl font-bold text-black">Our Partners</h1>
-              {noPartners ? (
-                <div>There is no partners to display</div>
+              {errorPartners ? (
+                <div className="py-10">There are no partners to display</div>
               ) : (
                 <div className="flex flex-wrap items-center justify-center">
                   {partners.map((partner) => (
-                    <div key={partner.id} className="m-5 w-full md:w-80">
-                      <img src={partner.image} alt="Partner Image" />
+                    <div
+                      key={partner.id}
+                      className="m-5 flex h-full items-center justify-center"
+                    >
+                      <img
+                        src={partner.image}
+                        className="h-56 object-fill"
+                        alt="Partner Image"
+                      />
                     </div>
                   ))}
                 </div>

@@ -1,14 +1,17 @@
 import { useQuery } from "@apollo/client";
 import { GET_EVENTS, GET_EVENTS_GALLERY } from "../graphql/queries";
 import LoadingSpinner from "../components/LoadingSpinner";
-import type { Event } from "../types/types";
+import type { Event, EventGallery } from "../types/types";
 import { Mapper } from "../utils/Mapper";
-import Header from "@components/Header";
-import PastEvents from "@components/PastEvents";
-// import UpcomingEventsList from "@components/UpcomingEventsList";
-import EventGalleryComponent from "@components/EventGalleryComponent";
+import EventGalleryComponent from "@components/events-page/EventGalleryComponent";
+import { useEffect, useState } from "react";
+import UpcomingEvents from "@components/events-slider/UpcomingEvents";
 
-export default function EventScreen() {
+export default function EventScreen({ navbar }: { navbar: JSX.Element }) {
+  // Get today's date for filtering
+  const currentDate = new Date();
+
+  // Queries
   const {
     loading: eventsLoading,
     data: eventsData,
@@ -21,20 +24,52 @@ export default function EventScreen() {
     error: eventGalleryError,
   } = useQuery(GET_EVENTS_GALLERY);
 
-  if (eventsLoading || eventGalleryLoading) {
-    return <LoadingSpinner />;
-  }
+  // States
+  const [events, setEvents] = useState<Event[]>([]);
+  const [loadingEvents, setLoadingEvents] = useState(true);
+  const [errorEvents, setErrorEvents] = useState(false);
 
-  if (eventsError || eventGalleryError) {
-    return <div>CMS Offline</div>;
-  }
+  const [gallery, setGallery] = useState<EventGallery[]>([]);
+  const [loadingGallery, setLoadingGallery] = useState(true);
+  const [errorGallery, setErrorGallery] = useState(false);
 
-  const events = Mapper.mapToEvents(eventsData);
-  const eventsGallery = Mapper.mapToEventsGallery(eventGalleryData);
+  // useEffect
+  useEffect(() => {
+    if (!eventsLoading) {
+      setLoadingEvents(false);
+    }
+    if (eventsError) {
+      setErrorEvents(true);
+    }
+    if (eventsData) {
+      try {
+        const mappedEvents = Mapper.mapToEvents(eventsData);
+        setEvents(mappedEvents);
+      } catch (error) {
+        setErrorEvents(true);
+      }
+    }
+  }, [eventsData, eventsError, eventsLoading]);
 
-  const currentDate = new Date();
+  useEffect(() => {
+    if (!eventGalleryLoading) {
+      setLoadingGallery(false);
+    }
+    if (eventGalleryError) {
+      setErrorGallery(true);
+    }
+    if (eventGalleryData) {
+      try {
+        const mappedEventGallery = Mapper.mapToEventsGallery(eventGalleryData);
+        setGallery(mappedEventGallery);
+      } catch (error) {
+        setErrorGallery(true);
+      }
+    }
+  }, [eventGalleryData, eventGalleryError, eventGalleryLoading]);
 
-  const { /*upcomingEvents,*/ pastEvents } = events.reduce<{
+  // Filtering - can be changed to be direct API call in future
+  const { upcomingEvents, pastEvents } = events.reduce<{
     upcomingEvents: Event[];
     pastEvents: Event[];
   }>(
@@ -52,33 +87,56 @@ export default function EventScreen() {
   );
 
   return (
-    <div className="h-auto">
-      <div className="max-w-screen h-auto bg-white">
-        <div className="max-w-screen from-AUIS-dark-teal to-AUIS-teal h-auto bg-gradient-to-b">
-          <Header />
-          <div className="flex flex-col items-center text-center text-white">
-            <h1 className="text-4xl font-bold md:text-6xl">
-              Our Upcoming Events!
-            </h1>
-            <h3 className="text-AUIS-light-teal my-5 py-2 text-sm">
-              Our exciting new events lined up just for you.
-            </h3>
-          </div>
-          <div className="flex h-auto w-full flex-row items-center justify-center bg-transparent pb-10">
-            <div className="w-11/12 lg:w-3/4">
-              {/* <UpcomingEventsList sliderRef={null} upcomingEvents={upcomingEvents} /> */}
+    <>
+      {loadingEvents || loadingGallery ? (
+        <LoadingSpinner />
+      ) : (
+        <div className="h-auto">
+          <div className="max-w-screen h-auto bg-white">
+            <div className="max-w-screen from-AUIS-dark-teal to-AUIS-teal h-auto bg-gradient-to-b">
+              {navbar}
+              <div className="flex flex-col items-center text-center text-white">
+                <h1 className="text-4xl font-bold md:text-6xl">
+                  Our Upcoming Events!
+                </h1>
+                <h3 className="text-AUIS-light-teal my-5 py-2 text-sm">
+                  Our exciting new events lined up just for you.
+                </h3>
+              </div>
+              <div className="flex h-auto w-full flex-row items-center justify-center bg-transparent pb-10">
+                <div className="w-11/12 lg:w-3/4">
+                  <UpcomingEvents
+                    pastEvent={false}
+                    upcomingEvents={upcomingEvents}
+                    noEvents={errorEvents || upcomingEvents.length == 0}
+                  />
+                </div>
+              </div>
             </div>
-          </div>
-          <div className="flex h-auto w-full flex-row items-center justify-center bg-white">
-            <div className="w-11/12 lg:w-3/4">
-              <PastEvents pastEvents={pastEvents} />
+            <div className="bg-white pb-20">
+              <h1 className="mx-3 pt-12 text-center text-5xl font-bold text-black">
+                Past Events
+              </h1>
             </div>
-          </div>
-          <div className="">
-            <EventGalleryComponent photos={eventsGallery} />
+            <div className="flex h-auto w-full flex-row items-center justify-center bg-transparent pb-10">
+              <div className="w-11/12 lg:w-3/4">
+                <UpcomingEvents
+                  pastEvent={true}
+                  upcomingEvents={pastEvents}
+                  noEvents={errorEvents || pastEvents.length == 0}
+                />
+              </div>
+            </div>
+            {errorGallery ? (
+              <div className="py-10 text-center">
+                There are no event photos to display
+              </div>
+            ) : (
+              <EventGalleryComponent photos={gallery} />
+            )}
           </div>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 }

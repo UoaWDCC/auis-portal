@@ -12,7 +12,7 @@ describe("Sign In Screen", () => {
     render(
       <MemoryRouter>
         <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
-          <SignInScreen />
+          <SignInScreen navbar={<></>} />
         </ClerkProvider>
       </MemoryRouter>
     );

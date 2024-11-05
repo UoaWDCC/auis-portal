@@ -1,4 +1,4 @@
-import { Event } from "../types/types";
+import { Event } from "../../types/types";
 import UpcomingEventCard from "./UpcomingEventCard";
 import { Link } from "react-router-dom";
 import "keen-slider/keen-slider.min.css";
@@ -6,11 +6,13 @@ import "keen-slider/keen-slider.min.css";
 interface UpcomingEventsListProps {
   upcomingEvents: Event[];
   sliderRef: (node: HTMLElement | null) => void;
+  pastEvent: boolean;
 }
 
 const UpcomingEventsList: React.FC<UpcomingEventsListProps> = ({
   upcomingEvents,
   sliderRef,
+  pastEvent,
 }) => {
   return (
     <>
@@ -21,7 +23,7 @@ const UpcomingEventsList: React.FC<UpcomingEventsListProps> = ({
             className="keen-slider__slide p-2 hover:cursor-pointer"
           >
             <Link to={`/events/${event.id}`}>
-              <UpcomingEventCard upcomingEvent={event} />
+              <UpcomingEventCard pastEvent={pastEvent} upcomingEvent={event} />
             </Link>
           </div>
         ))}

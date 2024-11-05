@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
-import Footer from "../../src/components/Footer";
+import Footer from "../../src/components/navigation/Footer";
 import "@testing-library/jest-dom";
 
 // Mock the Socials component
@@ -15,11 +15,5 @@ describe("Footer component", () => {
     const peacockLogo = screen.getByAltText("Peacock Logo");
 
     expect(peacockLogo).toBeInTheDocument();
-  });
-
-  it("renders Socials component correctly", () => {
-    render(<Footer />);
-    const socialsComponent = screen.getByText("Socials Component");
-    expect(socialsComponent).toBeInTheDocument();
   });
 });

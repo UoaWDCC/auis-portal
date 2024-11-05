@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { render, screen } from "@testing-library/react";
-import ExecCard from "../../src/components/ExecCard";
+import ExecCard from "../../src/components/exec-page/ExecCard";
 import React from "react";
 import { Exec } from "../../src/types/types";
 

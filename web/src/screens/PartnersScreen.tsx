@@ -4,40 +4,38 @@ import { useQuery } from "@apollo/client";
 import { GET_PARTNERS } from "../graphql/queries";
 import { Mapper } from "../utils/Mapper";
 import LoadingSpinner from "../components/LoadingSpinner";
-import Header from "../components/Header";
-import PartnerCard from "../components/PartnerCard";
+import PartnerCard from "../components/partner-page/PartnerCard";
 
-export default function PartnersScreen() {
+export default function PartnersScreen({ navbar }: { navbar: JSX.Element }) {
+  // Queries
   const {
     loading: partnersLoading,
     data: partnersData,
     error: partnersError,
   } = useQuery(GET_PARTNERS);
 
+  // States
   const [partners, setPartners] = useState<Partner[]>([]);
-  const [noPartners, setNoPartners] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [loadingPartners, setLoadingPartners] = useState(true);
+  const [errorPartners, setErrorPartners] = useState(false);
 
-  useEffect(() => {
-    if (partnersData) {
-      try {
-        const sponsors = Mapper.mapToPartner(partnersData);
-        setPartners(sponsors);
-      } catch (error) {
-        setNoPartners(true);
-      }
-    }
-  }, [partnersData]);
-
+  // useEffect
   useEffect(() => {
     if (!partnersLoading) {
-      setLoading(false);
+      setLoadingPartners(false);
     }
-  });
-
-  if (partnersError) {
-    return <div>CMS Offline</div>;
-  }
+    if (partnersError) {
+      setErrorPartners(true);
+    }
+    if (partnersData) {
+      try {
+        const mappedPartners = Mapper.mapToPartner(partnersData);
+        setPartners(mappedPartners);
+      } catch (error) {
+        setErrorPartners(true);
+      }
+    }
+  }, [partnersData, partnersError, partnersLoading]);
 
   // Filtering the partners based on their type
   const goldPartners = partners.filter((partner) => partner.type === "Gold");
@@ -50,13 +48,13 @@ export default function PartnersScreen() {
 
   return (
     <>
-      {loading ? (
+      {loadingPartners ? (
         <LoadingSpinner />
       ) : (
         <>
           <div className="max-w-screen h-auto bg-white">
             <div className="max-w-screen from-AUIS-dark-teal to-AUIS-teal h-72 bg-gradient-to-b">
-              <Header />
+              {navbar}
               <div className="flex flex-col items-center text-center text-white">
                 <h1 className="text-4xl font-bold md:text-6xl">Our Partners</h1>
                 <h3 className="my-5 text-2xl">
@@ -67,7 +65,7 @@ export default function PartnersScreen() {
             </div>
             <div className="max-w-screen flex h-auto flex-col items-center bg-white py-5">
               {/* Gold Partners */}
-              {noPartners ? (
+              {errorPartners ? (
                 <div className="my-5 text-center">
                   No gold partners to display
                 </div>
@@ -87,7 +85,7 @@ export default function PartnersScreen() {
               )}
 
               {/* Silver Partners */}
-              {noPartners ? (
+              {errorPartners ? (
                 <div className="my-5 text-center">
                   No silver partners to display
                 </div>
@@ -107,7 +105,7 @@ export default function PartnersScreen() {
               )}
 
               {/* Bronze Partners */}
-              {noPartners ? (
+              {errorPartners ? (
                 <div className="my-5 text-center">
                   No bronze partners to display
                 </div>
@@ -133,7 +131,7 @@ export default function PartnersScreen() {
               </h1>
               <a
                 href="mailto:au.indiansociety@gmail.com"
-                className="bg-primary-orange my-5 rounded-full px-5 py-3 text-2xl font-bold text-white"
+                className="bg-primary-orange my-5 rounded-full px-5 py-3 text-2xl font-bold text-white transition-all hover:scale-110"
               >
                 Contact Us Now!
               </a>

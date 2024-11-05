@@ -1,6 +1,6 @@
-import auisHalfLogo from "../assets/peacock_white_side.png";
-import auisHalfLogo1 from "../assets/peacock_white_left_side.png";
-import auisAbbrev from "../assets/auis_no_depth.png";
+import auisHalfLogo from "../../assets/peacock_white_side.png";
+import auisHalfLogo1 from "../../assets/peacock_white_left_side.png";
+import auisAbbrev from "../../assets/auis_no_depth.png";
 import { useNavigate } from "react-router";
 
 export default function Hero({ navbar }: { navbar: JSX.Element }) {

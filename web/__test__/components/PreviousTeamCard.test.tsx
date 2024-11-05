@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { render, screen } from "@testing-library/react";
-import PreviousTeamCard from "../../src/components/PreviousTeamCard";
+import PreviousTeamCard from "../../src/components/exec-page/PreviousTeamCard";
 import React from "react";
 
 const mockTeams = {

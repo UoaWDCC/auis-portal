@@ -1,8 +1,9 @@
 import { SignIn } from "@clerk/clerk-react";
 
-function LoginScreen() {
+function LoginScreen({ navbar }: { navbar: JSX.Element }) {
   return (
     <div className="flex h-full flex-grow flex-col">
+      {navbar}
       <div className="flex flex-grow justify-center">
         <div className="flex flex-1 items-center justify-center">
           <SignIn />

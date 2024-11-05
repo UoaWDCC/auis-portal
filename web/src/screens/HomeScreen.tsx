@@ -1,7 +1,7 @@
-import Hero from "@components/Hero";
-import Intro from "@components/Intro";
-import SomePhotos from "@components/SomePhotos";
-import UpcomingEvents from "@components/UpcomingEvents";
+import Hero from "@components/home-page/Hero";
+import Intro from "@components/home-page/Intro";
+import SomePhotos from "@components/home-page/SomePhotos";
+import UpcomingEvents from "@components/events-slider/UpcomingEvents";
 import { GET_EVENTS, GET_SOME_PHOTOS } from "../graphql/queries";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { useQuery } from "@apollo/client";
@@ -77,22 +77,26 @@ export default function HomeScreen({ navbar }: { navbar: JSX.Element }) {
   });
 
   return (
-    <div>
-      <Hero navbar={navbar} />
-      <Intro />
-      {loadingEvents ? (
+    <>
+      {loadingEvents || loadingPhotos ? (
         <LoadingSpinner />
       ) : (
-        <UpcomingEvents
-          upcomingEvents={upcomingEvents}
-          noEvents={errorEvents}
-        />
+        <div>
+          <Hero navbar={navbar} />
+          <Intro />
+          <div className="from-AUIS-dark-teal to-AUIS-teal bg-gradient-to-b pb-20">
+            <h1 className="mx-3 py-10 text-center text-5xl font-bold text-white">
+              Our Upcoming Events!
+            </h1>
+            <UpcomingEvents
+              upcomingEvents={upcomingEvents}
+              noEvents={errorEvents}
+              pastEvent={false}
+            />
+          </div>
+          <SomePhotos photos={photos} noPhotos={errorPhotos} />
+        </div>
       )}
-      {loadingPhotos ? (
-        <LoadingSpinner />
-      ) : (
-        <SomePhotos photos={photos} noPhotos={errorPhotos} />
-      )}
-    </div>
+    </>
   );
 }

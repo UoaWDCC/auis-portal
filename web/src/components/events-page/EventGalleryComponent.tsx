@@ -1,12 +1,12 @@
-import React from "react";
+// import React from "react";
 import Masonry from "react-masonry-css";
-import { EventGallery } from "../types/types";
+import { EventGallery } from "../../types/types";
 
-interface EventGalleryProps {
-  photos: EventGallery[];
-}
+// interface EventGalleryProps {
+//   photos: EventGallery[];
+// }
 
-const EventGalleryComponent: React.FC<EventGalleryProps> = ({ photos }) => {
+function EventGalleryComponent({ photos }: { photos: EventGallery[] }) {
   const breakpointColumnsObj = {
     default: 3,
     1100: 3,
@@ -38,6 +38,6 @@ const EventGalleryComponent: React.FC<EventGalleryProps> = ({ photos }) => {
       </div>
     </div>
   );
-};
+}
 
 export default EventGalleryComponent;
