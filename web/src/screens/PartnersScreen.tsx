@@ -4,15 +4,17 @@ import { useQuery } from "@apollo/client";
 import { GET_PARTNERS } from "../graphql/queries";
 import { Mapper } from "../utils/Mapper";
 import LoadingSpinner from "../components/LoadingSpinner";
-import PartnerCard from "../components/PartnerCard";
+import PartnerCard from "../components/partner-page/PartnerCard";
 
 export default function PartnersScreen({ navbar }: { navbar: JSX.Element }) {
+  // Queries
   const {
     loading: partnersLoading,
     data: partnersData,
     error: partnersError,
   } = useQuery(GET_PARTNERS);
 
+  // States
   const [partners, setPartners] = useState<Partner[]>([]);
   const [loadingPartners, setLoadingPartners] = useState(true);
   const [errorPartners, setErrorPartners] = useState(false);

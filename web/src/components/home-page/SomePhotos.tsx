@@ -1,4 +1,4 @@
-import type { SomePhoto } from "../types/types";
+import type { SomePhoto } from "../../types/types";
 
 function SomePhotos({
   photos,

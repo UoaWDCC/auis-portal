@@ -3,11 +3,15 @@ import { GET_EVENTS, GET_EVENTS_GALLERY } from "../graphql/queries";
 import LoadingSpinner from "../components/LoadingSpinner";
 import type { Event, EventGallery } from "../types/types";
 import { Mapper } from "../utils/Mapper";
-import EventGalleryComponent from "@components/EventGalleryComponent";
+import EventGalleryComponent from "@components/events-page/EventGalleryComponent";
 import { useEffect, useState } from "react";
-import UpcomingEvents from "@components/UpcomingEvents";
+import UpcomingEvents from "@components/events-slider/UpcomingEvents";
 
 export default function EventScreen({ navbar }: { navbar: JSX.Element }) {
+  // Get today's date for filtering
+  const currentDate = new Date();
+
+  // Queries
   const {
     loading: eventsLoading,
     data: eventsData,
@@ -64,8 +68,7 @@ export default function EventScreen({ navbar }: { navbar: JSX.Element }) {
     }
   }, [eventGalleryData, eventGalleryError, eventGalleryLoading]);
 
-  const currentDate = new Date();
-
+  // Filtering - can be changed to be direct API call in future
   const { upcomingEvents, pastEvents } = events.reduce<{
     upcomingEvents: Event[];
     pastEvents: Event[];

@@ -3,8 +3,8 @@ import { useQuery } from "@apollo/client";
 import { GET_EXECS, GET_PREVIOUS_TEAMS } from "../graphql/queries";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { Mapper } from "../utils/Mapper";
-import ExecCard from "../components/ExecCard";
-import PreviousTeamCard from "../components/PreviousTeamCard";
+import ExecCard from "../components/exec-page/ExecCard";
+import PreviousTeamCard from "../components/exec-page/PreviousTeamCard";
 import { useState, useEffect } from "react";
 
 export default function ExecScreen({ navbar }: { navbar: JSX.Element }) {

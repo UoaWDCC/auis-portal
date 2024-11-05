@@ -4,12 +4,14 @@ import { GET_INTRODUCTION, GET_VALUES, GET_PARTNERS } from "../graphql/queries";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { Mapper } from "../utils/Mapper";
 import { useState, useEffect } from "react";
-import ValueCard from "../components/ValueCard";
+import ValueCard from "../components/about-us-page/ValueCard";
 import { useNavigate } from "react-router";
 
 export default function AboutUsScreen({ navbar }: { navbar: JSX.Element }) {
+  // Navigation
   const navigate = useNavigate();
 
+  // Queries
   const {
     loading: introLoading,
     data: introData,
@@ -28,6 +30,7 @@ export default function AboutUsScreen({ navbar }: { navbar: JSX.Element }) {
     error: partnersError,
   } = useQuery(GET_PARTNERS);
 
+  // States
   const [introduction, setIntroduction] = useState<Introduction[]>([]);
   const [loadingIntroduction, setLoadingIntroduction] = useState(true);
   const [errorIntroduction, setErrorIntroduction] = useState(false);

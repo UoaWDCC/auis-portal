@@ -1,4 +1,4 @@
-import { PartnerCardProps } from "../types/types";
+import { PartnerCardProps } from "../../types/types";
 
 export default function PartnerCard({ partner, colour }: PartnerCardProps) {
   // Function to convert hex to RGBA

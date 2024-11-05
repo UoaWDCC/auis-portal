@@ -1,4 +1,4 @@
-import { Event } from "../types/types";
+import { Event } from "../../types/types";
 import UpcomingEventCard from "./UpcomingEventCard";
 import { Link } from "react-router-dom";
 import "keen-slider/keen-slider.min.css";

@@ -1,7 +1,7 @@
-import Hero from "@components/Hero";
-import Intro from "@components/Intro";
-import SomePhotos from "@components/SomePhotos";
-import UpcomingEvents from "@components/UpcomingEvents";
+import Hero from "@components/home-page/Hero";
+import Intro from "@components/home-page/Intro";
+import SomePhotos from "@components/home-page/SomePhotos";
+import UpcomingEvents from "@components/events-slider/UpcomingEvents";
 import { GET_EVENTS, GET_SOME_PHOTOS } from "../graphql/queries";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { useQuery } from "@apollo/client";

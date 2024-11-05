@@ -1,4 +1,4 @@
-import { PrimaryDeveloperCardProps } from "../types/types";
+import { PrimaryDeveloperCardProps } from "../../types/types";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
 
 export default function PrimaryDeveloperCard({

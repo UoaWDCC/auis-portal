@@ -1,6 +1,6 @@
 import React from "react";
 import Masonry from "react-masonry-css";
-import { EventGallery } from "../types/types";
+import { EventGallery } from "../../types/types";
 
 interface EventGalleryProps {
   photos: EventGallery[];

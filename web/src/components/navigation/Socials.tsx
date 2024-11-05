@@ -5,7 +5,7 @@ import {
   FacebookLink,
   EmailLink,
   LinkedinLink,
-} from "../data/data";
+} from "../../data/data";
 
 export default function Socials() {
   return (

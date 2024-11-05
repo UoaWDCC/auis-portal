@@ -1,4 +1,4 @@
-import { SecondaryDeveloperCardProps } from "../types/types";
+import { SecondaryDeveloperCardProps } from "../../types/types";
 import { FaGithub } from "react-icons/fa";
 
 export default function SecondaryDeveloperCard({

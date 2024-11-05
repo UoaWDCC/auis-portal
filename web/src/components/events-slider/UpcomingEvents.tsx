@@ -1,13 +1,13 @@
 import UpcomingEventsList from "./UpcomingEventsList";
-import { Event } from "../types/types";
+import { Event } from "../../types/types";
 import {
   IoArrowBackCircleOutline,
   IoArrowForwardCircleOutline,
 } from "react-icons/io5";
-import useScreenSize from "../hooks/useScreenSize";
+import useScreenSize from "../../hooks/useScreenSize";
 import { useState } from "react";
 import { useKeenSlider } from "keen-slider/react";
-import { showNoPastEvents, showNoUpcomingEvents } from "../data/data";
+import { showNoPastEvents, showNoUpcomingEvents } from "../../data/data";
 
 interface UpcomingEventsProps {
   upcomingEvents: Event[];

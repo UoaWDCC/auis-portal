@@ -1,4 +1,4 @@
-import { ValueCardProps } from "../types/types";
+import { ValueCardProps } from "../../types/types";
 
 export default function ValueCard({ value }: ValueCardProps) {
   return (

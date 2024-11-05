@@ -1,6 +1,6 @@
-import SecondaryDeveloperCard from "@components/SecondaryDeveloperCard";
+import SecondaryDeveloperCard from "@components/credits-page/SecondaryDeveloperCard";
 import { secondaryDevelopers, primaryDevelopers } from "../data/data";
-import PrimaryDeveloperCard from "@components/PrimaryDeveloperCard";
+import PrimaryDeveloperCard from "@components/credits-page/PrimaryDeveloperCard";
 
 export default function CreditsScreen({ navbar }: { navbar: JSX.Element }) {
   return (
