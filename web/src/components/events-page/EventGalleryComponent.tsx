@@ -6,7 +6,7 @@ import { EventGallery } from "../../types/types";
 //   photos: EventGallery[];
 // }
 
-function EventGalleryComponent({photos}: {photos : EventGallery[]}) {
+function EventGalleryComponent({ photos }: { photos: EventGallery[] }) {
   const breakpointColumnsObj = {
     default: 3,
     1100: 3,
@@ -38,6 +38,6 @@ function EventGalleryComponent({photos}: {photos : EventGallery[]}) {
       </div>
     </div>
   );
-};
+}
 
 export default EventGalleryComponent;
