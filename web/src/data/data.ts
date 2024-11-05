@@ -18,53 +18,58 @@ export const primaryDevelopers = [
   {
     id: 2,
     name: "Tarun Ramachandran",
-    linkedIn: "https://www.linkedin.com/in/bobsmith/",
-    github: "https://github.com/bobsmith",
+    linkedIn: "https://www.linkedin.com/in/tarunram01/",
+    github: "https://github.com/Ratchet7x5",
   },
   {
     id: 3,
     name: "Harsheel Singh",
-    linkedIn: "https://www.linkedin.com/in/charliebrown/",
-    github: "https://github.com/charliebrown",
+    linkedIn: "https://www.linkedin.com/in/harsheelsingh/",
+    github: "https://github.com/Harsheel12",
   },
   {
     id: 4,
     name: "Naren Rohan",
-    linkedIn: "https://www.linkedin.com/in/dianaprince/",
-    github: "https://github.com/dianaprince",
+    linkedIn: "https://www.linkedin.com/in/naren-rohan/",
+    github: "https://github.com/nroh555",
   },
 ];
 
 export const secondaryDevelopers = [
   {
     id: 1,
-    name: "Alice Johnson",
-    linkedIn: "https://www.linkedin.com/in/alicejohnson/",
-    github: "https://github.com/alicejohnson",
+    name: "Devesh Duptala",
+    github: "https://github.com/duptala",
   },
   {
     id: 2,
-    name: "Bob Smith",
-    linkedIn: "https://www.linkedin.com/in/bobsmith/",
-    github: "https://github.com/bobsmith",
+    name: "Karmveer Singh",
+    github: "https://github.com/Karmveer27",
   },
   {
     id: 3,
-    name: "Charlie Brown",
-    linkedIn: "https://www.linkedin.com/in/charliebrown/",
-    github: "https://github.com/charliebrown",
+    name: "Chalisa Bond",
+    github: "https://github.com/cbon848",
   },
   {
     id: 4,
-    name: "Diana Prince",
-    linkedIn: "https://www.linkedin.com/in/dianaprince/",
-    github: "https://github.com/dianaprince",
+    name: "Emma Chen",
+    github: "https://github.com/emm4chen",
   },
   {
     id: 5,
-    name: "Evan Davis",
-    linkedIn: "https://www.linkedin.com/in/evandavis/",
-    github: "https://github.com/evandavis",
+    name: "Diya Kurien",
+    github: "https://github.com/dkur670",
+  },
+  {
+    id: 6,
+    name: "Nicholas Lianto",
+    github: "https://github.com/nlia656",
+  },
+  {
+    id: 7,
+    name: "Sai Kiran Kamat",
+    github: "https://github.com/saikam2003",
   },
 ];
 

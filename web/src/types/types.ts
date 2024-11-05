@@ -15,15 +15,25 @@ export interface ExecCardProps {
   exec: Exec;
 }
 
-export interface Developer {
+export interface PrimaryDeveloper {
   id: number;
   name: string;
   linkedIn: string;
   github: string;
 }
 
-export interface DeveloperCardProps {
-  developer: Developer;
+export interface SecondaryDeveloper {
+  id: number;
+  name: string;
+  github: string;
+}
+
+export interface PrimaryDeveloperCardProps {
+  primaryDeveloper: PrimaryDeveloper;
+}
+
+export interface SecondaryDeveloperCardProps {
+  secondaryDeveloper: SecondaryDeveloper;
 }
 
 export interface Partner {

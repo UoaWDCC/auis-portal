@@ -1,5 +1,6 @@
-import DeveloperCard from "@components/DeveloperCard";
+import SecondaryDeveloperCard from "@components/SecondaryDeveloperCard";
 import { secondaryDevelopers, primaryDevelopers } from "../data/data";
+import PrimaryDeveloperCard from "@components/PrimaryDeveloperCard";
 
 export default function CreditsScreen({ navbar }: { navbar: JSX.Element }) {
   return (
@@ -15,7 +16,7 @@ export default function CreditsScreen({ navbar }: { navbar: JSX.Element }) {
             this site to life.
           </h3>
           <h3 className="px-5 text-xl text-white">
-            Visit{" "}
+            Click{" "}
             <a
               href="https://wdcc.co.nz/"
               target="_blank"
@@ -24,7 +25,7 @@ export default function CreditsScreen({ navbar }: { navbar: JSX.Element }) {
             >
               here
             </a>{" "}
-            to learn more!
+            to learn more about WDCC!
           </h3>
 
           <h2 className="text-tertiary-blue mt-10 text-3xl font-bold">
@@ -35,7 +36,7 @@ export default function CreditsScreen({ navbar }: { navbar: JSX.Element }) {
         <div className="flex flex-wrap justify-center">
           {primaryDevelopers.map((developer, index) => (
             <div className="m-5">
-              <DeveloperCard key={index} developer={developer} />
+              <PrimaryDeveloperCard key={index} primaryDeveloper={developer} />
             </div>
           ))}
         </div>
@@ -46,7 +47,7 @@ export default function CreditsScreen({ navbar }: { navbar: JSX.Element }) {
           <div className="flex flex-wrap justify-center">
             {secondaryDevelopers.map((developer, index) => (
               <div className="m-5">
-                <DeveloperCard key={index} developer={developer} />
+                <SecondaryDeveloperCard key={index} secondaryDeveloper={developer} />
               </div>
             ))}
           </div>
