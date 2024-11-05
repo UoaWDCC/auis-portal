@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useLocation, Link } from "react-router-dom";
-import peacockLogo from "../../assets/peacock-logo.png";
+import peacockLogo from "../../assets/peacock_logo.png";
 import auisWhiteLogo from "../../assets/auis_white.png";
 import { IoMdClose, IoMdMenu } from "react-icons/io";
 

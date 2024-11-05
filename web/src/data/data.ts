@@ -66,11 +66,6 @@ export const secondaryDevelopers = [
     name: "Nicholas Lianto",
     github: "https://github.com/nlia656",
   },
-  {
-    id: 7,
-    name: "Sai Kiran Kamat",
-    github: "https://github.com/saikam2003",
-  },
 ];
 
 // Handle case with no events

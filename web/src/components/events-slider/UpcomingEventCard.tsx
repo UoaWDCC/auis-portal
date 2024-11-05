@@ -29,7 +29,7 @@ const UpcomingEventCard: React.FC<UpcomingEventCardProps> = ({
     timeUntilEvent = `${differenceInMinutes} minute${differenceInMinutes != 1 ? "s" : ""}`;
   }
   return (
-    <div className="card drop-shadow-all relative h-full w-full rounded-lg bg-white duration-100 hover:bg-white/80">
+    <div className="drop-shadow-all h-full w-full rounded-lg bg-white duration-100 hover:bg-white/80">
       {!pastEvent ? (
         <div className="absolute right-2 top-2 z-10 rounded-full bg-orange-500 px-3 py-1 text-base font-bold text-white shadow-sm">
           in {timeUntilEvent}
@@ -37,28 +37,36 @@ const UpcomingEventCard: React.FC<UpcomingEventCardProps> = ({
       ) : (
         <></>
       )}
-      <img
-        src={upcomingEvent.image}
-        alt={upcomingEvent.title}
-        className="h-full w-full rounded-t-lg object-cover"
-      />
-      <div className="card-body text-gray-500">
-        <h5 className="card-title text-lg font-bold text-black">
-          {upcomingEvent.title}
-        </h5>
-        <div className="card-text flex flex-row items-center gap-2 text-sm">
-          <FaCalendarAlt />{" "}
-          {new Date(upcomingEvent.eventDateStart).toLocaleString("en-NZ", {
-            day: "numeric",
-            month: "numeric",
-            year: "numeric",
-            hour: "2-digit",
-            minute: "2-digit",
-            hour12: true,
-          })}
+
+      <div className="grid h-full text-gray-500">
+        <div className="flex items-start justify-start">
+          <img
+            src={upcomingEvent.image}
+            alt={upcomingEvent.title}
+            className="w-full rounded-t-lg object-contain"
+          />
         </div>
-        <div className="card-text flex flex-row items-center gap-2 text-sm">
-          <FaLocationDot /> {upcomingEvent.location}
+        <div className="flex items-end">
+          <div className=" flex-grow">
+            <h5 className="text-center mt-3 text-3xl font-bold text-black">
+              {upcomingEvent.title}
+            </h5>
+
+            <div className="flex items-center my-1 justify-center gap-2 text-lg">
+              <FaCalendarAlt />{" "}
+              {new Date(upcomingEvent.eventDateStart).toLocaleString("en-NZ", {
+                day: "numeric",
+                month: "numeric",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: true,
+              })}
+            </div>
+            <div className="flex items-center mb-2 justify-center gap-2 text-lg">
+              <FaLocationDot /> {upcomingEvent.location}
+            </div>
+          </div>
         </div>
       </div>
     </div>
