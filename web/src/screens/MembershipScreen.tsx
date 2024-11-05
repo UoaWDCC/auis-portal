@@ -1,9 +1,8 @@
 import auisLogo from "../assets/peacock_white_inner_big.png";
 import auisAbbrev from "../assets/auis_no_depth.png";
-import auisLogo2 from "../assets/peacock.png";
 import PurchaseMembershipCard from "@components/membership-page/PurchaseMembershipCard";
 
-export default function EventScreen({ navbar }: { navbar: JSX.Element }) {
+export default function MembershipScreen({ navbar }: { navbar: JSX.Element }) {
   const MEMBERSHIP_ACTIVE = false;
 
   return (
