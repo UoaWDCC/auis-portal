@@ -9,7 +9,7 @@ export default function MembershipScreen({ navbar }: { navbar: JSX.Element }) {
     <>
       <div className="from-AUIS-dark-teal to-AUIS-teal min-h-svh bg-gradient-to-b pb-20">
         {navbar}
-        <h1 className="mx-3 text-center text-5xl pb-2 font-bold text-white">
+        <h1 className="mx-3 pb-2 text-center text-5xl font-bold text-white">
           Memberships
         </h1>
         {MEMBERSHIP_ACTIVE ? (
@@ -35,8 +35,8 @@ export default function MembershipScreen({ navbar }: { navbar: JSX.Element }) {
         ) : (
           <div className="h-full">
             <div className="flex flex-wrap items-center justify-center">
-              <PurchaseMembershipCard/>
-              <PurchaseMembershipCard/>
+              <PurchaseMembershipCard />
+              <PurchaseMembershipCard />
             </div>
           </div>
         )}

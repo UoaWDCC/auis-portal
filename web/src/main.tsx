@@ -25,7 +25,7 @@ import EventScreen from "./screens/EventScreen.tsx";
 import InformationScreen from "./screens/InformationScreen.tsx";
 import PartnersScreen from "./screens/PartnersScreen.tsx";
 import Header from "@components/navigation/Header.tsx";
-import MembershipScreen from "./screens/MembershipScreen.tsx"
+import MembershipScreen from "./screens/MembershipScreen.tsx";
 import EventInformationScreen from "./screens/EventInformationScreen.tsx";
 
 // @Ratchet7x5: keys etc need to be parsed before route creation.
@@ -53,8 +53,14 @@ const router = createBrowserRouter(
       <Route path="/checkout" element={<CheckoutScreen />} />
       <Route path="/return" element={<ReturnScreen />} />
       <Route path="/userinfo" element={<InformationScreen />} />
-      <Route path="/membership" element={<MembershipScreen navbar={<Header/>} />}/>
-      <Route path="/events/:id" element={<EventInformationScreen navbar={<Header />}/>} />
+      <Route
+        path="/membership"
+        element={<MembershipScreen navbar={<Header />} />}
+      />
+      <Route
+        path="/events/:id"
+        element={<EventInformationScreen navbar={<Header />} />}
+      />
     </Route>
   )
 );

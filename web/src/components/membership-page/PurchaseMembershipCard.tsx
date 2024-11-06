@@ -1,7 +1,5 @@
 import auisLogo2 from "../../assets/peacock.png";
 
-
-
 export default function PurchaseMembershipCard() {
   return (
     <div className="drop-shadow-all m-5 rounded-lg border-8 border-[#F3CF0B] bg-white">
