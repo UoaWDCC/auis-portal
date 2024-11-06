@@ -14,9 +14,9 @@ export default function EventInformationScreen({
 }) {
   //TODO: add screen for not found event
 
-  const ref  = useRef<null | HTMLDivElement>(null); 
+  const ref = useRef<null | HTMLDivElement>(null);
   const handleClick = () => {
-ref.current?.scrollIntoView({behavior: 'smooth'});
+    ref.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   const markdown = `A paragraph with *emphasis* and **strong importance**.
@@ -103,7 +103,10 @@ We can’t wait to see you and teri jaans on the dance floor! 🧡🤍💙💚`;
                 <p className="text-right text-xl text-white">$200</p>
               </div>
               <div className="my-2 flex items-center justify-center">
-                <button onClick={handleClick} className="bg-primary-orange mx-4 mb-2 w-full rounded-lg py-3 text-2xl font-bold text-white transition-all hover:scale-105">
+                <button
+                  onClick={handleClick}
+                  className="bg-primary-orange mx-4 mb-2 w-full rounded-lg py-3 text-2xl font-bold text-white transition-all hover:scale-105"
+                >
                   Get Tickets
                 </button>
               </div>
@@ -160,7 +163,9 @@ We can’t wait to see you and teri jaans on the dance floor! 🧡🤍💙💚`;
       <div className="flex items-center justify-center pt-6">
         <div className="mx-5 w-[80rem] border-t-2 border-black pt-6 text-center text-5xl font-bold"></div>
       </div>
-      <h2 ref={ref} className="pt-6 text-center text-5xl font-bold">Purchase Tickets</h2>
+      <h2 ref={ref} className="pt-6 text-center text-5xl font-bold">
+        Purchase Tickets
+      </h2>
       <div>
         <div className="flex items-center justify-center pt-6">
           <div className="mx-2 flex w-[80rem] items-center justify-between rounded-lg border-2 border-gray-200 bg-gray-100 py-3">
