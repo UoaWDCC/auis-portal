@@ -37,7 +37,7 @@ export default function Socials() {
 
         <div className="bg-primary-orange hover:bg-AUIS-teal group h-10 w-10 cursor-pointer rounded-full transition-all hover:scale-110">
           <a
-            href={EmailLink}
+            href={"mailto:" + EmailLink}
             aria-label="Email"
             className="flex h-full w-full items-center justify-center"
           >

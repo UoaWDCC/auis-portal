@@ -4,6 +4,7 @@ import { FaLocationDot } from "react-icons/fa6";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkBreaks from "remark-breaks";
+import { EmailLink, InstagramLink } from "../data/data";
 
 export default function EventInformationScreen({
   navbar,
@@ -122,7 +123,7 @@ We can’t wait to see you and teri jaans on the dance floor! 🧡🤍💙💚`;
       </div>
       <div className="flex justify-center">
         <div className="mx-5 flex w-[75rem] flex-wrap justify-around">
-          <div className="">
+          <div className="px-5 md:px-0">
             <h3 className="pb-6 text-center text-4xl font-bold md:text-left">
               Location
             </h3>
@@ -150,6 +151,137 @@ We can’t wait to see you and teri jaans on the dance floor! 🧡🤍💙💚`;
           </div>
         </div>
       </div>
+      <div className="flex items-center justify-center pt-6">
+        <div className="mx-5 w-[80rem] border-t-2 border-black pt-6 text-center text-5xl font-bold"></div>
+      </div>
+      <h2 className="pt-6 text-center text-5xl font-bold">Purchase Tickets</h2>
+      <div>
+        <div className="flex items-center justify-center pt-6">
+          <div className="mx-2 flex w-[80rem] items-center justify-between rounded-lg border-2 border-gray-200 bg-gray-100 py-3">
+            <p className="pl-4 text-xl font-bold">
+              Ticket name AUIS MEMBER TEICKET REALLTY LONG NAME{" "}
+            </p>
+            <div className="flex items-center justify-center">
+              <p className="text-xl font-bold">$200</p>
+              <button className="bg-primary-orange text-md mx-4 rounded-lg px-5 py-3 font-bold text-white transition-all hover:scale-105">
+                Get Tickets
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div className="flex items-center justify-center pt-6">
+          <div className="mx-2 flex w-[80rem] items-center justify-between rounded-lg border-2 border-gray-200 bg-gray-100 py-3">
+            <p className="pl-4 text-xl font-bold">
+              Ticket name AUIS MEMBER TEICKET REALLTY LONG NAME{" "}
+            </p>
+            <div className="flex items-center justify-center">
+              <p className="text-xl font-bold">$200</p>
+              <button className="bg-primary-orange text-md mx-4 rounded-lg px-5 py-3 font-bold text-white transition-all hover:scale-105">
+                Get Tickets
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div className="flex items-center justify-center pt-6">
+          <div className="mx-2 flex w-[80rem] items-center justify-between rounded-lg border-2 border-gray-200 bg-gray-100 py-3">
+            <p className="pl-4 text-xl font-bold">
+              Ticket name AUIS MEMBER TEICKET REALLTY LONG NAME{" "}
+            </p>
+            <div className="flex items-center justify-center">
+              <p className="text-xl font-bold">$200</p>
+              <button className="bg-primary-orange text-md mx-4 rounded-lg px-5 py-3 font-bold text-white transition-all hover:scale-105">
+                Get Tickets
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="flex items-center justify-center pt-12">
+        <div className="mx-5 w-[80rem] border-t-2 border-black pt-6 text-center text-5xl font-bold"></div>
+      </div>
+      <h2 className="px-5 pt-6 text-center text-5xl font-bold md:px-0">
+        Terms & Conditions
+      </h2>
+      <p className="px-5 pt-3 text-center text-xl md:px-3">
+        By purchasing this ticket or being a ticket holder, you accept the terms
+        and conditions.
+      </p>
+      <div className="flex justify-center px-5 xl:px-0">
+        <p className="mx-2 flex w-[80rem] pt-4 text-left text-xl">
+          ‘The AUIS Ball’ is an event organised by the Auckland University
+          Indian Society (AUIS), a student club at the University of Auckland.
+          Each ticket grants entry to one individual and is valid only for the
+          specified event. This ticket is non-transferable. Ticket scalping is
+          strictly prohibited, ie. cannot resell the ticket at a price higher
+          than its original purchase value. This is strictly an 18+ event. The
+          use of illegal substances, vaping and smoking is strictly prohibited.
+          Alcohol consumption must be in accordance with venue regulations. This
+          is a non-refundable event unless under extenuating circumstances. We
+          prioritise the safety and well-being of our students; thus, we kindly
+          request that you adhere to appropriate and respectful behaviour
+          towards one another throughout the duration of this event. AUIS and
+          the Grand Millennium Hotel will not tolerate inappropriate behaviour,
+          and we reserve the right to remove you from the venue. In addition to
+          venue security measures, designated executive members from AUIS will
+          serve as harassment officers, guaranteeing a secure environment for
+          all event attendees. Photography and videography may be conducted
+          during the event for promotional purposes. By attending, you consent
+          to being photographed or recorded. You bear both financial and legal
+          liability for any damages to the premises or equipment incurred by you
+          at the venue. You are responsible for any items you bring to the
+          venue, which may be discarded if left behind. We shall not incur any
+          liability or responsibility for injury to any person...
+        </p>
+      </div>
+      <div className="flex items-center justify-center pt-12">
+        <div className="mx-5 w-[80rem] border-t-2 border-black pt-6 text-center text-5xl font-bold"></div>
+      </div>
+      <h2 className="px-5 pt-6 text-center text-5xl font-bold md:px-0">
+        Refund Policy
+      </h2>
+      <p className="px-5 pt-6 text-center text-xl md:px-3">
+        Non-refundable, unless under extenuating circumstances. Email{" "}
+        <a
+          className="text-blue-400 underline hover:text-blue-600"
+          href={`mailto:${EmailLink}`}
+        >
+          {" "}
+          {EmailLink}
+        </a>{" "}
+        well in advance.
+      </p>
+      <div className="flex items-center justify-center pt-12">
+        <div className="mx-5 w-[80rem] border-t-2 border-black pt-6 text-center text-5xl font-bold"></div>
+      </div>
+      <h2 className="px-5 pt-6 text-center text-5xl font-bold md:px-0">
+        Any Questions?
+      </h2>
+      <p className="px-5 pt-6 text-center text-xl md:px-3">
+        If you have any questions regarding events or tickets, please reach out
+        on our{" "}
+        <a
+          className="text-blue-400 underline hover:text-blue-600"
+          href={InstagramLink}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {" "}
+          Instagram
+        </a>{" "}
+        or{" "}
+        <a
+          className="text-blue-400 underline hover:text-blue-600"
+          href={`mailto:${EmailLink}`}
+        >
+          {" "}
+          email
+        </a>{" "}
+        us! well in advance.
+      </p>
     </>
   );
 }
