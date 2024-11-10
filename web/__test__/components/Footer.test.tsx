@@ -10,7 +10,7 @@ vi.mock("../../src/components/navigation/Socials", () => ({
 }));
 
 describe("Footer component", () => {
-  it.todo("TEST")
+  it.todo("TEST");
   // it("should render the logo images", () => {
   //   render(<Footer />);
   //   const peacockLogo = screen.getByAltText("Peacock Logo");
