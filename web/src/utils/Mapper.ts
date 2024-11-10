@@ -12,6 +12,7 @@ import type {
   EventGallery,
   Question,
   Ticket,
+  PurchasableMembership,
 } from "../types/types";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -241,6 +242,24 @@ export class Mapper {
           ticketDescription: attributes.Ticket_Description || "",
           startDateTicketSales: attributes.Start_Date_Ticket_Sales || "",
           isTicketLive: attributes.Is_Ticket_Live || false,
+        };
+      });
+    }
+  }
+
+  static mapToPurchasableMemberships(data: any): PurchasableMembership[] {
+    if (!data.purchasableMemberships || !data.purchasableMemberships.data || data.purchasableMemberships.data.length === 0) {
+      throw new NoDataError("No data");
+    } else {
+      return data.purchasableMemberships.data.map((item: any) => {
+        const attributes = item.attributes || {};
+        return {
+          id: item.id,
+          title: attributes.Title,
+          expiry: attributes.Expiry,
+          price: attributes.Price || 0,
+          stripeLink: attributes.Stripe_Link,
+          description: attributes.Description
         };
       });
     }

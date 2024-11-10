@@ -216,3 +216,20 @@ export const GET_TICKETS = gql`
     }
   }
 `;
+
+export const GET_PURCHASEABLE_MEMBERSHIPS = gql`
+  query {
+    purchasableMemberships {
+      data {
+        id
+        attributes {
+          Title
+          Expiry
+          Price
+          Stripe_Link
+          Description
+        }
+      }
+    }
+  }
+`;

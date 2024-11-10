@@ -27,6 +27,7 @@ import PartnersScreen from "./screens/PartnersScreen.tsx";
 import Header from "@components/navigation/Header.tsx";
 import MembershipScreen from "./screens/MembershipScreen.tsx";
 import EventInformationScreen from "./screens/EventInformationScreen.tsx";
+import SignUpInformationScreen from "./screens/SignUpInformationScreen.tsx";
 
 // @Ratchet7x5: keys etc need to be parsed before route creation.
 const CLERK_PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
@@ -61,6 +62,7 @@ const router = createBrowserRouter(
         path="/events/:id"
         element={<EventInformationScreen navbar={<Header />} />}
       />
+      <Route path="/signup/information" element={<SignUpInformationScreen navbar={<Header/>}/>}/>
     </Route>
   )
 );

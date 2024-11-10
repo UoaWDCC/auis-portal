@@ -1,9 +1,58 @@
 import auisLogo from "../assets/peacock_white_inner_big.png";
 import auisAbbrev from "../assets/auis_no_depth.png";
 import PurchaseMembershipCard from "@components/membership-page/PurchaseMembershipCard";
+import { GET_PURCHASEABLE_MEMBERSHIPS } from "../graphql/queries";
+import { useQuery } from "@apollo/client";
+import { useEffect, useState } from "react";
+import { PurchasableMembership } from "../types/types";
+import { Mapper } from "@utils/Mapper";
+import LoadingSpinner from "@components/LoadingSpinner";
 
 export default function MembershipScreen({ navbar }: { navbar: JSX.Element }) {
   const MEMBERSHIP_ACTIVE = false;
+  // Queries
+  const {
+    loading: purchasableMembershipsLoading,
+    data: purchasableMembershipsData,
+    error: purchasableMembershipsError,
+  } = useQuery(GET_PURCHASEABLE_MEMBERSHIPS);
+
+  // States
+  const [purchasableMemberships, setPurchasableMembership] = useState<
+    PurchasableMembership[]
+  >([]);
+  const [loadingPurchasableMembership, setLoadingPurchasableMembership] =
+    useState(true);
+  const [errorPurchasableMembership, setErrorPurchasableMembership] =
+    useState(false);
+
+  // useEffect
+  useEffect(() => {
+    if (!purchasableMembershipsLoading) {
+      setLoadingPurchasableMembership(false);
+    }
+    if (purchasableMembershipsError) {
+      setErrorPurchasableMembership(true);
+    }
+    if (purchasableMembershipsData) {
+      try {
+        const mappedPurchaseableMemberships = Mapper.mapToPurchasableMemberships(
+          purchasableMembershipsData
+          
+        );
+        setPurchasableMembership(mappedPurchaseableMemberships);
+        console.log(purchasableMemberships)
+      } catch (error) {
+        setErrorPurchasableMembership(true);
+      }
+    }
+  }, [
+    purchasableMembershipsData,
+    purchasableMembershipsError,
+    purchasableMembershipsLoading,
+  ]);
+
+  
 
   return (
     <>
@@ -32,14 +81,17 @@ export default function MembershipScreen({ navbar }: { navbar: JSX.Element }) {
               </div>
             </div>
           </div>
+        ) : (loadingPurchasableMembership ? (
+          <LoadingSpinner />
         ) : (
-          <div className="h-full">
+          errorPurchasableMembership || purchasableMemberships.length === 0 ?(
+            <div className=" text-white text-center p-5"><p>Sorry there are no memberships available at this time. Come back later</p></div>
+          ) : (<div className="h-full">
             <div className="flex flex-wrap items-center justify-center">
-              <PurchaseMembershipCard />
-              <PurchaseMembershipCard />
+              {purchasableMemberships.map((purchasableMembership) => (<PurchaseMembershipCard purchasableMembership={purchasableMembership} />))}
             </div>
-          </div>
-        )}
+          </div>)
+        ))}
       </div>
     </>
   );
