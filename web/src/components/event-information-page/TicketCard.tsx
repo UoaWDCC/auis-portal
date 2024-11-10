@@ -5,11 +5,11 @@ interface LocationInformationProps {
   isDouble: boolean;
   price: number;
   stripeLink: string;
-  bypass : boolean
-  bypassLink : string
-  isTicketLive: boolean
-  numTicketsLeft: number
-  isMemberOnly: boolean
+  bypass: boolean;
+  bypassLink: string;
+  isTicketLive: boolean;
+  numTicketsLeft: number;
+  isMemberOnly: boolean;
 }
 
 export default function TicketCard({
@@ -21,7 +21,7 @@ export default function TicketCard({
   bypassLink,
   isTicketLive,
   numTicketsLeft,
-  isMemberOnly
+  isMemberOnly,
 }: LocationInformationProps) {
   const navigate = useNavigate();
 
@@ -34,8 +34,7 @@ export default function TicketCard({
     }
   }
 
-  const isTicketOnSale = isTicketLive && (numTicketsLeft > 0)
-
+  const isTicketOnSale = isTicketLive && numTicketsLeft > 0;
 
   return (
     <>
@@ -48,20 +47,22 @@ export default function TicketCard({
               <p className="pl-4 text-xs text-gray-500">
                 Both ticket holders must be members
               </p>
-            ) : (isMemberOnly ? (
+            ) : isMemberOnly ? (
               <p className="pl-4 text-xs text-gray-500">
                 You must be a paid member to purchase this ticket
               </p>
             ) : (
               <></>
-            )
-              
             )}
           </div>
           <div className="flex items-center justify-center">
             <p className="text-xl font-bold">${price.toFixed(2)}</p>
-            <button disabled={!isTicketOnSale} onClick={handleOnClick} className={` ${!isTicketOnSale? " bg-gray-300 text-black cursor-not-allowed text-md mx-4 rounded-lg px-5 py-3 font-bold " : "bg-primary-orange text-md mx-4 rounded-lg px-5 py-3 font-bold text-white transition-all hover:scale-105"} `}>
-            {!isTicketOnSale? "Sold out" : "Get Tickets"}
+            <button
+              disabled={!isTicketOnSale}
+              onClick={handleOnClick}
+              className={` ${!isTicketOnSale ? "text-md mx-4 cursor-not-allowed rounded-lg bg-gray-300 px-5 py-3 font-bold text-black" : "bg-primary-orange text-md mx-4 rounded-lg px-5 py-3 font-bold text-white transition-all hover:scale-105"} `}
+            >
+              {!isTicketOnSale ? "Sold out" : "Get Tickets"}
             </button>
           </div>
         </div>

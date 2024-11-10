@@ -92,12 +92,20 @@ export default function EventInformationScreen({
       }
     }
   }, [eventData, eventError, eventLoading]);
-  let ticketPrices = []
+  let ticketPrices = [];
   //TODO: add screen for not found event
-  for (let i = 0; i < event.ticket.length; i++){
-    ticketPrices.push(event.ticket[i].price)
+  for (let i = 0; i < event.ticket.length; i++) {
+    ticketPrices.push(event.ticket[i].price);
   }
-  const priceRange = "$" + Math.min(...ticketPrices).toFixed(2).toString() + " - $" + Math.max(...ticketPrices).toFixed(2).toString()
+  const priceRange =
+    "$" +
+    Math.min(...ticketPrices)
+      .toFixed(2)
+      .toString() +
+    " - $" +
+    Math.max(...ticketPrices)
+      .toFixed(2)
+      .toString();
 
   const ref = useRef<null | HTMLDivElement>(null);
   const handleClick = () => {
@@ -141,7 +149,7 @@ export default function EventInformationScreen({
             title={ticket.name}
             isDouble={ticket.isDouble}
             price={ticket.price}
-            isMemberOnly= {ticket.isMemberOnly}
+            isMemberOnly={ticket.isMemberOnly}
           />
         ))}
       </div>
