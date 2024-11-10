@@ -7,6 +7,7 @@ import {
   InstagramLink,
   LinkedinLink,
   EmailLink,
+  TiktokLink,
 } from "../../src/data/data";
 
 describe("Socials component", () => {
@@ -14,11 +15,15 @@ describe("Socials component", () => {
     render(<Socials />);
     const socialMediaLinks = [
       {
+        name: "Tiktok",
+        link: TiktokLink,
+      },
+      {
         name: "Instagram",
         link: InstagramLink,
       },
       { name: "Facebook", link: FacebookLink },
-      { name: "Email", link: EmailLink },
+      { name: "Email", link:"mailto:"+ EmailLink },
       {
         name: "LinkedIn",
         link: LinkedinLink,
@@ -29,7 +34,7 @@ describe("Socials component", () => {
       const socialMediaIcon = screen.getByRole("link", {
         name: new RegExp(name, "i"),
       });
-      expect(socialMediaIcon).toHaveAttribute("href", link);
+      expect(socialMediaIcon).toHaveAttribute("href",  link);
     });
   });
 });

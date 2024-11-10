@@ -24,7 +24,7 @@ describe("Header component", () => {
   });
 
   it("should render the navigation links", () => {
-    const navLinks = ["Events", "About Us", "Team", "Partners", "Credits"];
+    const navLinks = ["Events", "About Us", "Team", "Partners", "Membership"];
     navLinks.forEach((link) => {
       expect(screen.getByText(link)).toBeInTheDocument();
     });
@@ -68,7 +68,7 @@ describe("Header component", () => {
 
   it("should display navigation links properly on large screens", () => {
     resizeWindow(1024); // Simulate a large screen
-    const links = ["Events", "About Us", "Team", "Partners", "Credits"];
+    const links = ["Events", "About Us", "Team", "Partners", "Membership"];
     links.forEach((link) => {
       expect(screen.getByText(link)).toBeInTheDocument();
     });
