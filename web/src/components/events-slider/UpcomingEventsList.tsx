@@ -1,6 +1,6 @@
 import { Event } from "../../types/types";
 import UpcomingEventCard from "./UpcomingEventCard";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "keen-slider/keen-slider.min.css";
 
 interface UpcomingEventsListProps {

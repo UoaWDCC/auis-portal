@@ -4,7 +4,7 @@ interface LocationInformationProps {
   title: string;
   isDouble: boolean;
   price: number;
-  stripeLink: string;
+  // stripeLink: string;
   bypass: boolean;
   bypassLink: string;
   isTicketLive: boolean;
@@ -16,7 +16,7 @@ export default function TicketCard({
   title,
   isDouble,
   price,
-  stripeLink,
+  // stripeLink,
   bypass,
   bypassLink,
   isTicketLive,
