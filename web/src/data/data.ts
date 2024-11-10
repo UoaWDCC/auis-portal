@@ -7,7 +7,7 @@ export const InstagramLink =
 export const LinkedinLink = "https://www.linkedin.com/company/auindiansociety/";
 export const GithubLink = "https://github.com/UoaWDCC/auis-portal";
 export const EmailLink = "au.indiansociety@gmail.com";
-export const TiktokLink = "https://tiktok.com"
+export const TiktokLink = "https://tiktok.com";
 
 export const primaryDevelopers = [
   {

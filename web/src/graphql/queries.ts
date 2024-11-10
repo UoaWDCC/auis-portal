@@ -234,8 +234,8 @@ export const GET_PURCHASEABLE_MEMBERSHIPS = gql`
   }
 `;
 
-export function getEventById({id} : {id: number}) {
-  id.toString()
+export function getEventById({ id }: { id: number }) {
+  id.toString();
   return gql`
   query {
     event(id:${id}) {
@@ -278,4 +278,5 @@ export function getEventById({id} : {id: number}) {
       }
     }
   }
-`;}
+`;
+}

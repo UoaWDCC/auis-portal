@@ -12,8 +12,8 @@ const STRIPE_PUBLISHABLE_KEY = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
 const stripePromise = loadStripe(`${STRIPE_PUBLISHABLE_KEY}`);
 let bodyData = { priceId: "price_1PSHWRP464csY2UpYpxvB2tk", eventId: 1 };
 
-function CheckoutScreen( {stripeKey} : {stripeKey?: string}) {
-  if (stripeKey){
+function CheckoutScreen({ stripeKey }: { stripeKey?: string }) {
+  if (stripeKey) {
     bodyData = { priceId: stripeKey, eventId: 1 };
   }
 

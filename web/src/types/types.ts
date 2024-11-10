@@ -127,7 +127,7 @@ export interface EventAndTicket {
   termsAndConditions: string;
   eventCapacityRemaining: number;
   image: string;
-  ticket: Ticket[]
+  ticket: Ticket[];
 }
 
 export interface EventGallery {
