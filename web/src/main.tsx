@@ -62,7 +62,10 @@ const router = createBrowserRouter(
         path="/events/:id"
         element={<EventInformationScreen navbar={<Header />} />}
       />
-      <Route path="/signup/information" element={<SignUpInformationScreen navbar={<Header/>}/>}/>
+      <Route
+        path="/signup/information"
+        element={<SignUpInformationScreen navbar={<Header />} />}
+      />
     </Route>
   )
 );
