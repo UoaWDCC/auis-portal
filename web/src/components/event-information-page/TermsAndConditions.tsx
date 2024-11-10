@@ -1,9 +1,9 @@
 interface TermsAndConditionsProps {
-    termsAndConditions: string;
+  termsAndConditions: string;
 }
 
 export default function TermsAndConditions({
-    termsAndConditions,
+  termsAndConditions,
 }: TermsAndConditionsProps) {
   return (
     <>

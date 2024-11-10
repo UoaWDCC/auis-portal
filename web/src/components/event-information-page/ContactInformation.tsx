@@ -1,9 +1,9 @@
 import { EmailLink, InstagramLink } from "../../data/data";
 
 export default function LineBreak() {
-    return (
-      <>
-<h2 className="px-5 pt-6 text-center text-5xl font-bold md:px-0">
+  return (
+    <>
+      <h2 className="px-5 pt-6 text-center text-5xl font-bold md:px-0">
         Refund Policy
       </h2>
       <p className="px-5 pt-6 text-center text-xl md:px-3">
@@ -45,7 +45,6 @@ export default function LineBreak() {
         </a>{" "}
         us! well in advance.
       </p>
-      </>
-    );
-  }
-  
+    </>
+  );
+}
