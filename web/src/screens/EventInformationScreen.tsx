@@ -31,6 +31,8 @@ export default function EventInformationScreen({
     ticketDescription: "descirption",
     startDateTicketSales: "string",
     isTicketLive: false,
+    ticketBypassLink: true,
+    bypassTicketLink: "https://google.com"
   };
   const a: EventAndTicket = {
     id: 0,
@@ -171,6 +173,8 @@ export default function EventInformationScreen({
         {/* TODO: ADD STRIPE ID */}
         {event.ticket.map((ticket) => (
           <TicketCard
+            bypass={ticket.ticketBypassLink}
+            bypassLink={ticket.bypassTicketLink}
             stripeLink={"IDK"}
             title={ticket.name}
             isDouble={ticket.isDouble}

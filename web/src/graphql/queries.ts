@@ -271,6 +271,8 @@ export function getEventById({ id }: { id: number }) {
                 Ticket_Description
                 Start_Date_Ticket_Sales
                 Is_Ticket_Live
+                Ticket_Link_Bypass
+                Bypass_Ticket_Link
               }
             }
           }
