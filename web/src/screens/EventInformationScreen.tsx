@@ -159,7 +159,9 @@ export default function EventInformationScreen({
         {event.ticket.map((ticket) => (
           <TicketCard
             numTicketsLeft={ticket.numTicketsLeft}
-            isTicketLive={ticket.isTicketLive && (new Date(event.eventDateStart) > new Date())}
+            isTicketLive={
+              ticket.isTicketLive && new Date(event.eventDateStart) > new Date()
+            }
             bypass={ticket.ticketBypassLink}
             bypassLink={ticket.bypassTicketLink}
             stripeLink={"IDK"}
