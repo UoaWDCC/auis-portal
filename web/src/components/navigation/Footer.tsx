@@ -20,12 +20,12 @@ export default function Footer() {
               </div>
             </div>
             <Link to={"/credits"}>
-            <button
-              // onClick={() => navigate("")}
-              className="bg-primary-orange mx-5 my-3 mr-5 rounded-3xl px-6 py-1 font-bold text-white transition-all hover:scale-110"
-            >
-              Website Credits
-            </button>
+              <button
+                // onClick={() => navigate("")}
+                className="bg-primary-orange mx-5 my-3 mr-5 rounded-3xl px-6 py-1 font-bold text-white transition-all hover:scale-110"
+              >
+                Website Credits
+              </button>
             </Link>
           </div>
           <Socials />

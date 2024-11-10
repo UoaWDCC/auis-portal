@@ -4,7 +4,7 @@ import UserInformationForm from "../../src/components/UserInformationForm";
 import React from "react";
 
 describe("UserInformationForm Component", () => {
-  it.todo("TESTING")
+  it.todo("TESTING");
   // it("renders the form", () => {
   //   render(<UserInformationForm />);
   //   expect(screen.getByText(/Thanks for joining/i)).toBeInTheDocument();

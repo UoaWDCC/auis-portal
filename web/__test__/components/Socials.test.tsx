@@ -23,7 +23,7 @@ describe("Socials component", () => {
         link: InstagramLink,
       },
       { name: "Facebook", link: FacebookLink },
-      { name: "Email", link:"mailto:"+ EmailLink },
+      { name: "Email", link: "mailto:" + EmailLink },
       {
         name: "LinkedIn",
         link: LinkedinLink,
@@ -34,7 +34,7 @@ describe("Socials component", () => {
       const socialMediaIcon = screen.getByRole("link", {
         name: new RegExp(name, "i"),
       });
-      expect(socialMediaIcon).toHaveAttribute("href",  link);
+      expect(socialMediaIcon).toHaveAttribute("href", link);
     });
   });
 });
