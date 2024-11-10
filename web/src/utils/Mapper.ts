@@ -294,7 +294,11 @@ export class Mapper {
   }
 
   static mapToPurchasableMemberships(data: any): PurchasableMembership[] {
-    if (!data.purchasableMemberships || !data.purchasableMemberships.data || data.purchasableMemberships.data.length === 0) {
+    if (
+      !data.purchasableMemberships ||
+      !data.purchasableMemberships.data ||
+      data.purchasableMemberships.data.length === 0
+    ) {
       throw new NoDataError("No data");
     } else {
       return data.purchasableMemberships.data.map((item: any) => {
@@ -305,7 +309,7 @@ export class Mapper {
           expiry: attributes.Expiry,
           price: attributes.Price || 0,
           stripeLink: attributes.Stripe_Link,
-          description: attributes.Description
+          description: attributes.Description,
         };
       });
     }

@@ -161,5 +161,5 @@ export interface PurchasableMembership {
   expiry: string;
   price: number;
   stripeLink: string;
-  description: string
+  description: string;
 }

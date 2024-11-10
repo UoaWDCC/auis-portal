@@ -36,12 +36,10 @@ export default function MembershipScreen({ navbar }: { navbar: JSX.Element }) {
     }
     if (purchasableMembershipsData) {
       try {
-        const mappedPurchaseableMemberships = Mapper.mapToPurchasableMemberships(
-          purchasableMembershipsData
-          
-        );
+        const mappedPurchaseableMemberships =
+          Mapper.mapToPurchasableMemberships(purchasableMembershipsData);
         setPurchasableMembership(mappedPurchaseableMemberships);
-        console.log(purchasableMemberships)
+        console.log(purchasableMemberships);
       } catch (error) {
         setErrorPurchasableMembership(true);
       }
@@ -51,8 +49,6 @@ export default function MembershipScreen({ navbar }: { navbar: JSX.Element }) {
     purchasableMembershipsError,
     purchasableMembershipsLoading,
   ]);
-
-  
 
   return (
     <>
@@ -81,17 +77,27 @@ export default function MembershipScreen({ navbar }: { navbar: JSX.Element }) {
               </div>
             </div>
           </div>
-        ) : (loadingPurchasableMembership ? (
+        ) : loadingPurchasableMembership ? (
           <LoadingSpinner />
+        ) : errorPurchasableMembership ||
+          purchasableMemberships.length === 0 ? (
+          <div className="p-5 text-center text-white">
+            <p>
+              Sorry there are no memberships available at this time. Come back
+              later
+            </p>
+          </div>
         ) : (
-          errorPurchasableMembership || purchasableMemberships.length === 0 ?(
-            <div className=" text-white text-center p-5"><p>Sorry there are no memberships available at this time. Come back later</p></div>
-          ) : (<div className="h-full">
+          <div className="h-full">
             <div className="flex flex-wrap items-center justify-center">
-              {purchasableMemberships.map((purchasableMembership) => (<PurchaseMembershipCard purchasableMembership={purchasableMembership} />))}
+              {purchasableMemberships.map((purchasableMembership) => (
+                <PurchaseMembershipCard
+                  purchasableMembership={purchasableMembership}
+                />
+              ))}
             </div>
-          </div>)
-        ))}
+          </div>
+        )}
       </div>
     </>
   );

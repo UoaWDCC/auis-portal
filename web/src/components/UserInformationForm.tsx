@@ -3,7 +3,7 @@ import axios from "axios";
 import FormInput from "../components/FormInput";
 
 function UserInformationForm() {
-  // TODO: move onSubmit to parent component. 
+  // TODO: move onSubmit to parent component.
   const {
     handleSubmit,
     control,
@@ -43,8 +43,8 @@ function UserInformationForm() {
   };
 
   return (
-    <div className="  flex items-center justify-center">
-      <div className="bg-white m-4 max-w-3xl rounded-lg p-8 shadow-lg">
+    <div className="flex items-center justify-center">
+      <div className="m-4 max-w-3xl rounded-lg bg-white p-8 shadow-lg">
         <h2 className="mb-6 text-center text-2xl font-semibold">
           Thanks for joining!{" "}
           <span role="img" aria-label="emoji">
@@ -167,7 +167,7 @@ function UserInformationForm() {
                 )}
               />
             </div>
-            <div className="flex flex-1 flex-col ">
+            <div className="flex flex-1 flex-col">
               <label className="text-gray-700">
                 Domestic or International? 🌏
               </label>
@@ -175,7 +175,7 @@ function UserInformationForm() {
                 name="residency"
                 control={control}
                 render={({ field }) => (
-                  <div className="mt-2 flex flex-col md:flex-row md:items-center ">
+                  <div className="mt-2 flex flex-col md:flex-row md:items-center">
                     {residencyOptions.map((option, index) => (
                       <label
                         key={option}
@@ -198,7 +198,7 @@ function UserInformationForm() {
 
           <button
             type="submit"
-            className="bg-primary-orange text-md  rounded-lg px-5 py-3 font-bold text-white transition-all hover:scale-105"
+            className="bg-primary-orange text-md rounded-lg px-5 py-3 font-bold text-white transition-all hover:scale-105"
           >
             Done
           </button>
