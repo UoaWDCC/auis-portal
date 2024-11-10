@@ -114,6 +114,22 @@ export interface Event {
   image: string;
 }
 
+export interface EventAndTicket {
+  id: number;
+  title: string;
+  description: string;
+  subtitle: string;
+  location: string;
+  locationLink: string;
+  eventDateStart: string;
+  eventDateEnd: string;
+  isLive: boolean;
+  termsAndConditions: string;
+  eventCapacityRemaining: number;
+  image: string;
+  ticket: Ticket[]
+}
+
 export interface EventGallery {
   id: number;
   image: string;

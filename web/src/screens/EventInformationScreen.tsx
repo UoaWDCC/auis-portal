@@ -5,102 +5,178 @@ import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkBreaks from "remark-breaks";
 import { EmailLink, InstagramLink } from "../data/data";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { getEventById } from "../graphql/queries";
+import { useQuery } from "@apollo/client";
+import { Mapper } from "@utils/Mapper";
+import { Event, EventAndTicket, Ticket } from "../types/types";
+import { useParams, useSearchParams } from "react-router-dom";
 
 export default function EventInformationScreen({
   navbar,
 }: {
   navbar: JSX.Element;
 }) {
+
+  const { id } = useParams()
+
+  const tic: Ticket = {
+    id: 0,
+    name: "string",
+    discountCode: "string",
+    discountPrice: 0,
+    price: 50,
+    isMemberOnly: true,
+    isDouble: false,
+    numTicketsLeft: 50,
+    ticketDescription: "descirption",
+    startDateTicketSales: "string",
+    isTicketLive: false,
+  };
+  const a: EventAndTicket = {
+    id: 0,
+    title: "string;",
+    description: "string;",
+    subtitle: "string;",
+    location: "string;",
+    locationLink: "string;",
+    eventDateStart: "string;",
+    eventDateEnd: "string;",
+    isLive: true,
+    termsAndConditions: "string;",
+    eventCapacityRemaining: 0,
+    image: "string;",
+    ticket: [tic],
+  };
+
+  let queryId = -1
+  const q = id
+  if (q !== undefined) {
+    queryId = parseInt(q)
+    
+  } 
+  console.log(id)
+  // Queries
+  const {
+    loading: eventLoading,
+    data: eventData,
+    error: eventError,
+  } = useQuery(getEventById({ id: queryId }));
+
+  // States
+  const [event, setEvent] = useState<EventAndTicket>(a);
+  const [loadingEvent, setLoadingEvent] = useState(true);
+  const [errorEvent, setErrorEvent] = useState(false);
+
+  // useEffect
+  useEffect(() => {
+    if (!eventLoading) {
+      setLoadingEvent(false);
+    }
+    if (eventError) {
+      setErrorEvent(true);
+      console.log("ERROR");
+    }
+    if (eventData) {
+      try {
+        const mappedEvent = Mapper.mapToEvent(eventData);
+        setEvent(mappedEvent);
+        console.log(event);
+      } catch (error) {
+        setErrorEvent(true);
+        console.log(error);
+      }
+    }
+  }, [eventData, eventError, eventLoading]);
+
   //TODO: add screen for not found event
+
+  const PRICE_RANGE = "50-200"
 
   const ref = useRef<null | HTMLDivElement>(null);
   const handleClick = () => {
     ref.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const markdown = `A paragraph with *emphasis* and **strong importance**.
+//   const markdown = `A paragraph with *emphasis* and **strong importance**.
 
-> A block quote with ~strikethrough~ and a URL: https://reactjs.org.
+// > A block quote with ~strikethrough~ and a URL: https://reactjs.org.
 
-* Lists
-* [ ] todo
-* [x] done
+// * Lists
+// * [ ] todo
+// * [x] done
 
-A table:
+// A table:
 
-| a | b |
-| - | - |
-`;
+// | a | b |
+// | - | - |
+// `;
 
-  const test: string = `
+//   const test: string = `
   
-  _✨ Our most awaited event of the year… THE AUIS BALL 2024!✨🍾🪩_
+//   _✨ Our most awaited event of the year… THE AUIS BALL 2024!✨🍾🪩_
     
 
 
-It’s time to dust off your finest ethnic attire and join us for an unforgettable night of celebrating Indian culture in all its glory 🎉💃🕺
+// It’s time to dust off your finest ethnic attire and join us for an unforgettable night of celebrating Indian culture in all its glory 🎉💃🕺
 
-Prepare to be wowed with our stunning ballroom, exquisite range of food options, and music and dance performances to bring the wedding vibes we know you all have been missing! 🌟
+// Prepare to be wowed with our stunning ballroom, exquisite range of food options, and music and dance performances to bring the wedding vibes we know you all have been missing! 🌟
 
 
-- 🗓️ Saturday 3rd August
-- ⏰ 6.30pm - 1am
-- 📍Grand Millennium Hotel
+// - 🗓️ Saturday 3rd August
+// - ⏰ 6.30pm - 1am
+// - 📍Grand Millennium Hotel
 
-This is strictly an 18+ ONLY event.
+// This is strictly an 18+ ONLY event.
 
-But wait, there’s more! An extra specialty of our Ball this year, ticket holders will get exclusive access to our pre-events leading up to the Ball to truly provide an authentic Indian wedding experience 🤩 More information about these events will be released soon!
+// But wait, there’s more! An extra specialty of our Ball this year, ticket holders will get exclusive access to our pre-events leading up to the Ball to truly provide an authentic Indian wedding experience 🤩 More information about these events will be released soon!
 
-We are also calling all passionate choreographers to help us light the stage! 🪔 Apply now through the link in our bio. Forms for dancers will be released soon, keep an eye out! The Choreographer Form will close on Saturday 15th June at 11.59pm.
+// We are also calling all passionate choreographers to help us light the stage! 🪔 Apply now through the link in our bio. Forms for dancers will be released soon, keep an eye out! The Choreographer Form will close on Saturday 15th June at 11.59pm.
 
-Don’t miss out on the opportunity to fulfil your filmy fantasies!
+// Don’t miss out on the opportunity to fulfil your filmy fantasies!
 
-Tickets will be released exclusively for AUIS members on Wednesday 12th June at 8pm for the first 100 hours!
+// Tickets will be released exclusively for AUIS members on Wednesday 12th June at 8pm for the first 100 hours!
 
-After 100 hours, the tickets will be available for everyone.
+// After 100 hours, the tickets will be available for everyone.
 
-The closing date for ticket sales will strictly be on Tuesday 23rd July at 11.59pm (not Indian Standard Time)😋
+// The closing date for ticket sales will strictly be on Tuesday 23rd July at 11.59pm (not Indian Standard Time)😋
 
-We can’t wait to see you and teri jaans on the dance floor! 🧡🤍💙💚`;
+// We can’t wait to see you and teri jaans on the dance floor! 🧡🤍💙💚`;
 
   return (
     <>
       <div className="from-AUIS-dark-teal to-AUIS-teal bg-gradient-to-b pb-20">
         {navbar}
         <div className="flex flex-wrap items-center justify-center">
-          <div className="drop-shadow-all rounded-lg bg-red-400">
-            <img src={auisLogo} className="w-[30rem]" />
+          <div className="drop-shadow-all rounded-lg">
+            <img src={event.image} className="w-[30rem] rounded-lg" />
           </div>
 
           <div className="md:ml-6">
             <h1 className="mt-4 max-w-[40rem] pb-2 text-center text-6xl font-bold text-white md:text-left">
-              AUIS Ball 2024
+              {event.title}
             </h1>
             <h2 className="text-md pb-2 text-center text-gray-300 md:text-left">
-              Hosted by AUIS
+              {event.subtitle}
             </h2>
             <div className="my-3 flex items-center justify-center gap-2 text-2xl text-gray-300 md:justify-start">
               <FaCalendarAlt />{" "}
-              {new Date(/*upcomingEvent.eventDateStart*/).toLocaleString(
-                "en-NZ",
-                {
-                  day: "numeric",
-                  month: "short",
-                  year: "numeric",
-                  hour: "2-digit",
-                  minute: "2-digit",
-                  hour12: true,
-                }
-              )}
+              {new Date(event.eventDateStart).toLocaleString("en-NZ", {
+                day: "numeric",
+                month: "short",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: true,
+              })}
             </div>
             <div className="mb-3 flex items-center justify-center gap-2 text-2xl text-gray-300 md:justify-start">
-              <FaLocationDot /> LOCATION
+              <FaLocationDot /> {event.location}
             </div>
             <div className="rounded-lg border-2 border-gray-600 bg-black bg-opacity-10">
               <div className="mx-4 mt-2 flex justify-between">
                 <p className="text-xl text-white">Price: </p>
-                <p className="text-right text-xl text-white">$200</p>
+                <p className="text-right text-xl text-white">${PRICE_RANGE}</p>
               </div>
               <div className="my-2 flex items-center justify-center">
                 <button
@@ -123,7 +199,7 @@ We can’t wait to see you and teri jaans on the dance floor! 🧡🤍💙💚`;
             remarkPlugins={[remarkGfm, remarkBreaks]}
             className="markdown mx-5 w-[70rem]"
           >
-            {test}
+            {event.description}
           </Markdown>
         </div>
       </div>
@@ -138,13 +214,12 @@ We can’t wait to see you and teri jaans on the dance floor! 🧡🤍💙💚`;
             </h3>
 
             <p className="max-w-96 pb-2 text-center md:text-left">
-              Grand Millennium Auckland 71 Mayoral Drive, Auckland CBD, Auckland
-              1010, New Zealand
+              {event.location}
             </p>
             <div className="pb-6 text-center md:text-left">
               <a
                 className="text-blue-400 underline hover:text-blue-600"
-                href={`https://www.google.com/maps/dir//${"Grand+Millennium+Auckland,+71+Mayoral+Drive,+Cnr+Vincent+Street,+Auckland+1010"}`}
+                href={`https://www.google.com/maps/dir//${event.location}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -155,7 +230,7 @@ We can’t wait to see you and teri jaans on the dance floor! 🧡🤍💙💚`;
           <div>
             <iframe
               className="h-96 w-96 md:w-[40rem]"
-              src={`https://www.google.com/maps?q=${"Grand Millennium Auckland 71 Mayoral Drive, Auckland CBD, Auckland 1010, New Zealand"}&output=embed`}
+              src={`https://www.google.com/maps?q=${event.location}&output=embed`}
             ></iframe>
           </div>
         </div>
@@ -169,11 +244,15 @@ We can’t wait to see you and teri jaans on the dance floor! 🧡🤍💙💚`;
       <div>
         <div className="flex items-center justify-center pt-6">
           <div className="mx-2 flex w-[80rem] items-center justify-between rounded-lg border-2 border-gray-200 bg-gray-100 py-3">
+            <div>
             <p className="pl-4 text-xl font-bold">
-              Ticket name AUIS MEMBER TEICKET REALLTY LONG NAME{" "}
+              {event.ticket[0].name}
             </p>
+            {event.ticket[0].isDouble ? (<p className="pl-4 text-xs text-gray-500">Both ticket holders must be members</p>):(<></>)}
+            
+            </div>
             <div className="flex items-center justify-center">
-              <p className="text-xl font-bold">$200</p>
+              <p className="text-xl font-bold">${event.ticket[0].price}</p>
               <button className="bg-primary-orange text-md mx-4 rounded-lg px-5 py-3 font-bold text-white transition-all hover:scale-105">
                 Get Tickets
               </button>
@@ -223,29 +302,7 @@ We can’t wait to see you and teri jaans on the dance floor! 🧡🤍💙💚`;
       </p>
       <div className="flex justify-center px-5 xl:px-0">
         <p className="mx-2 flex w-[80rem] pt-4 text-left text-xl">
-          ‘The AUIS Ball’ is an event organised by the Auckland University
-          Indian Society (AUIS), a student club at the University of Auckland.
-          Each ticket grants entry to one individual and is valid only for the
-          specified event. This ticket is non-transferable. Ticket scalping is
-          strictly prohibited, ie. cannot resell the ticket at a price higher
-          than its original purchase value. This is strictly an 18+ event. The
-          use of illegal substances, vaping and smoking is strictly prohibited.
-          Alcohol consumption must be in accordance with venue regulations. This
-          is a non-refundable event unless under extenuating circumstances. We
-          prioritise the safety and well-being of our students; thus, we kindly
-          request that you adhere to appropriate and respectful behaviour
-          towards one another throughout the duration of this event. AUIS and
-          the Grand Millennium Hotel will not tolerate inappropriate behaviour,
-          and we reserve the right to remove you from the venue. In addition to
-          venue security measures, designated executive members from AUIS will
-          serve as harassment officers, guaranteeing a secure environment for
-          all event attendees. Photography and videography may be conducted
-          during the event for promotional purposes. By attending, you consent
-          to being photographed or recorded. You bear both financial and legal
-          liability for any damages to the premises or equipment incurred by you
-          at the venue. You are responsible for any items you bring to the
-          venue, which may be discarded if left behind. We shall not incur any
-          liability or responsibility for injury to any person...
+          {event.termsAndConditions}
         </p>
       </div>
       <div className="flex items-center justify-center pt-12">

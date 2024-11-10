@@ -13,6 +13,7 @@ import type {
   Question,
   Ticket,
   PurchasableMembership,
+  EventAndTicket,
 } from "../types/types";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -182,6 +183,51 @@ export class Mapper {
       });
     }
   }
+
+  static mapToEvent(data: any): EventAndTicket {
+    console.log(data)
+    if (!data.event || !data.event.data || data.event.data.length === 0) {
+      throw new NoDataError("No data");
+    } else {
+      
+        const attributes = data.event.data.attributes || {};
+        const imageUrl = attributes.Image?.data?.attributes?.url || "";
+
+        return {
+          id: data.event.data.id,
+          title: attributes.Title || "",
+          description: attributes.Description || "",
+          subtitle: attributes.Subtitle || "",
+          location: attributes.Location || "",
+          locationLink: attributes.Location_Link || "",
+          eventDateStart: attributes.Event_Date_Start || "",
+          eventDateEnd: attributes.Event_Date_End || "",
+          isLive: attributes.Is_Live || false,
+          termsAndConditions: attributes.Terms_And_Conditions || "",
+          eventCapacityRemaining: attributes.Event_Capacity_Remaining || 0,
+          image: imageUrl,
+          ticket: attributes.Ticket_ID.data.map((item: any) => {
+            const attributesTicket = item.attributes || {};
+    
+            return {
+              id: item.id,
+              name: attributesTicket.Name || "",
+              description: attributesTicket.Ticket_Description || "",
+              discountCode: attributesTicket.Discount_Code || "",
+              discountPrice: attributesTicket.Discount_Price || 0,
+              price: attributesTicket.Price || 0,
+              isMemberOnly: attributesTicket.Is_Member_Only || "",
+              isDouble: attributesTicket.Is_Double || "",
+              numTicketsLeft: attributesTicket.Number_Tickets_Left || "",
+              ticketDescription: attributesTicket.Ticket_Description || false,
+              startDateTicketSales: attributesTicket.Start_Date_Ticket_Sales || "",
+              isTicketLive: attributesTicket.Is_Ticket_Live || false,
+            };
+          })
+        };
+      };
+    }
+  
 
   static mapToEventsGallery(data: any): EventGallery[] {
     if (
