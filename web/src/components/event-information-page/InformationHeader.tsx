@@ -57,7 +57,7 @@ export default function InformationHeader({
           <div className="rounded-lg border-2 border-gray-600 bg-black bg-opacity-10">
             <div className="mx-4 mt-2 flex justify-between">
               <p className="text-xl text-white">Price: </p>
-              <p className="text-right text-xl text-white">${priceRange}</p>
+              <p className="text-right text-xl text-white">{priceRange}</p>
             </div>
             <div className="my-2 flex items-center justify-center">
               <button

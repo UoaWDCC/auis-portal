@@ -7,6 +7,8 @@ interface LocationInformationProps {
   stripeLink: string;
   bypass : boolean
   bypassLink : string
+  isTicketLive: boolean
+  numTicketsLeft: number
 }
 
 export default function TicketCard({
@@ -15,7 +17,9 @@ export default function TicketCard({
   price,
   stripeLink,
   bypass,
-  bypassLink
+  bypassLink,
+  isTicketLive,
+  numTicketsLeft
 }: LocationInformationProps) {
 
   const navigate = useNavigate()
@@ -29,6 +33,8 @@ export default function TicketCard({
     }
 
   }
+
+  const isTicketOnSale = isTicketLive && (numTicketsLeft > 0)
 
 
   return (
@@ -47,9 +53,9 @@ export default function TicketCard({
             )}
           </div>
           <div className="flex items-center justify-center">
-            <p className="text-xl font-bold">${price}</p>
-            <button onClick={handleOnClick} className="bg-primary-orange text-md mx-4 rounded-lg px-5 py-3 font-bold text-white transition-all hover:scale-105">
-              Get Tickets
+            <p className="text-xl font-bold">${price.toFixed(2)}</p>
+            <button disabled={!isTicketOnSale} onClick={handleOnClick} className={` ${!isTicketOnSale? " bg-gray-300 text-black cursor-not-allowed text-md mx-4 rounded-lg px-5 py-3 font-bold " : "bg-primary-orange text-md mx-4 rounded-lg px-5 py-3 font-bold text-white transition-all hover:scale-105"} `}>
+            {!isTicketOnSale? "Sold out" : "Get Tickets"}
             </button>
           </div>
         </div>

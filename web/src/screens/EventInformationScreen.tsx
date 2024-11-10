@@ -92,10 +92,12 @@ export default function EventInformationScreen({
       }
     }
   }, [eventData, eventError, eventLoading]);
-
+  let ticketPrices = []
   //TODO: add screen for not found event
-
-  const PRICE_RANGE = "50-200";
+  for (let i = 0; i < event.ticket.length; i++){
+    ticketPrices.push(event.ticket[i].price)
+  }
+  const priceRange = "$" + Math.min(...ticketPrices).toFixed(2).toString() + " - $" + Math.max(...ticketPrices).toFixed(2).toString()
 
   const ref = useRef<null | HTMLDivElement>(null);
   const handleClick = () => {
@@ -155,7 +157,7 @@ export default function EventInformationScreen({
           startDate={event.eventDateStart}
           location={event.location}
           scrollToTickets={handleClick}
-          priceRange={PRICE_RANGE}
+          priceRange={priceRange}
         />
       </div>
       <div>
@@ -173,6 +175,8 @@ export default function EventInformationScreen({
         {/* TODO: ADD STRIPE ID */}
         {event.ticket.map((ticket) => (
           <TicketCard
+            numTicketsLeft={ticket.numTicketsLeft}
+            isTicketLive={ticket.isTicketLive}
             bypass={ticket.ticketBypassLink}
             bypassLink={ticket.bypassTicketLink}
             stripeLink={"IDK"}
