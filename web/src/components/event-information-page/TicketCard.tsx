@@ -21,17 +21,15 @@ export default function TicketCard({
   isTicketLive,
   numTicketsLeft
 }: LocationInformationProps) {
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   function handleOnClick() {
-    console.log(bypass)
+    console.log(bypass);
     if (bypass) {
-      window.open(bypassLink, "_blank")
+      window.open(bypassLink, "_blank");
     } else {
-      navigate("/checkout")
+      navigate("/checkout");
     }
-
   }
 
   const isTicketOnSale = isTicketLive && (numTicketsLeft > 0)

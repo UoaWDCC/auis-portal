@@ -32,7 +32,7 @@ export default function EventInformationScreen({
     startDateTicketSales: "string",
     isTicketLive: false,
     ticketBypassLink: true,
-    bypassTicketLink: "https://google.com"
+    bypassTicketLink: "https://google.com",
   };
   const a: EventAndTicket = {
     id: 0,
