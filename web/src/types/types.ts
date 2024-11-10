@@ -1,3 +1,5 @@
+// import { StringValidation } from "zod";
+
 export interface Exec {
   id: number;
   image: string;
@@ -112,6 +114,22 @@ export interface Event {
   image: string;
 }
 
+export interface EventAndTicket {
+  id: number;
+  title: string;
+  description: string;
+  subtitle: string;
+  location: string;
+  locationLink: string;
+  eventDateStart: string;
+  eventDateEnd: string;
+  isLive: boolean;
+  termsAndConditions: string;
+  eventCapacityRemaining: number;
+  image: string;
+  ticket: Ticket[];
+}
+
 export interface EventGallery {
   id: number;
   image: string;
@@ -135,4 +153,15 @@ export interface Ticket {
   ticketDescription: string;
   startDateTicketSales: string;
   isTicketLive: boolean;
+  ticketBypassLink: boolean;
+  bypassTicketLink: string;
+}
+
+export interface PurchasableMembership {
+  id: number;
+  title: string;
+  expiry: string;
+  price: number;
+  stripeLink: string;
+  description: string;
 }

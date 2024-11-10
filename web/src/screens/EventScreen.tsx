@@ -99,7 +99,7 @@ export default function EventScreen({ navbar }: { navbar: JSX.Element }) {
                 <h1 className="text-4xl font-bold md:text-6xl">
                   Our Upcoming Events!
                 </h1>
-                <h3 className="text-AUIS-light-teal my-5 py-2 text-sm">
+                <h3 className="my-5 px-5 text-xl text-white">
                   Our exciting new events lined up just for you.
                 </h3>
               </div>

@@ -1,6 +1,6 @@
 import { Event } from "../../types/types";
 import UpcomingEventCard from "./UpcomingEventCard";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "keen-slider/keen-slider.min.css";
 
 interface UpcomingEventsListProps {
@@ -14,6 +14,14 @@ const UpcomingEventsList: React.FC<UpcomingEventsListProps> = ({
   sliderRef,
   pastEvent,
 }) => {
+  const navigate = useNavigate();
+
+  function handleOnClick(id: number) {
+    if (id > 0) {
+      navigate(`/events/${id}`);
+    }
+  }
+
   return (
     <>
       <div ref={sliderRef} className="keen-slider">
@@ -21,10 +29,9 @@ const UpcomingEventsList: React.FC<UpcomingEventsListProps> = ({
           <div
             key={event.id}
             className="keen-slider__slide p-2 hover:cursor-pointer"
+            onClick={() => handleOnClick(event.id)}
           >
-            <Link to={`/events/${event.id}`}>
-              <UpcomingEventCard pastEvent={pastEvent} upcomingEvent={event} />
-            </Link>
+            <UpcomingEventCard pastEvent={pastEvent} upcomingEvent={event} />
           </div>
         ))}
       </div>

@@ -76,6 +76,13 @@
       "relation": "oneToMany",
       "target": "api::user-ticket.user-ticket",
       "mappedBy": "Ticket_ID"
+    },
+    "Ticket_Link_Bypass": {
+      "type": "boolean",
+      "required": true
+    },
+    "Bypass_Ticket_Link": {
+      "type": "string"
     }
   }
 }

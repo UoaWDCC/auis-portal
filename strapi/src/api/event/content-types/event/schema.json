@@ -16,10 +16,6 @@
       "type": "string",
       "required": true
     },
-    "Description": {
-      "type": "text",
-      "required": true
-    },
     "Subtitle": {
       "type": "string",
       "required": false
@@ -69,6 +65,10 @@
       "relation": "oneToMany",
       "target": "api::ticket.ticket",
       "mappedBy": "Event_ID"
+    },
+    "Description": {
+      "type": "richtext",
+      "required": true
     }
   }
 }

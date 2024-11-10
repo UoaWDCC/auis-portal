@@ -13,7 +13,7 @@ function Header() {
     { title: "About Us", page: "/aboutus" },
     { title: "Team", page: "/exec" },
     { title: "Partners", page: "/sponsors" },
-    { title: "Credits", page: "/credits" },
+    { title: "Membership", page: "/membership" },
   ];
   return (
     <>

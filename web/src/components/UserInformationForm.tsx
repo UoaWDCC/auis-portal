@@ -3,6 +3,7 @@ import axios from "axios";
 import FormInput from "../components/FormInput";
 
 function UserInformationForm() {
+  // TODO: move onSubmit to parent component.
   const {
     handleSubmit,
     control,
@@ -22,7 +23,6 @@ function UserInformationForm() {
   });
 
   const residencyOptions = ["International", "Domestic"];
-  const paymentOptions = ["One Semester ($8)", "Two Semesters ($15)"];
 
   const onSubmit = async (data: any) => {
     try {
@@ -43,14 +43,14 @@ function UserInformationForm() {
   };
 
   return (
-    <div className="min-w-screen flex items-center justify-center">
-      <div className="w-full max-w-3xl rounded-lg p-8 shadow-lg">
+    <div className="flex items-center justify-center">
+      <div className="m-4 max-w-3xl rounded-lg bg-white p-8 shadow-lg">
         <h2 className="mb-6 text-center text-2xl font-semibold">
           Thanks for joining!{" "}
           <span role="img" aria-label="emoji">
             😊
           </span>{" "}
-          We just need a bit more info about your membership—it'll be quick!
+          We just need a little bit more information about you!
         </h2>
 
         <form
@@ -65,7 +65,7 @@ function UserInformationForm() {
                 control={control}
                 rules={{ required: "First Name is Required" }}
                 render={({ field }) => (
-                  <FormInput {...field} placeholder="e.g Clark" />
+                  <FormInput {...field} placeholder="e.g John" />
                 )}
               />
               {errors.firstName && (
@@ -79,7 +79,7 @@ function UserInformationForm() {
                 control={control}
                 rules={{ required: "Last Name is Required" }}
                 render={({ field }) => (
-                  <FormInput {...field} placeholder="e.g Kent" />
+                  <FormInput {...field} placeholder="e.g Smith" />
                 )}
               />
               {errors.lastName && (
@@ -196,41 +196,11 @@ function UserInformationForm() {
             </div>
           </div>
 
-          <div className="mt-4 flex flex-col items-start md:items-center md:space-x-7">
-            <label className="text-gray-700">Membership Types 💳</label>
-            <Controller
-              name="duration"
-              control={control}
-              rules={{ required: "Membership Type is Required" }}
-              render={({ field }) => (
-                <div className="mt-2 flex flex-col md:flex-row md:items-center">
-                  {paymentOptions.map((option, index) => (
-                    <label
-                      key={option}
-                      className={`inline-flex items-center ${index !== 0 ? "ml-0 md:ml-6" : ""}`}
-                    >
-                      <input
-                        type="radio"
-                        {...field}
-                        value={option}
-                        checked={field.value === option}
-                      />
-                      <span className="ml-2">{option}</span>
-                    </label>
-                  ))}
-                </div>
-              )}
-            />
-            {errors.duration && (
-              <span className="text-red-500">{errors.duration.message}</span>
-            )}
-          </div>
-
           <button
             type="submit"
-            className="mt-6 w-full rounded-lg bg-black py-2 text-white hover:bg-gray-800"
+            className="bg-primary-orange text-md rounded-lg px-5 py-3 font-bold text-white transition-all hover:scale-105"
           >
-            Purchase membership
+            Done
           </button>
         </form>
       </div>

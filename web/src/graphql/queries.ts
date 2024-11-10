@@ -216,3 +216,69 @@ export const GET_TICKETS = gql`
     }
   }
 `;
+
+export const GET_PURCHASEABLE_MEMBERSHIPS = gql`
+  query {
+    purchasableMemberships {
+      data {
+        id
+        attributes {
+          Title
+          Expiry
+          Price
+          Stripe_Link
+          Description
+        }
+      }
+    }
+  }
+`;
+
+export function getEventById({ id }: { id: number }) {
+  id.toString();
+  return gql`
+  query {
+    event(id:${id}) {
+      data {
+        attributes {
+          Title
+          Description
+          Subtitle
+          Location
+          Location_Link
+          Event_Date_Start
+          Event_Date_End
+          Is_Live
+          Terms_And_Conditions
+          Event_Capacity_Remaining
+          Image {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+          Ticket_ID{
+            data{
+              attributes{
+                Name
+                Discount_Code
+                Discount_Price
+                Price
+                Is_Member_Only
+                Is_Double
+                Number_Tickets_Left
+                Ticket_Description
+                Start_Date_Ticket_Sales
+                Is_Ticket_Live
+                Ticket_Link_Bypass
+                Bypass_Ticket_Link
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+}

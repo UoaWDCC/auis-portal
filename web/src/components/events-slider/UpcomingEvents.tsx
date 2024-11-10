@@ -58,7 +58,7 @@ const UpcomingEvents: React.FC<UpcomingEventsProps> = ({
                 : showNoUpcomingEvents
               : upcomingEvents
           }
-          pastEvent={pastEvent}
+          pastEvent={pastEvent || noEvents}
         />
         <RightArrow
           onClick={(e: any) =>
