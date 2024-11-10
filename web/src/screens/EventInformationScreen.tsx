@@ -66,6 +66,10 @@ export default function EventInformationScreen({
   const [loadingEvent, setLoadingEvent] = useState(true);
   const [errorEvent, setErrorEvent] = useState(false);
 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   // useEffect
   useEffect(() => {
     if (!eventLoading) {
