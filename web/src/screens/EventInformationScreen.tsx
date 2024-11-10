@@ -11,6 +11,8 @@ import LocationInformation from "@components/event-information-page/LocationInfo
 import TicketCard from "@components/event-information-page/TicketCard";
 import TermsAndConditions from "@components/event-information-page/TermsAndConditions";
 import ContactInformation from "@components/event-information-page/ContactInformation";
+import LoadingSpinner from "@components/LoadingSpinner";
+import NoEventFound from "@components/event-information-page/NoEventFound";
 
 export default function EventInformationScreen({
   navbar,
@@ -112,6 +114,21 @@ export default function EventInformationScreen({
     ref.current?.scrollIntoView({ behavior: "smooth" });
   };
 
+  if (loadingEvent) {
+    return <LoadingSpinner />;
+  }
+
+  if (errorEvent) {
+    return (
+      <>
+        <div className="from-AUIS-dark-teal to-AUIS-teal min-h-screen bg-gradient-to-b pb-20">
+          {navbar}
+          <NoEventFound />
+        </div>
+      </>
+    );
+  }
+
   return (
     <>
       <div className="from-AUIS-dark-teal to-AUIS-teal bg-gradient-to-b pb-20">
@@ -142,7 +159,7 @@ export default function EventInformationScreen({
         {event.ticket.map((ticket) => (
           <TicketCard
             numTicketsLeft={ticket.numTicketsLeft}
-            isTicketLive={ticket.isTicketLive}
+            isTicketLive={ticket.isTicketLive && (new Date(event.eventDateStart) > new Date())}
             bypass={ticket.ticketBypassLink}
             bypassLink={ticket.bypassTicketLink}
             stripeLink={"IDK"}

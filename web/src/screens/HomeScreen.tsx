@@ -90,7 +90,7 @@ export default function HomeScreen({ navbar }: { navbar: JSX.Element }) {
             </h1>
             <UpcomingEvents
               upcomingEvents={upcomingEvents}
-              noEvents={errorEvents}
+              noEvents={errorEvents || (upcomingEvents.length === 0)}
               pastEvent={false}
             />
           </div>
