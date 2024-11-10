@@ -1,6 +1,6 @@
 import { EmailLink, InstagramLink } from "../../data/data";
 
-export default function LineBreak() {
+export default function ContactInformation() {
   return (
     <>
       <h2 className="px-5 pt-6 text-center text-5xl font-bold md:px-0">

@@ -9,6 +9,7 @@ interface LocationInformationProps {
   bypassLink : string
   isTicketLive: boolean
   numTicketsLeft: number
+  isMemberOnly: boolean
 }
 
 export default function TicketCard({
@@ -19,7 +20,8 @@ export default function TicketCard({
   bypass,
   bypassLink,
   isTicketLive,
-  numTicketsLeft
+  numTicketsLeft,
+  isMemberOnly
 }: LocationInformationProps) {
   const navigate = useNavigate();
 
@@ -46,8 +48,14 @@ export default function TicketCard({
               <p className="pl-4 text-xs text-gray-500">
                 Both ticket holders must be members
               </p>
+            ) : (isMemberOnly ? (
+              <p className="pl-4 text-xs text-gray-500">
+                You must be a paid member to purchase this ticket
+              </p>
             ) : (
               <></>
+            )
+              
             )}
           </div>
           <div className="flex items-center justify-center">

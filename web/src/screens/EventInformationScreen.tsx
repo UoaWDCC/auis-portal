@@ -104,48 +104,6 @@ export default function EventInformationScreen({
     ref.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  //   const markdown = `A paragraph with *emphasis* and **strong importance**.
-
-  // > A block quote with ~strikethrough~ and a URL: https://reactjs.org.
-
-  // * Lists
-  // * [ ] todo
-  // * [x] done
-
-  // A table:
-
-  // | a | b |
-  // | - | - |
-  // `;
-
-  //   const test: string = `
-
-  //   _✨ Our most awaited event of the year… THE AUIS BALL 2024!✨🍾🪩_
-
-  // It’s time to dust off your finest ethnic attire and join us for an unforgettable night of celebrating Indian culture in all its glory 🎉💃🕺
-
-  // Prepare to be wowed with our stunning ballroom, exquisite range of food options, and music and dance performances to bring the wedding vibes we know you all have been missing! 🌟
-
-  // - 🗓️ Saturday 3rd August
-  // - ⏰ 6.30pm - 1am
-  // - 📍Grand Millennium Hotel
-
-  // This is strictly an 18+ ONLY event.
-
-  // But wait, there’s more! An extra specialty of our Ball this year, ticket holders will get exclusive access to our pre-events leading up to the Ball to truly provide an authentic Indian wedding experience 🤩 More information about these events will be released soon!
-
-  // We are also calling all passionate choreographers to help us light the stage! 🪔 Apply now through the link in our bio. Forms for dancers will be released soon, keep an eye out! The Choreographer Form will close on Saturday 15th June at 11.59pm.
-
-  // Don’t miss out on the opportunity to fulfil your filmy fantasies!
-
-  // Tickets will be released exclusively for AUIS members on Wednesday 12th June at 8pm for the first 100 hours!
-
-  // After 100 hours, the tickets will be available for everyone.
-
-  // The closing date for ticket sales will strictly be on Tuesday 23rd July at 11.59pm (not Indian Standard Time)😋
-
-  // We can’t wait to see you and teri jaans on the dance floor! 🧡🤍💙💚`;
-
   return (
     <>
       <div className="from-AUIS-dark-teal to-AUIS-teal bg-gradient-to-b pb-20">
@@ -183,6 +141,7 @@ export default function EventInformationScreen({
             title={ticket.name}
             isDouble={ticket.isDouble}
             price={ticket.price}
+            isMemberOnly= {ticket.isMemberOnly}
           />
         ))}
       </div>
