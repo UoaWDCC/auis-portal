@@ -240,6 +240,7 @@ export function getEventById({ id }: { id: number }) {
   query {
     event(id:${id}) {
       data {
+        id
         attributes {
           Title
           Description
@@ -260,6 +261,7 @@ export function getEventById({ id }: { id: number }) {
           }
           Ticket_ID{
             data{
+              id
               attributes{
                 Name
                 Discount_Code
