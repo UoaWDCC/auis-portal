@@ -51,7 +51,7 @@ const router = createBrowserRouter(
       <Route path="/login" element={<SignInScreen navbar={<Header />} />} />
       <Route path="/signup" element={<SignUpScreen navbar={<Header />} />} />
       <Route path="/aboutus" element={<AboutUsScreen navbar={<Header />} />} />
-      <Route path="/checkout" element={<CheckoutScreen  />} />
+      <Route path="/checkout" element={<CheckoutScreen />} />
       <Route path="/return" element={<ReturnScreen />} />
       <Route path="/userinfo" element={<InformationScreen />} />
       <Route
@@ -62,7 +62,10 @@ const router = createBrowserRouter(
         path="/events/:id"
         element={<EventInformationScreen navbar={<Header />} />}
       />
-      <Route path="/signup/information" element={<SignUpInformationScreen navbar={<Header/>}/>}/>
+      <Route
+        path="/signup/information"
+        element={<SignUpInformationScreen navbar={<Header />} />}
+      />
     </Route>
   )
 );
