@@ -1,6 +1,6 @@
 import { and, eq, sql, gt } from "drizzle-orm";
 import { db } from "../db/config/db";
-import { events, user_tickets, peoples, tickets } from "../schemas/schema";
+import { events, userTickets, peoples, tickets } from "../schemas/schema";
 import Stripe from "stripe";
 import { stripe } from "../stripe/stripe";
 
@@ -10,17 +10,17 @@ export async function isTicketAvailableByEventId(
   let isTicketAvailable = false;
 
   const remainingTickets = await db.query.events.findFirst({
-    columns: { event_capacity_remaining: true },
+    columns: { eventCapacityRemaining: true },
     // Event must be LIVE (true) for reserve and sales to go through.
     where: and(
-      and(eq(events.id, eventId), eq(events.is_live, true)),
-      gt(events.event_capacity_remaining, eventId)
+      and(eq(events.id, eventId), eq(events.isLive, true)),
+      gt(events.eventCapacityRemaining, eventId)
     ),
   });
 
-  // Handle the case where remainingTickets or event_capacity_remaining is undefined or null
-  if (remainingTickets && remainingTickets.event_capacity_remaining != null) {
-    isTicketAvailable = remainingTickets.event_capacity_remaining > 0;
+  // Handle the case where remainingTickets or eventCapacityRemaining is undefined or null
+  if (remainingTickets && remainingTickets.eventCapacityRemaining != null) {
+    isTicketAvailable = remainingTickets.eventCapacityRemaining > 0;
   }
 
   return isTicketAvailable;
@@ -37,7 +37,7 @@ export async function reserveTicket(eventId: number) {
     reservedTicket = await db
       .update(events)
       .set({
-        event_capacity_remaining: sql`${events.event_capacity_remaining} - 1`,
+        eventCapacityRemaining: sql`${events.eventCapacityRemaining} - 1`,
       })
       .where(eq(events.id, eventId))
       .returning();
@@ -54,7 +54,7 @@ export async function releaseReservedTicket(eventId: number) {
   releasedTicket = await db
     .update(events)
     .set({
-      event_capacity_remaining: sql`${events.event_capacity_remaining} + 1`,
+      eventCapacityRemaining: sql`${events.eventCapacityRemaining} + 1`,
     })
     .where(eq(events.id, eventId))
     .returning();
