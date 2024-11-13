@@ -1,5 +1,5 @@
 import { db } from "../db/config/db";
-import { peoples, user_tickets, events } from "../schemas/schema";
+import { peoples, userTickets, events } from "../schemas/schema";
 
 const main = async () => {
   try {
@@ -7,7 +7,7 @@ const main = async () => {
     console.log("Deleting data in database");
     await db.delete(peoples);
     await db.delete(events);
-    await db.delete(user_tickets);
+    await db.delete(userTickets);
 
     // Add users
     console.log("Seeding database");
@@ -17,28 +17,28 @@ const main = async () => {
         id: 0,
         email: "gury@go.at",
         upi: "gmat123",
-        university_id: "12345",
+        universityId: "12345",
         name: "Gury",
-        is_member: true,
-        member_expiry_date: new Date(
+        isMember: true,
+        memberExpiryDate: new Date(
           new Date().setFullYear(new Date().getFullYear() + 1)
         ).toLocaleDateString(),
         institution: "UoA",
-        year_of_study: "4",
+        yearOfStudy: "4",
         status: "Domestic",
       },
       {
         id: 2,
         email: "naren@go.at",
         upi: "nrnr123",
-        university_id: "23456",
+        universityId: "23456",
         name: "Naren",
-        is_member: true,
-        member_expiry_date: new Date(
+        isMember: true,
+        memberExpiryDate: new Date(
           new Date().setMonth(new Date().getMonth() + 6)
         ).toLocaleDateString(),
         institution: "UoA",
-        year_of_study: "4",
+        yearOfStudy: "4",
         status: "International",
       },
     ]);
@@ -50,17 +50,17 @@ const main = async () => {
         title: "Dance Series: Shawn Thomas",
         description: "Special dance series led by the goat himself, Guryash.",
         location: "The dance floor baby. ",
-        event_date_start: new Date(
+        eventDateStart: new Date(
           new Date().setFullYear(new Date().getFullYear() + 1)
         ).toLocaleDateString(),
-        event_date_end: new Date(
+        eventDateEnd: new Date(
           new Date().setFullYear(new Date().getFullYear() + 1)
         ).toLocaleString(),
-        event_capacity: 20,
-        is_live: true,
-        event_capacity_remaining: 1,
-        terms_and_conditions: "No refunds.",
-        published_at: new Date().toISOString(),
+        eventCapacity: 20,
+        isLive: true,
+        eventCapacityRemaining: 1,
+        termsAndConditions: "No refunds.",
+        publishedAt: new Date().toISOString(),
       },
       {
         id: 1,
@@ -68,30 +68,30 @@ const main = async () => {
         description:
           "Informative workshop where Naren walksthrough the architecture of the AUIS App. Plenty of opportunity to network with sponsor companies and pizza is served. No pineapple pizzas.",
         location: "Remotely from Naren's billion dollar bunker.",
-        event_date_start: new Date(
+        eventDateStart: new Date(
           new Date().setMonth(new Date().getMonth() + 6)
         ).toLocaleDateString(),
-        event_date_end: new Date(
+        eventDateEnd: new Date(
           new Date().setMonth(new Date().getMonth() + 6)
         ).toLocaleString(),
-        event_capacity: 5,
-        is_live: true,
-        event_capacity_remaining: 2,
-        terms_and_conditions: "No refunds.",
-        published_at: new Date().toISOString(),
+        eventCapacity: 5,
+        isLive: true,
+        eventCapacityRemaining: 2,
+        termsAndConditions: "No refunds.",
+        publishedAt: new Date().toISOString(),
       },
       {
         id: 2,
         title: "Gury's Cookout",
         description: "Let him COOK",
         location: "Chef's kitchen. ",
-        event_date_start: new Date().toLocaleString(),
-        event_date_end: new Date().toLocaleString(),
-        event_capacity: 20,
-        is_live: true,
-        event_capacity_remaining: 20,
-        terms_and_conditions: "No refunds.",
-        published_at: new Date().toISOString(),
+        eventDateStart: new Date().toLocaleString(),
+        eventDateEnd: new Date().toLocaleString(),
+        eventCapacity: 20,
+        isLive: true,
+        eventCapacityRemaining: 20,
+        termsAndConditions: "No refunds.",
+        publishedAt: new Date().toISOString(),
       },
     ]);
 
