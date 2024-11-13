@@ -27,13 +27,13 @@ export async function insertUserByEmail(email: string): Promise<User[]> {
     .insert(peoples)
     .values({
       email,
-      created_at: new Date().toISOString(),
+      createdAt: new Date().toISOString(),
       name: "",
-      university_id: "",
+      universityId: "",
       upi: "",
-      year_of_study: "",
-      study_field: "",
-      is_member: false,
+      yearOfStudy: "",
+      studyField: "",
+      isMember: false,
       status: "",
       institution: "",
     })
