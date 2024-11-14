@@ -94,7 +94,7 @@ export default function SignUpInformation() {
   ]
 
   return (
-    <div className="drop-shadow-all w-[36rem] rounded-lg bg-white p-12">
+    <div className="drop-shadow-all w-[36rem] rounded-lg bg-white py-12 px-2 sm:px-12">
       <div className=" ">
         <form onSubmit={handleSubmit(onSubmit)} className="form">
           <label className="flex items-center justify-center pb-3 text-center text-xl">
