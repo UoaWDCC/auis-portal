@@ -8,10 +8,12 @@ function SignUpInformationScreen({ navbar }: { navbar: JSX.Element }) {
       {/* move logic to this component */}
       {/* <UserInformationForm /> */}
       <div className="flex flex-col items-center text-center">
-      <h1 className="text-5xl font-bold text-white">We just need a little bit more information about you!</h1>
+        <h1 className="text-5xl font-bold text-white">
+          We just need a little bit more information about you!
+        </h1>
       </div>
-      <div className=" flex items-center py-12 justify-center">
-      <SignUpInformation/>
+      <div className="flex items-center justify-center py-12">
+        <SignUpInformation />
       </div>
     </div>
   );

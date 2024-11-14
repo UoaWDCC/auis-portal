@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {  useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 
 const SignUpSchema = z.object({
@@ -34,8 +34,9 @@ const SignUpSchema = z.object({
 
 type SignUpSchemaType = z.infer<typeof SignUpSchema>;
 
-const sendData = async (data: any) => {// TODO: update type
-  console.log(data)
+const sendData = async (data: any) => {
+  // TODO: update type
+  console.log(data);
   try {
     const response = await axios.post("/api/submitForm", data, {
       headers: {
@@ -60,12 +61,17 @@ export default function SignUpInformation() {
     formState: { errors },
   } = useForm<SignUpSchemaType>({ resolver: zodResolver(SignUpSchema) });
 
-  const [yearOfStudyDropdownTouched, setYearOfStudyDropdownTouched] = useState<boolean>(false);
-  const [isDomesticDropdownTouched, setIsDomesticDropdownTouched] = useState<boolean>(false);
-  const [institutionDropdownTouched, setInstitutionDropdownTouched] = useState<boolean>(false);
+  const [yearOfStudyDropdownTouched, setYearOfStudyDropdownTouched] =
+    useState<boolean>(false);
+  const [isDomesticDropdownTouched, setIsDomesticDropdownTouched] =
+    useState<boolean>(false);
+  const [institutionDropdownTouched, setInstitutionDropdownTouched] =
+    useState<boolean>(false);
 
   //we should here call like API or something...
-  const onSubmit: SubmitHandler<SignUpSchemaType> = (data) => {sendData(data)};
+  const onSubmit: SubmitHandler<SignUpSchemaType> = (data) => {
+    sendData(data);
+  };
 
   const yearOfStudyOptions = [
     { id: 0, text: "0" },
@@ -83,15 +89,15 @@ export default function SignUpInformation() {
   const isDomesticOptions = [
     { id: 0, text: "Domestic Student" },
     { id: 1, text: "International Student" },
-    {id : 2, text: "N/A"}
+    { id: 2, text: "N/A" },
   ];
 
   const institutionOptions = [
     { id: 0, text: "The University of Auckland" },
     { id: 1, text: "Auckland University of Technology" },
     { id: 2, text: "Other" },
-    { id: 3, text: "None" }
-  ]
+    { id: 3, text: "None" },
+  ];
 
   return (
     <div className="drop-shadow-all w-[36rem] rounded-lg bg-white p-12">
@@ -178,10 +184,11 @@ export default function SignUpInformation() {
           />
           <div className="py-2">
             {errors.fieldOfStudy && (
-              <span className="text-red-500">Please enter your field of study</span>
+              <span className="text-red-500">
+                Please enter your field of study
+              </span>
             )}
           </div>
-
 
           <label className="flex items-center justify-center pb-3 text-xl">
             Enter student study status
@@ -236,9 +243,7 @@ export default function SignUpInformation() {
           </select>
           <div className="py-2">
             {errors.institution && (
-              <span className="text-red-500">
-                Please select an institute
-              </span>
+              <span className="text-red-500">Please select an institute</span>
             )}
           </div>
 
