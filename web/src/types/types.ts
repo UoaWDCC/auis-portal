@@ -1,6 +1,3 @@
-
-
-
 export interface Exec {
   id: number;
   image: string;
