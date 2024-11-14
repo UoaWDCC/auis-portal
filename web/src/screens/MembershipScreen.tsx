@@ -9,7 +9,7 @@ import { Mapper } from "@utils/Mapper";
 import LoadingSpinner from "@components/LoadingSpinner";
 
 export default function MembershipScreen({ navbar }: { navbar: JSX.Element }) {
-  const MEMBERSHIP_ACTIVE = false;
+  const MEMBERSHIP_ACTIVE = true;
   // Queries
   const {
     loading: purchasableMembershipsLoading,
