@@ -1,12 +1,11 @@
 import { z } from "zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
 import axios from "axios";
+import TextQuestion from "./TextQuestion";
+import DropdownQuestion from "./DropdownQuestion";
 
 const SignUpSchema = z.object({
-  //   email: z.string().email(),
-  //   password: z.string().min(3).max(20)
   name: z.string().max(40).min(1),
   universityId: z.string().max(15).min(2),
   upi: z.string().max(15).min(2),
@@ -61,13 +60,6 @@ export default function SignUpInformation() {
     formState: { errors },
   } = useForm<SignUpSchemaType>({ resolver: zodResolver(SignUpSchema) });
 
-  const [yearOfStudyDropdownTouched, setYearOfStudyDropdownTouched] =
-    useState<boolean>(false);
-  const [isDomesticDropdownTouched, setIsDomesticDropdownTouched] =
-    useState<boolean>(false);
-  const [institutionDropdownTouched, setInstitutionDropdownTouched] =
-    useState<boolean>(false);
-
   //we should here call like API or something...
   const onSubmit: SubmitHandler<SignUpSchemaType> = (data) => {
     sendData(data);
@@ -100,152 +92,72 @@ export default function SignUpInformation() {
   ];
 
   return (
-    <div className="drop-shadow-all w-[36rem] rounded-lg bg-white py-12 px-2 sm:px-12">
+    <div className="drop-shadow-all w-[36rem] rounded-lg bg-white px-2 py-12 sm:px-12">
       <div className=" ">
         <form onSubmit={handleSubmit(onSubmit)} className="form">
-          <label className="flex items-center justify-center pb-3 text-center text-xl">
-            Enter your name
-          </label>
-          <input
-            className="input flex w-full items-center justify-center rounded border px-3 py-2 text-lg leading-tight shadow focus:outline-none"
+          <TextQuestion
+            question="Enter your name"
             placeholder="Eg. John Smith"
-            {...register("name")}
+            name="name"
+            register={register}
+            error={errors.name}
+            errorMessage="Please enter your full name"
           />
-          <div className="py-2">
-            {errors.name && (
-              <span className="text-red-500">Please enter your full name</span>
-            )}
-          </div>
-
-          <label className="flex items-center justify-center pb-3 text-center text-xl">
-            University ID number
-          </label>
-          <input
-            className="input flex w-full items-center justify-center rounded border px-3 py-2 text-lg leading-tight shadow focus:outline-none"
-            placeholder={"Enter 000000000 if you don't have one..."}
-            {...register("universityId")}
+          <TextQuestion
+            question="University ID number"
+            placeholder="Enter 000000000 if you don't have one..."
+            name="universityId"
+            register={register}
+            error={errors.universityId}
+            errorMessage="Please enter your ID number"
           />
-          <div className="py-2">
-            {errors.universityId && (
-              <span className="text-red-500">Please enter your ID number</span>
-            )}
-          </div>
-
-          <label className="flex items-center justify-center pb-3 text-xl">
-            Enter your UPI Number
-          </label>
-          <input
-            className="input flex w-full items-center justify-center rounded border px-3 py-2 text-lg leading-tight shadow focus:outline-none"
+          <TextQuestion
+            question="Enter your UPI Number"
             placeholder="Enter 0000000 if you don't have one..."
-            {...register("upi")}
+            name="upi"
+            register={register}
+            error={errors.upi}
+            errorMessage="Please enter your field of study"
           />
-          <div className="py-2">
-            {errors.upi && (
-              <span className="text-red-500">Please enter your UPI</span>
-            )}
-          </div>
-
-          <label className="flex items-center justify-center pb-3 text-xl">
-            Enter your year of study
-          </label>
-          <select
-            onInput={() => setYearOfStudyDropdownTouched(true)}
-            className={`input flex w-full items-center justify-center rounded border px-3 py-2 text-lg leading-tight shadow focus:outline-none ${yearOfStudyDropdownTouched ? "text-black" : "text-gray-400"} `}
-            {...register("yearOfStudy")}
-          >
-            <option
-              className="flex w-full items-center justify-center rounded border px-3 py-2 text-lg leading-tight text-gray-400 shadow focus:outline-none"
-              disabled
-              selected
-            >
-              Select your option
-            </option>
-            {yearOfStudyOptions.map((item) => (
-              <option className="flex w-full items-center justify-center rounded border px-3 py-2 text-lg leading-tight text-black shadow focus:outline-none">
-                {item.text}
-              </option>
-            ))}
-          </select>
-          <div className="py-2">
-            {errors.yearOfStudy && (
-              <span className="text-red-500">
-                Please select a year of study
-              </span>
-            )}
-          </div>
-
-          <label className="flex items-center justify-center pb-3 text-xl">
-            Enter your field of study
-          </label>
-          <input
-            className="input flex w-full items-center justify-center rounded border px-3 py-2 text-lg leading-tight shadow focus:outline-none"
+          <TextQuestion
+            question="Enter your field of study"
             placeholder="Eg. Software Engineering"
-            {...register("fieldOfStudy")}
+            name="fieldOfStudy"
+            register={register}
+            error={errors.fieldOfStudy}
+            errorMessage="Please enter your UPI"
           />
-          <div className="py-2">
-            {errors.fieldOfStudy && (
-              <span className="text-red-500">
-                Please enter your field of study
-              </span>
-            )}
-          </div>
+          <DropdownQuestion
+            question="Enter your year of study"
+            placeholder="Select your option"
+            name="yearOfStudy"
+            yearOfStudyOptions={yearOfStudyOptions}
+            register={register}
+            error={errors.yearOfStudy}
+            errorMessage="Please select a year of study"
+          />
+          
 
-          <label className="flex items-center justify-center pb-3 text-xl">
-            Enter student study status
-          </label>
-          <select
-            onInput={() => setIsDomesticDropdownTouched(true)}
-            className={`input flex w-full items-center justify-center rounded border px-3 py-2 text-lg leading-tight shadow focus:outline-none ${isDomesticDropdownTouched ? "text-black" : "text-gray-400"} `}
-            {...register("isDomestic")}
-          >
-            <option
-              className="flex w-full items-center justify-center rounded border px-3 py-2 text-lg leading-tight text-gray-400 shadow focus:outline-none"
-              disabled
-              selected
-            >
-              Select your option
-            </option>
-            {isDomesticOptions.map((item) => (
-              <option className="flex w-full items-center justify-center rounded border px-3 py-2 text-lg leading-tight text-black shadow focus:outline-none">
-                {item.text}
-              </option>
-            ))}
-          </select>
-          <div className="py-2">
-            {errors.isDomestic && (
-              <span className="text-red-500">
-                Please select a student status
-              </span>
-            )}
-          </div>
+          <DropdownQuestion
+            question="Enter student study status"
+            placeholder="Select your option"
+            name="isDomestic"
+            yearOfStudyOptions={isDomesticOptions}
+            register={register}
+            error={errors.isDomestic}
+            errorMessage="Please select a student status"
+          />
 
-          <label className="flex items-center justify-center pb-3 text-xl">
-            Enter the institute you study at
-          </label>
+          <DropdownQuestion
+            question="Enter the institute you study at"
+            placeholder="Select your option"
+            name="institution"
+            yearOfStudyOptions={institutionOptions}
+            register={register}
+            error={errors.institution}
+            errorMessage="Please select an institute"
+          />
 
-          <select
-            onInput={() => setInstitutionDropdownTouched(true)}
-            className={`input flex w-full items-center justify-center rounded border px-3 py-2 text-lg leading-tight shadow focus:outline-none ${institutionDropdownTouched ? "text-black" : "text-gray-400"} `}
-            {...register("institution")}
-          >
-            <option
-              className="flex w-full items-center justify-center rounded border px-3 py-2 text-lg leading-tight text-gray-400 shadow focus:outline-none"
-              disabled
-              selected
-            >
-              Select your option
-            </option>
-            {institutionOptions.map((item) => (
-              <option className="flex w-full items-center justify-center rounded border px-3 py-2 text-lg leading-tight text-black shadow focus:outline-none">
-                {item.text}
-              </option>
-            ))}
-          </select>
-          <div className="py-2">
-            {errors.institution && (
-              <span className="text-red-500">Please select an institute</span>
-            )}
-          </div>
 
           <div className="flex items-center justify-center pt-5">
             <button
