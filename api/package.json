@@ -45,6 +45,7 @@
     "postgres": "^3.4.4",
     "quicktype": "^23.0.170",
     "stripe": "^16.1.0",
+    "supertokens-node": "^21.0.0",
     "ts-node": "^10.9.2",
     "zod": "^3.22.4"
   },
