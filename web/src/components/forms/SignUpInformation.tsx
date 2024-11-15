@@ -136,7 +136,6 @@ export default function SignUpInformation() {
             error={errors.yearOfStudy}
             errorMessage="Please select a year of study"
           />
-          
 
           <DropdownQuestion
             question="Enter student study status"
@@ -157,7 +156,6 @@ export default function SignUpInformation() {
             error={errors.institution}
             errorMessage="Please select an institute"
           />
-
 
           <div className="flex items-center justify-center pt-5">
             <button

@@ -1,24 +1,38 @@
 import { FieldError, UseFormRegister } from "react-hook-form";
 
 interface QuestionProps {
-    question: string;
-    placeholder: string;
-    name: ValidFieldNames;
-    register: UseFormRegister<FormData>;
-    error: FieldError | undefined;
-    errorMessage: string;
+  question: string;
+  placeholder: string;
+  name: ValidFieldNames;
+  register: UseFormRegister<FormData>;
+  error: FieldError | undefined;
+  errorMessage: string;
 }
- type FormData = {
-    name: string,
-    universityId: string,
-    upi: string,
-    yearOfStudy: "0" | "1" | "2" | "3" | "4" | "5" | "6" | "Other" | "Postgraduate" | "Alumni",
-    fieldOfStudy : string,
-    isDomestic: "Domestic Student" | "International Student" | "N/A",
-    institution: "Other" | "The University of Auckland" | "Auckland University of Technology" | "None"
-  };
+type FormData = {
+  name: string;
+  universityId: string;
+  upi: string;
+  yearOfStudy:
+    | "0"
+    | "1"
+    | "2"
+    | "3"
+    | "4"
+    | "5"
+    | "6"
+    | "Other"
+    | "Postgraduate"
+    | "Alumni";
+  fieldOfStudy: string;
+  isDomestic: "Domestic Student" | "International Student" | "N/A";
+  institution:
+    | "Other"
+    | "The University of Auckland"
+    | "Auckland University of Technology"
+    | "None";
+};
 
- type ValidFieldNames =
+type ValidFieldNames =
   | "name"
   | "universityId"
   | "upi"
@@ -27,8 +41,15 @@ interface QuestionProps {
   | "isDomestic"
   | "institution";
 
-export default function TextQuestion({question, placeholder, name, register, error, errorMessage} : QuestionProps) {
-  return(
+export default function TextQuestion({
+  question,
+  placeholder,
+  name,
+  register,
+  error,
+  errorMessage,
+}: QuestionProps) {
+  return (
     <div>
       <label className="flex items-center justify-center pb-3 text-center text-xl">
         {question}
@@ -39,10 +60,8 @@ export default function TextQuestion({question, placeholder, name, register, err
         {...register(name)}
       />
       <div className="py-2">
-        {error && (
-          <span className="text-red-500">{errorMessage}</span>
-        )}
+        {error && <span className="text-red-500">{errorMessage}</span>}
       </div>
-    </div>);
-  
+    </div>
+  );
 }
