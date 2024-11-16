@@ -11,8 +11,6 @@ const TicketInformationSchema = z.object({
   phoneNumber: z.string().max(15).min(6),
 });
 
-
-
 type TicketInformationSchemaType = z.infer<typeof TicketInformationSchema>;
 
 const sendData = async (data: any) => {
@@ -27,7 +25,6 @@ const sendData = async (data: any) => {
 
     if (response.status === 200) {
       //Form Submission Successful
-      
     } else {
       // Form Submission Failed
     }
@@ -36,20 +33,24 @@ const sendData = async (data: any) => {
   }
 };
 
-export default function CheckoutInformation( {questions} : {questions : Question[]}) {
+export default function CheckoutInformation({
+  questions,
+}: {
+  questions: Question[];
+}) {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<TicketInformationSchemaType>({ resolver: zodResolver(TicketInformationSchema) });
+  } = useForm<TicketInformationSchemaType>({
+    resolver: zodResolver(TicketInformationSchema),
+  });
 
   //we should here call like API or something...
   const onSubmit: SubmitHandler<TicketInformationSchemaType> = (data) => {
     sendData(data);
   };
-  console.log(questions)
-
-
+  console.log(questions);
 
   return (
     <div className="drop-shadow-all w-[36rem] rounded-lg bg-white px-2 py-12 sm:px-12">
@@ -79,7 +80,7 @@ export default function CheckoutInformation( {questions} : {questions : Question
             error={errors.phoneNumber}
             errorMessage="Please enter your phone number"
           />
-          
+
           <div className="flex items-center justify-center pt-5">
             <button
               className="bg-primary-orange rounded-2xl px-10 py-3 text-xl font-bold text-white transition-all hover:scale-110"
@@ -87,7 +88,9 @@ export default function CheckoutInformation( {questions} : {questions : Question
             >
               Submit!
             </button>
-            {questions.map((question) => (<div className="text-red-500">TESTING {question.question}</div>))}
+            {questions.map((question) => (
+              <div className="text-red-500">TESTING {question.question}</div>
+            ))}
           </div>
         </form>
       </div>

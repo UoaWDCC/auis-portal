@@ -14,10 +14,7 @@ type FormData = {
   phoneNumber: string;
 };
 
-type ValidFieldNames =
-  | "name"
-  | "email"
-  | "phoneNumber"
+type ValidFieldNames = "name" | "email" | "phoneNumber";
 
 export default function TicketInformationQuestion({
   question,

@@ -234,7 +234,6 @@ export class Mapper {
   static mapToTicketQuestion(data: any): TicketAndQuestion {
     console.log(data);
     if (!data.ticket || !data.ticket.data || data.ticket.data.length === 0) {
-      
       throw new NoDataError("No data");
     } else {
       const attributes = data.ticket.data.attributes || {};
@@ -246,7 +245,8 @@ export class Mapper {
           return {
             id: item.id,
             question: attributesTicket.Question || "",
-            checkForMemberEmail: attributesTicket.Check_For_Member_Email || false
+            checkForMemberEmail:
+              attributesTicket.Check_For_Member_Email || false,
           };
         }),
       };

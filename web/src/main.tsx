@@ -53,7 +53,10 @@ const router = createBrowserRouter(
       <Route path="/signup" element={<SignUpScreen navbar={<Header />} />} />
       <Route path="/aboutus" element={<AboutUsScreen navbar={<Header />} />} />
       <Route path="/checkout" element={<CheckoutScreen />} />
-      <Route path="/checkout/information/:id" element={<CheckoutInformationScreen />} />
+      <Route
+        path="/checkout/information/:id"
+        element={<CheckoutInformationScreen />}
+      />
       <Route path="/return" element={<ReturnScreen />} />
       <Route path="/userinfo" element={<InformationScreen />} />
       <Route
