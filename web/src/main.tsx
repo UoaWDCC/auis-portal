@@ -21,7 +21,6 @@ import HomeScreen from "./screens/HomeScreen.tsx";
 import ExecScreen from "./screens/ExecScreen.tsx";
 import SignUpScreen from "./screens/SignUpScreen.tsx";
 import AboutUsScreen from "./screens/AboutUsScreen.tsx";
-import { ClerkProvider } from "@clerk/clerk-react";
 import { graphqlClient } from "./graphql/client.ts";
 import CreditsScreen from "./screens/CreditsScreen.tsx";
 import SignInScreen from "./screens/SignInScreen.tsx";
