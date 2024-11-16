@@ -65,7 +65,7 @@ export const createEventCheckoutSession = asyncHandler(
         mode: "payment",
         payment_method_types: ["card"],
         currency: "NZD",
-        return_url: `${process.env.DOMAIN_FRONTEND}return?session_id={CHECKOUT_SESSION_ID}`,
+        return_url: `${process.env.DOMAIN_FRONTEND}/return?session_id={CHECKOUT_SESSION_ID}`,
 
         //changeable below:
         // use metadata property
