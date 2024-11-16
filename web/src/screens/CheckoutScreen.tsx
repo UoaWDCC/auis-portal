@@ -33,10 +33,17 @@ function CheckoutScreen({ stripeKey }: { stripeKey?: string }) {
   const options = { fetchClientSecret };
 
   return (
-    <div id="checkout">
-      <EmbeddedCheckoutProvider stripe={stripePromise} options={options}>
-        <EmbeddedCheckout />
-      </EmbeddedCheckoutProvider>
+    <div className="max-w-screen from-AUIS-dark-teal to-AUIS-teal min-h-screen bg-gradient-to-b">
+                  <div className="flex flex-col items-center text-center">
+                  <h1 className="text-5xl font-bold my-12 text-white">Payment</h1>
+                  </div>
+      <div className=" flex item justify-center">
+        <div className="w-[68rem] p-5 mb-12 drop-shadow-all bg-white rounded-lg flex items-center justify-center">
+          <EmbeddedCheckoutProvider stripe={stripePromise} options={options}>
+            <EmbeddedCheckout className="flex flex-grow "  />
+          </EmbeddedCheckoutProvider>
+          </div>
+          </div>
     </div>
   );
 }

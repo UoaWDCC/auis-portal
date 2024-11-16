@@ -31,6 +31,8 @@ const SignUpSchema = z.object({
   ]),
 });
 
+
+
 type SignUpSchemaType = z.infer<typeof SignUpSchema>;
 
 const sendData = async (data: any) => {
@@ -45,6 +47,7 @@ const sendData = async (data: any) => {
 
     if (response.status === 200) {
       //Form Submission Successful
+      
     } else {
       // Form Submission Failed
     }
@@ -112,7 +115,7 @@ export default function SignUpInformation() {
             errorMessage="Please enter your ID number"
           />
           <TextQuestion
-            question="Enter your UPI Number"
+            question="Enter your UPI number"
             placeholder="Enter 0000000 if you don't have one..."
             name="upi"
             register={register}
