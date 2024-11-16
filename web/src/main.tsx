@@ -1,25 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import {
-  BrowserRouter,
   createBrowserRouter,
   createRoutesFromElements,
   Route,
-  Routes,
 } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { RouterProvider } from "react-router-dom";
 import { ApolloProvider } from "@apollo/client";
 
 //supertokens
-import SuperTokens, { SuperTokensWrapper } from "supertokens-auth-react";
-import { getSuperTokensRoutesForReactRouterDom } from "supertokens-auth-react/ui";
+import SuperTokens from "supertokens-auth-react";
 import ThirdParty, { Google } from "supertokens-auth-react/recipe/thirdparty";
 import EmailPassword from "supertokens-auth-react/recipe/emailpassword";
 import Session from "supertokens-auth-react/recipe/session";
-import * as reactRouterDom from "react-router-dom";
-import { ThirdPartyPreBuiltUI } from "supertokens-auth-react/recipe/thirdparty/prebuiltui";
-import { EmailPasswordPreBuiltUI } from "supertokens-auth-react/recipe/emailpassword/prebuiltui";
 
 import App from "./App.tsx";
 import "./index.css";
@@ -60,6 +54,14 @@ SuperTokens.init({
     EmailPassword.init(),
     Session.init(),
   ],
+  getRedirectionURL: async (context) => {
+    if (context.action === "SUCCESS" && context.newSessionCreated) {
+      return "/"; // defaults to "/"
+    } else if (context.action === "TO_AUTH") {
+      // The user will be taken to this path when they need to login.
+      return "/signup"; // return the path where you are rendering the Auth UI
+    }
+  },
 });
 
 // @Ratchet7x5: keys etc need to be parsed before route creation.
@@ -69,67 +71,49 @@ if (!CLERK_PUBLISHABLE_KEY) {
   throw new Error("Missing Publishable Key");
 }
 
+//Add any routes for screens below
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<App />}>
+      <Route index={true} element={<HomeScreen navbar={<Header />} />} />
+      <Route path="/events" element={<EventScreen navbar={<Header />} />} />
+      <Route path="/credits" element={<CreditsScreen navbar={<Header />} />} />
+      <Route path="/exec" element={<ExecScreen navbar={<Header />} />} />
+      <Route
+        path="/sponsors"
+        element={<PartnersScreen navbar={<Header />} />}
+      />
+      <Route path="/login" element={<SignInScreen navbar={<Header />} />} />
+      <Route path="/signup" element={<SignUpScreen navbar={<Header />} />} />
+      <Route path="/aboutus" element={<AboutUsScreen navbar={<Header />} />} />
+      <Route path="/checkout" element={<CheckoutScreen />} />
+      <Route path="/return" element={<ReturnScreen />} />
+      <Route path="/userinfo" element={<InformationScreen />} />
+      <Route
+        path="/membership"
+        element={<MembershipScreen navbar={<Header />} />}
+      />
+      <Route
+        path="/events/:id"
+        element={<EventInformationScreen navbar={<Header />} />}
+      />
+      <Route
+        path="/signup/information"
+        element={<SignUpInformationScreen navbar={<Header />} />}
+      />
+    </Route>
+  )
+);
+
 const queryClient = new QueryClient();
 const root = document.getElementById("root") as HTMLElement;
 
 ReactDOM.createRoot(root).render(
   <React.StrictMode>
-    <SuperTokensWrapper>
-        <ApolloProvider client={graphqlClient}>
-          <QueryClientProvider client={queryClient}>
-            <BrowserRouter>
-              <Routes>
-                {/* SuperTokens authentication routes */}
-                {getSuperTokensRoutesForReactRouterDom(reactRouterDom, [
-                  ThirdPartyPreBuiltUI,
-                  EmailPasswordPreBuiltUI,
-                ])}
-
-                {/* Custom app routes */}
-                <Route path="/" element={<HomeScreen navbar={<Header />} />} />
-                <Route
-                  path="/events"
-                  element={<EventScreen navbar={<Header />} />}
-                />
-                <Route
-                  path="/credits"
-                  element={<CreditsScreen navbar={<Header />} />}
-                />
-                <Route
-                  path="/exec"
-                  element={<ExecScreen navbar={<Header />} />}
-                />
-                <Route
-                  path="/sponsors"
-                  element={<PartnersScreen navbar={<Header />} />}
-                />
-                <Route
-                  path="/login"
-                  element={<SignInScreen navbar={<Header />} />}
-                />
-                <Route
-                  path="/aboutus"
-                  element={<AboutUsScreen navbar={<Header />} />}
-                />
-                <Route path="/checkout" element={<CheckoutScreen />} />
-                <Route path="/return" element={<ReturnScreen />} />
-                <Route path="/userinfo" element={<InformationScreen />} />
-                <Route
-                  path="/membership"
-                  element={<MembershipScreen navbar={<Header />} />}
-                />
-                <Route
-                  path="/events/:id"
-                  element={<EventInformationScreen navbar={<Header />} />}
-                />
-                <Route
-                  path="/signup/information"
-                  element={<SignUpInformationScreen navbar={<Header />} />}
-                />
-              </Routes>
-            </BrowserRouter>
-          </QueryClientProvider>
-        </ApolloProvider>
-    </SuperTokensWrapper>
+      <ApolloProvider client={graphqlClient}>
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider router={router} />
+        </QueryClientProvider>
+      </ApolloProvider>
   </React.StrictMode>
 );
