@@ -284,3 +284,29 @@ export function getEventById({ id }: { id: number }) {
   }
 `;
 }
+
+export function getTicketQuestions({ id }: { id: number }) {
+  id.toString();
+  return gql`
+  query {
+    ticket(id:"1") {
+            data{
+              id
+              attributes{
+                Name
+                Question_ID{
+                  data{
+                  id
+                  attributes{
+                    Question
+                    Check_For_Member_Email
+                  }
+                  }
+                }
+              }
+            }
+          }
+        }
+
+`;
+}

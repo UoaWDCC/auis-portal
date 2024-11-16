@@ -14,6 +14,7 @@ import type {
   Ticket,
   PurchasableMembership,
   EventAndTicket,
+  TicketAndQuestion,
 } from "../types/types";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -224,6 +225,28 @@ export class Mapper {
             isTicketLive: attributesTicket.Is_Ticket_Live || false,
             ticketBypassLink: attributesTicket.Ticket_Link_Bypass || true,
             bypassTicketLink: attributesTicket.Bypass_Ticket_Link || "",
+          };
+        }),
+      };
+    }
+  }
+
+  static mapToTicketQuestion(data: any): TicketAndQuestion {
+    console.log(data);
+    if (!data.ticket || !data.ticket.data || data.ticket.data.length === 0) {
+      
+      throw new NoDataError("No data");
+    } else {
+      const attributes = data.ticket.data.attributes || {};
+      return {
+        id: data.ticket.data.id,
+        name: attributes.Name || "",
+        question: attributes.Question_ID.data.map((item: any) => {
+          const attributesTicket = item.attributes || {};
+          return {
+            id: item.id,
+            question: attributesTicket.Question || "",
+            checkForMemberEmail: attributesTicket.Check_For_Member_Email || false
           };
         }),
       };
