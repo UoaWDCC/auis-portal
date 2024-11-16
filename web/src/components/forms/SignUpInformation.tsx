@@ -31,8 +31,6 @@ const SignUpSchema = z.object({
   ]),
 });
 
-
-
 type SignUpSchemaType = z.infer<typeof SignUpSchema>;
 
 const sendData = async (data: any) => {
@@ -47,7 +45,6 @@ const sendData = async (data: any) => {
 
     if (response.status === 200) {
       //Form Submission Successful
-      
     } else {
       // Form Submission Failed
     }
