@@ -1,4 +1,6 @@
-import { SignIn } from "@clerk/clerk-react";
+import { ThirdPartyPreBuiltUI } from "supertokens-auth-react/recipe/thirdparty/prebuiltui";
+import { EmailPasswordPreBuiltUI } from "supertokens-auth-react/recipe/emailpassword/prebuiltui";
+import { AuthPage } from "supertokens-auth-react/ui";
 import auisLogo from "../assets/peacock_white_inner_big.png";
 import auisAbbrev from "../assets/auis_no_depth.png";
 
@@ -19,7 +21,10 @@ function SignInScreen({ navbar }: { navbar: JSX.Element }) {
         </div>
         <div className="flex flex-grow justify-center pb-12 xl:justify-start xl:pl-24">
           <div data-testid="clerk-sign-in" className="flex">
-            <SignIn />
+            <AuthPage
+              preBuiltUIList={[EmailPasswordPreBuiltUI, ThirdPartyPreBuiltUI]}
+              isSignUp={false}
+            />
           </div>
         </div>
       </div>
