@@ -63,13 +63,6 @@ SuperTokens.init({
   },
 });
 
-// @Ratchet7x5: keys etc need to be parsed before route creation.
-const CLERK_PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
-
-if (!CLERK_PUBLISHABLE_KEY) {
-  throw new Error("Missing Publishable Key");
-}
-
 //Add any routes for screens below
 const router = createBrowserRouter(
   createRoutesFromElements(
