@@ -23,6 +23,7 @@ function SignUpScreen({ navbar }: { navbar: JSX.Element }) {
           <div data-testid="clerk-sign-in" className="flex">
             <AuthPage
               preBuiltUIList={[EmailPasswordPreBuiltUI, ThirdPartyPreBuiltUI]}
+              isSignUp={true}
             />
           </div>
         </div>
