@@ -53,14 +53,6 @@ SuperTokens.init({
     EmailPassword.init(),
     Session.init(),
   ],
-  getRedirectionURL: async (context) => {
-    if (context.action === "SUCCESS" && context.newSessionCreated) {
-      return "/"; // defaults to "/"
-    } else if (context.action === "TO_AUTH") {
-      // The user will be taken to this path when they need to login.
-      return "/signup"; // return the path where you are rendering the Auth UI
-    }
-  },
 });
 
 //Add any routes for screens below
