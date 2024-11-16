@@ -2,6 +2,15 @@ import express, { json } from "express";
 import cors from "cors";
 import { config } from "dotenv";
 
+//supertokens
+import supertokens from "supertokens-node";
+import EmailPassword from "supertokens-node/recipe/emailpassword";
+import ThirdParty from "supertokens-node/recipe/thirdparty";
+import UserMetadata from "supertokens-node/recipe/usermetadata";
+import Session from "supertokens-node/recipe/session";
+import Dashboard from "supertokens-node/recipe/dashboard";
+import { middleware, errorHandler } from "supertokens-node/framework/express";
+
 // Import Routers
 import helloRoutes from "./routes/hello";
 import eventRoutes from "./routes/eventRoutes";
@@ -11,11 +20,51 @@ import adminRoutes from "./routes/adminRoutes";
 import photoRoutes from "./routes/photoRoutes";
 import stripeRoutes from "./routes/stripeRoutes";
 
-import { errorHandler, notFound } from "./middleware/errorMiddleware";
+import { notFound } from "./middleware/errorMiddleware";
 import userRoutes from "./routes/userRoutes";
 
 const app = express();
 config();
+
+supertokens.init({
+  framework: "express",
+  supertokens: {
+    // https://try.supertokens.com is for demo purposes. Replace this with the address of your core instance (sign up on supertokens.com), or self host a core.
+    connectionURI: `${process.env.DOMAIN_SUPERTOKENS}`,
+    apiKey: `${process.env.SUPERTOKENS_API_KEY}`,
+  },
+  appInfo: {
+    // learn more about this on https://supertokens.com/docs/thirdpartyemailpassword/appinfo
+    appName: "AUIS",
+    apiDomain: "http://localhost:3000",
+    websiteDomain: `${process.env.DOMAIN_FRONTEND}`,
+    apiBasePath: "/api/auth",
+    websiteBasePath: "/signup",
+  },
+  recipeList: [
+    EmailPassword.init(),
+    ThirdParty.init({
+      signInAndUpFeature: {
+        providers: [
+          {
+            config: {
+              thirdPartyId: "google",
+              clients: [
+                {
+                  clientId: `${process.env.SUPERTOKENS_GOOGLE_OAUTH_CLIENT_ID}`,
+                  clientSecret: `${process.env.SUPERTOKENS_GOOGLE_OAUTH_CLIENT_SECRET}`,
+                },
+              ],
+            },
+          },
+        ],
+      },
+    }),
+    Session.init(), // initializes session features
+    Dashboard.init(),
+    UserMetadata.init(),
+  ],
+});
 
 // @Ratchet7x5: INFO: Use JSON parser for all non-webhook routes
 //              otherwise, webhook and db entries will fail
@@ -34,7 +83,19 @@ app.use(
   }
 );
 
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      `${process.env.DOMAIN_FRONTEND}`, //FE
+      `${process.env.DOMAIN_STRAPI}`, //Strapi
+      `${process.env.DOMAIN_SUPERTOKENS}`, //ST user Dashboard
+      `${process.env.DOMAIN_DB}`, //DB
+    ],
+    allowedHeaders: ["content-type", ...supertokens.getAllCORSHeaders()],
+    credentials: true,
+  })
+);
+app.use(middleware());
 app.use(express.static("public"));
 
 // Routes
@@ -42,7 +103,6 @@ app.use("/hello", helloRoutes);
 app.use("/api/events", eventRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/credits", creditRoutes);
-// We are yet to add middleware for authenication and authorization to protect admin routes
 app.use("/api/admin", adminRoutes);
 app.use("/api/photos", photoRoutes);
 app.use("/api", userRoutes); //Demo Route on how to work with Drizzle
@@ -52,7 +112,7 @@ app.use("/api/stripe", stripeRoutes);
 
 // The custom handlers in /middleware need to be below Routes
 app.use(notFound);
-app.use(errorHandler);
+app.use(errorHandler());
 
 //const port = Number.parseInt(process.env.PORT || "4000");
 const port = 3000; // Or whichever port your application listens on
