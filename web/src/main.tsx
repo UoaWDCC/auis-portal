@@ -75,61 +75,61 @@ const root = document.getElementById("root") as HTMLElement;
 ReactDOM.createRoot(root).render(
   <React.StrictMode>
     <SuperTokensWrapper>
-        <ApolloProvider client={graphqlClient}>
-          <QueryClientProvider client={queryClient}>
-            <BrowserRouter>
-              <Routes>
-                {/* SuperTokens authentication routes */}
-                {getSuperTokensRoutesForReactRouterDom(reactRouterDom, [
-                  ThirdPartyPreBuiltUI,
-                  EmailPasswordPreBuiltUI,
-                ])}
+      <ApolloProvider client={graphqlClient}>
+        <QueryClientProvider client={queryClient}>
+          <BrowserRouter>
+            <Routes>
+              {/* SuperTokens authentication routes */}
+              {getSuperTokensRoutesForReactRouterDom(reactRouterDom, [
+                ThirdPartyPreBuiltUI,
+                EmailPasswordPreBuiltUI,
+              ])}
 
-                {/* Custom app routes */}
-                <Route path="/" element={<HomeScreen navbar={<Header />} />} />
-                <Route
-                  path="/events"
-                  element={<EventScreen navbar={<Header />} />}
-                />
-                <Route
-                  path="/credits"
-                  element={<CreditsScreen navbar={<Header />} />}
-                />
-                <Route
-                  path="/exec"
-                  element={<ExecScreen navbar={<Header />} />}
-                />
-                <Route
-                  path="/sponsors"
-                  element={<PartnersScreen navbar={<Header />} />}
-                />
-                <Route
-                  path="/login"
-                  element={<SignInScreen navbar={<Header />} />}
-                />
-                <Route
-                  path="/aboutus"
-                  element={<AboutUsScreen navbar={<Header />} />}
-                />
-                <Route path="/checkout" element={<CheckoutScreen />} />
-                <Route path="/return" element={<ReturnScreen />} />
-                <Route path="/userinfo" element={<InformationScreen />} />
-                <Route
-                  path="/membership"
-                  element={<MembershipScreen navbar={<Header />} />}
-                />
-                <Route
-                  path="/events/:id"
-                  element={<EventInformationScreen navbar={<Header />} />}
-                />
-                <Route
-                  path="/signup/information"
-                  element={<SignUpInformationScreen navbar={<Header />} />}
-                />
-              </Routes>
-            </BrowserRouter>
-          </QueryClientProvider>
-        </ApolloProvider>
+              {/* Custom app routes */}
+              <Route path="/" element={<HomeScreen navbar={<Header />} />} />
+              <Route
+                path="/events"
+                element={<EventScreen navbar={<Header />} />}
+              />
+              <Route
+                path="/credits"
+                element={<CreditsScreen navbar={<Header />} />}
+              />
+              <Route
+                path="/exec"
+                element={<ExecScreen navbar={<Header />} />}
+              />
+              <Route
+                path="/sponsors"
+                element={<PartnersScreen navbar={<Header />} />}
+              />
+              <Route
+                path="/login"
+                element={<SignInScreen navbar={<Header />} />}
+              />
+              <Route
+                path="/aboutus"
+                element={<AboutUsScreen navbar={<Header />} />}
+              />
+              <Route path="/checkout" element={<CheckoutScreen />} />
+              <Route path="/return" element={<ReturnScreen />} />
+              <Route path="/userinfo" element={<InformationScreen />} />
+              <Route
+                path="/membership"
+                element={<MembershipScreen navbar={<Header />} />}
+              />
+              <Route
+                path="/events/:id"
+                element={<EventInformationScreen navbar={<Header />} />}
+              />
+              <Route
+                path="/signup/information"
+                element={<SignUpInformationScreen navbar={<Header />} />}
+              />
+            </Routes>
+          </BrowserRouter>
+        </QueryClientProvider>
+      </ApolloProvider>
     </SuperTokensWrapper>
   </React.StrictMode>
 );
