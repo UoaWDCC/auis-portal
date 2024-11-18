@@ -11,43 +11,44 @@ import EmailPassword from "supertokens-auth-react/recipe/emailpassword";
 import Session from "supertokens-auth-react/recipe/session";
 
 describe("Sign Up Screen", () => {
-  beforeEach(() => {
-    //supertokens code
-    SuperTokens.init({
-      enableDebugLogs: true,
-      appInfo: {
-        // learn more about this on https://supertokens.com/docs/thirdpartyemailpassword/appinfo
-        appName: "AUIS",
-        apiDomain: "http://localhost:3000",
-        websiteDomain: "http://localhost:5173",
-        apiBasePath: "/api/auth",
-        websiteBasePath: "/signup",
-      },
-      disableAuthRoute: true,
-      recipeList: [
-        ThirdParty.init({
-          signInAndUpFeature: {
-            providers: [Google.init()],
-          },
-        }),
-        EmailPassword.init(),
-        Session.init(),
-      ],
-      getRedirectionURL: async (context) => {
-        if (context.action === "SUCCESS" && context.newSessionCreated) {
-          if (context.createdNewUser) {
-            // user signed up
-            return "/signup/information"; // defaults to "/"
-          } else {
-            // user signed in
-            return "/";
-          }
-        } else if (context.action === "TO_AUTH") {
-          // The user will be taken to this path when they need to login.
-          return "/signup"; // return the path where you are rendering the Auth UI
+  //supertokens code
+  SuperTokens.init({
+    enableDebugLogs: true,
+    appInfo: {
+      // learn more about this on https://supertokens.com/docs/thirdpartyemailpassword/appinfo
+      appName: "AUIS",
+      apiDomain: "http://localhost:3000",
+      websiteDomain: "http://localhost:5173",
+      apiBasePath: "/api/auth",
+      websiteBasePath: "/signup",
+    },
+    disableAuthRoute: true,
+    recipeList: [
+      ThirdParty.init({
+        signInAndUpFeature: {
+          providers: [Google.init()],
+        },
+      }),
+      EmailPassword.init(),
+      Session.init(),
+    ],
+    getRedirectionURL: async (context) => {
+      if (context.action === "SUCCESS" && context.newSessionCreated) {
+        if (context.createdNewUser) {
+          // user signed up
+          return "/signup/information"; // defaults to "/"
+        } else {
+          // user signed in
+          return "/";
         }
-      },
-    });
+      } else if (context.action === "TO_AUTH") {
+        // The user will be taken to this path when they need to login.
+        return "/signup"; // return the path where you are rendering the Auth UI
+      }
+    },
+  });
+  
+  beforeEach(() => {
     render(
       <MemoryRouter>
         <SuperTokensWrapper>
