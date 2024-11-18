@@ -37,6 +37,7 @@ import SignUpInformationScreen from "./screens/SignUpInformationScreen.tsx";
 
 //supertokens code
 SuperTokens.init({
+  enableDebugLogs: true,
   appInfo: {
     // learn more about this on https://supertokens.com/docs/thirdpartyemailpassword/appinfo
     appName: "AUIS",
