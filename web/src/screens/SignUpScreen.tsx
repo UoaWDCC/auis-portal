@@ -20,7 +20,7 @@ function SignUpScreen({ navbar }: { navbar: JSX.Element }) {
           </div>
         </div>
         <div className="flex flex-grow justify-center pb-12 xl:justify-start xl:pl-24">
-          <div data-testid="clerk-sign-in" className="flex">
+          <div data-testid="supertokens-sign-in" className="flex">
             <AuthPage
               preBuiltUIList={[EmailPasswordPreBuiltUI, ThirdPartyPreBuiltUI]}
               isSignUp={true}
