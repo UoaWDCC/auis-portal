@@ -27,6 +27,7 @@ const app = express();
 config();
 
 supertokens.init({
+  debug: true,
   framework: "express",
   supertokens: {
     // https://try.supertokens.com is for demo purposes. Replace this with the address of your core instance (sign up on supertokens.com), or self host a core.
