@@ -67,6 +67,7 @@ supertokens.init({
   ],
 });
 
+// CORS config.
 app.use(
   cors({
     origin: [
@@ -86,6 +87,8 @@ app.use(
     credentials: true,
   })
 );
+
+// Supertokens middleware.
 app.use(middleware());
 app.use(express.static("public"));
 
@@ -126,5 +129,5 @@ const port = Number.parseInt(process.env.PORT || "3000");
 
 // Specify the host parameter as '0.0.0.0' to listen on all network interfaces
 app.listen(port, "0.0.0.0", () => {
-  console.log(`Listening on port ${port}`);
+  console.log(`Backend is now listening on port :${port}`);
 });
