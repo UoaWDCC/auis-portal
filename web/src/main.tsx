@@ -10,10 +10,11 @@ import { RouterProvider } from "react-router-dom";
 import { ApolloProvider } from "@apollo/client";
 
 //supertokens
-import SuperTokens from "supertokens-auth-react";
+import SuperTokens, { SuperTokensWrapper } from "supertokens-auth-react";
 import ThirdParty, { Google } from "supertokens-auth-react/recipe/thirdparty";
 import EmailPassword from "supertokens-auth-react/recipe/emailpassword";
 import Session from "supertokens-auth-react/recipe/session";
+import { SignInAndUpCallback } from "supertokens-auth-react/recipe/thirdparty/prebuiltui";
 
 import App from "./App.tsx";
 import "./index.css";
@@ -44,6 +45,7 @@ SuperTokens.init({
     apiBasePath: "/api/auth",
     websiteBasePath: "/signup",
   },
+  disableAuthRoute: true,
   recipeList: [
     ThirdParty.init({
       signInAndUpFeature: {
@@ -53,6 +55,20 @@ SuperTokens.init({
     EmailPassword.init(),
     Session.init(),
   ],
+  getRedirectionURL: async (context) => {
+    if (context.action === "SUCCESS" && context.newSessionCreated) {
+      if (context.createdNewUser) {
+        // user signed up
+        return "/signup/information"; // defaults to "/"
+      } else {
+        // user signed in
+        return "/";
+      }
+    } else if (context.action === "TO_AUTH") {
+      // The user will be taken to this path when they need to login.
+      return "/signup"; // return the path where you are rendering the Auth UI
+    }
+  },
 });
 
 //Add any routes for screens below
@@ -69,6 +85,7 @@ const router = createBrowserRouter(
       />
       <Route path="/login" element={<SignInScreen navbar={<Header />} />} />
       <Route path="/signup" element={<SignUpScreen navbar={<Header />} />} />
+      <Route path="/signup/callback/google" element={<SignInAndUpCallback />} />
       <Route path="/aboutus" element={<AboutUsScreen navbar={<Header />} />} />
       <Route path="/checkout" element={<CheckoutScreen />} />
       <Route path="/return" element={<ReturnScreen />} />
@@ -94,10 +111,12 @@ const root = document.getElementById("root") as HTMLElement;
 
 ReactDOM.createRoot(root).render(
   <React.StrictMode>
-    <ApolloProvider client={graphqlClient}>
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-      </QueryClientProvider>
-    </ApolloProvider>
+    <SuperTokensWrapper>
+      <ApolloProvider client={graphqlClient}>
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider router={router} />
+        </QueryClientProvider>
+      </ApolloProvider>
+    </SuperTokensWrapper>
   </React.StrictMode>
 );
