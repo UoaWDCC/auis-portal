@@ -66,6 +66,28 @@ supertokens.init({
   ],
 });
 
+app.use(
+  cors({
+    origin: [
+      `${process.env.DOMAIN_FRONTEND}`, //FE
+      `${process.env.DOMAIN_STRAPI}`, //Strapi
+      `${process.env.DOMAIN_SUPERTOKENS}`, //ST user Dashboard
+      `${process.env.DOMAIN_DB}`, //DB
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: [
+      "Content-Type",
+      "Authorization",
+      "st-auth-mode",
+      "content-type",
+      ...supertokens.getAllCORSHeaders(),
+    ],
+    credentials: true,
+  })
+);
+app.use(middleware());
+app.use(express.static("public"));
+
 // @Ratchet7x5: INFO: Use JSON parser for all non-webhook routes
 //              otherwise, webhook and db entries will fail
 app.use(
@@ -82,21 +104,6 @@ app.use(
     }
   }
 );
-
-app.use(
-  cors({
-    origin: [
-      `${process.env.DOMAIN_FRONTEND}`, //FE
-      `${process.env.DOMAIN_STRAPI}`, //Strapi
-      `${process.env.DOMAIN_SUPERTOKENS}`, //ST user Dashboard
-      `${process.env.DOMAIN_DB}`, //DB
-    ],
-    allowedHeaders: ["content-type", ...supertokens.getAllCORSHeaders()],
-    credentials: true,
-  })
-);
-app.use(middleware());
-app.use(express.static("public"));
 
 // Routes
 app.use("/hello", helloRoutes);
