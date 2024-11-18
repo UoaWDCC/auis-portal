@@ -47,7 +47,7 @@ describe("Sign Up Screen", () => {
       }
     },
   });
-  
+
   beforeEach(() => {
     render(
       <MemoryRouter>
