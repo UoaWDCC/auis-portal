@@ -121,8 +121,7 @@ app.use("/api/stripe", stripeRoutes);
 app.use(notFound);
 app.use(errorHandler());
 
-//const port = Number.parseInt(process.env.PORT || "4000");
-const port = 3000; // Or whichever port your application listens on
+const port = Number.parseInt(process.env.PORT || "3000");
 
 // Specify the host parameter as '0.0.0.0' to listen on all network interfaces
 app.listen(port, "0.0.0.0", () => {
