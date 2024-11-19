@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "@apollo/client": "^3.10.5",
-    "@clerk/clerk-react": "^5.0.5",
     "@hookform/resolvers": "^3.9.1",
     "@stripe/react-stripe-js": "^2.7.2",
     "@stripe/stripe-js": "^4.0.0",
