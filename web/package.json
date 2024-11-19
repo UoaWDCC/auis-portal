@@ -12,6 +12,8 @@
   },
   "dependencies": {
     "@apollo/client": "^3.10.5",
+    "@clerk/clerk-react": "^5.0.5",
+    "@hookform/resolvers": "^3.9.1",
     "@stripe/react-stripe-js": "^2.7.2",
     "@stripe/stripe-js": "^4.0.0",
     "@tanstack/react-query": "^5.18.1",
@@ -25,7 +27,7 @@
     "react": "^18.2.0",
     "react-cookies": "^0.1.1",
     "react-dom": "^18.2.0",
-    "react-hook-form": "^7.52.1",
+    "react-hook-form": "^7.53.2",
     "react-icons": "^5.2.1",
     "react-markdown": "^9.0.1",
     "react-masonry-component": "^6.3.0",
@@ -40,7 +42,7 @@
     "supertokens-web-js": "^0.14.0",
     "tailwind-merge": "^2.2.1",
     "universal-cookie": "^7.0.2",
-    "zod": "^3.22.4"
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@testing-library/dom": "^10.1.0",

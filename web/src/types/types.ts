@@ -1,5 +1,3 @@
-// import { StringValidation } from "zod";
-
 export interface Exec {
   id: number;
   image: string;

@@ -5,7 +5,7 @@ import { EmailLink } from "../data/data";
 import { RxCrossCircled } from "react-icons/rx";
 
 const ReturnScreen = () => {
-  const TEMP_PAYMENT_SUCCESSFUL: boolean = false;
+  const TEMP_PAYMENT_SUCCESSFUL: boolean = true;
 
   const navigate = useNavigate();
   const [status, setStatus] = useState(null);
