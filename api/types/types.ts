@@ -1,3 +1,6 @@
+import "express";
+import { SessionContainer } from "supertokens-node/recipe/session";
+
 export interface User {
   id: number;
   name: string;
@@ -15,4 +18,12 @@ export interface User {
   publishedAt: string;
   createdById: number | null;
   updatedById: number | null;
+}
+
+declare global {
+  namespace Express {
+    interface Request {
+      session?: SessionContainer;
+    }
+  }
 }

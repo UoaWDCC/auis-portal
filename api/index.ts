@@ -115,7 +115,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/credits", creditRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/photos", photoRoutes);
-app.use("/api", userRoutes); //Demo Route on how to work with Drizzle
+app.use("/api/user", userRoutes);
 
 //StripeJS
 app.use("/api/stripe", stripeRoutes);
