@@ -34,7 +34,6 @@ supertokens.init({
     apiKey: `${process.env.SUPERTOKENS_API_KEY}`,
   },
   appInfo: {
-    // learn more about this on https://supertokens.com/docs/thirdpartyemailpassword/appinfo
     appName: "AUIS",
     apiDomain: "http://localhost:3000",
     websiteDomain: `${process.env.DOMAIN_FRONTEND}`,
