@@ -41,8 +41,83 @@ supertokens.init({
     websiteBasePath: "/signup",
   },
   recipeList: [
-    EmailPassword.init(),
+    EmailPassword.init({
+      override: {
+        functions: (originalImplementation) => {
+          return {
+            ...originalImplementation,
+
+            // override the email password sign up function
+            signUp: async function (input) {
+              // TODO: some pre sign up logic
+
+              let response = await originalImplementation.signUp(input);
+
+              if (
+                response.status === "OK" &&
+                response.user.loginMethods.length === 1 &&
+                input.session === undefined
+              ) {
+                // TODO: some post sign up logic
+                await UserMetadata.updateUserMetadata(response.user.id, {
+                  bIsUserInfoComplete: false,
+                  bIsMembershipPaymentComplete: false,
+                });
+              }
+
+              return response;
+            },
+
+            // override the email password sign in function
+            signIn: async function (input) {
+              // TODO: some pre sign in logic
+
+              let response = await originalImplementation.signIn(input);
+
+              if (response.status === "OK" && input.session === undefined) {
+                // TODO: some post sign in logic
+              }
+
+              return response;
+            },
+          };
+        },
+      },
+    }),
     ThirdParty.init({
+      override: {
+        functions: (originalImplementation) => {
+          return {
+            ...originalImplementation,
+
+            // override the thirdparty sign in / up function
+            signInUp: async function (input) {
+              // TODO: Some pre sign in / up logic
+
+              let response = await originalImplementation.signInUp(input);
+
+              if (response.status === "OK") {
+                if (input.session === undefined) {
+                  if (
+                    response.createdNewRecipeUser &&
+                    response.user.loginMethods.length === 1
+                  ) {
+                    // TODO: some post sign up logic
+                    await UserMetadata.updateUserMetadata(response.user.id, {
+                      bIsUserInfoComplete: false,
+                      bIsMembershipPaymentComplete: false,
+                    });
+                  } else {
+                    // TODO: some post sign in logic
+                  }
+                }
+              }
+
+              return response;
+            },
+          };
+        },
+      },
       signInAndUpFeature: {
         providers: [
           {
