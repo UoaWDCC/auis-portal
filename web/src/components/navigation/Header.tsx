@@ -3,10 +3,19 @@ import { useLocation, Link } from "react-router-dom";
 import peacockLogo from "../../assets/peacock_logo.png";
 import auisWhiteLogo from "../../assets/auis_white.png";
 import { IoMdClose, IoMdMenu } from "react-icons/io";
+import { useSessionContext } from "supertokens-auth-react/recipe/session";
+import LoadingSpinner from "@components/LoadingSpinner";
+import { signOut } from "supertokens-web-js/recipe/session";
 
 function Header() {
   const [navBar, setNavBar] = useState(false);
   const { pathname } = useLocation();
+  const session = useSessionContext();
+
+  async function onLogout() {
+    await signOut();
+    window.location.href = "/"; // or to wherever your logic page is
+  }
 
   const titles = [
     { title: "Events", page: "/events" },
@@ -15,6 +24,11 @@ function Header() {
     { title: "Partners", page: "/sponsors" },
     { title: "Membership", page: "/membership" },
   ];
+
+  if (session.loading) {
+    return <LoadingSpinner></LoadingSpinner>;
+  }
+
   return (
     <>
       <header className="py-5 xl:py-8">
@@ -85,48 +99,80 @@ function Header() {
                   </Link>
                 </li>
               ))}
-              <div className="mt-8 flex flex-col items-center text-xl font-bold text-white xl:hidden xl:flex-row">
-                <a href="/login" className="my-2">
-                  <button
-                    data-testid="Log-in"
-                    type="button"
-                    className="bg-primary-green rounded-3xl px-6 py-1 transition-all hover:scale-110"
-                  >
-                    Log-in
-                  </button>
-                </a>
-                <a href="/signup" className="my-2">
-                  <button
-                    data-testid="Sign-up"
-                    type="button"
-                    className="bg-primary-orange rounded-3xl px-6 py-1 transition-all hover:scale-110"
-                  >
-                    Sign-up
-                  </button>
-                </a>
+              <div > 
+                {session.userId ? (
+                  <div  className="mt-8 flex flex-col items-center text-xl font-bold text-white xl:hidden xl:flex-row">
+                    <button
+                      data-testid="Log-out-mobile"
+                      type="button"
+                      className="bg-primary-orange rounded-3xl px-6 py-1 transition-all hover:scale-110"
+                      onClick={onLogout}
+                    >
+                      Log-out
+                    </button>
+                  </div>
+                ) : (
+                  <div  className="mt-8 flex flex-col items-center text-xl font-bold text-white xl:hidden xl:flex-row">
+                    <a href="/login" className="my-2">
+                      <button
+                        data-testid="Log-in"
+                        type="button"
+                        className="bg-primary-green rounded-3xl px-6 py-1 transition-all hover:scale-110"
+                      >
+                        Log-in
+                      </button>
+                    </a>
+                    <a href="/signup" className="my-2">
+                      <button
+                        data-testid="Sign-up"
+                        type="button"
+                        className="bg-primary-orange rounded-3xl px-6 py-1 transition-all hover:scale-110"
+                      >
+                        Sign-up
+                      </button>
+                    </a>
+                  </div>
+                )}
               </div>
             </div>
           </nav>
           <div className="mr-5 hidden xl:flex">
             <div className="flex h-full flex-col items-center text-xl font-bold text-white xl:flex-row">
-              <a href="/login" className="mx-4">
-                <button
-                  data-testid="Log-in-mobile"
-                  type="button"
-                  className="bg-primary-green rounded-3xl px-6 py-1 transition-all hover:scale-110"
-                >
-                  Log-in
-                </button>
-              </a>
-              <a href="/signup" className="mx-4">
-                <button
-                  data-testid="Sign-up-mobile"
-                  type="button"
-                  className="bg-primary-orange rounded-3xl px-6 py-1 transition-all hover:scale-110"
-                >
-                  Sign-up
-                </button>
-              </a>
+              <p>
+                {session.userId ? (
+                  <div>
+                    <button
+                      data-testid="Log-out-mobile"
+                      type="button"
+                      className="bg-primary-orange rounded-3xl px-6 py-1 transition-all hover:scale-110"
+                      onClick={onLogout}
+                    >
+                      Log-out
+                    </button>
+                  </div>
+                ) : (
+                  <div>
+                    <a href="/login" className="mx-4">
+                      <button
+                        data-testid="Log-in-mobile"
+                        type="button"
+                        className="bg-primary-green rounded-3xl px-6 py-1 transition-all hover:scale-110"
+                      >
+                        Log-in
+                      </button>
+                    </a>
+                    <a href="/signup" className="mx-4">
+                      <button
+                        data-testid="Sign-up-mobile"
+                        type="button"
+                        className="bg-primary-orange rounded-3xl px-6 py-1 transition-all hover:scale-110"
+                      >
+                        Sign-up
+                      </button>
+                    </a>
+                  </div>
+                )}
+              </p>
             </div>
           </div>
         </div>

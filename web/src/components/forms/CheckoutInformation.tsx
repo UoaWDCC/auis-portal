@@ -3,7 +3,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import TicketInformationQuestion from "./TicketInformationQuestion";
-import { Question, TicketAndQuestion } from "../../types/types";
+import { Question } from "../../types/types";
 
 const TicketInformationSchema = z.object({
   name: z.string().max(40).min(1),
