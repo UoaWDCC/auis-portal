@@ -99,9 +99,9 @@ function Header() {
                   </Link>
                 </li>
               ))}
-              <div > 
+              <div>
                 {session.userId ? (
-                  <div  className="mt-8 flex flex-col items-center text-xl font-bold text-white xl:hidden xl:flex-row">
+                  <div className="mt-8 flex flex-col items-center text-xl font-bold text-white xl:hidden xl:flex-row">
                     <button
                       data-testid="Log-out-mobile"
                       type="button"
@@ -112,7 +112,7 @@ function Header() {
                     </button>
                   </div>
                 ) : (
-                  <div  className="mt-8 flex flex-col items-center text-xl font-bold text-white xl:hidden xl:flex-row">
+                  <div className="mt-8 flex flex-col items-center text-xl font-bold text-white xl:hidden xl:flex-row">
                     <a href="/login" className="my-2">
                       <button
                         data-testid="Log-in"
