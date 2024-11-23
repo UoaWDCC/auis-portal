@@ -20,7 +20,7 @@ export default function PurchaseMembershipCard({
         </div>
         <div className="px-4">
           <p className="pt-6 text-center text-4xl font-bold">
-            Semester 1 membership
+            {purchasableMembership.title}
           </p>
           <p className="pt-4 text-center text-2xl">
             Expires on:{" "}
