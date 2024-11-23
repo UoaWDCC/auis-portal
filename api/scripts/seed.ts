@@ -46,10 +46,25 @@ const main = async () => {
     // Add events
     await db.insert(events).values([
       {
-        id: 3,
+        id: 1,
+        stripePriceId: "price_1Pwg1ZP464csY2Up9hCiwrhp",
+        title: "Gury's Cookout",
+        description: "Learn how to cook authentic indian meals.",
+        location: "Chef's kitchen",
+        eventDateStart: new Date().toLocaleString(),
+        eventDateEnd: new Date().toLocaleString(),
+        eventCapacity: 20,
+        isLive: true,
+        eventCapacityRemaining: 20,
+        termsAndConditions: "No refunds.",
+        publishedAt: new Date().toISOString(),
+      },
+      {
+        id: 2,
+        stripePriceId: "price_1PSHWRP464csY2UpYpxvB2tk",
         title: "Dance Series: Shawn Thomas",
         description: "Special dance series led by the goat himself, Guryash.",
-        location: "The dance floor baby. ",
+        location: "Dance Studio",
         eventDateStart: new Date(
           new Date().setFullYear(new Date().getFullYear() + 1)
         ).toLocaleDateString(),
@@ -63,33 +78,21 @@ const main = async () => {
         publishedAt: new Date().toISOString(),
       },
       {
-        id: 1,
-        title: "Naren's Tech Workshop",
+        id: 3,
+        stripePriceId: "price_1PSHWyP464csY2UpVWjc276j",
+        title: "Pub Quiz: India Series",
         description:
-          "Informative workshop where Naren walksthrough the architecture of the AUIS App. Plenty of opportunity to network with sponsor companies and pizza is served. No pineapple pizzas.",
-        location: "Remotely from Naren's billion dollar bunker.",
+          "Join this unique members only event to test your knowledge on Indian culture and win amazing prizes.",
+        location: "Pub",
         eventDateStart: new Date(
-          new Date().setMonth(new Date().getMonth() + 6)
+          new Date().setFullYear(new Date().getFullYear() + 1)
         ).toLocaleDateString(),
         eventDateEnd: new Date(
-          new Date().setMonth(new Date().getMonth() + 6)
+          new Date().setFullYear(new Date().getFullYear() + 1)
         ).toLocaleString(),
-        eventCapacity: 5,
-        isLive: true,
-        eventCapacityRemaining: 2,
-        termsAndConditions: "No refunds.",
-        publishedAt: new Date().toISOString(),
-      },
-      {
-        id: 2,
-        title: "Gury's Cookout",
-        description: "Let him COOK",
-        location: "Chef's kitchen. ",
-        eventDateStart: new Date().toLocaleString(),
-        eventDateEnd: new Date().toLocaleString(),
         eventCapacity: 20,
         isLive: true,
-        eventCapacityRemaining: 20,
+        eventCapacityRemaining: 1,
         termsAndConditions: "No refunds.",
         publishedAt: new Date().toISOString(),
       },
