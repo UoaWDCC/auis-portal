@@ -1,5 +1,10 @@
 import { db } from "../db/config/db";
-import { peoples, userTickets, events } from "../schemas/schema";
+import {
+  peoples,
+  userTickets,
+  events,
+  purchasableMemberships,
+} from "../schemas/schema";
 
 const main = async () => {
   try {
@@ -8,6 +13,7 @@ const main = async () => {
     await db.delete(peoples);
     await db.delete(events);
     await db.delete(userTickets);
+    await db.delete(purchasableMemberships);
 
     // Add users
     console.log("Seeding database");
@@ -94,6 +100,31 @@ const main = async () => {
         isLive: true,
         eventCapacityRemaining: 1,
         termsAndConditions: "No refunds.",
+        publishedAt: new Date().toISOString(),
+      },
+    ]);
+
+    await db.insert(purchasableMemberships).values([
+      {
+        id: 1,
+        stripeLink: "price_1PSHXPP464csY2Up4aKoSw6r",
+        title: "1x Semester Membership",
+        description: "One Semester long membership.",
+        expiry: new Date(
+          new Date().setMonth(new Date().getMonth() + 6)
+        ).toLocaleDateString(),
+        price: "8.00",
+        publishedAt: new Date().toISOString(),
+      },
+      {
+        id: 2,
+        stripeLink: "price_1Q1NimP464csY2Up7A7BwMcS",
+        title: "2x Semester Membership",
+        description: "Two Semester long membership.",
+        expiry: new Date(
+          new Date().setFullYear(new Date().getFullYear() + 1)
+        ).toLocaleDateString(),
+        price: "15.00",
         publishedAt: new Date().toISOString(),
       },
     ]);
