@@ -69,11 +69,6 @@ SuperTokens.init({
           },
         });
 
-        console.log(
-          "getRedirectionURL: metadata received: ",
-          response.data.metadata
-        );
-
         if (response.status === 200) {
           if (response.data!.bIsUserInfoComplete === false) {
             redirectionURL = "/signup/information";
