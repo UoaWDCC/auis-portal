@@ -27,3 +27,14 @@ declare global {
     }
   }
 }
+
+export interface UpdateUserInfoBody {
+  email: string;
+  name: string;
+  universityId: string;
+  upi: string;
+  yearOfStudy: string;
+  fieldOfStudy: string;
+  isDomestic: string;
+  institution: string;
+}
