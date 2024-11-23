@@ -1,22 +1,81 @@
-import express, { Request, Response } from "express";
+import { Request, Response } from "express";
 import asyncHandler from "../middleware/asyncHandler";
 import { getUsers } from "../gateway/getUsers";
-import { verifySession } from "supertokens-node/recipe/session/framework/express";
 import UserMetadata from "supertokens-node/recipe/usermetadata";
+import { UpdateUserInfoBody } from "../types/types";
+import { getUser } from "supertokens-node";
+import { insertUserBySuperToken } from "../gateway/getUsers";
 
 export const getAllUsers = asyncHandler(async (req: Request, res: Response) => {
   res.status(200).json(await getUsers());
 });
+
+export const updateUserInfo = asyncHandler(
+  async (req: Request<{}, {}, UpdateUserInfoBody>, res: Response) => {
+    try {
+      const {
+        name,
+        universityId,
+        upi,
+        yearOfStudy,
+        fieldOfStudy,
+        isDomestic,
+        institution,
+      } = req.body;
+
+      if (
+        !name ||
+        !universityId ||
+        !upi ||
+        !yearOfStudy ||
+        !fieldOfStudy ||
+        !isDomestic ||
+        !institution
+      ) {
+        return res.status(400).json({ message: "All fields are required" });
+      }
+
+      const session = req.session!;
+      const userId = session.getUserId();
+
+      //get user email
+      const user = await getUser(userId);
+      const email = user?.emails[0];
+
+      await UserMetadata.updateUserMetadata(userId, {
+        bIsUserInfoComplete: true,
+      });
+
+      const payload = {
+        email,
+        name,
+        universityId,
+        upi,
+        yearOfStudy,
+        fieldOfStudy,
+        isDomestic,
+        institution,
+      };
+
+      //insert user into peoples table here
+      await insertUserBySuperToken(payload as UpdateUserInfoBody);
+
+      res.status(200).json({
+        message: "successfully updated user info",
+      });
+    } catch (error) {
+      res.status(500).json({
+        message: "Unknown error occurred while trying to update user info",
+      });
+    }
+  }
+);
 
 export const updateUserMetadata = asyncHandler(
   async (req: Express.Request, res: Response) => {
     try {
       const session = req.session!;
       const userId = session.getUserId();
-
-      await UserMetadata.updateUserMetadata(userId, {
-        isOnboardingComplete: false,
-      });
 
       res.status(200).json({ message: "successfully updated user metadata" });
     } catch (error) {

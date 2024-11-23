@@ -67,19 +67,6 @@ supertokens.init({
 
               return response;
             },
-
-            // override the email password sign in function
-            signIn: async function (input) {
-              // TODO: some pre sign in logic
-
-              let response = await originalImplementation.signIn(input);
-
-              if (response.status === "OK" && input.session === undefined) {
-                // TODO: some post sign in logic
-              }
-
-              return response;
-            },
           };
         },
       },
@@ -89,11 +76,7 @@ supertokens.init({
         functions: (originalImplementation) => {
           return {
             ...originalImplementation,
-
-            // override the thirdparty sign in / up function
             signInUp: async function (input) {
-              // TODO: Some pre sign in / up logic
-
               let response = await originalImplementation.signInUp(input);
 
               if (response.status === "OK") {
@@ -107,8 +90,6 @@ supertokens.init({
                       bIsUserInfoComplete: false,
                       bIsMembershipPaymentComplete: false,
                     });
-                  } else {
-                    // TODO: some post sign in logic
                   }
                 }
               }

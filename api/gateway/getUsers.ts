@@ -1,10 +1,38 @@
 import { peoples } from "../schemas/schema";
 import { db } from "../db/config/db";
-import { User } from "../types/types";
+import { User, UpdateUserInfoBody } from "../types/types";
 import { eq } from "drizzle-orm";
 
 export async function getUsers(): Promise<User[]> {
   return (await db.select().from(peoples)) as User[];
+}
+
+export async function insertUserBySuperToken(
+  data: UpdateUserInfoBody
+): Promise<User[]> {
+  /*const userExists = await doesUserExistByEmail(email);
+
+  if (userExists) {
+    throw new Error(`User with email ${email} already exists.`);
+  }*/
+
+  const newUser = (await db
+    .insert(peoples)
+    .values({
+      email: data.email,
+      createdAt: new Date().toISOString(),
+      name: data.name,
+      universityId: data.universityId,
+      upi: data.upi,
+      yearOfStudy: data.yearOfStudy,
+      studyField: data.fieldOfStudy,
+      isMember: false,
+      status: data.isDomestic,
+      institution: data.institution,
+    })
+    .returning()) as User[];
+
+  return newUser;
 }
 
 export async function doesUserExistByEmail(email: string): Promise<boolean> {

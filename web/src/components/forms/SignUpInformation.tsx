@@ -33,18 +33,22 @@ const SignUpSchema = z.object({
 
 type SignUpSchemaType = z.infer<typeof SignUpSchema>;
 
-const sendData = async (data: any) => {
+const sendData = async (data: object) => {
   // TODO: update type
-  console.log(data);
+  console.log("typeof: ", typeof data);
   try {
-    const response = await axios.post("/api/submitForm", data, {
+    const response = await axios.post("/api/user/update-user-info", data, {
       headers: {
         "Content-Type": "application/json",
       },
+      data: { data },
     });
+
+    console.log("SignUpInfoComponent: received: ", response);
 
     if (response.status === 200) {
       //Form Submission Successful
+      window.location.href = "/membership";
     } else {
       // Form Submission Failed
     }

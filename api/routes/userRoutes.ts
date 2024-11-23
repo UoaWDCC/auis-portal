@@ -4,6 +4,7 @@ import UserMetadata from "supertokens-node/recipe/usermetadata";
 import {
   getAllUsers,
   getUserMetadata,
+  updateUserInfo,
   updateUserMetadata,
   deleteUserMetadata,
 } from "../controller/userController";
@@ -11,7 +12,8 @@ import {
 const router = Router();
 
 router.get("/users", getAllUsers);
-router.get("/get-metadata", verifySession());
+router.post("/update-user-info", verifySession(), updateUserInfo);
+router.get("/get-metadata", verifySession(), getUserMetadata);
 router.post("/update-metadata", verifySession(), updateUserMetadata);
 router.post("/delete-metadata", verifySession());
 

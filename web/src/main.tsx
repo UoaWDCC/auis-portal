@@ -35,6 +35,7 @@ import MembershipScreen from "./screens/MembershipScreen.tsx";
 import EventInformationScreen from "./screens/EventInformationScreen.tsx";
 import SignUpInformationScreen from "./screens/SignUpInformationScreen.tsx";
 import CheckoutInformationScreen from "./screens/CheckoutInformationScreen.tsx";
+import axios from "axios";
 
 //supertokens code
 SuperTokens.init({
@@ -59,16 +60,45 @@ SuperTokens.init({
   ],
   getRedirectionURL: async (context) => {
     if (context.action === "SUCCESS" && context.newSessionCreated) {
-      if (context.createdNewUser) {
-        // user signed up
-        return "/signup/information"; // defaults to "/"
-      } else {
-        // user signed in
-        return "/";
+      let redirectionURL = "/";
+
+      try {
+        const response = await axios.get("/api/user/get-metadata", {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        console.log(
+          "getRedirectionURL: metadata received: ",
+          response.data.metadata
+        );
+
+        if (response.status === 200) {
+          if (response.data!.bIsUserInfoComplete === false) {
+            redirectionURL = "/signup/information";
+          } else if (
+            response.data!.bIsUserInfoComplete &&
+            response.data!.bIsMembershipPaymentComplete === false
+          ) {
+            redirectionURL = "/membership";
+          } else {
+            redirectionURL = "/";
+          }
+        } else {
+          // Request Failed
+          alert("Unknown error occured while trying to fetch user data. ");
+        }
+      } catch (error) {
+        // Error
+        alert(
+          "There was error after logging in. Please contact the AUIS admin for further assistance."
+        );
       }
+
+      return redirectionURL;
     } else if (context.action === "TO_AUTH") {
-      // The user will be taken to this path when they need to login.
-      return "/signup"; // return the path where you are rendering the Auth UI
+      return "/signup";
     }
   },
 });
