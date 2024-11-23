@@ -4,8 +4,8 @@ import { events, userTickets, peoples, tickets } from "../schemas/schema";
 import Stripe from "stripe";
 import { stripe } from "../stripe/stripe";
 
-export async function isTicketAvailableByEventId(
-  eventId: any
+export async function isTicketAvailableByPriceId(
+  priceId: string
 ): Promise<boolean> {
   let isTicketAvailable = false;
 
@@ -13,8 +13,8 @@ export async function isTicketAvailableByEventId(
     columns: { eventCapacityRemaining: true },
     // Event must be LIVE (true) for reserve and sales to go through.
     where: and(
-      and(eq(events.id, eventId), eq(events.isLive, true)),
-      gt(events.eventCapacityRemaining, eventId)
+      and(eq(events.stripePriceId, priceId), eq(events.isLive, true)),
+      gt(events.eventCapacityRemaining, 0)
     ),
   });
 
@@ -27,8 +27,8 @@ export async function isTicketAvailableByEventId(
 }
 
 // @Ratchet7x5: Reserve one ticket
-export async function reserveTicket(eventId: number) {
-  let canReserveTicket = await isTicketAvailableByEventId(eventId);
+export async function reserveTicket(priceId: string) {
+  let canReserveTicket = await isTicketAvailableByPriceId(priceId);
   let reservedTicket;
 
   //if ticket available, reduce by 1
@@ -39,7 +39,7 @@ export async function reserveTicket(eventId: number) {
       .set({
         eventCapacityRemaining: sql`${events.eventCapacityRemaining} - 1`,
       })
-      .where(eq(events.id, eventId))
+      .where(eq(events.stripePriceId, priceId))
       .returning();
   }
 
@@ -47,7 +47,7 @@ export async function reserveTicket(eventId: number) {
 }
 
 // @Ratchet7x5: Release one reserved ticket
-export async function releaseReservedTicket(eventId: number) {
+export async function releaseReservedTicket(priceId: string) {
   let releasedTicket;
 
   // increment event_remaining_ticket by 1
@@ -56,7 +56,7 @@ export async function releaseReservedTicket(eventId: number) {
     .set({
       eventCapacityRemaining: sql`${events.eventCapacityRemaining} + 1`,
     })
-    .where(eq(events.id, eventId))
+    .where(eq(events.stripePriceId, priceId))
     .returning();
 
   return releasedTicket;

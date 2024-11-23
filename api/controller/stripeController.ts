@@ -1,7 +1,7 @@
 import express, { Request, Response, Router, json } from "express";
 import asyncHandler from "../middleware/asyncHandler";
 import {
-  isTicketAvailableByEventId,
+  isTicketAvailableByPriceId,
   reserveTicket,
   releaseReservedTicket,
   completeTicketPurchase,
@@ -14,7 +14,7 @@ const endpointSecret: string = process.env.STRIPE_WEBHOOK_ENDPOINT as string;
 // Create a checkout session based on priceId. Send a client secret back (cs_ABCD123)
 export const createEventCheckoutSession = asyncHandler(
   async (req: Request, res: Response) => {
-    const { priceId, eventId } = req.body;
+    const { priceId } = req.body;
 
     // if priceId is undefined, send a 404 back.
     if (priceId == undefined || priceId == "") {
@@ -26,17 +26,7 @@ export const createEventCheckoutSession = asyncHandler(
         .status(404);
     }
 
-    //check eventId validity
-    if (!eventId || eventId == "") {
-      return res
-        .send({
-          error:
-            "This event does not exist, or is not available for sale at the moment.",
-        })
-        .status(404);
-    }
-
-    let ticketAvailable = await isTicketAvailableByEventId(eventId);
+    let ticketAvailable = await isTicketAvailableByPriceId(priceId);
 
     if (ticketAvailable == false) {
       return res.send({
@@ -44,7 +34,7 @@ export const createEventCheckoutSession = asyncHandler(
           "There are no tickets available for this event. Please come back later to see if more tickets become available.",
       });
     } else {
-      reserveTicket(0);
+      reserveTicket(priceId);
     }
 
     // epoch time in seconds, 30mins timeout
@@ -69,7 +59,7 @@ export const createEventCheckoutSession = asyncHandler(
 
         //changeable below:
         // use metadata property
-        metadata: { eventId: `${eventId}` },
+        metadata: { priceId: `${priceId}` },
       });
 
       res.send({ clientSecret: session.client_secret });
@@ -109,9 +99,9 @@ export const handleWebhook = asyncHandler(
 
         if (
           session.metadata != null &&
-          session.metadata["eventId"] != undefined
+          session.metadata["priceId"] != undefined
         ) {
-          releaseReservedTicket(parseInt(session.metadata["eventId"]));
+          releaseReservedTicket(session.metadata["priceId"]);
         }
       }
     } catch (err) {
