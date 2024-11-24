@@ -7,6 +7,9 @@ import { useEffect, useState } from "react";
 import { PurchasableMembership } from "../types/types";
 import { Mapper } from "@utils/Mapper";
 import LoadingSpinner from "@components/LoadingSpinner";
+import { QueryClient, useQueryClient, useQuery as useQueryTanstack } from "@tanstack/react-query";
+import axios from "axios";
+import { useUserMembership } from "../hooks/api/useUserMembership";
 
 export default function MembershipScreen({ navbar }: { navbar: JSX.Element }) {
   const MEMBERSHIP_ACTIVE = true;
@@ -17,6 +20,9 @@ export default function MembershipScreen({ navbar }: { navbar: JSX.Element }) {
     error: purchasableMembershipsError,
   } = useQuery(GET_PURCHASEABLE_MEMBERSHIPS);
 
+  const queryClient = useQueryClient()
+  const { status, data, error, isFetching } = useUserMembership()
+
   // States
   const [purchasableMemberships, setPurchasableMembership] = useState<
     PurchasableMembership[]
@@ -24,6 +30,14 @@ export default function MembershipScreen({ navbar }: { navbar: JSX.Element }) {
   const [loadingPurchasableMembership, setLoadingPurchasableMembership] =
     useState(true);
   const [errorPurchasableMembership, setErrorPurchasableMembership] =
+    useState(false);
+
+    const [userMembershipStatus, setUserMembershipStatus] = useState<
+    Date
+  >();
+  const [loadingUserMembershipStatus, setLoadingUserMembershipStatus] =
+    useState(true);
+  const [errorUserMembershipStatus, setErrorUserMembershipStatus] =
     useState(false);
 
   // useEffect
@@ -50,6 +64,26 @@ export default function MembershipScreen({ navbar }: { navbar: JSX.Element }) {
     purchasableMembershipsLoading,
   ]);
 
+  useEffect(() => {
+    // var temp = queryClient.getQueryData(['user'])
+    if (status == 'pending') {
+      setLoadingUserMembershipStatus(false);
+    }
+
+    if (status == 'error') {
+      setErrorUserMembershipStatus(true);
+    }
+
+    if (status == 'success') {
+      try {
+        // const mappedValues = Mapper.mapToValue(valuesData);
+        setUserMembershipStatus(new Date(data.member_expiry_date)); // TODO - add check to make sure this exisists and is current 
+      } catch (error) {
+        setErrorUserMembershipStatus(true);
+      }
+    }
+  }, []);
+
   return (
     <>
       <div className="from-AUIS-dark-teal to-AUIS-teal min-h-svh bg-gradient-to-b pb-20">
@@ -57,7 +91,7 @@ export default function MembershipScreen({ navbar }: { navbar: JSX.Element }) {
         <h1 className="mx-3 pb-2 text-center text-5xl font-bold text-white">
           Memberships
         </h1>
-        {MEMBERSHIP_ACTIVE ? (
+        {data ? (
           <div>
             <h1 className="text-center text-xl text-white">
               Your current membership expires on:{" "}
