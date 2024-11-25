@@ -5,7 +5,7 @@ export interface User {
   id: number;
   institution: string;
   is_member: boolean;
-  member_expiry_date: string;
+  memberExpiryDate: string;
   name: string;
   published_at: string;
   status: string;

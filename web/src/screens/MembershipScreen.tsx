@@ -53,7 +53,7 @@ export default function MembershipScreen({ navbar }: { navbar: JSX.Element }) {
         const mappedPurchaseableMemberships =
           Mapper.mapToPurchasableMemberships(purchasableMembershipsData);
         setPurchasableMembership(mappedPurchaseableMemberships);
-        console.log(purchasableMemberships);
+        // console.log(purchasableMemberships);
       } catch (error) {
         setErrorPurchasableMembership(true);
       }
@@ -77,7 +77,9 @@ export default function MembershipScreen({ navbar }: { navbar: JSX.Element }) {
     if (status == 'success') {
       try {
         // const mappedValues = Mapper.mapToValue(valuesData);
-        setUserMembershipStatus(new Date(data.member_expiry_date)); // TODO - add check to make sure this exisists and is current 
+        console.log("IRAN")
+        console.log(data[0].memberExpiryDate)
+        setUserMembershipStatus(new Date(data[0].memberExpiryDate)); // TODO - add check to make sure this exisists and is current 
       } catch (error) {
         setErrorUserMembershipStatus(true);
       }
@@ -94,7 +96,7 @@ export default function MembershipScreen({ navbar }: { navbar: JSX.Element }) {
         {data ? (
           <div>
             <h1 className="text-center text-xl text-white">
-              Your current membership expires on:{" "}
+              Your current membership expires on: {data[0].memberExpiryDate}
             </h1>
             <div className="flex justify-center">
               <div className="">

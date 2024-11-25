@@ -7,6 +7,7 @@ import {
   updateUserInfo,
   updateUserMetadata,
   deleteUserMetadata,
+  getTest,
 } from "../controller/userController";
 
 const router = Router();
@@ -14,6 +15,7 @@ const router = Router();
 router.get("/users", getAllUsers);
 router.post("/update-user-info", verifySession(), updateUserInfo);
 router.get("/get-metadata", verifySession(), getUserMetadata);
+router.get("/test",verifySession(), getTest);
 router.post("/update-metadata", verifySession(), updateUserMetadata);
 router.post("/delete-metadata", verifySession());
 

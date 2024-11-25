@@ -3,7 +3,7 @@ import { fetchUser } from "../../api/apiRequests";
 import { User } from "../../types/backend-types";
 
 export const useUserMembership = () => {
-    return useQuery({
+    return useQuery<User[], Error>({
         queryKey: ['user'],
         queryFn: fetchUser,
       })
