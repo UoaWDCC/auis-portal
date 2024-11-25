@@ -7,7 +7,11 @@ import { useEffect, useState } from "react";
 import { PurchasableMembership } from "../types/types";
 import { Mapper } from "@utils/Mapper";
 import LoadingSpinner from "@components/LoadingSpinner";
-import { QueryClient, useQueryClient, useQuery as useQueryTanstack } from "@tanstack/react-query";
+import {
+  QueryClient,
+  useQueryClient,
+  useQuery as useQueryTanstack,
+} from "@tanstack/react-query";
 import axios from "axios";
 import { useUserMembership } from "../hooks/api/useUserMembership";
 
@@ -20,8 +24,8 @@ export default function MembershipScreen({ navbar }: { navbar: JSX.Element }) {
     error: purchasableMembershipsError,
   } = useQuery(GET_PURCHASEABLE_MEMBERSHIPS);
 
-  const queryClient = useQueryClient()
-  const { status, data, error, isFetching } = useUserMembership()
+  const queryClient = useQueryClient();
+  const { status, data, error, isFetching } = useUserMembership();
 
   // States
   const [purchasableMemberships, setPurchasableMembership] = useState<
@@ -32,9 +36,7 @@ export default function MembershipScreen({ navbar }: { navbar: JSX.Element }) {
   const [errorPurchasableMembership, setErrorPurchasableMembership] =
     useState(false);
 
-    const [userMembershipStatus, setUserMembershipStatus] = useState<
-    Date
-  >();
+  const [userMembershipStatus, setUserMembershipStatus] = useState<Date>();
   const [loadingUserMembershipStatus, setLoadingUserMembershipStatus] =
     useState(true);
   const [errorUserMembershipStatus, setErrorUserMembershipStatus] =
@@ -66,18 +68,18 @@ export default function MembershipScreen({ navbar }: { navbar: JSX.Element }) {
 
   useEffect(() => {
     // var temp = queryClient.getQueryData(['user'])
-    if (status == 'pending') {
+    if (status == "pending") {
       setLoadingUserMembershipStatus(false);
     }
 
-    if (status == 'error') {
+    if (status == "error") {
       setErrorUserMembershipStatus(true);
     }
 
-    if (status == 'success') {
+    if (status == "success") {
       try {
         // const mappedValues = Mapper.mapToValue(valuesData);
-        console.log("IRAN")
+        console.log("I RAN")
         console.log(data[0].memberExpiryDate)
         setUserMembershipStatus(new Date(data[0].memberExpiryDate)); // TODO - add check to make sure this exisists and is current 
       } catch (error) {
