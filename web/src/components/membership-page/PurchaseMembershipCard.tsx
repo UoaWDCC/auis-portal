@@ -9,10 +9,12 @@ export default function PurchaseMembershipCard({
 }) {
   const expiryDate = new Date(purchasableMembership.expiry);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   function handleClick() {
-    navigate("/checkout", { state: { data: purchasableMembership.stripeLink } })
+    navigate("/checkout", {
+      state: { data: purchasableMembership.stripeLink },
+    });
   }
 
   return (
@@ -49,9 +51,12 @@ export default function PurchaseMembershipCard({
               target="_blank"
               rel="noopener noreferrer"
             > */}
-              <button onClick={handleClick} className="bg-primary-orange my-5 rounded-full px-10 py-3 text-2xl font-bold text-white transition-all hover:scale-110">
-                Purchase
-              </button>
+            <button
+              onClick={handleClick}
+              className="bg-primary-orange my-5 rounded-full px-10 py-3 text-2xl font-bold text-white transition-all hover:scale-110"
+            >
+              Purchase
+            </button>
             {/* </a> */}
           </div>
         </div>

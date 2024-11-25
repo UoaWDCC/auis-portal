@@ -18,7 +18,7 @@ function CheckoutScreen({ stripeKey }: { stripeKey?: string }) {
     bodyData = { priceId: stripeKey };
   }
 
-  const location = useLocation()
+  const location = useLocation();
   // console.log(location.state.data)
 
   const fetchClientSecret = useCallback(async () => {
