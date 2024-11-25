@@ -79,9 +79,9 @@ export default function MembershipScreen({ navbar }: { navbar: JSX.Element }) {
     if (status == "success") {
       try {
         // const mappedValues = Mapper.mapToValue(valuesData);
-        console.log("I RAN")
-        console.log(data[0].memberExpiryDate)
-        setUserMembershipStatus(new Date(data[0].memberExpiryDate)); // TODO - add check to make sure this exisists and is current 
+        console.log("I RAN");
+        console.log(data[0].memberExpiryDate);
+        setUserMembershipStatus(new Date(data[0].memberExpiryDate)); // TODO - add check to make sure this exisists and is current
       } catch (error) {
         setErrorUserMembershipStatus(true);
       }

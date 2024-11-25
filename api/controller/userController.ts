@@ -90,25 +90,23 @@ export const updateUserMetadata = asyncHandler(
 );
 
 // NEED TO ENSURE USER IS LOGGED IN
-export const getTest = asyncHandler(
-  async (req: Request, res: Response) => {
-    try {
-      // const session = req.session!;
-      // const userId = session.getUserId();
-      const idk = await db
-  .select()
-	.from(peoples)
-	.where(eq(peoples.email, "a@a.com"))
+export const getTest = asyncHandler(async (req: Request, res: Response) => {
+  try {
+    // const session = req.session!;
+    // const userId = session.getUserId();
+    const idk = await db
+      .select()
+      .from(peoples)
+      .where(eq(peoples.email, "a@a.com"));
 
-      // const { metadata } = await UserMetadata.getUserMetadata(userId);
-      res.status(200).json(idk);
-    } catch (error) {
-      res.status(500).json({
-        message: "Unknown error occurred while trying to get User Metadata",
-      });
-    }
+    // const { metadata } = await UserMetadata.getUserMetadata(userId);
+    res.status(200).json(idk);
+  } catch (error) {
+    res.status(500).json({
+      message: "Unknown error occurred while trying to get User Metadata",
+    });
   }
-);
+});
 
 export const getUserMetadata = asyncHandler(
   async (req: Request, res: Response) => {
