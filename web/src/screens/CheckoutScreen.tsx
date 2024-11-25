@@ -4,6 +4,7 @@ import {
   EmbeddedCheckoutProvider,
   EmbeddedCheckout,
 } from "@stripe/react-stripe-js";
+import { useLocation } from "react-router";
 
 const STRIPE_PUBLISHABLE_KEY = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
 
@@ -17,13 +18,16 @@ function CheckoutScreen({ stripeKey }: { stripeKey?: string }) {
     bodyData = { priceId: stripeKey };
   }
 
+  const location = useLocation()
+  // console.log(location.state.data)
+
   const fetchClientSecret = useCallback(async () => {
     // Create a Checkout Session
     return await fetch("/api/stripe/create-event-checkout", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       // add our own priceId here later for different products
-      body: JSON.stringify(bodyData),
+      body: JSON.stringify(location.state.data),
     })
       .then((res) => res.json())
       .then((data) => data.clientSecret);

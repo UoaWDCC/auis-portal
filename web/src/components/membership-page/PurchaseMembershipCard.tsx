@@ -1,3 +1,4 @@
+import { useNavigate, useNavigation } from "react-router";
 import auisLogo2 from "../../assets/peacock.png";
 import { PurchasableMembership } from "../../types/types";
 
@@ -7,6 +8,12 @@ export default function PurchaseMembershipCard({
   purchasableMembership: PurchasableMembership;
 }) {
   const expiryDate = new Date(purchasableMembership.expiry);
+
+  const navigate = useNavigate()
+
+  function handleClick() {
+    navigate("/checkout", { state: { data: purchasableMembership.stripeLink } })
+  }
 
   return (
     <div className="drop-shadow-all m-5 rounded-lg border-8 border-[#F3CF0B] bg-white">
@@ -37,15 +44,15 @@ export default function PurchaseMembershipCard({
             {purchasableMembership.description}
           </p>
           <div className="flex items-center justify-center">
-            <a
+            {/* <a
               href={purchasableMembership.stripeLink}
               target="_blank"
               rel="noopener noreferrer"
-            >
-              <button className="bg-primary-orange my-5 rounded-full px-10 py-3 text-2xl font-bold text-white transition-all hover:scale-110">
+            > */}
+              <button onClick={handleClick} className="bg-primary-orange my-5 rounded-full px-10 py-3 text-2xl font-bold text-white transition-all hover:scale-110">
                 Purchase
               </button>
-            </a>
+            {/* </a> */}
           </div>
         </div>
       </div>
