@@ -1,5 +1,5 @@
 import express, { Router, json } from "express";
-import { protect } from "../middleware/authMiddleware";
+import { verifySession } from "supertokens-node/recipe/session/framework/express";
 import {
   createCheckout,
   getSessionStatus,
@@ -8,12 +8,10 @@ import {
 
 const router = Router();
 
-// Only allowed to access if the user is logged in.
-//router.use(protect);
+router.get("/session-status", verifySession(), getSessionStatus);
+router.post("/create-checkout", verifySession(), createCheckout);
 
-router.get("/session-status", getSessionStatus);
-router.post("/create-checkout", createCheckout);
-
+// do not protect this route
 router.post(
   "/webhook",
   // Stripe requires the raw body to construct the event
