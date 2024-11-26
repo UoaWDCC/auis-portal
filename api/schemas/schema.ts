@@ -641,6 +641,49 @@ export const answers = pgTable(
   }
 );
 
+export const events = pgTable(
+  "events",
+  {
+    id: serial("id").primaryKey().notNull(),
+    title: varchar("title", { length: 255 }),
+    subtitle: varchar("subtitle", { length: 255 }),
+    location: varchar("location", { length: 255 }),
+    locationLink: varchar("location_link", { length: 255 }),
+    eventDateStart: timestamp("event_date_start", {
+      precision: 6,
+      mode: "string",
+    }),
+    eventDateEnd: timestamp("event_date_end", { precision: 6, mode: "string" }),
+    eventCapacity: integer("event_capacity"),
+    isLive: boolean("is_live"),
+    termsAndConditions: text("terms_and_conditions"),
+    eventCapacityRemaining: integer("event_capacity_remaining"),
+    description: text("description"),
+    stripePriceId: varchar("stripe_price_id", { length: 255 }),
+    createdAt: timestamp("created_at", { precision: 6, mode: "string" }),
+    updatedAt: timestamp("updated_at", { precision: 6, mode: "string" }),
+    publishedAt: timestamp("published_at", { precision: 6, mode: "string" }),
+    createdById: integer("created_by_id").references(() => adminUsers.id, {
+      onDelete: "set null",
+    }),
+    updatedById: integer("updated_by_id").references(() => adminUsers.id, {
+      onDelete: "set null",
+    }),
+  },
+  (table) => {
+    return {
+      createdByIdFk: index("events_created_by_id_fk").using(
+        "btree",
+        table.createdById
+      ),
+      updatedByIdFk: index("events_updated_by_id_fk").using(
+        "btree",
+        table.updatedById
+      ),
+    };
+  }
+);
+
 export const eventGalleries = pgTable(
   "event_galleries",
   {
@@ -1569,49 +1612,6 @@ export const userTicketsTicketIdLinks = pgTable(
   }
 );
 
-export const events = pgTable(
-  "events",
-  {
-    id: serial("id").primaryKey().notNull(),
-    title: varchar("title", { length: 255 }),
-    subtitle: varchar("subtitle", { length: 255 }),
-    location: varchar("location", { length: 255 }),
-    locationLink: varchar("location_link", { length: 255 }),
-    eventDateStart: timestamp("event_date_start", {
-      precision: 6,
-      mode: "string",
-    }),
-    eventDateEnd: timestamp("event_date_end", { precision: 6, mode: "string" }),
-    eventCapacity: integer("event_capacity"),
-    isLive: boolean("is_live"),
-    termsAndConditions: text("terms_and_conditions"),
-    eventCapacityRemaining: integer("event_capacity_remaining"),
-    description: text("description"),
-    createdAt: timestamp("created_at", { precision: 6, mode: "string" }),
-    updatedAt: timestamp("updated_at", { precision: 6, mode: "string" }),
-    publishedAt: timestamp("published_at", { precision: 6, mode: "string" }),
-    createdById: integer("created_by_id").references(() => adminUsers.id, {
-      onDelete: "set null",
-    }),
-    updatedById: integer("updated_by_id").references(() => adminUsers.id, {
-      onDelete: "set null",
-    }),
-    stripePriceId: varchar("stripe_price_id", { length: 255 }),
-  },
-  (table) => {
-    return {
-      createdByIdFk: index("events_created_by_id_fk").using(
-        "btree",
-        table.createdById
-      ),
-      updatedByIdFk: index("events_updated_by_id_fk").using(
-        "btree",
-        table.updatedById
-      ),
-    };
-  }
-);
-
 export const roles = pgTable(
   "roles",
   {
@@ -1963,12 +1963,12 @@ export const useridMapping = pgTable(
         columns: [table.appId, table.supertokensUserId, table.externalUserId],
         name: "userid_mapping_pkey",
       }),
-      useridMappingExternalUserIdKey: unique(
-        "userid_mapping_external_user_id_key"
-      ).on(table.appId, table.externalUserId),
       useridMappingSupertokensUserIdKey: unique(
         "userid_mapping_supertokens_user_id_key"
       ).on(table.appId, table.supertokensUserId),
+      useridMappingExternalUserIdKey: unique(
+        "userid_mapping_external_user_id_key"
+      ).on(table.appId, table.externalUserId),
     };
   }
 );
@@ -2197,31 +2197,6 @@ export const jwtSigningKeys = pgTable(
   }
 );
 
-export const passwordlessUsers = pgTable(
-  "passwordless_users",
-  {
-    appId: varchar("app_id", { length: 64 }).default("public").notNull(),
-    userId: char("user_id", { length: 36 }).notNull(),
-    email: varchar("email", { length: 256 }),
-    phoneNumber: varchar("phone_number", { length: 256 }),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    timeJoined: bigint("time_joined", { mode: "number" }).notNull(),
-  },
-  (table) => {
-    return {
-      passwordlessUsersUserIdFkey: foreignKey({
-        columns: [table.appId, table.userId],
-        foreignColumns: [appIdToUserId.appId, appIdToUserId.userId],
-        name: "passwordless_users_user_id_fkey",
-      }).onDelete("cascade"),
-      passwordlessUsersPkey: primaryKey({
-        columns: [table.appId, table.userId],
-        name: "passwordless_users_pkey",
-      }),
-    };
-  }
-);
-
 export const passwordlessUserToTenant = pgTable(
   "passwordless_user_to_tenant",
   {
@@ -2252,6 +2227,31 @@ export const passwordlessUserToTenant = pgTable(
       passwordlessUserToTenantPhoneNumberKey: unique(
         "passwordless_user_to_tenant_phone_number_key"
       ).on(table.appId, table.tenantId, table.phoneNumber),
+    };
+  }
+);
+
+export const passwordlessUsers = pgTable(
+  "passwordless_users",
+  {
+    appId: varchar("app_id", { length: 64 }).default("public").notNull(),
+    userId: char("user_id", { length: 36 }).notNull(),
+    email: varchar("email", { length: 256 }),
+    phoneNumber: varchar("phone_number", { length: 256 }),
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    timeJoined: bigint("time_joined", { mode: "number" }).notNull(),
+  },
+  (table) => {
+    return {
+      passwordlessUsersUserIdFkey: foreignKey({
+        columns: [table.appId, table.userId],
+        foreignColumns: [appIdToUserId.appId, appIdToUserId.userId],
+        name: "passwordless_users_user_id_fkey",
+      }).onDelete("cascade"),
+      passwordlessUsersPkey: primaryKey({
+        columns: [table.appId, table.userId],
+        name: "passwordless_users_pkey",
+      }),
     };
   }
 );

@@ -18,6 +18,7 @@ import {
   upRoles,
   upUsers,
   answers,
+  events,
   eventGalleries,
   execs,
   introductions,
@@ -45,7 +46,6 @@ import {
   answersQuestionIdLinks,
   questionsTicketIdLinks,
   ticketsEventIdLinks,
-  events,
   userTicketsPeopleIdLinks,
   userTicketsTicketIdLinks,
   apps,
@@ -71,8 +71,8 @@ import {
   emailpasswordPswdResetTokens,
   thirdpartyUserToTenant,
   jwtSigningKeys,
-  passwordlessUsers,
   passwordlessUserToTenant,
+  passwordlessUsers,
   dashboardUsers,
   dashboardUserSessions,
   emailverificationTokens,
@@ -220,6 +220,12 @@ export const adminUsersRelations = relations(adminUsers, ({ one, many }) => ({
   answers_updatedById: many(answers, {
     relationName: "answers_updatedById_adminUsers_id",
   }),
+  events_createdById: many(events, {
+    relationName: "events_createdById_adminUsers_id",
+  }),
+  events_updatedById: many(events, {
+    relationName: "events_updatedById_adminUsers_id",
+  }),
   eventGalleries_createdById: many(eventGalleries, {
     relationName: "eventGalleries_createdById_adminUsers_id",
   }),
@@ -299,12 +305,6 @@ export const adminUsersRelations = relations(adminUsers, ({ one, many }) => ({
     relationName: "values_updatedById_adminUsers_id",
   }),
   adminUsersRolesLinks: many(adminUsersRolesLinks),
-  events_createdById: many(events, {
-    relationName: "events_createdById_adminUsers_id",
-  }),
-  events_updatedById: many(events, {
-    relationName: "events_updatedById_adminUsers_id",
-  }),
 }));
 
 export const adminPermissionsRelations = relations(
@@ -559,6 +559,20 @@ export const answersRelations = relations(answers, ({ one, many }) => ({
   }),
   answersPeopleIdLinks: many(answersPeopleIdLinks),
   answersQuestionIdLinks: many(answersQuestionIdLinks),
+}));
+
+export const eventsRelations = relations(events, ({ one, many }) => ({
+  adminUser_createdById: one(adminUsers, {
+    fields: [events.createdById],
+    references: [adminUsers.id],
+    relationName: "events_createdById_adminUsers_id",
+  }),
+  adminUser_updatedById: one(adminUsers, {
+    fields: [events.updatedById],
+    references: [adminUsers.id],
+    relationName: "events_updatedById_adminUsers_id",
+  }),
+  ticketsEventIdLinks: many(ticketsEventIdLinks),
 }));
 
 export const eventGalleriesRelations = relations(eventGalleries, ({ one }) => ({
@@ -938,20 +952,6 @@ export const ticketsEventIdLinksRelations = relations(
   })
 );
 
-export const eventsRelations = relations(events, ({ one, many }) => ({
-  ticketsEventIdLinks: many(ticketsEventIdLinks),
-  adminUser_createdById: one(adminUsers, {
-    fields: [events.createdById],
-    references: [adminUsers.id],
-    relationName: "events_createdById_adminUsers_id",
-  }),
-  adminUser_updatedById: one(adminUsers, {
-    fields: [events.updatedById],
-    references: [adminUsers.id],
-    relationName: "events_updatedById_adminUsers_id",
-  }),
-}));
-
 export const userTicketsPeopleIdLinksRelations = relations(
   userTicketsPeopleIdLinks,
   ({ one }) => ({
@@ -1214,22 +1214,22 @@ export const jwtSigningKeysRelations = relations(jwtSigningKeys, ({ one }) => ({
   }),
 }));
 
-export const passwordlessUsersRelations = relations(
-  passwordlessUsers,
-  ({ one }) => ({
-    appIdToUserId: one(appIdToUserId, {
-      fields: [passwordlessUsers.appId],
-      references: [appIdToUserId.appId],
-    }),
-  })
-);
-
 export const passwordlessUserToTenantRelations = relations(
   passwordlessUserToTenant,
   ({ one }) => ({
     allAuthRecipeUser: one(allAuthRecipeUsers, {
       fields: [passwordlessUserToTenant.appId],
       references: [allAuthRecipeUsers.appId],
+    }),
+  })
+);
+
+export const passwordlessUsersRelations = relations(
+  passwordlessUsers,
+  ({ one }) => ({
+    appIdToUserId: one(appIdToUserId, {
+      fields: [passwordlessUsers.appId],
+      references: [appIdToUserId.appId],
     }),
   })
 );
