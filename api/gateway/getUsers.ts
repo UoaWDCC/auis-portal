@@ -7,7 +7,7 @@ import { stripe } from "../stripe/stripe";
 export async function getUserMembershipExpiryDate(
   userEmail: string
 ): Promise<string> {
-  let returnDate = "-1";
+  let returnDate = "";
 
   if (userEmail === "" || userEmail === undefined || userEmail === null) {
     throw new Error(
@@ -19,17 +19,24 @@ export async function getUserMembershipExpiryDate(
   let membershipExpiryDate = await db
     .select({ memberExpiryDate: peoples.memberExpiryDate })
     .from(peoples)
-    .where(eq(peoples.email, userEmail));
+    .where(eq(peoples.email, userEmail))
+    .limit(1);
 
-  if (membershipExpiryDate !== undefined || membershipExpiryDate !== null) {
-  }
-
-  console.log("getUserMembershipExpiryDate: ", membershipExpiryDate[0]);
-
-  if (membershipExpiryDate.length == 0) {
-    returnDate = "-1";
-  } else if (membershipExpiryDate.length == 1) {
-    returnDate = membershipExpiryDate[0].memberExpiryDate!;
+  if (membershipExpiryDate.length == 1) {
+    if (
+      membershipExpiryDate[0].memberExpiryDate === undefined ||
+      membershipExpiryDate[0].memberExpiryDate === null
+    ) {
+    } else if (
+      membershipExpiryDate[0].memberExpiryDate !== undefined ||
+      membershipExpiryDate[0].memberExpiryDate !== null
+    ) {
+      returnDate = membershipExpiryDate[0].memberExpiryDate;
+    }
+  } else if (membershipExpiryDate.length === 0) {
+    throw new Error(
+      "getUserMembershipExpiryDate: membershipExpiryDate.length was 0"
+    );
   }
 
   return returnDate;
