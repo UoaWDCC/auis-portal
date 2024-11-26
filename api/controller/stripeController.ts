@@ -50,9 +50,9 @@ export const createCheckout = asyncHandler(
       const session = await stripe.checkout.sessions.create({
         //do not change anything below
         ui_mode: "embedded",
-        invoice_creation: {
-          enabled: true,
-        },
+        // invoice_creation: {
+        //   enabled: true,
+        // },
         expires_at: session_expiry,
         line_items: [
           {
