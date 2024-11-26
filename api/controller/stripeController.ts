@@ -138,9 +138,3 @@ export const handleWebhook = asyncHandler(
     res.json({ received: true });
   }
 );
-
-export const templateFunction = asyncHandler(
-  async (req: Request, res: Response) => {
-    throw new Error("Not implemented yet");
-  }
-);
