@@ -7,6 +7,7 @@ import {
   completeTicketPurchase,
   isPriceIdForEvent,
 } from "../gateway/eventsGateway";
+import { updateUserMembershipExpiryDate } from "../gateway/getUsers";
 import Stripe from "stripe"; //Types and Interfaces
 import { stripe } from "../stripe/stripe";
 
@@ -50,6 +51,7 @@ export const createCheckout = asyncHandler(
       const session = await stripe.checkout.sessions.create({
         //do not change anything below
         ui_mode: "embedded",
+        //customer_email: "",
         // invoice_creation: {
         //   enabled: true,
         // },
@@ -113,7 +115,7 @@ export const handleWebhook = asyncHandler(
           } else if (session.metadata["isEventTicket"] === "n") {
             //check if isEventTicket == 'n'
             // then we just update the membership expiry in the peoples' field for the specific user.
-            throw new Error("isEventTicket: 'n' isn't handled at the moment.");
+            updateUserMembershipExpiryDate(session.id);
           }
         }
       } else if (event.type === "checkout.session.expired") {

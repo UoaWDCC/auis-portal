@@ -1,7 +1,8 @@
-import { peoples } from "../schemas/schema";
+import { peoples, purchasableMemberships } from "../schemas/schema";
 import { db } from "../db/config/db";
 import { User, UpdateUserInfoBody } from "../types/types";
 import { eq } from "drizzle-orm";
+import { stripe } from "../stripe/stripe";
 
 export async function getUserMembershipExpiryDate(
   userEmail: string
@@ -32,6 +33,54 @@ export async function getUserMembershipExpiryDate(
   }
 
   return returnDate;
+}
+
+export async function updateUserMembershipExpiryDate(
+  sessionId: string
+): Promise<void> {
+  if (sessionId === "" || sessionId === undefined || sessionId === null) {
+    throw new Error(
+      "updateUserMembershipExpiryDate: received invalid type for sessionId: " +
+        sessionId
+    );
+  }
+
+  //retrieve stripe session
+  const checkoutSession = await stripe.checkout.sessions.retrieve(sessionId, {
+    expand: ["line_items"],
+  });
+
+  try {
+    //since this is for memberships, get the current user by their email id
+    let customer = await db
+      .select()
+      .from(peoples)
+      .where(eq(peoples.email, checkoutSession.customer_details!.email!))
+      .limit(1);
+
+    //then, retrieve the price id from metadata from purchaseableMemberships
+    let expiryDate = await db
+      .select()
+      .from(purchasableMemberships)
+      .where(
+        eq(
+          purchasableMemberships.stripeLink,
+          checkoutSession.metadata!["priceId"]
+        )
+      )
+      .limit(1);
+
+    // then, apply the retrieved expiry date into the users' field
+    let updateExpiryDate = await db
+      .update(peoples)
+      .set({ memberExpiryDate: expiryDate[0].expiry })
+      .where(eq(peoples.email, checkoutSession.customer_details!.email!))
+      .returning({ expiryDate: peoples.memberExpiryDate });
+  } catch (error) {
+    throw new Error(
+      "Unknown error occurred while trying to update user membership: " + error
+    );
+  }
 }
 
 export async function insertUserBySuperToken(
