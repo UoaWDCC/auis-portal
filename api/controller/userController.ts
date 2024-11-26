@@ -1,17 +1,10 @@
 import { Request, Response } from "express";
 import asyncHandler from "../middleware/asyncHandler";
-import { getUsers } from "../gateway/getUsers";
+import { getUserMembershipExpiryDate } from "../gateway/getUsers";
 import UserMetadata from "supertokens-node/recipe/usermetadata";
 import { UpdateUserInfoBody } from "../types/types";
 import { getUser } from "supertokens-node";
 import { insertUserBySuperToken } from "../gateway/getUsers";
-import { db } from "../db/config/db";
-import { peoples } from "../schemas/schema";
-import { eq } from "drizzle-orm";
-
-export const getAllUsers = asyncHandler(async (req: Request, res: Response) => {
-  res.status(200).json(await getUsers());
-});
 
 export const updateUserInfo = asyncHandler(
   async (req: Request<{}, {}, UpdateUserInfoBody>, res: Response) => {
@@ -89,24 +82,26 @@ export const updateUserMetadata = asyncHandler(
   }
 );
 
-// NEED TO ENSURE USER IS LOGGED IN
-export const getTest = asyncHandler(async (req: Request, res: Response) => {
-  try {
-    // const session = req.session!;
-    // const userId = session.getUserId();
-    const idk = await db
-      .select()
-      .from(peoples)
-      .where(eq(peoples.email, "a@a.com"));
+export const getUserMembershipExpiry = asyncHandler(
+  async (req: Request, res: Response) => {
+    try {
+      const session = req.session!;
+      const userId = session.getUserId();
 
-    // const { metadata } = await UserMetadata.getUserMetadata(userId);
-    res.status(200).json(idk);
-  } catch (error) {
-    res.status(500).json({
-      message: "Unknown error occurred while trying to get User Metadata",
-    });
+      //get user email
+      const user = await getUser(userId);
+      const email = user?.emails[0];
+
+      let userExpiryDate = await getUserMembershipExpiryDate(email as string);
+
+      res.status(200).json(userExpiryDate);
+    } catch (error) {
+      res.status(500).json({
+        message: "Unknown error occurred while trying to get User Metadata",
+      });
+    }
   }
-});
+);
 
 export const getUserMetadata = asyncHandler(
   async (req: Request, res: Response) => {

@@ -3,8 +3,35 @@ import { db } from "../db/config/db";
 import { User, UpdateUserInfoBody } from "../types/types";
 import { eq } from "drizzle-orm";
 
-export async function getUsers(): Promise<User[]> {
-  return (await db.select().from(peoples)) as User[];
+export async function getUserMembershipExpiryDate(
+  userEmail: string
+): Promise<string> {
+  let returnDate = "-1";
+
+  if (userEmail === "" || userEmail === undefined || userEmail === null) {
+    throw new Error(
+      "getUserMembershipExpiryDate: received invalid type for userEmail: " +
+        userEmail
+    );
+  }
+
+  let membershipExpiryDate = await db
+    .select({ memberExpiryDate: peoples.memberExpiryDate })
+    .from(peoples)
+    .where(eq(peoples.email, userEmail));
+
+  if (membershipExpiryDate !== undefined || membershipExpiryDate !== null) {
+  }
+
+  console.log("getUserMembershipExpiryDate: ", membershipExpiryDate[0]);
+
+  if (membershipExpiryDate.length == 0) {
+    returnDate = "-1";
+  } else if (membershipExpiryDate.length == 1) {
+    returnDate = membershipExpiryDate[0].memberExpiryDate!;
+  }
+
+  return returnDate;
 }
 
 export async function insertUserBySuperToken(
@@ -15,6 +42,11 @@ export async function insertUserBySuperToken(
   if (userExists) {
     throw new Error(`User with email ${email} already exists.`);
   }*/
+
+  console.log(
+    "Status and institution for user info sign up is not inserted into peoples database table"
+  );
+  console.log("insertUserBySuperToken: received: ", data);
 
   const newUser = (await db
     .insert(peoples)
@@ -42,42 +74,4 @@ export async function doesUserExistByEmail(email: string): Promise<boolean> {
   });
 
   return user !== undefined && user !== null;
-}
-
-export async function insertUserByEmail(email: string): Promise<User[]> {
-  const userExists = await doesUserExistByEmail(email);
-
-  if (userExists) {
-    throw new Error(`User with email ${email} already exists.`);
-  }
-
-  const newUser = (await db
-    .insert(peoples)
-    .values({
-      email,
-      createdAt: new Date().toISOString(),
-      name: "",
-      universityId: "",
-      upi: "",
-      yearOfStudy: "",
-      studyField: "",
-      isMember: false,
-      status: "",
-      institution: "",
-    })
-    .returning()) as User[];
-
-  return newUser;
-}
-
-export async function deleteUserByEmail(): Promise<User[]> {
-  //get the users' email
-
-  //search db for email
-
-  //if exists: delete
-  //if not exists: return error
-
-  //modify below
-  return (await db.select().from(peoples)) as User[];
 }

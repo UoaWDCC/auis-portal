@@ -7,8 +7,8 @@ const apiClient = axios.create({
 
 // Define a function to fetch data
 export const fetchUser = async (): Promise<User[]> => {
-  const response = await apiClient.get("/api/user/test"); // Adjust endpoint as needed
-  // console.log(response.data[0].memberExpiryDate)
+  const response = await apiClient.get("/api/user/get-membership-expiry"); // Adjust endpoint as needed
+  console.log("fetchUserMembershipExpiry(FE): received: ", response);
   return response.data;
 };
 
