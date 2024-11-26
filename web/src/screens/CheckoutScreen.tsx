@@ -11,7 +11,7 @@ const STRIPE_PUBLISHABLE_KEY = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
 const stripePromise = loadStripe(`${STRIPE_PUBLISHABLE_KEY}`);
-let bodyData = { priceId: "price_1PSHWRP464csY2UpYpxvB2tk" };
+let bodyData = { priceId: "price_1PSHXPP464csY2Up4aKoSw6r" };
 
 function CheckoutScreen({ stripeKey }: { stripeKey?: string }) {
   if (stripeKey) {
@@ -19,15 +19,15 @@ function CheckoutScreen({ stripeKey }: { stripeKey?: string }) {
   }
 
   const location = useLocation();
-  // console.log(location.state.data)
+  console.log(bodyData)
 
   const fetchClientSecret = useCallback(async () => {
     // Create a Checkout Session
-    return await fetch("/api/stripe/create-event-checkout", {
+    return await fetch(`${import.meta.env.VITE_API_URL}/api/stripe/create-membership-checkout`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       // add our own priceId here later for different products
-      body: JSON.stringify(location.state.data),
+      body: JSON.stringify(bodyData),
     })
       .then((res) => res.json())
       .then((data) => data.clientSecret);

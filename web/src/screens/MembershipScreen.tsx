@@ -95,10 +95,10 @@ export default function MembershipScreen({ navbar }: { navbar: JSX.Element }) {
         <h1 className="mx-3 pb-2 text-center text-5xl font-bold text-white">
           Memberships
         </h1>
-        {data ? (
+        {!data ? (
           <div>
             <h1 className="text-center text-xl text-white">
-              Your current membership expires on: {data[0].memberExpiryDate}
+              {/* Your current membership expires on: {data[0].memberExpiryDate} */}
             </h1>
             <div className="flex justify-center">
               <div className="">

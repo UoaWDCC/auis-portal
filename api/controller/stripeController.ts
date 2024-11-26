@@ -15,6 +15,7 @@ const endpointSecret: string = process.env.STRIPE_WEBHOOK_ENDPOINT as string;
 export const createEventCheckoutSession = asyncHandler(
   async (req: Request, res: Response) => {
     const { priceId } = req.body;
+    // const priceId : string = "price_1PSHWRP464csY2UpYpxvB2tk"
 
     // if priceId is undefined, send a 404 back.
     if (priceId == undefined || priceId == "") {
@@ -26,16 +27,16 @@ export const createEventCheckoutSession = asyncHandler(
         .status(404);
     }
 
-    let ticketAvailable = await isTicketAvailableByPriceId(priceId);
+    // let ticketAvailable = await isTicketAvailableByPriceId(priceId);
 
-    if (ticketAvailable == false) {
-      return res.send({
-        error:
-          "There are no tickets available for this event. Please come back later to see if more tickets become available.",
-      });
-    } else {
-      reserveTicket(priceId);
-    }
+    // if (ticketAvailable == false) {
+    //   return res.send({
+    //     error:
+    //       "There are no tickets available for this event. Please come back later to see if more tickets become available.",
+    //   });
+    // } else {
+    //   reserveTicket(priceId);
+    // }
 
     // epoch time in seconds, 30mins timeout
     let session_expiry = Math.floor(new Date().getTime() / 1000 + 30 * 60);
