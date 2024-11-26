@@ -19,10 +19,10 @@ function CheckoutScreen({ stripeKey }: { stripeKey?: string }) {
   }
   const location = useLocation();
 
-  if (location.state.data){
+  if (location.state.data) {
     bodyData = { priceId: location.state.data };
   }
-  console.log(bodyData)
+  console.log(bodyData);
 
   const fetchClientSecret = useCallback(async () => {
     // Create a Checkout Session
