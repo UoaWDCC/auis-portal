@@ -12,14 +12,17 @@ const STRIPE_PUBLISHABLE_KEY = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
 const stripePromise = loadStripe(`${STRIPE_PUBLISHABLE_KEY}`);
-let bodyData = { priceId: "price_1Pwg1ZP464csY2Up9hCiwrhp" };
+let bodyData = { priceId: "" };
 
 function CheckoutScreen({ stripeKey }: { stripeKey?: string }) {
   if (stripeKey) {
     bodyData = { priceId: stripeKey };
   }
-
   const location = useLocation();
+
+  if (location.state.data) {
+    bodyData = { priceId: location.state.data };
+  }
   console.log(bodyData);
 
   const fetchClientSecret = useCallback(async () => {
