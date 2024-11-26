@@ -5,13 +5,14 @@ import {
   EmbeddedCheckout,
 } from "@stripe/react-stripe-js";
 import { useLocation } from "react-router";
+import { fetchEventOrMembershipCheckoutSecret } from "../api/apiRequests";
 
 const STRIPE_PUBLISHABLE_KEY = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
 const stripePromise = loadStripe(`${STRIPE_PUBLISHABLE_KEY}`);
-let bodyData = { priceId: "price_1PSHXPP464csY2Up4aKoSw6r" };
+let bodyData = { priceId: "price_1Pwg1ZP464csY2Up9hCiwrhp" };
 
 function CheckoutScreen({ stripeKey }: { stripeKey?: string }) {
   if (stripeKey) {
@@ -23,17 +24,7 @@ function CheckoutScreen({ stripeKey }: { stripeKey?: string }) {
 
   const fetchClientSecret = useCallback(async () => {
     // Create a Checkout Session
-    return await fetch(
-      `${import.meta.env.VITE_API_URL}/api/stripe/create-membership-checkout`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        // add our own priceId here later for different products
-        body: JSON.stringify(bodyData),
-      }
-    )
-      .then((res) => res.json())
-      .then((data) => data.clientSecret);
+    return await fetchEventOrMembershipCheckoutSecret(bodyData);
   }, []);
 
   // can be null to options.clientSecret or options.fetchClientSecret if you are performing an initial server-side render or when generating a static site.

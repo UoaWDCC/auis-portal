@@ -80,3 +80,28 @@ export async function completeTicketPurchase(sessionId: string) {
     db.insert(tickets).values({});
   }
 }
+
+export async function isPriceIdForEvent(priceId: string) {
+  let isPriceIdUsedForEventOrMembership = false;
+
+  if (priceId === "" || priceId === undefined || priceId === null) {
+    throw new Error(
+      "received invalid type for isPriceIdForEvent() in eventsGateway" + priceId
+    );
+  }
+
+  // search for this priceId
+  let isUsedForEvent = await db
+    .select()
+    .from(events)
+    .where(eq(events.stripePriceId, priceId));
+
+  // if array is 1, true. If 0, set to false.
+  if (isUsedForEvent.length == 1) {
+    isPriceIdUsedForEventOrMembership = true;
+  } else if (isUsedForEvent.length == 0) {
+    isPriceIdUsedForEventOrMembership = false;
+  }
+
+  return isPriceIdUsedForEventOrMembership;
+}

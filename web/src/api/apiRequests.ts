@@ -12,12 +12,11 @@ export const fetchUser = async (): Promise<User[]> => {
   return response.data;
 };
 
-//this specific function is experimental. Slightly unsafe to use. Conditionally creates a event checkout, or membership checkout session.
-export const fetchCheckoutSecret = async (payload: {
-  stripeKey: string;
-  isEventTicket: string;
+//Use this one to automatically create an Event or Membership checkout. Event checkout will decrement a ticket.
+export const fetchEventOrMembershipCheckoutSecret = async (payload: {
+  priceId: string;
 }): Promise<string> => {
-  return await fetch("/api/stripe/create-event-checkout", {
+  return await fetch("/api/stripe/create-checkout", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     // add our own priceId here later for different products
