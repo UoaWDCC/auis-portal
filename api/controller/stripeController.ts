@@ -108,9 +108,9 @@ export const handleWebhook = asyncHandler(
           session.metadata["priceId"] != undefined &&
           session.metadata["isEventTicket"] != undefined
         ) {
-          if (session.metadata["isEventTicket"] == "y") {
+          if (session.metadata["isEventTicket"] === "y") {
             completeTicketPurchase(session.id);
-          } else if (session.metadata["isEventTicket"] == "n") {
+          } else if (session.metadata["isEventTicket"] === "n") {
             //check if isEventTicket == 'n'
             // then we just update the membership expiry in the peoples' field for the specific user.
             throw new Error("isEventTicket: 'n' isn't handled at the moment.");
@@ -125,12 +125,13 @@ export const handleWebhook = asyncHandler(
           session.metadata["priceId"] != undefined &&
           session.metadata["isEventTicket"] != undefined
         ) {
-          if (session.metadata["isEventTicket"] == "y") {
+          if (session.metadata["isEventTicket"] === "y") {
             releaseReservedTicket(session.metadata["priceId"]);
           }
         }
       }
     } catch (err) {
+      console.log(`Webhook Error: ${err}`);
       res.status(400).send(`Webhook Error: ${err}`);
       return;
     }
