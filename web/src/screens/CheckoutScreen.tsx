@@ -19,16 +19,19 @@ function CheckoutScreen({ stripeKey }: { stripeKey?: string }) {
   }
 
   const location = useLocation();
-  console.log(bodyData)
+  console.log(bodyData);
 
   const fetchClientSecret = useCallback(async () => {
     // Create a Checkout Session
-    return await fetch(`${import.meta.env.VITE_API_URL}/api/stripe/create-membership-checkout`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      // add our own priceId here later for different products
-      body: JSON.stringify(bodyData),
-    })
+    return await fetch(
+      `${import.meta.env.VITE_API_URL}/api/stripe/create-membership-checkout`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        // add our own priceId here later for different products
+        body: JSON.stringify(bodyData),
+      }
+    )
       .then((res) => res.json())
       .then((data) => data.clientSecret);
   }, []);
