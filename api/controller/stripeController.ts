@@ -10,12 +10,18 @@ import {
 import { updateUserMembershipExpiryDate } from "../gateway/getUsers";
 import Stripe from "stripe"; //Types and Interfaces
 import { stripe } from "../stripe/stripe";
+import { getUser } from "supertokens-node";
 
 const endpointSecret: string = process.env.STRIPE_WEBHOOK_ENDPOINT as string;
 
 export const createCheckout = asyncHandler(
   async (req: Request, res: Response) => {
     const { priceId } = req.body;
+    const session = req.session!;
+    const user = await getUser(session.getUserId());
+
+    //prefill user email
+    const email = user?.emails[0];
 
     // if priceId is undefined, send a 404 back.
     if (priceId == undefined || priceId == "") {
@@ -51,7 +57,7 @@ export const createCheckout = asyncHandler(
       const session = await stripe.checkout.sessions.create({
         //do not change anything below
         ui_mode: "embedded",
-        //customer_email: "",
+        customer_email: `${email}`,
         // invoice_creation: {
         //   enabled: true,
         // },
