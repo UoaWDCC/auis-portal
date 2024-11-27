@@ -17,6 +17,11 @@ export const updateUserTicketInfo = asyncHandler(
 
       // TODO: Get clarification from Gury on what needs to be done here.
       // ex: database inserts into a table? Update a db record?
+      res.status(200).json({
+        name,
+        email,
+        phoneNumber,
+      });
     } catch (error) {
       res.status(500).json({
         message: "Unknown error occurred while trying to update user info",
