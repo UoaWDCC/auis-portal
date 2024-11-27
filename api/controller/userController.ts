@@ -24,7 +24,7 @@ export const updateUserTicketInfo = asyncHandler(
       });
     } catch (error) {
       res.status(500).json({
-        message: "Unknown error occurred while trying to update user info",
+        message: "Unknown error occurred for user ticket info",
       });
     }
   }
