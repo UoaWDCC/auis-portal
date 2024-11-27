@@ -163,3 +163,7 @@ export interface PurchasableMembership {
   stripeLink: string;
   description: string;
 }
+
+export interface membershipExpiryDate {
+  userExpiryDate : string;
+}

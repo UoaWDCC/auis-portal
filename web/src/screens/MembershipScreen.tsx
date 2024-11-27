@@ -7,16 +7,13 @@ import { useEffect, useState } from "react";
 import { PurchasableMembership } from "../types/types";
 import { Mapper } from "@utils/Mapper";
 import LoadingSpinner from "@components/LoadingSpinner";
-import {
-  QueryClient,
-  useQueryClient,
-  useQuery as useQueryTanstack,
-} from "@tanstack/react-query";
-import axios from "axios";
 import { useUserMembership } from "../hooks/api/useUserMembership";
+import { useSessionContext } from "supertokens-auth-react/recipe/session";
+
 
 export default function MembershipScreen({ navbar }: { navbar: JSX.Element }) {
-  const MEMBERSHIP_ACTIVE = true;
+  const session = useSessionContext();
+
   // Queries
   const {
     loading: purchasableMembershipsLoading,
@@ -24,8 +21,11 @@ export default function MembershipScreen({ navbar }: { navbar: JSX.Element }) {
     error: purchasableMembershipsError,
   } = useQuery(GET_PURCHASEABLE_MEMBERSHIPS);
 
-  const queryClient = useQueryClient();
-  const { status, data, error, isFetching } = useUserMembership();
+  const {
+    data: userMembershipExpiry,
+    error: errorUserMembership,
+    isLoading: loadingUserMembership,
+  } = useUserMembership();
 
   // States
   const [purchasableMemberships, setPurchasableMembership] = useState<
@@ -35,12 +35,13 @@ export default function MembershipScreen({ navbar }: { navbar: JSX.Element }) {
     useState(true);
   const [errorPurchasableMembership, setErrorPurchasableMembership] =
     useState(false);
+  const [userLoggedIn, setUserLoggedIn] = useState(false)
 
-  const [userMembershipStatus, setUserMembershipStatus] = useState<Date>();
-  const [loadingUserMembershipStatus, setLoadingUserMembershipStatus] =
-    useState(true);
-  const [errorUserMembershipStatus, setErrorUserMembershipStatus] =
-    useState(false);
+  useEffect(() =>{
+    if (session.loading === false){
+      setUserLoggedIn(session.doesSessionExist)
+    }
+  })
 
   // useEffect
   useEffect(() => {
@@ -66,27 +67,8 @@ export default function MembershipScreen({ navbar }: { navbar: JSX.Element }) {
     purchasableMembershipsLoading,
   ]);
 
-  useEffect(() => {
-    // var temp = queryClient.getQueryData(['user'])
-    if (status == "pending") {
-      setLoadingUserMembershipStatus(false);
-    }
-
-    if (status == "error") {
-      setErrorUserMembershipStatus(true);
-    }
-
-    if (status == "success") {
-      try {
-        // const mappedValues = Mapper.mapToValue(valuesData);
-        console.log("I RAN");
-        console.log(data[0].memberExpiryDate);
-        setUserMembershipStatus(new Date(data[0].memberExpiryDate)); // TODO - add check to make sure this exisists and is current
-      } catch (error) {
-        setErrorUserMembershipStatus(true);
-      }
-    }
-  }, []);
+  if ((loadingUserMembership && userLoggedIn) || loadingPurchasableMembership )
+    return <LoadingSpinner />;
 
   return (
     <>
@@ -95,10 +77,18 @@ export default function MembershipScreen({ navbar }: { navbar: JSX.Element }) {
         <h1 className="mx-3 pb-2 text-center text-5xl font-bold text-white">
           Memberships
         </h1>
-        {!data ? (
+        {userMembershipExpiry && !errorUserMembership && userLoggedIn  ? (
           <div>
             <h1 className="text-center text-xl text-white">
-              {/* Your current membership expires on: {data[0].memberExpiryDate} */}
+              Your current membership expires on:{" "}
+              {new Date(userMembershipExpiry.userExpiryDate).toLocaleDateString(
+                "default",
+                {
+                  day: "2-digit",
+                  month: "long",
+                  year: "numeric",
+                }
+              )}
             </h1>
             <div className="flex justify-center">
               <div className="">
@@ -115,8 +105,6 @@ export default function MembershipScreen({ navbar }: { navbar: JSX.Element }) {
               </div>
             </div>
           </div>
-        ) : loadingPurchasableMembership ? (
-          <LoadingSpinner />
         ) : errorPurchasableMembership ||
           purchasableMemberships.length === 0 ? (
           <div className="p-5 text-center text-white">
