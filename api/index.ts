@@ -34,7 +34,7 @@ supertokens.init({
     websiteBasePath: "/signup",
   },
   recipeList: getConfiguredRecipeList(),
-                });
+});
 
 //init user and admin roles in supertokens
 createRoles();
