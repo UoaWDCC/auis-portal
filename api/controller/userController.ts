@@ -1,10 +1,29 @@
 import { Request, Response } from "express";
 import asyncHandler from "../middleware/asyncHandler";
-import { getUserMembershipExpiryDate } from "../gateway/getUsers";
+import { getUserMembershipExpiryDate } from "../gateway/userGateway";
 import UserMetadata from "supertokens-node/recipe/usermetadata";
 import { UpdateUserInfoBody } from "../types/types";
 import { getUser } from "supertokens-node";
-import { insertUserBySuperToken } from "../gateway/getUsers";
+import { insertUserBySuperToken } from "../gateway/userGateway";
+
+export const updateUserTicketInfo = asyncHandler(
+  async (req: Request, res: Response) => {
+    try {
+      const { name, email, phoneNumber } = req.body;
+
+      if (!name || !email || !phoneNumber) {
+        return res.status(400).json({ message: "All fields are required" });
+      }
+
+      // TODO: Get clarification from Gury on what needs to be done here.
+      // ex: database inserts into a table? Update a db record?
+    } catch (error) {
+      res.status(500).json({
+        message: "Unknown error occurred while trying to update user info",
+      });
+    }
+  }
+);
 
 export const updateUserInfo = asyncHandler(
   async (req: Request<{}, {}, UpdateUserInfoBody>, res: Response) => {

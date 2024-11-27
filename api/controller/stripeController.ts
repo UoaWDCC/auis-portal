@@ -7,7 +7,7 @@ import {
   completeTicketPurchase,
   isPriceIdForEvent,
 } from "../gateway/eventsGateway";
-import { updateUserMembershipExpiryDate } from "../gateway/getUsers";
+import { updateUserMembershipExpiryDate } from "../gateway/userGateway";
 import Stripe from "stripe"; //Types and Interfaces
 import { stripe } from "../stripe/stripe";
 import { getUser } from "supertokens-node";

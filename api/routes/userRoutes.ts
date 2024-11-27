@@ -5,16 +5,15 @@ import {
   getUserMetadata,
   updateUserInfo,
   updateUserMetadata,
-  deleteUserMetadata,
   getUserMembershipExpiry,
 } from "../controller/userController";
 
 const router = Router();
 
 router.post("/update-user-info", verifySession(), updateUserInfo);
+router.post("/update-metadata", verifySession(), updateUserMetadata);
+router.post("/user-ticket-info", verifySession(), updateUserInfo);
 router.get("/get-metadata", verifySession(), getUserMetadata);
 router.get("/get-membership-expiry", verifySession(), getUserMembershipExpiry);
-router.post("/update-metadata", verifySession(), updateUserMetadata);
-router.post("/delete-metadata", verifySession());
 
 export default router;
