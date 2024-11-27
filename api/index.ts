@@ -12,12 +12,7 @@ import Dashboard from "supertokens-node/recipe/dashboard";
 import { middleware, errorHandler } from "supertokens-node/framework/express";
 
 // Import Routers
-import helloRoutes from "./routes/hello";
-import eventRoutes from "./routes/eventRoutes";
-import authRoutes from "./routes/authRoutes";
-import creditRoutes from "./routes/creditRoutes";
-import adminRoutes from "./routes/adminRoutes";
-import photoRoutes from "./routes/photoRoutes";
+import userRoutes from "./routes/userRoutes";
 import stripeRoutes from "./routes/stripeRoutes";
 
 import { notFound } from "./middleware/errorMiddleware";
