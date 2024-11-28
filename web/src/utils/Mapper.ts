@@ -14,6 +14,7 @@ import type {
   Ticket,
   PurchasableMembership,
   EventAndTicket,
+  TicketAndQuestion,
   // TicketAndQuestion,
 } from "../types/types";
 

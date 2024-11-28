@@ -1,3 +1,5 @@
+import { LargeNumberLike } from "crypto";
+
 export interface Exec {
   id: number;
   image: string;
@@ -137,6 +139,12 @@ export interface Question {
   id: number;
   question: string;
   checkForMemberEmail: boolean;
+}
+
+export interface TicketAndQuestion{
+  id: number,
+  name: string,
+  question: Question[]
 }
 
 export interface Ticket {

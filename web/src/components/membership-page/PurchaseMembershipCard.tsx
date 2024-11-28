@@ -16,7 +16,6 @@ export default function PurchaseMembershipCard({
   function handleClick() {
     console.log(purchasableMembership.membershipLinkBypass)
     if (purchasableMembership.membershipLinkBypass) {
-      // navigate("https://www.google.com");
       window.open(purchasableMembership.bypassMembershipLink, '_blank');
     } else {
       if (!session.loading) {
