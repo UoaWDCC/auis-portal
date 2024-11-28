@@ -1,6 +1,7 @@
 import { useNavigate, useNavigation } from "react-router";
 import auisLogo2 from "../../assets/peacock.png";
 import { PurchasableMembership } from "../../types/types";
+import { useSessionContext } from "supertokens-auth-react/recipe/session";
 
 export default function PurchaseMembershipCard({
   purchasableMembership,
@@ -10,11 +11,18 @@ export default function PurchaseMembershipCard({
   const expiryDate = new Date(purchasableMembership.expiry);
 
   const navigate = useNavigate();
+  const session = useSessionContext();
 
   function handleClick() {
-    navigate("/checkout", {
-      state: { data: purchasableMembership.stripeLink },
-    });
+    if (!session.loading) {
+      if (session.doesSessionExist) {
+        navigate("/checkout", {
+          state: { data: purchasableMembership.stripeLink },
+        });
+      } else {
+        navigate("/signup");
+      }
+    }
   }
 
   return (
