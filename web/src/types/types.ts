@@ -141,10 +141,10 @@ export interface Question {
   checkForMemberEmail: boolean;
 }
 
-export interface TicketAndQuestion{
-  id: number,
-  name: string,
-  question: Question[]
+export interface TicketAndQuestion {
+  id: number;
+  name: string;
+  question: Question[];
 }
 
 export interface Ticket {

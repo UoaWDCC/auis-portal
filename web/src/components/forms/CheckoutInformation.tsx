@@ -155,11 +155,16 @@ export default function CheckoutInformation({
       answer: string;
     }[]
   ) {
-    var valid : boolean = true
+    var valid: boolean = true;
 
     text.map((item) => {
-      console.log(item.answer.length)
-      if (item.answer.length > 20 || !item.answer.toLowerCase().match(/^(?=.*[a-zA-Z\d].*)[a-zA-Z\d!@#$%&*]{7,}$/)) {
+      console.log(item.answer.length);
+      if (
+        item.answer.length > 20 ||
+        !item.answer
+          .toLowerCase()
+          .match(/^(?=.*[a-zA-Z\d].*)[a-zA-Z\d!@#$%&*]{7,}$/)
+      ) {
         valid = false;
       }
     });
