@@ -47,7 +47,7 @@ export const createCheckout = asyncHandler(
         reserveTicket(priceId);
       }
     } else if (isEventTicket === "n") {
-      // do nothing for now.
+      // do nothing for now
     }
 
     // epoch time in seconds, 30mins timeout

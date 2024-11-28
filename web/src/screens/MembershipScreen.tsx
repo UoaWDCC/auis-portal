@@ -77,7 +77,7 @@ export default function MembershipScreen({ navbar }: { navbar: JSX.Element }) {
         <h1 className="mx-3 pb-2 text-center text-5xl font-bold text-white">
           Memberships
         </h1>
-        {userMembershipExpiry && !errorUserMembership && userLoggedIn  ? (
+        {userMembershipExpiry && !errorUserMembership && userLoggedIn && ((new Date(userMembershipExpiry.userExpiryDate)) >= new Date())  ? (
           <div>
             <h1 className="text-center text-xl text-white">
               Your current membership expires on:{" "}
