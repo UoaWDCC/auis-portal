@@ -318,7 +318,6 @@ export class Mapper {
   }
 
   static mapToPurchasableMemberships(data: any): PurchasableMembership[] {
-    
     if (
       !data.purchasableMemberships ||
       !data.purchasableMemberships.data ||

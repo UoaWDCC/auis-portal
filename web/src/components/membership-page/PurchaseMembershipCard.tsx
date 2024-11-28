@@ -14,10 +14,10 @@ export default function PurchaseMembershipCard({
   const session = useSessionContext();
 
   function handleClick() {
-    console.log(purchasableMembership.membershipLinkBypass)
+    console.log(purchasableMembership.membershipLinkBypass);
     if (purchasableMembership.membershipLinkBypass) {
       // navigate("https://www.google.com");
-      window.open(purchasableMembership.bypassMembershipLink, '_blank');
+      window.open(purchasableMembership.bypassMembershipLink, "_blank");
     } else {
       if (!session.loading) {
         if (session.doesSessionExist) {
