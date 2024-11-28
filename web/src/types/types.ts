@@ -165,5 +165,5 @@ export interface PurchasableMembership {
 }
 
 export interface membershipExpiryDate {
-  userExpiryDate : string;
+  userExpiryDate: string;
 }

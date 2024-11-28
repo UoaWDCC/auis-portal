@@ -10,7 +10,6 @@ import LoadingSpinner from "@components/LoadingSpinner";
 import { useUserMembership } from "../hooks/api/useUserMembership";
 import { useSessionContext } from "supertokens-auth-react/recipe/session";
 
-
 export default function MembershipScreen({ navbar }: { navbar: JSX.Element }) {
   const session = useSessionContext();
 
@@ -35,13 +34,13 @@ export default function MembershipScreen({ navbar }: { navbar: JSX.Element }) {
     useState(true);
   const [errorPurchasableMembership, setErrorPurchasableMembership] =
     useState(false);
-  const [userLoggedIn, setUserLoggedIn] = useState(false)
+  const [userLoggedIn, setUserLoggedIn] = useState(false);
 
-  useEffect(() =>{
-    if (session.loading === false){
-      setUserLoggedIn(session.doesSessionExist)
+  useEffect(() => {
+    if (session.loading === false) {
+      setUserLoggedIn(session.doesSessionExist);
     }
-  })
+  });
 
   // useEffect
   useEffect(() => {
@@ -67,7 +66,7 @@ export default function MembershipScreen({ navbar }: { navbar: JSX.Element }) {
     purchasableMembershipsLoading,
   ]);
 
-  if ((loadingUserMembership && userLoggedIn) || loadingPurchasableMembership )
+  if ((loadingUserMembership && userLoggedIn) || loadingPurchasableMembership)
     return <LoadingSpinner />;
 
   return (

@@ -118,7 +118,7 @@ export const getUserMembershipExpiry = asyncHandler(
 
       let userExpiryDate = await getUserMembershipExpiryDate(email as string);
 
-      res.status(200).json({userExpiryDate: userExpiryDate});
+      res.status(200).json({ userExpiryDate: userExpiryDate });
     } catch (error) {
       res.status(500).json({
         message: "Unknown error occurred while trying to get User Metadata",
