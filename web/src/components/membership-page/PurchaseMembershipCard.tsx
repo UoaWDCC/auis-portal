@@ -14,7 +14,7 @@ export default function PurchaseMembershipCard({
   const session = useSessionContext();
 
   function handleClick() {
-    console.log(purchasableMembership.membershipLinkBypass)
+    console.log(purchasableMembership.membershipLinkBypass);
     if (purchasableMembership.membershipLinkBypass) {
       window.open(purchasableMembership.bypassMembershipLink, '_blank');
     } else {
