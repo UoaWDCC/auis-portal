@@ -32,6 +32,14 @@
     "Description": {
       "type": "text",
       "required": true
+    },
+    "Membership_Link_Bypass": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "Bypass_Membership_Link": {
+      "type": "string"
     }
   }
 }

@@ -162,6 +162,8 @@ export interface PurchasableMembership {
   price: number;
   stripeLink: string;
   description: string;
+  membershipLinkBypass: boolean;
+  bypassMembershipLink: string;
 }
 
 export interface membershipExpiryDate {

@@ -55,7 +55,6 @@ export default function MembershipScreen({ navbar }: { navbar: JSX.Element }) {
         const mappedPurchaseableMemberships =
           Mapper.mapToPurchasableMemberships(purchasableMembershipsData);
         setPurchasableMembership(mappedPurchaseableMemberships);
-        // console.log(purchasableMemberships);
       } catch (error) {
         setErrorPurchasableMembership(true);
       }

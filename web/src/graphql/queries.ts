@@ -228,6 +228,8 @@ export const GET_PURCHASEABLE_MEMBERSHIPS = gql`
           Price
           Stripe_Link
           Description
+          Membership_Link_Bypass
+          Bypass_Membership_Link
         }
       }
     }

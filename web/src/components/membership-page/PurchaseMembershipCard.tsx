@@ -14,13 +14,19 @@ export default function PurchaseMembershipCard({
   const session = useSessionContext();
 
   function handleClick() {
-    if (!session.loading) {
-      if (session.doesSessionExist) {
-        navigate("/checkout", {
-          state: { data: purchasableMembership.stripeLink },
-        });
-      } else {
-        navigate("/signup");
+    console.log(purchasableMembership.membershipLinkBypass)
+    if (purchasableMembership.membershipLinkBypass) {
+      // navigate("https://www.google.com");
+      window.open(purchasableMembership.bypassMembershipLink, '_blank');
+    } else {
+      if (!session.loading) {
+        if (session.doesSessionExist) {
+          navigate("/checkout", {
+            state: { data: purchasableMembership.stripeLink },
+          });
+        } else {
+          navigate("/signup");
+        }
       }
     }
   }

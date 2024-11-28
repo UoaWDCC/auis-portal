@@ -39,7 +39,7 @@ import axios from "axios";
 
 //supertokens code
 SuperTokens.init({
-  enableDebugLogs: true,
+  // enableDebugLogs: false,
   appInfo: {
     // learn more about this on https://supertokens.com/docs/thirdpartyemailpassword/appinfo
     appName: "AUIS",

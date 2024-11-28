@@ -14,7 +14,7 @@ import type {
   Ticket,
   PurchasableMembership,
   EventAndTicket,
-  TicketAndQuestion,
+  // TicketAndQuestion,
 } from "../types/types";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -318,6 +318,7 @@ export class Mapper {
   }
 
   static mapToPurchasableMemberships(data: any): PurchasableMembership[] {
+    
     if (
       !data.purchasableMemberships ||
       !data.purchasableMemberships.data ||
@@ -334,6 +335,8 @@ export class Mapper {
           price: attributes.Price || 0,
           stripeLink: attributes.Stripe_Link,
           description: attributes.Description,
+          membershipLinkBypass: attributes.Membership_Link_Bypass || false,
+          bypassMembershipLink: attributes.Bypass_Membership_Link || "",
         };
       });
     }

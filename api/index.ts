@@ -20,7 +20,7 @@ const app = express();
 config();
 
 supertokens.init({
-  debug: true,
+  // debug: true,
   framework: "express",
   supertokens: {
     connectionURI: `${process.env.DOMAIN_SUPERTOKENS}`,
