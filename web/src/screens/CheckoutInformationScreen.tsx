@@ -16,8 +16,18 @@ import { useEffect, useState } from "react";
 import { Mapper } from "@utils/Mapper";
 import LoadingSpinner from "@components/LoadingSpinner";
 
-export default function CheckoutInformationScreen() {
+export default function CheckoutInformationScreen({
+  handleSubmita
+}: {
+   handleSubmita: (
+    e: React.FormEvent<HTMLFormElement>,
+  ) => void; 
+}) {
   const { id } = useParams();
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+      handleSubmita(event)
+  }
 
   const tic: Question = {
     id: 0,
@@ -92,7 +102,7 @@ export default function CheckoutInformationScreen() {
         <h1 className="mx-3 pb-2 text-center text-5xl font-bold text-white">
           Checkout Questions
         </h1>
-        <CheckoutInformation questions={event.question} />
+        <CheckoutInformation handleSubmit={(e) => handleSubmit(e)} questions={event.question} />
       </div>
     </>
   );

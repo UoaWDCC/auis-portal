@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import {
   EmbeddedCheckoutProvider,
@@ -6,6 +6,7 @@ import {
 } from "@stripe/react-stripe-js";
 import { useLocation } from "react-router";
 import { fetchEventOrMembershipCheckoutSecret } from "../api/apiRequests";
+import CheckoutInformationScreen from "./CheckoutInformationScreen";
 
 const STRIPE_PUBLISHABLE_KEY = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
 
@@ -13,6 +14,7 @@ const STRIPE_PUBLISHABLE_KEY = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
 // recreating the `Stripe` object on every render.
 const stripePromise = loadStripe(`${STRIPE_PUBLISHABLE_KEY}`);
 let bodyData = { priceId: "" };
+let isTicket = {isTicket: true}
 
 function CheckoutScreen({ stripeKey }: { stripeKey?: string }) {
   if (stripeKey) {
@@ -20,10 +22,18 @@ function CheckoutScreen({ stripeKey }: { stripeKey?: string }) {
   }
   const location = useLocation();
 
+  const [infoEntered, setInfoEntered] = useState(false)
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    console.log("I DI A THING")
+    setInfoEntered(true)
+}
+
   if (location.state.data) {
-    bodyData = { priceId: location.state.data };
+    bodyData = { priceId: location.state.data.priceId };
+    isTicket = { isTicket: location.state.data.isTicket}
   }
-  console.log(bodyData);
+  console.log(location.state.data);
 
   const fetchClientSecret = useCallback(async () => {
     // Create a Checkout Session
@@ -39,10 +49,14 @@ function CheckoutScreen({ stripeKey }: { stripeKey?: string }) {
         <h1 className="my-12 text-5xl font-bold text-white">Payment</h1>
       </div>
       <div className="item flex justify-center">
-        <div className="drop-shadow-all mb-12 flex w-[68rem] items-center justify-center rounded-lg bg-white p-5">
+        <div className={`drop-shadow-all mb-12  w-[68rem] flex items-center justify-center rounded-lg bg-white p-5 ${(isTicket.isTicket && !infoEntered)? "hidden" : "flex"}` }>
           <EmbeddedCheckoutProvider stripe={stripePromise} options={options}>
             <EmbeddedCheckout className="flex flex-grow" />
           </EmbeddedCheckoutProvider>
+        </div>
+        <div className={`
+           ${(isTicket.isTicket && !infoEntered)? "flex" : "hidden"}`}>
+          <CheckoutInformationScreen handleSubmita={(e) => handleSubmit(e)} />
         </div>
       </div>
     </div>

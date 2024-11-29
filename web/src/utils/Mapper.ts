@@ -187,7 +187,6 @@ export class Mapper {
   }
 
   static mapToEvent(data: any): EventAndTicket {
-    console.log(data);
     if (!data.event || !data.event.data || data.event.data.length === 0) {
       throw new NoDataError("No data");
     } else {
@@ -226,6 +225,7 @@ export class Mapper {
             isTicketLive: attributesTicket.Is_Ticket_Live || false,
             ticketBypassLink: attributesTicket.Ticket_Link_Bypass || true,
             bypassTicketLink: attributesTicket.Bypass_Ticket_Link || "",
+            stripeLink: attributesTicket.Stripe_Link || ""
           };
         }),
       };

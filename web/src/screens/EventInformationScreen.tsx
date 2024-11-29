@@ -13,6 +13,7 @@ import TermsAndConditions from "@components/event-information-page/TermsAndCondi
 import ContactInformation from "@components/event-information-page/ContactInformation";
 import LoadingSpinner from "@components/LoadingSpinner";
 import NoEventFound from "@components/event-information-page/NoEventFound";
+import { useSessionContext } from "supertokens-auth-react/recipe/session";
 
 export default function EventInformationScreen({
   navbar,
@@ -20,6 +21,7 @@ export default function EventInformationScreen({
   navbar: JSX.Element;
 }) {
   const { id } = useParams();
+
 
   const tic: Ticket = {
     id: 0,
@@ -33,8 +35,9 @@ export default function EventInformationScreen({
     ticketDescription: "descirption",
     startDateTicketSales: "string",
     isTicketLive: false,
-    ticketBypassLink: true,
+    ticketLinkBypass: true,
     bypassTicketLink: "https://google.com",
+    stripeLink: ""
   };
   const a: EventAndTicket = {
     id: 0,
@@ -87,6 +90,7 @@ export default function EventInformationScreen({
       try {
         const mappedEvent = Mapper.mapToEvent(eventData);
         setEvent(mappedEvent);
+        console.log("agdskfjd")
         console.log(event);
       } catch (error) {
         setErrorEvent(true);
@@ -162,9 +166,9 @@ export default function EventInformationScreen({
             isTicketLive={
               ticket.isTicketLive && new Date(event.eventDateStart) > new Date()
             }
-            bypass={ticket.ticketBypassLink}
+            bypass={ticket.ticketLinkBypass}
             bypassLink={ticket.bypassTicketLink}
-            // stripeLink={"IDK"}
+            stripeLink={ticket.stripeLink}
             title={ticket.name}
             isDouble={ticket.isDouble}
             price={ticket.price}

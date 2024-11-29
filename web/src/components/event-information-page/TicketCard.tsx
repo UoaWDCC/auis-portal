@@ -1,10 +1,12 @@
 import { useNavigate } from "react-router";
+import { ContinueWithPasswordlessTheme } from "supertokens-auth-react/lib/build/recipe/passwordless/components/themes/continueWithPasswordless";
+import { useSessionContext } from "supertokens-auth-react/recipe/session";
 
 interface LocationInformationProps {
   title: string;
   isDouble: boolean;
   price: number;
-  // stripeLink: string;
+  stripeLink: string;
   bypass: boolean;
   bypassLink: string;
   isTicketLive: boolean;
@@ -16,7 +18,7 @@ export default function TicketCard({
   title,
   isDouble,
   price,
-  // stripeLink,
+  stripeLink,
   bypass,
   bypassLink,
   isTicketLive,
@@ -24,13 +26,26 @@ export default function TicketCard({
   isMemberOnly,
 }: LocationInformationProps) {
   const navigate = useNavigate();
+  const session = useSessionContext();
 
   function handleOnClick() {
     console.log(bypass);
     if (bypass) {
       window.open(bypassLink, "_blank");
     } else {
-      navigate("/checkout");
+      if ( !session.loading) {
+        if (( true) && session.doesSessionExist) {
+          navigate("/checkout", {
+            state: { data: {priceId:  stripeLink, isTicket: true} },
+          });
+        } else {
+          navigate("/membership");
+        }
+      } else {
+        navigate("/checkout", {
+          state: { data: {priceId:  stripeLink, isTicket: true} },
+        });
+      }
     }
   }
 

@@ -159,8 +159,9 @@ export interface Ticket {
   ticketDescription: string;
   startDateTicketSales: string;
   isTicketLive: boolean;
-  ticketBypassLink: boolean;
+  ticketLinkBypass: boolean;
   bypassTicketLink: string;
+  stripeLink: string
 }
 
 export interface PurchasableMembership {

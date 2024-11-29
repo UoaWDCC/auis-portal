@@ -21,7 +21,7 @@ export default function PurchaseMembershipCard({
       if (!session.loading) {
         if (session.doesSessionExist) {
           navigate("/checkout", {
-            state: { data: purchasableMembership.stripeLink },
+            state: { data: { priceId: purchasableMembership.stripeLink, isTicket: false} },
           });
         } else {
           navigate("/signup");

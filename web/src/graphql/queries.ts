@@ -277,6 +277,7 @@ export function getEventById({ id }: { id: number }) {
                 Is_Ticket_Live
                 Ticket_Link_Bypass
                 Bypass_Ticket_Link
+                Stripe_Link
               }
             }
           }
