@@ -3,6 +3,8 @@ import { db } from "../db/config/db";
 import { User, UpdateUserInfoBody } from "../types/types";
 import { eq } from "drizzle-orm";
 import { stripe } from "../stripe/stripe";
+import { getUserEmail, getUserIdByEmail } from "./authGateway";
+import { updateUserMetadata } from "supertokens-node/recipe/usermetadata";
 
 export async function getUserMembershipExpiryDate(
   userEmail: string
@@ -80,9 +82,25 @@ export async function updateUserMembershipExpiryDate(
     // then, apply the retrieved expiry date into the users' field
     let updateExpiryDate = await db
       .update(peoples)
-      .set({ memberExpiryDate: expiryDate[0].expiry })
+      .set({ memberExpiryDate: expiryDate[0].expiry, isMember: true })
       .where(eq(peoples.email, checkoutSession.customer_details!.email!))
       .returning({ expiryDate: peoples.memberExpiryDate });
+
+    //update user metadata
+    //getUserIdByEmail
+    let customerEmail = await getUserEmail(
+      checkoutSession.customer_details!.email!
+    );
+    console.log(
+      "updateUserMembershipExpiryDate: customerEmail: ",
+      customerEmail
+    );
+
+    let userId = await getUserIdByEmail(customerEmail);
+
+    await updateUserMetadata(userId, {
+      bIsMembershipPaymentComplete: true,
+    });
   } catch (error) {
     throw new Error(
       "Unknown error occurred while trying to update user membership: " + error
@@ -93,34 +111,44 @@ export async function updateUserMembershipExpiryDate(
 export async function insertUserBySuperToken(
   data: UpdateUserInfoBody
 ): Promise<User[]> {
-  /*const userExists = await doesUserExistByEmail(email);
+  let updateUserInfoOrNewUser: User[];
+  //if user exists in peoples table already, then update the info
+  const userExists = await doesUserExistByEmail(data.email);
 
   if (userExists) {
-    throw new Error(`User with email ${email} already exists.`);
-  }*/
+    updateUserInfoOrNewUser = (await db
+      .update(peoples)
+      .set({
+        email: data.email,
+        name: data.name,
+        universityId: data.universityId,
+        upi: data.upi,
+        yearOfStudy: data.yearOfStudy,
+        studyField: data.fieldOfStudy,
+        status: data.isDomestic,
+        institution: data.institution,
+      })
+      .where(eq(peoples.email, data.email))
+      .returning()) as User[];
+  } else {
+    updateUserInfoOrNewUser = (await db
+      .insert(peoples)
+      .values({
+        email: data.email,
+        createdAt: new Date().toISOString(),
+        name: data.name,
+        universityId: data.universityId,
+        upi: data.upi,
+        yearOfStudy: data.yearOfStudy,
+        studyField: data.fieldOfStudy,
+        isMember: false,
+        status: data.isDomestic,
+        institution: data.institution,
+      })
+      .returning()) as User[];
+  }
 
-  console.log(
-    "Status and institution for user info sign up is not inserted into peoples database table"
-  );
-  console.log("insertUserBySuperToken: received: ", data);
-
-  const newUser = (await db
-    .insert(peoples)
-    .values({
-      email: data.email,
-      createdAt: new Date().toISOString(),
-      name: data.name,
-      universityId: data.universityId,
-      upi: data.upi,
-      yearOfStudy: data.yearOfStudy,
-      studyField: data.fieldOfStudy,
-      isMember: false,
-      status: data.isDomestic,
-      institution: data.institution,
-    })
-    .returning()) as User[];
-
-  return newUser;
+  return updateUserInfoOrNewUser;
 }
 
 export async function doesUserExistByEmail(email: string): Promise<boolean> {

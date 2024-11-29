@@ -33,7 +33,7 @@ export const updateUserTicketInfo = asyncHandler(
 export const updateUserInfo = asyncHandler(
   async (req: Request<{}, {}, UpdateUserInfoBody>, res: Response) => {
     try {
-      const {
+      let {
         name,
         universityId,
         upi,
@@ -62,11 +62,7 @@ export const updateUserInfo = asyncHandler(
       const user = await getUser(userId);
       const email = user?.emails[0];
 
-      await UserMetadata.updateUserMetadata(userId, {
-        bIsUserInfoComplete: true,
-      });
-
-      const payload = {
+      let payload = {
         email,
         name,
         universityId,
@@ -77,8 +73,31 @@ export const updateUserInfo = asyncHandler(
         institution,
       };
 
+      //transform institute
+      if (payload.institution === "The University of Auckland") {
+        payload.institution = "UoA";
+      } else if (payload.institution === "Auckland University of Technology") {
+        //set Auckland University of Technology
+        payload.institution = "AUT";
+      }
+
+      //transform status
+      if (payload.isDomestic === "Domestic Student") {
+        payload.isDomestic = "Domestic";
+      } else if (payload.isDomestic === "International Student") {
+        //set Auckland University of Technology
+        payload.isDomestic = "International";
+      } else {
+        payload.isDomestic = "Domestic";
+      }
+
       //insert user into peoples table here
       await insertUserBySuperToken(payload as UpdateUserInfoBody);
+
+      //only updat metadata if it worked properly
+      await UserMetadata.updateUserMetadata(userId, {
+        bIsUserInfoComplete: true,
+      });
 
       res.status(200).json({
         message: "successfully updated user info",
