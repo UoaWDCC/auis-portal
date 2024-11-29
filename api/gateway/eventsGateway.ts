@@ -63,12 +63,6 @@ export async function releaseReservedTicket(priceId: string) {
 }
 
 export async function completeTicketPurchase(sessionId: string) {
-  // TODO: Make this function safe to run multiple times,
-  // even concurrently, with the same session ID
-
-  // TODO: Make sure fulfillment hasn't already been
-  // peformed for this Checkout Session
-
   //retrieve session from API with line_items expanded
   const checkoutSession = await stripe.checkout.sessions.retrieve(sessionId, {
     expand: ["line_items"],
@@ -77,7 +71,30 @@ export async function completeTicketPurchase(sessionId: string) {
   // Check the Checkout Session's payment_status property
   // to determine if fulfillment should be peformed
   if (checkoutSession.payment_status !== "unpaid") {
-    db.insert(tickets).values({});
+    console.log("updateUserMembershipExpiryDate: received: ", checkoutSession);
+    console.log(
+      "updateUserMembershipExpiryDate: customer_email: ",
+      checkoutSession.customer_details?.email
+    );
+    console.log(
+      "updateUserMembershipExpiryDate: metadata: ",
+      checkoutSession.metadata
+    );
+
+    //since this is for memberships, get the current user by their email id
+    let customer = await db
+      .select()
+      .from(peoples)
+      .where(eq(peoples.email, checkoutSession.customer_details!.email!))
+      .limit(1);
+
+    let event = await db
+      .select()
+      .from(events)
+      .where(eq(events.stripePriceId, checkoutSession.metadata!["priceId"]))
+      .limit(1);
+
+    //db.insert(userTickets);
   }
 }
 
