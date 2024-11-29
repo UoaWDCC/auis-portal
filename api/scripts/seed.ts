@@ -108,6 +108,8 @@ const main = async () => {
       {
         id: 1,
         stripeLink: "price_1PSHXPP464csY2Up4aKoSw6r",
+        membershipLinkBypass: false,
+        bypassMembershipLink: "",
         title: "1x Semester Membership",
         description: "One Semester long membership.",
         expiry: new Date(
@@ -119,6 +121,8 @@ const main = async () => {
       {
         id: 2,
         stripeLink: "price_1Q1NimP464csY2Up7A7BwMcS",
+        membershipLinkBypass: false,
+        bypassMembershipLink: "",
         title: "2x Semester Membership",
         description: "Two Semester long membership.",
         expiry: new Date(
