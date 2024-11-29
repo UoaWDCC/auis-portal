@@ -107,7 +107,6 @@ export async function insertUserBySuperToken(
         upi: data.upi,
         yearOfStudy: data.yearOfStudy,
         studyField: data.fieldOfStudy,
-        isMember: false,
         status: data.isDomestic,
         institution: data.institution,
       })
