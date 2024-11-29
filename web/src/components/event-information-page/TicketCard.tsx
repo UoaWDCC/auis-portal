@@ -33,17 +33,17 @@ export default function TicketCard({
     if (bypass) {
       window.open(bypassLink, "_blank");
     } else {
-      if ( !session.loading) {
-        if (( true) && session.doesSessionExist) {
+      if (!session.loading) {
+        if (true && session.doesSessionExist) {
           navigate("/checkout", {
-            state: { data: {priceId:  stripeLink, isTicket: true} },
+            state: { data: { priceId: stripeLink, isTicket: true } },
           });
         } else {
           navigate("/membership");
         }
       } else {
         navigate("/checkout", {
-          state: { data: {priceId:  stripeLink, isTicket: true} },
+          state: { data: { priceId: stripeLink, isTicket: true } },
         });
       }
     }

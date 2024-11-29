@@ -225,7 +225,7 @@ export class Mapper {
             isTicketLive: attributesTicket.Is_Ticket_Live || false,
             ticketBypassLink: attributesTicket.Ticket_Link_Bypass || true,
             bypassTicketLink: attributesTicket.Bypass_Ticket_Link || "",
-            stripeLink: attributesTicket.Stripe_Link || ""
+            stripeLink: attributesTicket.Stripe_Link || "",
           };
         }),
       };

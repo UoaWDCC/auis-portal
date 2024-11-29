@@ -47,13 +47,13 @@ const UpcomingEventCard: React.FC<UpcomingEventCardProps> = ({
           />
         </div>
         <div className="flex items-end">
-          <div className="flex-grow mx-2">
+          <div className="mx-2 flex-grow">
             <h5 className="mt-3 text-center text-2xl font-bold text-black">
               {upcomingEvent.title}
             </h5>
 
-            <div className="text-md my-1 flex items-center  justify-start gap-2">
-              <FaCalendarAlt className=" min-w-6" />{" "}
+            <div className="text-md my-1 flex items-center justify-start gap-2">
+              <FaCalendarAlt className="min-w-6" />{" "}
               {new Date(upcomingEvent.eventDateStart).toLocaleString("en-NZ", {
                 day: "numeric",
                 month: "numeric",
@@ -64,7 +64,7 @@ const UpcomingEventCard: React.FC<UpcomingEventCardProps> = ({
               })}
             </div>
             <div className="text-md mb-2 flex items-center justify-start gap-2">
-              <FaLocationDot className=" min-w-6 " /> {upcomingEvent.location}
+              <FaLocationDot className="min-w-6" /> {upcomingEvent.location}
             </div>
           </div>
         </div>

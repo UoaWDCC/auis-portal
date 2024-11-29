@@ -161,7 +161,7 @@ export interface Ticket {
   isTicketLive: boolean;
   ticketLinkBypass: boolean;
   bypassTicketLink: string;
-  stripeLink: string
+  stripeLink: string;
 }
 
 export interface PurchasableMembership {

@@ -34,11 +34,10 @@ const sendData = async (data: any) => {
 
 export default function CheckoutInformation({
   questions,
-  handleSubmit : idk
+  handleSubmit: idk,
 }: {
-  questions: Question[], handleSubmit: (
-    e: React.FormEvent<HTMLFormElement>
-  ) => void; 
+  questions: Question[];
+  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }) {
   // const {
   //   register,
@@ -78,7 +77,7 @@ export default function CheckoutInformation({
   const [phoneNumber, setPhoneNumber] = useState<string>("");
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    idk(event)
+    idk(event);
     event.preventDefault();
     if (!validateEmail(email)) {
       console.log("invalid email");

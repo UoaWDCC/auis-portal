@@ -22,7 +22,6 @@ export default function EventInformationScreen({
 }) {
   const { id } = useParams();
 
-
   const tic: Ticket = {
     id: 0,
     name: "string",
@@ -37,7 +36,7 @@ export default function EventInformationScreen({
     isTicketLive: false,
     ticketLinkBypass: true,
     bypassTicketLink: "https://google.com",
-    stripeLink: ""
+    stripeLink: "",
   };
   const a: EventAndTicket = {
     id: 0,
@@ -90,7 +89,7 @@ export default function EventInformationScreen({
       try {
         const mappedEvent = Mapper.mapToEvent(eventData);
         setEvent(mappedEvent);
-        console.log("agdskfjd")
+        console.log("agdskfjd");
         console.log(event);
       } catch (error) {
         setErrorEvent(true);
