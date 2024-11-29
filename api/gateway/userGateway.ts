@@ -93,34 +93,45 @@ export async function updateUserMembershipExpiryDate(
 export async function insertUserBySuperToken(
   data: UpdateUserInfoBody
 ): Promise<User[]> {
-  /*const userExists = await doesUserExistByEmail(email);
+  let updateUserInfoOrNewUser: User[];
+  //if user exists in peoples table already, then update the info
+  const userExists = await doesUserExistByEmail(data.email);
 
   if (userExists) {
-    throw new Error(`User with email ${email} already exists.`);
-  }*/
+    updateUserInfoOrNewUser = (await db
+      .update(peoples)
+      .set({
+        email: data.email,
+        name: data.name,
+        universityId: data.universityId,
+        upi: data.upi,
+        yearOfStudy: data.yearOfStudy,
+        studyField: data.fieldOfStudy,
+        isMember: false,
+        status: data.isDomestic,
+        institution: data.institution,
+      })
+      .where(eq(peoples.email, data.email))
+      .returning()) as User[];
+  } else {
+    updateUserInfoOrNewUser = (await db
+      .insert(peoples)
+      .values({
+        email: data.email,
+        createdAt: new Date().toISOString(),
+        name: data.name,
+        universityId: data.universityId,
+        upi: data.upi,
+        yearOfStudy: data.yearOfStudy,
+        studyField: data.fieldOfStudy,
+        isMember: false,
+        status: data.isDomestic,
+        institution: data.institution,
+      })
+      .returning()) as User[];
+  }
 
-  console.log(
-    "Status and institution for user info sign up is not inserted into peoples database table"
-  );
-  console.log("insertUserBySuperToken: received: ", data);
-
-  const newUser = (await db
-    .insert(peoples)
-    .values({
-      email: data.email,
-      createdAt: new Date().toISOString(),
-      name: data.name,
-      universityId: data.universityId,
-      upi: data.upi,
-      yearOfStudy: data.yearOfStudy,
-      studyField: data.fieldOfStudy,
-      isMember: false,
-      status: data.isDomestic,
-      institution: data.institution,
-    })
-    .returning()) as User[];
-
-  return newUser;
+  return updateUserInfoOrNewUser;
 }
 
 export async function doesUserExistByEmail(email: string): Promise<boolean> {
