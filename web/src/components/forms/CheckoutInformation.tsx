@@ -54,7 +54,7 @@ export default function CheckoutInformation({
   questions,
   handleSubmit: idk,
 }: {
-  eventId : number,
+  eventId: number;
   questions: Question[];
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }) {
