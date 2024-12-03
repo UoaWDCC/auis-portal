@@ -1,6 +1,9 @@
 import { Request, Response } from "express";
 import asyncHandler from "../middleware/asyncHandler";
-import { doesUserExistByEmail, getUserMembershipExpiryDate } from "../gateway/userGateway";
+import {
+  doesUserExistByEmail,
+  getUserMembershipExpiryDate,
+} from "../gateway/userGateway";
 import UserMetadata from "supertokens-node/recipe/usermetadata";
 import { UpdateUserInfoBody } from "../types/types";
 import { getUser } from "supertokens-node";
@@ -15,16 +18,16 @@ export const updateUserTicketInfo = asyncHandler(
       // check user session
       const session = req.session!;
       const userId = session.getUserId();
-      
+
       const { name, email, phoneNumber, eventId, answers } = req.body;
 
       if (!name || !email || !phoneNumber || !eventId || !answers) {
         return res.status(400).json({ message: "All fields are required" });
       }
 
-      console.log(req.body)
-      console.log(userId)
-      insertUserTicket(req.body)
+      console.log(req.body);
+      console.log(userId);
+      insertUserTicket(req.body);
 
       // TODO: Get clarification from Gury on what needs to be done here.
       // ex: database inserts into a table? Update a db record?
@@ -33,7 +36,7 @@ export const updateUserTicketInfo = asyncHandler(
         name,
         email,
         phoneNumber,
-        answers
+        answers,
       });
     } catch (error) {
       res.status(500).json({
@@ -44,54 +47,46 @@ export const updateUserTicketInfo = asyncHandler(
 );
 
 export interface temp {
-  
-    eventId : number,
-    name : string,
-    email : string,
-    phoneNumber : string,
-    answers : {
-      questionId: number,
-      answer: string
-    }
-  
+  eventId: number;
+  name: string;
+  email: string;
+  phoneNumber: string;
+  answers: {
+    questionId: number;
+    answer: string;
+  };
 }
 
+export async function insertUserTicket(data: {
+  eventId: number;
+  name: string;
+  email: string;
+  phoneNumber: string;
+  answers: {
+    questionId: number;
+    answer: string;
+  }[];
+}): Promise<{ id: number }[]> {
+  let updateUserInfoOrNewUser: { id: number }[];
 
-export async function insertUserTicket(
-  data: {
-    eventId : number,
-    name : string,
-    email : string,
-    phoneNumber : string,
-    answers : {
-      questionId: number,
-      answer: string
-    }[]
-  }
-): Promise<{id: number}[]> {
-  let updateUserInfoOrNewUser: {id: number}[];
+  updateUserInfoOrNewUser = await db
+    .insert(userTickets)
+    .values({
+      name: data.name,
+      email: data.email,
+      phoneNumber: data.phoneNumber,
+    })
+    .returning({ id: userTickets.id });
 
-    updateUserInfoOrNewUser = (await db
-      .insert(userTickets)
-      .values({
-        name: data.name,
-        email: data.email,
-        phoneNumber: data.phoneNumber
-        
-      })
-      .returning({ id: userTickets.id }));
+  const ticketId = userTickets.id;
 
-      const ticketId = userTickets.id;
+  const answerRecords = data.answers.map((answerData) => ({
+    ticketId: ticketId,
+    questionId: answerData.questionId,
+    answer: answerData.answer,
+  }));
 
-
-    const answerRecords = data.answers.map((answerData) => ({
-      ticketId: ticketId,
-      questionId: answerData.questionId,
-      answer: answerData.answer,
-    }));
-
-    await db.insert(answers).values(answerRecords);
-  
+  await db.insert(answers).values(answerRecords);
 
   return updateUserInfoOrNewUser;
 }

@@ -3,7 +3,7 @@ import { ContinueWithPasswordlessTheme } from "supertokens-auth-react/lib/build/
 import { useSessionContext } from "supertokens-auth-react/recipe/session";
 
 interface LocationInformationProps {
-  eventId : number;
+  eventId: number;
   title: string;
   isDouble: boolean;
   price: number;
@@ -16,7 +16,7 @@ interface LocationInformationProps {
 }
 
 export default function TicketCard({
-  eventId, 
+  eventId,
   title,
   isDouble,
   price,
@@ -38,14 +38,18 @@ export default function TicketCard({
       if (!session.loading) {
         if (true && session.doesSessionExist) {
           navigate("/checkout", {
-            state: { data: { priceId: stripeLink, isTicket: true, eventId: eventId } },
+            state: {
+              data: { priceId: stripeLink, isTicket: true, eventId: eventId },
+            },
           });
         } else {
           navigate("/membership");
         }
       } else {
         navigate("/checkout", {
-          state: { data: { priceId: stripeLink, isTicket: true, eventId: eventId } },
+          state: {
+            data: { priceId: stripeLink, isTicket: true, eventId: eventId },
+          },
         });
       }
     }

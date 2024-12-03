@@ -20,7 +20,7 @@ export default function CheckoutInformationScreen({
   eventId,
   handleSubmita,
 }: {
-  eventId : number,
+  eventId: number;
   handleSubmita: (e: React.FormEvent<HTMLFormElement>) => void;
 }) {
   const { id } = useParams();
@@ -103,7 +103,7 @@ export default function CheckoutInformationScreen({
           Checkout Questions
         </h1>
         <CheckoutInformation
-        eventId={eventId}
+          eventId={eventId}
           handleSubmit={(e) => handleSubmit(e)}
           questions={event.question}
         />
