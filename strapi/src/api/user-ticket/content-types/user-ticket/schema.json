@@ -28,6 +28,15 @@
       "relation": "manyToOne",
       "target": "api::ticket.ticket",
       "inversedBy": "People_Ticket_ID"
+    },
+    "Name": {
+      "type": "string"
+    },
+    "Email": {
+      "type": "email"
+    },
+    "Phone_Number": {
+      "type": "string"
     }
   }
 }

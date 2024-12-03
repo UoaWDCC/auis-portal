@@ -1051,6 +1051,9 @@ export const userTickets = pgTable(
   "user_tickets",
   {
     id: serial("id").primaryKey().notNull(),
+    name: varchar("name", { length: 255 }),
+    email: varchar("email", { length: 255 }),
+    phoneNumber: varchar("phone_number", { length: 255 }),
     peopleTicketCode: integer("people_ticket_code"),
     createdAt: timestamp("created_at", { precision: 6, mode: "string" }),
     updatedAt: timestamp("updated_at", { precision: 6, mode: "string" }),

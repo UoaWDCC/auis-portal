@@ -7,6 +7,7 @@ import {
 import { useLocation } from "react-router";
 import { fetchEventOrMembershipCheckoutSecret } from "../api/apiRequests";
 import CheckoutInformationScreen from "./CheckoutInformationScreen";
+import axios from "axios";
 
 const STRIPE_PUBLISHABLE_KEY = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
 
@@ -15,6 +16,7 @@ const STRIPE_PUBLISHABLE_KEY = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
 const stripePromise = loadStripe(`${STRIPE_PUBLISHABLE_KEY}`);
 let bodyData = { priceId: "" };
 let isTicket = { isTicket: true };
+let eventId = {eventId: -1}
 
 function CheckoutScreen({ stripeKey }: { stripeKey?: string }) {
   if (stripeKey) {
@@ -26,12 +28,33 @@ function CheckoutScreen({ stripeKey }: { stripeKey?: string }) {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     console.log("I DI A THING");
-    setInfoEntered(true);
+    // onSubmit(event.target)
+    console.log(event.target)
+    // setInfoEntered(true);
   };
+
+  // const onSubmit = async (data: any) => {
+  //   try {
+  //     const response = await axios.post("/api/user/user-ticket-info", data, {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //     });
+
+  //     if (response.status === 200) {
+  //       //Form Submission Successful
+  //     } else {
+  //       // Form Submission Failed
+  //     }
+  //   } catch (error) {
+  //     // Error
+  //   }
+  // };
 
   if (location.state.data) {
     bodyData = { priceId: location.state.data.priceId };
     isTicket = { isTicket: location.state.data.isTicket };
+    eventId = {eventId: location.state.data.eventId}
   }
   console.log(location.state.data);
 
@@ -59,7 +82,7 @@ function CheckoutScreen({ stripeKey }: { stripeKey?: string }) {
         <div
           className={` ${isTicket.isTicket && !infoEntered ? "flex" : "hidden"}`}
         >
-          <CheckoutInformationScreen handleSubmita={(e) => handleSubmit(e)} />
+          <CheckoutInformationScreen eventId={eventId.eventId} handleSubmita={(e) => handleSubmit(e)} />
         </div>
       </div>
     </div>

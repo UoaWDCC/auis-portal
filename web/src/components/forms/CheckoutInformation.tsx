@@ -32,10 +32,29 @@ const sendData = async (data: any) => {
   }
 };
 
+const onSubmit = async (data: any) => {
+  try {
+    const response = await axios.post("/api/user/user-ticket-info", data, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (response.status === 200) {
+      //Form Submission Successful
+    } else {
+      // Form Submission Failed
+    }
+  } catch (error) {
+    // Error
+  }
+};
 export default function CheckoutInformation({
+  eventId,
   questions,
   handleSubmit: idk,
 }: {
+  eventId : number,
   questions: Question[];
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }) {
@@ -103,6 +122,7 @@ export default function CheckoutInformation({
     console.log(temp);
 
     console.log({
+      eventId: eventId,
       name: name,
       email: email,
       phoneNumber: phoneNumber,
@@ -110,7 +130,8 @@ export default function CheckoutInformation({
     });
     // alert(`The name you entered was: ${name}`);
 
-    sendData({
+    onSubmit({
+      eventId: eventId,
       name: name,
       email: email,
       phoneNumber: phoneNumber,
@@ -253,6 +274,7 @@ export default function CheckoutInformation({
 
           <div className="flex items-center justify-center pt-5">
             <button
+              // onClick={(e) =>onsubmit(e)}
               className="bg-primary-orange rounded-2xl px-10 py-3 text-xl font-bold text-white transition-all hover:scale-110"
               type="submit"
             >

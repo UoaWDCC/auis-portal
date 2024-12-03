@@ -161,6 +161,7 @@ export default function EventInformationScreen({
         {/* TODO: ADD STRIPE ID */}
         {event.ticket.map((ticket) => (
           <TicketCard
+          eventId={event.id}
             numTicketsLeft={ticket.numTicketsLeft}
             isTicketLive={
               ticket.isTicketLive && new Date(event.eventDateStart) > new Date()
