@@ -91,7 +91,7 @@ export async function insertUserTicket(data: {
   return updateUserInfoOrNewUser;
 }
 
-// FIX THIS MESS ^^^^^^^^^^^^^^^^^^^ sorry Tarun 
+// FIX THIS MESS ^^^^^^^^^^^^^^^^^^^ sorry Tarun
 
 export const updateUserInfo = asyncHandler(
   async (req: Request<{}, {}, UpdateUserInfoBody>, res: Response) => {
