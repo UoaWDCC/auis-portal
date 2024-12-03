@@ -8,6 +8,7 @@ import { insertUserBySuperToken } from "../gateway/userGateway";
 import { db } from "../db/config/db";
 import { answers, userTickets } from "../schemas/schema";
 
+// FIX THIS MESS ->
 export const updateUserTicketInfo = asyncHandler(
   async (req: Request, res: Response) => {
     try {
@@ -94,6 +95,8 @@ export async function insertUserTicket(
 
   return updateUserInfoOrNewUser;
 }
+
+// FIX THIS MESS ^^^^^^^^^^^^^^^^^^^ sorry Tarun 
 
 export const updateUserInfo = asyncHandler(
   async (req: Request<{}, {}, UpdateUserInfoBody>, res: Response) => {
