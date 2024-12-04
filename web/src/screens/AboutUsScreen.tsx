@@ -1,6 +1,16 @@
-import type { Introduction, Value, Partner, PartnerImage } from "../types/types";
+import type {
+  Introduction,
+  Value,
+  Partner,
+  PartnerImage,
+} from "../types/types";
 import { useQuery } from "@apollo/client";
-import { GET_INTRODUCTION, GET_VALUES, GET_PARTNERS, GET_PARTNER_IMAGES } from "../graphql/queries";
+import {
+  GET_INTRODUCTION,
+  GET_VALUES,
+  GET_PARTNERS,
+  GET_PARTNER_IMAGES,
+} from "../graphql/queries";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { Mapper } from "../utils/Mapper";
 import { useState, useEffect } from "react";
