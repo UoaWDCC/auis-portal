@@ -181,6 +181,29 @@ export const GET_EVENTS = gql`
   }
 `;
 
+export const GET_EVENTS_SLIDER = gql`
+  query {
+    events {
+      data {
+        id
+        attributes {
+          Title
+          Location
+          Event_Date_Start
+          Is_Live
+          Image {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
 export const GET_EVENTS_GALLERY = gql`
   query {
     eventGalleries {

@@ -1,5 +1,5 @@
 import EventsList from "./EventsList";
-import { Event } from "../../types/types";
+import { EventsSlider } from "../../types/types";
 import {
   IoArrowBackCircleOutline,
   IoArrowForwardCircleOutline,
@@ -9,17 +9,17 @@ import { useState } from "react";
 import { useKeenSlider } from "keen-slider/react";
 import { showNoPastEvents, showNoUpcomingEvents } from "../../data/data";
 
-interface UpcomingEventsProps {
-  upcomingEvents: Event[];
+interface EventSliderProps{
+  events: EventsSlider[];
   noEvents: boolean;
   pastEvent: boolean;
 }
 
 export default function EventSlider({
-  upcomingEvents,
+  events: upcomingEvents,
   noEvents,
   pastEvent,
-}: UpcomingEventsProps) {
+}: EventSliderProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const screenSize = useScreenSize();
 
@@ -51,7 +51,7 @@ export default function EventSlider({
         />
         <EventsList
           sliderRef={sliderRef}
-          upcomingEvents={
+          events={
             noEvents
               ? pastEvent
                 ? showNoPastEvents

@@ -73,6 +73,7 @@ export const createCheckout = asyncHandler(
         payment_method_types: ["card"],
         currency: "NZD",
         return_url: `${process.env.DOMAIN_FRONTEND}/return?session_id={CHECKOUT_SESSION_ID}`,
+        allow_promotion_codes: true,
 
         //changeable below:
         // use metadata property

@@ -13,7 +13,6 @@ import TermsAndConditions from "@components/event-information-page/TermsAndCondi
 import ContactInformation from "@components/event-information-page/ContactInformation";
 import LoadingSpinner from "@components/LoadingSpinner";
 import NoEventFound from "@components/event-information-page/NoEventFound";
-import { useSessionContext } from "supertokens-auth-react/recipe/session";
 
 export default function EventInformationScreen({
   navbar,

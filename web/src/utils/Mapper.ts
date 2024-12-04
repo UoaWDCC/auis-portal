@@ -207,6 +207,26 @@ export class Mapper {
     }
   }
 
+  static mapToEventsSlider(data: any): Event[] {
+    if (!data.events || !data.events.data || data.events.data.length === 0) {
+      throw new NoDataError("No data");
+    } else {
+      return data.events.data.map((item: any) => {
+        const attributes = item.attributes || {};
+        const imageUrl = attributes.Image?.data?.attributes?.url || "";
+
+        return {
+          id: item.id,
+          title: attributes.Title || "",
+          location: attributes.Location || "",
+          eventDateStart: attributes.Event_Date_Start || "",
+          isLive: attributes.Is_Live || false,
+          image: imageUrl,
+        };
+      });
+    }
+  }
+
   static mapToEvent(data: any): EventAndTicket {
     if (!data.event || !data.event.data || data.event.data.length === 0) {
       throw new NoDataError("No data");

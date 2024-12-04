@@ -1,19 +1,24 @@
-import { Event } from "../../types/types";
 import { FaCalendarAlt } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import dayjs from "dayjs";
 
-interface UpcomingEventCardProps {
-  upcomingEvent: Event;
+interface EventCardProps {
+  title: string;
+  image: string;
+  location: string;
+  eventDateStart: string;
   pastEvent: boolean;
 }
 
 export default function EventList({
-  upcomingEvent,
-  pastEvent,
-}: UpcomingEventCardProps) {
+  title,
+  image,
+  location,
+  eventDateStart,
+  pastEvent
+}: EventCardProps) {
   // Calculate the difference in time from now to the event start date
-  const eventDate = dayjs(upcomingEvent.eventDateStart);
+  const eventDate = dayjs(eventDateStart);
   const now = dayjs();
   const differenceInDays = eventDate.diff(now, "day");
   const differenceInHours = eventDate.diff(now, "hour");
@@ -36,24 +41,23 @@ export default function EventList({
       ) : (
         <></>
       )}
-
       <div className="grid h-full text-gray-500">
         <div className="flex items-start justify-start">
           <img
-            src={upcomingEvent.image}
-            alt={upcomingEvent.title}
+            src={image}
+            alt={title}
             className="w-full rounded-t-lg object-contain"
           />
         </div>
         <div className="flex items-end">
           <div className="mx-2 flex-grow">
             <h5 className="mt-3 text-center text-2xl font-bold text-black">
-              {upcomingEvent.title}
+              {title}
             </h5>
 
             <div className="text-md my-1 flex items-center justify-start gap-2">
               <FaCalendarAlt className="min-w-6" />{" "}
-              {new Date(upcomingEvent.eventDateStart).toLocaleString("en-NZ", {
+              {new Date(eventDateStart).toLocaleString("en-NZ", {
                 day: "numeric",
                 month: "numeric",
                 year: "numeric",
@@ -63,7 +67,7 @@ export default function EventList({
               })}
             </div>
             <div className="text-md mb-2 flex items-center justify-start gap-2">
-              <FaLocationDot className="min-w-6" /> {upcomingEvent.location}
+              <FaLocationDot className="min-w-6" /> {location}
             </div>
           </div>
         </div>

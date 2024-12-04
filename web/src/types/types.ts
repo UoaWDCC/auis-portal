@@ -87,6 +87,15 @@ export interface Event {
   image: string;
 }
 
+export interface EventsSlider {
+  id: number;
+  title: string;
+  location: string;
+  eventDateStart: string;
+  image: string;
+  isLive: boolean
+}
+
 export interface EventAndTicket {
   id: number;
   title: string;

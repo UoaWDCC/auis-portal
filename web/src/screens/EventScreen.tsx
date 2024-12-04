@@ -107,7 +107,7 @@ export default function EventScreen({ navbar }: { navbar: JSX.Element }) {
                 <div className="w-11/12 lg:w-3/4">
                   <UpcomingEvents
                     pastEvent={false}
-                    upcomingEvents={upcomingEvents}
+                    events={upcomingEvents}
                     noEvents={errorEvents || upcomingEvents.length == 0}
                   />
                 </div>
@@ -122,7 +122,7 @@ export default function EventScreen({ navbar }: { navbar: JSX.Element }) {
               <div className="w-11/12 lg:w-3/4">
                 <UpcomingEvents
                   pastEvent={true}
-                  upcomingEvents={pastEvents}
+                  events={pastEvents}
                   noEvents={errorEvents || pastEvents.length == 0}
                 />
               </div>
