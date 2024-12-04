@@ -26,7 +26,6 @@ export interface SecondaryDeveloper {
   github: string;
 }
 
-
 export interface PartnerImage {
   id: number;
   name: string;

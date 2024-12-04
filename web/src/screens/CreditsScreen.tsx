@@ -34,7 +34,11 @@ export default function CreditsScreen({ navbar }: { navbar: JSX.Element }) {
         <div className="flex flex-wrap justify-center">
           {primaryDevelopers.map((developer) => (
             <div className="m-5" key={developer.id}>
-              <PrimaryDeveloperCard  name={developer.name} linkedIn={developer.linkedIn} github={developer.github} />
+              <PrimaryDeveloperCard
+                name={developer.name}
+                linkedIn={developer.linkedIn}
+                github={developer.github}
+              />
             </div>
           ))}
         </div>
@@ -46,7 +50,6 @@ export default function CreditsScreen({ navbar }: { navbar: JSX.Element }) {
             {secondaryDevelopers.map((developer) => (
               <div key={developer.id} className="m-5">
                 <SecondaryDeveloperCard
-                  
                   name={developer.name}
                   github={developer.github}
                 />
