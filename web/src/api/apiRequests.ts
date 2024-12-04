@@ -6,10 +6,11 @@ const apiClient = axios.create({
 });
 
 // Define a function to fetch data
-export const fetchUserMembershipExpiry = async (): Promise<MembershipExpiryDate> => {
-  const response = await apiClient.get("/api/user/get-membership-expiry");
-  return response.data;
-};
+export const fetchUserMembershipExpiry =
+  async (): Promise<MembershipExpiryDate> => {
+    const response = await apiClient.get("/api/user/get-membership-expiry");
+    return response.data;
+  };
 
 //Use this one to automatically create an Event or Membership checkout. Event checkout will decrement a ticket.
 export const fetchEventOrMembershipCheckoutSecret = async (payload: {
