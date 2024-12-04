@@ -66,7 +66,11 @@ export default function MembershipScreen({ navbar }: { navbar: JSX.Element }) {
   ]);
 
   if ((loadingUserMembership && userLoggedIn) || loadingPurchasableMembership)
-    return (<><LoadingSpinner /></>);
+    return (
+      <>
+        <LoadingSpinner />
+      </>
+    );
 
   return (
     <>
