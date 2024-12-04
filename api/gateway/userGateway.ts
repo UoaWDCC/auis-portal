@@ -91,10 +91,10 @@ export async function updateUserMembershipExpiryDate(
     let customerEmail = await getUserEmail(
       checkoutSession.customer_details!.email!
     );
-    console.log(
-      "updateUserMembershipExpiryDate: customerEmail: ",
-      customerEmail
-    );
+    // console.log(
+    //   "updateUserMembershipExpiryDate: customerEmail: ",
+    //   customerEmail
+    // );
 
     let userId = await getUserIdByEmail(customerEmail);
 

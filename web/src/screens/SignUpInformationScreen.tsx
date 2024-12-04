@@ -1,5 +1,4 @@
 import SignUpInformation from "@components/forms/SignUpInformation";
-import UserInformationForm from "@components/UserInformationForm";
 
 function SignUpInformationScreen({ navbar }: { navbar: JSX.Element }) {
   return (

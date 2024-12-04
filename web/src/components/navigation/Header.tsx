@@ -14,7 +14,7 @@ function Header() {
 
   async function onLogout() {
     await signOut();
-    window.location.href = "/"; // or to wherever your logic page is
+    window.location.href = "/";
   }
 
   const titles = [
@@ -103,23 +103,23 @@ function Header() {
                 {session.userId ? (
                   <div className="mt-8 flex flex-col items-center text-xl font-bold text-white xl:hidden xl:flex-row">
                     <button
-                      data-testid="Log-out-mobile"
+                      data-testid="sign-out-mobile"
                       type="button"
                       className="bg-primary-orange rounded-3xl px-6 py-1 transition-all hover:scale-110"
                       onClick={onLogout}
                     >
-                      Log-out
+                      Sign-out
                     </button>
                   </div>
                 ) : (
                   <div className="mt-8 flex flex-col items-center text-xl font-bold text-white xl:hidden xl:flex-row">
                     <a href="/login" className="my-2">
                       <button
-                        data-testid="Log-in"
+                        data-testid="sign-in"
                         type="button"
                         className="bg-primary-green rounded-3xl px-6 py-1 transition-all hover:scale-110"
                       >
-                        Log-in
+                        Sign-in
                       </button>
                     </a>
                     <a href="/signup" className="my-2">
@@ -141,23 +141,23 @@ function Header() {
               {session.userId ? (
                 <div>
                   <button
-                    data-testid="Log-out-mobile"
+                    data-testid="sign-out-mobile"
                     type="button"
                     className="bg-primary-orange rounded-3xl px-6 py-1 transition-all hover:scale-110"
                     onClick={onLogout}
                   >
-                    Log-out
+                    Sign-out
                   </button>
                 </div>
               ) : (
                 <div>
                   <a href="/login" className="mx-4">
                     <button
-                      data-testid="Log-in-mobile"
+                      data-testid="sign-in-mobile"
                       type="button"
                       className="bg-primary-green rounded-3xl px-6 py-1 transition-all hover:scale-110"
                     >
-                      Log-in
+                      Sign-in
                     </button>
                   </a>
                   <a href="/signup" className="mx-4">

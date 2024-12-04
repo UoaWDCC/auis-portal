@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { SiTicktick } from "react-icons/si";
 import { Navigate, useNavigate } from "react-router";
 import { EmailLink } from "../data/data";
-import { RxCrossCircled } from "react-icons/rx";
 
 const ReturnScreen = () => {
   const TEMP_PAYMENT_SUCCESSFUL: boolean = true;
@@ -31,21 +30,19 @@ const ReturnScreen = () => {
   if (status === "complete") {
     return (
       <div className="from-AUIS-dark-teal to-AUIS-teal min-h-svh bg-gradient-to-b pb-20">
-        <div className="flex items-center justify-center pt-12">
-          <SiTicktick className="hidden h-12 w-12 text-green-500 md:block" />
+        <div className="flex items-center justify-center pt-36">
           <div>
             <h1 className="mx-3 pb-2 text-center text-5xl font-bold text-white">
               Payment Successful
             </h1>
           </div>
-          <SiTicktick className="hidden h-12 w-12 text-green-500 md:block" />
         </div>
         <div>
-          <p className="pt-12 text-center text-white">
+          <p className="pt-12  text-lg text-center text-white">
             Payment successful, a confirmation email will be sent to{" "}
             {customerEmail}.
           </p>
-          <p className="text-center text-white">
+          <p className="text-center text-lg text-white">
             If you have any questions, please email{" "}
             <a className="text-blue-500" href={`mailto:${EmailLink}`}>
               {EmailLink}
@@ -74,13 +71,11 @@ const ReturnScreen = () => {
       {!TEMP_PAYMENT_SUCCESSFUL ? (
         <div className="from-AUIS-dark-teal to-AUIS-teal min-h-svh bg-gradient-to-b pb-20">
           <div className="flex items-center justify-center pt-12">
-            <RxCrossCircled className="hidden h-12 w-12 text-red-500 md:block" />
             <div>
               <h1 className="mx-3 pb-2 text-center text-5xl font-bold text-white">
                 Payment Failed
               </h1>
             </div>
-            <RxCrossCircled className="hidden h-12 w-12 text-red-500 md:block" />
           </div>
           <div>
             <p className="pt-12 text-center text-white">
