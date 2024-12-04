@@ -1,4 +1,4 @@
-import { useNavigate, useNavigation } from "react-router";
+import { useNavigate } from "react-router";
 import auisLogo2 from "../../assets/peacock.png";
 import { useSessionContext } from "supertokens-auth-react/recipe/session";
 
