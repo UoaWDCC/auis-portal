@@ -38,7 +38,7 @@ const ReturnScreen = () => {
           </div>
         </div>
         <div>
-          <p className="pt-12  text-lg text-center text-white">
+          <p className="pt-12 text-center text-lg text-white">
             Payment successful, a confirmation email will be sent to{" "}
             {customerEmail}.
           </p>
