@@ -13,10 +13,14 @@ interface PurchaseMembershipCardProps {
 }
 
 export default function PurchaseMembershipCard({
-  title, expiry, price, stripeLink, description, membershipLinkBypass, bypassMembershipLink
-}: 
-   PurchaseMembershipCardProps
-) {
+  title,
+  expiry,
+  price,
+  stripeLink,
+  description,
+  membershipLinkBypass,
+  bypassMembershipLink,
+}: PurchaseMembershipCardProps) {
   const expiryDate = new Date(expiry);
 
   const navigate = useNavigate();
@@ -45,7 +49,7 @@ export default function PurchaseMembershipCard({
   }
 
   return (
-    <div className="drop-shadow-all m-5 rounded-lg  bg-white">
+    <div className="drop-shadow-all m-5 rounded-lg bg-white">
       <div>
         <div className="flex items-center justify-center">
           <img
@@ -55,9 +59,7 @@ export default function PurchaseMembershipCard({
           ></img>
         </div>
         <div className="px-4">
-          <p className="pt-6 text-center text-4xl font-bold">
-            {title}
-          </p>
+          <p className="pt-6 text-center text-4xl font-bold">{title}</p>
           <p className="pt-4 text-center text-2xl">
             Expires on:{" "}
             {expiryDate.toLocaleDateString("default", {
@@ -69,9 +71,7 @@ export default function PurchaseMembershipCard({
           <p className="pt-4 text-center text-2xl">
             Price: ${price.toFixed(2)}
           </p>
-          <p className="py-4 text-center text-xl">
-            {description}
-          </p>
+          <p className="py-4 text-center text-xl">{description}</p>
           <div className="flex items-center justify-center">
             <button
               onClick={handleClick}

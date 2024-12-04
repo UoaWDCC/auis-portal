@@ -1,12 +1,18 @@
 export interface PartnerCardProps {
   colour: string;
-  image: string,
-  name: string, 
-  location: string,
-  description: string
+  image: string;
+  name: string;
+  location: string;
+  description: string;
 }
 
-export default function PartnerCard({ image, name, location, description, colour }: PartnerCardProps) {
+export default function PartnerCard({
+  image,
+  name,
+  location,
+  description,
+  colour,
+}: PartnerCardProps) {
   // Function to convert hex to RGBA
   const hexToRgba = (hex: string, alpha: number) => {
     const r = parseInt(hex.slice(1, 3), 16);
@@ -29,12 +35,11 @@ export default function PartnerCard({ image, name, location, description, colour
         className="flex h-auto w-72 flex-col items-center overflow-hidden rounded-2xl border-4 p-5"
         style={{ borderColor: colour, backgroundColor: bgColorWithOpacity }}
       >
-        <div className="flex h-auto w-full items-center justify-center" title={name}>
-          <img
-            src={image}
-            alt={name}
-            className="w-full rounded-2xl"
-          />
+        <div
+          className="flex h-auto w-full items-center justify-center"
+          title={name}
+        >
+          <img src={image} alt={name} className="w-full rounded-2xl" />
         </div>
         <h1 className="text-md my-2 text-center font-bold text-black">
           {name}

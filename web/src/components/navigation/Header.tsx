@@ -138,39 +138,39 @@ function Header() {
           </nav>
           <div className="mr-5 hidden xl:flex">
             <div className="flex h-full flex-col items-center text-xl font-bold text-white xl:flex-row">
-                {session.userId ? (
-                  <div>
+              {session.userId ? (
+                <div>
+                  <button
+                    data-testid="Log-out-mobile"
+                    type="button"
+                    className="bg-primary-orange rounded-3xl px-6 py-1 transition-all hover:scale-110"
+                    onClick={onLogout}
+                  >
+                    Log-out
+                  </button>
+                </div>
+              ) : (
+                <div>
+                  <a href="/login" className="mx-4">
                     <button
-                      data-testid="Log-out-mobile"
+                      data-testid="Log-in-mobile"
+                      type="button"
+                      className="bg-primary-green rounded-3xl px-6 py-1 transition-all hover:scale-110"
+                    >
+                      Log-in
+                    </button>
+                  </a>
+                  <a href="/signup" className="mx-4">
+                    <button
+                      data-testid="Sign-up-mobile"
                       type="button"
                       className="bg-primary-orange rounded-3xl px-6 py-1 transition-all hover:scale-110"
-                      onClick={onLogout}
                     >
-                      Log-out
+                      Sign-up
                     </button>
-                  </div>
-                ) : (
-                  <div>
-                    <a href="/login" className="mx-4">
-                      <button
-                        data-testid="Log-in-mobile"
-                        type="button"
-                        className="bg-primary-green rounded-3xl px-6 py-1 transition-all hover:scale-110"
-                      >
-                        Log-in
-                      </button>
-                    </a>
-                    <a href="/signup" className="mx-4">
-                      <button
-                        data-testid="Sign-up-mobile"
-                        type="button"
-                        className="bg-primary-orange rounded-3xl px-6 py-1 transition-all hover:scale-110"
-                      >
-                        Sign-up
-                      </button>
-                    </a>
-                  </div>
-                )}
+                  </a>
+                </div>
+              )}
             </div>
           </div>
         </div>
