@@ -1442,7 +1442,10 @@ export const answersUserTicketIdLinks = pgTable(
   },
   (table) => {
     return {
-      fk: index("answers_user_ticket_id_links_fk").using("btree", table.answerId),
+      fk: index("answers_user_ticket_id_links_fk").using(
+        "btree",
+        table.answerId
+      ),
       invFk: index("answers_user_ticket_id_links_inv_fk").using(
         "btree",
         table.userTicketId
@@ -1451,10 +1454,9 @@ export const answersUserTicketIdLinks = pgTable(
         "btree",
         table.answerOrder
       ),
-      answersUserTicketIdLinksUnique: unique("answers_user_ticket_id_links_unique").on(
-        table.answerId,
-        table.userTicketId
-      ),
+      answersUserTicketIdLinksUnique: unique(
+        "answers_user_ticket_id_links_unique"
+      ).on(table.answerId, table.userTicketId),
     };
   }
 );

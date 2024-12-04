@@ -9,7 +9,11 @@ import { UpdateUserInfoBody } from "../types/types";
 import { getUser } from "supertokens-node";
 import { insertUserBySuperToken } from "../gateway/userGateway";
 import { db } from "../db/config/db";
-import { answers, userTickets, userTicketsTicketIdLinks } from "../schemas/schema";
+import {
+  answers,
+  userTickets,
+  userTicketsTicketIdLinks,
+} from "../schemas/schema";
 import { userTicketsTicketIdLinksRelations } from "../schemas/relations";
 
 // FIX THIS MESS ->
@@ -79,11 +83,16 @@ export async function insertUserTicket(data: {
     })
     .returning({ userTicketId: userTickets.id });
 
-    const tempID = updateUserInfoOrNewUser[0].userTicketId
+  const tempID = updateUserInfoOrNewUser[0].userTicketId;
 
-  const tempa : any = await db.insert(userTicketsTicketIdLinks).values({userTicketId: updateUserInfoOrNewUser[0].userTicketId, ticketId: data.ticketId}).returning({id: userTicketsTicketIdLinks.id})
-    console.log(tempa.id)
-
+  const tempa: any = await db
+    .insert(userTicketsTicketIdLinks)
+    .values({
+      userTicketId: updateUserInfoOrNewUser[0].userTicketId,
+      ticketId: data.ticketId,
+    })
+    .returning({ id: userTicketsTicketIdLinks.id });
+  console.log(tempa.id);
 
   const ticketId = userTickets.id;
 
