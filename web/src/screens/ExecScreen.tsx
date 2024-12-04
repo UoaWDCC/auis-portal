@@ -125,7 +125,12 @@ export default function ExecScreen({ navbar }: { navbar: JSX.Element }) {
               <div className="flex flex-wrap justify-center">
                 {presidents?.map((exec) => (
                   <div key={exec.id} className="mx-3 my-5">
-                    <ExecCard name={exec.name} description={exec.description} image={exec.image} position={exec.position} />
+                    <ExecCard
+                      name={exec.name}
+                      description={exec.description}
+                      image={exec.image}
+                      position={exec.position}
+                    />
                   </div>
                 ))}
               </div>
@@ -139,7 +144,12 @@ export default function ExecScreen({ navbar }: { navbar: JSX.Element }) {
               <div className="mb-5 flex flex-wrap justify-center">
                 {otherExecutives?.map((exec) => (
                   <div key={exec.id} className="mx-3 my-5">
-                    <ExecCard name={exec.name} description={exec.description} image={exec.image} position={exec.position} />
+                    <ExecCard
+                      name={exec.name}
+                      description={exec.description}
+                      image={exec.image}
+                      position={exec.position}
+                    />
                   </div>
                 ))}
               </div>

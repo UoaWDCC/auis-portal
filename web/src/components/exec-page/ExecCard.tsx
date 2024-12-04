@@ -1,12 +1,16 @@
-
 interface ExecCardProps {
-  image: string,
-  name : string,
-  position: string, 
-  description: string
+  image: string;
+  name: string;
+  position: string;
+  description: string;
 }
 
-export default function ExecCard({ image, name, position, description }: ExecCardProps) {
+export default function ExecCard({
+  image,
+  name,
+  position,
+  description,
+}: ExecCardProps) {
   return (
     <>
       <div className="relative flex h-60 w-44 transform cursor-pointer flex-col items-center justify-between overflow-hidden rounded-2xl bg-white shadow-lg transition-transform hover:scale-105">

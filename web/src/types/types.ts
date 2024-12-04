@@ -79,8 +79,6 @@ export interface PreviousTeam {
   year: string;
 }
 
-
-
 export interface Event {
   id: number;
   title: string;
