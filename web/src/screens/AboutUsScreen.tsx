@@ -1,6 +1,10 @@
 import type { Introduction, Value, PartnerImage } from "../types/types";
 import { useQuery } from "@apollo/client";
-import { GET_INTRODUCTION, GET_VALUES,  GET_PARTNER_IMAGES } from "../graphql/queries";
+import {
+  GET_INTRODUCTION,
+  GET_VALUES,
+  GET_PARTNER_IMAGES,
+} from "../graphql/queries";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { Mapper } from "../utils/Mapper";
 import { useState, useEffect } from "react";
@@ -160,7 +164,11 @@ export default function AboutUsScreen({ navbar }: { navbar: JSX.Element }) {
               <div className="flex flex-wrap justify-center">
                 {values.map((value) => (
                   <div key={value.id} className="mx-5 my-5 xl:mx-20">
-                    <ValueCard title={value.title} description={value.description} image={value.image} />
+                    <ValueCard
+                      title={value.title}
+                      description={value.description}
+                      image={value.image}
+                    />
                   </div>
                 ))}
               </div>
