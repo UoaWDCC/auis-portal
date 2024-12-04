@@ -1,5 +1,5 @@
 import { Event } from "../../types/types";
-import UpcomingEventCard from "./UpcomingEventCard";
+import EventCard from "./EventCard";
 import { useNavigate } from "react-router-dom";
 import "keen-slider/keen-slider.min.css";
 
@@ -9,19 +9,17 @@ interface UpcomingEventsListProps {
   pastEvent: boolean;
 }
 
-const UpcomingEventsList: React.FC<UpcomingEventsListProps> = ({
+export default function EventList({
   upcomingEvents,
   sliderRef,
   pastEvent,
-}) => {
+}: UpcomingEventsListProps) {
   const navigate = useNavigate();
-
   function handleOnClick(id: number) {
     if (id > 0) {
       navigate(`/events/${id}`);
     }
   }
-
   return (
     <>
       <div ref={sliderRef} className="keen-slider">
@@ -31,12 +29,10 @@ const UpcomingEventsList: React.FC<UpcomingEventsListProps> = ({
             className="keen-slider__slide p-2 hover:cursor-pointer"
             onClick={() => handleOnClick(event.id)}
           >
-            <UpcomingEventCard pastEvent={pastEvent} upcomingEvent={event} />
+            <EventCard pastEvent={pastEvent} upcomingEvent={event} />
           </div>
         ))}
       </div>
     </>
   );
-};
-
-export default UpcomingEventsList;
+}

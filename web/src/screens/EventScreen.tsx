@@ -5,7 +5,7 @@ import type { Event, EventGallery } from "../types/types";
 import { Mapper } from "../utils/Mapper";
 import EventGalleryComponent from "@components/events-page/EventGalleryComponent";
 import { useEffect, useState } from "react";
-import UpcomingEvents from "@components/events-slider/UpcomingEvents";
+import UpcomingEvents from "@components/events-slider/EventSlider";
 
 export default function EventScreen({ navbar }: { navbar: JSX.Element }) {
   // Get today's date for filtering

@@ -1,4 +1,4 @@
-import UpcomingEventsList from "./UpcomingEventsList";
+import EventsList from "./EventsList";
 import { Event } from "../../types/types";
 import {
   IoArrowBackCircleOutline,
@@ -15,11 +15,11 @@ interface UpcomingEventsProps {
   pastEvent: boolean;
 }
 
-const UpcomingEvents: React.FC<UpcomingEventsProps> = ({
+export default function EventSlider({
   upcomingEvents,
   noEvents,
   pastEvent,
-}) => {
+}: UpcomingEventsProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const screenSize = useScreenSize();
 
@@ -49,7 +49,7 @@ const UpcomingEvents: React.FC<UpcomingEventsProps> = ({
           }
           disabled={currentSlide === 0}
         />
-        <UpcomingEventsList
+        <EventsList
           sliderRef={sliderRef}
           upcomingEvents={
             noEvents
@@ -73,7 +73,7 @@ const UpcomingEvents: React.FC<UpcomingEventsProps> = ({
       </div>
     </div>
   );
-};
+}
 
 function LeftArrow(props: { disabled: boolean; onClick: (e: any) => void }) {
   const disabled = props.disabled ? " arrow--disabled" : "";
@@ -94,5 +94,3 @@ function RightArrow(props: { disabled: boolean; onClick: (e: any) => void }) {
     />
   );
 }
-
-export default UpcomingEvents;

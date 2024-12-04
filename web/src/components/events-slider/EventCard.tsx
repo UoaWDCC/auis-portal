@@ -1,4 +1,3 @@
-import React from "react";
 import { Event } from "../../types/types";
 import { FaCalendarAlt } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
@@ -9,10 +8,10 @@ interface UpcomingEventCardProps {
   pastEvent: boolean;
 }
 
-const UpcomingEventCard: React.FC<UpcomingEventCardProps> = ({
+export default function EventList({
   upcomingEvent,
   pastEvent,
-}) => {
+}: UpcomingEventCardProps) {
   // Calculate the difference in time from now to the event start date
   const eventDate = dayjs(upcomingEvent.eventDateStart);
   const now = dayjs();
@@ -71,6 +70,4 @@ const UpcomingEventCard: React.FC<UpcomingEventCardProps> = ({
       </div>
     </div>
   );
-};
-
-export default UpcomingEventCard;
+}
