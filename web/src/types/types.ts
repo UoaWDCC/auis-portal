@@ -38,6 +38,12 @@ export interface SecondaryDeveloperCardProps {
   secondaryDeveloper: SecondaryDeveloper;
 }
 
+export interface PartnerImage {
+  id: number;
+  name: string;
+  image: string;
+}
+
 export interface Partner {
   id: number;
   type: string;
@@ -77,7 +83,6 @@ export interface ValueCardProps {
 }
 
 export interface Introduction {
-  id: number;
   description: string;
   events: string;
   members: string;

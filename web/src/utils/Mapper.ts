@@ -15,6 +15,7 @@ import type {
   PurchasableMembership,
   EventAndTicket,
   TicketAndQuestion,
+  PartnerImage,
   // TicketAndQuestion,
 } from "../types/types";
 
@@ -34,6 +35,26 @@ export class Mapper {
           description: attributes.Description || "",
           position: attributes.Position || "",
           role: attributes.Role || "",
+          image: imageUrl,
+        };
+      });
+    }
+  }
+
+  static mapToPartnerImage(data: any): PartnerImage[] {
+    if (
+      !data.partners ||
+      !data.partners.data ||
+      data.partners.data.length === 0
+    ) {
+      throw new NoDataError("No data");
+    } else {
+      return data.partners.data.map((item: any) => {
+        const attributes = item.attributes || {};
+        const imageUrl = attributes.Image?.data?.attributes?.url || "";
+        return {
+          id: item.id,
+          name: attributes.Name || "",
           image: imageUrl,
         };
       });
@@ -130,7 +151,7 @@ export class Mapper {
       return data.introductions.data.map((item: any) => {
         const attributes = item.attributes || {};
         return {
-          id: item.id,
+          // id: item.id,
           description: attributes.Description || "",
           events: attributes.Events || "",
           members: attributes.Members || "",

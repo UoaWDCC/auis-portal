@@ -46,11 +46,30 @@ export const GET_PARTNERS = gql`
   }
 `;
 
+export const GET_PARTNER_IMAGES = gql`
+  query {
+    partners {
+      data {
+        id
+        attributes {
+          Name
+          Image {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
 export const GET_INTRODUCTION = gql`
   query {
     introductions {
       data {
-        id
         attributes {
           Description
           Events
