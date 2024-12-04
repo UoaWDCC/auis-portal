@@ -27,16 +27,14 @@ export default function CreditsScreen({ navbar }: { navbar: JSX.Element }) {
             </a>{" "}
             to learn more about WDCC!
           </h3>
-
           <h2 className="text-tertiary-blue mt-10 text-3xl font-bold">
             Primary Developers
           </h2>
         </div>
-
         <div className="flex flex-wrap justify-center">
-          {primaryDevelopers.map((developer, index) => (
-            <div className="m-5">
-              <PrimaryDeveloperCard key={index} primaryDeveloper={developer} />
+          {primaryDevelopers.map((developer) => (
+            <div className="m-5" key={developer.id}>
+              <PrimaryDeveloperCard  name={developer.name} linkedIn={developer.linkedIn} github={developer.github} />
             </div>
           ))}
         </div>
@@ -45,11 +43,12 @@ export default function CreditsScreen({ navbar }: { navbar: JSX.Element }) {
             Secondary Developers
           </h2>
           <div className="flex flex-wrap justify-center">
-            {secondaryDevelopers.map((developer, index) => (
-              <div className="m-5">
+            {secondaryDevelopers.map((developer) => (
+              <div key={developer.id} className="m-5">
                 <SecondaryDeveloperCard
-                  key={index}
-                  secondaryDeveloper={developer}
+                  
+                  name={developer.name}
+                  github={developer.github}
                 />
               </div>
             ))}

@@ -30,13 +30,6 @@ export interface SecondaryDeveloper {
   github: string;
 }
 
-export interface PrimaryDeveloperCardProps {
-  primaryDeveloper: PrimaryDeveloper;
-}
-
-export interface SecondaryDeveloperCardProps {
-  secondaryDeveloper: SecondaryDeveloper;
-}
 
 export interface PartnerImage {
   id: number;
@@ -77,11 +70,6 @@ export interface Value {
   description: string;
   image: string;
 }
-
-export interface ValueCardProps {
-  value: Value;
-}
-
 export interface Introduction {
   description: string;
   events: string;

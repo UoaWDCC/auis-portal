@@ -1,18 +1,22 @@
-import { SecondaryDeveloperCardProps } from "../../types/types";
 import { FaGithub } from "react-icons/fa";
 
+interface SecondaryDeveloperCardProps {
+  name: string,
+  github: string
+}
+
 export default function SecondaryDeveloperCard({
-  secondaryDeveloper,
+  name, github
 }: SecondaryDeveloperCardProps) {
   return (
     <>
       <div className="bg-AUIS-dark-teal flex h-auto w-64 flex-col items-center justify-between rounded-xl p-2">
         <h1 className="text-center text-xl font-bold text-white">
-          {secondaryDeveloper.name}
+          {name}
         </h1>
         <div className="my-2 flex justify-end">
           <a
-            href={secondaryDeveloper.github}
+            href={github}
             aria-label="GitHub"
             target="_blank"
             rel="noopener noreferrer"

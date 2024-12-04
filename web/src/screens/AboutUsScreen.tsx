@@ -1,6 +1,6 @@
-import type { Introduction, Value, Partner, PartnerImage } from "../types/types";
+import type { Introduction, Value, PartnerImage } from "../types/types";
 import { useQuery } from "@apollo/client";
-import { GET_INTRODUCTION, GET_VALUES, GET_PARTNERS, GET_PARTNER_IMAGES } from "../graphql/queries";
+import { GET_INTRODUCTION, GET_VALUES,  GET_PARTNER_IMAGES } from "../graphql/queries";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { Mapper } from "../utils/Mapper";
 import { useState, useEffect } from "react";
@@ -119,7 +119,6 @@ export default function AboutUsScreen({ navbar }: { navbar: JSX.Element }) {
               </h1>
             </div>
           </div>
-
           <div className="max-w-screen flex h-auto flex-col items-center bg-white px-5 py-5 text-center text-black md:px-20 lg:px-48">
             <h2 className="text-4xl font-bold">Our Introduction</h2>
             {errorIntroduction ? (
@@ -146,7 +145,6 @@ export default function AboutUsScreen({ navbar }: { navbar: JSX.Element }) {
                 </div>
               </>
             )}
-
             <button
               onClick={() => navigate("/signup")}
               className="bg-primary-orange my-5 rounded-full px-10 py-3 text-2xl font-bold text-white transition-all hover:scale-110"
@@ -154,7 +152,6 @@ export default function AboutUsScreen({ navbar }: { navbar: JSX.Element }) {
               Join Us Now!
             </button>
           </div>
-
           <div className="max-w-screen from-AUIS-dark-teal to-AUIS-teal flex h-auto flex-col items-center bg-gradient-to-b px-5 py-5 md:px-20">
             <h1 className="text-4xl font-bold text-white">Our Values</h1>
             {errorValues ? (
@@ -163,13 +160,12 @@ export default function AboutUsScreen({ navbar }: { navbar: JSX.Element }) {
               <div className="flex flex-wrap justify-center">
                 {values.map((value) => (
                   <div key={value.id} className="mx-5 my-5 xl:mx-20">
-                    <ValueCard value={value} />
+                    <ValueCard title={value.title} description={value.description} image={value.image} />
                   </div>
                 ))}
               </div>
             )}
           </div>
-
           <div className="max-w-screen flex flex-col items-center bg-white px-2 py-5">
             <h1 className="text-4xl font-bold text-black">Our Partners</h1>
             {errorPartners ? (
