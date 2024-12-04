@@ -9,7 +9,7 @@ import { useState } from "react";
 import { useKeenSlider } from "keen-slider/react";
 import { showNoPastEvents, showNoUpcomingEvents } from "../../data/data";
 
-interface EventSliderProps{
+interface EventSliderProps {
   events: EventsSlider[];
   noEvents: boolean;
   pastEvent: boolean;

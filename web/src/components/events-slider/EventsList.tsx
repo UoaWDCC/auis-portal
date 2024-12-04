@@ -29,7 +29,13 @@ export default function EventList({
             className="keen-slider__slide p-2 hover:cursor-pointer"
             onClick={() => handleOnClick(event.id)}
           >
-            <EventCard pastEvent={pastEvent} title={event.title} image={event.image} location={event.location} eventDateStart={event.eventDateStart} />
+            <EventCard
+              pastEvent={pastEvent}
+              title={event.title}
+              image={event.image}
+              location={event.location}
+              eventDateStart={event.eventDateStart}
+            />
           </div>
         ))}
       </div>

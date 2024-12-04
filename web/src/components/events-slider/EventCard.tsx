@@ -15,7 +15,7 @@ export default function EventList({
   image,
   location,
   eventDateStart,
-  pastEvent
+  pastEvent,
 }: EventCardProps) {
   // Calculate the difference in time from now to the event start date
   const eventDate = dayjs(eventDateStart);

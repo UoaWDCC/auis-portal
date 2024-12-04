@@ -93,7 +93,7 @@ export interface EventsSlider {
   location: string;
   eventDateStart: string;
   image: string;
-  isLive: boolean
+  isLive: boolean;
 }
 
 export interface EventAndTicket {
