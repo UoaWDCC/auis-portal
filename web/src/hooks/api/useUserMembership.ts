@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import { fetchUser } from "../../api/apiRequests";
+import { fetchUserMembershipExpiry } from "../../api/apiRequests";
 import { membershipExpiryDate } from "../../types/types";
 
-export const useUserMembership = () => {
+export const useUserMembershipExpiry = () => {
   return useQuery<membershipExpiryDate, Error>({
     queryKey: ["membershipExpiry"],
-    queryFn: fetchUser,
+    queryFn: fetchUserMembershipExpiry,
   });
 };

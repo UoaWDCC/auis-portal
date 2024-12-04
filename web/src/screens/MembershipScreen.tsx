@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { PurchasableMembership } from "../types/types";
 import { Mapper } from "@utils/Mapper";
 import LoadingSpinner from "@components/LoadingSpinner";
-import { useUserMembership } from "../hooks/api/useUserMembership";
+import { useUserMembershipExpiry } from "../hooks/api/useUserMembership";
 import { useSessionContext } from "supertokens-auth-react/recipe/session";
 
 export default function MembershipScreen({ navbar }: { navbar: JSX.Element }) {
@@ -24,7 +24,7 @@ export default function MembershipScreen({ navbar }: { navbar: JSX.Element }) {
     data: userMembershipExpiry,
     error: errorUserMembership,
     isLoading: loadingUserMembership,
-  } = useUserMembership();
+  } = useUserMembershipExpiry();
 
   // States
   const [purchasableMemberships, setPurchasableMembership] = useState<
@@ -119,7 +119,18 @@ export default function MembershipScreen({ navbar }: { navbar: JSX.Element }) {
             <div className="flex flex-wrap items-center justify-center">
               {purchasableMemberships.map((purchasableMembership) => (
                 <PurchaseMembershipCard
-                  purchasableMembership={purchasableMembership}
+                  key={purchasableMembership.id}
+                  title={purchasableMembership.title}
+                  expiry={purchasableMembership.expiry}
+                  price={purchasableMembership.price}
+                  stripeLink={purchasableMembership.stripeLink}
+                  description={purchasableMembership.description}
+                  membershipLinkBypass={
+                    purchasableMembership.membershipLinkBypass
+                  }
+                  bypassMembershipLink={
+                    purchasableMembership.bypassMembershipLink
+                  }
                 />
               ))}
             </div>

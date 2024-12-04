@@ -138,7 +138,6 @@ function Header() {
           </nav>
           <div className="mr-5 hidden xl:flex">
             <div className="flex h-full flex-col items-center text-xl font-bold text-white xl:flex-row">
-              <p>
                 {session.userId ? (
                   <div>
                     <button
@@ -172,7 +171,6 @@ function Header() {
                     </a>
                   </div>
                 )}
-              </p>
             </div>
           </div>
         </div>

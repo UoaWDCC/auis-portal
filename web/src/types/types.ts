@@ -1,5 +1,3 @@
-import { LargeNumberLike } from "crypto";
-
 export interface Exec {
   id: number;
   image: string;

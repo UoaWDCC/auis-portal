@@ -1,29 +1,38 @@
 import { useNavigate, useNavigation } from "react-router";
 import auisLogo2 from "../../assets/peacock.png";
-import { PurchasableMembership } from "../../types/types";
 import { useSessionContext } from "supertokens-auth-react/recipe/session";
 
+interface PurchaseMembershipCardProps {
+  title: string;
+  expiry: string;
+  price: number;
+  stripeLink: string;
+  description: string;
+  membershipLinkBypass: boolean;
+  bypassMembershipLink: string;
+}
+
 export default function PurchaseMembershipCard({
-  purchasableMembership,
-}: {
-  purchasableMembership: PurchasableMembership;
-}) {
-  const expiryDate = new Date(purchasableMembership.expiry);
+  title, expiry, price, stripeLink, description, membershipLinkBypass, bypassMembershipLink
+}: 
+   PurchaseMembershipCardProps
+) {
+  const expiryDate = new Date(expiry);
 
   const navigate = useNavigate();
   const session = useSessionContext();
 
   function handleClick() {
-    console.log(purchasableMembership.membershipLinkBypass);
-    if (purchasableMembership.membershipLinkBypass) {
-      window.open(purchasableMembership.bypassMembershipLink, "_blank");
+    console.log(membershipLinkBypass);
+    if (membershipLinkBypass) {
+      window.open(bypassMembershipLink, "_blank");
     } else {
       if (!session.loading) {
         if (session.doesSessionExist) {
           navigate("/checkout", {
             state: {
               data: {
-                priceId: purchasableMembership.stripeLink,
+                priceId: stripeLink,
                 isTicket: false,
               },
             },
@@ -36,7 +45,7 @@ export default function PurchaseMembershipCard({
   }
 
   return (
-    <div className="drop-shadow-all m-5 rounded-lg border-8 border-[#F3CF0B] bg-white">
+    <div className="drop-shadow-all m-5 rounded-lg  bg-white">
       <div>
         <div className="flex items-center justify-center">
           <img
@@ -47,7 +56,7 @@ export default function PurchaseMembershipCard({
         </div>
         <div className="px-4">
           <p className="pt-6 text-center text-4xl font-bold">
-            {purchasableMembership.title}
+            {title}
           </p>
           <p className="pt-4 text-center text-2xl">
             Expires on:{" "}
@@ -58,24 +67,18 @@ export default function PurchaseMembershipCard({
             })}
           </p>
           <p className="pt-4 text-center text-2xl">
-            Price: ${purchasableMembership.price.toFixed(2)}
+            Price: ${price.toFixed(2)}
           </p>
           <p className="py-4 text-center text-xl">
-            {purchasableMembership.description}
+            {description}
           </p>
           <div className="flex items-center justify-center">
-            {/* <a
-              href={purchasableMembership.stripeLink}
-              target="_blank"
-              rel="noopener noreferrer"
-            > */}
             <button
               onClick={handleClick}
               className="bg-primary-orange my-5 rounded-full px-10 py-3 text-2xl font-bold text-white transition-all hover:scale-110"
             >
               Purchase
             </button>
-            {/* </a> */}
           </div>
         </div>
       </div>
