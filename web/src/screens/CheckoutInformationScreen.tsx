@@ -17,10 +17,10 @@ import { Mapper } from "@utils/Mapper";
 import LoadingSpinner from "@components/LoadingSpinner";
 
 export default function CheckoutInformationScreen({
-  eventId,
+  ticketId,
   handleSubmita,
 }: {
-  eventId: number;
+  ticketId: number;
   handleSubmita: (e: React.FormEvent<HTMLFormElement>) => void;
 }) {
   const { id } = useParams();
@@ -103,7 +103,7 @@ export default function CheckoutInformationScreen({
           Checkout Questions
         </h1>
         <CheckoutInformation
-          eventId={eventId}
+          ticketId={ticketId}
           handleSubmit={(e) => handleSubmit(e)}
           questions={event.question}
         />

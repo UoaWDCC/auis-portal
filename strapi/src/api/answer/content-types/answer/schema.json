@@ -16,11 +16,11 @@
       "type": "text",
       "required": true
     },
-    "People_ID": {
+    "People_Ticket": {
       "type": "relation",
       "relation": "manyToOne",
-      "target": "api::people.people",
-      "inversedBy": "Answer_ID"
+      "target": "api::user-ticket.user-ticket",
+      "inversedBy": "Answers"
     },
     "Question_ID": {
       "type": "relation",

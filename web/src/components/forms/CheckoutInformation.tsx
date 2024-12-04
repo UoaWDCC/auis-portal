@@ -50,11 +50,11 @@ const onSubmit = async (data: any) => {
   }
 };
 export default function CheckoutInformation({
-  eventId,
+  ticketId,
   questions,
   handleSubmit: idk,
 }: {
-  eventId: number;
+  ticketId: number;
   questions: Question[];
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }) {
@@ -122,7 +122,7 @@ export default function CheckoutInformation({
     console.log(temp);
 
     console.log({
-      eventId: eventId,
+      ticketId: ticketId,
       name: name,
       email: email,
       phoneNumber: phoneNumber,
@@ -131,7 +131,7 @@ export default function CheckoutInformation({
     // alert(`The name you entered was: ${name}`);
 
     onSubmit({
-      eventId: eventId,
+      ticketId: ticketId,
       name: name,
       email: email,
       phoneNumber: phoneNumber,

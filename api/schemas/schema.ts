@@ -1427,32 +1427,33 @@ export const upUsersRoleLinks = pgTable(
   }
 );
 
-export const answersPeopleIdLinks = pgTable(
-  "answers_people_id_links",
+// THIS NEEDS TO BE CHANMGED
+export const answersUserTicketIdLinks = pgTable(
+  "answers_user_ticket_id_links",
   {
     id: serial("id").primaryKey().notNull(),
     answerId: integer("answer_id").references(() => answers.id, {
       onDelete: "cascade",
     }),
-    peopleId: integer("people_id").references(() => peoples.id, {
+    userTicketId: integer("user_ticket_id").references(() => peoples.id, {
       onDelete: "cascade",
     }),
     answerOrder: doublePrecision("answer_order"),
   },
   (table) => {
     return {
-      fk: index("answers_people_id_links_fk").using("btree", table.answerId),
-      invFk: index("answers_people_id_links_inv_fk").using(
+      fk: index("answers_user_ticket_id_links_fk").using("btree", table.answerId),
+      invFk: index("answers_user_ticket_id_links_inv_fk").using(
         "btree",
-        table.peopleId
+        table.userTicketId
       ),
-      orderInvFk: index("answers_people_id_links_order_inv_fk").using(
+      orderInvFk: index("answers_user_ticket_id_links_order_inv_fk").using(
         "btree",
         table.answerOrder
       ),
-      answersPeopleIdLinksUnique: unique("answers_people_id_links_unique").on(
+      answersUserTicketIdLinksUnique: unique("answers_user_ticket_id_links_unique").on(
         table.answerId,
-        table.peopleId
+        table.userTicketId
       ),
     };
   }
@@ -1551,7 +1552,7 @@ export const ticketsEventIdLinks = pgTable(
     };
   }
 );
-
+// update this
 export const userTicketsPeopleIdLinks = pgTable(
   "user_tickets_people_id_links",
   {

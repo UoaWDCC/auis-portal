@@ -59,12 +59,6 @@
       "target": "api::user-ticket.user-ticket",
       "mappedBy": "People_ID"
     },
-    "Answer_ID": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::answer.answer",
-      "mappedBy": "People_ID"
-    },
     "Institution": {
       "type": "enumeration",
       "enum": [

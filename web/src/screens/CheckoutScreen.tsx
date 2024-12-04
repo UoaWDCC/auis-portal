@@ -16,7 +16,7 @@ const STRIPE_PUBLISHABLE_KEY = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
 const stripePromise = loadStripe(`${STRIPE_PUBLISHABLE_KEY}`);
 let bodyData = { priceId: "" };
 let isTicket = { isTicket: true };
-let eventId = { eventId: -1 };
+let ticketId = { ticketId: -1 };
 
 function CheckoutScreen({ stripeKey }: { stripeKey?: string }) {
   if (stripeKey) {
@@ -54,7 +54,7 @@ function CheckoutScreen({ stripeKey }: { stripeKey?: string }) {
   if (location.state.data) {
     bodyData = { priceId: location.state.data.priceId };
     isTicket = { isTicket: location.state.data.isTicket };
-    eventId = { eventId: location.state.data.eventId };
+    ticketId = { ticketId: location.state.data.ticketId };
   }
   console.log(location.state.data);
 
@@ -83,7 +83,7 @@ function CheckoutScreen({ stripeKey }: { stripeKey?: string }) {
           className={` ${isTicket.isTicket && !infoEntered ? "flex" : "hidden"}`}
         >
           <CheckoutInformationScreen
-            eventId={eventId.eventId}
+            ticketId={ticketId.ticketId}
             handleSubmita={(e) => handleSubmit(e)}
           />
         </div>

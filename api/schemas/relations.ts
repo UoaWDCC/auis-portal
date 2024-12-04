@@ -42,7 +42,7 @@ import {
   strapiReleaseActionsReleaseLinks,
   upPermissionsRoleLinks,
   upUsersRoleLinks,
-  answersPeopleIdLinks,
+  answersUserTicketIdLinks,
   answersQuestionIdLinks,
   questionsTicketIdLinks,
   ticketsEventIdLinks,
@@ -589,7 +589,7 @@ export const answersRelations = relations(answers, ({ one, many }) => ({
     references: [adminUsers.id],
     relationName: "answers_updatedById_adminUsers_id",
   }),
-  answersPeopleIdLinks: many(answersPeopleIdLinks),
+  answersPeopleIdLinks: many(answersUserTicketIdLinks),
   answersQuestionIdLinks: many(answersQuestionIdLinks),
 }));
 
@@ -658,7 +658,7 @@ export const partnersRelations = relations(partners, ({ one }) => ({
     relationName: "partners_updatedById_adminUsers_id",
   }),
 }));
-
+// update this
 export const peoplesRelations = relations(peoples, ({ one, many }) => ({
   adminUser_createdById: one(adminUsers, {
     fields: [peoples.createdById],
@@ -670,7 +670,7 @@ export const peoplesRelations = relations(peoples, ({ one, many }) => ({
     references: [adminUsers.id],
     relationName: "peoples_updatedById_adminUsers_id",
   }),
-  answersPeopleIdLinks: many(answersPeopleIdLinks),
+  answersPeopleIdLinks: many(answersUserTicketIdLinks),
   userTicketsPeopleIdLinks: many(userTicketsPeopleIdLinks),
 }));
 
@@ -895,17 +895,17 @@ export const upUsersRoleLinksRelations = relations(
     }),
   })
 );
-
+// update realtion
 export const answersPeopleIdLinksRelations = relations(
-  answersPeopleIdLinks,
+  answersUserTicketIdLinks,
   ({ one }) => ({
     answer: one(answers, {
-      fields: [answersPeopleIdLinks.answerId],
+      fields: [answersUserTicketIdLinks.answerId],
       references: [answers.id],
     }),
-    people: one(peoples, {
-      fields: [answersPeopleIdLinks.peopleId],
-      references: [peoples.id],
+    people: one(userTickets, {
+      fields: [answersUserTicketIdLinks.userTicketId],
+      references: [userTickets.id],
     }),
   })
 );

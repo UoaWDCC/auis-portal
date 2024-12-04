@@ -37,6 +37,12 @@
     },
     "Phone_Number": {
       "type": "string"
+    },
+    "Answers": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::answer.answer",
+      "mappedBy": "People_Ticket"
     }
   }
 }

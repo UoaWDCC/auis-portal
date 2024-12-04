@@ -9,7 +9,8 @@ import { UpdateUserInfoBody } from "../types/types";
 import { getUser } from "supertokens-node";
 import { insertUserBySuperToken } from "../gateway/userGateway";
 import { db } from "../db/config/db";
-import { answers, userTickets } from "../schemas/schema";
+import { answers, userTickets, userTicketsTicketIdLinks } from "../schemas/schema";
+import { userTicketsTicketIdLinksRelations } from "../schemas/relations";
 
 // FIX THIS MESS ->
 export const updateUserTicketInfo = asyncHandler(
@@ -19,9 +20,9 @@ export const updateUserTicketInfo = asyncHandler(
       const session = req.session!;
       const userId = session.getUserId();
 
-      const { name, email, phoneNumber, eventId, answers } = req.body;
+      const { name, email, phoneNumber, ticketId, answers } = req.body;
 
-      if (!name || !email || !phoneNumber || !eventId || !answers) {
+      if (!name || !email || !phoneNumber || !ticketId || !answers) {
         return res.status(400).json({ message: "All fields are required" });
       }
 
@@ -32,7 +33,7 @@ export const updateUserTicketInfo = asyncHandler(
       // TODO: Get clarification from Gury on what needs to be done here.
       // ex: database inserts into a table? Update a db record?
       res.status(200).json({
-        eventId,
+        ticketId,
         name,
         email,
         phoneNumber,
@@ -47,7 +48,7 @@ export const updateUserTicketInfo = asyncHandler(
 );
 
 export interface temp {
-  eventId: number;
+  ticketId: number;
   name: string;
   email: string;
   phoneNumber: string;
@@ -58,7 +59,7 @@ export interface temp {
 }
 
 export async function insertUserTicket(data: {
-  eventId: number;
+  ticketId: number;
   name: string;
   email: string;
   phoneNumber: string;
@@ -66,17 +67,23 @@ export async function insertUserTicket(data: {
     questionId: number;
     answer: string;
   }[];
-}): Promise<{ id: number }[]> {
-  let updateUserInfoOrNewUser: { id: number }[];
-
+}): Promise<{ userTicketId: number }[]> {
+  let updateUserInfoOrNewUser: { userTicketId: number }[];
   updateUserInfoOrNewUser = await db
     .insert(userTickets)
     .values({
+      // ticketId: data.ticketId,
       name: data.name,
       email: data.email,
       phoneNumber: data.phoneNumber,
     })
-    .returning({ id: userTickets.id });
+    .returning({ userTicketId: userTickets.id });
+
+    const tempID = updateUserInfoOrNewUser[0].userTicketId
+
+  const tempa : any = await db.insert(userTicketsTicketIdLinks).values({userTicketId: updateUserInfoOrNewUser[0].userTicketId, ticketId: data.ticketId}).returning({id: userTicketsTicketIdLinks.id})
+    console.log(tempa.id)
+
 
   const ticketId = userTickets.id;
 

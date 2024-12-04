@@ -1,9 +1,8 @@
 import { useNavigate } from "react-router";
-import { ContinueWithPasswordlessTheme } from "supertokens-auth-react/lib/build/recipe/passwordless/components/themes/continueWithPasswordless";
 import { useSessionContext } from "supertokens-auth-react/recipe/session";
 
 interface LocationInformationProps {
-  eventId: number;
+  ticketId: number;
   title: string;
   isDouble: boolean;
   price: number;
@@ -16,7 +15,7 @@ interface LocationInformationProps {
 }
 
 export default function TicketCard({
-  eventId,
+  ticketId,
   title,
   isDouble,
   price,
@@ -39,7 +38,7 @@ export default function TicketCard({
         if (true && session.doesSessionExist) {
           navigate("/checkout", {
             state: {
-              data: { priceId: stripeLink, isTicket: true, eventId: eventId },
+              data: { priceId: stripeLink, isTicket: true, ticketId: ticketId },
             },
           });
         } else {
@@ -48,7 +47,7 @@ export default function TicketCard({
       } else {
         navigate("/checkout", {
           state: {
-            data: { priceId: stripeLink, isTicket: true, eventId: eventId },
+            data: { priceId: stripeLink, isTicket: true, ticketId: ticketId },
           },
         });
       }
