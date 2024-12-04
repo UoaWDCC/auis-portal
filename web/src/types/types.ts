@@ -13,10 +13,6 @@ export interface Props {
   execs: Exec[];
 }
 
-export interface ExecCardProps {
-  exec: Exec;
-}
-
 export interface PrimaryDeveloper {
   id: number;
   name: string;
@@ -84,13 +80,7 @@ export interface PreviousTeam {
   year: string;
 }
 
-export interface PreviousTeamCardProps {
-  year: string;
-  teams: {
-    Presidents: PreviousTeam[];
-    Executives: PreviousTeam[];
-  };
-}
+
 
 export interface Event {
   id: number;
