@@ -1,4 +1,4 @@
-export interface ValueCardProps {
+interface ValueCardProps {
   title: string;
   description: string;
   image: string;

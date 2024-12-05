@@ -1,4 +1,3 @@
-// import { useNavigate } from "react-router";
 import peacockLogo from "../../assets/peacock_logo.png";
 import Socials from "./Socials";
 import { Link } from "react-router-dom";

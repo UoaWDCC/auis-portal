@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import { GET_EVENTS, GET_EVENTS_GALLERY } from "../graphql/queries";
+import { GET_EVENTS, GET_EVENTS_GALLERY, GET_EVENTS_SLIDER } from "../graphql/queries";
 import LoadingSpinner from "../components/LoadingSpinner";
 import type { Event, EventGallery } from "../types/types";
 import { Mapper } from "../utils/Mapper";
@@ -16,7 +16,7 @@ export default function EventScreen({ navbar }: { navbar: JSX.Element }) {
     loading: eventsLoading,
     data: eventsData,
     error: eventsError,
-  } = useQuery(GET_EVENTS);
+  } = useQuery(GET_EVENTS_SLIDER);
 
   const {
     loading: eventGalleryLoading,
@@ -43,7 +43,7 @@ export default function EventScreen({ navbar }: { navbar: JSX.Element }) {
     }
     if (eventsData) {
       try {
-        const mappedEvents = Mapper.mapToEvents(eventsData);
+        const mappedEvents = Mapper.mapToEventsSlider(eventsData);
         setEvents(mappedEvents);
       } catch (error) {
         setErrorEvents(true);

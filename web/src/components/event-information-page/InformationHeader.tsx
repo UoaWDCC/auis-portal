@@ -6,6 +6,7 @@ interface InformationHeaderProps {
   title: string;
   subtitle: string;
   startDate: string;
+  endDate: string;
   location: string;
   priceRange: string;
   scrollToTickets: (
@@ -18,6 +19,7 @@ export default function InformationHeader({
   title,
   subtitle,
   startDate,
+  endDate,
   location,
   scrollToTickets,
   priceRange,
@@ -40,9 +42,19 @@ export default function InformationHeader({
           <h2 className="text-md pb-2 text-center text-gray-300 md:text-left">
             {subtitle}
           </h2>
-          <div className="my-3 flex items-center justify-center gap-2 text-2xl text-gray-300 md:justify-start">
-            <FaCalendarAlt />{" "}
+          <div className="mx-2 my-3 flex items-center justify-center gap-2 text-2xl text-gray-300 md:justify-start">
+            <FaCalendarAlt />
+            
             {new Date(startDate).toLocaleString("en-NZ", {
+              day: "numeric",
+              month: "short",
+              year: "numeric",
+              hour: "2-digit",
+              minute: "2-digit",
+              hour12: true,
+            })}{" "}
+            to{" "}
+            {new Date(endDate).toLocaleString("en-NZ", {
               day: "numeric",
               month: "short",
               year: "numeric",
@@ -51,7 +63,7 @@ export default function InformationHeader({
               hour12: true,
             })}
           </div>
-          <div className="mb-3 flex items-center justify-center gap-2 text-2xl text-gray-300 md:justify-start">
+          <div className="mx-2 mb-3 flex items-center justify-center gap-2 text-2xl text-gray-300 md:justify-start">
             <FaLocationDot /> {location}
           </div>
           <div className="rounded-lg border-2 border-gray-600 bg-black bg-opacity-10">

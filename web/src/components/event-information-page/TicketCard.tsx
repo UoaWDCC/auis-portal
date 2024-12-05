@@ -6,6 +6,7 @@ interface LocationInformationProps {
   title: string;
   isDouble: boolean;
   price: number;
+  description: string;
   stripeLink: string;
   bypass: boolean;
   bypassLink: string;
@@ -19,6 +20,7 @@ export default function TicketCard({
   title,
   isDouble,
   price,
+  description,
   stripeLink,
   bypass,
   bypassLink,
@@ -30,6 +32,7 @@ export default function TicketCard({
   const session = useSessionContext();
 
   function handleOnClick() {
+    console.log("TJHSIDF");
     console.log(bypass);
     if (bypass) {
       window.open(bypassLink, "_blank");
@@ -71,6 +74,11 @@ export default function TicketCard({
               <p className="pl-4 text-xs text-gray-500">
                 You must be a paid member to purchase this ticket
               </p>
+            ) : (
+              <></>
+            )}
+            {description.length > 0 ? (
+              <p className="pl-4 text-xs text-gray-500">{description}</p>
             ) : (
               <></>
             )}

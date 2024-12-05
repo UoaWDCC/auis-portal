@@ -13,7 +13,7 @@ import type {
   Question,
   Ticket,
   PurchasableMembership,
-  EventAndTicket,
+  EventAndTickets,
   TicketAndQuestion,
   PartnerImage,
   // TicketAndQuestion,
@@ -227,7 +227,7 @@ export class Mapper {
     }
   }
 
-  static mapToEvent(data: any): EventAndTicket {
+  static mapToEvent(data: any): EventAndTickets {
     if (!data.event || !data.event.data || data.event.data.length === 0) {
       throw new NoDataError("No data");
     } else {
@@ -235,27 +235,26 @@ export class Mapper {
       const imageUrl = attributes.Image?.data?.attributes?.url || "";
 
       return {
-        id: data.event.data.id,
+        // id: data.event.data.id,
         title: attributes.Title || "",
         description: attributes.Description || "",
         subtitle: attributes.Subtitle || "",
         location: attributes.Location || "",
-        locationLink: attributes.Location_Link || "",
+        // locationLink: attributes.Location_Link || "",
         eventDateStart: attributes.Event_Date_Start || "",
         eventDateEnd: attributes.Event_Date_End || "",
-        isLive: attributes.Is_Live || false,
+        // isLive: attributes.Is_Live || false,
         termsAndConditions: attributes.Terms_And_Conditions || "",
         eventCapacityRemaining: attributes.Event_Capacity_Remaining || 0,
         image: imageUrl,
-        ticket: attributes.Ticket_ID.data.map((item: any) => {
+        tickets: attributes.Ticket_ID.data.map((item: any) => {
           const attributesTicket = item.attributes || {};
-
           return {
             id: item.id,
             name: attributesTicket.Name || "",
             description: attributesTicket.Ticket_Description || "",
-            discountCode: attributesTicket.Discount_Code || "",
-            discountPrice: attributesTicket.Discount_Price || 0,
+            // discountCode: attributesTicket.Discount_Code || "",
+            // discountPrice: attributesTicket.Discount_Price || 0,
             price: attributesTicket.Price || 0,
             isMemberOnly: attributesTicket.Is_Member_Only || "",
             isDouble: attributesTicket.Is_Double || "",
@@ -264,7 +263,7 @@ export class Mapper {
             startDateTicketSales:
               attributesTicket.Start_Date_Ticket_Sales || "",
             isTicketLive: attributesTicket.Is_Ticket_Live || false,
-            ticketBypassLink: attributesTicket.Ticket_Link_Bypass || true,
+            ticketLinkBypass: attributesTicket.Ticket_Link_Bypass || false,
             bypassTicketLink: attributesTicket.Bypass_Ticket_Link || "",
             stripeLink: attributesTicket.Stripe_Link || "",
           };
@@ -274,7 +273,6 @@ export class Mapper {
   }
 
   static mapToTicketQuestion(data: any): TicketAndQuestion {
-    console.log(data);
     if (!data.ticket || !data.ticket.data || data.ticket.data.length === 0) {
       throw new NoDataError("No data");
     } else {
@@ -325,7 +323,6 @@ export class Mapper {
     } else {
       return data.questions.data.map((item: any) => {
         const attributes = item.attributes || {};
-
         return {
           id: item.id,
           question: attributes.Question || "",
@@ -335,29 +332,28 @@ export class Mapper {
     }
   }
 
-  static mapToTickets(data: any): Ticket[] {
-    if (!data.tickets || !data.tickets.data || data.tickets.data.length === 0) {
-      throw new NoDataError("No data");
-    } else {
-      return data.tickets.data.map((item: any) => {
-        const attributes = item.attributes || {};
-
-        return {
-          id: item.id,
-          name: attributes.Name || "",
-          discountCode: attributes.Discount_Code || "",
-          discountPrice: attributes.Discount_Price || 0,
-          price: attributes.Price || 0,
-          isMemberOnly: attributes.Is_Member_Only || false,
-          isDouble: attributes.Is_Double || false,
-          numTicketsLeft: attributes.Number_Tickets_Left || 0,
-          ticketDescription: attributes.Ticket_Description || "",
-          startDateTicketSales: attributes.Start_Date_Ticket_Sales || "",
-          isTicketLive: attributes.Is_Ticket_Live || false,
-        };
-      });
-    }
-  }
+  // static mapToTickets(data: any): Ticket[] {
+  //   if (!data.tickets || !data.tickets.data || data.tickets.data.length === 0) {
+  //     throw new NoDataError("No data");
+  //   } else {
+  //     return data.tickets.data.map((item: any) => {
+  //       const attributes = item.attributes || {};
+  //       return {
+  //         id: item.id,
+  //         name: attributes.Name || "",
+  //         discountCode: attributes.Discount_Code || "",
+  //         discountPrice: attributes.Discount_Price || 0,
+  //         price: attributes.Price || 0,
+  //         isMemberOnly: attributes.Is_Member_Only || false,
+  //         isDouble: attributes.Is_Double || false,
+  //         numTicketsLeft: attributes.Number_Tickets_Left || 0,
+  //         ticketDescription: attributes.Ticket_Description || "",
+  //         startDateTicketSales: attributes.Start_Date_Ticket_Sales || "",
+  //         isTicketLive: attributes.Is_Ticket_Live || false,
+  //       };
+  //     });
+  //   }
+  // }
 
   static mapToPurchasableMemberships(data: any): PurchasableMembership[] {
     if (

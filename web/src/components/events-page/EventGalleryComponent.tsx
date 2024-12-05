@@ -2,11 +2,11 @@
 import Masonry from "react-masonry-css";
 import { EventGallery } from "../../types/types";
 
-// interface EventGalleryProps {
-//   photos: EventGallery[];
-// }
+interface EventGalleryProps {
+  photos: EventGallery[];
+}
 
-function EventGalleryComponent({ photos }: { photos: EventGallery[] }) {
+function EventGalleryComponent( {photos} : EventGalleryProps) {
   const breakpointColumnsObj = {
     default: 3,
     1100: 3,

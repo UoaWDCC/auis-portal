@@ -96,20 +96,20 @@ export interface EventsSlider {
   isLive: boolean;
 }
 
-export interface EventAndTicket {
-  id: number;
+export interface EventAndTickets {
+  // id: number;
   title: string;
   description: string;
   subtitle: string;
   location: string;
-  locationLink: string;
+  // locationLink: string;
   eventDateStart: string;
   eventDateEnd: string;
-  isLive: boolean;
+  // isLive: boolean;
   termsAndConditions: string;
   eventCapacityRemaining: number;
   image: string;
-  ticket: Ticket[];
+  tickets: Ticket[];
 }
 
 export interface EventGallery {
@@ -132,8 +132,8 @@ export interface TicketAndQuestion {
 export interface Ticket {
   id: number;
   name: string;
-  discountCode: string;
-  discountPrice: number;
+  // discountCode: string;
+  // discountPrice: number;
   price: number;
   isMemberOnly: boolean;
   isDouble: boolean;
