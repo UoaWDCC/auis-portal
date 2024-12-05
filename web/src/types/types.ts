@@ -124,9 +124,9 @@ export interface Question {
 }
 
 export interface TicketAndQuestion {
-  id: number;
-  name: string;
-  question: Question[];
+  ticketId: number;
+  // name: string;
+  questions: Question[];
 }
 
 export interface Ticket {
@@ -159,4 +159,13 @@ export interface PurchasableMembership {
 
 export interface membershipExpiryDate {
   userExpiryDate: string;
+}
+
+
+export interface QuestionAnswer {
+  question: string;
+  questionId: number;
+  checkForMemberEmail: boolean;
+  indexId: number;
+  answer: string;
 }

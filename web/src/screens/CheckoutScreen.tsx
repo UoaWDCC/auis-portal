@@ -4,60 +4,65 @@ import {
   EmbeddedCheckoutProvider,
   EmbeddedCheckout,
 } from "@stripe/react-stripe-js";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { fetchEventOrMembershipCheckoutSecret } from "../api/apiRequests";
-import CheckoutInformationScreen from "./CheckoutInformationScreen";
+// import CheckoutInformationScreen from "./CheckoutInformationScreen";
 import axios from "axios";
+import { PiRobotBold } from "react-icons/pi";
+import CheckoutError from "@components/checkout-page/CheckoutError";
+import CheckoutInformation from "@components/forms/CheckoutInformation";
 
 const STRIPE_PUBLISHABLE_KEY = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
 const stripePromise = loadStripe(`${STRIPE_PUBLISHABLE_KEY}`);
-let bodyData = { priceId: "" };
-let isTicket = { isTicket: true };
-let ticketId = { ticketId: -1 };
+let bodyData: { priceId: string };
+let isTicket: { isTicket: boolean };
+let ticketId: { ticketId: number };
 
-function CheckoutScreen({ stripeKey }: { stripeKey?: string }) {
-  if (stripeKey) {
-    bodyData = { priceId: stripeKey };
-  }
+
+
+function CheckoutScreen() {
   const location = useLocation();
+  // const navigate = useNavigate();
 
-  const [infoEntered, setInfoEntered] = useState(false);
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    console.log("I DI A THING");
-    // onSubmit(event.target)
-    console.log(event.target);
-    // setInfoEntered(true);
-  };
-
-  // const onSubmit = async (data: any) => {
-  //   try {
-  //     const response = await axios.post("/api/user/user-ticket-info", data, {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //     });
-
-  //     if (response.status === 200) {
-  //       //Form Submission Successful
-  //     } else {
-  //       // Form Submission Failed
-  //     }
-  //   } catch (error) {
-  //     // Error
-  //   }
-  // };
-
-  if (location.state.data) {
+  // ensure data required for checkout is here
+  try {
     bodyData = { priceId: location.state.data.priceId };
     isTicket = { isTicket: location.state.data.isTicket };
     ticketId = { ticketId: location.state.data.ticketId };
+  } catch {
+    return <CheckoutError />;
   }
-  console.log(location.state.data);
 
+  // For switching between stripe and checkout questions
+  const [infoEntered, setInfoEntered] = useState(false);
+
+  // const handleSubmit = (
+  //   event: React.FormEvent<HTMLFormElement>,
+  //   name: string,
+  //   email: string,
+  //   phoneNumber: string,
+  //   answers: {
+  //     questionId: number;
+  //     answer: string;
+  //   }[]
+  // ) => {
+  //   console.log("I DI A THING");
+  //   // onSubmit(event.target)
+  //   console.log(event.target);
+  //   // setInfoEntered(true);
+  //   // onSubmit({
+  //   //   ticketId: ticketId.ticketId,
+  //   //   name: name,
+  //   //   email: email,
+  //   //   phoneNumber: phoneNumber,
+  //   //   answers: answers,
+  //   // });
+  // };
+
+  // Stripe payments ------------------------------
   const fetchClientSecret = useCallback(async () => {
     // Create a Checkout Session
     return await fetchEventOrMembershipCheckoutSecret(bodyData);
@@ -66,10 +71,12 @@ function CheckoutScreen({ stripeKey }: { stripeKey?: string }) {
   // can be null to options.clientSecret or options.fetchClientSecret if you are performing an initial server-side render or when generating a static site.
   const options = { fetchClientSecret };
 
+  //------------------------------------------------
+
   return (
     <div className="max-w-screen from-AUIS-dark-teal to-AUIS-teal min-h-screen bg-gradient-to-b">
       <div className="flex flex-col items-center text-center">
-        <h1 className="my-12 text-5xl font-bold text-white">Payment</h1>
+        <h1 className="my-12 text-5xl font-bold text-white">Checkout</h1>
       </div>
       <div className="item flex justify-center">
         <div
@@ -80,11 +87,11 @@ function CheckoutScreen({ stripeKey }: { stripeKey?: string }) {
           </EmbeddedCheckoutProvider>
         </div>
         <div
-          className={` ${isTicket.isTicket && !infoEntered ? "flex" : "hidden"}`}
+          className={` w-[40rem] ${isTicket.isTicket && !infoEntered ? "flex" : "hidden"}`}
         >
-          <CheckoutInformationScreen
+          <CheckoutInformation 
             ticketId={ticketId.ticketId}
-            handleSubmita={(e) => handleSubmit(e)}
+            setInfoEntered={setInfoEntered}
           />
         </div>
       </div>

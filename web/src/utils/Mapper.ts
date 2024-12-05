@@ -276,9 +276,9 @@ export class Mapper {
     } else {
       const attributes = data.ticket.data.attributes || {};
       return {
-        id: data.ticket.data.id,
-        name: attributes.Name || "",
-        question: attributes.Question_ID.data.map((item: any) => {
+        ticketId: data.ticket.data.id,
+        // name: attributes.Name || "",
+        questions: attributes.Question_ID.data.map((item: any) => {
           const attributesTicket = item.attributes || {};
           return {
             id: item.id,

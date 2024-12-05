@@ -334,7 +334,7 @@ export function getTicketQuestions({ id }: { id: number }) {
   id.toString();
   return gql`
     query {
-      ticket(id: "1") {
+      ticket(id:${id}) {
         data {
           id
           attributes {
