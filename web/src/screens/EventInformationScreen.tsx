@@ -115,7 +115,6 @@ export default function EventInformationScreen({
           scrollToTickets={handleClick}
           priceRange={priceRange}
         />
-
       </div>
       <div>
         <EventDescription description={event.description} />

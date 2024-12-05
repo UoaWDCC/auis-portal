@@ -94,11 +94,13 @@ export default function TicketCard({
     <>
       {" "}
       <div className="flex items-center justify-center pt-6">
-        <div className="mx-2 flex w-[80rem]  max-w-full items-center justify-between rounded-lg border-2 border-gray-200 bg-gray-100 py-3">
+        <div className="mx-2 flex w-[80rem] max-w-full items-center justify-between rounded-lg border-2 border-gray-200 bg-gray-100 py-3">
           <div>
-            <p className="pl-4 text-md sm:text-xl break-words font-bold">{title}</p>
+            <p className="text-md break-words pl-4 font-bold sm:text-xl">
+              {title}
+            </p>
             {isDouble ? (
-              <p className="pl-4 text-xs break-words text-gray-500">
+              <p className="break-words pl-4 text-xs text-gray-500">
                 Both ticket holders must be members
               </p>
             ) : isMemberOnly ? (
@@ -114,8 +116,8 @@ export default function TicketCard({
               <></>
             )}
           </div>
-          <div className="flex  items-center justify-center">
-            <p className="text-md sm:text-xl font-bold">${price.toFixed(2)}</p>
+          <div className="flex items-center justify-center">
+            <p className="text-md font-bold sm:text-xl">${price.toFixed(2)}</p>
             <button
               disabled={!isTicketOnSale}
               onClick={handleOnClick}
