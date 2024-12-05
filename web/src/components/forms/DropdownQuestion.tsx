@@ -64,7 +64,7 @@ export default function DropdownQuestion({
         onInput={() => setYearOfStudyDropdownTouched(true)}
         className={`input flex w-full items-center justify-center rounded-xl border px-3 py-2 text-lg leading-tight shadow focus:outline-none ${yearOfStudyDropdownTouched ? "text-black" : "text-gray-400"} `}
         {...register(name)}
-          defaultValue={placeholder}
+        defaultValue={placeholder}
       >
         <option
           className="flex w-full items-center justify-center rounded-xl border px-3 py-2 text-lg leading-tight text-gray-400 shadow focus:outline-none"
@@ -73,7 +73,10 @@ export default function DropdownQuestion({
           {placeholder}
         </option>
         {yearOfStudyOptions.map((item, index) => (
-          <option key={index} className="flex w-full items-center justify-center rounded-xl border px-3 py-2 text-lg leading-tight text-black shadow focus:outline-none">
+          <option
+            key={index}
+            className="flex w-full items-center justify-center rounded-xl border px-3 py-2 text-lg leading-tight text-black shadow focus:outline-none"
+          >
             {item.text}
           </option>
         ))}
