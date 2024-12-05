@@ -35,7 +35,7 @@ export default function InformationHeader({
           <img src={image} className="w-[30rem] rounded-lg" />
         </div>
         <div className="md:ml-6">
-          <h1 className="mt-4 max-w-[40rem] pb-2 text-center text-5xl sm:text-6xl font-bold text-white md:text-left">
+          <h1 className="mt-4 max-w-[40rem] pb-2 text-center text-5xl font-bold text-white sm:text-6xl md:text-left">
             {title}
           </h1>
           <h2 className="text-md pb-2 text-center text-gray-300 md:text-left">
