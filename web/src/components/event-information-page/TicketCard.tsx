@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router";
 import { useSessionContext } from "supertokens-auth-react/recipe/session";
+import { useUserMembershipExpiry } from "../../hooks/api/useUserMembership";
 
 interface LocationInformationProps {
   ticketId: number;
@@ -30,44 +31,74 @@ export default function TicketCard({
 }: LocationInformationProps) {
   const navigate = useNavigate();
   const session = useSessionContext();
+  const {
+    data: userMembershipExpiry,
+    error: errorUserMembership,
+    isLoading: loadingUserMembership,
+  } = useUserMembershipExpiry();
 
   function handleOnClick() {
-    console.log("TJHSIDF");
-    console.log(bypass);
     if (bypass) {
       window.open(bypassLink, "_blank");
-    } else {
-      if (!session.loading) {
-        if (true && session.doesSessionExist) {
-          navigate("/checkout", {
-            state: {
-              data: { priceId: stripeLink, isTicket: true, ticketId: ticketId },
-            },
-          });
-        } else {
-          navigate("/membership");
-        }
-      } else {
-        navigate("/checkout", {
-          state: {
-            data: { priceId: stripeLink, isTicket: true, ticketId: ticketId },
+    } else if (!(isMemberOnly || isDouble)) {
+      navigate("/checkout", {
+        state: {
+          data: {
+            priceId: stripeLink,
+            isTicket: true,
+            ticketId: ticketId,
           },
-        });
+        },
+      });
+    } else {
+      // wait to see if there is a session active
+      if (session.loading === false) {
+        // if user is not logged in take them to membership screen
+        if (!session.doesSessionExist) {
+          navigate("/membership");
+          // if user is logged
+        } else {
+          // make sure the membership isnt loading
+          if (loadingUserMembership === false) {
+            // check to see if they have completed the onboarding questions
+            if (errorUserMembership) {
+              navigate("/membership");
+            }
+            // check to see if they are a valid member
+            if (userMembershipExpiry) {
+              if (new Date(userMembershipExpiry.userExpiryDate) >= new Date()) {
+                // if all checks pass then navigate to checkout
+                navigate("/checkout", {
+                  state: {
+                    data: {
+                      priceId: stripeLink,
+                      isTicket: true,
+                      ticketId: ticketId,
+                    },
+                  },
+                });
+              } else {
+                navigate("/membership");
+              }
+            } else {
+              navigate("/membership");
+            }
+          }
+        }
       }
     }
   }
-
   const isTicketOnSale = isTicketLive && numTicketsLeft > 0;
 
   return (
     <>
       {" "}
       <div className="flex items-center justify-center pt-6">
-        <div className="mx-2 flex w-[80rem] items-center justify-between rounded-lg border-2 border-gray-200 bg-gray-100 py-3">
+        <div className="mx-2 flex w-[80rem]  max-w-full items-center justify-between rounded-lg border-2 border-gray-200 bg-gray-100 py-3">
           <div>
-            <p className="pl-4 text-xl font-bold">{title}</p>
+            <p className="pl-4 text-md sm:text-xl break-words font-bold">{title}</p>
             {isDouble ? (
-              <p className="pl-4 text-xs text-gray-500">
+              <p className="pl-4 text-xs break-words text-gray-500">
                 Both ticket holders must be members
               </p>
             ) : isMemberOnly ? (
@@ -83,8 +114,8 @@ export default function TicketCard({
               <></>
             )}
           </div>
-          <div className="flex items-center justify-center">
-            <p className="text-xl font-bold">${price.toFixed(2)}</p>
+          <div className="flex  items-center justify-center">
+            <p className="text-md sm:text-xl font-bold">${price.toFixed(2)}</p>
             <button
               disabled={!isTicketOnSale}
               onClick={handleOnClick}

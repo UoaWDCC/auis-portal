@@ -254,8 +254,8 @@ export class Mapper {
             // discountCode: attributesTicket.Discount_Code || "",
             // discountPrice: attributesTicket.Discount_Price || 0,
             price: attributesTicket.Price || 0,
-            isMemberOnly: attributesTicket.Is_Member_Only || "",
-            isDouble: attributesTicket.Is_Double || "",
+            isMemberOnly: attributesTicket.Is_Member_Only || false,
+            isDouble: attributesTicket.Is_Double || false,
             numTicketsLeft: attributesTicket.Number_Tickets_Left || "",
             ticketDescription: attributesTicket.Ticket_Description || false,
             startDateTicketSales:

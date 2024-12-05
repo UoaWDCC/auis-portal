@@ -36,7 +36,7 @@ export default function InformationHeader({
         </div>
 
         <div className="md:ml-6">
-          <h1 className="mt-4 max-w-[40rem] pb-2 text-center text-6xl font-bold text-white md:text-left">
+          <h1 className="mt-4 max-w-[40rem] pb-2 text-center text-5xl sm:text-6xl font-bold text-white md:text-left">
             {title}
           </h1>
           <h2 className="text-md pb-2 text-center text-gray-300 md:text-left">
@@ -70,7 +70,7 @@ export default function InformationHeader({
               <p className="text-xl text-white">Price: </p>
               <p className="text-right text-xl text-white">{priceRange}</p>
             </div>
-            <div className="my-2 flex items-center justify-center">
+            <div className="my-2 flex max-w-full items-center justify-center">
               <button
                 onClick={(e) => handleClick(e)}
                 className="bg-primary-orange mx-4 mb-2 w-full rounded-lg py-3 text-2xl font-bold text-white transition-all hover:scale-105"

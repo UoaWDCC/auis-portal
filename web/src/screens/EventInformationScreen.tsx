@@ -104,6 +104,7 @@ export default function EventInformationScreen({
     <>
       <div className="from-AUIS-dark-teal to-AUIS-teal bg-gradient-to-b pb-20">
         {navbar}
+
         <InformationHeader
           image={event.image}
           title={event.title}
@@ -114,6 +115,7 @@ export default function EventInformationScreen({
           scrollToTickets={handleClick}
           priceRange={priceRange}
         />
+
       </div>
       <div>
         <EventDescription description={event.description} />
