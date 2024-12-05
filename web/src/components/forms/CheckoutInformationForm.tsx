@@ -6,7 +6,7 @@ import { FormValidate } from "@utils/FormValidate";
 export default function CheckoutInformationForm({
   handleSubmit: postInformation,
   questions,
-  submitError
+  submitError,
 }: {
   handleSubmit: (
     event: React.FormEvent<HTMLFormElement>,
@@ -16,7 +16,7 @@ export default function CheckoutInformationForm({
     answers: QuestionAnswer[]
   ) => void;
   questions: TicketAndQuestion;
-  submitError : boolean
+  submitError: boolean;
 }) {
   var defaultAnswers: QuestionAnswer[] = [];
   for (var i: number = 0; i < questions.questions.length; i++) {
@@ -71,7 +71,14 @@ export default function CheckoutInformationForm({
     }
 
     // send post request
-    if (FormValidate.validateAll(name=nameInput, email=emailInput, phoneNumber=phoneNumberInput, answers=answerList)) {
+    if (
+      FormValidate.validateAll(
+        (name = nameInput),
+        (email = emailInput),
+        (phoneNumber = phoneNumberInput),
+        (answers = answerList)
+      )
+    ) {
       postInformation(event, name, email, phoneNumber, answers);
     }
   };
@@ -80,10 +87,10 @@ export default function CheckoutInformationForm({
     const myNextList = [...answerList];
     const answerItem = myNextList.find((a) => a.indexId === indexId);
     if (answerItem) {
-        answerItem.answer = updateValue;
+      answerItem.answer = updateValue;
     }
     setAnswerList(myNextList);
-    }
+  }
 
   function onAnswerChange(
     e: React.ChangeEvent<HTMLInputElement>,
@@ -95,7 +102,9 @@ export default function CheckoutInformationForm({
   return (
     <>
       <form
-        onSubmit={(e) => handleSubmit(e, nameInput, emailInput, phoneNumberInput, answerList)}
+        onSubmit={(e) =>
+          handleSubmit(e, nameInput, emailInput, phoneNumberInput, answerList)
+        }
         className="form"
       >
         <label className="flex items-center justify-center py-3 text-center text-xl">
@@ -167,9 +176,11 @@ export default function CheckoutInformationForm({
             Continue
           </button>
         </div>
-        {submitError? (
-          <p className="mt-2 text-center text-red-500 text-sm">
-            An error has occurred while submitting, please try again later.<br/>If this is a double ticket, both ticket holders must be members
+        {submitError ? (
+          <p className="mt-2 text-center text-sm text-red-500">
+            An error has occurred while submitting, please try again later.
+            <br />
+            If this is a double ticket, both ticket holders must be members
           </p>
         ) : (
           <></>
