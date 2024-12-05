@@ -44,8 +44,9 @@
     "Status": {
       "type": "enumeration",
       "enum": [
-        "Domestic",
-        "International"
+        "Domestic Student",
+        "International Student",
+        "N/A"
       ],
       "required": true
     },
@@ -62,8 +63,8 @@
     "Institution": {
       "type": "enumeration",
       "enum": [
-        "UoA",
-        "AUT",
+        "The University of Auckland",
+        "Auckland University of Technology",
         "Other",
         "None"
       ],

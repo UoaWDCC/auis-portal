@@ -36,6 +36,7 @@ import EventInformationScreen from "./screens/EventInformationScreen.tsx";
 import SignUpInformationScreen from "./screens/SignUpInformationScreen.tsx";
 // import CheckoutInformationScreen from "./screens/CheckoutInformationScreen.tsx";
 import axios from "axios";
+import ErrorScreen from "./screens/ErrorScreen.tsx";
 
 //supertokens code
 SuperTokens.init({
@@ -101,7 +102,7 @@ SuperTokens.init({
 //Add any routes for screens below
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<App />}>
+    <Route path="/" element={<App />} errorElement={<ErrorScreen/>}>
       <Route index={true} element={<HomeScreen navbar={<Header />} />} />
       <Route path="/events" element={<EventScreen navbar={<Header />} />} />
       <Route path="/credits" element={<CreditsScreen navbar={<Header />} />} />

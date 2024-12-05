@@ -152,24 +152,6 @@ export const updateUserInfo = asyncHandler(
         institution,
       };
 
-      //transform institute
-      if (payload.institution === "The University of Auckland") {
-        payload.institution = "UoA";
-      } else if (payload.institution === "Auckland University of Technology") {
-        //set Auckland University of Technology
-        payload.institution = "AUT";
-      }
-
-      //transform status
-      if (payload.isDomestic === "Domestic Student") {
-        payload.isDomestic = "Domestic";
-      } else if (payload.isDomestic === "International Student") {
-        //set Auckland University of Technology
-        payload.isDomestic = "International";
-      } else {
-        payload.isDomestic = "Domestic";
-      }
-
       //insert user into peoples table here
       await insertUserBySuperToken(payload as UpdateUserInfoBody);
 

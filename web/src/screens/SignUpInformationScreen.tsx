@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import TextQuestion from "@components/forms/TextQuestion";
 import DropdownQuestion from "@components/forms/DropdownQuestion";
+import { useState } from "react";
 
 const SignUpSchema = z.object({
   name: z.string().max(40).min(1),
@@ -33,36 +34,33 @@ const SignUpSchema = z.object({
 
 type SignUpSchemaType = z.infer<typeof SignUpSchema>;
 
-const sendSignUpData = async (data: object) => {
-  // TODO: update type
-  console.log("typeof: ", typeof data);
-  try {
-    const response = await axios.post("/api/user/update-user-info", data, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: { data },
-    });
-
-    console.log("SignUpInfoComponent: received: ", response);
-
-    if (response.status === 200) {
-      //Form Submission Successful
-      window.location.href = "/membership";
-    } else {
-      // Form Submission Failed
-    }
-  } catch (error) {
-    // Error
-  }
-};
-
 function SignUpInformationScreen({ navbar }: { navbar: JSX.Element }) {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<SignUpSchemaType>({ resolver: zodResolver(SignUpSchema) });
+
+  const [formError, setFormError] = useState(false);
+
+  const sendSignUpData = async (data: object) => {
+    try {
+      const response = await axios.post("/api/user/update-user-info", data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: { data },
+      });
+      if (response.status === 200) {
+        window.location.href = "/membership";
+      } else {
+        // Form Submission Failed
+        setFormError(true);
+      }
+    } catch (error) {
+      setFormError(true);
+    }
+  };
 
   const onSubmit: SubmitHandler<SignUpSchemaType> = (data) => {
     sendSignUpData(data);
@@ -176,6 +174,13 @@ function SignUpInformationScreen({ navbar }: { navbar: JSX.Element }) {
               </div>
             </form>
           </div>
+          {formError ? (
+            <p className="pt-5 text-center text-red-500">
+              An error has occured, please try again later
+            </p>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
     </div>
