@@ -1,6 +1,5 @@
 import { useQuery } from "@apollo/client";
 import {
-  GET_EVENTS,
   GET_EVENTS_GALLERY,
   GET_EVENTS_SLIDER,
 } from "../graphql/queries";

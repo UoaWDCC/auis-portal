@@ -9,9 +9,11 @@ import { Mapper } from "@utils/Mapper";
 import LoadingSpinner from "@components/navigation/LoadingSpinner";
 import { useUserMembershipExpiry } from "../hooks/api/useUserMembership";
 import { useSessionContext } from "supertokens-auth-react/recipe/session";
+import { useNavigate } from "react-router";
 
 export default function MembershipScreen({ navbar }: { navbar: JSX.Element }) {
   const session = useSessionContext();
+  const navigate = useNavigate()
 
   // Queries
   const {
@@ -71,6 +73,10 @@ export default function MembershipScreen({ navbar }: { navbar: JSX.Element }) {
         <LoadingSpinner />
       </>
     );
+
+  if (errorUserMembership && userLoggedIn){
+    navigate("/signup/information")
+  }
 
   return (
     <>

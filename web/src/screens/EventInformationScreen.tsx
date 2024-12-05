@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { getEventById } from "../graphql/queries";
 import { useQuery } from "@apollo/client";
 import { Mapper } from "@utils/Mapper";
-import { EventAndTickets, Ticket } from "../types/types";
+import { EventAndTickets } from "../types/types";
 import { useParams } from "react-router-dom";
 import InformationHeader from "@components/event-information-page/InformationHeader";
 import EventDescription from "@components/event-information-page/EventDescription";

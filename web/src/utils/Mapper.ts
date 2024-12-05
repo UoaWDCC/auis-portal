@@ -11,12 +11,10 @@ import type {
   Event,
   EventGallery,
   Question,
-  Ticket,
   PurchasableMembership,
   EventAndTickets,
   TicketAndQuestion,
   PartnerImage,
-  // TicketAndQuestion,
 } from "../types/types";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

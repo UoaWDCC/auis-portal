@@ -28,13 +28,13 @@ import SignInScreen from "./screens/SignInScreen.tsx";
 import CheckoutScreen from "./screens/CheckoutScreen.tsx";
 import ReturnScreen from "./screens/ReturnScreen.tsx";
 import EventScreen from "./screens/EventScreen.tsx";
-import InformationScreen from "./screens/InformationScreen.tsx";
+// import InformationScreen from "./screens/InformationScreen.tsx";
 import PartnersScreen from "./screens/PartnersScreen.tsx";
 import Header from "@components/navigation/Header.tsx";
 import MembershipScreen from "./screens/MembershipScreen.tsx";
 import EventInformationScreen from "./screens/EventInformationScreen.tsx";
 import SignUpInformationScreen from "./screens/SignUpInformationScreen.tsx";
-import CheckoutInformationScreen from "./screens/CheckoutInformationScreen.tsx";
+// import CheckoutInformationScreen from "./screens/CheckoutInformationScreen.tsx";
 import axios from "axios";
 
 //supertokens code
@@ -115,12 +115,12 @@ const router = createBrowserRouter(
       <Route path="/signup/callback/google" element={<SignInAndUpCallback />} />
       <Route path="/aboutus" element={<AboutUsScreen navbar={<Header />} />} />
       <Route path="/checkout" element={<CheckoutScreen />} />
-      <Route
+      {/* <Route
         path="/checkout/information/:id"
         element={<CheckoutInformationScreen />}
-      />
+      /> */}
       <Route path="/return" element={<ReturnScreen />} />
-      <Route path="/userinfo" element={<InformationScreen />} />
+      {/* <Route path="/userinfo" element={<InformationScreen />} /> */}
       <Route
         path="/membership"
         element={<MembershipScreen navbar={<Header />} />}
