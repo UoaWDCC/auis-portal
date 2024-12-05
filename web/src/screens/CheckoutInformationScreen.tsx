@@ -14,7 +14,7 @@ import { useQuery } from "@apollo/client";
 import { getTicketQuestions } from "../graphql/queries";
 import { useEffect, useState } from "react";
 import { Mapper } from "@utils/Mapper";
-import LoadingSpinner from "@components/LoadingSpinner";
+import LoadingSpinner from "@components/navigation/LoadingSpinner";
 
 export default function CheckoutInformationScreen({
   ticketId,

@@ -3,7 +3,7 @@ import Intro from "@components/home-page/Intro";
 import SomePhotos from "@components/home-page/SomePhotos";
 import UpcomingEvents from "@components/events-slider/EventSlider";
 import { GET_EVENTS_SLIDER, GET_SOME_PHOTOS } from "../graphql/queries";
-import LoadingSpinner from "../components/LoadingSpinner";
+import LoadingSpinner from "../components/navigation/LoadingSpinner";
 import { useQuery } from "@apollo/client";
 import { Mapper } from "@utils/Mapper";
 import { useEffect, useState } from "react";

@@ -3,7 +3,7 @@ import type { Partner } from "../types/types";
 import { useQuery } from "@apollo/client";
 import { GET_PARTNERS } from "../graphql/queries";
 import { Mapper } from "../utils/Mapper";
-import LoadingSpinner from "../components/LoadingSpinner";
+import LoadingSpinner from "../components/navigation/LoadingSpinner";
 import PartnerCard from "../components/partner-page/PartnerCard";
 
 export default function PartnersScreen({ navbar }: { navbar: JSX.Element }) {

@@ -6,7 +6,7 @@ import { useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 import { PurchasableMembership } from "../types/types";
 import { Mapper } from "@utils/Mapper";
-import LoadingSpinner from "@components/LoadingSpinner";
+import LoadingSpinner from "@components/navigation/LoadingSpinner";
 import { useUserMembershipExpiry } from "../hooks/api/useUserMembership";
 import { useSessionContext } from "supertokens-auth-react/recipe/session";
 

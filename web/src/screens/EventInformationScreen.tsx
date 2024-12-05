@@ -11,7 +11,7 @@ import LocationInformation from "@components/event-information-page/LocationInfo
 import TicketCard from "@components/event-information-page/TicketCard";
 import TermsAndConditions from "@components/event-information-page/TermsAndConditions";
 import ContactInformation from "@components/event-information-page/ContactInformation";
-import LoadingSpinner from "@components/LoadingSpinner";
+import LoadingSpinner from "@components/navigation/LoadingSpinner";
 import NoEventFound from "@components/event-information-page/NoEventFound";
 
 export default function EventInformationScreen({

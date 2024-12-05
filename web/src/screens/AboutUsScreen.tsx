@@ -5,7 +5,7 @@ import {
   GET_VALUES,
   GET_PARTNER_IMAGES,
 } from "../graphql/queries";
-import LoadingSpinner from "../components/LoadingSpinner";
+import LoadingSpinner from "../components/navigation/LoadingSpinner";
 import { Mapper } from "../utils/Mapper";
 import { useState, useEffect } from "react";
 import ValueCard from "../components/about-us-page/ValueCard";

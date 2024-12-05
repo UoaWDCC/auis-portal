@@ -4,7 +4,7 @@ import peacockLogo from "../../assets/peacock_logo.png";
 import auisWhiteLogo from "../../assets/auis_white.png";
 import { IoMdClose, IoMdMenu } from "react-icons/io";
 import { useSessionContext } from "supertokens-auth-react/recipe/session";
-import LoadingSpinner from "@components/LoadingSpinner";
+import LoadingSpinner from "@components/navigation/LoadingSpinner";
 import { signOut } from "supertokens-web-js/recipe/session";
 
 function Header() {

@@ -4,7 +4,7 @@ import {
   GET_EVENTS_GALLERY,
   GET_EVENTS_SLIDER,
 } from "../graphql/queries";
-import LoadingSpinner from "../components/LoadingSpinner";
+import LoadingSpinner from "../components/navigation/LoadingSpinner";
 import type { Event, EventGallery } from "../types/types";
 import { Mapper } from "../utils/Mapper";
 import EventGalleryComponent from "@components/events-page/EventGalleryComponent";
