@@ -58,7 +58,6 @@ const sendSignUpData = async (data: object) => {
 };
 
 function SignUpInformationScreen({ navbar }: { navbar: JSX.Element }) {
-  
   const {
     register,
     handleSubmit,

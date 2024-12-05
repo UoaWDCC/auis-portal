@@ -13,7 +13,7 @@ import { useNavigate } from "react-router";
 
 export default function MembershipScreen({ navbar }: { navbar: JSX.Element }) {
   const session = useSessionContext();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   // Queries
   const {
@@ -74,8 +74,8 @@ export default function MembershipScreen({ navbar }: { navbar: JSX.Element }) {
       </>
     );
 
-  if (errorUserMembership && userLoggedIn){
-    navigate("/signup/information")
+  if (errorUserMembership && userLoggedIn) {
+    navigate("/signup/information");
   }
 
   return (
