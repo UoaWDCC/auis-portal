@@ -133,7 +133,10 @@ export default function EventInformationScreen({
             ticketId={ticket.id}
             numTicketsLeft={ticket.numTicketsLeft}
             isTicketLive={
-              (ticket.isTicketLive) && (new Date(ticket.startDateTicketSales) <= new Date()) && (new Date(event.eventDateStart) > new Date()) && (event.eventCapacityRemaining > 0)
+              ticket.isTicketLive &&
+              new Date(ticket.startDateTicketSales) <= new Date() &&
+              new Date(event.eventDateStart) > new Date() &&
+              event.eventCapacityRemaining > 0
             }
             bypass={ticket.ticketLinkBypass}
             bypassLink={ticket.bypassTicketLink}

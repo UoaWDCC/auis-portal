@@ -1,5 +1,9 @@
 import { useQuery } from "@apollo/client";
-import { GET_EVENTS, GET_EVENTS_GALLERY, GET_EVENTS_SLIDER } from "../graphql/queries";
+import {
+  GET_EVENTS,
+  GET_EVENTS_GALLERY,
+  GET_EVENTS_SLIDER,
+} from "../graphql/queries";
 import LoadingSpinner from "../components/LoadingSpinner";
 import type { Event, EventGallery } from "../types/types";
 import { Mapper } from "../utils/Mapper";

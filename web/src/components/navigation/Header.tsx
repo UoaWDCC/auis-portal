@@ -26,7 +26,11 @@ function Header() {
   ];
 
   if (session.loading) {
-    return <><LoadingSpinner/></>;
+    return (
+      <>
+        <LoadingSpinner />
+      </>
+    );
   }
 
   return (

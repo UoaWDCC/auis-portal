@@ -6,7 +6,7 @@ interface EventGalleryProps {
   photos: EventGallery[];
 }
 
-function EventGalleryComponent( {photos} : EventGalleryProps) {
+function EventGalleryComponent({ photos }: EventGalleryProps) {
   const breakpointColumnsObj = {
     default: 3,
     1100: 3,

@@ -44,7 +44,6 @@ export default function InformationHeader({
           </h2>
           <div className="mx-2 my-3 flex items-center justify-center gap-2 text-2xl text-gray-300 md:justify-start">
             <FaCalendarAlt />
-            
             {new Date(startDate).toLocaleString("en-NZ", {
               day: "numeric",
               month: "short",
