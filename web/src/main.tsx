@@ -102,7 +102,7 @@ SuperTokens.init({
 //Add any routes for screens below
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<App />} errorElement={<ErrorScreen/>}>
+    <Route path="/" element={<App />} errorElement={<ErrorScreen />}>
       <Route index={true} element={<HomeScreen navbar={<Header />} />} />
       <Route path="/events" element={<EventScreen navbar={<Header />} />} />
       <Route path="/credits" element={<CreditsScreen navbar={<Header />} />} />
