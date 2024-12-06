@@ -1,15 +1,17 @@
-export default function TicketQuestion({
-  question,
-  indexId,
-  onAnswerChange,
-}: {
+interface TicketQuestionProps {
   question: string;
   indexId: number;
   onAnswerChange: (
     e: React.ChangeEvent<HTMLInputElement>,
     indexId: number
   ) => void;
-}) {
+}
+
+export default function TicketQuestion({
+  question,
+  indexId,
+  onAnswerChange,
+}: TicketQuestionProps) {
   return (
     <div>
       <label className="flex items-center justify-center py-3 text-center text-xl">

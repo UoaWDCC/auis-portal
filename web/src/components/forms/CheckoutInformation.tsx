@@ -8,13 +8,15 @@ import LoadingSpinner from "@components/navigation/LoadingSpinner";
 import { useNavigate } from "react-router";
 import CheckoutInformationForm from "./CheckoutInformationForm";
 
+interface CheckoutInformationProps {
+  ticketId: number;
+  navigateToPaymentScreen(userTicketId: number): void;
+}
+
 export default function CheckoutInformation({
   ticketId,
   navigateToPaymentScreen,
-}: {
-  ticketId: number;
-  navigateToPaymentScreen(userTicketId: number): void;
-}) {
+}: CheckoutInformationProps) {
   // navigate
   const navigate = useNavigate();
 
@@ -97,11 +99,9 @@ export default function CheckoutInformation({
     setSubmitLoading(true);
 
     // remove unused information for post request
-    const answerList = answers.map(
-      ({ question, indexId, ...rest }) => {
-        return rest;
-      }
-    );
+    const answerList = answers.map(({ question, indexId, ...rest }) => {
+      return rest;
+    });
 
     // call post request
     onSubmit({
