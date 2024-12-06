@@ -3,7 +3,7 @@ import TicketQuestion from "./TicketQuestion";
 import { QuestionAnswer, TicketAndQuestion } from "../../types/types";
 import { FormValidate } from "@utils/FormValidate";
 
-interface CheckoutInformationForm{
+interface CheckoutInformationForm {
   handleSubmit: (
     event: React.FormEvent<HTMLFormElement>,
     name: string,
@@ -19,9 +19,8 @@ export default function CheckoutInformationForm({
   handleSubmit: postInformation,
   questions,
   submitError,
-}: CheckoutInformationForm ) {
-
-// Initialise the dynamic answer list
+}: CheckoutInformationForm) {
+  // Initialise the dynamic answer list
   var defaultAnswers: QuestionAnswer[] = [];
   for (var i: number = 0; i < questions.questions.length; i++) {
     defaultAnswers.push({
@@ -41,8 +40,8 @@ export default function CheckoutInformationForm({
   const [errorPhoneNumber, setErrorPhoneNumber] = useState(false);
   const [answerList, setAnswerList] =
     useState<QuestionAnswer[]>(defaultAnswers);
-  const [errorAnswer, setErrorAnswer] = useState(false);  
-  
+  const [errorAnswer, setErrorAnswer] = useState(false);
+
   // Update the dynamic answers list
   function handleUpdateAnswerList(indexId: number, updateValue: string) {
     const myNextList = [...answerList];
