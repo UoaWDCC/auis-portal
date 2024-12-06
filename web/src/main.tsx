@@ -38,6 +38,7 @@ import SignUpInformationScreen from "./screens/SignUpInformationScreen.tsx";
 import axios from "axios";
 import ErrorScreen from "./screens/ErrorScreen.tsx";
 import CheckoutInformationScreen from "./screens/CheckoutInformationScreen.tsx";
+import AttendanceScreen from "./screens/AttendanceScreen.tsx";
 
 //supertokens code
 SuperTokens.init({
@@ -138,6 +139,10 @@ const router = createBrowserRouter(
       <Route
         path="/signup/information"
         element={<SignUpInformationScreen navbar={<Header />} />}
+      />
+      <Route
+        path="/admin/attendance"
+        element={<AttendanceScreen navbar={<Header />} />}
       />
     </Route>
   )
