@@ -3,7 +3,7 @@ import TicketQuestion from "./TicketQuestion";
 import { QuestionAnswer, TicketAndQuestion } from "../../types/types";
 import { FormValidate } from "@utils/FormValidate";
 
-interface CheckoutInformationFormProps{
+interface CheckoutInformationFormProps {
   handleSubmit: (
     event: React.FormEvent<HTMLFormElement>,
     name: string,
@@ -19,9 +19,8 @@ export default function CheckoutInformationForm({
   handleSubmit: postInformation,
   questions,
   submitError,
-}: CheckoutInformationFormProps ) {
-
-// Initialise the dynamic answer list
+}: CheckoutInformationFormProps) {
+  // Initialise the dynamic answer list
   var defaultAnswers: QuestionAnswer[] = [];
   for (var i: number = 0; i < questions.questions.length; i++) {
     defaultAnswers.push({
