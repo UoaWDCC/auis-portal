@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { SiTicktick } from "react-icons/si";
 import { Navigate, useNavigate } from "react-router";
 import { EmailLink } from "../data/data";
 
