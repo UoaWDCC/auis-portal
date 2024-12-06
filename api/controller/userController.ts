@@ -37,12 +37,7 @@ export const updateUserTicketInfo = asyncHandler(
       // TODO: Get clarification from Gury on what needs to be done here.
       // ex: database inserts into a table? Update a db record?
       res.status(200).json({
-        updateUserInfoOrNewUser,
-        ticketId,
-        name,
-        email,
-        phoneNumber,
-        answers,
+        updateUserInfoOrNewUser
       });
     } catch (error) {
       res.status(500).json({
@@ -72,7 +67,7 @@ export async function insertUserTicket(data: {
     questionId: number;
     answer: string;
   }[];
-}): Promise<{ userTicketId: number }[]> {
+}): Promise<{ userTicketId: number }> {
   let updateUserInfoOrNewUser: { userTicketId: number }[];
   updateUserInfoOrNewUser = await db
     .insert(userTickets)
@@ -105,7 +100,7 @@ export async function insertUserTicket(data: {
 
     await db.insert(answers).values(answerRecords);
   }
-  return updateUserInfoOrNewUser;
+  return updateUserInfoOrNewUser[0];
 }
 
 // FIX THIS MESS ^^^^^^^^^^^^^^^^^^^ sorry Tarun

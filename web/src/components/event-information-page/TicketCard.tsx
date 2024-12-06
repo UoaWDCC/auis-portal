@@ -45,7 +45,6 @@ export default function TicketCard({
         state: {
           data: {
             priceId: stripeLink,
-            isTicket: true,
             ticketId: ticketId,
           },
         },
@@ -72,7 +71,6 @@ export default function TicketCard({
                   state: {
                     data: {
                       priceId: stripeLink,
-                      isTicket: true,
                       ticketId: ticketId,
                     },
                   },

@@ -3,14 +3,12 @@ import { NoDataError } from "../classes/NoDataError";
 import type {
   Exec,
   Partner,
-  Social,
   SomePhoto,
   Value,
   Introduction,
   PreviousTeam,
   Event,
   EventGallery,
-  Question,
   PurchasableMembership,
   EventAndTickets,
   TicketAndQuestion,
@@ -78,21 +76,6 @@ export class Mapper {
           description: attributes.Description || "",
           location: attributes.Location || "",
           image: imageUrl,
-        };
-      });
-    }
-  }
-
-  static mapToSocials(data: any): Social[] {
-    if (!data.socials || !data.socials.data || data.socials.data.length === 0) {
-      throw new NoDataError("No data");
-    } else {
-      return data.socials.data.map((item: any) => {
-        const attributes = item.attributes || {};
-        return {
-          id: item.id,
-          type: attributes.Type || "",
-          link: attributes.Link || "",
         };
       });
     }
@@ -179,32 +162,6 @@ export class Mapper {
     }
   }
 
-  static mapToEvents(data: any): Event[] {
-    if (!data.events || !data.events.data || data.events.data.length === 0) {
-      throw new NoDataError("No data");
-    } else {
-      return data.events.data.map((item: any) => {
-        const attributes = item.attributes || {};
-        const imageUrl = attributes.Image?.data?.attributes?.url || "";
-
-        return {
-          id: item.id,
-          title: attributes.Title || "",
-          description: attributes.Description || "",
-          subtitle: attributes.Subtitle || "",
-          location: attributes.Location || "",
-          locationLink: attributes.Location_Link || "",
-          eventDateStart: attributes.Event_Date_Start || "",
-          eventDateEnd: attributes.Event_Date_End || "",
-          isLive: attributes.Is_Live || false,
-          termsAndConditions: attributes.Terms_And_Conditions || "",
-          eventCapacityRemaining: attributes.Event_Capacity_Remaining || 0,
-          image: imageUrl,
-        };
-      });
-    }
-  }
-
   static mapToEventsSlider(data: any): Event[] {
     if (!data.events || !data.events.data || data.events.data.length === 0) {
       throw new NoDataError("No data");
@@ -231,17 +188,13 @@ export class Mapper {
     } else {
       const attributes = data.event.data.attributes || {};
       const imageUrl = attributes.Image?.data?.attributes?.url || "";
-
       return {
-        // id: data.event.data.id,
         title: attributes.Title || "",
         description: attributes.Description || "",
         subtitle: attributes.Subtitle || "",
         location: attributes.Location || "",
-        // locationLink: attributes.Location_Link || "",
         eventDateStart: attributes.Event_Date_Start || "",
         eventDateEnd: attributes.Event_Date_End || "",
-        // isLive: attributes.Is_Live || false,
         termsAndConditions: attributes.Terms_And_Conditions || "",
         eventCapacityRemaining: attributes.Event_Capacity_Remaining || 0,
         image: imageUrl,
@@ -251,8 +204,6 @@ export class Mapper {
             id: item.id,
             name: attributesTicket.Name || "",
             description: attributesTicket.Ticket_Description || "",
-            // discountCode: attributesTicket.Discount_Code || "",
-            // discountPrice: attributesTicket.Discount_Price || 0,
             price: attributesTicket.Price || 0,
             isMemberOnly: attributesTicket.Is_Member_Only || false,
             isDouble: attributesTicket.Is_Double || false,
@@ -277,7 +228,6 @@ export class Mapper {
       const attributes = data.ticket.data.attributes || {};
       return {
         ticketId: data.ticket.data.id,
-        // name: attributes.Name || "",
         questions: attributes.Question_ID.data.map((item: any) => {
           const attributesTicket = item.attributes || {};
           return {
@@ -310,48 +260,6 @@ export class Mapper {
       });
     }
   }
-
-  static mapToQuestions(data: any): Question[] {
-    if (
-      !data.questions ||
-      !data.questions.data ||
-      data.questions.data.length === 0
-    ) {
-      throw new NoDataError("No data");
-    } else {
-      return data.questions.data.map((item: any) => {
-        const attributes = item.attributes || {};
-        return {
-          id: item.id,
-          question: attributes.Question || "",
-          checkForMemberEmail: attributes.Check_For_Member_Email || false,
-        };
-      });
-    }
-  }
-
-  // static mapToTickets(data: any): Ticket[] {
-  //   if (!data.tickets || !data.tickets.data || data.tickets.data.length === 0) {
-  //     throw new NoDataError("No data");
-  //   } else {
-  //     return data.tickets.data.map((item: any) => {
-  //       const attributes = item.attributes || {};
-  //       return {
-  //         id: item.id,
-  //         name: attributes.Name || "",
-  //         discountCode: attributes.Discount_Code || "",
-  //         discountPrice: attributes.Discount_Price || 0,
-  //         price: attributes.Price || 0,
-  //         isMemberOnly: attributes.Is_Member_Only || false,
-  //         isDouble: attributes.Is_Double || false,
-  //         numTicketsLeft: attributes.Number_Tickets_Left || 0,
-  //         ticketDescription: attributes.Ticket_Description || "",
-  //         startDateTicketSales: attributes.Start_Date_Ticket_Sales || "",
-  //         isTicketLive: attributes.Is_Ticket_Live || false,
-  //       };
-  //     });
-  //   }
-  // }
 
   static mapToPurchasableMemberships(data: any): PurchasableMembership[] {
     if (

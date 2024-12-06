@@ -1,5 +1,3 @@
-import { Question } from "../../types/types";
-
 export default function TicketQuestion({
   question,
   indexId,

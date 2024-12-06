@@ -1,6 +1,6 @@
 import axios from "axios";
 import { QuestionAnswer, TicketAndQuestion } from "../../types/types";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useQuery } from "@apollo/client";
 import { getTicketQuestions } from "../../graphql/queries";
 import { Mapper } from "@utils/Mapper";
@@ -24,11 +24,6 @@ export default function CheckoutInformation({
     data: ticketAndQuestionsData,
     error: ticketAndQuestionsError,
   } = useQuery(getTicketQuestions({ id: ticketId }));
-
-  // Take user to top of page
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   // useEffect
   useEffect(() => {
@@ -54,6 +49,11 @@ export default function CheckoutInformation({
     ticketAndQuestionsLoading,
   ]);
 
+  // Take user to top of page
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   // States
   const [ticketAndQuestions, setTicketAndQuestions] =
     useState<TicketAndQuestion>();
@@ -74,27 +74,16 @@ export default function CheckoutInformation({
       if (response.status === 200) {
         // Form Submission Successful
         setSubmitLoading(false);
-        // Move user to payment
-        try{
-          console.log(response.data.updateUserInfoOrNewUser[0].userTicketId)
-          navigateToPaymentScreen(response.data.updateUserInfoOrNewUser[0].userTicketId)
-        }
-        catch{
-          console.log("IT BROKE")
-        }
-        
-        
-        // setInfoEntered(true);
+        // Move user to payment screen after the user ticket id is received
+        navigateToPaymentScreen(response.data.userTicketId);
+
       } else {
         setSubmitLoading(false);
-
-        // Form Submission Failed
         setSubmitError(true);
       }
     } catch (error) {
       setSubmitLoading(false);
       setSubmitError(true);
-      // Error
     }
   };
 
@@ -108,12 +97,14 @@ export default function CheckoutInformation({
     event.preventDefault();
     setSubmitLoading(true);
 
+    // remove unused information for post request
     const answerList = answers.map(
       ({ question, checkForMemberEmail, indexId, ...rest }) => {
         return rest;
       }
     );
 
+    // call post request
     onSubmit({
       ticketId: ticketId,
       name: name,
@@ -122,6 +113,7 @@ export default function CheckoutInformation({
       answers: answerList,
     });
   };
+
   // Loading
   if (loadingTicketAndQuestions || submitLoading) {
     return <LoadingSpinner />;
@@ -132,6 +124,7 @@ export default function CheckoutInformation({
     navigate("/error");
   }
 
+  // ensure that ticketAndQuestions exists
   return ticketAndQuestions ? (
     <div className="drop-shadow-all mb-20 w-full rounded-lg bg-white px-2 py-12 sm:px-12">
       <CheckoutInformationForm

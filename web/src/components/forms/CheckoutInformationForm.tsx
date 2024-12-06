@@ -3,11 +3,7 @@ import TicketQuestion from "./TicketQuestion";
 import { QuestionAnswer, TicketAndQuestion } from "../../types/types";
 import { FormValidate } from "@utils/FormValidate";
 
-export default function CheckoutInformationForm({
-  handleSubmit: postInformation,
-  questions,
-  submitError,
-}: {
+interface CheckoutInformationForm{
   handleSubmit: (
     event: React.FormEvent<HTMLFormElement>,
     name: string,
@@ -17,7 +13,15 @@ export default function CheckoutInformationForm({
   ) => void;
   questions: TicketAndQuestion;
   submitError: boolean;
-}) {
+}
+
+export default function CheckoutInformationForm({
+  handleSubmit: postInformation,
+  questions,
+  submitError,
+}: CheckoutInformationForm ) {
+
+// Initialise the dynamic answer list
   var defaultAnswers: QuestionAnswer[] = [];
   for (var i: number = 0; i < questions.questions.length; i++) {
     defaultAnswers.push({
@@ -29,6 +33,7 @@ export default function CheckoutInformationForm({
     });
   }
 
+  // Initialise all states
   const [nameInput, setNameInput] = useState<string>("");
   const [errorName, setErrorName] = useState(false);
   const [emailInput, setEmailInput] = useState<string>("");
@@ -37,8 +42,27 @@ export default function CheckoutInformationForm({
   const [errorPhoneNumber, setErrorPhoneNumber] = useState(false);
   const [answerList, setAnswerList] =
     useState<QuestionAnswer[]>(defaultAnswers);
-  const [errorAnswer, setErrorAnswer] = useState(false);
+  const [errorAnswer, setErrorAnswer] = useState(false);  
+  
+  // Update the dynamic answers list
+  function handleUpdateAnswerList(indexId: number, updateValue: string) {
+    const myNextList = [...answerList];
+    const answerItem = myNextList.find((a) => a.indexId === indexId);
+    if (answerItem) {
+      answerItem.answer = updateValue;
+    }
+    setAnswerList(myNextList);
+  }
 
+  // handle dynamic answer change
+  function onAnswerChange(
+    e: React.ChangeEvent<HTMLInputElement>,
+    indexId: number
+  ) {
+    handleUpdateAnswerList(indexId, e.target.value);
+  }
+
+  // Form validation prior to sending information to parent component for the post request
   const handleSubmit = (
     event: React.FormEvent<HTMLFormElement>,
     name: string,
@@ -82,22 +106,6 @@ export default function CheckoutInformationForm({
       postInformation(event, name, email, phoneNumber, answers);
     }
   };
-
-  function handleUpdateAnswerList(indexId: number, updateValue: string) {
-    const myNextList = [...answerList];
-    const answerItem = myNextList.find((a) => a.indexId === indexId);
-    if (answerItem) {
-      answerItem.answer = updateValue;
-    }
-    setAnswerList(myNextList);
-  }
-
-  function onAnswerChange(
-    e: React.ChangeEvent<HTMLInputElement>,
-    indexId: number
-  ) {
-    handleUpdateAnswerList(indexId, e.target.value);
-  }
 
   return (
     <>
@@ -169,7 +177,6 @@ export default function CheckoutInformationForm({
         )}
         <div className="flex items-center justify-center pt-5">
           <button
-            // onClick={(e) =>onsubmit(e)}
             className="bg-primary-orange rounded-2xl px-10 py-3 text-xl font-bold text-white transition-all hover:scale-110"
             type="submit"
           >

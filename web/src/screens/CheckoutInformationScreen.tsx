@@ -1,27 +1,19 @@
 import CheckoutError from "@components/checkout-page/CheckoutError";
 import CheckoutInformation from "@components/forms/CheckoutInformation";
-import { useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 
-let bodyData: { priceId: string };
-let isTicket: { isTicket: boolean };
-let ticketId: { ticketId: number };
-
-// const navigate = useNavigate();
-
-// ensure data required for checkout is here
+let priceId: string;
+let ticketId: number;
 
 export default function CheckoutInformationScreen() {
   const navigate = useNavigate();
   const location = useLocation();
+
   function navigateToPaymentScreen(userTicketId: number) {
-    // TODO: is this number or string
     navigate("/checkout/payment", {
       state: {
         data: {
-          priceId: bodyData.priceId,
-          isTicket: true,
-          ticketId: ticketId,
+          priceId: priceId,
           userTicketId: userTicketId,
         },
       },
@@ -29,9 +21,8 @@ export default function CheckoutInformationScreen() {
   }
 
   try {
-    bodyData = { priceId: location.state.data.priceId };
-    isTicket = { isTicket: location.state.data.isTicket };
-    ticketId = { ticketId: location.state.data.ticketId };
+    priceId = location.state.data.priceId ;
+    ticketId = location.state.data.ticketId ;
   } catch {
     return <CheckoutError />;
   }
@@ -44,7 +35,7 @@ export default function CheckoutInformationScreen() {
       <div className="item flex justify-center">
         <div className={`w-[40rem]`}>
           <CheckoutInformation
-            ticketId={ticketId.ticketId}
+            ticketId={ticketId}
             navigateToPaymentScreen={navigateToPaymentScreen}
           />
         </div>

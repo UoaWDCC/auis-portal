@@ -125,7 +125,6 @@ export interface Question {
 
 export interface TicketAndQuestion {
   ticketId: number;
-  // name: string;
   questions: Question[];
 }
 
