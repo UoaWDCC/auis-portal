@@ -116,7 +116,10 @@ const router = createBrowserRouter(
       <Route path="/signup" element={<SignUpScreen navbar={<Header />} />} />
       <Route path="/signup/callback/google" element={<SignInAndUpCallback />} />
       <Route path="/aboutus" element={<AboutUsScreen navbar={<Header />} />} />
-      <Route path="/checkout/information" element={<CheckoutInformationScreen />} />
+      <Route
+        path="/checkout/information"
+        element={<CheckoutInformationScreen />}
+      />
       <Route path="/checkout/payment" element={<CheckoutScreen />} />
       {/* <Route
         path="/checkout/information/:id"
