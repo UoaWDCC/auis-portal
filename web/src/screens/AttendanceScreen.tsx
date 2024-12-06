@@ -1,4 +1,6 @@
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router";
 import { useZxing } from "react-zxing";
 import { UseZxingOptionsWithConstraints } from "react-zxing/lib/useZxing";
 
@@ -6,62 +8,70 @@ function AttendanceScreen({ navbar }: { navbar: JSX.Element }) {
   type DataItem = {
     name: string;
     id: number;
-    ticketId: string;
+    userTicketCode: string;
     attendance: boolean;
   };
+
+  let queryId = -1;
+  const { id } = useParams();
+  if (id !== undefined) {
+    queryId = parseInt(id);
+  }
+
+  useEffect;
 
   const tempData = [
     {
       name: "hello",
       id: 0,
-      ticketId: "xxasadfasfdasdfasdfasdfasdfasdfa",
+      userTicketCode: "xxasadfasfdasdfasdfasdfasdfasdfa",
       attendance: false,
     },
     {
       name: "hi",
       id: 1,
-      ticketId: "x543",
+      userTicketCode: "x543",
       attendance: true,
     },
     {
       name: "steve",
       id: 2,
-      ticketId: "asdf",
+      userTicketCode: "asdf",
       attendance: true,
     },
     {
       name: "alex",
       id: 3,
-      ticketId: "gjhg",
+      userTicketCode: "gjhg",
       attendance: true,
     },
     {
       name: "gury",
       id: 4,
-      ticketId: "asfd",
+      userTicketCode: "asfd",
       attendance: false,
     },
     {
       name: "jack",
       id: 5,
-      ticketId: "vbn",
+      userTicketCode: "vbn",
       attendance: false,
     },
     {
       name: "yeet",
       id: 6,
-      ticketId: "myname",
+      userTicketCode: "myname",
       attendance: false,
     },
   ];
 
-  function filterDataByTicketIdOrName(
+  function filterDataByuserTicketCodeOrName(
     data: DataItem[],
     searchTerm: string
   ): DataItem[] {
     return data.filter(
       (item) =>
-        item.ticketId.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        // item.userTicketCode.toLowerCase().includes(searchTerm.toLowerCase()) || // UNCOMMENT THIS
         item.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
   }
@@ -69,12 +79,13 @@ function AttendanceScreen({ navbar }: { navbar: JSX.Element }) {
   const [resulta, setResult] = useState("");
   const [curr, setCurr] = useState("");
   const [filtered, setFiltered] = useState(tempData);
+  const [serverData, setServerData] = useState(tempData)
 
   const { ref } = useZxing({
     onDecodeResult(result) {
       if (resulta != result.getText()) {
-        const filteredData = filterDataByTicketIdOrName(
-          tempData,
+        const filteredData = filterDataByuserTicketCodeOrName(
+          serverData,
           result.getText()
         );
         setResult(result.getText());
@@ -85,26 +96,70 @@ function AttendanceScreen({ navbar }: { navbar: JSX.Element }) {
   });
 
   function handleOnChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const filteredData = filterDataByTicketIdOrName(tempData, e.target.value);
+    const filteredData = filterDataByuserTicketCodeOrName(serverData, e.target.value);
     setCurr(e.target.value);
     setFiltered(filteredData);
   }
 
   function updateCheckbox(e: React.ChangeEvent<HTMLInputElement>, id: number) {
-    let tempObj = tempData.find((o) => o.id === id);
+    // onCheckboxClicked()
+    let tempObj = serverData.find((o) => o.id === id);
     if (tempObj) {
-      let index = tempData.indexOf(tempObj);
+      let index = serverData.indexOf(tempObj);
       tempObj.attendance = !tempObj.attendance;
-      tempData.fill(tempObj, index, index++);
+      serverData.fill(tempObj, index, index++);
       // send data to backend from here send ticket ID and attendance
       console.log(tempObj.id);
       console.log(tempObj.attendance);
     }
   }
 
+  //dumb shit
+
+  const onSubmit = async ( params: any ) => {
+    try {
+      const response = await axios.get("/api/event/attendance", { params, 
+        headers: {
+          "Content-Type": "application/json",
+        },
+        
+      });
+      if (response.status === 200) {
+        // Form Submission Successful
+        console.log(response.data.eventTickets);
+        setServerData(response.data.eventTickets)
+        // console.log(serverData)
+      } else {
+        console.log(response);
+      }
+    } catch (error) {
+      console.log("error");
+    }
+  };
+
+  const onCheckboxClicked = async () => {
+    try {
+      const response = await axios.patch("/api/event/attendance", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        // data,
+      });
+      if (response.status === 200) {
+        // Form Submission Successful
+        console.log(response);
+      } else {
+        console.log(response);
+      }
+    } catch (error) {
+      console.log("error");
+    }
+  };
+
   return (
     <div className="from-AUIS-dark-teal to-AUIS-teal min-h-[calc(100vh)] bg-gradient-to-b">
       {navbar}
+      <button onClick={() => onSubmit({eventId : queryId})}>THIS IS A BUTTON</button>
       <h1 className="text-center text-white">
         Attendance updated successfully
       </h1>
@@ -139,11 +194,11 @@ function AttendanceScreen({ navbar }: { navbar: JSX.Element }) {
                     className={`grid grid-cols-3 grid-rows-1 py-2 ${index % 2 == 1 ? "bg-AUIS-teal bg-opacity-10" : "bg-white"}`}
                   >
                     <div className="break-words text-center">{data.name}</div>
-                    <div className="break-all text-center">{data.ticketId}</div>
+                    <div className="break-all text-center">{data.userTicketCode}</div>
                     <div className="flex items-center justify-center">
                       <input
                         type="checkbox"
-                        className="scale-150"
+                        className="accent-AUIS-teal scale-150"
                         defaultChecked={data.attendance}
                         // checked={data.attendance}
                         onChange={(e) => updateCheckbox(e, data.id)}

@@ -10,7 +10,7 @@ interface EventCardProps {
   pastEvent: boolean;
 }
 
-export default function EventList({
+export default function EventCard({
   title,
   image,
   location,

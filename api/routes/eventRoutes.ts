@@ -1,10 +1,15 @@
-import express from "express";
-import { getEventById, getEvents } from "../controller/eventController";
-//import products from '../data/products.js' // DONT FORGET THE .JS in backend files
+import express, { Router, json } from "express";
+import { verifySession } from "supertokens-node/recipe/session/framework/express";
+import {
+  createCheckout,
+  getSessionStatus,
+  handleWebhook,
+} from "../controller/stripeController";
+import { getUserTickets } from "../gateway/eventsGateway";
+import { getEventAttendanceById } from "../controller/eventController";
 
-const router = express.Router();
+const router = Router();
 
-router.route("/").get(getEvents);
-router.route("/:id").get(getEventById);
+router.get("/attendance", getEventAttendanceById);
 
 export default router;
