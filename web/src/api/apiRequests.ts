@@ -15,7 +15,7 @@ export const fetchUserMembershipExpiry =
 //Use this one to automatically create an Event or Membership checkout. Event checkout will decrement a ticket.
 export const fetchEventOrMembershipCheckoutSecret = async (payload: {
   priceId: string;
-  userTicketId: number
+  userTicketId: number;
 }): Promise<string> => {
   return await fetch("/api/stripe/create-checkout", {
     method: "POST",

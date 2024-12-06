@@ -76,7 +76,6 @@ export default function CheckoutInformation({
         setSubmitLoading(false);
         // Move user to payment screen after the user ticket id is received
         navigateToPaymentScreen(response.data.userTicketId);
-
       } else {
         setSubmitLoading(false);
         setSubmitError(true);

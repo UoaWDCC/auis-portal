@@ -37,7 +37,7 @@ export const updateUserTicketInfo = asyncHandler(
       // TODO: Get clarification from Gury on what needs to be done here.
       // ex: database inserts into a table? Update a db record?
       res.status(200).json({
-        updateUserInfoOrNewUser
+        updateUserInfoOrNewUser,
       });
     } catch (error) {
       res.status(500).json({
