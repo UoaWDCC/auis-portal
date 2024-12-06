@@ -75,15 +75,15 @@ export default function CheckoutInformation({
         // Form Submission Successful
         setSubmitLoading(false);
         // Move user to payment
-        try{
-          console.log(response.data.updateUserInfoOrNewUser[0].userTicketId)
-          navigateToPaymentScreen(response.data.updateUserInfoOrNewUser[0].userTicketId)
+        try {
+          console.log(response.data.updateUserInfoOrNewUser[0].userTicketId);
+          navigateToPaymentScreen(
+            response.data.updateUserInfoOrNewUser[0].userTicketId
+          );
+        } catch {
+          console.log("IT BROKE");
         }
-        catch{
-          console.log("IT BROKE")
-        }
-        
-        
+
         // setInfoEntered(true);
       } else {
         setSubmitLoading(false);

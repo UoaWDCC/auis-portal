@@ -78,7 +78,7 @@ function CheckoutScreen() {
       </div>
       <div className="item flex justify-center">
         <div
-          className={`drop-shadow-all mb-12 flex w-[40rem] lg:w-[68rem] items-center justify-center rounded-lg bg-white p-5`}
+          className={`drop-shadow-all mb-12 flex w-[40rem] items-center justify-center rounded-lg bg-white p-5 lg:w-[68rem]`}
         >
           <EmbeddedCheckoutProvider stripe={stripePromise} options={options}>
             <EmbeddedCheckout className="flex flex-grow" />
