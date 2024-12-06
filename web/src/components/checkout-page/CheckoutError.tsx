@@ -2,8 +2,7 @@ import { PiRobotBold } from "react-icons/pi";
 import { useNavigate } from "react-router";
 
 export default function CheckoutError() {
-
- const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <>
       <div className="from-AUIS-dark-teal to-AUIS-teal h-svh bg-gradient-to-b pb-20">

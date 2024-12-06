@@ -10,7 +10,15 @@ export default function ErrorScreen() {
           <div className="flex items-center justify-center">
             <PiRobotBold color="white" className="h-56 w-56" />
           </div>
-            {window.location.pathname == "/error" ? (<h1 className="text-center text-4xl text-white">{"Oops... an error has occurred :("}</h1>) : (<h1 className="text-center text-6xl text-white">{"404 page not found :("}</h1>)}
+          {window.location.pathname == "/error" ? (
+            <h1 className="text-center text-4xl text-white">
+              {"Oops... an error has occurred :("}
+            </h1>
+          ) : (
+            <h1 className="text-center text-6xl text-white">
+              {"404 page not found :("}
+            </h1>
+          )}
           <div className="flex justify-center">
             <button
               type="button"

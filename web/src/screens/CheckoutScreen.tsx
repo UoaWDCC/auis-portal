@@ -21,8 +21,6 @@ let bodyData: { priceId: string };
 let isTicket: { isTicket: boolean };
 let ticketId: { ticketId: number };
 
-
-
 function CheckoutScreen() {
   const location = useLocation();
   // const navigate = useNavigate();
@@ -89,7 +87,7 @@ function CheckoutScreen() {
         {/* <div
           className={` w-[40rem] ${isTicket.isTicket && !infoEntered ? "flex" : "hidden"}`}
         >
-          <CheckoutInformation 
+          <CheckoutInformation
             ticketId={ticketId.ticketId}
             setInfoEntered={setInfoEntered}
           />
