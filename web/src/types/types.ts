@@ -7,23 +7,6 @@ export interface Exec {
   description: string;
 }
 
-export interface Props {
-  execs: Exec[];
-}
-
-export interface PrimaryDeveloper {
-  id: number;
-  name: string;
-  linkedIn: string;
-  github: string;
-}
-
-export interface SecondaryDeveloper {
-  id: number;
-  name: string;
-  github: string;
-}
-
 export interface PartnerImage {
   id: number;
   name: string;
@@ -39,12 +22,6 @@ export interface Partner {
   location: string;
 }
 
-export interface Social {
-  id: number;
-  type: string;
-  link: string;
-}
-
 export interface SomePhoto {
   id: number;
   title: string;
@@ -58,6 +35,7 @@ export interface Value {
   description: string;
   image: string;
 }
+
 export interface Introduction {
   description: string;
   events: string;
@@ -97,15 +75,12 @@ export interface EventsSlider {
 }
 
 export interface EventAndTickets {
-  // id: number;
   title: string;
   description: string;
   subtitle: string;
   location: string;
-  // locationLink: string;
   eventDateStart: string;
   eventDateEnd: string;
-  // isLive: boolean;
   termsAndConditions: string;
   eventCapacityRemaining: number;
   image: string;
@@ -117,10 +92,9 @@ export interface EventGallery {
   image: string;
 }
 
-export interface Question {
+interface Question {
   id: number;
   question: string;
-  checkForMemberEmail: boolean;
 }
 
 export interface TicketAndQuestion {
@@ -128,11 +102,9 @@ export interface TicketAndQuestion {
   questions: Question[];
 }
 
-export interface Ticket {
+interface Ticket {
   id: number;
   name: string;
-  // discountCode: string;
-  // discountPrice: number;
   price: number;
   isMemberOnly: boolean;
   isDouble: boolean;
@@ -163,7 +135,6 @@ export interface membershipExpiryDate {
 export interface QuestionAnswer {
   question: string;
   questionId: number;
-  checkForMemberEmail: boolean;
   indexId: number;
   answer: string;
 }

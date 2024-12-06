@@ -27,7 +27,6 @@ export default function CheckoutInformationForm({
     defaultAnswers.push({
       question: questions.questions[i].question,
       questionId: questions.questions[i].id,
-      checkForMemberEmail: questions.questions[i].checkForMemberEmail,
       indexId: i,
       answer: "",
     });

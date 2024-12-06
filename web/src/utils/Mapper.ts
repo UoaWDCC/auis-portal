@@ -233,8 +233,6 @@ export class Mapper {
           return {
             id: item.id,
             question: attributesTicket.Question || "",
-            checkForMemberEmail:
-              attributesTicket.Check_For_Member_Email || false,
           };
         }),
       };

@@ -99,7 +99,7 @@ export default function CheckoutInformation({
 
     // remove unused information for post request
     const answerList = answers.map(
-      ({ question, checkForMemberEmail, indexId, ...rest }) => {
+      ({ question, indexId, ...rest }) => {
         return rest;
       }
     );

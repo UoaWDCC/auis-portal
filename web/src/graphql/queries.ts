@@ -260,7 +260,6 @@ export function getTicketQuestions({ id }: { id: number }) {
                 id
                 attributes {
                   Question
-                  Check_For_Member_Email
                 }
               }
             }
