@@ -41,7 +41,7 @@ export default function TicketCard({
     if (bypass) {
       window.open(bypassLink, "_blank");
     } else if (!(isMemberOnly || isDouble)) {
-      navigate("/checkout", {
+      navigate("/checkout/information", {
         state: {
           data: {
             priceId: stripeLink,
@@ -68,7 +68,7 @@ export default function TicketCard({
             if (userMembershipExpiry) {
               if (new Date(userMembershipExpiry.userExpiryDate) >= new Date()) {
                 // if all checks pass then navigate to checkout
-                navigate("/checkout", {
+                navigate("/checkout/information", {
                   state: {
                     data: {
                       priceId: stripeLink,

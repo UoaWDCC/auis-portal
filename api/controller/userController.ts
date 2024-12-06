@@ -32,11 +32,12 @@ export const updateUserTicketInfo = asyncHandler(
 
       console.log(req.body);
       console.log(userId);
-      insertUserTicket(req.body);
+      let updateUserInfoOrNewUser = await insertUserTicket(req.body);
 
       // TODO: Get clarification from Gury on what needs to be done here.
       // ex: database inserts into a table? Update a db record?
       res.status(200).json({
+        updateUserInfoOrNewUser,
         ticketId,
         name,
         email,
@@ -95,15 +96,15 @@ export async function insertUserTicket(data: {
   console.log(tempa.id);
 
   const ticketId = userTickets.id;
+  if (data.answers.length > 0) {
+    const answerRecords = data.answers.map((answerData) => ({
+      ticketId: ticketId,
+      questionId: answerData.questionId,
+      answer: answerData.answer,
+    }));
 
-  const answerRecords = data.answers.map((answerData) => ({
-    ticketId: ticketId,
-    questionId: answerData.questionId,
-    answer: answerData.answer,
-  }));
-
-  await db.insert(answers).values(answerRecords);
-
+    await db.insert(answers).values(answerRecords);
+  }
   return updateUserInfoOrNewUser;
 }
 

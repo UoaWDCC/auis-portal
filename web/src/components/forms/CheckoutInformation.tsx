@@ -10,10 +10,10 @@ import CheckoutInformationForm from "./CheckoutInformationForm";
 
 export default function CheckoutInformation({
   ticketId,
-  setInfoEntered,
+  navigateToPaymentScreen,
 }: {
   ticketId: number;
-  setInfoEntered: Dispatch<SetStateAction<boolean>>;
+  navigateToPaymentScreen(userTicketId: number): void;
 }) {
   // navigate
   const navigate = useNavigate();
@@ -75,9 +75,19 @@ export default function CheckoutInformation({
         // Form Submission Successful
         setSubmitLoading(false);
         // Move user to payment
-        setInfoEntered(true);
+        try{
+          console.log(response.data.updateUserInfoOrNewUser[0].userTicketId)
+          navigateToPaymentScreen(response.data.updateUserInfoOrNewUser[0].userTicketId)
+        }
+        catch{
+          console.log("IT BROKE")
+        }
+        
+        
+        // setInfoEntered(true);
       } else {
         setSubmitLoading(false);
+
         // Form Submission Failed
         setSubmitError(true);
       }

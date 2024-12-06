@@ -37,6 +37,7 @@ import SignUpInformationScreen from "./screens/SignUpInformationScreen.tsx";
 // import CheckoutInformationScreen from "./screens/CheckoutInformationScreen.tsx";
 import axios from "axios";
 import ErrorScreen from "./screens/ErrorScreen.tsx";
+import CheckoutInformationScreen from "./screens/CheckoutInformationScreen.tsx";
 
 //supertokens code
 SuperTokens.init({
@@ -115,7 +116,8 @@ const router = createBrowserRouter(
       <Route path="/signup" element={<SignUpScreen navbar={<Header />} />} />
       <Route path="/signup/callback/google" element={<SignInAndUpCallback />} />
       <Route path="/aboutus" element={<AboutUsScreen navbar={<Header />} />} />
-      <Route path="/checkout" element={<CheckoutScreen />} />
+      <Route path="/checkout/information" element={<CheckoutInformationScreen />} />
+      <Route path="/checkout/payment" element={<CheckoutScreen />} />
       {/* <Route
         path="/checkout/information/:id"
         element={<CheckoutInformationScreen />}

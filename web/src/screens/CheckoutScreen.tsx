@@ -37,7 +37,7 @@ function CheckoutScreen() {
   }
 
   // For switching between stripe and checkout questions
-  const [infoEntered, setInfoEntered] = useState(false);
+  // const [infoEntered, setInfoEntered] = useState(false);
 
   // const handleSubmit = (
   //   event: React.FormEvent<HTMLFormElement>,
@@ -80,20 +80,20 @@ function CheckoutScreen() {
       </div>
       <div className="item flex justify-center">
         <div
-          className={`drop-shadow-all mb-12 flex w-[68rem] items-center justify-center rounded-lg bg-white p-5 ${isTicket.isTicket && !infoEntered ? "hidden" : "flex"}`}
+          className={`drop-shadow-all mb-12 flex w-[40rem] lg:w-[68rem] items-center justify-center rounded-lg bg-white p-5`}
         >
           <EmbeddedCheckoutProvider stripe={stripePromise} options={options}>
             <EmbeddedCheckout className="flex flex-grow" />
           </EmbeddedCheckoutProvider>
         </div>
-        <div
+        {/* <div
           className={` w-[40rem] ${isTicket.isTicket && !infoEntered ? "flex" : "hidden"}`}
         >
           <CheckoutInformation 
             ticketId={ticketId.ticketId}
             setInfoEntered={setInfoEntered}
           />
-        </div>
+        </div> */}
       </div>
     </div>
   );
