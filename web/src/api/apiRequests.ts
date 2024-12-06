@@ -41,7 +41,6 @@ export const fetchAttendanceInformation = async (payload: {
     .then((data) => data.clientSecret);
 };
 
-
 //Use this one to automatically create an Event or Membership checkout. Event checkout will decrement a ticket.
 export const fetchEventOrMembershipCheckoutSecret = async (payload: {
   priceId: string;

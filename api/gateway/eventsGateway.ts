@@ -130,9 +130,9 @@ export async function isPriceIdForEvent(priceId: string) {
   return isPriceIdUsedForEventOrMembership;
 }
 
-export async function getUserTickets(eventId : number) {
-  console.log("I WAS CALLED")
-  console.log(eventId)
+export async function getUserTickets(eventId: number) {
+  console.log("I WAS CALLED");
+  console.log(eventId);
   if (eventId < 0 || eventId === undefined || eventId === null) {
     throw new Error(
       "received invalid type for getUserTickets() in eventsGateway" + eventId
@@ -145,7 +145,6 @@ export async function getUserTickets(eventId : number) {
       id: userTickets.id,
       userTicketCode: userTickets.peopleTicketCode,
       name: userTickets.name,
-      
     })
     .from(ticketsEventIdLinks)
     .where(eq(ticketsEventIdLinks.eventId, eventId))
@@ -153,9 +152,12 @@ export async function getUserTickets(eventId : number) {
       userTicketsTicketIdLinks,
       eq(ticketsEventIdLinks.ticketId, userTicketsTicketIdLinks.ticketId)
     )
-    .leftJoin(userTickets, eq(userTicketsTicketIdLinks.userTicketId, userTickets.id));
+    .leftJoin(
+      userTickets,
+      eq(userTicketsTicketIdLinks.userTicketId, userTickets.id)
+    );
 
-  console.log(eventTickets)
+  console.log(eventTickets);
 
   // if array is 1, true. If 0, set to false.
 
@@ -163,7 +165,7 @@ export async function getUserTickets(eventId : number) {
 }
 
 export async function updateUserTicket() {
-  console.log("I WAS CALLED")
+  console.log("I WAS CALLED");
   // if (eventId < 0 || eventId === undefined || eventId === null) {
   //   throw new Error(
   //     "received invalid type for getUserTickets() in eventsGateway" + eventId
@@ -176,7 +178,6 @@ export async function updateUserTicket() {
       id: userTickets.id,
       userTicketCode: userTickets.peopleTicketCode,
       name: userTickets.name,
-      
     })
     .from(ticketsEventIdLinks)
     .where(eq(ticketsEventIdLinks.eventId, 3))
@@ -184,9 +185,12 @@ export async function updateUserTicket() {
       userTicketsTicketIdLinks,
       eq(ticketsEventIdLinks.ticketId, userTicketsTicketIdLinks.ticketId)
     )
-    .leftJoin(userTickets, eq(userTicketsTicketIdLinks.userTicketId, userTickets.id));
+    .leftJoin(
+      userTickets,
+      eq(userTicketsTicketIdLinks.userTicketId, userTickets.id)
+    );
 
-  console.log(eventTickets)
+  console.log(eventTickets);
 
   // if array is 1, true. If 0, set to false.
 

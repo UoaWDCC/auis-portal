@@ -13,7 +13,7 @@ import { middleware, errorHandler } from "supertokens-node/framework/express";
 // Import Routers
 import userRoutes from "./routes/userRoutes";
 import stripeRoutes from "./routes/stripeRoutes";
-import eventRoutes from "./routes/eventRoutes"
+import eventRoutes from "./routes/eventRoutes";
 
 import { notFound } from "./middleware/errorMiddleware";
 
@@ -88,7 +88,7 @@ app.use("/api/user", userRoutes);
 //StripeJS
 app.use("/api/stripe", stripeRoutes);
 
-app.use("/api/event", eventRoutes)
+app.use("/api/event", eventRoutes);
 
 // The custom handlers in /middleware need to be below Routes
 app.use(notFound);

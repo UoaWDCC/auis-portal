@@ -69,17 +69,16 @@ function AttendanceScreen({ navbar }: { navbar: JSX.Element }) {
     data: DataItem[],
     searchTerm: string
   ): DataItem[] {
-    return data.filter(
-      (item) =>
-        // item.userTicketCode.toLowerCase().includes(searchTerm.toLowerCase()) || // UNCOMMENT THIS
-        item.name.toLowerCase().includes(searchTerm.toLowerCase())
+    return data.filter((item) =>
+      // item.userTicketCode.toLowerCase().includes(searchTerm.toLowerCase()) || // UNCOMMENT THIS
+      item.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
   }
 
   const [resulta, setResult] = useState("");
   const [curr, setCurr] = useState("");
   const [filtered, setFiltered] = useState(tempData);
-  const [serverData, setServerData] = useState(tempData)
+  const [serverData, setServerData] = useState(tempData);
 
   const { ref } = useZxing({
     onDecodeResult(result) {
@@ -96,7 +95,10 @@ function AttendanceScreen({ navbar }: { navbar: JSX.Element }) {
   });
 
   function handleOnChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const filteredData = filterDataByuserTicketCodeOrName(serverData, e.target.value);
+    const filteredData = filterDataByuserTicketCodeOrName(
+      serverData,
+      e.target.value
+    );
     setCurr(e.target.value);
     setFiltered(filteredData);
   }
@@ -116,18 +118,18 @@ function AttendanceScreen({ navbar }: { navbar: JSX.Element }) {
 
   //dumb shit
 
-  const onSubmit = async ( params: any ) => {
+  const onSubmit = async (params: any) => {
     try {
-      const response = await axios.get("/api/event/attendance", { params, 
+      const response = await axios.get("/api/event/attendance", {
+        params,
         headers: {
           "Content-Type": "application/json",
         },
-        
       });
       if (response.status === 200) {
         // Form Submission Successful
         console.log(response.data.eventTickets);
-        setServerData(response.data.eventTickets)
+        setServerData(response.data.eventTickets);
         // console.log(serverData)
       } else {
         console.log(response);
@@ -159,7 +161,9 @@ function AttendanceScreen({ navbar }: { navbar: JSX.Element }) {
   return (
     <div className="from-AUIS-dark-teal to-AUIS-teal min-h-[calc(100vh)] bg-gradient-to-b">
       {navbar}
-      <button onClick={() => onSubmit({eventId : queryId})}>THIS IS A BUTTON</button>
+      <button onClick={() => onSubmit({ eventId: queryId })}>
+        THIS IS A BUTTON
+      </button>
       <h1 className="text-center text-white">
         Attendance updated successfully
       </h1>
@@ -194,7 +198,9 @@ function AttendanceScreen({ navbar }: { navbar: JSX.Element }) {
                     className={`grid grid-cols-3 grid-rows-1 py-2 ${index % 2 == 1 ? "bg-AUIS-teal bg-opacity-10" : "bg-white"}`}
                   >
                     <div className="break-words text-center">{data.name}</div>
-                    <div className="break-all text-center">{data.userTicketCode}</div>
+                    <div className="break-all text-center">
+                      {data.userTicketCode}
+                    </div>
                     <div className="flex items-center justify-center">
                       <input
                         type="checkbox"
