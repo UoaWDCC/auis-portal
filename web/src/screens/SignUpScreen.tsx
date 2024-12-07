@@ -4,7 +4,7 @@ import { AuthPage } from "supertokens-auth-react/ui";
 import auisLogo from "../assets/peacock_white_inner_big.png";
 import auisAbbrev from "../assets/auis_no_depth.png";
 
-function SignUpScreen({ navbar }: { navbar: JSX.Element }) {
+export default function SignUpScreen({ navbar }: { navbar: JSX.Element }) {
   return (
     <div className="from-AUIS-dark-teal to-AUIS-teal min-h-[calc(100vh)] bg-gradient-to-b">
       {navbar}
@@ -31,5 +31,3 @@ function SignUpScreen({ navbar }: { navbar: JSX.Element }) {
     </div>
   );
 }
-
-export default SignUpScreen;

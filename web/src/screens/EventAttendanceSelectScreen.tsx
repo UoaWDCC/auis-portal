@@ -7,7 +7,7 @@ import LoadingSpinner from "@components/navigation/LoadingSpinner";
 import EventCard from "@components/events-slider/EventCard";
 import { useNavigate } from "react-router";
 
-function EventAttendanceSelectScreen({ navbar }: { navbar: JSX.Element }) {
+export default function EventAttendanceSelectScreen({ navbar }: { navbar: JSX.Element }) {
   const {
     loading: eventsLoading,
     data: eventsData,
@@ -84,5 +84,3 @@ function EventAttendanceSelectScreen({ navbar }: { navbar: JSX.Element }) {
     </div>
   );
 }
-
-export default EventAttendanceSelectScreen;

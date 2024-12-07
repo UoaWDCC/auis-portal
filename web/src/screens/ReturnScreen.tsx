@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Navigate, useNavigate } from "react-router";
 import { EmailLink } from "../data/data";
 
-const ReturnScreen = () => {
+export default function ReturnScreen() {
   const navigate = useNavigate();
   const [status, setStatus] = useState(null);
   const [customerEmail, setCustomerEmail] = useState("");
@@ -98,5 +98,3 @@ const ReturnScreen = () => {
     );
   }
 };
-
-export default ReturnScreen;

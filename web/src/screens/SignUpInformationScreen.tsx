@@ -34,7 +34,7 @@ const SignUpSchema = z.object({
 
 type SignUpSchemaType = z.infer<typeof SignUpSchema>;
 
-function SignUpInformationScreen({ navbar }: { navbar: JSX.Element }) {
+export default function SignUpInformationScreen({ navbar }: { navbar: JSX.Element }) {
   const {
     register,
     handleSubmit,
@@ -186,5 +186,3 @@ function SignUpInformationScreen({ navbar }: { navbar: JSX.Element }) {
     </div>
   );
 }
-
-export default SignUpInformationScreen;

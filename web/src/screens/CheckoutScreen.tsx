@@ -14,7 +14,7 @@ const STRIPE_PUBLISHABLE_KEY = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
 // recreating the `Stripe` object on every render.
 const stripePromise = loadStripe(`${STRIPE_PUBLISHABLE_KEY}`);
 let bodyData: { priceId: string; userTicketId: number };
-function CheckoutScreen() {
+export default function CheckoutScreen() {
   const location = useLocation();
   // ensure data required for checkout is here
   try {
@@ -52,5 +52,3 @@ function CheckoutScreen() {
     </div>
   );
 }
-
-export default CheckoutScreen;

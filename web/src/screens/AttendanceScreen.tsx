@@ -2,9 +2,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { useZxing } from "react-zxing";
-import { UseZxingOptionsWithConstraints } from "react-zxing/lib/useZxing";
 
-function AttendanceScreen({ navbar }: { navbar: JSX.Element }) {
+export default function AttendanceScreen({ navbar }: { navbar: JSX.Element }) {
   type DataItem = {
     name: string;
     id: number;
@@ -222,5 +221,3 @@ function AttendanceScreen({ navbar }: { navbar: JSX.Element }) {
     </div>
   );
 }
-
-export default AttendanceScreen;
