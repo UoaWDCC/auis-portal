@@ -33,7 +33,7 @@ export default function PurchaseMembershipCard({
     } else {
       if (!session.loading) {
         if (session.doesSessionExist) {
-          navigate("/checkout", {
+          navigate("/checkout/payment", {
             state: {
               data: {
                 priceId: stripeLink,

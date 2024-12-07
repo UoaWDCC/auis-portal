@@ -66,11 +66,16 @@ const getEventAttendanceById = asyncHandler(
       // await UserMetadata.updateUserMetadata(userId, {
       //   bIsUserInfoComplete: true,
       // });
-      let eventTickets = await db
+      const temp = await db.select().from(userTickets).where(eq(userTickets.paid, true)).as('temp')
+      console.log(temp)
+
+
+      const eventTickets = await db
         .select({
-          id: userTickets.id,
-          userTicketCode: userTickets.peopleTicketCode,
-          name: userTickets.name,
+          id: temp.id,
+          userTicketCode: temp.peopleTicketCode,
+          name: temp.name,
+          attendance: temp.attendance
         })
         .from(ticketsEventIdLinks)
         .where(eq(ticketsEventIdLinks.eventId, 3))
@@ -78,9 +83,9 @@ const getEventAttendanceById = asyncHandler(
           userTicketsTicketIdLinks,
           eq(ticketsEventIdLinks.ticketId, userTicketsTicketIdLinks.ticketId)
         )
-        .leftJoin(
-          userTickets,
-          eq(userTicketsTicketIdLinks.userTicketId, userTickets.id)
+        .rightJoin(
+          temp,
+          (eq(userTicketsTicketIdLinks.userTicketId, temp.id))
         );
 
       console.log(eventTickets);
