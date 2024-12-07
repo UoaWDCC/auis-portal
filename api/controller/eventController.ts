@@ -91,11 +91,19 @@ const getEventAttendanceById = asyncHandler(
         .rightJoin(temp, eq(userTicketsTicketIdLinks.userTicketId, temp.id));
 
       console.log(eventTickets);
-      
-      console.log()
-      console.log(`${"<img src=\"" + await generateQRCode("ABC12345") + "\"/>"}`)
-      sendEmail(await generateQRCode("testing123"), "gmat224@aucklanduni.ac.nz", "Gury", "Gury's Dance Workshop", "ABC12345")
-      console.log("SENT EMAIL")
+
+      console.log();
+      console.log(
+        `${'<img src="' + (await generateQRCode("ABC12345")) + '"/>'}`
+      );
+      sendEmail(
+        await generateQRCode("testing123"),
+        "gmat224@aucklanduni.ac.nz",
+        "Gury",
+        "Gury's Dance Workshop",
+        "ABC12345"
+      );
+      console.log("SENT EMAIL");
 
       // if array is 1, true. If 0, set to false.
 
@@ -114,7 +122,14 @@ const getEventAttendanceById = asyncHandler(
 );
 
 const updateAttendanceById = asyncHandler(
-  async (req: Request<{}, {}, {data: { peopleTicketId: number, attendance: boolean }}>, res: Response) => {
+  async (
+    req: Request<
+      {},
+      {},
+      { data: { peopleTicketId: number; attendance: boolean } }
+    >,
+    res: Response
+  ) => {
     console.log(req.body);
     try {
       let { data } = req.body;
@@ -149,13 +164,14 @@ const updateAttendanceById = asyncHandler(
       //   bIsUserInfoComplete: true,
       // });
 
-    const updateUserInfoOrNewUser = await db
-    .update(userTickets)
-    .set({
-      // ticketId: data.ticketId,
-      attendance: data.attendance
-    }).where(eq(userTickets.id, data.peopleTicketId))
-    .returning({ name: userTickets.name });
+      const updateUserInfoOrNewUser = await db
+        .update(userTickets)
+        .set({
+          // ticketId: data.ticketId,
+          attendance: data.attendance,
+        })
+        .where(eq(userTickets.id, data.peopleTicketId))
+        .returning({ name: userTickets.name });
 
       console.log(updateUserInfoOrNewUser[0].name);
 
@@ -175,7 +191,12 @@ const updateAttendanceById = asyncHandler(
   }
 );
 
-export { getEvents, getEventById, getEventAttendanceById , updateAttendanceById};
+export {
+  getEvents,
+  getEventById,
+  getEventAttendanceById,
+  updateAttendanceById,
+};
 
 // export async function updateUserTicket() {
 //   console.log("I WAS CALLED")
@@ -208,7 +229,6 @@ export { getEvents, getEventById, getEventAttendanceById , updateAttendanceById}
 //   return eventTickets;
 // }
 
-
 // <body style="background-image: linear-gradient(#07242F, #0F4A57); color: rgb(255 255 255);">
 // <h2 style="font-size: 1.25rem;
 // line-height: 1.75rem; text-align: center; padding-bottom: 0.5rem; padding-top: 2rem; font-weight:400;">(NAME), here is your ticket for: </h2>
@@ -222,10 +242,10 @@ export { getEvents, getEventById, getEventAttendanceById , updateAttendanceById}
 
 //    <img style="border-radius:0.75rem;" height="200" width="200" src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIQAAACECAYAAABRRIOnAAAAAklEQVR4AewaftIAAAOnSURBVO3BQY4jSQIDQWdA//+ybx3mwFMAQkrV07M0iz+Y+cdhphxmymGmHGbKYaYcZsphphxmymGmHGbKYaYcZsphphxmymGmvHgoCb9J5SYJTaUloam0JNyotCQ0lZaE36TyxGGmHGbKYaa8+DCVT0rCO1RaEm6S0FTeofIOlU9KwicdZsphphxmyosvS8I7VH6TyjuS0FSeSMI7VL7pMFMOM+UwU178xyThRqUloam0JPw/OcyUw0w5zJQXf7kkNJV3qNyo3CShqfzNDjPlMFMOM+XFl6l8k0pLwhMqLQlNpak8ofJvcpgph5lymCkvPiwJvykJTaUloam0JDyRhKZyk4R/s8NMOcyUw0x58ZDKv5lKS8JNEprKEyp/k8NMOcyUw0yJP/iiJNyo3CThN6m0JDSVmyTcqLQkNJU/6TBTDjPlMFNefJlKS8I7VG6ScKPSktBUWhKaSktCU7lRaUloKi0JTaUloal80mGmHGbKYabEH3xQEm5UWhLeofJJSXiHyk0SblRaEt6h8k2HmXKYKYeZ8uLDVG6S0FTekYSm8kkqN0loKr8pCU3lkw4z5TBTDjMl/uCBJDSVloSm0pLQVFoSmkpLQlNpSbhRaUloKjdJaCotCU3lHUl4h8oTh5lymCmHmRJ/8EFJaCotCU2lJaGp/E2S0FRuknCj0pJwo/LEYaYcZsphprz4siQ0lZaEptKS8A6VloSm0pLQVFoSmso7knCjcpOEG5VPOsyUw0w5zJT4gweS0FT+pCQ0lZaEpvKOJDSVPykJTeWJw0w5zJTDTIk/+KIk3Ki0JNyovCMJNyotCTcqLQmfpNKS0FS+6TBTDjPlMFPiD/5iSbhRaUl4h8pNEprKO5LQVG6ScKPyxGGmHGbKYaa8eCgJv0nlRqUloam0JDSVloQnktBU/s0OM+UwUw4z5cWHqXxSEm5UWhLeodKS8Ekq70hCU2kqLQmfdJgph5lymCkvviwJ71B5QqUloSWhqdyotCTcJOEJlZskNJVPOsyUw0w5zJQXf7kkPJGEptKS8IRKS0JTuUlCU2lJaCpPHGbKYaYcZsqL/xiVloQbld+k0pLQVG6S0FQ+6TBTDjPlMFNefJnKN6m0JNyo3CThCZUnknCj8k2HmXKYKYeZ8uLDkvAnqdwkoak8odKS8A6VloSbJNyoPHGYKYeZcpgp8Qcz/zjMlMNMOcyUw0w5zJTDTDnMlMNMOcyUw0w5zJTDTDnMlMNMOcyU/wF0BL/l7v3TCgAAAABJRU5ErkJggg==></img>
 //    </td>
-// </tr> 
+// </tr>
 // </tbody>
 // </table>
-  
+
 //   <h3 style="text-align:center; padding-top:1rem; padding-bottom:1rem; font-weight:400">Ticket code: (TICKET CODE)</h3>
 // </div>
 // <p style="text-align:center;font-size: 1.125rem;
@@ -242,7 +262,7 @@ export { getEvents, getEventById, getEventAttendanceById , updateAttendanceById}
 
 //    <a href="www.auis.co.nz" style="color:#3b82f6; padding-top:0.5rem; padding-bottom:0.5rem;">www.auis.co.nz</a>
 //    </td>
-// </tr> 
+// </tr>
 // </tbody>
 // </table>
 
