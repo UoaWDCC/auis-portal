@@ -104,7 +104,7 @@ function AttendanceScreen({ navbar }: { navbar: JSX.Element }) {
   }
 
   function updateCheckbox(e: React.ChangeEvent<HTMLInputElement>, id: number) {
-    // onCheckboxClicked()
+    
     let tempObj = serverData.find((o) => o.id === id);
     if (tempObj) {
       let index = serverData.indexOf(tempObj);
@@ -113,7 +113,9 @@ function AttendanceScreen({ navbar }: { navbar: JSX.Element }) {
       // send data to backend from here send ticket ID and attendance
       console.log(tempObj.id);
       console.log(tempObj.attendance);
+      onCheckboxClicked({ peopleTicketId: tempObj.id, attendance:  tempObj.attendance} )
     }
+    
   }
 
   //dumb shit
@@ -139,13 +141,13 @@ function AttendanceScreen({ navbar }: { navbar: JSX.Element }) {
     }
   };
 
-  const onCheckboxClicked = async () => {
+  const onCheckboxClicked = async (data : {peopleTicketId: number, attendance: boolean}) => {
     try {
       const response = await axios.patch("/api/event/attendance", {
         headers: {
           "Content-Type": "application/json",
         },
-        // data,
+        data,
       });
       if (response.status === 200) {
         // Form Submission Successful
@@ -181,16 +183,16 @@ function AttendanceScreen({ navbar }: { navbar: JSX.Element }) {
         />
       </div>
       <div>
-        <div className="m-2 rounded-lg text-white">
-          <div className="grid grid-cols-3 grid-rows-1">
+        <div className="m-2 rounded-lg  flex items-center justify-center text-white">
+          <div className="grid grid-cols-3 max-w-[40rem] grid-rows-1">
             <div className="text-center text-lg">Name</div>
 
             <div className="text-center text-lg">Ticket Id</div>
             <div className="text-center text-lg">Attendance</div>
           </div>
         </div>
-        <div className="pb-2">
-          <div className="m-2 max-h-64 overflow-scroll rounded-lg bg-white">
+        <div className="pb-2 flex items-center justify-center">
+          <div className="m-2 max-h-64 overflow-y-scroll max-w-[40rem] rounded-lg bg-white">
             {filtered.map((data, index) => {
               return (
                 <div key={data.id} className="">

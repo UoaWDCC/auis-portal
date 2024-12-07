@@ -6,10 +6,11 @@ import {
   handleWebhook,
 } from "../controller/stripeController";
 import { getUserTickets } from "../gateway/eventsGateway";
-import { getEventAttendanceById } from "../controller/eventController";
+import { getEventAttendanceById, updateAttendanceById } from "../controller/eventController";
 
 const router = Router();
 
 router.get("/attendance", getEventAttendanceById);
+router.patch("/attendance", updateAttendanceById)
 
 export default router;
