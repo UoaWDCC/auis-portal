@@ -19,7 +19,7 @@ function EventAttendanceSelectScreen({ navbar }: { navbar: JSX.Element }) {
   const [loadingEvents, setLoadingEvents] = useState(true);
   const [errorEvents, setErrorEvents] = useState(false);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   // useEffect
   useEffect(() => {
@@ -42,7 +42,7 @@ function EventAttendanceSelectScreen({ navbar }: { navbar: JSX.Element }) {
   if (loadingEvents) {
     return <LoadingSpinner />;
   }
-  console.log(errorEvents)
+  console.log(errorEvents);
 
   return (
     <div className="from-AUIS-dark-teal to-AUIS-teal min-h-[calc(100vh)] bg-gradient-to-b">
@@ -55,11 +55,12 @@ function EventAttendanceSelectScreen({ navbar }: { navbar: JSX.Element }) {
           {errorEvents ? (
             <>
               <h1 className="py-5 text-center text-lg text-white">
-        Sorry, there was an error getting events
-      </h1>
+                Sorry, there was an error getting events
+              </h1>
             </>
           ) : (
-            <>{events.map((event) => {
+            <>
+              {events.map((event) => {
                 return (
                   <div
                     onClick={() => navigate(`/admin/attendance/${event.id}`)}
@@ -75,7 +76,8 @@ function EventAttendanceSelectScreen({ navbar }: { navbar: JSX.Element }) {
                     />
                   </div>
                 );
-              })}</>
+              })}
+            </>
           )}
         </div>
       </div>
