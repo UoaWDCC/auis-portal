@@ -8,17 +8,25 @@ import { UserRoleClaim } from "supertokens-node/lib/build/recipe/userroles/userR
 
 const router = Router();
 
-router.get("/attendance", verifySession({
-  overrideGlobalClaimValidators: async (globalValidators) => [
+router.get(
+  "/attendance",
+  verifySession({
+    overrideGlobalClaimValidators: async (globalValidators) => [
       ...globalValidators,
       UserRoleClaim.validators.includes("exec"),
-  ],
-}), getEventAttendanceById);
-router.patch("/attendance", verifySession({
-  overrideGlobalClaimValidators: async (globalValidators) => [
+    ],
+  }),
+  getEventAttendanceById
+);
+router.patch(
+  "/attendance",
+  verifySession({
+    overrideGlobalClaimValidators: async (globalValidators) => [
       ...globalValidators,
-     UserRoleClaim.validators.includes("exec"),
-  ],
-}), updateAttendanceById);
+      UserRoleClaim.validators.includes("exec"),
+    ],
+  }),
+  updateAttendanceById
+);
 
 export default router;
