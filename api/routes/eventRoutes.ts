@@ -14,3 +14,4 @@ router.get("/attendance", getEventAttendanceById);
 router.patch("/attendance", updateAttendanceById)
 
 export default router;
+

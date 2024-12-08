@@ -128,7 +128,7 @@ export interface PurchasableMembership {
   bypassMembershipLink: string;
 }
 
-export interface membershipExpiryDate {
+export interface MembershipExpiryDate {
   userExpiryDate: string;
 }
 
@@ -137,4 +137,14 @@ export interface QuestionAnswer {
   questionId: number;
   indexId: number;
   answer: string;
+}
+
+export interface AttendanceList {
+  name: string;
+  id: number;
+  userTicketCode: string;
+  attendance: boolean;
+}
+export interface AttendanceReturn {
+  name:string;
 }

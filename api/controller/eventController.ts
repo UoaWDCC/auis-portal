@@ -93,8 +93,8 @@ const getEventAttendanceById = asyncHandler(
       console.log(eventTickets);
       
       console.log()
-      console.log(`${"<img src=\"" + await generateQRCode("ABC12345") + "\"/>"}`)
-      sendEmail(await generateQRCode("testing123"), "gmat224@aucklanduni.ac.nz", "Gury", "Gury's Dance Workshop", "ABC12345")
+      // console.log(`${"<img src=\"" + await generateQRCode("ABC12345") + "\"/>"}`)
+      // sendEmail(await generateQRCode("testing123"), "gmat224@aucklanduni.ac.nz", "Gury", "Gury's Dance Workshop", "ABC12345")
       console.log("SENT EMAIL")
 
       // if array is 1, true. If 0, set to false.
@@ -113,6 +113,10 @@ const getEventAttendanceById = asyncHandler(
   }
 );
 
+function delay(ms: number) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 const updateAttendanceById = asyncHandler(
   async (req: Request<{}, {}, {data: { peopleTicketId: number, attendance: boolean }}>, res: Response) => {
     console.log(req.body);
@@ -122,6 +126,9 @@ const updateAttendanceById = asyncHandler(
       if (!data) {
         return res.status(400).json({ message: "All fields are required" });
       }
+      
+      // await delay(1000); // 1-second delay
+
 
       // const session = req.session!;
       // const userId = session.getUserId();
@@ -148,6 +155,8 @@ const updateAttendanceById = asyncHandler(
       // await UserMetadata.updateUserMetadata(userId, {
       //   bIsUserInfoComplete: true,
       // });
+
+      
 
     const updateUserInfoOrNewUser = await db
     .update(userTickets)
