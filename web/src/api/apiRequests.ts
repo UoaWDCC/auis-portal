@@ -15,7 +15,7 @@ export const fetchUserMembershipExpiry =
     return response.data;
   };
 
-// User membership expiry
+// Admin to see attendance information
 export const fetchAttendanceInformation = async (
   eventId: number
 ): Promise<AttendanceList[]> => {
@@ -29,6 +29,7 @@ export const fetchAttendanceInformation = async (
   return response.data.eventTickets;
 };
 
+// Admin to update attendance information
 export const postAttendanceUpdate = async (
   peopleTicketId: number,
   attendance: boolean
@@ -45,53 +46,6 @@ export const postAttendanceUpdate = async (
   });
   return response.data;
 };
-// try {
-//   const response = await axios.get("/api/event/attendance", {
-//     params,
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//   });
-//   if (response.status === 200) {
-//     // Form Submission Successful
-//     console.log(response.data.eventTickets);
-//     setServerData(response.data.eventTickets);
-//     // console.log(serverData)
-//   } else {
-//     console.log(response);
-//   }
-// } catch (error) {
-//   console.log("error");
-// }
-
-// fetch user attendance information
-// try {
-//   const response = await axios.get("/api/event/attendance", {
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//   });
-//   if (response.status === 200) {
-//     // Form Submission Successful
-//     console.log(response)
-//   } else {
-//     console.log(response)
-//   }
-// } catch (error) {
-//     console.log("error")
-// }
-// export const fetchAttendanceInformation = async (payload: {
-//   eventId: number;
-// }): Promise<string> => {
-//   return await fetch("/api/stripe/create-checkout", {
-//     method: "POST",
-//     headers: { "Content-Type": "application/json" },
-//     // add our own priceId here later for different products
-//     body: JSON.stringify(payload),
-//   })
-//     .then((res) => res.json())
-//     .then((data) => data.clientSecret);
-// };
 
 //Use this one to automatically create an Event or Membership checkout. Event checkout will decrement a ticket.
 export const fetchEventOrMembershipCheckoutSecret = async (payload: {
@@ -107,6 +61,8 @@ export const fetchEventOrMembershipCheckoutSecret = async (payload: {
     .then((res) => res.json())
     .then((data) => data.clientSecret);
 };
+
+// TODO: Delete these? ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 
 // the ones below are for a separate approach. Safe to use.
 export const fetchEventCheckoutSecret = async (payload: {

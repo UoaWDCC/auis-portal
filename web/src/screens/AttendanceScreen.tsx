@@ -4,61 +4,33 @@ import { useZxing } from "react-zxing";
 import { useAttendanceList } from "../hooks/api/useAttendanceList";
 import { AttendanceList } from "../types/types";
 import LoadingSpinner from "@components/navigation/LoadingSpinner";
-import { useUpdateUserName } from "../hooks/api/useAttendanceUpdateMutation";
+import { useUpdateAttendance } from "../hooks/api/useAttendanceUpdateMutation";
+
+function filterDataByUserTicketCodeOrName(
+  data: AttendanceList[],
+  searchTerm: string
+): AttendanceList[] {
+  return data.filter((item) => {
+    return (
+      (item.userTicketCode
+        ? item.userTicketCode.toLowerCase().includes(searchTerm.toLowerCase())
+        : false) ||
+      (item.name
+        ? item.name.toLowerCase().includes(searchTerm.toLowerCase())
+        : false)
+    );
+  });
+}
 
 export default function AttendanceScreen({ navbar }: { navbar: JSX.Element }) {
+  // get event selected
   let queryId = -1;
   const { id } = useParams();
   if (id !== undefined) {
     queryId = parseInt(id);
   }
 
-
-const { data : nameData, mutateAsync, status } = useUpdateUserName();
-
-const [textidk, settextId] = useState("Scan first ticket")
-
-
-  const {
-    data: attendanceList,
-    error: errorAttendanceList,
-    isLoading: loadingAttendanceList,
-    status: statusAttendanceList,
-  } = useAttendanceList(queryId);
-
-  useEffect(() => {
-    if (statusAttendanceList === "success") {
-      setOriginalAttendanceList(attendanceList);
-      setFilteredAttendanceList(attendanceList);
-    }
-  }, [statusAttendanceList, attendanceList]);
-
-  useEffect(() => {
-    if (status === "success") {
-      settextId("Entered successfully: " +  nameData.name)
-    } else if (status == "pending"){
-      settextId("Loading...")
-    } else if (status == "error"){
-      settextId("Update failed")
-    }
-  }, [textidk, status]);
-
-  function filterDataByUserTicketCodeOrName(
-    data: AttendanceList[],
-    searchTerm: string
-  ): AttendanceList[] {
-    return data.filter((item) => {
-      return (
-        (item.userTicketCode
-          ? item.userTicketCode.toLowerCase().includes(searchTerm.toLowerCase())
-          : false) ||
-        (item.name
-          ? item.name.toLowerCase().includes(searchTerm.toLowerCase())
-          : false)
-      );
-    });
-  }
-
+  // useStates
   const [scannedQRCode, setScannedQRCode] = useState("");
   const [currentSearchField, setCurrentSearchField] = useState("");
   const [filteredAttendanceList, setFilteredAttendanceList] = useState<
@@ -67,7 +39,46 @@ const [textidk, settextId] = useState("Scan first ticket")
   const [originalAttendanceList, setOriginalAttendanceList] = useState<
     AttendanceList[]
   >([]);
+  const [statusText, setStatusText] = useState("Scan first ticket");
+  const [totalAttendees, setTotalAttendees] = useState(0);
+  const [totalCheckedIn, setTotalCheckedIn] = useState(0);
 
+  // Mutation hook
+  const { data: nameData, mutateAsync, status } = useUpdateAttendance();
+
+  // Get current attendance list
+  const {
+    data: attendanceList,
+    error: errorAttendanceList,
+    isLoading: loadingAttendanceList,
+    status: statusAttendanceList,
+  } = useAttendanceList(queryId);
+
+  // update values once data is fetched
+  useEffect(() => {
+    if (statusAttendanceList === "success") {
+      setOriginalAttendanceList(attendanceList);
+      setFilteredAttendanceList(attendanceList);
+      setTotalAttendees(attendanceList.length);
+      const count = attendanceList.filter(
+        (obj) => obj.attendance === true
+      ).length;
+      setTotalCheckedIn(count);
+    }
+  }, [statusAttendanceList, attendanceList]);
+
+  // Update status text as it changes
+  useEffect(() => {
+    if (status === "success") {
+      setStatusText("Entered successfully: " + nameData.name);
+    } else if (status == "pending") {
+      setStatusText("Loading...");
+    } else if (status == "error") {
+      setStatusText("Update failed");
+    }
+  }, [statusText, status]);
+
+  // QR decoding
   const { ref } = useZxing({
     onDecodeResult(decodedQRCode) {
       if (scannedQRCode != decodedQRCode.getText()) {
@@ -82,22 +93,32 @@ const [textidk, settextId] = useState("Scan first ticket")
     },
   });
 
-  function handleOnChange(e: React.ChangeEvent<HTMLInputElement>) {
+  // update search
+  function handleOnSearchChanged(event: React.ChangeEvent<HTMLInputElement>) {
     const filteredData = filterDataByUserTicketCodeOrName(
       originalAttendanceList,
-      e.target.value
+      event.target.value
     );
-    setCurrentSearchField(e.target.value);
+    setCurrentSearchField(event.target.value);
     setFilteredAttendanceList(filteredData);
   }
 
+  //
   function updateCheckbox(e: React.ChangeEvent<HTMLInputElement>, id: number) {
-    let tempObj = originalAttendanceList.find((o) => o.id === id);
-    if (tempObj) {
-      let index = originalAttendanceList.indexOf(tempObj);
-      tempObj.attendance = !tempObj.attendance;
-      originalAttendanceList.fill(tempObj, index, index++);
-      mutateAsync({ peopleTicketId: tempObj.id, attendance: tempObj.attendance })
+    let user = originalAttendanceList.find((foundUser) => foundUser.id === id);
+    if (user) {
+      let index = originalAttendanceList.indexOf(user);
+      user.attendance = !user.attendance;
+      originalAttendanceList.fill(user, index, index++);
+      if (user.attendance) {
+        setTotalCheckedIn(totalCheckedIn + 1);
+      } else {
+        setTotalCheckedIn(totalCheckedIn - 1);
+      }
+      mutateAsync({
+        peopleTicketId: user.id,
+        attendance: user.attendance,
+      });
     }
   }
 
@@ -108,9 +129,7 @@ const [textidk, settextId] = useState("Scan first ticket")
   return (
     <div className="from-AUIS-dark-teal to-AUIS-teal min-h-[calc(100vh)] bg-gradient-to-b">
       {navbar}
-      <h1 className="text-center text-white">
-        {textidk}
-      </h1>
+      <h1 className="text-center text-white">{statusText}</h1>
       <h1 className="text-center text-white">Last Scanned: {scannedQRCode}</h1>
       <div className="flex items-center justify-center">
         <video className="w-[40rem] py-2" ref={ref} />
@@ -119,7 +138,9 @@ const [textidk, settextId] = useState("Scan first ticket")
         <input
           type="text"
           placeholder="Search Name/Ticket Number"
-          onChange={(e) => {handleOnChange(e)}}
+          onChange={(e) => {
+            handleOnSearchChanged(e);
+          }}
           value={currentSearchField}
           className="input mx-2 flex w-full max-w-[40rem] items-center justify-center rounded-xl border px-3 py-2 text-lg leading-tight shadow focus:outline-none"
         />
@@ -172,6 +193,9 @@ const [textidk, settextId] = useState("Scan first ticket")
             )}
           </div>
         </div>
+        <p className="py-2 text-center text-white">
+          Attendance: {totalCheckedIn} {" / "} {totalAttendees}
+        </p>
       </div>
     </div>
   );
