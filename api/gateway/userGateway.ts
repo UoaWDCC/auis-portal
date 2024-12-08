@@ -1,4 +1,10 @@
-import { answers, peoples, purchasableMemberships, userTickets, userTicketsTicketIdLinks } from "../schemas/schema";
+import {
+  answers,
+  peoples,
+  purchasableMemberships,
+  userTickets,
+  userTicketsTicketIdLinks,
+} from "../schemas/schema";
 import { db } from "../db/config/db";
 import { User, UpdateUserInfoBody } from "../types/types";
 import { eq } from "drizzle-orm";
@@ -146,8 +152,6 @@ export async function updateUserMembershipExpiryDate(
     await updateUserMetadata(userId, {
       bIsMembershipPaymentComplete: true,
     });
-
-
   } catch (error) {
     throw new Error(
       "Unknown error occurred while trying to update user membership: " + error

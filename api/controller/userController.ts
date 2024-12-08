@@ -14,7 +14,7 @@ export const updateUserTicketInfo = asyncHandler(
   async (req: Request, res: Response) => {
     try {
       const { name, email, phoneNumber, ticketId, answers } = req.body;
-      
+
       if (!name || !email || !phoneNumber || !ticketId || !answers) {
         return res.status(400).json({ message: "All fields are required" });
       }
