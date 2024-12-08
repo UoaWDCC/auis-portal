@@ -28,27 +28,24 @@ import SignInScreen from "./screens/SignInScreen.tsx";
 import CheckoutScreen from "./screens/CheckoutScreen.tsx";
 import ReturnScreen from "./screens/ReturnScreen.tsx";
 import EventScreen from "./screens/EventScreen.tsx";
-// import InformationScreen from "./screens/InformationScreen.tsx";
 import PartnersScreen from "./screens/PartnersScreen.tsx";
 import Header from "@components/navigation/Header.tsx";
 import MembershipScreen from "./screens/MembershipScreen.tsx";
 import EventInformationScreen from "./screens/EventInformationScreen.tsx";
 import SignUpInformationScreen from "./screens/SignUpInformationScreen.tsx";
-// import CheckoutInformationScreen from "./screens/CheckoutInformationScreen.tsx";
 import axios from "axios";
 import ErrorScreen from "./screens/ErrorScreen.tsx";
 import CheckoutInformationScreen from "./screens/CheckoutInformationScreen.tsx";
 import AttendanceScreen from "./screens/AttendanceScreen.tsx";
 import EventAttendanceSelectScreen from "./screens/EventAttendanceSelectScreen.tsx";
+import { ExecRoute } from "@utils/AdminRouteProtection.tsx";
 
 //supertokens code
 SuperTokens.init({
-  // enableDebugLogs: false,
   appInfo: {
-    // learn more about this on https://supertokens.com/docs/thirdpartyemailpassword/appinfo
-    appName: "AUIS",
-    apiDomain: "http://localhost:3000",
-    websiteDomain: "http://localhost:5173",
+    appName: import.meta.env.VITE_APP_NAME,
+    apiDomain: import.meta.env.VITE_API_URL,
+    websiteDomain: import.meta.env.VITE_APP_URL,
     apiBasePath: "/api/auth",
     websiteBasePath: "/signup",
   },
@@ -102,6 +99,7 @@ SuperTokens.init({
   },
 });
 
+
 //Add any routes for screens below
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -123,12 +121,7 @@ const router = createBrowserRouter(
         element={<CheckoutInformationScreen />}
       />
       <Route path="/checkout/payment" element={<CheckoutScreen />} />
-      {/* <Route
-        path="/checkout/information/:id"
-        element={<CheckoutInformationScreen />}
-      /> */}
       <Route path="/return" element={<ReturnScreen />} />
-      {/* <Route path="/userinfo" element={<InformationScreen />} /> */}
       <Route
         path="/membership"
         element={<MembershipScreen navbar={<Header />} />}
@@ -143,11 +136,19 @@ const router = createBrowserRouter(
       />
       <Route
         path="/admin/attendance/:id"
-        element={<AttendanceScreen navbar={<Header />} />}
+        element={
+          <ExecRoute>
+            <AttendanceScreen navbar={<Header />} />
+          </ExecRoute>
+        }
       />
       <Route
         path="/admin/attendance"
-        element={<EventAttendanceSelectScreen navbar={<Header />} />}
+        element={
+          <ExecRoute>
+            <EventAttendanceSelectScreen navbar={<Header />} />
+          </ExecRoute>
+        }
       />
     </Route>
   )

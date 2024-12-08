@@ -104,7 +104,7 @@ export default function AttendanceScreen({ navbar }: { navbar: JSX.Element }) {
   }
 
   //
-  function updateCheckbox(e: React.ChangeEvent<HTMLInputElement>, id: number) {
+  function updateCheckbox(id: number) {
     let user = originalAttendanceList.find((foundUser) => foundUser.id === id);
     if (user) {
       let index = originalAttendanceList.indexOf(user);
@@ -175,7 +175,7 @@ export default function AttendanceScreen({ navbar }: { navbar: JSX.Element }) {
                             type="checkbox"
                             className="accent-AUIS-teal scale-150"
                             defaultChecked={data.attendance}
-                            onChange={(e) => updateCheckbox(e, data.id)}
+                            onChange={() => updateCheckbox(data.id)}
                           ></input>
                         </div>
                       </div>
