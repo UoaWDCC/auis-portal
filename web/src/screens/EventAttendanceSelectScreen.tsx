@@ -7,7 +7,11 @@ import LoadingSpinner from "@components/navigation/LoadingSpinner";
 import EventCard from "@components/events-slider/EventCard";
 import { useNavigate } from "react-router";
 
-export default function EventAttendanceSelectScreen({ navbar }: { navbar: JSX.Element }) {
+export default function EventAttendanceSelectScreen({
+  navbar,
+}: {
+  navbar: JSX.Element;
+}) {
   const {
     loading: eventsLoading,
     data: eventsData,
@@ -44,7 +48,7 @@ export default function EventAttendanceSelectScreen({ navbar }: { navbar: JSX.El
   }
   console.log(errorEvents);
 
- return (
+  return (
     <div className="from-AUIS-dark-teal to-AUIS-teal min-h-[calc(100vh)] bg-gradient-to-b">
       {navbar}
       <h1 className="py-5 text-center text-2xl text-white">
