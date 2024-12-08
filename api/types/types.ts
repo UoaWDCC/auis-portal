@@ -20,6 +20,7 @@ export interface User {
   updatedById: number | null;
 }
 
+// TODO: Check this
 declare global {
   namespace Express {
     interface Request {
