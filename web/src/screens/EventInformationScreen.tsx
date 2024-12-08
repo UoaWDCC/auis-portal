@@ -68,23 +68,22 @@ export default function EventInformationScreen({
     }
   }
 
-  let priceRange : string = ""
-  
-  if (ticketPrices.length == 0){
-    priceRange = "Free"
-  } else if (ticketPrices.length == 1){priceRange="$" +
-   ticketPrices[0]
-      .toFixed(2)
-      .toString()} else{
+  let priceRange: string = "";
+
+  if (ticketPrices.length == 0) {
+    priceRange = "Free";
+  } else if (ticketPrices.length == 1) {
+    priceRange = "$" + ticketPrices[0].toFixed(2).toString();
+  } else {
     "$" +
-    Math.min(...ticketPrices)
-      .toFixed(2)
-      .toString() +
-    " - $" +
-    Math.max(...ticketPrices)
-      .toFixed(2)
-      .toString();
-}
+      Math.min(...ticketPrices)
+        .toFixed(2)
+        .toString() +
+      " - $" +
+      Math.max(...ticketPrices)
+        .toFixed(2)
+        .toString();
+  }
   // Autoscroll to top of page on landing
   const ref = useRef<null | HTMLDivElement>(null);
 
@@ -134,7 +133,13 @@ export default function EventInformationScreen({
         Purchase Tickets
       </h2>
       <div>
-        {event.tickets.length == 0? (<p className=" px-5 pt-3 text-center text-xl md:px-3">No tickets available or needed</p>) : (<></>)}
+        {event.tickets.length == 0 ? (
+          <p className="px-5 pt-3 text-center text-xl md:px-3">
+            No tickets available or needed
+          </p>
+        ) : (
+          <></>
+        )}
         {event.tickets.map((ticket) => (
           <TicketCard
             key={ticket.id}
