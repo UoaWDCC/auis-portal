@@ -99,7 +99,6 @@ SuperTokens.init({
   },
 });
 
-
 //Add any routes for screens below
 const router = createBrowserRouter(
   createRoutesFromElements(
