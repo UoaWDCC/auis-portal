@@ -31,8 +31,13 @@ const getEventById = asyncHandler(
   }
 );
 
-function isInt(value : any) {
-  return !isNaN(value) && (function(x) { return (x | 0) === x; })(parseFloat(value))
+function isInt(value: any) {
+  return (
+    !isNaN(value) &&
+    (function (x) {
+      return (x | 0) === x;
+    })(parseFloat(value))
+  );
 }
 
 const getEventAttendanceById = asyncHandler(
@@ -42,14 +47,14 @@ const getEventAttendanceById = asyncHandler(
     console.log(req.body);
     try {
       let { eventId: eventId } = req.query;
-      
+
       if (!eventId) {
         return res.status(400).json({ message: "All fields are required" });
       }
-      if (!isInt(eventId)){
+      if (!isInt(eventId)) {
         return res.status(400).json({ message: "All fields are required" });
       }
-      
+
       // const session = req.session!;
       // const userId = session.getUserId();
 
