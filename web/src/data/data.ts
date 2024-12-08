@@ -71,7 +71,7 @@ export const secondaryDevelopers = [
 
 // Handle case with no events
 const today = new Date();
-const showNoUpcomingEvent: Event = {
+const showNoUpcomingEventOne: Event = {
   id: -1,
   title: "No Upcoming Events Right Now",
   description: "description",
@@ -85,13 +85,44 @@ const showNoUpcomingEvent: Event = {
   locationLink: "locationLink",
   image: peacockLogo,
 };
+
+const showNoUpcomingEventTwo: Event = {
+  id: -2,
+  title: "No Upcoming Events Right Now",
+  description: "description",
+  subtitle: "subtitle",
+  eventDateStart: today.toISOString(),
+  eventDateEnd: "termsAndConditions",
+  isLive: true,
+  termsAndConditions: "termsAndConditions",
+  eventCapacityRemaining: 0,
+  location: "University of Auckland",
+  locationLink: "locationLink",
+  image: peacockLogo,
+};
+
+const showNoUpcomingEventThree: Event = {
+  id: -3,
+  title: "No Upcoming Events Right Now",
+  description: "description",
+  subtitle: "subtitle",
+  eventDateStart: today.toISOString(),
+  eventDateEnd: "termsAndConditions",
+  isLive: true,
+  termsAndConditions: "termsAndConditions",
+  eventCapacityRemaining: 0,
+  location: "University of Auckland",
+  locationLink: "locationLink",
+  image: peacockLogo,
+};
+
 export const showNoUpcomingEvents: Event[] = [
-  showNoUpcomingEvent,
-  showNoUpcomingEvent,
-  showNoUpcomingEvent,
+  showNoUpcomingEventOne,
+  showNoUpcomingEventTwo,
+  showNoUpcomingEventThree,
 ];
 
-const showNoPastEvent: Event = {
+const showNoPastEventOne: Event = {
   id: -1,
   title: "No Past Events Right Now",
   description: "description",
@@ -105,8 +136,38 @@ const showNoPastEvent: Event = {
   locationLink: "locationLink",
   image: peacockLogo,
 };
+
+const showNoPastEventTwo: Event = {
+  id: -2,
+  title: "No Past Events Right Now",
+  description: "description",
+  subtitle: "subtitle",
+  eventDateStart: today.toISOString(),
+  eventDateEnd: "termsAndConditions",
+  isLive: true,
+  termsAndConditions: "termsAndConditions",
+  eventCapacityRemaining: 0,
+  location: "University of Auckland",
+  locationLink: "locationLink",
+  image: peacockLogo,
+};
+
+const showNoPastEventThree: Event = {
+  id: -3,
+  title: "No Past Events Right Now",
+  description: "description",
+  subtitle: "subtitle",
+  eventDateStart: today.toISOString(),
+  eventDateEnd: "termsAndConditions",
+  isLive: true,
+  termsAndConditions: "termsAndConditions",
+  eventCapacityRemaining: 0,
+  location: "University of Auckland",
+  locationLink: "locationLink",
+  image: peacockLogo,
+};
 export const showNoPastEvents: Event[] = [
-  showNoPastEvent,
-  showNoPastEvent,
-  showNoPastEvent,
+  showNoPastEventOne,
+  showNoPastEventTwo,
+  showNoPastEventThree,
 ];
