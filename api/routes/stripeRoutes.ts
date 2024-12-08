@@ -9,8 +9,8 @@ import {
 const router = Router();
 
 // TODO: unprotect these routes
-router.get("/session-status", verifySession(), getSessionStatus);
-router.post("/create-checkout", verifySession(), createCheckout);
+router.get("/session-status", verifySession({sessionRequired: false}), getSessionStatus);
+router.post("/create-checkout",verifySession({sessionRequired: false}), createCheckout);
 
 // do not protect this route
 router.post(

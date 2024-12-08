@@ -1,4 +1,4 @@
-import { peoples, purchasableMemberships } from "../schemas/schema";
+import { answers, peoples, purchasableMemberships, userTickets, userTicketsTicketIdLinks } from "../schemas/schema";
 import { db } from "../db/config/db";
 import { User, UpdateUserInfoBody } from "../types/types";
 import { eq } from "drizzle-orm";
@@ -42,6 +42,51 @@ export async function getUserMembershipExpiryDate(
   }
 
   return returnDate;
+}
+
+export async function insertUserTicket(data: {
+  ticketId: number;
+  name: string;
+  email: string;
+  phoneNumber: string;
+  answers: {
+    questionId: number;
+    answer: string;
+  }[];
+}): Promise<{ userTicketId: number }> {
+  let updateUserInfoOrNewUser: { userTicketId: number }[];
+  updateUserInfoOrNewUser = await db
+    .insert(userTickets)
+    .values({
+      // ticketId: data.ticketId,
+      name: data.name,
+      email: data.email,
+      phoneNumber: data.phoneNumber,
+    })
+    .returning({ userTicketId: userTickets.id });
+
+  const tempID = updateUserInfoOrNewUser[0].userTicketId;
+
+  const tempa: any = await db
+    .insert(userTicketsTicketIdLinks)
+    .values({
+      userTicketId: updateUserInfoOrNewUser[0].userTicketId,
+      ticketId: data.ticketId,
+    })
+    .returning({ id: userTicketsTicketIdLinks.id });
+  console.log(tempa.id);
+
+  const ticketId = userTickets.id;
+  if (data.answers.length > 0) {
+    const answerRecords = data.answers.map((answerData) => ({
+      ticketId: ticketId,
+      questionId: answerData.questionId,
+      answer: answerData.answer,
+    }));
+
+    await db.insert(answers).values(answerRecords);
+  }
+  return updateUserInfoOrNewUser[0];
 }
 
 export async function updateUserMembershipExpiryDate(
@@ -101,6 +146,8 @@ export async function updateUserMembershipExpiryDate(
     await updateUserMetadata(userId, {
       bIsMembershipPaymentComplete: true,
     });
+
+
   } catch (error) {
     throw new Error(
       "Unknown error occurred while trying to update user membership: " + error

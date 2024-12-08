@@ -13,7 +13,7 @@ const router = Router();
 
 router.post("/update-user-info", verifySession(), updateUserInfo);
 router.post("/update-metadata", verifySession(), updateUserMetadata);
-router.post("/user-ticket-info", verifySession(), updateUserTicketInfo);
+router.post("/user-ticket-info", updateUserTicketInfo);
 router.get("/get-metadata", verifySession(), getUserMetadata);
 router.get("/get-membership-expiry", verifySession(), getUserMembershipExpiry);
 
