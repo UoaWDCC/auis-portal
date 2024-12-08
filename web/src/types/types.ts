@@ -146,5 +146,5 @@ export interface AttendanceList {
   attendance: boolean;
 }
 export interface AttendanceReturn {
-  name:string;
+  name: string;
 }
