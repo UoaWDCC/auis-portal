@@ -13,11 +13,9 @@ export default function AttendanceScreen({ navbar }: { navbar: JSX.Element }) {
     queryId = parseInt(id);
   }
 
+  const { data: nameData, mutateAsync, status } = useUpdateUserName();
 
-const { data : nameData, mutateAsync, status } = useUpdateUserName();
-
-const [textidk, settextId] = useState("Scan first ticket")
-
+  const [textidk, settextId] = useState("Scan first ticket");
 
   const {
     data: attendanceList,
@@ -35,11 +33,11 @@ const [textidk, settextId] = useState("Scan first ticket")
 
   useEffect(() => {
     if (status === "success") {
-      settextId("Entered successfully: " +  nameData.name)
-    } else if (status == "pending"){
-      settextId("Loading...")
-    } else if (status == "error"){
-      settextId("Update failed")
+      settextId("Entered successfully: " + nameData.name);
+    } else if (status == "pending") {
+      settextId("Loading...");
+    } else if (status == "error") {
+      settextId("Update failed");
     }
   }, [textidk, status]);
 
@@ -97,7 +95,10 @@ const [textidk, settextId] = useState("Scan first ticket")
       let index = originalAttendanceList.indexOf(tempObj);
       tempObj.attendance = !tempObj.attendance;
       originalAttendanceList.fill(tempObj, index, index++);
-      mutateAsync({ peopleTicketId: tempObj.id, attendance: tempObj.attendance })
+      mutateAsync({
+        peopleTicketId: tempObj.id,
+        attendance: tempObj.attendance,
+      });
     }
   }
 
@@ -108,9 +109,7 @@ const [textidk, settextId] = useState("Scan first ticket")
   return (
     <div className="from-AUIS-dark-teal to-AUIS-teal min-h-[calc(100vh)] bg-gradient-to-b">
       {navbar}
-      <h1 className="text-center text-white">
-        {textidk}
-      </h1>
+      <h1 className="text-center text-white">{textidk}</h1>
       <h1 className="text-center text-white">Last Scanned: {scannedQRCode}</h1>
       <div className="flex items-center justify-center">
         <video className="w-[40rem] py-2" ref={ref} />
@@ -119,7 +118,9 @@ const [textidk, settextId] = useState("Scan first ticket")
         <input
           type="text"
           placeholder="Search Name/Ticket Number"
-          onChange={(e) => {handleOnChange(e)}}
+          onChange={(e) => {
+            handleOnChange(e);
+          }}
           value={currentSearchField}
           className="input mx-2 flex w-full max-w-[40rem] items-center justify-center rounded-xl border px-3 py-2 text-lg leading-tight shadow focus:outline-none"
         />

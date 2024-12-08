@@ -91,11 +91,11 @@ const getEventAttendanceById = asyncHandler(
         .rightJoin(temp, eq(userTicketsTicketIdLinks.userTicketId, temp.id));
 
       console.log(eventTickets);
-      
-      console.log()
+
+      console.log();
       // console.log(`${"<img src=\"" + await generateQRCode("ABC12345") + "\"/>"}`)
       // sendEmail(await generateQRCode("testing123"), "gmat224@aucklanduni.ac.nz", "Gury", "Gury's Dance Workshop", "ABC12345")
-      console.log("SENT EMAIL")
+      console.log("SENT EMAIL");
 
       // if array is 1, true. If 0, set to false.
 
@@ -114,7 +114,7 @@ const getEventAttendanceById = asyncHandler(
 );
 
 function delay(ms: number) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 const updateAttendanceById = asyncHandler(
@@ -133,9 +133,8 @@ const updateAttendanceById = asyncHandler(
       if (!data) {
         return res.status(400).json({ message: "All fields are required" });
       }
-      
-      // await delay(1000); // 1-second delay
 
+      // await delay(1000); // 1-second delay
 
       // const session = req.session!;
       // const userId = session.getUserId();
@@ -163,15 +162,14 @@ const updateAttendanceById = asyncHandler(
       //   bIsUserInfoComplete: true,
       // });
 
-      
-
-    const updateUserInfoOrNewUser = await db
-    .update(userTickets)
-    .set({
-      // ticketId: data.ticketId,
-      attendance: data.attendance
-    }).where(eq(userTickets.id, data.peopleTicketId))
-    .returning({ name: userTickets.name });
+      const updateUserInfoOrNewUser = await db
+        .update(userTickets)
+        .set({
+          // ticketId: data.ticketId,
+          attendance: data.attendance,
+        })
+        .where(eq(userTickets.id, data.peopleTicketId))
+        .returning({ name: userTickets.name });
 
       console.log(updateUserInfoOrNewUser[0].name);
 

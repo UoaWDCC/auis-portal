@@ -35,8 +35,8 @@ export const postAttendanceUpdate = async (
 ): Promise<{ name: string }> => {
   const data = {
     peopleTicketId: peopleTicketId,
-  attendance: attendance
-  }
+    attendance: attendance,
+  };
   const response = await axios.patch("/api/event/attendance", {
     headers: {
       "Content-Type": "application/json",
