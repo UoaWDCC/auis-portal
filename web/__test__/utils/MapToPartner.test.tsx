@@ -11,7 +11,7 @@ describe("mapToPartner", () => {
           {
             id: 1,
             attributes: {
-              Type: "Business",
+              Type: "Gold",
               Name: "Partner One",
               Description: "A leading business partner",
               Location: "Farm",
@@ -31,7 +31,7 @@ describe("mapToPartner", () => {
     const expected: Partner[] = [
       {
         id: 1,
-        type: "Business",
+        type: "Gold",
         name: "Partner One",
         description: "A leading business partner",
         location: "Farm",
@@ -49,7 +49,7 @@ describe("mapToPartner", () => {
           {
             id: 2,
             attributes: {
-              Type: "Technology",
+              Type: "Silver",
               Name: "Partner Two",
               Description: "A technology partner",
               Location: "City",
@@ -63,7 +63,7 @@ describe("mapToPartner", () => {
     const expected: Partner[] = [
       {
         id: 2,
-        type: "Technology",
+        type: "Silver",
         name: "Partner Two",
         description: "A technology partner",
         location: "City",
@@ -81,7 +81,7 @@ describe("mapToPartner", () => {
           {
             id: 3,
             attributes: {
-              Type: "Finance",
+              Type: "Bronze",
               Name: null,
               Description: "A finance partner",
               Location: "Town",
@@ -101,7 +101,7 @@ describe("mapToPartner", () => {
     const expected: Partner[] = [
       {
         id: 3,
-        type: "Finance",
+        type: "Bronze",
         name: "",
         description: "A finance partner",
         location: "Town",
