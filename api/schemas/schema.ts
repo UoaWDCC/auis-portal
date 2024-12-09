@@ -1,69 +1,24 @@
 import {
   pgTable,
-  index,
-  foreignKey,
   serial,
   varchar,
-  numeric,
-  boolean,
-  integer,
-  text,
   timestamp,
   json,
+  text,
   jsonb,
-  unique,
-  doublePrecision,
+  boolean,
+  index,
+  foreignKey,
+  integer,
   bigint,
+  numeric,
+  unique,
   date,
+  doublePrecision,
   primaryKey,
   char,
 } from "drizzle-orm/pg-core";
 import { sql } from "drizzle-orm";
-
-export const tickets = pgTable(
-  "tickets",
-  {
-    id: serial("id").primaryKey().notNull(),
-    name: varchar("name", { length: 255 }),
-    discountCode: varchar("discount_code", { length: 255 }),
-    discountPrice: numeric("discount_price", { precision: 10, scale: 2 }),
-    price: numeric("price", { precision: 10, scale: 2 }),
-    isMemberOnly: boolean("is_member_only"),
-    isDouble: boolean("is_double"),
-    maxNumberTickets: integer("max_number_tickets"),
-    numberTicketsLeft: integer("number_tickets_left"),
-    ticketDescription: text("ticket_description"),
-    startDateTicketSales: timestamp("start_date_ticket_sales", {
-      precision: 6,
-      mode: "string",
-    }),
-    isTicketLive: boolean("is_ticket_live"),
-    ticketLinkBypass: boolean("ticket_link_bypass"),
-    bypassTicketLink: varchar("bypass_ticket_link", { length: 255 }),
-    createdAt: timestamp("created_at", { precision: 6, mode: "string" }),
-    updatedAt: timestamp("updated_at", { precision: 6, mode: "string" }),
-    publishedAt: timestamp("published_at", { precision: 6, mode: "string" }),
-    createdById: integer("created_by_id").references(() => adminUsers.id, {
-      onDelete: "set null",
-    }),
-    updatedById: integer("updated_by_id").references(() => adminUsers.id, {
-      onDelete: "set null",
-    }),
-    stripeLink: varchar("stripe_link", { length: 255 }),
-  },
-  (table) => {
-    return {
-      createdByIdFk: index("tickets_created_by_id_fk").using(
-        "btree",
-        table.createdById
-      ),
-      updatedByIdFk: index("tickets_updated_by_id_fk").using(
-        "btree",
-        table.updatedById
-      ),
-    };
-  }
-);
 
 export const strapiMigrations = pgTable("strapi_migrations", {
   id: serial("id").primaryKey().notNull(),
@@ -95,117 +50,6 @@ export const strapiWebhooks = pgTable("strapi_webhooks", {
   events: jsonb("events"),
   enabled: boolean("enabled"),
 });
-
-export const answersPeopleTicketLinks = pgTable(
-  "answers_people_ticket_links",
-  {
-    id: serial("id").primaryKey().notNull(),
-    answerId: integer("answer_id").references(() => answers.id, {
-      onDelete: "cascade",
-    }),
-    userTicketId: integer("user_ticket_id").references(() => userTickets.id, {
-      onDelete: "cascade",
-    }),
-    answerOrder: doublePrecision("answer_order"),
-  },
-  (table) => {
-    return {
-      fk: index("answers_people_ticket_links_fk").using(
-        "btree",
-        table.answerId
-      ),
-      invFk: index("answers_people_ticket_links_inv_fk").using(
-        "btree",
-        table.userTicketId
-      ),
-      orderInvFk: index("answers_people_ticket_links_order_inv_fk").using(
-        "btree",
-        table.answerOrder
-      ),
-      answersPeopleTicketLinksUnique: unique(
-        "answers_people_ticket_links_unique"
-      ).on(table.answerId, table.userTicketId),
-    };
-  }
-);
-
-export const purchasableMemberships = pgTable(
-  "purchasable_memberships",
-  {
-    id: serial("id").primaryKey().notNull(),
-    title: varchar("title", { length: 255 }),
-    expiry: timestamp("expiry", { precision: 6, mode: "string" }),
-    price: numeric("price", { precision: 10, scale: 2 }),
-    stripeLink: varchar("stripe_link", { length: 255 }),
-    description: text("description"),
-    createdAt: timestamp("created_at", { precision: 6, mode: "string" }),
-    updatedAt: timestamp("updated_at", { precision: 6, mode: "string" }),
-    publishedAt: timestamp("published_at", { precision: 6, mode: "string" }),
-    createdById: integer("created_by_id").references(() => adminUsers.id, {
-      onDelete: "set null",
-    }),
-    updatedById: integer("updated_by_id").references(() => adminUsers.id, {
-      onDelete: "set null",
-    }),
-    membershipLinkBypass: boolean("membership_link_bypass"),
-    bypassMembershipLink: varchar("bypass_membership_link", { length: 255 }),
-  },
-  (table) => {
-    return {
-      createdByIdFk: index("purchasable_memberships_created_by_id_fk").using(
-        "btree",
-        table.createdById
-      ),
-      updatedByIdFk: index("purchasable_memberships_updated_by_id_fk").using(
-        "btree",
-        table.updatedById
-      ),
-    };
-  }
-);
-
-export const apps = pgTable("apps", {
-  appId: varchar("app_id", { length: 64 })
-    .default("public")
-    .primaryKey()
-    .notNull(),
-  // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-  createdAtTime: bigint("created_at_time", { mode: "number" }),
-});
-
-export const userTickets = pgTable(
-  "user_tickets",
-  {
-    id: serial("id").primaryKey().notNull(),
-    peopleTicketCode: varchar("people_ticket_code", { length: 255 }),
-    createdAt: timestamp("created_at", { precision: 6, mode: "string" }),
-    updatedAt: timestamp("updated_at", { precision: 6, mode: "string" }),
-    publishedAt: timestamp("published_at", { precision: 6, mode: "string" }),
-    createdById: integer("created_by_id").references(() => adminUsers.id, {
-      onDelete: "set null",
-    }),
-    updatedById: integer("updated_by_id").references(() => adminUsers.id, {
-      onDelete: "set null",
-    }),
-    name: varchar("name", { length: 255 }),
-    email: varchar("email", { length: 255 }),
-    phoneNumber: varchar("phone_number", { length: 255 }),
-    attendance: boolean("attendance"),
-    paid: boolean("paid"),
-  },
-  (table) => {
-    return {
-      createdByIdFk: index("user_tickets_created_by_id_fk").using(
-        "btree",
-        table.createdById
-      ),
-      updatedByIdFk: index("user_tickets_updated_by_id_fk").using(
-        "btree",
-        table.updatedById
-      ),
-    };
-  }
-);
 
 export const adminUsers = pgTable(
   "admin_users",
@@ -987,6 +831,41 @@ export const previousTeams = pgTable(
   }
 );
 
+export const purchasableMemberships = pgTable(
+  "purchasable_memberships",
+  {
+    id: serial("id").primaryKey().notNull(),
+    title: varchar("title", { length: 255 }),
+    expiry: timestamp("expiry", { precision: 6, mode: "string" }),
+    price: numeric("price", { precision: 10, scale: 2 }),
+    stripeLink: varchar("stripe_link", { length: 255 }),
+    description: text("description"),
+    membershipLinkBypass: boolean("membership_link_bypass"),
+    bypassMembershipLink: varchar("bypass_membership_link", { length: 255 }),
+    createdAt: timestamp("created_at", { precision: 6, mode: "string" }),
+    updatedAt: timestamp("updated_at", { precision: 6, mode: "string" }),
+    publishedAt: timestamp("published_at", { precision: 6, mode: "string" }),
+    createdById: integer("created_by_id").references(() => adminUsers.id, {
+      onDelete: "set null",
+    }),
+    updatedById: integer("updated_by_id").references(() => adminUsers.id, {
+      onDelete: "set null",
+    }),
+  },
+  (table) => {
+    return {
+      createdByIdFk: index("purchasable_memberships_created_by_id_fk").using(
+        "btree",
+        table.createdById
+      ),
+      updatedByIdFk: index("purchasable_memberships_updated_by_id_fk").using(
+        "btree",
+        table.updatedById
+      ),
+    };
+  }
+);
+
 export const questions = pgTable(
   "questions",
   {
@@ -1040,6 +919,85 @@ export const somePhotos = pgTable(
         table.createdById
       ),
       updatedByIdFk: index("some_photos_updated_by_id_fk").using(
+        "btree",
+        table.updatedById
+      ),
+    };
+  }
+);
+
+export const tickets = pgTable(
+  "tickets",
+  {
+    id: serial("id").primaryKey().notNull(),
+    name: varchar("name", { length: 255 }),
+    discountCode: varchar("discount_code", { length: 255 }),
+    discountPrice: numeric("discount_price", { precision: 10, scale: 2 }),
+    price: numeric("price", { precision: 10, scale: 2 }),
+    isMemberOnly: boolean("is_member_only"),
+    isDouble: boolean("is_double"),
+    maxNumberTickets: integer("max_number_tickets"),
+    numberTicketsLeft: integer("number_tickets_left"),
+    ticketDescription: text("ticket_description"),
+    startDateTicketSales: timestamp("start_date_ticket_sales", {
+      precision: 6,
+      mode: "string",
+    }),
+    isTicketLive: boolean("is_ticket_live"),
+    ticketLinkBypass: boolean("ticket_link_bypass"),
+    bypassTicketLink: varchar("bypass_ticket_link", { length: 255 }),
+    stripeLink: varchar("stripe_link", { length: 255 }),
+    createdAt: timestamp("created_at", { precision: 6, mode: "string" }),
+    updatedAt: timestamp("updated_at", { precision: 6, mode: "string" }),
+    publishedAt: timestamp("published_at", { precision: 6, mode: "string" }),
+    createdById: integer("created_by_id").references(() => adminUsers.id, {
+      onDelete: "set null",
+    }),
+    updatedById: integer("updated_by_id").references(() => adminUsers.id, {
+      onDelete: "set null",
+    }),
+  },
+  (table) => {
+    return {
+      createdByIdFk: index("tickets_created_by_id_fk").using(
+        "btree",
+        table.createdById
+      ),
+      updatedByIdFk: index("tickets_updated_by_id_fk").using(
+        "btree",
+        table.updatedById
+      ),
+    };
+  }
+);
+
+export const userTickets = pgTable(
+  "user_tickets",
+  {
+    id: serial("id").primaryKey().notNull(),
+    name: varchar("name", { length: 255 }),
+    email: varchar("email", { length: 255 }),
+    phoneNumber: varchar("phone_number", { length: 255 }),
+    peopleTicketCode: varchar("people_ticket_code", { length: 255 }),
+    attendance: boolean("attendance"),
+    paid: boolean("paid"),
+    createdAt: timestamp("created_at", { precision: 6, mode: "string" }),
+    updatedAt: timestamp("updated_at", { precision: 6, mode: "string" }),
+    publishedAt: timestamp("published_at", { precision: 6, mode: "string" }),
+    createdById: integer("created_by_id").references(() => adminUsers.id, {
+      onDelete: "set null",
+    }),
+    updatedById: integer("updated_by_id").references(() => adminUsers.id, {
+      onDelete: "set null",
+    }),
+  },
+  (table) => {
+    return {
+      createdByIdFk: index("user_tickets_created_by_id_fk").using(
+        "btree",
+        table.createdById
+      ),
+      updatedByIdFk: index("user_tickets_updated_by_id_fk").using(
         "btree",
         table.updatedById
       ),
@@ -1395,6 +1353,39 @@ export const upUsersRoleLinks = pgTable(
   }
 );
 
+export const answersPeopleTicketLinks = pgTable(
+  "answers_people_ticket_links",
+  {
+    id: serial("id").primaryKey().notNull(),
+    answerId: integer("answer_id").references(() => answers.id, {
+      onDelete: "cascade",
+    }),
+    userTicketId: integer("user_ticket_id").references(() => userTickets.id, {
+      onDelete: "cascade",
+    }),
+    answerOrder: doublePrecision("answer_order"),
+  },
+  (table) => {
+    return {
+      fk: index("answers_people_ticket_links_fk").using(
+        "btree",
+        table.answerId
+      ),
+      invFk: index("answers_people_ticket_links_inv_fk").using(
+        "btree",
+        table.userTicketId
+      ),
+      orderInvFk: index("answers_people_ticket_links_order_inv_fk").using(
+        "btree",
+        table.answerOrder
+      ),
+      answersPeopleTicketLinksUnique: unique(
+        "answers_people_ticket_links_unique"
+      ).on(table.answerId, table.userTicketId),
+    };
+  }
+);
+
 export const answersQuestionIdLinks = pgTable(
   "answers_question_id_links",
   {
@@ -1554,6 +1545,15 @@ export const userTicketsTicketIdLinks = pgTable(
     };
   }
 );
+
+export const apps = pgTable("apps", {
+  appId: varchar("app_id", { length: 64 })
+    .default("public")
+    .primaryKey()
+    .notNull(),
+  // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+  createdAtTime: bigint("created_at_time", { mode: "number" }),
+});
 
 export const oauthSessions = pgTable(
   "oauth_sessions",
@@ -1726,6 +1726,27 @@ export const emailverificationVerifiedEmails = pgTable(
   }
 );
 
+export const userMetadata = pgTable(
+  "user_metadata",
+  {
+    appId: varchar("app_id", { length: 64 })
+      .default("public")
+      .notNull()
+      .references(() => apps.appId, { onDelete: "cascade" }),
+    userId: varchar("user_id", { length: 128 }).notNull(),
+    userMetadata: text("user_metadata").notNull(),
+  },
+  (table) => {
+    return {
+      appIdIdx: index().using("btree", table.appId),
+      userMetadataPkey: primaryKey({
+        columns: [table.appId, table.userId],
+        name: "user_metadata_pkey",
+      }),
+    };
+  }
+);
+
 export const rolePermissions = pgTable(
   "role_permissions",
   {
@@ -1753,27 +1774,6 @@ export const rolePermissions = pgTable(
       rolePermissionsPkey: primaryKey({
         columns: [table.appId, table.role, table.permission],
         name: "role_permissions_pkey",
-      }),
-    };
-  }
-);
-
-export const userMetadata = pgTable(
-  "user_metadata",
-  {
-    appId: varchar("app_id", { length: 64 })
-      .default("public")
-      .notNull()
-      .references(() => apps.appId, { onDelete: "cascade" }),
-    userId: varchar("user_id", { length: 128 }).notNull(),
-    userMetadata: text("user_metadata").notNull(),
-  },
-  (table) => {
-    return {
-      appIdIdx: index().using("btree", table.appId),
-      userMetadataPkey: primaryKey({
-        columns: [table.appId, table.userId],
-        name: "user_metadata_pkey",
       }),
     };
   }
@@ -1987,6 +1987,136 @@ export const oauthM2MTokens = pgTable(
   }
 );
 
+export const keyValue = pgTable(
+  "key_value",
+  {
+    appId: varchar("app_id", { length: 64 }).default("public").notNull(),
+    tenantId: varchar("tenant_id", { length: 64 }).default("public").notNull(),
+    name: varchar("name", { length: 128 }).notNull(),
+    value: text("value"),
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    createdAtTime: bigint("created_at_time", { mode: "number" }),
+  },
+  (table) => {
+    return {
+      tenantIdIdx: index("key_value_tenant_id_index").using(
+        "btree",
+        table.appId,
+        table.tenantId
+      ),
+      keyValueTenantIdFkey: foreignKey({
+        columns: [table.appId, table.tenantId],
+        foreignColumns: [tenants.appId, tenants.tenantId],
+        name: "key_value_tenant_id_fkey",
+      }).onDelete("cascade"),
+      keyValuePkey: primaryKey({
+        columns: [table.appId, table.tenantId, table.name],
+        name: "key_value_pkey",
+      }),
+    };
+  }
+);
+
+export const appIdToUserId = pgTable(
+  "app_id_to_user_id",
+  {
+    appId: varchar("app_id", { length: 64 })
+      .default("public")
+      .notNull()
+      .references(() => apps.appId, { onDelete: "cascade" }),
+    userId: char("user_id", { length: 36 }).notNull(),
+    recipeId: varchar("recipe_id", { length: 128 }).notNull(),
+    primaryOrRecipeUserId: char("primary_or_recipe_user_id", {
+      length: 36,
+    }).notNull(),
+    isLinkedOrIsAPrimaryUser: boolean("is_linked_or_is_a_primary_user")
+      .default(false)
+      .notNull(),
+  },
+  (table) => {
+    return {
+      appIdIdx: index().using("btree", table.appId),
+      primaryUserIdIdx: index("app_id_to_user_id_primary_user_id_index").using(
+        "btree",
+        table.primaryOrRecipeUserId,
+        table.appId
+      ),
+      appIdToUserIdPrimaryOrRecipeUserIdFkey: foreignKey({
+        columns: [table.appId, table.primaryOrRecipeUserId],
+        foreignColumns: [table.appId, table.userId],
+        name: "app_id_to_user_id_primary_or_recipe_user_id_fkey",
+      }).onDelete("cascade"),
+      appIdToUserIdPkey: primaryKey({
+        columns: [table.appId, table.userId],
+        name: "app_id_to_user_id_pkey",
+      }),
+    };
+  }
+);
+
+export const emailpasswordPswdResetTokens = pgTable(
+  "emailpassword_pswd_reset_tokens",
+  {
+    appId: varchar("app_id", { length: 64 }).default("public").notNull(),
+    userId: char("user_id", { length: 36 }).notNull(),
+    token: varchar("token", { length: 128 }).notNull(),
+    email: varchar("email", { length: 256 }),
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    tokenExpiry: bigint("token_expiry", { mode: "number" }).notNull(),
+  },
+  (table) => {
+    return {
+      emailpasswordPasswordResetTokenExpiryIdx: index(
+        "emailpassword_password_reset_token_expiry_index"
+      ).using("btree", table.tokenExpiry),
+      userIdIdx: index("emailpassword_pswd_reset_tokens_user_id_index").using(
+        "btree",
+        table.appId,
+        table.userId
+      ),
+      emailpasswordPswdResetTokensUserIdFkey: foreignKey({
+        columns: [table.appId, table.userId],
+        foreignColumns: [appIdToUserId.appId, appIdToUserId.userId],
+        name: "emailpassword_pswd_reset_tokens_user_id_fkey",
+      })
+        .onUpdate("cascade")
+        .onDelete("cascade"),
+      emailpasswordPswdResetTokensPkey: primaryKey({
+        columns: [table.appId, table.userId, table.token],
+        name: "emailpassword_pswd_reset_tokens_pkey",
+      }),
+      emailpasswordPswdResetTokensTokenKey: unique(
+        "emailpassword_pswd_reset_tokens_token_key"
+      ).on(table.token),
+    };
+  }
+);
+
+export const emailpasswordUsers = pgTable(
+  "emailpassword_users",
+  {
+    appId: varchar("app_id", { length: 64 }).default("public").notNull(),
+    userId: char("user_id", { length: 36 }).notNull(),
+    email: varchar("email", { length: 256 }).notNull(),
+    passwordHash: varchar("password_hash", { length: 256 }).notNull(),
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    timeJoined: bigint("time_joined", { mode: "number" }).notNull(),
+  },
+  (table) => {
+    return {
+      emailpasswordUsersUserIdFkey: foreignKey({
+        columns: [table.appId, table.userId],
+        foreignColumns: [appIdToUserId.appId, appIdToUserId.userId],
+        name: "emailpassword_users_user_id_fkey",
+      }).onDelete("cascade"),
+      emailpasswordUsersPkey: primaryKey({
+        columns: [table.appId, table.userId],
+        name: "emailpassword_users_pkey",
+      }),
+    };
+  }
+);
+
 export const thirdpartyUserToTenant = pgTable(
   "thirdparty_user_to_tenant",
   {
@@ -2068,136 +2198,6 @@ export const passwordlessUsers = pgTable(
         columns: [table.appId, table.userId],
         name: "passwordless_users_pkey",
       }),
-    };
-  }
-);
-
-export const keyValue = pgTable(
-  "key_value",
-  {
-    appId: varchar("app_id", { length: 64 }).default("public").notNull(),
-    tenantId: varchar("tenant_id", { length: 64 }).default("public").notNull(),
-    name: varchar("name", { length: 128 }).notNull(),
-    value: text("value"),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    createdAtTime: bigint("created_at_time", { mode: "number" }),
-  },
-  (table) => {
-    return {
-      tenantIdIdx: index("key_value_tenant_id_index").using(
-        "btree",
-        table.appId,
-        table.tenantId
-      ),
-      keyValueTenantIdFkey: foreignKey({
-        columns: [table.appId, table.tenantId],
-        foreignColumns: [tenants.appId, tenants.tenantId],
-        name: "key_value_tenant_id_fkey",
-      }).onDelete("cascade"),
-      keyValuePkey: primaryKey({
-        columns: [table.appId, table.tenantId, table.name],
-        name: "key_value_pkey",
-      }),
-    };
-  }
-);
-
-export const appIdToUserId = pgTable(
-  "app_id_to_user_id",
-  {
-    appId: varchar("app_id", { length: 64 })
-      .default("public")
-      .notNull()
-      .references(() => apps.appId, { onDelete: "cascade" }),
-    userId: char("user_id", { length: 36 }).notNull(),
-    recipeId: varchar("recipe_id", { length: 128 }).notNull(),
-    primaryOrRecipeUserId: char("primary_or_recipe_user_id", {
-      length: 36,
-    }).notNull(),
-    isLinkedOrIsAPrimaryUser: boolean("is_linked_or_is_a_primary_user")
-      .default(false)
-      .notNull(),
-  },
-  (table) => {
-    return {
-      appIdIdx: index().using("btree", table.appId),
-      primaryUserIdIdx: index("app_id_to_user_id_primary_user_id_index").using(
-        "btree",
-        table.primaryOrRecipeUserId,
-        table.appId
-      ),
-      appIdToUserIdPrimaryOrRecipeUserIdFkey: foreignKey({
-        columns: [table.appId, table.primaryOrRecipeUserId],
-        foreignColumns: [table.appId, table.userId],
-        name: "app_id_to_user_id_primary_or_recipe_user_id_fkey",
-      }).onDelete("cascade"),
-      appIdToUserIdPkey: primaryKey({
-        columns: [table.appId, table.userId],
-        name: "app_id_to_user_id_pkey",
-      }),
-    };
-  }
-);
-
-export const emailpasswordUsers = pgTable(
-  "emailpassword_users",
-  {
-    appId: varchar("app_id", { length: 64 }).default("public").notNull(),
-    userId: char("user_id", { length: 36 }).notNull(),
-    email: varchar("email", { length: 256 }).notNull(),
-    passwordHash: varchar("password_hash", { length: 256 }).notNull(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    timeJoined: bigint("time_joined", { mode: "number" }).notNull(),
-  },
-  (table) => {
-    return {
-      emailpasswordUsersUserIdFkey: foreignKey({
-        columns: [table.appId, table.userId],
-        foreignColumns: [appIdToUserId.appId, appIdToUserId.userId],
-        name: "emailpassword_users_user_id_fkey",
-      }).onDelete("cascade"),
-      emailpasswordUsersPkey: primaryKey({
-        columns: [table.appId, table.userId],
-        name: "emailpassword_users_pkey",
-      }),
-    };
-  }
-);
-
-export const emailpasswordPswdResetTokens = pgTable(
-  "emailpassword_pswd_reset_tokens",
-  {
-    appId: varchar("app_id", { length: 64 }).default("public").notNull(),
-    userId: char("user_id", { length: 36 }).notNull(),
-    token: varchar("token", { length: 128 }).notNull(),
-    email: varchar("email", { length: 256 }),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    tokenExpiry: bigint("token_expiry", { mode: "number" }).notNull(),
-  },
-  (table) => {
-    return {
-      emailpasswordPasswordResetTokenExpiryIdx: index(
-        "emailpassword_password_reset_token_expiry_index"
-      ).using("btree", table.tokenExpiry),
-      userIdIdx: index("emailpassword_pswd_reset_tokens_user_id_index").using(
-        "btree",
-        table.appId,
-        table.userId
-      ),
-      emailpasswordPswdResetTokensUserIdFkey: foreignKey({
-        columns: [table.appId, table.userId],
-        foreignColumns: [appIdToUserId.appId, appIdToUserId.userId],
-        name: "emailpassword_pswd_reset_tokens_user_id_fkey",
-      })
-        .onUpdate("cascade")
-        .onDelete("cascade"),
-      emailpasswordPswdResetTokensPkey: primaryKey({
-        columns: [table.appId, table.userId, table.token],
-        name: "emailpassword_pswd_reset_tokens_pkey",
-      }),
-      emailpasswordPswdResetTokensTokenKey: unique(
-        "emailpassword_pswd_reset_tokens_token_key"
-      ).on(table.token),
     };
   }
 );

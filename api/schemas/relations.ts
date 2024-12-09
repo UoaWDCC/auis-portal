@@ -1,11 +1,6 @@
 import { relations } from "drizzle-orm/relations";
 import {
   adminUsers,
-  tickets,
-  answers,
-  answersPeopleTicketLinks,
-  userTickets,
-  purchasableMemberships,
   adminPermissions,
   adminRoles,
   strapiApiTokens,
@@ -20,6 +15,7 @@ import {
   upPermissions,
   upRoles,
   upUsers,
+  answers,
   events,
   eventGalleries,
   execs,
@@ -27,8 +23,11 @@ import {
   partners,
   peoples,
   previousTeams,
+  purchasableMemberships,
   questions,
   somePhotos,
+  tickets,
+  userTickets,
   values,
   adminPermissionsRoleLinks,
   adminUsersRolesLinks,
@@ -40,6 +39,7 @@ import {
   strapiReleaseActionsReleaseLinks,
   upPermissionsRoleLinks,
   upUsersRoleLinks,
+  answersPeopleTicketLinks,
   answersQuestionIdLinks,
   questionsTicketIdLinks,
   ticketsEventIdLinks,
@@ -54,8 +54,8 @@ import {
   userLastActive,
   sessionAccessTokenSigningKeys,
   emailverificationVerifiedEmails,
-  rolePermissions,
   userMetadata,
+  rolePermissions,
   tenantConfigs,
   tenantFirstFactors,
   tenantRequiredSecondaryFactors,
@@ -65,12 +65,12 @@ import {
   appIdToUserId,
   useridMapping,
   oauthM2MTokens,
+  keyValue,
+  emailpasswordPswdResetTokens,
+  emailpasswordUsers,
   thirdpartyUserToTenant,
   jwtSigningKeys,
   passwordlessUsers,
-  keyValue,
-  emailpasswordUsers,
-  emailpasswordPswdResetTokens,
   passwordlessUserToTenant,
   dashboardUsers,
   dashboardUserSessions,
@@ -86,41 +86,7 @@ import {
   tenantThirdpartyProviderClients,
 } from "./schema";
 
-export const ticketsRelations = relations(tickets, ({ one, many }) => ({
-  adminUser_createdById: one(adminUsers, {
-    fields: [tickets.createdById],
-    references: [adminUsers.id],
-    relationName: "tickets_createdById_adminUsers_id",
-  }),
-  adminUser_updatedById: one(adminUsers, {
-    fields: [tickets.updatedById],
-    references: [adminUsers.id],
-    relationName: "tickets_updatedById_adminUsers_id",
-  }),
-  questionsTicketIdLinks: many(questionsTicketIdLinks),
-  ticketsEventIdLinks: many(ticketsEventIdLinks),
-  userTicketsTicketIdLinks: many(userTicketsTicketIdLinks),
-}));
-
 export const adminUsersRelations = relations(adminUsers, ({ one, many }) => ({
-  tickets_createdById: many(tickets, {
-    relationName: "tickets_createdById_adminUsers_id",
-  }),
-  tickets_updatedById: many(tickets, {
-    relationName: "tickets_updatedById_adminUsers_id",
-  }),
-  purchasableMemberships_createdById: many(purchasableMemberships, {
-    relationName: "purchasableMemberships_createdById_adminUsers_id",
-  }),
-  purchasableMemberships_updatedById: many(purchasableMemberships, {
-    relationName: "purchasableMemberships_updatedById_adminUsers_id",
-  }),
-  userTickets_createdById: many(userTickets, {
-    relationName: "userTickets_createdById_adminUsers_id",
-  }),
-  userTickets_updatedById: many(userTickets, {
-    relationName: "userTickets_updatedById_adminUsers_id",
-  }),
   adminUser_createdById: one(adminUsers, {
     fields: [adminUsers.createdById],
     references: [adminUsers.id],
@@ -275,6 +241,12 @@ export const adminUsersRelations = relations(adminUsers, ({ one, many }) => ({
   previousTeams_updatedById: many(previousTeams, {
     relationName: "previousTeams_updatedById_adminUsers_id",
   }),
+  purchasableMemberships_createdById: many(purchasableMemberships, {
+    relationName: "purchasableMemberships_createdById_adminUsers_id",
+  }),
+  purchasableMemberships_updatedById: many(purchasableMemberships, {
+    relationName: "purchasableMemberships_updatedById_adminUsers_id",
+  }),
   questions_createdById: many(questions, {
     relationName: "questions_createdById_adminUsers_id",
   }),
@@ -287,6 +259,18 @@ export const adminUsersRelations = relations(adminUsers, ({ one, many }) => ({
   somePhotos_updatedById: many(somePhotos, {
     relationName: "somePhotos_updatedById_adminUsers_id",
   }),
+  tickets_createdById: many(tickets, {
+    relationName: "tickets_createdById_adminUsers_id",
+  }),
+  tickets_updatedById: many(tickets, {
+    relationName: "tickets_updatedById_adminUsers_id",
+  }),
+  userTickets_createdById: many(userTickets, {
+    relationName: "userTickets_createdById_adminUsers_id",
+  }),
+  userTickets_updatedById: many(userTickets, {
+    relationName: "userTickets_updatedById_adminUsers_id",
+  }),
   values_createdById: many(values, {
     relationName: "values_createdById_adminUsers_id",
   }),
@@ -295,67 +279,6 @@ export const adminUsersRelations = relations(adminUsers, ({ one, many }) => ({
   }),
   adminUsersRolesLinks: many(adminUsersRolesLinks),
 }));
-
-export const answersPeopleTicketLinksRelations = relations(
-  answersPeopleTicketLinks,
-  ({ one }) => ({
-    answer: one(answers, {
-      fields: [answersPeopleTicketLinks.answerId],
-      references: [answers.id],
-    }),
-    userTicket: one(userTickets, {
-      fields: [answersPeopleTicketLinks.userTicketId],
-      references: [userTickets.id],
-    }),
-  })
-);
-
-export const answersRelations = relations(answers, ({ one, many }) => ({
-  answersPeopleTicketLinks: many(answersPeopleTicketLinks),
-  adminUser_createdById: one(adminUsers, {
-    fields: [answers.createdById],
-    references: [adminUsers.id],
-    relationName: "answers_createdById_adminUsers_id",
-  }),
-  adminUser_updatedById: one(adminUsers, {
-    fields: [answers.updatedById],
-    references: [adminUsers.id],
-    relationName: "answers_updatedById_adminUsers_id",
-  }),
-  answersQuestionIdLinks: many(answersQuestionIdLinks),
-}));
-
-export const userTicketsRelations = relations(userTickets, ({ one, many }) => ({
-  answersPeopleTicketLinks: many(answersPeopleTicketLinks),
-  adminUser_createdById: one(adminUsers, {
-    fields: [userTickets.createdById],
-    references: [adminUsers.id],
-    relationName: "userTickets_createdById_adminUsers_id",
-  }),
-  adminUser_updatedById: one(adminUsers, {
-    fields: [userTickets.updatedById],
-    references: [adminUsers.id],
-    relationName: "userTickets_updatedById_adminUsers_id",
-  }),
-  userTicketsPeopleIdLinks: many(userTicketsPeopleIdLinks),
-  userTicketsTicketIdLinks: many(userTicketsTicketIdLinks),
-}));
-
-export const purchasableMembershipsRelations = relations(
-  purchasableMemberships,
-  ({ one }) => ({
-    adminUser_createdById: one(adminUsers, {
-      fields: [purchasableMemberships.createdById],
-      references: [adminUsers.id],
-      relationName: "purchasableMemberships_createdById_adminUsers_id",
-    }),
-    adminUser_updatedById: one(adminUsers, {
-      fields: [purchasableMemberships.updatedById],
-      references: [adminUsers.id],
-      relationName: "purchasableMemberships_updatedById_adminUsers_id",
-    }),
-  })
-);
 
 export const adminPermissionsRelations = relations(
   adminPermissions,
@@ -596,6 +519,21 @@ export const upUsersRelations = relations(upUsers, ({ one, many }) => ({
   upUsersRoleLinks: many(upUsersRoleLinks),
 }));
 
+export const answersRelations = relations(answers, ({ one, many }) => ({
+  adminUser_createdById: one(adminUsers, {
+    fields: [answers.createdById],
+    references: [adminUsers.id],
+    relationName: "answers_createdById_adminUsers_id",
+  }),
+  adminUser_updatedById: one(adminUsers, {
+    fields: [answers.updatedById],
+    references: [adminUsers.id],
+    relationName: "answers_updatedById_adminUsers_id",
+  }),
+  answersPeopleTicketLinks: many(answersPeopleTicketLinks),
+  answersQuestionIdLinks: many(answersQuestionIdLinks),
+}));
+
 export const eventsRelations = relations(events, ({ one, many }) => ({
   adminUser_createdById: one(adminUsers, {
     fields: [events.createdById],
@@ -689,6 +627,22 @@ export const previousTeamsRelations = relations(previousTeams, ({ one }) => ({
   }),
 }));
 
+export const purchasableMembershipsRelations = relations(
+  purchasableMemberships,
+  ({ one }) => ({
+    adminUser_createdById: one(adminUsers, {
+      fields: [purchasableMemberships.createdById],
+      references: [adminUsers.id],
+      relationName: "purchasableMemberships_createdById_adminUsers_id",
+    }),
+    adminUser_updatedById: one(adminUsers, {
+      fields: [purchasableMemberships.updatedById],
+      references: [adminUsers.id],
+      relationName: "purchasableMemberships_updatedById_adminUsers_id",
+    }),
+  })
+);
+
 export const questionsRelations = relations(questions, ({ one, many }) => ({
   adminUser_createdById: one(adminUsers, {
     fields: [questions.createdById],
@@ -715,6 +669,38 @@ export const somePhotosRelations = relations(somePhotos, ({ one }) => ({
     references: [adminUsers.id],
     relationName: "somePhotos_updatedById_adminUsers_id",
   }),
+}));
+
+export const ticketsRelations = relations(tickets, ({ one, many }) => ({
+  adminUser_createdById: one(adminUsers, {
+    fields: [tickets.createdById],
+    references: [adminUsers.id],
+    relationName: "tickets_createdById_adminUsers_id",
+  }),
+  adminUser_updatedById: one(adminUsers, {
+    fields: [tickets.updatedById],
+    references: [adminUsers.id],
+    relationName: "tickets_updatedById_adminUsers_id",
+  }),
+  questionsTicketIdLinks: many(questionsTicketIdLinks),
+  ticketsEventIdLinks: many(ticketsEventIdLinks),
+  userTicketsTicketIdLinks: many(userTicketsTicketIdLinks),
+}));
+
+export const userTicketsRelations = relations(userTickets, ({ one, many }) => ({
+  adminUser_createdById: one(adminUsers, {
+    fields: [userTickets.createdById],
+    references: [adminUsers.id],
+    relationName: "userTickets_createdById_adminUsers_id",
+  }),
+  adminUser_updatedById: one(adminUsers, {
+    fields: [userTickets.updatedById],
+    references: [adminUsers.id],
+    relationName: "userTickets_updatedById_adminUsers_id",
+  }),
+  answersPeopleTicketLinks: many(answersPeopleTicketLinks),
+  userTicketsPeopleIdLinks: many(userTicketsPeopleIdLinks),
+  userTicketsTicketIdLinks: many(userTicketsTicketIdLinks),
 }));
 
 export const valuesRelations = relations(values, ({ one }) => ({
@@ -870,6 +856,20 @@ export const upUsersRoleLinksRelations = relations(
   })
 );
 
+export const answersPeopleTicketLinksRelations = relations(
+  answersPeopleTicketLinks,
+  ({ one }) => ({
+    answer: one(answers, {
+      fields: [answersPeopleTicketLinks.answerId],
+      references: [answers.id],
+    }),
+    userTicket: one(userTickets, {
+      fields: [answersPeopleTicketLinks.userTicketId],
+      references: [userTickets.id],
+    }),
+  })
+);
+
 export const answersQuestionIdLinksRelations = relations(
   answersQuestionIdLinks,
   ({ one }) => ({
@@ -976,8 +976,8 @@ export const appsRelations = relations(apps, ({ many }) => ({
   sessionAccessTokenSigningKeys: many(sessionAccessTokenSigningKeys),
   emailverificationVerifiedEmails: many(emailverificationVerifiedEmails),
   userMetadata: many(userMetadata),
-  jwtSigningKeys: many(jwtSigningKeys),
   appIdToUserIds: many(appIdToUserId),
+  jwtSigningKeys: many(jwtSigningKeys),
   dashboardUsers: many(dashboardUsers),
   oauthClients: many(oauthClients),
 }));
@@ -1032,6 +1032,13 @@ export const emailverificationVerifiedEmailsRelations = relations(
   })
 );
 
+export const userMetadataRelations = relations(userMetadata, ({ one }) => ({
+  app: one(apps, {
+    fields: [userMetadata.appId],
+    references: [apps.appId],
+  }),
+}));
+
 export const rolePermissionsRelations = relations(
   rolePermissions,
   ({ one }) => ({
@@ -1041,13 +1048,6 @@ export const rolePermissionsRelations = relations(
     }),
   })
 );
-
-export const userMetadataRelations = relations(userMetadata, ({ one }) => ({
-  app: one(apps, {
-    fields: [userMetadata.appId],
-    references: [apps.appId],
-  }),
-}));
 
 export const tenantFirstFactorsRelations = relations(
   tenantFirstFactors,
@@ -1121,7 +1121,6 @@ export const appIdToUserIdRelations = relations(
   appIdToUserId,
   ({ one, many }) => ({
     useridMappings: many(useridMapping),
-    passwordlessUsers: many(passwordlessUsers),
     appIdToUserId: one(appIdToUserId, {
       fields: [appIdToUserId.appId],
       references: [appIdToUserId.appId],
@@ -1134,8 +1133,9 @@ export const appIdToUserIdRelations = relations(
       fields: [appIdToUserId.appId],
       references: [apps.appId],
     }),
-    emailpasswordUsers: many(emailpasswordUsers),
     emailpasswordPswdResetTokens: many(emailpasswordPswdResetTokens),
+    emailpasswordUsers: many(emailpasswordUsers),
+    passwordlessUsers: many(passwordlessUsers),
     thirdpartyUsers: many(thirdpartyUsers),
     allAuthRecipeUsers_appId: many(allAuthRecipeUsers, {
       relationName: "allAuthRecipeUsers_appId_appIdToUserId_appId",
@@ -1149,6 +1149,33 @@ export const oauthM2MTokensRelations = relations(oauthM2MTokens, ({ one }) => ({
     references: [oauthClients.appId],
   }),
 }));
+
+export const keyValueRelations = relations(keyValue, ({ one }) => ({
+  tenant: one(tenants, {
+    fields: [keyValue.appId],
+    references: [tenants.appId],
+  }),
+}));
+
+export const emailpasswordPswdResetTokensRelations = relations(
+  emailpasswordPswdResetTokens,
+  ({ one }) => ({
+    appIdToUserId: one(appIdToUserId, {
+      fields: [emailpasswordPswdResetTokens.appId],
+      references: [appIdToUserId.appId],
+    }),
+  })
+);
+
+export const emailpasswordUsersRelations = relations(
+  emailpasswordUsers,
+  ({ one }) => ({
+    appIdToUserId: one(appIdToUserId, {
+      fields: [emailpasswordUsers.appId],
+      references: [appIdToUserId.appId],
+    }),
+  })
+);
 
 export const thirdpartyUserToTenantRelations = relations(
   thirdpartyUserToTenant,
@@ -1172,33 +1199,6 @@ export const passwordlessUsersRelations = relations(
   ({ one }) => ({
     appIdToUserId: one(appIdToUserId, {
       fields: [passwordlessUsers.appId],
-      references: [appIdToUserId.appId],
-    }),
-  })
-);
-
-export const keyValueRelations = relations(keyValue, ({ one }) => ({
-  tenant: one(tenants, {
-    fields: [keyValue.appId],
-    references: [tenants.appId],
-  }),
-}));
-
-export const emailpasswordUsersRelations = relations(
-  emailpasswordUsers,
-  ({ one }) => ({
-    appIdToUserId: one(appIdToUserId, {
-      fields: [emailpasswordUsers.appId],
-      references: [appIdToUserId.appId],
-    }),
-  })
-);
-
-export const emailpasswordPswdResetTokensRelations = relations(
-  emailpasswordPswdResetTokens,
-  ({ one }) => ({
-    appIdToUserId: one(appIdToUserId, {
-      fields: [emailpasswordPswdResetTokens.appId],
       references: [appIdToUserId.appId],
     }),
   })
