@@ -132,7 +132,6 @@ export class Mapper {
       return data.introductions.data.map((item: any) => {
         const attributes = item.attributes || {};
         return {
-          // id: item.id,
           description: attributes.Description || "",
           events: attributes.Events || "",
           members: attributes.Members || "",

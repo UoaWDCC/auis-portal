@@ -9,7 +9,6 @@ describe("mapToIntroduction", () => {
       introductions: {
         data: [
           {
-            id: 1,
             attributes: {
               Description: "Introduction description",
               Events: "Upcoming events",
@@ -23,7 +22,6 @@ describe("mapToIntroduction", () => {
 
     const expected: Introduction[] = [
       {
-        id: 1,
         description: "Introduction description",
         events: "Upcoming events",
         members: "Current members",
@@ -39,7 +37,6 @@ describe("mapToIntroduction", () => {
       introductions: {
         data: [
           {
-            id: 2,
             attributes: null,
           },
         ],
@@ -48,7 +45,6 @@ describe("mapToIntroduction", () => {
 
     const expected: Introduction[] = [
       {
-        id: 2,
         description: "",
         events: "",
         members: "",
@@ -64,7 +60,6 @@ describe("mapToIntroduction", () => {
       introductions: {
         data: [
           {
-            id: 3,
             attributes: {
               Description: null,
               Events: "Upcoming events",
@@ -78,7 +73,6 @@ describe("mapToIntroduction", () => {
 
     const expected: Introduction[] = [
       {
-        id: 3,
         description: "",
         events: "Upcoming events",
         members: "Current members",
@@ -94,7 +88,6 @@ describe("mapToIntroduction", () => {
       introductions: {
         data: [
           {
-            id: 4,
             attributes: {
               Description: "Introduction description",
               Events: null,
@@ -108,7 +101,6 @@ describe("mapToIntroduction", () => {
 
     const expected: Introduction[] = [
       {
-        id: 4,
         description: "Introduction description",
         events: "",
         members: "Current members",
@@ -124,7 +116,6 @@ describe("mapToIntroduction", () => {
       introductions: {
         data: [
           {
-            id: 5,
             attributes: {
               Description: "Introduction description",
               Events: "Upcoming events",
@@ -138,7 +129,6 @@ describe("mapToIntroduction", () => {
 
     const expected: Introduction[] = [
       {
-        id: 5,
         description: "Introduction description",
         events: "Upcoming events",
         members: "",
@@ -154,7 +144,6 @@ describe("mapToIntroduction", () => {
       introductions: {
         data: [
           {
-            id: 6,
             attributes: {
               Description: "Introduction description",
               Events: "Upcoming events",
@@ -168,7 +157,6 @@ describe("mapToIntroduction", () => {
 
     const expected: Introduction[] = [
       {
-        id: 6,
         description: "Introduction description",
         events: "Upcoming events",
         members: "Current members",
@@ -184,7 +172,6 @@ describe("mapToIntroduction", () => {
       introductions: {
         data: [
           {
-            id: 7,
             attributes: null,
           },
         ],
@@ -193,7 +180,6 @@ describe("mapToIntroduction", () => {
 
     const expected: Introduction[] = [
       {
-        id: 7,
         description: "",
         events: "",
         members: "",
