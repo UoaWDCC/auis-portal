@@ -3,14 +3,26 @@ import {
   GET_INTRODUCTION,
   GET_VALUES,
   GET_PARTNERS,
+  GET_PARTNER_IMAGES,
 } from "../../src/graphql/queries";
-import { describe, expect, it } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { describe, expect, it, vi } from "vitest";
+import { fireEvent, render, screen } from "@testing-library/react";
 import AboutUsScreen from "../../src/screens/AboutUsScreen";
 import React from "react";
 import { GraphQLError } from "graphql";
 import "@testing-library/jest-dom";
 import { MemoryRouter } from "react-router";
+
+const mockedUseNavigate = vi.fn();
+vi.mock("react-router-dom", async () => {
+  const mod = await vi.importActual<typeof import("react-router-dom")>(
+    "react-router-dom"
+  );
+  return {
+    ...mod,
+    useNavigate: () => mockedUseNavigate,
+  };
+});
 
 // Mock data for GET_INTRODUCTION query
 const introMock = {
@@ -18,22 +30,21 @@ const introMock = {
     query: GET_INTRODUCTION,
   },
   result: {
-    data: {
+    data : {
       introductions: {
         data: [
           {
-            id: 1,
             attributes: {
-              Description: "AUIS is a great club",
-              Events: "30",
-              Members: "500",
-              Followers: "1000",
+              Description: "Introduction description",
+              Events: "Upcoming events",
+              Members: "Current members",
+              Followers: "Followers count",
             },
           },
         ],
       },
-    },
-  },
+    }
+  }
 };
 
 const noIntroMock = {
@@ -55,18 +66,18 @@ const valuesMock = {
     query: GET_VALUES,
   },
   result: {
-    data: {
+    data : {
       values: {
         data: [
           {
             id: 1,
             attributes: {
-              Title: "Community",
-              Description: "We believe in a strong community",
+              Title: "Value One",
+              Description: "Description of Value One",
               Image: {
                 data: {
                   attributes: {
-                    url: "/uploads/community.jpg",
+                    url: "/uploads/value_one.jpg",
                   },
                 },
               },
@@ -94,23 +105,20 @@ const noValuesMock = {
 // Mock data for GET_PARTNERS query
 const partnersMock = {
   request: {
-    query: GET_PARTNERS,
+    query: GET_PARTNER_IMAGES,
   },
   result: {
     data: {
       partners: {
-        data: [
+        data:  [
           {
             id: 1,
             attributes: {
-              Type: "Gold",
-              Name: "The Kebab and Chicken House",
-              Location: "17 Mount Street",
-              Description: "20% off Everything",
+              Name: "Partner One",
               Image: {
                 data: {
                   attributes: {
-                    url: "/uploads/kebab.jpg",
+                    url: "/uploads/partner_one.jpg",
                   },
                 },
               },
@@ -181,10 +189,12 @@ describe("AboutUsScreen", () => {
       </MockedProvider>
     );
 
-    // expect(await screen.findByText("CMS Offline")).toBeInTheDocument();
+    expect(await screen.findByText("There is no introduction to display")).toBeInTheDocument();
+    expect(await screen.findByText("There are no values to display")).toBeInTheDocument();
+    expect(await screen.findByText("There are no partners to display")).toBeInTheDocument();
   });
 
-  it("renders introduction correctly", async () => {
+  it("renders queries correctly", async () => {
     render(
       <MockedProvider mocks={mocks} addTypename={false}>
         <MemoryRouter>
@@ -193,41 +203,13 @@ describe("AboutUsScreen", () => {
       </MockedProvider>
     );
 
-    expect(await screen.findByText("AUIS is a great club")).toBeInTheDocument();
-    expect(await screen.findByText("30+")).toBeInTheDocument();
-    expect(await screen.findByText("500+")).toBeInTheDocument();
-    expect(await screen.findByText("1000+")).toBeInTheDocument();
+    expect(await screen.findByText("Our Introduction")).toBeInTheDocument();
+    expect(await screen.findByText("Introduction description")).toBeInTheDocument();
+    expect(await screen.findByText("Value One")).toBeInTheDocument();
+    const partnerImage = await screen.findByAltText("Partner One");
+    expect(partnerImage).toHaveAttribute("src", "/uploads/partner_one.jpg");
   });
 
-  it("renders values correctly", async () => {
-    render(
-      <MockedProvider mocks={mocks} addTypename={false}>
-        <MemoryRouter>
-          <AboutUsScreen navbar={<></>} />
-        </MemoryRouter>
-      </MockedProvider>
-    );
-
-    expect(await screen.findByText("Community")).toBeInTheDocument();
-    expect(
-      await screen.findByText("We believe in a strong community")
-    ).toBeInTheDocument();
-    const valueImage = await screen.findByAltText("Value Image");
-    expect(valueImage).toHaveAttribute("src", "/uploads/community.jpg");
-  });
-
-  it("renders partners correctly", async () => {
-    render(
-      <MockedProvider mocks={mocks} addTypename={false}>
-        <MemoryRouter>
-          <AboutUsScreen navbar={<></>} />
-        </MemoryRouter>
-      </MockedProvider>
-    );
-
-    const partnerImage = await screen.findByAltText("Partner Image");
-    expect(partnerImage).toHaveAttribute("src", "/uploads/kebab.jpg");
-  });
 
   it("renders no data from cms", async () => {
     render(
@@ -238,14 +220,25 @@ describe("AboutUsScreen", () => {
       </MockedProvider>
     );
 
-    expect(
-      await screen.findByText("There is no introduction to display")
-    ).toBeInTheDocument();
-    expect(
-      await screen.findByText("There are no values to display")
-    ).toBeInTheDocument();
-    expect(
-      await screen.findByText("There are no partners to display")
-    ).toBeInTheDocument();
+    expect(await screen.findByText("There is no introduction to display")).toBeInTheDocument();
+    expect(await screen.findByText("There are no values to display")).toBeInTheDocument();
+    expect(await screen.findByText("There are no partners to display")).toBeInTheDocument();
   });
+
+  it("redirects user when join us clicked", async () => {
+    render(
+      <MockedProvider mocks={noDataMocks} addTypename={false}>
+        <MemoryRouter>
+          <AboutUsScreen navbar={<></>} />
+        </MemoryRouter>
+      </MockedProvider>
+    );
+
+  const button = (await screen.findByRole('button', {name: "Join Us Now!"}))
+  expect(button).toBeDefined();
+  await fireEvent.click(button)
+  
+  expect(mockedUseNavigate);
+  })
+
 });

@@ -14,4 +14,14 @@ export default defineConfig({
       reporter: ["text", "json", "html"],
     },
   },
+  resolve: {
+    alias: {
+      "@utils": "/src/utils",
+      "@components": "/src/components",
+      "@pages": "/src/pages",
+      "@contexts": "/src/contexts",
+      "@layouts": "/src/layouts",
+      "@screens": "/src/screens",
+    },
+  },
 });
