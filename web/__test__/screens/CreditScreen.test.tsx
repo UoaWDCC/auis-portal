@@ -1,6 +1,6 @@
 import { MockedProvider } from "@apollo/client/testing";
 import { describe, expect, it, vi } from "vitest";
-import {  render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import CreditsScreen from "../../src/screens/CreditsScreen";
 import React from "react";
 import "@testing-library/jest-dom";
@@ -21,5 +21,4 @@ describe("CreditScreen", () => {
     expect(await screen.findByText("Secondary Developers")).toBeInTheDocument();
     expect(await screen.findByText("Karmveer Singh")).toBeInTheDocument();
   });
-
 });

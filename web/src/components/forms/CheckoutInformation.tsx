@@ -76,9 +76,11 @@ export default function CheckoutInformation({
       if (response.status === 200) {
         // Form Submission Successful
         setSubmitLoading(false);
-        console.log(response.data.updateUserInfoOrNewUser.userTicketId)
+        console.log(response.data.updateUserInfoOrNewUser.userTicketId);
         // Move user to payment screen after the user ticket id is received
-        navigateToPaymentScreen(response.data.updateUserInfoOrNewUser.userTicketId);
+        navigateToPaymentScreen(
+          response.data.updateUserInfoOrNewUser.userTicketId
+        );
       } else {
         setSubmitLoading(false);
         setSubmitError(true);
