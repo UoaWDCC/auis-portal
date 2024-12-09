@@ -213,6 +213,7 @@ export function getEventById({ id }: { id: number }) {
           Location
           Event_Date_Start
           Event_Date_End
+          Is_Live
           Terms_And_Conditions
           Event_Capacity_Remaining
           Image {

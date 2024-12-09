@@ -146,6 +146,7 @@ export default function EventInformationScreen({
             ticketId={ticket.id}
             numTicketsLeft={ticket.numTicketsLeft}
             isTicketLive={
+              event.isLive &&
               ticket.isTicketLive &&
               new Date(ticket.startDateTicketSales) <= new Date() &&
               new Date(event.eventDateStart) > new Date() &&

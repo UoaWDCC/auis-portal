@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
-import { TicketAndQuestion, Value } from "../../src/types/types";
-import { Mapper } from "../../src/utils/Mapper";
-import { NoDataError } from "../../src/classes/NoDataError";
+import { TicketAndQuestion, Value } from "../../../src/types/types";
+import { Mapper } from "../../../src/utils/Mapper";
+import { NoDataError } from "../../../src/classes/NoDataError";
 
 describe("mapToTicketQuestion", () => {
   it("should map valid data correctly", () => {
@@ -92,7 +92,7 @@ describe("mapToTicketQuestion", () => {
 
   it("should throw NoDataError when values.data is empty", () => {
     const data = {
-      values: {
+      ticket: {
         data: [],
       },
     };

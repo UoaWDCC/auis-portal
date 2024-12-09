@@ -69,6 +69,7 @@ export interface EventAndTickets {
   termsAndConditions: string;
   eventCapacityRemaining: number;
   image: string;
+  isLive: boolean;
   tickets: Ticket[];
 }
 

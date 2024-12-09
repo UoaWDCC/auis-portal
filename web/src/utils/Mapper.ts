@@ -196,6 +196,7 @@ export class Mapper {
         eventDateEnd: attributes.Event_Date_End || "",
         termsAndConditions: attributes.Terms_And_Conditions || "",
         eventCapacityRemaining: attributes.Event_Capacity_Remaining || 0,
+        isLive: attributes.Is_Live || false,
         image: imageUrl,
         tickets: attributes.Ticket_ID.data.map((item: any) => {
           const attributesTicket = item.attributes || {};
@@ -205,7 +206,7 @@ export class Mapper {
             price: attributesTicket.Price || 0,
             isMemberOnly: attributesTicket.Is_Member_Only || false,
             isDouble: attributesTicket.Is_Double || false,
-            numTicketsLeft: attributesTicket.Number_Tickets_Left || "",
+            numTicketsLeft: attributesTicket.Number_Tickets_Left || 0,
             ticketDescription: attributesTicket.Ticket_Description || "",
             startDateTicketSales:
               attributesTicket.Start_Date_Ticket_Sales || "",

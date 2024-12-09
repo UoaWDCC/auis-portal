@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
-import { Value } from "../../src/types/types";
-import { Mapper } from "../../src/utils/Mapper";
-import { NoDataError } from "../../src/classes/NoDataError";
+import { Value } from "../../../src/types/types";
+import { Mapper } from "../../../src/utils/Mapper";
+import { NoDataError } from "../../../src/classes/NoDataError";
 
 describe("mapToValue", () => {
   it("should map valid data correctly", () => {

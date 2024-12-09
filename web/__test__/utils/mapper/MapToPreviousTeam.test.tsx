@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
-import { PreviousTeam } from "../../src/types/types";
-import { Mapper } from "../../src/utils/Mapper";
-import { NoDataError } from "../../src/classes/NoDataError";
+import { PreviousTeam } from "../../../src/types/types";
+import { Mapper } from "../../../src/utils/Mapper";
+import { NoDataError } from "../../../src/classes/NoDataError";
 
 describe("mapToPreviousTeams", () => {
   it("should map valid data correctly", () => {

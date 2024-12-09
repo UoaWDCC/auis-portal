@@ -194,4 +194,7 @@ export async function createRoles() {
   if (adminRole.createdNewRole === false) {
     // The role already exists
   }
+  if (execRole.createdNewRole === false) {
+    // The role already exists
+  }
 }
