@@ -50,6 +50,30 @@ export async function getUserMembershipExpiryDate(
   return returnDate;
 }
 
+export async function isMembershipActive(userEmail: string): Promise<boolean> {
+  let isActive = false;
+
+  if (userEmail === "" || userEmail === undefined || userEmail === null) {
+    throw new Error(
+      "isMembershipActive: received invalid type for userEmail: " + userEmail
+    );
+  }
+
+  let isMember = await db
+    .select({ isMember: peoples.isMember })
+    .from(peoples)
+    .where(eq(peoples.email, userEmail))
+    .limit(1);
+
+  if (isMember.length === 1) {
+    if (isMember[0].isMember !== undefined || isMember[0].isMember !== null) {
+      isActive = isMember[0].isMember!;
+    }
+  }
+
+  return isActive;
+}
+
 export async function insertUserTicket(data: {
   ticketId: number;
   name: string;
