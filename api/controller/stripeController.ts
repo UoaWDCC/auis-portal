@@ -17,18 +17,16 @@ const endpointSecret: string = process.env.STRIPE_WEBHOOK_ENDPOINT as string;
 export const createCheckout = asyncHandler(
   async (req: Request, res: Response) => {
     const { priceId } = req.body;
-
     const session = req.session!;
-
-    // console.log(session.getUserId());
-
     let email;
+
     if (session) {
       const user = await getUser(session.getUserId());
       email = user?.emails[0];
+    } else {
+      // set to undefined so user manually fills out their email
+      email = undefined;
     }
-
-    //prefill user email if they are logged in
 
     // if priceId is undefined, send a 404 back.
     if (priceId == undefined || priceId == "") {
@@ -54,85 +52,42 @@ export const createCheckout = asyncHandler(
         reserveTicket(priceId);
       }
     } else if (isEventTicket === "n") {
-      if (!email) {
-        return res.send({
-          error:
-            "There are no tickets available for this event. Please come back later to see if more tickets become available.",
-        });
-      }
+      // do nothing
     }
 
     // epoch time in seconds, 30mins timeout
     let session_expiry = Math.floor(new Date().getTime() / 1000 + 30 * 60);
 
-    // Set customer email if they are logged in or don't if they aren't
-
     try {
-      if (email) {
-        const session = await stripe.checkout.sessions.create({
-          //do not change anything below
-          ui_mode: "embedded",
-          // Figure out some way to see if user is logged in, and if so then auto enter email pls
-          customer_email: `${email}`,
-          // invoice_creation: {
-          //   enabled: true,
-          // },
-          expires_at: session_expiry,
-          line_items: [
-            {
-              // Provide the exact Price ID (pr_1234) of the product on sale
-              price: priceId,
-              quantity: 1,
-            },
-          ],
-          mode: "payment",
-          payment_method_types: ["card"],
-          currency: "NZD",
-          return_url: `${process.env.DOMAIN_FRONTEND}/return?session_id={CHECKOUT_SESSION_ID}`,
-          allow_promotion_codes: true,
-
-          //changeable below:
-          // use metadata property
-          metadata: {
-            priceId: `${priceId}`,
-            isEventTicket: `${isEventTicket}`,
+      const session = await stripe.checkout.sessions.create({
+        //do not change anything below
+        ui_mode: "embedded",
+        customer_email: email,
+        // invoice_creation: {
+        //   enabled: true,
+        // },
+        expires_at: session_expiry,
+        line_items: [
+          {
+            // Provide the exact Price ID (pr_1234) of the product on sale
+            price: priceId,
+            quantity: 1,
           },
-        });
+        ],
+        mode: "payment",
+        payment_method_types: ["card"],
+        currency: "NZD",
+        return_url: `${process.env.DOMAIN_FRONTEND}/return?session_id={CHECKOUT_SESSION_ID}`,
+        allow_promotion_codes: true,
 
-        res.send({ clientSecret: session.client_secret });
-      } else {
-        const session = await stripe.checkout.sessions.create({
-          //do not change anything below
-          ui_mode: "embedded",
-          // Figure out some way to see if user is logged in, and if so then auto enter email pls
-          // customer_email: `${email}`,
-          // invoice_creation: {
-          //   enabled: true,
-          // },
-          expires_at: session_expiry,
-          line_items: [
-            {
-              // Provide the exact Price ID (pr_1234) of the product on sale
-              price: priceId,
-              quantity: 1,
-            },
-          ],
-          mode: "payment",
-          payment_method_types: ["card"],
-          currency: "NZD",
-          return_url: `${process.env.DOMAIN_FRONTEND}/return?session_id={CHECKOUT_SESSION_ID}`,
-          allow_promotion_codes: true,
+        //changeable below:
+        metadata: {
+          priceId: `${priceId}`,
+          isEventTicket: `${isEventTicket}`,
+        },
+      });
 
-          //changeable below:
-          // use metadata property
-          metadata: {
-            priceId: `${priceId}`,
-            isEventTicket: `${isEventTicket}`,
-          },
-        });
-
-        res.send({ clientSecret: session.client_secret });
-      }
+      res.send({ clientSecret: session.client_secret });
     } catch (error) {
       res.send({ error }).status(404);
     }

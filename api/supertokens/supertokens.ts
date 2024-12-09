@@ -179,10 +179,17 @@ export async function createRoles() {
     "read",
     "write",
   ]);
+  const execRole = await UserRoles.createNewRoleOrAddPermissions("exec", [
+    "read",
+    "write",
+  ]);
   const userRole = await UserRoles.createNewRoleOrAddPermissions("user", []);
   const execRole = await UserRoles.createNewRoleOrAddPermissions("exec", []);
 
   if (userRole.createdNewRole === false) {
+    // The role already exists
+  }
+  if (execRole.createdNewRole === false) {
     // The role already exists
   }
   if (adminRole.createdNewRole === false) {
