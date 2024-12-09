@@ -52,7 +52,8 @@ describe("Validate Text", () => {
 
   it("should return false with answers not valid", () => {
     const name = "gury";
-    const answer = "answeransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweranswer";
+    const answer =
+      "answeransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweranswer";
     const email = "test@email.com";
     const phoneNumber = "123456789123";
     const output = FormValidate.validateAll(name, email, phoneNumber, [
