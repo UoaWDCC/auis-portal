@@ -92,7 +92,7 @@ describe("mapToTicketQuestion", () => {
 
   it("should throw NoDataError when values.data is empty", () => {
     const data = {
-        ticket: {
+      ticket: {
         data: [],
       },
     };

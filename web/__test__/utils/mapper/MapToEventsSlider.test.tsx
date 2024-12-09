@@ -7,33 +7,37 @@ describe("mapToEventsSlider", () => {
   it("should map valid data correctly", () => {
     const data = {
       events: {
-        data: [{
-          id: 1,
-          attributes: {
-            Title: "Event 1",
-            Location: "Location 1",
-            Event_Date_Start: "2024-01-01",
-            isLive: false,
-            Image: {
-              data: {
-                attributes: {
-                  url: "/uploads/event1.jpg",
+        data: [
+          {
+            id: 1,
+            attributes: {
+              Title: "Event 1",
+              Location: "Location 1",
+              Event_Date_Start: "2024-01-01",
+              isLive: false,
+              Image: {
+                data: {
+                  attributes: {
+                    url: "/uploads/event1.jpg",
+                  },
                 },
               },
             },
           },
-        },]
+        ],
       },
     };
 
-    const expected: EventsSlider[] = [{
-      id: 1,
-      title: "Event 1",
-      location: "Location 1",
-      eventDateStart: "2024-01-01",
-      image: "/uploads/event1.jpg",
-      isLive: false
-    }];
+    const expected: EventsSlider[] = [
+      {
+        id: 1,
+        title: "Event 1",
+        location: "Location 1",
+        eventDateStart: "2024-01-01",
+        image: "/uploads/event1.jpg",
+        isLive: false,
+      },
+    ];
 
     expect(Mapper.mapToEventsSlider(data)).toEqual(expected);
   });
@@ -41,33 +45,37 @@ describe("mapToEventsSlider", () => {
   it("should handle missing fields gracefully", () => {
     const data = {
       events: {
-        data: [{
-          id: 1,
-          attributes: {
-            Title: "",
-            Location: "",
-            Event_Date_Start: "",
-            isLive: false,
-            Image: {
-              data: {
-                attributes: {
-                  url: "",
+        data: [
+          {
+            id: 1,
+            attributes: {
+              Title: "",
+              Location: "",
+              Event_Date_Start: "",
+              isLive: false,
+              Image: {
+                data: {
+                  attributes: {
+                    url: "",
+                  },
                 },
               },
             },
           },
-        },]
+        ],
       },
     };
 
-    const expected: EventsSlider[] = [{
-      id: 1,
-      title: "",
-      location: "",
-      eventDateStart: "",
-      image: "",
-      isLive: false
-    }];
+    const expected: EventsSlider[] = [
+      {
+        id: 1,
+        title: "",
+        location: "",
+        eventDateStart: "",
+        image: "",
+        isLive: false,
+      },
+    ];
 
     expect(Mapper.mapToEventsSlider(data)).toEqual(expected);
   });

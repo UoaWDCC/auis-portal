@@ -196,7 +196,7 @@ export class Mapper {
         eventDateEnd: attributes.Event_Date_End || "",
         termsAndConditions: attributes.Terms_And_Conditions || "",
         eventCapacityRemaining: attributes.Event_Capacity_Remaining || 0,
-        isLive: attributes.Is_Live || false, 
+        isLive: attributes.Is_Live || false,
         image: imageUrl,
         tickets: attributes.Ticket_ID.data.map((item: any) => {
           const attributesTicket = item.attributes || {};
