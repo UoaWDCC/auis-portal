@@ -2,8 +2,9 @@ import { relations } from "drizzle-orm/relations";
 import {
   adminUsers,
   tickets,
-  oauthClients,
-  oauthSessions,
+  answers,
+  answersPeopleTicketLinks,
+  userTickets,
   purchasableMemberships,
   adminPermissions,
   adminRoles,
@@ -19,7 +20,6 @@ import {
   upPermissions,
   upRoles,
   upUsers,
-  answers,
   events,
   eventGalleries,
   execs,
@@ -28,9 +28,7 @@ import {
   peoples,
   previousTeams,
   questions,
-  socials,
   somePhotos,
-  userTickets,
   values,
   adminPermissionsRoleLinks,
   adminUsersRolesLinks,
@@ -42,21 +40,22 @@ import {
   strapiReleaseActionsReleaseLinks,
   upPermissionsRoleLinks,
   upUsersRoleLinks,
-  answersUserTicketIdLinks,
   answersQuestionIdLinks,
   questionsTicketIdLinks,
   ticketsEventIdLinks,
   userTicketsPeopleIdLinks,
   userTicketsTicketIdLinks,
+  oauthClients,
+  oauthSessions,
   apps,
   roles,
   totpUsers,
   tenants,
-  sessionAccessTokenSigningKeys,
   userLastActive,
+  sessionAccessTokenSigningKeys,
   emailverificationVerifiedEmails,
-  userMetadata,
   rolePermissions,
+  userMetadata,
   tenantConfigs,
   tenantFirstFactors,
   tenantRequiredSecondaryFactors,
@@ -66,12 +65,12 @@ import {
   appIdToUserId,
   useridMapping,
   oauthM2MTokens,
-  keyValue,
-  emailpasswordUsers,
-  emailpasswordPswdResetTokens,
   thirdpartyUserToTenant,
   jwtSigningKeys,
   passwordlessUsers,
+  keyValue,
+  emailpasswordUsers,
+  emailpasswordPswdResetTokens,
   passwordlessUserToTenant,
   dashboardUsers,
   dashboardUserSessions,
@@ -115,6 +114,12 @@ export const adminUsersRelations = relations(adminUsers, ({ one, many }) => ({
   }),
   purchasableMemberships_updatedById: many(purchasableMemberships, {
     relationName: "purchasableMemberships_updatedById_adminUsers_id",
+  }),
+  userTickets_createdById: many(userTickets, {
+    relationName: "userTickets_createdById_adminUsers_id",
+  }),
+  userTickets_updatedById: many(userTickets, {
+    relationName: "userTickets_updatedById_adminUsers_id",
   }),
   adminUser_createdById: one(adminUsers, {
     fields: [adminUsers.createdById],
@@ -276,23 +281,11 @@ export const adminUsersRelations = relations(adminUsers, ({ one, many }) => ({
   questions_updatedById: many(questions, {
     relationName: "questions_updatedById_adminUsers_id",
   }),
-  socials_createdById: many(socials, {
-    relationName: "socials_createdById_adminUsers_id",
-  }),
-  socials_updatedById: many(socials, {
-    relationName: "socials_updatedById_adminUsers_id",
-  }),
   somePhotos_createdById: many(somePhotos, {
     relationName: "somePhotos_createdById_adminUsers_id",
   }),
   somePhotos_updatedById: many(somePhotos, {
     relationName: "somePhotos_updatedById_adminUsers_id",
-  }),
-  userTickets_createdById: many(userTickets, {
-    relationName: "userTickets_createdById_adminUsers_id",
-  }),
-  userTickets_updatedById: many(userTickets, {
-    relationName: "userTickets_updatedById_adminUsers_id",
   }),
   values_createdById: many(values, {
     relationName: "values_createdById_adminUsers_id",
@@ -303,25 +296,50 @@ export const adminUsersRelations = relations(adminUsers, ({ one, many }) => ({
   adminUsersRolesLinks: many(adminUsersRolesLinks),
 }));
 
-export const oauthSessionsRelations = relations(oauthSessions, ({ one }) => ({
-  oauthClient: one(oauthClients, {
-    fields: [oauthSessions.appId],
-    references: [oauthClients.appId],
-  }),
-}));
-
-export const oauthClientsRelations = relations(
-  oauthClients,
-  ({ one, many }) => ({
-    oauthSessions: many(oauthSessions),
-    oauthM2MTokens: many(oauthM2MTokens),
-    app: one(apps, {
-      fields: [oauthClients.appId],
-      references: [apps.appId],
+export const answersPeopleTicketLinksRelations = relations(
+  answersPeopleTicketLinks,
+  ({ one }) => ({
+    answer: one(answers, {
+      fields: [answersPeopleTicketLinks.answerId],
+      references: [answers.id],
     }),
-    oauthLogoutChallenges: many(oauthLogoutChallenges),
+    userTicket: one(userTickets, {
+      fields: [answersPeopleTicketLinks.userTicketId],
+      references: [userTickets.id],
+    }),
   })
 );
+
+export const answersRelations = relations(answers, ({ one, many }) => ({
+  answersPeopleTicketLinks: many(answersPeopleTicketLinks),
+  adminUser_createdById: one(adminUsers, {
+    fields: [answers.createdById],
+    references: [adminUsers.id],
+    relationName: "answers_createdById_adminUsers_id",
+  }),
+  adminUser_updatedById: one(adminUsers, {
+    fields: [answers.updatedById],
+    references: [adminUsers.id],
+    relationName: "answers_updatedById_adminUsers_id",
+  }),
+  answersQuestionIdLinks: many(answersQuestionIdLinks),
+}));
+
+export const userTicketsRelations = relations(userTickets, ({ one, many }) => ({
+  answersPeopleTicketLinks: many(answersPeopleTicketLinks),
+  adminUser_createdById: one(adminUsers, {
+    fields: [userTickets.createdById],
+    references: [adminUsers.id],
+    relationName: "userTickets_createdById_adminUsers_id",
+  }),
+  adminUser_updatedById: one(adminUsers, {
+    fields: [userTickets.updatedById],
+    references: [adminUsers.id],
+    relationName: "userTickets_updatedById_adminUsers_id",
+  }),
+  userTicketsPeopleIdLinks: many(userTicketsPeopleIdLinks),
+  userTicketsTicketIdLinks: many(userTicketsTicketIdLinks),
+}));
 
 export const purchasableMembershipsRelations = relations(
   purchasableMemberships,
@@ -578,21 +596,6 @@ export const upUsersRelations = relations(upUsers, ({ one, many }) => ({
   upUsersRoleLinks: many(upUsersRoleLinks),
 }));
 
-export const answersRelations = relations(answers, ({ one, many }) => ({
-  adminUser_createdById: one(adminUsers, {
-    fields: [answers.createdById],
-    references: [adminUsers.id],
-    relationName: "answers_createdById_adminUsers_id",
-  }),
-  adminUser_updatedById: one(adminUsers, {
-    fields: [answers.updatedById],
-    references: [adminUsers.id],
-    relationName: "answers_updatedById_adminUsers_id",
-  }),
-  answersPeopleIdLinks: many(answersUserTicketIdLinks),
-  answersQuestionIdLinks: many(answersQuestionIdLinks),
-}));
-
 export const eventsRelations = relations(events, ({ one, many }) => ({
   adminUser_createdById: one(adminUsers, {
     fields: [events.createdById],
@@ -658,7 +661,7 @@ export const partnersRelations = relations(partners, ({ one }) => ({
     relationName: "partners_updatedById_adminUsers_id",
   }),
 }));
-// update this
+
 export const peoplesRelations = relations(peoples, ({ one, many }) => ({
   adminUser_createdById: one(adminUsers, {
     fields: [peoples.createdById],
@@ -670,7 +673,6 @@ export const peoplesRelations = relations(peoples, ({ one, many }) => ({
     references: [adminUsers.id],
     relationName: "peoples_updatedById_adminUsers_id",
   }),
-  answersPeopleIdLinks: many(answersUserTicketIdLinks),
   userTicketsPeopleIdLinks: many(userTicketsPeopleIdLinks),
 }));
 
@@ -702,19 +704,6 @@ export const questionsRelations = relations(questions, ({ one, many }) => ({
   questionsTicketIdLinks: many(questionsTicketIdLinks),
 }));
 
-export const socialsRelations = relations(socials, ({ one }) => ({
-  adminUser_createdById: one(adminUsers, {
-    fields: [socials.createdById],
-    references: [adminUsers.id],
-    relationName: "socials_createdById_adminUsers_id",
-  }),
-  adminUser_updatedById: one(adminUsers, {
-    fields: [socials.updatedById],
-    references: [adminUsers.id],
-    relationName: "socials_updatedById_adminUsers_id",
-  }),
-}));
-
 export const somePhotosRelations = relations(somePhotos, ({ one }) => ({
   adminUser_createdById: one(adminUsers, {
     fields: [somePhotos.createdById],
@@ -726,21 +715,6 @@ export const somePhotosRelations = relations(somePhotos, ({ one }) => ({
     references: [adminUsers.id],
     relationName: "somePhotos_updatedById_adminUsers_id",
   }),
-}));
-
-export const userTicketsRelations = relations(userTickets, ({ one, many }) => ({
-  adminUser_createdById: one(adminUsers, {
-    fields: [userTickets.createdById],
-    references: [adminUsers.id],
-    relationName: "userTickets_createdById_adminUsers_id",
-  }),
-  adminUser_updatedById: one(adminUsers, {
-    fields: [userTickets.updatedById],
-    references: [adminUsers.id],
-    relationName: "userTickets_updatedById_adminUsers_id",
-  }),
-  userTicketsPeopleIdLinks: many(userTicketsPeopleIdLinks),
-  userTicketsTicketIdLinks: many(userTicketsTicketIdLinks),
 }));
 
 export const valuesRelations = relations(values, ({ one }) => ({
@@ -895,20 +869,6 @@ export const upUsersRoleLinksRelations = relations(
     }),
   })
 );
-// update realtion
-export const answersPeopleIdLinksRelations = relations(
-  answersUserTicketIdLinks,
-  ({ one }) => ({
-    answer: one(answers, {
-      fields: [answersUserTicketIdLinks.answerId],
-      references: [answers.id],
-    }),
-    people: one(userTickets, {
-      fields: [answersUserTicketIdLinks.userTicketId],
-      references: [userTickets.id],
-    }),
-  })
-);
 
 export const answersQuestionIdLinksRelations = relations(
   answersQuestionIdLinks,
@@ -980,6 +940,26 @@ export const userTicketsTicketIdLinksRelations = relations(
   })
 );
 
+export const oauthSessionsRelations = relations(oauthSessions, ({ one }) => ({
+  oauthClient: one(oauthClients, {
+    fields: [oauthSessions.appId],
+    references: [oauthClients.appId],
+  }),
+}));
+
+export const oauthClientsRelations = relations(
+  oauthClients,
+  ({ one, many }) => ({
+    oauthSessions: many(oauthSessions),
+    oauthM2MTokens: many(oauthM2MTokens),
+    app: one(apps, {
+      fields: [oauthClients.appId],
+      references: [apps.appId],
+    }),
+    oauthLogoutChallenges: many(oauthLogoutChallenges),
+  })
+);
+
 export const rolesRelations = relations(roles, ({ one, many }) => ({
   app: one(apps, {
     fields: [roles.appId],
@@ -992,12 +972,12 @@ export const appsRelations = relations(apps, ({ many }) => ({
   roles: many(roles),
   totpUsers: many(totpUsers),
   tenants: many(tenants),
-  sessionAccessTokenSigningKeys: many(sessionAccessTokenSigningKeys),
   userLastActives: many(userLastActive),
+  sessionAccessTokenSigningKeys: many(sessionAccessTokenSigningKeys),
   emailverificationVerifiedEmails: many(emailverificationVerifiedEmails),
   userMetadata: many(userMetadata),
-  appIdToUserIds: many(appIdToUserId),
   jwtSigningKeys: many(jwtSigningKeys),
+  appIdToUserIds: many(appIdToUserId),
   dashboardUsers: many(dashboardUsers),
   oauthClients: many(oauthClients),
 }));
@@ -1025,6 +1005,13 @@ export const tenantsRelations = relations(tenants, ({ one, many }) => ({
   sessionInfos: many(sessionInfo),
 }));
 
+export const userLastActiveRelations = relations(userLastActive, ({ one }) => ({
+  app: one(apps, {
+    fields: [userLastActive.appId],
+    references: [apps.appId],
+  }),
+}));
+
 export const sessionAccessTokenSigningKeysRelations = relations(
   sessionAccessTokenSigningKeys,
   ({ one }) => ({
@@ -1034,13 +1021,6 @@ export const sessionAccessTokenSigningKeysRelations = relations(
     }),
   })
 );
-
-export const userLastActiveRelations = relations(userLastActive, ({ one }) => ({
-  app: one(apps, {
-    fields: [userLastActive.appId],
-    references: [apps.appId],
-  }),
-}));
 
 export const emailverificationVerifiedEmailsRelations = relations(
   emailverificationVerifiedEmails,
@@ -1052,13 +1032,6 @@ export const emailverificationVerifiedEmailsRelations = relations(
   })
 );
 
-export const userMetadataRelations = relations(userMetadata, ({ one }) => ({
-  app: one(apps, {
-    fields: [userMetadata.appId],
-    references: [apps.appId],
-  }),
-}));
-
 export const rolePermissionsRelations = relations(
   rolePermissions,
   ({ one }) => ({
@@ -1068,6 +1041,13 @@ export const rolePermissionsRelations = relations(
     }),
   })
 );
+
+export const userMetadataRelations = relations(userMetadata, ({ one }) => ({
+  app: one(apps, {
+    fields: [userMetadata.appId],
+    references: [apps.appId],
+  }),
+}));
 
 export const tenantFirstFactorsRelations = relations(
   tenantFirstFactors,
@@ -1141,6 +1121,7 @@ export const appIdToUserIdRelations = relations(
   appIdToUserId,
   ({ one, many }) => ({
     useridMappings: many(useridMapping),
+    passwordlessUsers: many(passwordlessUsers),
     appIdToUserId: one(appIdToUserId, {
       fields: [appIdToUserId.appId],
       references: [appIdToUserId.appId],
@@ -1155,7 +1136,6 @@ export const appIdToUserIdRelations = relations(
     }),
     emailpasswordUsers: many(emailpasswordUsers),
     emailpasswordPswdResetTokens: many(emailpasswordPswdResetTokens),
-    passwordlessUsers: many(passwordlessUsers),
     thirdpartyUsers: many(thirdpartyUsers),
     allAuthRecipeUsers_appId: many(allAuthRecipeUsers, {
       relationName: "allAuthRecipeUsers_appId_appIdToUserId_appId",
@@ -1169,33 +1149,6 @@ export const oauthM2MTokensRelations = relations(oauthM2MTokens, ({ one }) => ({
     references: [oauthClients.appId],
   }),
 }));
-
-export const keyValueRelations = relations(keyValue, ({ one }) => ({
-  tenant: one(tenants, {
-    fields: [keyValue.appId],
-    references: [tenants.appId],
-  }),
-}));
-
-export const emailpasswordUsersRelations = relations(
-  emailpasswordUsers,
-  ({ one }) => ({
-    appIdToUserId: one(appIdToUserId, {
-      fields: [emailpasswordUsers.appId],
-      references: [appIdToUserId.appId],
-    }),
-  })
-);
-
-export const emailpasswordPswdResetTokensRelations = relations(
-  emailpasswordPswdResetTokens,
-  ({ one }) => ({
-    appIdToUserId: one(appIdToUserId, {
-      fields: [emailpasswordPswdResetTokens.appId],
-      references: [appIdToUserId.appId],
-    }),
-  })
-);
 
 export const thirdpartyUserToTenantRelations = relations(
   thirdpartyUserToTenant,
@@ -1219,6 +1172,33 @@ export const passwordlessUsersRelations = relations(
   ({ one }) => ({
     appIdToUserId: one(appIdToUserId, {
       fields: [passwordlessUsers.appId],
+      references: [appIdToUserId.appId],
+    }),
+  })
+);
+
+export const keyValueRelations = relations(keyValue, ({ one }) => ({
+  tenant: one(tenants, {
+    fields: [keyValue.appId],
+    references: [tenants.appId],
+  }),
+}));
+
+export const emailpasswordUsersRelations = relations(
+  emailpasswordUsers,
+  ({ one }) => ({
+    appIdToUserId: one(appIdToUserId, {
+      fields: [emailpasswordUsers.appId],
+      references: [appIdToUserId.appId],
+    }),
+  })
+);
+
+export const emailpasswordPswdResetTokensRelations = relations(
+  emailpasswordPswdResetTokens,
+  ({ one }) => ({
+    appIdToUserId: one(appIdToUserId, {
+      fields: [emailpasswordPswdResetTokens.appId],
       references: [appIdToUserId.appId],
     }),
   })
