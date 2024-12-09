@@ -64,9 +64,7 @@ describe("mapToTicketQuestion", () => {
 
     const expected: TicketAndQuestion = {
       ticketId: 0,
-      questions: [
-        { id: 0, question: "" },
-      ],
+      questions: [{ id: 0, question: "" }],
     };
     expect(Mapper.mapToTicketQuestion(data)).toEqual(expected);
   });

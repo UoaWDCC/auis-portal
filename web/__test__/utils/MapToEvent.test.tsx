@@ -50,34 +50,33 @@ describe("mapToEvents", () => {
       },
     };
 
-    const expected: EventAndTickets =
-      {
-        title: "Event 1",
-        description: "Description 1",
-        subtitle: "Subtitle 1",
-        location: "Location 1",
-        eventDateStart: "2024-01-01",
-        eventDateEnd: "2024-01-02",
-        termsAndConditions: "Terms and Conditions 1",
-        eventCapacityRemaining: 50,
-        image: "/uploads/event1.jpg",
-        tickets: [
-          {
-            id: 1,
-            ticketDescription : "description",
-            name: "name",
-            price: 45,
-            isMemberOnly: true,
-            isDouble: false,
-            numTicketsLeft: 5,
-            startDateTicketSales: "1/2/3",
-            isTicketLive: true,
-            ticketLinkBypass: false,
-            bypassTicketLink: "link",
-            stripeLink: "stripe",
-          },
-        ],
-      };
+    const expected: EventAndTickets = {
+      title: "Event 1",
+      description: "Description 1",
+      subtitle: "Subtitle 1",
+      location: "Location 1",
+      eventDateStart: "2024-01-01",
+      eventDateEnd: "2024-01-02",
+      termsAndConditions: "Terms and Conditions 1",
+      eventCapacityRemaining: 50,
+      image: "/uploads/event1.jpg",
+      tickets: [
+        {
+          id: 1,
+          ticketDescription: "description",
+          name: "name",
+          price: 45,
+          isMemberOnly: true,
+          isDouble: false,
+          numTicketsLeft: 5,
+          startDateTicketSales: "1/2/3",
+          isTicketLive: true,
+          ticketLinkBypass: false,
+          bypassTicketLink: "link",
+          stripeLink: "stripe",
+        },
+      ],
+    };
 
     expect(Mapper.mapToEvent(data)).toEqual(expected);
   });
@@ -128,34 +127,33 @@ describe("mapToEvents", () => {
       },
     };
 
-    const expected: EventAndTickets =
-      {
-        title: "",
-        description: "Description 1",
-        subtitle: "Subtitle 1",
-        location: "Location 1",
-        eventDateStart: "2024-01-01",
-        eventDateEnd: "2024-01-02",
-        termsAndConditions: "Terms and Conditions 1",
-        eventCapacityRemaining: 50,
-        image: "/uploads/event1.jpg",
-        tickets: [
-          {
-            id: 1,
-            ticketDescription : "description",
-            name: "name",
-            price: 45,
-            isMemberOnly: true,
-            isDouble: false,
-            numTicketsLeft: 5,
-            startDateTicketSales: "1/2/3",
-            isTicketLive: true,
-            ticketLinkBypass: false,
-            bypassTicketLink: "link",
-            stripeLink: "stripe",
-          },
-        ],
-      };
+    const expected: EventAndTickets = {
+      title: "",
+      description: "Description 1",
+      subtitle: "Subtitle 1",
+      location: "Location 1",
+      eventDateStart: "2024-01-01",
+      eventDateEnd: "2024-01-02",
+      termsAndConditions: "Terms and Conditions 1",
+      eventCapacityRemaining: 50,
+      image: "/uploads/event1.jpg",
+      tickets: [
+        {
+          id: 1,
+          ticketDescription: "description",
+          name: "name",
+          price: 45,
+          isMemberOnly: true,
+          isDouble: false,
+          numTicketsLeft: 5,
+          startDateTicketSales: "1/2/3",
+          isTicketLive: true,
+          ticketLinkBypass: false,
+          bypassTicketLink: "link",
+          stripeLink: "stripe",
+        },
+      ],
+    };
 
     expect(Mapper.mapToEvent(data)).toEqual(expected);
   });
@@ -206,34 +204,33 @@ describe("mapToEvents", () => {
       },
     };
 
-    const expected: EventAndTickets =
-      {
-        title: "Event 1",
-        description: "",
-        subtitle: "Subtitle 1",
-        location: "Location 1",
-        eventDateStart: "2024-01-01",
-        eventDateEnd: "2024-01-02",
-        termsAndConditions: "Terms and Conditions 1",
-        eventCapacityRemaining: 50,
-        image: "/uploads/event1.jpg",
-        tickets: [
-          {
-            id: 1,
-            ticketDescription : "",
-            name: "name",
-            price: 45,
-            isMemberOnly: true,
-            isDouble: false,
-            numTicketsLeft: 5,
-            startDateTicketSales: "1/2/3",
-            isTicketLive: true,
-            ticketLinkBypass: false,
-            bypassTicketLink: "link",
-            stripeLink: "stripe",
-          },
-        ],
-      };
+    const expected: EventAndTickets = {
+      title: "Event 1",
+      description: "",
+      subtitle: "Subtitle 1",
+      location: "Location 1",
+      eventDateStart: "2024-01-01",
+      eventDateEnd: "2024-01-02",
+      termsAndConditions: "Terms and Conditions 1",
+      eventCapacityRemaining: 50,
+      image: "/uploads/event1.jpg",
+      tickets: [
+        {
+          id: 1,
+          ticketDescription: "",
+          name: "name",
+          price: 45,
+          isMemberOnly: true,
+          isDouble: false,
+          numTicketsLeft: 5,
+          startDateTicketSales: "1/2/3",
+          isTicketLive: true,
+          ticketLinkBypass: false,
+          bypassTicketLink: "link",
+          stripeLink: "stripe",
+        },
+      ],
+    };
 
     expect(Mapper.mapToEvent(data)).toEqual(expected);
   });
@@ -284,34 +281,33 @@ describe("mapToEvents", () => {
       },
     };
 
-    const expected: EventAndTickets =
-      {
-        title: "Event 1",
-        description: "Description 1",
-        subtitle: "",
-        location: "Location 1",
-        eventDateStart: "2024-01-01",
-        eventDateEnd: "2024-01-02",
-        termsAndConditions: "Terms and Conditions 1",
-        eventCapacityRemaining: 50,
-        image: "/uploads/event1.jpg",
-        tickets: [
-          {
-            id: 1,
-            ticketDescription : "description",
-            name: "name",
-            price: 45,
-            isMemberOnly: true,
-            isDouble: false,
-            numTicketsLeft: 5,
-            startDateTicketSales: "1/2/3",
-            isTicketLive: true,
-            ticketLinkBypass: false,
-            bypassTicketLink: "link",
-            stripeLink: "stripe",
-          },
-        ],
-      };
+    const expected: EventAndTickets = {
+      title: "Event 1",
+      description: "Description 1",
+      subtitle: "",
+      location: "Location 1",
+      eventDateStart: "2024-01-01",
+      eventDateEnd: "2024-01-02",
+      termsAndConditions: "Terms and Conditions 1",
+      eventCapacityRemaining: 50,
+      image: "/uploads/event1.jpg",
+      tickets: [
+        {
+          id: 1,
+          ticketDescription: "description",
+          name: "name",
+          price: 45,
+          isMemberOnly: true,
+          isDouble: false,
+          numTicketsLeft: 5,
+          startDateTicketSales: "1/2/3",
+          isTicketLive: true,
+          ticketLinkBypass: false,
+          bypassTicketLink: "link",
+          stripeLink: "stripe",
+        },
+      ],
+    };
 
     expect(Mapper.mapToEvent(data)).toEqual(expected);
   });
@@ -362,34 +358,33 @@ describe("mapToEvents", () => {
       },
     };
 
-    const expected: EventAndTickets =
-      {
-        title: "Event 1",
-        description: "Description 1",
-        subtitle: "Subtitle 1",
-        location: "",
-        eventDateStart: "2024-01-01",
-        eventDateEnd: "2024-01-02",
-        termsAndConditions: "Terms and Conditions 1",
-        eventCapacityRemaining: 50,
-        image: "/uploads/event1.jpg",
-        tickets: [
-          {
-            id: 1,
-            ticketDescription : "description",
-            name: "name",
-            price: 45,
-            isMemberOnly: true,
-            isDouble: false,
-            numTicketsLeft: 5,
-            startDateTicketSales: "1/2/3",
-            isTicketLive: true,
-            ticketLinkBypass: false,
-            bypassTicketLink: "link",
-            stripeLink: "stripe",
-          },
-        ],
-      };
+    const expected: EventAndTickets = {
+      title: "Event 1",
+      description: "Description 1",
+      subtitle: "Subtitle 1",
+      location: "",
+      eventDateStart: "2024-01-01",
+      eventDateEnd: "2024-01-02",
+      termsAndConditions: "Terms and Conditions 1",
+      eventCapacityRemaining: 50,
+      image: "/uploads/event1.jpg",
+      tickets: [
+        {
+          id: 1,
+          ticketDescription: "description",
+          name: "name",
+          price: 45,
+          isMemberOnly: true,
+          isDouble: false,
+          numTicketsLeft: 5,
+          startDateTicketSales: "1/2/3",
+          isTicketLive: true,
+          ticketLinkBypass: false,
+          bypassTicketLink: "link",
+          stripeLink: "stripe",
+        },
+      ],
+    };
 
     expect(Mapper.mapToEvent(data)).toEqual(expected);
   });
@@ -440,34 +435,33 @@ describe("mapToEvents", () => {
       },
     };
 
-    const expected: EventAndTickets =
-      {
-        title: "Event 1",
-        description: "Description 1",
-        subtitle: "Subtitle 1",
-        location: "Location 1",
-        eventDateStart: "",
-        eventDateEnd: "2024-01-02",
-        termsAndConditions: "Terms and Conditions 1",
-        eventCapacityRemaining: 50,
-        image: "/uploads/event1.jpg",
-        tickets: [
-          {
-            id: 1,
-            ticketDescription : "description",
-            name: "name",
-            price: 45,
-            isMemberOnly: true,
-            isDouble: false,
-            numTicketsLeft: 5,
-            startDateTicketSales: "1/2/3",
-            isTicketLive: true,
-            ticketLinkBypass: false,
-            bypassTicketLink: "link",
-            stripeLink: "stripe",
-          },
-        ],
-      };
+    const expected: EventAndTickets = {
+      title: "Event 1",
+      description: "Description 1",
+      subtitle: "Subtitle 1",
+      location: "Location 1",
+      eventDateStart: "",
+      eventDateEnd: "2024-01-02",
+      termsAndConditions: "Terms and Conditions 1",
+      eventCapacityRemaining: 50,
+      image: "/uploads/event1.jpg",
+      tickets: [
+        {
+          id: 1,
+          ticketDescription: "description",
+          name: "name",
+          price: 45,
+          isMemberOnly: true,
+          isDouble: false,
+          numTicketsLeft: 5,
+          startDateTicketSales: "1/2/3",
+          isTicketLive: true,
+          ticketLinkBypass: false,
+          bypassTicketLink: "link",
+          stripeLink: "stripe",
+        },
+      ],
+    };
 
     expect(Mapper.mapToEvent(data)).toEqual(expected);
   });

@@ -50,7 +50,6 @@ export interface PreviousTeam {
   year: string;
 }
 
-
 export interface EventsSlider {
   id: number;
   title: string;

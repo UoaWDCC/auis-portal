@@ -1,4 +1,3 @@
-
 import peacockLogo from "../assets/peacock.png";
 import { EventsSlider } from "../types/types";
 export const FacebookLink = "https://www.facebook.com/auis.uoa/";
