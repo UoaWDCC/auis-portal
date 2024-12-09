@@ -53,7 +53,7 @@ describe("mapToPartnerImage", () => {
 
     const expected: PartnerImage[] = [
       {
-        id: 2,      
+        id: 2,
         name: "Partner Two",
         image: "",
       },
