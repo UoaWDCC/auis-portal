@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
-import { EventAndTickets } from "../../src/types/types";
-import { Mapper } from "../../src/utils/Mapper";
-import { NoDataError } from "../../src/classes/NoDataError";
+import { EventAndTickets } from "../../../src/types/types";
+import { Mapper } from "../../../src/utils/Mapper";
+import { NoDataError } from "../../../src/classes/NoDataError";
 
 describe("mapToEvents", () => {
   it("should map valid data correctly", () => {
@@ -16,6 +16,7 @@ describe("mapToEvents", () => {
             Location: "Location 1",
             Event_Date_Start: "2024-01-01",
             Event_Date_End: "2024-01-02",
+            isLive: false,
             Terms_And_Conditions: "Terms and Conditions 1",
             Event_Capacity_Remaining: 50,
             Image: {
@@ -60,6 +61,7 @@ describe("mapToEvents", () => {
       termsAndConditions: "Terms and Conditions 1",
       eventCapacityRemaining: 50,
       image: "/uploads/event1.jpg",
+      isLive: false,
       tickets: [
         {
           id: 1,
@@ -93,6 +95,7 @@ describe("mapToEvents", () => {
             Location: "Location 1",
             Event_Date_Start: "2024-01-01",
             Event_Date_End: "2024-01-02",
+            isLive: false,
             Terms_And_Conditions: "Terms and Conditions 1",
             Event_Capacity_Remaining: 50,
             Image: {
@@ -137,6 +140,7 @@ describe("mapToEvents", () => {
       termsAndConditions: "Terms and Conditions 1",
       eventCapacityRemaining: 50,
       image: "/uploads/event1.jpg",
+      isLive: false,
       tickets: [
         {
           id: 1,
@@ -158,6 +162,132 @@ describe("mapToEvents", () => {
     expect(Mapper.mapToEvent(data)).toEqual(expected);
   });
 
+  it("should handle missing all data fields gracefully", () => {
+    const data = {
+      event: {
+        data: {
+          id: 1,
+          attributes: {
+            Title: "",
+            Description: "",
+            Subtitle: "",
+            Location: "",
+            Event_Date_Start: "",
+            Event_Date_End: "",
+            isLive: false,
+            Terms_And_Conditions: "",
+            Event_Capacity_Remaining: 0,
+            Image: {
+              data: {
+                attributes: {
+                  url: "",
+                },
+              },
+            },
+            Ticket_ID: {
+              data: [
+                {
+                  id: 1,
+                  attributes: {
+                    Name: "",
+                    Price: 0,
+                    Is_Member_Only: false,
+                    Is_Double: false,
+                    Number_Tickets_Left: 0,
+                    Ticket_Description: "",
+                    Start_Date_Ticket_Sales: "",
+                    Is_Ticket_Live: false,
+                    Ticket_Link_Bypass: false,
+                    Bypass_Ticket_Link: "",
+                    Stripe_Link: "",
+                  },
+                },
+              ],
+            },
+          },
+        },
+      },
+    };
+
+    const expected: EventAndTickets = {
+      title: "",
+      description: "",
+      subtitle: "",
+      location: "",
+      eventDateStart: "",
+      eventDateEnd: "",
+      termsAndConditions: "",
+      eventCapacityRemaining: 0,
+      image: "",
+      isLive: false,
+      tickets: [
+        {
+          id: 1,
+          ticketDescription: "",
+          name: "",
+          price: 0,
+          isMemberOnly: false,
+          isDouble: false,
+          numTicketsLeft: 0,
+          startDateTicketSales: "",
+          isTicketLive: false,
+          ticketLinkBypass: false,
+          bypassTicketLink: "",
+          stripeLink: "",
+        },
+      ],
+    };
+
+    expect(Mapper.mapToEvent(data)).toEqual(expected);
+  });
+
+  it("should handle empty list of tickets", () => {
+    const data = {
+      event: {
+        data: {
+          id: 1,
+          attributes: {
+            Title: "",
+            Description: "",
+            Subtitle: "",
+            Location: "",
+            Event_Date_Start: "",
+            Event_Date_End: "",
+            isLive: false,
+            Terms_And_Conditions: "",
+            Event_Capacity_Remaining: 0,
+            Image: {
+              data: {
+                attributes: {
+                  url: "",
+                },
+              },
+            },
+            Ticket_ID: {
+              data: [],
+            },
+          },
+        },
+      },
+    };
+
+    const expected: EventAndTickets = {
+      title: "",
+      description: "",
+      subtitle: "",
+      location: "",
+      eventDateStart: "",
+      eventDateEnd: "",
+      termsAndConditions: "",
+      eventCapacityRemaining: 0,
+      image: "",
+      isLive: false,
+      tickets: [],
+    };
+
+    expect(Mapper.mapToEvent(data)).toEqual(expected);
+  });
+
   it("should handle missing description field gracefully", () => {
     const data = {
       event: {
@@ -170,6 +300,7 @@ describe("mapToEvents", () => {
             Location: "Location 1",
             Event_Date_Start: "2024-01-01",
             Event_Date_End: "2024-01-02",
+            isLive: false,
             Terms_And_Conditions: "Terms and Conditions 1",
             Event_Capacity_Remaining: 50,
             Image: {
@@ -214,6 +345,7 @@ describe("mapToEvents", () => {
       termsAndConditions: "Terms and Conditions 1",
       eventCapacityRemaining: 50,
       image: "/uploads/event1.jpg",
+      isLive: false,
       tickets: [
         {
           id: 1,
@@ -247,6 +379,7 @@ describe("mapToEvents", () => {
             Location: "Location 1",
             Event_Date_Start: "2024-01-01",
             Event_Date_End: "2024-01-02",
+            isLive: false,
             Terms_And_Conditions: "Terms and Conditions 1",
             Event_Capacity_Remaining: 50,
             Image: {
@@ -291,6 +424,7 @@ describe("mapToEvents", () => {
       termsAndConditions: "Terms and Conditions 1",
       eventCapacityRemaining: 50,
       image: "/uploads/event1.jpg",
+      isLive: false,
       tickets: [
         {
           id: 1,
@@ -324,6 +458,7 @@ describe("mapToEvents", () => {
             Location: "",
             Event_Date_Start: "2024-01-01",
             Event_Date_End: "2024-01-02",
+            isLive: false,
             Terms_And_Conditions: "Terms and Conditions 1",
             Event_Capacity_Remaining: 50,
             Image: {
@@ -368,6 +503,7 @@ describe("mapToEvents", () => {
       termsAndConditions: "Terms and Conditions 1",
       eventCapacityRemaining: 50,
       image: "/uploads/event1.jpg",
+      isLive: false,
       tickets: [
         {
           id: 1,
@@ -401,6 +537,7 @@ describe("mapToEvents", () => {
             Location: "Location 1",
             Event_Date_Start: "",
             Event_Date_End: "2024-01-02",
+            isLive: false,
             Terms_And_Conditions: "Terms and Conditions 1",
             Event_Capacity_Remaining: 50,
             Image: {
@@ -445,6 +582,7 @@ describe("mapToEvents", () => {
       termsAndConditions: "Terms and Conditions 1",
       eventCapacityRemaining: 50,
       image: "/uploads/event1.jpg",
+      isLive: false,
       tickets: [
         {
           id: 1,

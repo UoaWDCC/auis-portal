@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
-import { EventGallery } from "../../src/types/types";
-import { Mapper } from "../../src/utils/Mapper";
-import { NoDataError } from "../../src/classes/NoDataError";
+import { EventGallery } from "../../../src/types/types";
+import { Mapper } from "../../../src/utils/Mapper";
+import { NoDataError } from "../../../src/classes/NoDataError";
 
 describe("mapToEventsGallery", () => {
   it("should map the valid data correctly", () => {
