@@ -7,12 +7,12 @@ import type {
   Value,
   Introduction,
   PreviousTeam,
-  Event,
   EventGallery,
   PurchasableMembership,
   EventAndTickets,
   TicketAndQuestion,
   PartnerImage,
+  EventsSlider,
 } from "../types/types";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -161,7 +161,7 @@ export class Mapper {
     }
   }
 
-  static mapToEventsSlider(data: any): Event[] {
+  static mapToEventsSlider(data: any): EventsSlider[] {
     if (!data.events || !data.events.data || data.events.data.length === 0) {
       throw new NoDataError("No data");
     } else {
@@ -202,12 +202,11 @@ export class Mapper {
           return {
             id: item.id,
             name: attributesTicket.Name || "",
-            description: attributesTicket.Ticket_Description || "",
             price: attributesTicket.Price || 0,
             isMemberOnly: attributesTicket.Is_Member_Only || false,
             isDouble: attributesTicket.Is_Double || false,
             numTicketsLeft: attributesTicket.Number_Tickets_Left || "",
-            ticketDescription: attributesTicket.Ticket_Description || false,
+            ticketDescription: attributesTicket.Ticket_Description || "",
             startDateTicketSales:
               attributesTicket.Start_Date_Ticket_Sales || "",
             isTicketLive: attributesTicket.Is_Ticket_Live || false,

@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { GET_EVENTS_GALLERY, GET_EVENTS_SLIDER } from "../graphql/queries";
 import LoadingSpinner from "../components/navigation/LoadingSpinner";
-import type { Event, EventGallery } from "../types/types";
+import type { EventGallery, EventsSlider } from "../types/types";
 import { Mapper } from "../utils/Mapper";
 import EventGalleryComponent from "@components/events-page/EventGalleryComponent";
 import { useEffect, useState } from "react";
@@ -25,7 +25,7 @@ export default function EventScreen({ navbar }: { navbar: JSX.Element }) {
   } = useQuery(GET_EVENTS_GALLERY);
 
   // States
-  const [events, setEvents] = useState<Event[]>([]);
+  const [events, setEvents] = useState<EventsSlider[]>([]);
   const [loadingEvents, setLoadingEvents] = useState(true);
   const [errorEvents, setErrorEvents] = useState(false);
 
@@ -70,8 +70,8 @@ export default function EventScreen({ navbar }: { navbar: JSX.Element }) {
 
   // Filtering - can be changed to be direct API call in future
   const { upcomingEvents, pastEvents } = events.reduce<{
-    upcomingEvents: Event[];
-    pastEvents: Event[];
+    upcomingEvents: EventsSlider[];
+    pastEvents: EventsSlider[];
   }>(
     (acc, event) => {
       const eventDate = new Date(event.eventDateStart);

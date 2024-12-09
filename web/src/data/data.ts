@@ -1,6 +1,6 @@
-import { Event } from "../types/types";
-import peacockLogo from "../assets/peacock.png";
 
+import peacockLogo from "../assets/peacock.png";
+import { EventsSlider } from "../types/types";
 export const FacebookLink = "https://www.facebook.com/auis.uoa/";
 export const InstagramLink =
   "https://www.instagram.com/au.indiansociety/?hl=en";
@@ -71,102 +71,67 @@ export const secondaryDevelopers = [
 
 // Handle case with no events
 const today = new Date();
-const showNoUpcomingEventOne: Event = {
+const showNoUpcomingEventOne: EventsSlider = {
   id: -1,
   title: "No Upcoming Events Right Now",
-  description: "description",
-  subtitle: "subtitle",
   eventDateStart: today.toISOString(),
-  eventDateEnd: "termsAndConditions",
   isLive: true,
-  termsAndConditions: "termsAndConditions",
-  eventCapacityRemaining: 0,
   location: "University of Auckland",
-  locationLink: "locationLink",
   image: peacockLogo,
 };
 
-const showNoUpcomingEventTwo: Event = {
+const showNoUpcomingEventTwo: EventsSlider = {
   id: -2,
   title: "No Upcoming Events Right Now",
-  description: "description",
-  subtitle: "subtitle",
   eventDateStart: today.toISOString(),
-  eventDateEnd: "termsAndConditions",
   isLive: true,
-  termsAndConditions: "termsAndConditions",
-  eventCapacityRemaining: 0,
   location: "University of Auckland",
-  locationLink: "locationLink",
   image: peacockLogo,
 };
 
-const showNoUpcomingEventThree: Event = {
+const showNoUpcomingEventThree: EventsSlider = {
   id: -3,
   title: "No Upcoming Events Right Now",
-  description: "description",
-  subtitle: "subtitle",
   eventDateStart: today.toISOString(),
-  eventDateEnd: "termsAndConditions",
   isLive: true,
-  termsAndConditions: "termsAndConditions",
-  eventCapacityRemaining: 0,
   location: "University of Auckland",
-  locationLink: "locationLink",
   image: peacockLogo,
 };
 
-export const showNoUpcomingEvents: Event[] = [
+export const showNoUpcomingEvents: EventsSlider[] = [
   showNoUpcomingEventOne,
   showNoUpcomingEventTwo,
   showNoUpcomingEventThree,
 ];
 
-const showNoPastEventOne: Event = {
+const showNoPastEventOne: EventsSlider = {
   id: -1,
   title: "No Past Events Right Now",
-  description: "description",
-  subtitle: "subtitle",
   eventDateStart: today.toISOString(),
-  eventDateEnd: "termsAndConditions",
   isLive: true,
-  termsAndConditions: "termsAndConditions",
-  eventCapacityRemaining: 0,
   location: "University of Auckland",
-  locationLink: "locationLink",
   image: peacockLogo,
 };
 
-const showNoPastEventTwo: Event = {
+const showNoPastEventTwo: EventsSlider = {
   id: -2,
   title: "No Past Events Right Now",
-  description: "description",
-  subtitle: "subtitle",
   eventDateStart: today.toISOString(),
-  eventDateEnd: "termsAndConditions",
   isLive: true,
-  termsAndConditions: "termsAndConditions",
-  eventCapacityRemaining: 0,
   location: "University of Auckland",
-  locationLink: "locationLink",
   image: peacockLogo,
 };
 
-const showNoPastEventThree: Event = {
+const showNoPastEventThree: EventsSlider = {
   id: -3,
   title: "No Past Events Right Now",
-  description: "description",
-  subtitle: "subtitle",
   eventDateStart: today.toISOString(),
-  eventDateEnd: "termsAndConditions",
   isLive: true,
-  termsAndConditions: "termsAndConditions",
-  eventCapacityRemaining: 0,
   location: "University of Auckland",
-  locationLink: "locationLink",
   image: peacockLogo,
 };
-export const showNoPastEvents: Event[] = [
+
+export const showNoPastEvents: EventsSlider[] = [
   showNoPastEventOne,
   showNoPastEventTwo,
   showNoPastEventThree,
