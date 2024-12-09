@@ -20,7 +20,7 @@ const getEvents = asyncHandler(
 const getEventById = asyncHandler(
   async (req: Request, res: Response): Promise<void> => {
     const id = req.params.id;
-    const event = Events.find((event) => event._id === id);
+    const event = Events.find((event: { _id: string }) => event._id === id);
 
     if (event) {
       res.json(event);
