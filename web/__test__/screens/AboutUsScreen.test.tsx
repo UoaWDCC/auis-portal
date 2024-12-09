@@ -15,9 +15,10 @@ import { MemoryRouter } from "react-router";
 
 const mockedUseNavigate = vi.fn();
 vi.mock("react-router-dom", async () => {
-  const mod = await vi.importActual<typeof import("react-router-dom")>(
-    "react-router-dom"
-  );
+  const mod =
+    await vi.importActual<typeof import("react-router-dom")>(
+      "react-router-dom"
+    );
   return {
     ...mod,
     useNavigate: () => mockedUseNavigate,
@@ -30,7 +31,7 @@ const introMock = {
     query: GET_INTRODUCTION,
   },
   result: {
-    data : {
+    data: {
       introductions: {
         data: [
           {
@@ -43,8 +44,8 @@ const introMock = {
           },
         ],
       },
-    }
-  }
+    },
+  },
 };
 
 const noIntroMock = {
@@ -66,7 +67,7 @@ const valuesMock = {
     query: GET_VALUES,
   },
   result: {
-    data : {
+    data: {
       values: {
         data: [
           {
@@ -110,7 +111,7 @@ const partnersMock = {
   result: {
     data: {
       partners: {
-        data:  [
+        data: [
           {
             id: 1,
             attributes: {
@@ -189,9 +190,15 @@ describe("AboutUsScreen", () => {
       </MockedProvider>
     );
 
-    expect(await screen.findByText("There is no introduction to display")).toBeInTheDocument();
-    expect(await screen.findByText("There are no values to display")).toBeInTheDocument();
-    expect(await screen.findByText("There are no partners to display")).toBeInTheDocument();
+    expect(
+      await screen.findByText("There is no introduction to display")
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByText("There are no values to display")
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByText("There are no partners to display")
+    ).toBeInTheDocument();
   });
 
   it("renders queries correctly", async () => {
@@ -204,12 +211,13 @@ describe("AboutUsScreen", () => {
     );
 
     expect(await screen.findByText("Our Introduction")).toBeInTheDocument();
-    expect(await screen.findByText("Introduction description")).toBeInTheDocument();
+    expect(
+      await screen.findByText("Introduction description")
+    ).toBeInTheDocument();
     expect(await screen.findByText("Value One")).toBeInTheDocument();
     const partnerImage = await screen.findByAltText("Partner One");
     expect(partnerImage).toHaveAttribute("src", "/uploads/partner_one.jpg");
   });
-
 
   it("renders no data from cms", async () => {
     render(
@@ -220,9 +228,15 @@ describe("AboutUsScreen", () => {
       </MockedProvider>
     );
 
-    expect(await screen.findByText("There is no introduction to display")).toBeInTheDocument();
-    expect(await screen.findByText("There are no values to display")).toBeInTheDocument();
-    expect(await screen.findByText("There are no partners to display")).toBeInTheDocument();
+    expect(
+      await screen.findByText("There is no introduction to display")
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByText("There are no values to display")
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByText("There are no partners to display")
+    ).toBeInTheDocument();
   });
 
   it("redirects user when join us clicked", async () => {
@@ -234,11 +248,10 @@ describe("AboutUsScreen", () => {
       </MockedProvider>
     );
 
-  const button = (await screen.findByRole('button', {name: "Join Us Now!"}))
-  expect(button).toBeDefined();
-  await fireEvent.click(button)
-  
-  expect(mockedUseNavigate);
-  })
+    const button = await screen.findByRole("button", { name: "Join Us Now!" });
+    expect(button).toBeDefined();
+    await fireEvent.click(button);
 
+    expect(mockedUseNavigate);
+  });
 });
