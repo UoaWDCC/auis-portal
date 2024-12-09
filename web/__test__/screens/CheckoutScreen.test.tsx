@@ -1,6 +1,6 @@
 import { MockedProvider } from "@apollo/client/testing";
 import { describe, expect, it, vi } from "vitest";
-import {  render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import CheckoutScreen from "../../src/screens/CheckoutScreen";
 import React from "react";
 import "@testing-library/jest-dom";
@@ -25,7 +25,6 @@ vi.mock("@components/checkout-page/CheckoutError", () => ({
 }));
 
 describe("AboutUsScreen", () => {
-
   it("renders error screen properly", () => {
     render(
       <MockedProvider addTypename={false}>
