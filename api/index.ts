@@ -84,11 +84,8 @@ app.use(
 
 // Routes
 app.use("/api/user", userRoutes);
-
-//StripeJS
-app.use("/api/stripe", stripeRoutes);
-
 app.use("/api/event", eventRoutes);
+app.use("/api/stripe", stripeRoutes);
 
 // The custom handlers in /middleware need to be below Routes
 app.use(notFound);
