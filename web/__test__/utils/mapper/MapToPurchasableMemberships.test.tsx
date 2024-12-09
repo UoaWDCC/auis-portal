@@ -24,7 +24,7 @@ describe("mapToPurchaseableMemberships", () => {
               Bypass_Membership_Link: "link",
             },
           },
-        ]
+        ],
       },
     };
 
@@ -45,43 +45,42 @@ describe("mapToPurchaseableMemberships", () => {
 
   it("should map invalid data correctly", () => {
     const data = {
-        purchasableMemberships: {
-          data: [
-            {
-              id: 0,
-              attributes: {
-                Title: "",
-                Expiry: "",
-                Price: 0,
-                Stripe_Link: "",
-                Description: "",
-                Membership_Link_Bypass: false,
-                Bypass_Membership_Link: "",
-              },
+      purchasableMemberships: {
+        data: [
+          {
+            id: 0,
+            attributes: {
+              Title: "",
+              Expiry: "",
+              Price: 0,
+              Stripe_Link: "",
+              Description: "",
+              Membership_Link_Bypass: false,
+              Bypass_Membership_Link: "",
             },
-          ]
-        },
-      };
-  
-      const expected: PurchasableMembership[] = [
-        {
-          id: 0,
-          title: "",
-          expiry: "",
-          price: 0,
-          stripeLink: "",
-          description: "",
-          membershipLinkBypass: false,
-          bypassMembershipLink: "",
-        },
-      ];
-      expect(Mapper.mapToPurchasableMemberships(data)).toEqual(expected);
-    });
+          },
+        ],
+      },
+    };
 
+    const expected: PurchasableMembership[] = [
+      {
+        id: 0,
+        title: "",
+        expiry: "",
+        price: 0,
+        stripeLink: "",
+        description: "",
+        membershipLinkBypass: false,
+        bypassMembershipLink: "",
+      },
+    ];
+    expect(Mapper.mapToPurchasableMemberships(data)).toEqual(expected);
+  });
 
   it("should throw NoDataError when values.data is empty", () => {
     const data = {
-        purchasableMemberships: {
+      purchasableMemberships: {
         data: [],
       },
     };
