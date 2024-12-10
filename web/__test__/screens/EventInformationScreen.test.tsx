@@ -101,18 +101,18 @@ describe("EventInformationScreen", () => {
     const errorMocks = [
       {
         request: {
-          query: getEventById({id: -1}),
+          query: getEventById({ id: -1 }),
         },
         error: new GraphQLError("Error!"),
       },
     ];
     Object.defineProperty(window, "location", {
-        value: { pathname: "/events/-1" },
-      });
+      value: { pathname: "/events/-1" },
+    });
 
     render(
       <MockedProvider mocks={errorMocks} addTypename={false}>
-        <MemoryRouter >
+        <MemoryRouter>
           <EventInformationScreen navbar={<></>} />
         </MemoryRouter>
       </MockedProvider>
@@ -123,20 +123,19 @@ describe("EventInformationScreen", () => {
     ).toBeInTheDocument();
   });
 
-//   it("renders queries correctly", async () => {
-//     Object.defineProperty(window, "location", {
-//         value: { pathname: "/events/1" },
-//       });
-    
-//     render(
-//       <MockedProvider mocks={mocks} addTypename={false}>
-//         <MemoryRouter>
-//           <EventInformationScreen navbar={<></>} />
-//         </MemoryRouter>
-//       </MockedProvider>
-//     );
+  //   it("renders queries correctly", async () => {
+  //     Object.defineProperty(window, "location", {
+  //         value: { pathname: "/events/1" },
+  //       });
 
-//     expect(await screen.findByText("Event 1")).toBeInTheDocument();
-//   });
+  //     render(
+  //       <MockedProvider mocks={mocks} addTypename={false}>
+  //         <MemoryRouter>
+  //           <EventInformationScreen navbar={<></>} />
+  //         </MemoryRouter>
+  //       </MockedProvider>
+  //     );
 
+  //     expect(await screen.findByText("Event 1")).toBeInTheDocument();
+  //   });
 });
