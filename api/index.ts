@@ -36,7 +36,7 @@ supertokens.init({
   },
   appInfo: {
     appName: "AUIS",
-    apiDomain: "http://localhost:3000",
+    apiDomain: `${process.env.DOMAIN_API}`,
     websiteDomain: `${process.env.DOMAIN_FRONTEND}`,
     apiBasePath: "/api/auth",
     websiteBasePath: "/signup",
