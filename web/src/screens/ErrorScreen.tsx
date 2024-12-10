@@ -3,6 +3,8 @@ import { useNavigate } from "react-router";
 
 export default function ErrorScreen() {
   const navigate = useNavigate();
+
+  console.log(window.location.pathname)
   return (
     <div className="from-AUIS-dark-teal to-AUIS-teal h-svh bg-gradient-to-b pb-20">
       <div className="flex h-full items-center justify-center">
