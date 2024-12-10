@@ -20,7 +20,7 @@ import { notFound } from "./middleware/errorMiddleware";
 const app = express();
 config();
 
-// DELET ONC WE HAVE SUPEROTKEN THING postgresql://db:5432/AUIS?user=AUIS&password=GuryIsGoat
+// DELET ONC WE HAVE SUPEROTKEN THING
 var domainSuperToken = `postgres://${process.env.DATABASE_USERNAME}:${process.env.DATABASE_PASSWORD}@${process.env.DATABASE_HOST}:${process.env.SUPERTOKENS_PORT}/supertokens`;
 console.log(domainSuperToken);
 var domainDatabase = `postgres://${process.env.DATABASE_USERNAME}:${process.env.DATABASE_PASSWORD}@${process.env.DATABASE_HOST}:${process.env.DATABASE_PORT}`;
@@ -67,8 +67,8 @@ app.use(
 );
 
 // Supertokens middleware.
-app.use(middleware());
-app.use(express.static("public"));
+// app.use(middleware());
+// app.use(express.static("public"));
 
 // @Ratchet7x5: INFO: Use JSON parser for all non-webhook routes
 //              otherwise, webhook and db entries will fail
