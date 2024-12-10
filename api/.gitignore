@@ -46,6 +46,8 @@ jspm_packages/
 #Migrations
 db/migrations/
 db/migrations/meta/
+schemas/migrations/
+schemas/migrations/meta/
 
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/

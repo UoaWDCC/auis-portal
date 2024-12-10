@@ -1,926 +1,1336 @@
 import { relations } from "drizzle-orm/relations";
 import {
-  admin_users,
-  admin_permissions,
-  admin_roles,
-  strapi_api_tokens,
-  strapi_api_token_permissions,
-  strapi_transfer_tokens,
-  strapi_transfer_token_permissions,
+  adminUsers,
+  adminPermissions,
+  adminRoles,
+  strapiApiTokens,
+  strapiApiTokenPermissions,
+  strapiTransferTokens,
+  strapiTransferTokenPermissions,
   files,
-  upload_folders,
-  strapi_releases,
-  strapi_release_actions,
-  i18n_locale,
-  up_permissions,
-  up_roles,
-  up_users,
+  uploadFolders,
+  strapiReleases,
+  strapiReleaseActions,
+  i18NLocale,
+  upPermissions,
+  upRoles,
+  upUsers,
   answers,
   events,
-  event_galleries,
+  eventGalleries,
   execs,
   introductions,
   partners,
   peoples,
-  previous_teams,
+  previousTeams,
+  purchasableMemberships,
   questions,
-  socials,
-  some_photos,
+  somePhotos,
   tickets,
-  user_tickets,
+  userTickets,
   values,
-  admin_permissions_role_links,
-  admin_users_roles_links,
-  strapi_api_token_permissions_token_links,
-  strapi_transfer_token_permissions_token_links,
-  files_related_morphs,
-  files_folder_links,
-  upload_folders_parent_links,
-  strapi_release_actions_release_links,
-  up_permissions_role_links,
-  up_users_role_links,
-  answers_people_id_links,
-  answers_question_id_links,
-  questions_ticket_id_links,
-  tickets_event_id_links,
-  user_tickets_people_id_links,
-  user_tickets_ticket_id_links,
+  adminPermissionsRoleLinks,
+  adminUsersRolesLinks,
+  strapiApiTokenPermissionsTokenLinks,
+  strapiTransferTokenPermissionsTokenLinks,
+  filesRelatedMorphs,
+  filesFolderLinks,
+  uploadFoldersParentLinks,
+  strapiReleaseActionsReleaseLinks,
+  upPermissionsRoleLinks,
+  upUsersRoleLinks,
+  answersPeopleTicketLinks,
+  answersQuestionIdLinks,
+  questionsTicketIdLinks,
+  ticketsEventIdLinks,
+  userTicketsPeopleIdLinks,
+  userTicketsTicketIdLinks,
+  oauthClients,
+  oauthSessions,
+  apps,
+  roles,
+  totpUsers,
+  tenants,
+  userLastActive,
+  sessionAccessTokenSigningKeys,
+  emailverificationVerifiedEmails,
+  userMetadata,
+  rolePermissions,
+  tenantConfigs,
+  tenantFirstFactors,
+  tenantRequiredSecondaryFactors,
+  allAuthRecipeUsers,
+  emailpasswordUserToTenant,
+  userRoles,
+  appIdToUserId,
+  useridMapping,
+  oauthM2MTokens,
+  keyValue,
+  emailpasswordPswdResetTokens,
+  emailpasswordUsers,
+  thirdpartyUserToTenant,
+  jwtSigningKeys,
+  passwordlessUsers,
+  passwordlessUserToTenant,
+  dashboardUsers,
+  dashboardUserSessions,
+  emailverificationTokens,
+  thirdpartyUsers,
+  passwordlessDevices,
+  passwordlessCodes,
+  totpUsedCodes,
+  oauthLogoutChallenges,
+  totpUserDevices,
+  sessionInfo,
+  tenantThirdpartyProviders,
+  tenantThirdpartyProviderClients,
 } from "./schema";
 
-export const admin_usersRelations = relations(admin_users, ({ one, many }) => ({
-  admin_user_created_by_id: one(admin_users, {
-    fields: [admin_users.created_by_id],
-    references: [admin_users.id],
-    relationName: "admin_users_created_by_id_admin_users_id",
+export const adminUsersRelations = relations(adminUsers, ({ one, many }) => ({
+  adminUser_createdById: one(adminUsers, {
+    fields: [adminUsers.createdById],
+    references: [adminUsers.id],
+    relationName: "adminUsers_createdById_adminUsers_id",
   }),
-  admin_users_created_by_id: many(admin_users, {
-    relationName: "admin_users_created_by_id_admin_users_id",
+  adminUsers_createdById: many(adminUsers, {
+    relationName: "adminUsers_createdById_adminUsers_id",
   }),
-  admin_user_updated_by_id: one(admin_users, {
-    fields: [admin_users.updated_by_id],
-    references: [admin_users.id],
-    relationName: "admin_users_updated_by_id_admin_users_id",
+  adminUser_updatedById: one(adminUsers, {
+    fields: [adminUsers.updatedById],
+    references: [adminUsers.id],
+    relationName: "adminUsers_updatedById_adminUsers_id",
   }),
-  admin_users_updated_by_id: many(admin_users, {
-    relationName: "admin_users_updated_by_id_admin_users_id",
+  adminUsers_updatedById: many(adminUsers, {
+    relationName: "adminUsers_updatedById_adminUsers_id",
   }),
-  admin_permissions_created_by_id: many(admin_permissions, {
-    relationName: "admin_permissions_created_by_id_admin_users_id",
+  adminPermissions_createdById: many(adminPermissions, {
+    relationName: "adminPermissions_createdById_adminUsers_id",
   }),
-  admin_permissions_updated_by_id: many(admin_permissions, {
-    relationName: "admin_permissions_updated_by_id_admin_users_id",
+  adminPermissions_updatedById: many(adminPermissions, {
+    relationName: "adminPermissions_updatedById_adminUsers_id",
   }),
-  admin_roles_created_by_id: many(admin_roles, {
-    relationName: "admin_roles_created_by_id_admin_users_id",
+  adminRoles_createdById: many(adminRoles, {
+    relationName: "adminRoles_createdById_adminUsers_id",
   }),
-  admin_roles_updated_by_id: many(admin_roles, {
-    relationName: "admin_roles_updated_by_id_admin_users_id",
+  adminRoles_updatedById: many(adminRoles, {
+    relationName: "adminRoles_updatedById_adminUsers_id",
   }),
-  strapi_api_tokens_created_by_id: many(strapi_api_tokens, {
-    relationName: "strapi_api_tokens_created_by_id_admin_users_id",
+  strapiApiTokens_createdById: many(strapiApiTokens, {
+    relationName: "strapiApiTokens_createdById_adminUsers_id",
   }),
-  strapi_api_tokens_updated_by_id: many(strapi_api_tokens, {
-    relationName: "strapi_api_tokens_updated_by_id_admin_users_id",
+  strapiApiTokens_updatedById: many(strapiApiTokens, {
+    relationName: "strapiApiTokens_updatedById_adminUsers_id",
   }),
-  strapi_api_token_permissions_created_by_id: many(
-    strapi_api_token_permissions,
+  strapiApiTokenPermissions_createdById: many(strapiApiTokenPermissions, {
+    relationName: "strapiApiTokenPermissions_createdById_adminUsers_id",
+  }),
+  strapiApiTokenPermissions_updatedById: many(strapiApiTokenPermissions, {
+    relationName: "strapiApiTokenPermissions_updatedById_adminUsers_id",
+  }),
+  strapiTransferTokens_createdById: many(strapiTransferTokens, {
+    relationName: "strapiTransferTokens_createdById_adminUsers_id",
+  }),
+  strapiTransferTokens_updatedById: many(strapiTransferTokens, {
+    relationName: "strapiTransferTokens_updatedById_adminUsers_id",
+  }),
+  strapiTransferTokenPermissions_createdById: many(
+    strapiTransferTokenPermissions,
     {
-      relationName: "strapi_api_token_permissions_created_by_id_admin_users_id",
+      relationName: "strapiTransferTokenPermissions_createdById_adminUsers_id",
     }
   ),
-  strapi_api_token_permissions_updated_by_id: many(
-    strapi_api_token_permissions,
+  strapiTransferTokenPermissions_updatedById: many(
+    strapiTransferTokenPermissions,
     {
-      relationName: "strapi_api_token_permissions_updated_by_id_admin_users_id",
+      relationName: "strapiTransferTokenPermissions_updatedById_adminUsers_id",
     }
   ),
-  strapi_transfer_tokens_created_by_id: many(strapi_transfer_tokens, {
-    relationName: "strapi_transfer_tokens_created_by_id_admin_users_id",
+  files_createdById: many(files, {
+    relationName: "files_createdById_adminUsers_id",
   }),
-  strapi_transfer_tokens_updated_by_id: many(strapi_transfer_tokens, {
-    relationName: "strapi_transfer_tokens_updated_by_id_admin_users_id",
+  files_updatedById: many(files, {
+    relationName: "files_updatedById_adminUsers_id",
   }),
-  strapi_transfer_token_permissions_created_by_id: many(
-    strapi_transfer_token_permissions,
-    {
-      relationName:
-        "strapi_transfer_token_permissions_created_by_id_admin_users_id",
-    }
-  ),
-  strapi_transfer_token_permissions_updated_by_id: many(
-    strapi_transfer_token_permissions,
-    {
-      relationName:
-        "strapi_transfer_token_permissions_updated_by_id_admin_users_id",
-    }
-  ),
-  files_created_by_id: many(files, {
-    relationName: "files_created_by_id_admin_users_id",
+  uploadFolders_createdById: many(uploadFolders, {
+    relationName: "uploadFolders_createdById_adminUsers_id",
   }),
-  files_updated_by_id: many(files, {
-    relationName: "files_updated_by_id_admin_users_id",
+  uploadFolders_updatedById: many(uploadFolders, {
+    relationName: "uploadFolders_updatedById_adminUsers_id",
   }),
-  upload_folders_created_by_id: many(upload_folders, {
-    relationName: "upload_folders_created_by_id_admin_users_id",
+  strapiReleases_createdById: many(strapiReleases, {
+    relationName: "strapiReleases_createdById_adminUsers_id",
   }),
-  upload_folders_updated_by_id: many(upload_folders, {
-    relationName: "upload_folders_updated_by_id_admin_users_id",
+  strapiReleases_updatedById: many(strapiReleases, {
+    relationName: "strapiReleases_updatedById_adminUsers_id",
   }),
-  strapi_releases_created_by_id: many(strapi_releases, {
-    relationName: "strapi_releases_created_by_id_admin_users_id",
+  strapiReleaseActions_createdById: many(strapiReleaseActions, {
+    relationName: "strapiReleaseActions_createdById_adminUsers_id",
   }),
-  strapi_releases_updated_by_id: many(strapi_releases, {
-    relationName: "strapi_releases_updated_by_id_admin_users_id",
+  strapiReleaseActions_updatedById: many(strapiReleaseActions, {
+    relationName: "strapiReleaseActions_updatedById_adminUsers_id",
   }),
-  strapi_release_actions_created_by_id: many(strapi_release_actions, {
-    relationName: "strapi_release_actions_created_by_id_admin_users_id",
+  i18NLocales_createdById: many(i18NLocale, {
+    relationName: "i18NLocale_createdById_adminUsers_id",
   }),
-  strapi_release_actions_updated_by_id: many(strapi_release_actions, {
-    relationName: "strapi_release_actions_updated_by_id_admin_users_id",
+  i18NLocales_updatedById: many(i18NLocale, {
+    relationName: "i18NLocale_updatedById_adminUsers_id",
   }),
-  i18n_locales_created_by_id: many(i18n_locale, {
-    relationName: "i18n_locale_created_by_id_admin_users_id",
+  upPermissions_createdById: many(upPermissions, {
+    relationName: "upPermissions_createdById_adminUsers_id",
   }),
-  i18n_locales_updated_by_id: many(i18n_locale, {
-    relationName: "i18n_locale_updated_by_id_admin_users_id",
+  upPermissions_updatedById: many(upPermissions, {
+    relationName: "upPermissions_updatedById_adminUsers_id",
   }),
-  up_permissions_created_by_id: many(up_permissions, {
-    relationName: "up_permissions_created_by_id_admin_users_id",
+  upRoles_createdById: many(upRoles, {
+    relationName: "upRoles_createdById_adminUsers_id",
   }),
-  up_permissions_updated_by_id: many(up_permissions, {
-    relationName: "up_permissions_updated_by_id_admin_users_id",
+  upRoles_updatedById: many(upRoles, {
+    relationName: "upRoles_updatedById_adminUsers_id",
   }),
-  up_roles_created_by_id: many(up_roles, {
-    relationName: "up_roles_created_by_id_admin_users_id",
+  upUsers_createdById: many(upUsers, {
+    relationName: "upUsers_createdById_adminUsers_id",
   }),
-  up_roles_updated_by_id: many(up_roles, {
-    relationName: "up_roles_updated_by_id_admin_users_id",
+  upUsers_updatedById: many(upUsers, {
+    relationName: "upUsers_updatedById_adminUsers_id",
   }),
-  up_users_created_by_id: many(up_users, {
-    relationName: "up_users_created_by_id_admin_users_id",
+  answers_createdById: many(answers, {
+    relationName: "answers_createdById_adminUsers_id",
   }),
-  up_users_updated_by_id: many(up_users, {
-    relationName: "up_users_updated_by_id_admin_users_id",
+  answers_updatedById: many(answers, {
+    relationName: "answers_updatedById_adminUsers_id",
   }),
-  answers_created_by_id: many(answers, {
-    relationName: "answers_created_by_id_admin_users_id",
+  events_createdById: many(events, {
+    relationName: "events_createdById_adminUsers_id",
   }),
-  answers_updated_by_id: many(answers, {
-    relationName: "answers_updated_by_id_admin_users_id",
+  events_updatedById: many(events, {
+    relationName: "events_updatedById_adminUsers_id",
   }),
-  events_created_by_id: many(events, {
-    relationName: "events_created_by_id_admin_users_id",
+  eventGalleries_createdById: many(eventGalleries, {
+    relationName: "eventGalleries_createdById_adminUsers_id",
   }),
-  events_updated_by_id: many(events, {
-    relationName: "events_updated_by_id_admin_users_id",
+  eventGalleries_updatedById: many(eventGalleries, {
+    relationName: "eventGalleries_updatedById_adminUsers_id",
   }),
-  event_galleries_created_by_id: many(event_galleries, {
-    relationName: "event_galleries_created_by_id_admin_users_id",
+  execs_createdById: many(execs, {
+    relationName: "execs_createdById_adminUsers_id",
   }),
-  event_galleries_updated_by_id: many(event_galleries, {
-    relationName: "event_galleries_updated_by_id_admin_users_id",
+  execs_updatedById: many(execs, {
+    relationName: "execs_updatedById_adminUsers_id",
   }),
-  execs_created_by_id: many(execs, {
-    relationName: "execs_created_by_id_admin_users_id",
+  introductions_createdById: many(introductions, {
+    relationName: "introductions_createdById_adminUsers_id",
   }),
-  execs_updated_by_id: many(execs, {
-    relationName: "execs_updated_by_id_admin_users_id",
+  introductions_updatedById: many(introductions, {
+    relationName: "introductions_updatedById_adminUsers_id",
   }),
-  introductions_created_by_id: many(introductions, {
-    relationName: "introductions_created_by_id_admin_users_id",
+  partners_createdById: many(partners, {
+    relationName: "partners_createdById_adminUsers_id",
   }),
-  introductions_updated_by_id: many(introductions, {
-    relationName: "introductions_updated_by_id_admin_users_id",
+  partners_updatedById: many(partners, {
+    relationName: "partners_updatedById_adminUsers_id",
   }),
-  partners_created_by_id: many(partners, {
-    relationName: "partners_created_by_id_admin_users_id",
+  peoples_createdById: many(peoples, {
+    relationName: "peoples_createdById_adminUsers_id",
   }),
-  partners_updated_by_id: many(partners, {
-    relationName: "partners_updated_by_id_admin_users_id",
+  peoples_updatedById: many(peoples, {
+    relationName: "peoples_updatedById_adminUsers_id",
   }),
-  peoples_created_by_id: many(peoples, {
-    relationName: "peoples_created_by_id_admin_users_id",
+  previousTeams_createdById: many(previousTeams, {
+    relationName: "previousTeams_createdById_adminUsers_id",
   }),
-  peoples_updated_by_id: many(peoples, {
-    relationName: "peoples_updated_by_id_admin_users_id",
+  previousTeams_updatedById: many(previousTeams, {
+    relationName: "previousTeams_updatedById_adminUsers_id",
   }),
-  previous_teams_created_by_id: many(previous_teams, {
-    relationName: "previous_teams_created_by_id_admin_users_id",
+  purchasableMemberships_createdById: many(purchasableMemberships, {
+    relationName: "purchasableMemberships_createdById_adminUsers_id",
   }),
-  previous_teams_updated_by_id: many(previous_teams, {
-    relationName: "previous_teams_updated_by_id_admin_users_id",
+  purchasableMemberships_updatedById: many(purchasableMemberships, {
+    relationName: "purchasableMemberships_updatedById_adminUsers_id",
   }),
-  questions_created_by_id: many(questions, {
-    relationName: "questions_created_by_id_admin_users_id",
+  questions_createdById: many(questions, {
+    relationName: "questions_createdById_adminUsers_id",
   }),
-  questions_updated_by_id: many(questions, {
-    relationName: "questions_updated_by_id_admin_users_id",
+  questions_updatedById: many(questions, {
+    relationName: "questions_updatedById_adminUsers_id",
   }),
-  socials_created_by_id: many(socials, {
-    relationName: "socials_created_by_id_admin_users_id",
+  somePhotos_createdById: many(somePhotos, {
+    relationName: "somePhotos_createdById_adminUsers_id",
   }),
-  socials_updated_by_id: many(socials, {
-    relationName: "socials_updated_by_id_admin_users_id",
+  somePhotos_updatedById: many(somePhotos, {
+    relationName: "somePhotos_updatedById_adminUsers_id",
   }),
-  some_photos_created_by_id: many(some_photos, {
-    relationName: "some_photos_created_by_id_admin_users_id",
+  tickets_createdById: many(tickets, {
+    relationName: "tickets_createdById_adminUsers_id",
   }),
-  some_photos_updated_by_id: many(some_photos, {
-    relationName: "some_photos_updated_by_id_admin_users_id",
+  tickets_updatedById: many(tickets, {
+    relationName: "tickets_updatedById_adminUsers_id",
   }),
-  tickets_created_by_id: many(tickets, {
-    relationName: "tickets_created_by_id_admin_users_id",
+  userTickets_createdById: many(userTickets, {
+    relationName: "userTickets_createdById_adminUsers_id",
   }),
-  tickets_updated_by_id: many(tickets, {
-    relationName: "tickets_updated_by_id_admin_users_id",
+  userTickets_updatedById: many(userTickets, {
+    relationName: "userTickets_updatedById_adminUsers_id",
   }),
-  user_tickets_created_by_id: many(user_tickets, {
-    relationName: "user_tickets_created_by_id_admin_users_id",
+  values_createdById: many(values, {
+    relationName: "values_createdById_adminUsers_id",
   }),
-  user_tickets_updated_by_id: many(user_tickets, {
-    relationName: "user_tickets_updated_by_id_admin_users_id",
+  values_updatedById: many(values, {
+    relationName: "values_updatedById_adminUsers_id",
   }),
-  values_created_by_id: many(values, {
-    relationName: "values_created_by_id_admin_users_id",
-  }),
-  values_updated_by_id: many(values, {
-    relationName: "values_updated_by_id_admin_users_id",
-  }),
-  admin_users_roles_links: many(admin_users_roles_links),
+  adminUsersRolesLinks: many(adminUsersRolesLinks),
 }));
 
-export const admin_permissionsRelations = relations(
-  admin_permissions,
+export const adminPermissionsRelations = relations(
+  adminPermissions,
   ({ one, many }) => ({
-    admin_user_created_by_id: one(admin_users, {
-      fields: [admin_permissions.created_by_id],
-      references: [admin_users.id],
-      relationName: "admin_permissions_created_by_id_admin_users_id",
+    adminUser_createdById: one(adminUsers, {
+      fields: [adminPermissions.createdById],
+      references: [adminUsers.id],
+      relationName: "adminPermissions_createdById_adminUsers_id",
     }),
-    admin_user_updated_by_id: one(admin_users, {
-      fields: [admin_permissions.updated_by_id],
-      references: [admin_users.id],
-      relationName: "admin_permissions_updated_by_id_admin_users_id",
+    adminUser_updatedById: one(adminUsers, {
+      fields: [adminPermissions.updatedById],
+      references: [adminUsers.id],
+      relationName: "adminPermissions_updatedById_adminUsers_id",
     }),
-    admin_permissions_role_links: many(admin_permissions_role_links),
+    adminPermissionsRoleLinks: many(adminPermissionsRoleLinks),
   })
 );
 
-export const admin_rolesRelations = relations(admin_roles, ({ one, many }) => ({
-  admin_user_created_by_id: one(admin_users, {
-    fields: [admin_roles.created_by_id],
-    references: [admin_users.id],
-    relationName: "admin_roles_created_by_id_admin_users_id",
+export const adminRolesRelations = relations(adminRoles, ({ one, many }) => ({
+  adminUser_createdById: one(adminUsers, {
+    fields: [adminRoles.createdById],
+    references: [adminUsers.id],
+    relationName: "adminRoles_createdById_adminUsers_id",
   }),
-  admin_user_updated_by_id: one(admin_users, {
-    fields: [admin_roles.updated_by_id],
-    references: [admin_users.id],
-    relationName: "admin_roles_updated_by_id_admin_users_id",
+  adminUser_updatedById: one(adminUsers, {
+    fields: [adminRoles.updatedById],
+    references: [adminUsers.id],
+    relationName: "adminRoles_updatedById_adminUsers_id",
   }),
-  admin_permissions_role_links: many(admin_permissions_role_links),
-  admin_users_roles_links: many(admin_users_roles_links),
+  adminPermissionsRoleLinks: many(adminPermissionsRoleLinks),
+  adminUsersRolesLinks: many(adminUsersRolesLinks),
 }));
 
-export const strapi_api_tokensRelations = relations(
-  strapi_api_tokens,
+export const strapiApiTokensRelations = relations(
+  strapiApiTokens,
   ({ one, many }) => ({
-    admin_user_created_by_id: one(admin_users, {
-      fields: [strapi_api_tokens.created_by_id],
-      references: [admin_users.id],
-      relationName: "strapi_api_tokens_created_by_id_admin_users_id",
+    adminUser_createdById: one(adminUsers, {
+      fields: [strapiApiTokens.createdById],
+      references: [adminUsers.id],
+      relationName: "strapiApiTokens_createdById_adminUsers_id",
     }),
-    admin_user_updated_by_id: one(admin_users, {
-      fields: [strapi_api_tokens.updated_by_id],
-      references: [admin_users.id],
-      relationName: "strapi_api_tokens_updated_by_id_admin_users_id",
+    adminUser_updatedById: one(adminUsers, {
+      fields: [strapiApiTokens.updatedById],
+      references: [adminUsers.id],
+      relationName: "strapiApiTokens_updatedById_adminUsers_id",
     }),
-    strapi_api_token_permissions_token_links: many(
-      strapi_api_token_permissions_token_links
+    strapiApiTokenPermissionsTokenLinks: many(
+      strapiApiTokenPermissionsTokenLinks
     ),
   })
 );
 
-export const strapi_api_token_permissionsRelations = relations(
-  strapi_api_token_permissions,
+export const strapiApiTokenPermissionsRelations = relations(
+  strapiApiTokenPermissions,
   ({ one, many }) => ({
-    admin_user_created_by_id: one(admin_users, {
-      fields: [strapi_api_token_permissions.created_by_id],
-      references: [admin_users.id],
-      relationName: "strapi_api_token_permissions_created_by_id_admin_users_id",
+    adminUser_createdById: one(adminUsers, {
+      fields: [strapiApiTokenPermissions.createdById],
+      references: [adminUsers.id],
+      relationName: "strapiApiTokenPermissions_createdById_adminUsers_id",
     }),
-    admin_user_updated_by_id: one(admin_users, {
-      fields: [strapi_api_token_permissions.updated_by_id],
-      references: [admin_users.id],
-      relationName: "strapi_api_token_permissions_updated_by_id_admin_users_id",
+    adminUser_updatedById: one(adminUsers, {
+      fields: [strapiApiTokenPermissions.updatedById],
+      references: [adminUsers.id],
+      relationName: "strapiApiTokenPermissions_updatedById_adminUsers_id",
     }),
-    strapi_api_token_permissions_token_links: many(
-      strapi_api_token_permissions_token_links
+    strapiApiTokenPermissionsTokenLinks: many(
+      strapiApiTokenPermissionsTokenLinks
     ),
   })
 );
 
-export const strapi_transfer_tokensRelations = relations(
-  strapi_transfer_tokens,
+export const strapiTransferTokensRelations = relations(
+  strapiTransferTokens,
   ({ one, many }) => ({
-    admin_user_created_by_id: one(admin_users, {
-      fields: [strapi_transfer_tokens.created_by_id],
-      references: [admin_users.id],
-      relationName: "strapi_transfer_tokens_created_by_id_admin_users_id",
+    adminUser_createdById: one(adminUsers, {
+      fields: [strapiTransferTokens.createdById],
+      references: [adminUsers.id],
+      relationName: "strapiTransferTokens_createdById_adminUsers_id",
     }),
-    admin_user_updated_by_id: one(admin_users, {
-      fields: [strapi_transfer_tokens.updated_by_id],
-      references: [admin_users.id],
-      relationName: "strapi_transfer_tokens_updated_by_id_admin_users_id",
+    adminUser_updatedById: one(adminUsers, {
+      fields: [strapiTransferTokens.updatedById],
+      references: [adminUsers.id],
+      relationName: "strapiTransferTokens_updatedById_adminUsers_id",
     }),
-    strapi_transfer_token_permissions_token_links: many(
-      strapi_transfer_token_permissions_token_links
+    strapiTransferTokenPermissionsTokenLinks: many(
+      strapiTransferTokenPermissionsTokenLinks
     ),
   })
 );
 
-export const strapi_transfer_token_permissionsRelations = relations(
-  strapi_transfer_token_permissions,
+export const strapiTransferTokenPermissionsRelations = relations(
+  strapiTransferTokenPermissions,
   ({ one, many }) => ({
-    admin_user_created_by_id: one(admin_users, {
-      fields: [strapi_transfer_token_permissions.created_by_id],
-      references: [admin_users.id],
-      relationName:
-        "strapi_transfer_token_permissions_created_by_id_admin_users_id",
+    adminUser_createdById: one(adminUsers, {
+      fields: [strapiTransferTokenPermissions.createdById],
+      references: [adminUsers.id],
+      relationName: "strapiTransferTokenPermissions_createdById_adminUsers_id",
     }),
-    admin_user_updated_by_id: one(admin_users, {
-      fields: [strapi_transfer_token_permissions.updated_by_id],
-      references: [admin_users.id],
-      relationName:
-        "strapi_transfer_token_permissions_updated_by_id_admin_users_id",
+    adminUser_updatedById: one(adminUsers, {
+      fields: [strapiTransferTokenPermissions.updatedById],
+      references: [adminUsers.id],
+      relationName: "strapiTransferTokenPermissions_updatedById_adminUsers_id",
     }),
-    strapi_transfer_token_permissions_token_links: many(
-      strapi_transfer_token_permissions_token_links
+    strapiTransferTokenPermissionsTokenLinks: many(
+      strapiTransferTokenPermissionsTokenLinks
     ),
   })
 );
 
 export const filesRelations = relations(files, ({ one, many }) => ({
-  admin_user_created_by_id: one(admin_users, {
-    fields: [files.created_by_id],
-    references: [admin_users.id],
-    relationName: "files_created_by_id_admin_users_id",
+  adminUser_createdById: one(adminUsers, {
+    fields: [files.createdById],
+    references: [adminUsers.id],
+    relationName: "files_createdById_adminUsers_id",
   }),
-  admin_user_updated_by_id: one(admin_users, {
-    fields: [files.updated_by_id],
-    references: [admin_users.id],
-    relationName: "files_updated_by_id_admin_users_id",
+  adminUser_updatedById: one(adminUsers, {
+    fields: [files.updatedById],
+    references: [adminUsers.id],
+    relationName: "files_updatedById_adminUsers_id",
   }),
-  files_related_morphs: many(files_related_morphs),
-  files_folder_links: many(files_folder_links),
+  filesRelatedMorphs: many(filesRelatedMorphs),
+  filesFolderLinks: many(filesFolderLinks),
 }));
 
-export const upload_foldersRelations = relations(
-  upload_folders,
+export const uploadFoldersRelations = relations(
+  uploadFolders,
   ({ one, many }) => ({
-    admin_user_created_by_id: one(admin_users, {
-      fields: [upload_folders.created_by_id],
-      references: [admin_users.id],
-      relationName: "upload_folders_created_by_id_admin_users_id",
+    adminUser_createdById: one(adminUsers, {
+      fields: [uploadFolders.createdById],
+      references: [adminUsers.id],
+      relationName: "uploadFolders_createdById_adminUsers_id",
     }),
-    admin_user_updated_by_id: one(admin_users, {
-      fields: [upload_folders.updated_by_id],
-      references: [admin_users.id],
-      relationName: "upload_folders_updated_by_id_admin_users_id",
+    adminUser_updatedById: one(adminUsers, {
+      fields: [uploadFolders.updatedById],
+      references: [adminUsers.id],
+      relationName: "uploadFolders_updatedById_adminUsers_id",
     }),
-    files_folder_links: many(files_folder_links),
-    upload_folders_parent_links_folder_id: many(upload_folders_parent_links, {
-      relationName: "upload_folders_parent_links_folder_id_upload_folders_id",
+    filesFolderLinks: many(filesFolderLinks),
+    uploadFoldersParentLinks_folderId: many(uploadFoldersParentLinks, {
+      relationName: "uploadFoldersParentLinks_folderId_uploadFolders_id",
     }),
-    upload_folders_parent_links_inv_folder_id: many(
-      upload_folders_parent_links,
-      {
-        relationName:
-          "upload_folders_parent_links_inv_folder_id_upload_folders_id",
-      }
-    ),
+    uploadFoldersParentLinks_invFolderId: many(uploadFoldersParentLinks, {
+      relationName: "uploadFoldersParentLinks_invFolderId_uploadFolders_id",
+    }),
   })
 );
 
-export const strapi_releasesRelations = relations(
-  strapi_releases,
+export const strapiReleasesRelations = relations(
+  strapiReleases,
   ({ one, many }) => ({
-    admin_user_created_by_id: one(admin_users, {
-      fields: [strapi_releases.created_by_id],
-      references: [admin_users.id],
-      relationName: "strapi_releases_created_by_id_admin_users_id",
+    adminUser_createdById: one(adminUsers, {
+      fields: [strapiReleases.createdById],
+      references: [adminUsers.id],
+      relationName: "strapiReleases_createdById_adminUsers_id",
     }),
-    admin_user_updated_by_id: one(admin_users, {
-      fields: [strapi_releases.updated_by_id],
-      references: [admin_users.id],
-      relationName: "strapi_releases_updated_by_id_admin_users_id",
+    adminUser_updatedById: one(adminUsers, {
+      fields: [strapiReleases.updatedById],
+      references: [adminUsers.id],
+      relationName: "strapiReleases_updatedById_adminUsers_id",
     }),
-    strapi_release_actions_release_links: many(
-      strapi_release_actions_release_links
-    ),
+    strapiReleaseActionsReleaseLinks: many(strapiReleaseActionsReleaseLinks),
   })
 );
 
-export const strapi_release_actionsRelations = relations(
-  strapi_release_actions,
+export const strapiReleaseActionsRelations = relations(
+  strapiReleaseActions,
   ({ one, many }) => ({
-    admin_user_created_by_id: one(admin_users, {
-      fields: [strapi_release_actions.created_by_id],
-      references: [admin_users.id],
-      relationName: "strapi_release_actions_created_by_id_admin_users_id",
+    adminUser_createdById: one(adminUsers, {
+      fields: [strapiReleaseActions.createdById],
+      references: [adminUsers.id],
+      relationName: "strapiReleaseActions_createdById_adminUsers_id",
     }),
-    admin_user_updated_by_id: one(admin_users, {
-      fields: [strapi_release_actions.updated_by_id],
-      references: [admin_users.id],
-      relationName: "strapi_release_actions_updated_by_id_admin_users_id",
+    adminUser_updatedById: one(adminUsers, {
+      fields: [strapiReleaseActions.updatedById],
+      references: [adminUsers.id],
+      relationName: "strapiReleaseActions_updatedById_adminUsers_id",
     }),
-    strapi_release_actions_release_links: many(
-      strapi_release_actions_release_links
-    ),
+    strapiReleaseActionsReleaseLinks: many(strapiReleaseActionsReleaseLinks),
   })
 );
 
-export const i18n_localeRelations = relations(i18n_locale, ({ one }) => ({
-  admin_user_created_by_id: one(admin_users, {
-    fields: [i18n_locale.created_by_id],
-    references: [admin_users.id],
-    relationName: "i18n_locale_created_by_id_admin_users_id",
+export const i18NLocaleRelations = relations(i18NLocale, ({ one }) => ({
+  adminUser_createdById: one(adminUsers, {
+    fields: [i18NLocale.createdById],
+    references: [adminUsers.id],
+    relationName: "i18NLocale_createdById_adminUsers_id",
   }),
-  admin_user_updated_by_id: one(admin_users, {
-    fields: [i18n_locale.updated_by_id],
-    references: [admin_users.id],
-    relationName: "i18n_locale_updated_by_id_admin_users_id",
+  adminUser_updatedById: one(adminUsers, {
+    fields: [i18NLocale.updatedById],
+    references: [adminUsers.id],
+    relationName: "i18NLocale_updatedById_adminUsers_id",
   }),
 }));
 
-export const up_permissionsRelations = relations(
-  up_permissions,
+export const upPermissionsRelations = relations(
+  upPermissions,
   ({ one, many }) => ({
-    admin_user_created_by_id: one(admin_users, {
-      fields: [up_permissions.created_by_id],
-      references: [admin_users.id],
-      relationName: "up_permissions_created_by_id_admin_users_id",
+    adminUser_createdById: one(adminUsers, {
+      fields: [upPermissions.createdById],
+      references: [adminUsers.id],
+      relationName: "upPermissions_createdById_adminUsers_id",
     }),
-    admin_user_updated_by_id: one(admin_users, {
-      fields: [up_permissions.updated_by_id],
-      references: [admin_users.id],
-      relationName: "up_permissions_updated_by_id_admin_users_id",
+    adminUser_updatedById: one(adminUsers, {
+      fields: [upPermissions.updatedById],
+      references: [adminUsers.id],
+      relationName: "upPermissions_updatedById_adminUsers_id",
     }),
-    up_permissions_role_links: many(up_permissions_role_links),
+    upPermissionsRoleLinks: many(upPermissionsRoleLinks),
   })
 );
 
-export const up_rolesRelations = relations(up_roles, ({ one, many }) => ({
-  admin_user_created_by_id: one(admin_users, {
-    fields: [up_roles.created_by_id],
-    references: [admin_users.id],
-    relationName: "up_roles_created_by_id_admin_users_id",
+export const upRolesRelations = relations(upRoles, ({ one, many }) => ({
+  adminUser_createdById: one(adminUsers, {
+    fields: [upRoles.createdById],
+    references: [adminUsers.id],
+    relationName: "upRoles_createdById_adminUsers_id",
   }),
-  admin_user_updated_by_id: one(admin_users, {
-    fields: [up_roles.updated_by_id],
-    references: [admin_users.id],
-    relationName: "up_roles_updated_by_id_admin_users_id",
+  adminUser_updatedById: one(adminUsers, {
+    fields: [upRoles.updatedById],
+    references: [adminUsers.id],
+    relationName: "upRoles_updatedById_adminUsers_id",
   }),
-  up_permissions_role_links: many(up_permissions_role_links),
-  up_users_role_links: many(up_users_role_links),
+  upPermissionsRoleLinks: many(upPermissionsRoleLinks),
+  upUsersRoleLinks: many(upUsersRoleLinks),
 }));
 
-export const up_usersRelations = relations(up_users, ({ one, many }) => ({
-  admin_user_created_by_id: one(admin_users, {
-    fields: [up_users.created_by_id],
-    references: [admin_users.id],
-    relationName: "up_users_created_by_id_admin_users_id",
+export const upUsersRelations = relations(upUsers, ({ one, many }) => ({
+  adminUser_createdById: one(adminUsers, {
+    fields: [upUsers.createdById],
+    references: [adminUsers.id],
+    relationName: "upUsers_createdById_adminUsers_id",
   }),
-  admin_user_updated_by_id: one(admin_users, {
-    fields: [up_users.updated_by_id],
-    references: [admin_users.id],
-    relationName: "up_users_updated_by_id_admin_users_id",
+  adminUser_updatedById: one(adminUsers, {
+    fields: [upUsers.updatedById],
+    references: [adminUsers.id],
+    relationName: "upUsers_updatedById_adminUsers_id",
   }),
-  up_users_role_links: many(up_users_role_links),
+  upUsersRoleLinks: many(upUsersRoleLinks),
 }));
 
 export const answersRelations = relations(answers, ({ one, many }) => ({
-  admin_user_created_by_id: one(admin_users, {
-    fields: [answers.created_by_id],
-    references: [admin_users.id],
-    relationName: "answers_created_by_id_admin_users_id",
+  adminUser_createdById: one(adminUsers, {
+    fields: [answers.createdById],
+    references: [adminUsers.id],
+    relationName: "answers_createdById_adminUsers_id",
   }),
-  admin_user_updated_by_id: one(admin_users, {
-    fields: [answers.updated_by_id],
-    references: [admin_users.id],
-    relationName: "answers_updated_by_id_admin_users_id",
+  adminUser_updatedById: one(adminUsers, {
+    fields: [answers.updatedById],
+    references: [adminUsers.id],
+    relationName: "answers_updatedById_adminUsers_id",
   }),
-  answers_people_id_links: many(answers_people_id_links),
-  answers_question_id_links: many(answers_question_id_links),
+  answersPeopleTicketLinks: many(answersPeopleTicketLinks),
+  answersQuestionIdLinks: many(answersQuestionIdLinks),
 }));
 
 export const eventsRelations = relations(events, ({ one, many }) => ({
-  admin_user_created_by_id: one(admin_users, {
-    fields: [events.created_by_id],
-    references: [admin_users.id],
-    relationName: "events_created_by_id_admin_users_id",
+  adminUser_createdById: one(adminUsers, {
+    fields: [events.createdById],
+    references: [adminUsers.id],
+    relationName: "events_createdById_adminUsers_id",
   }),
-  admin_user_updated_by_id: one(admin_users, {
-    fields: [events.updated_by_id],
-    references: [admin_users.id],
-    relationName: "events_updated_by_id_admin_users_id",
+  adminUser_updatedById: one(adminUsers, {
+    fields: [events.updatedById],
+    references: [adminUsers.id],
+    relationName: "events_updatedById_adminUsers_id",
   }),
-  tickets_event_id_links: many(tickets_event_id_links),
+  ticketsEventIdLinks: many(ticketsEventIdLinks),
 }));
 
-export const event_galleriesRelations = relations(
-  event_galleries,
-  ({ one }) => ({
-    admin_user_created_by_id: one(admin_users, {
-      fields: [event_galleries.created_by_id],
-      references: [admin_users.id],
-      relationName: "event_galleries_created_by_id_admin_users_id",
-    }),
-    admin_user_updated_by_id: one(admin_users, {
-      fields: [event_galleries.updated_by_id],
-      references: [admin_users.id],
-      relationName: "event_galleries_updated_by_id_admin_users_id",
-    }),
-  })
-);
+export const eventGalleriesRelations = relations(eventGalleries, ({ one }) => ({
+  adminUser_createdById: one(adminUsers, {
+    fields: [eventGalleries.createdById],
+    references: [adminUsers.id],
+    relationName: "eventGalleries_createdById_adminUsers_id",
+  }),
+  adminUser_updatedById: one(adminUsers, {
+    fields: [eventGalleries.updatedById],
+    references: [adminUsers.id],
+    relationName: "eventGalleries_updatedById_adminUsers_id",
+  }),
+}));
 
 export const execsRelations = relations(execs, ({ one }) => ({
-  admin_user_created_by_id: one(admin_users, {
-    fields: [execs.created_by_id],
-    references: [admin_users.id],
-    relationName: "execs_created_by_id_admin_users_id",
+  adminUser_createdById: one(adminUsers, {
+    fields: [execs.createdById],
+    references: [adminUsers.id],
+    relationName: "execs_createdById_adminUsers_id",
   }),
-  admin_user_updated_by_id: one(admin_users, {
-    fields: [execs.updated_by_id],
-    references: [admin_users.id],
-    relationName: "execs_updated_by_id_admin_users_id",
+  adminUser_updatedById: one(adminUsers, {
+    fields: [execs.updatedById],
+    references: [adminUsers.id],
+    relationName: "execs_updatedById_adminUsers_id",
   }),
 }));
 
 export const introductionsRelations = relations(introductions, ({ one }) => ({
-  admin_user_created_by_id: one(admin_users, {
-    fields: [introductions.created_by_id],
-    references: [admin_users.id],
-    relationName: "introductions_created_by_id_admin_users_id",
+  adminUser_createdById: one(adminUsers, {
+    fields: [introductions.createdById],
+    references: [adminUsers.id],
+    relationName: "introductions_createdById_adminUsers_id",
   }),
-  admin_user_updated_by_id: one(admin_users, {
-    fields: [introductions.updated_by_id],
-    references: [admin_users.id],
-    relationName: "introductions_updated_by_id_admin_users_id",
+  adminUser_updatedById: one(adminUsers, {
+    fields: [introductions.updatedById],
+    references: [adminUsers.id],
+    relationName: "introductions_updatedById_adminUsers_id",
   }),
 }));
 
 export const partnersRelations = relations(partners, ({ one }) => ({
-  admin_user_created_by_id: one(admin_users, {
-    fields: [partners.created_by_id],
-    references: [admin_users.id],
-    relationName: "partners_created_by_id_admin_users_id",
+  adminUser_createdById: one(adminUsers, {
+    fields: [partners.createdById],
+    references: [adminUsers.id],
+    relationName: "partners_createdById_adminUsers_id",
   }),
-  admin_user_updated_by_id: one(admin_users, {
-    fields: [partners.updated_by_id],
-    references: [admin_users.id],
-    relationName: "partners_updated_by_id_admin_users_id",
+  adminUser_updatedById: one(adminUsers, {
+    fields: [partners.updatedById],
+    references: [adminUsers.id],
+    relationName: "partners_updatedById_adminUsers_id",
   }),
 }));
 
 export const peoplesRelations = relations(peoples, ({ one, many }) => ({
-  admin_user_created_by_id: one(admin_users, {
-    fields: [peoples.created_by_id],
-    references: [admin_users.id],
-    relationName: "peoples_created_by_id_admin_users_id",
+  adminUser_createdById: one(adminUsers, {
+    fields: [peoples.createdById],
+    references: [adminUsers.id],
+    relationName: "peoples_createdById_adminUsers_id",
   }),
-  admin_user_updated_by_id: one(admin_users, {
-    fields: [peoples.updated_by_id],
-    references: [admin_users.id],
-    relationName: "peoples_updated_by_id_admin_users_id",
+  adminUser_updatedById: one(adminUsers, {
+    fields: [peoples.updatedById],
+    references: [adminUsers.id],
+    relationName: "peoples_updatedById_adminUsers_id",
   }),
-  answers_people_id_links: many(answers_people_id_links),
-  user_tickets_people_id_links: many(user_tickets_people_id_links),
+  userTicketsPeopleIdLinks: many(userTicketsPeopleIdLinks),
 }));
 
-export const previous_teamsRelations = relations(previous_teams, ({ one }) => ({
-  admin_user_created_by_id: one(admin_users, {
-    fields: [previous_teams.created_by_id],
-    references: [admin_users.id],
-    relationName: "previous_teams_created_by_id_admin_users_id",
+export const previousTeamsRelations = relations(previousTeams, ({ one }) => ({
+  adminUser_createdById: one(adminUsers, {
+    fields: [previousTeams.createdById],
+    references: [adminUsers.id],
+    relationName: "previousTeams_createdById_adminUsers_id",
   }),
-  admin_user_updated_by_id: one(admin_users, {
-    fields: [previous_teams.updated_by_id],
-    references: [admin_users.id],
-    relationName: "previous_teams_updated_by_id_admin_users_id",
+  adminUser_updatedById: one(adminUsers, {
+    fields: [previousTeams.updatedById],
+    references: [adminUsers.id],
+    relationName: "previousTeams_updatedById_adminUsers_id",
   }),
 }));
+
+export const purchasableMembershipsRelations = relations(
+  purchasableMemberships,
+  ({ one }) => ({
+    adminUser_createdById: one(adminUsers, {
+      fields: [purchasableMemberships.createdById],
+      references: [adminUsers.id],
+      relationName: "purchasableMemberships_createdById_adminUsers_id",
+    }),
+    adminUser_updatedById: one(adminUsers, {
+      fields: [purchasableMemberships.updatedById],
+      references: [adminUsers.id],
+      relationName: "purchasableMemberships_updatedById_adminUsers_id",
+    }),
+  })
+);
 
 export const questionsRelations = relations(questions, ({ one, many }) => ({
-  admin_user_created_by_id: one(admin_users, {
-    fields: [questions.created_by_id],
-    references: [admin_users.id],
-    relationName: "questions_created_by_id_admin_users_id",
+  adminUser_createdById: one(adminUsers, {
+    fields: [questions.createdById],
+    references: [adminUsers.id],
+    relationName: "questions_createdById_adminUsers_id",
   }),
-  admin_user_updated_by_id: one(admin_users, {
-    fields: [questions.updated_by_id],
-    references: [admin_users.id],
-    relationName: "questions_updated_by_id_admin_users_id",
+  adminUser_updatedById: one(adminUsers, {
+    fields: [questions.updatedById],
+    references: [adminUsers.id],
+    relationName: "questions_updatedById_adminUsers_id",
   }),
-  answers_question_id_links: many(answers_question_id_links),
-  questions_ticket_id_links: many(questions_ticket_id_links),
+  answersQuestionIdLinks: many(answersQuestionIdLinks),
+  questionsTicketIdLinks: many(questionsTicketIdLinks),
 }));
 
-export const socialsRelations = relations(socials, ({ one }) => ({
-  admin_user_created_by_id: one(admin_users, {
-    fields: [socials.created_by_id],
-    references: [admin_users.id],
-    relationName: "socials_created_by_id_admin_users_id",
+export const somePhotosRelations = relations(somePhotos, ({ one }) => ({
+  adminUser_createdById: one(adminUsers, {
+    fields: [somePhotos.createdById],
+    references: [adminUsers.id],
+    relationName: "somePhotos_createdById_adminUsers_id",
   }),
-  admin_user_updated_by_id: one(admin_users, {
-    fields: [socials.updated_by_id],
-    references: [admin_users.id],
-    relationName: "socials_updated_by_id_admin_users_id",
-  }),
-}));
-
-export const some_photosRelations = relations(some_photos, ({ one }) => ({
-  admin_user_created_by_id: one(admin_users, {
-    fields: [some_photos.created_by_id],
-    references: [admin_users.id],
-    relationName: "some_photos_created_by_id_admin_users_id",
-  }),
-  admin_user_updated_by_id: one(admin_users, {
-    fields: [some_photos.updated_by_id],
-    references: [admin_users.id],
-    relationName: "some_photos_updated_by_id_admin_users_id",
+  adminUser_updatedById: one(adminUsers, {
+    fields: [somePhotos.updatedById],
+    references: [adminUsers.id],
+    relationName: "somePhotos_updatedById_adminUsers_id",
   }),
 }));
 
 export const ticketsRelations = relations(tickets, ({ one, many }) => ({
-  admin_user_created_by_id: one(admin_users, {
-    fields: [tickets.created_by_id],
-    references: [admin_users.id],
-    relationName: "tickets_created_by_id_admin_users_id",
+  adminUser_createdById: one(adminUsers, {
+    fields: [tickets.createdById],
+    references: [adminUsers.id],
+    relationName: "tickets_createdById_adminUsers_id",
   }),
-  admin_user_updated_by_id: one(admin_users, {
-    fields: [tickets.updated_by_id],
-    references: [admin_users.id],
-    relationName: "tickets_updated_by_id_admin_users_id",
+  adminUser_updatedById: one(adminUsers, {
+    fields: [tickets.updatedById],
+    references: [adminUsers.id],
+    relationName: "tickets_updatedById_adminUsers_id",
   }),
-  questions_ticket_id_links: many(questions_ticket_id_links),
-  tickets_event_id_links: many(tickets_event_id_links),
-  user_tickets_ticket_id_links: many(user_tickets_ticket_id_links),
+  questionsTicketIdLinks: many(questionsTicketIdLinks),
+  ticketsEventIdLinks: many(ticketsEventIdLinks),
+  userTicketsTicketIdLinks: many(userTicketsTicketIdLinks),
 }));
 
-export const user_ticketsRelations = relations(
-  user_tickets,
-  ({ one, many }) => ({
-    admin_user_created_by_id: one(admin_users, {
-      fields: [user_tickets.created_by_id],
-      references: [admin_users.id],
-      relationName: "user_tickets_created_by_id_admin_users_id",
-    }),
-    admin_user_updated_by_id: one(admin_users, {
-      fields: [user_tickets.updated_by_id],
-      references: [admin_users.id],
-      relationName: "user_tickets_updated_by_id_admin_users_id",
-    }),
-    user_tickets_people_id_links: many(user_tickets_people_id_links),
-    user_tickets_ticket_id_links: many(user_tickets_ticket_id_links),
-  })
-);
+export const userTicketsRelations = relations(userTickets, ({ one, many }) => ({
+  adminUser_createdById: one(adminUsers, {
+    fields: [userTickets.createdById],
+    references: [adminUsers.id],
+    relationName: "userTickets_createdById_adminUsers_id",
+  }),
+  adminUser_updatedById: one(adminUsers, {
+    fields: [userTickets.updatedById],
+    references: [adminUsers.id],
+    relationName: "userTickets_updatedById_adminUsers_id",
+  }),
+  answersPeopleTicketLinks: many(answersPeopleTicketLinks),
+  userTicketsPeopleIdLinks: many(userTicketsPeopleIdLinks),
+  userTicketsTicketIdLinks: many(userTicketsTicketIdLinks),
+}));
 
 export const valuesRelations = relations(values, ({ one }) => ({
-  admin_user_created_by_id: one(admin_users, {
-    fields: [values.created_by_id],
-    references: [admin_users.id],
-    relationName: "values_created_by_id_admin_users_id",
+  adminUser_createdById: one(adminUsers, {
+    fields: [values.createdById],
+    references: [adminUsers.id],
+    relationName: "values_createdById_adminUsers_id",
   }),
-  admin_user_updated_by_id: one(admin_users, {
-    fields: [values.updated_by_id],
-    references: [admin_users.id],
-    relationName: "values_updated_by_id_admin_users_id",
+  adminUser_updatedById: one(adminUsers, {
+    fields: [values.updatedById],
+    references: [adminUsers.id],
+    relationName: "values_updatedById_adminUsers_id",
   }),
 }));
 
-export const admin_permissions_role_linksRelations = relations(
-  admin_permissions_role_links,
+export const adminPermissionsRoleLinksRelations = relations(
+  adminPermissionsRoleLinks,
   ({ one }) => ({
-    admin_permission: one(admin_permissions, {
-      fields: [admin_permissions_role_links.permission_id],
-      references: [admin_permissions.id],
+    adminPermission: one(adminPermissions, {
+      fields: [adminPermissionsRoleLinks.permissionId],
+      references: [adminPermissions.id],
     }),
-    admin_role: one(admin_roles, {
-      fields: [admin_permissions_role_links.role_id],
-      references: [admin_roles.id],
+    adminRole: one(adminRoles, {
+      fields: [adminPermissionsRoleLinks.roleId],
+      references: [adminRoles.id],
     }),
   })
 );
 
-export const admin_users_roles_linksRelations = relations(
-  admin_users_roles_links,
+export const adminUsersRolesLinksRelations = relations(
+  adminUsersRolesLinks,
   ({ one }) => ({
-    admin_user: one(admin_users, {
-      fields: [admin_users_roles_links.user_id],
-      references: [admin_users.id],
+    adminUser: one(adminUsers, {
+      fields: [adminUsersRolesLinks.userId],
+      references: [adminUsers.id],
     }),
-    admin_role: one(admin_roles, {
-      fields: [admin_users_roles_links.role_id],
-      references: [admin_roles.id],
+    adminRole: one(adminRoles, {
+      fields: [adminUsersRolesLinks.roleId],
+      references: [adminRoles.id],
     }),
   })
 );
 
-export const strapi_api_token_permissions_token_linksRelations = relations(
-  strapi_api_token_permissions_token_links,
+export const strapiApiTokenPermissionsTokenLinksRelations = relations(
+  strapiApiTokenPermissionsTokenLinks,
   ({ one }) => ({
-    strapi_api_token_permission: one(strapi_api_token_permissions, {
+    strapiApiTokenPermission: one(strapiApiTokenPermissions, {
+      fields: [strapiApiTokenPermissionsTokenLinks.apiTokenPermissionId],
+      references: [strapiApiTokenPermissions.id],
+    }),
+    strapiApiToken: one(strapiApiTokens, {
+      fields: [strapiApiTokenPermissionsTokenLinks.apiTokenId],
+      references: [strapiApiTokens.id],
+    }),
+  })
+);
+
+export const strapiTransferTokenPermissionsTokenLinksRelations = relations(
+  strapiTransferTokenPermissionsTokenLinks,
+  ({ one }) => ({
+    strapiTransferTokenPermission: one(strapiTransferTokenPermissions, {
       fields: [
-        strapi_api_token_permissions_token_links.api_token_permission_id,
+        strapiTransferTokenPermissionsTokenLinks.transferTokenPermissionId,
       ],
-      references: [strapi_api_token_permissions.id],
+      references: [strapiTransferTokenPermissions.id],
     }),
-    strapi_api_token: one(strapi_api_tokens, {
-      fields: [strapi_api_token_permissions_token_links.api_token_id],
-      references: [strapi_api_tokens.id],
+    strapiTransferToken: one(strapiTransferTokens, {
+      fields: [strapiTransferTokenPermissionsTokenLinks.transferTokenId],
+      references: [strapiTransferTokens.id],
     }),
   })
 );
 
-export const strapi_transfer_token_permissions_token_linksRelations = relations(
-  strapi_transfer_token_permissions_token_links,
-  ({ one }) => ({
-    strapi_transfer_token_permission: one(strapi_transfer_token_permissions, {
-      fields: [
-        strapi_transfer_token_permissions_token_links.transfer_token_permission_id,
-      ],
-      references: [strapi_transfer_token_permissions.id],
-    }),
-    strapi_transfer_token: one(strapi_transfer_tokens, {
-      fields: [strapi_transfer_token_permissions_token_links.transfer_token_id],
-      references: [strapi_transfer_tokens.id],
-    }),
-  })
-);
-
-export const files_related_morphsRelations = relations(
-  files_related_morphs,
+export const filesRelatedMorphsRelations = relations(
+  filesRelatedMorphs,
   ({ one }) => ({
     file: one(files, {
-      fields: [files_related_morphs.file_id],
+      fields: [filesRelatedMorphs.fileId],
       references: [files.id],
     }),
   })
 );
 
-export const files_folder_linksRelations = relations(
-  files_folder_links,
+export const filesFolderLinksRelations = relations(
+  filesFolderLinks,
   ({ one }) => ({
     file: one(files, {
-      fields: [files_folder_links.file_id],
+      fields: [filesFolderLinks.fileId],
       references: [files.id],
     }),
-    upload_folder: one(upload_folders, {
-      fields: [files_folder_links.folder_id],
-      references: [upload_folders.id],
+    uploadFolder: one(uploadFolders, {
+      fields: [filesFolderLinks.folderId],
+      references: [uploadFolders.id],
     }),
   })
 );
 
-export const upload_folders_parent_linksRelations = relations(
-  upload_folders_parent_links,
+export const uploadFoldersParentLinksRelations = relations(
+  uploadFoldersParentLinks,
   ({ one }) => ({
-    upload_folder_folder_id: one(upload_folders, {
-      fields: [upload_folders_parent_links.folder_id],
-      references: [upload_folders.id],
-      relationName: "upload_folders_parent_links_folder_id_upload_folders_id",
+    uploadFolder_folderId: one(uploadFolders, {
+      fields: [uploadFoldersParentLinks.folderId],
+      references: [uploadFolders.id],
+      relationName: "uploadFoldersParentLinks_folderId_uploadFolders_id",
     }),
-    upload_folder_inv_folder_id: one(upload_folders, {
-      fields: [upload_folders_parent_links.inv_folder_id],
-      references: [upload_folders.id],
-      relationName:
-        "upload_folders_parent_links_inv_folder_id_upload_folders_id",
+    uploadFolder_invFolderId: one(uploadFolders, {
+      fields: [uploadFoldersParentLinks.invFolderId],
+      references: [uploadFolders.id],
+      relationName: "uploadFoldersParentLinks_invFolderId_uploadFolders_id",
     }),
   })
 );
 
-export const strapi_release_actions_release_linksRelations = relations(
-  strapi_release_actions_release_links,
+export const strapiReleaseActionsReleaseLinksRelations = relations(
+  strapiReleaseActionsReleaseLinks,
   ({ one }) => ({
-    strapi_release_action: one(strapi_release_actions, {
-      fields: [strapi_release_actions_release_links.release_action_id],
-      references: [strapi_release_actions.id],
+    strapiReleaseAction: one(strapiReleaseActions, {
+      fields: [strapiReleaseActionsReleaseLinks.releaseActionId],
+      references: [strapiReleaseActions.id],
     }),
-    strapi_release: one(strapi_releases, {
-      fields: [strapi_release_actions_release_links.release_id],
-      references: [strapi_releases.id],
+    strapiRelease: one(strapiReleases, {
+      fields: [strapiReleaseActionsReleaseLinks.releaseId],
+      references: [strapiReleases.id],
     }),
   })
 );
 
-export const up_permissions_role_linksRelations = relations(
-  up_permissions_role_links,
+export const upPermissionsRoleLinksRelations = relations(
+  upPermissionsRoleLinks,
   ({ one }) => ({
-    up_permission: one(up_permissions, {
-      fields: [up_permissions_role_links.permission_id],
-      references: [up_permissions.id],
+    upPermission: one(upPermissions, {
+      fields: [upPermissionsRoleLinks.permissionId],
+      references: [upPermissions.id],
     }),
-    up_role: one(up_roles, {
-      fields: [up_permissions_role_links.role_id],
-      references: [up_roles.id],
+    upRole: one(upRoles, {
+      fields: [upPermissionsRoleLinks.roleId],
+      references: [upRoles.id],
     }),
   })
 );
 
-export const up_users_role_linksRelations = relations(
-  up_users_role_links,
+export const upUsersRoleLinksRelations = relations(
+  upUsersRoleLinks,
   ({ one }) => ({
-    up_user: one(up_users, {
-      fields: [up_users_role_links.user_id],
-      references: [up_users.id],
+    upUser: one(upUsers, {
+      fields: [upUsersRoleLinks.userId],
+      references: [upUsers.id],
     }),
-    up_role: one(up_roles, {
-      fields: [up_users_role_links.role_id],
-      references: [up_roles.id],
+    upRole: one(upRoles, {
+      fields: [upUsersRoleLinks.roleId],
+      references: [upRoles.id],
     }),
   })
 );
 
-export const answers_people_id_linksRelations = relations(
-  answers_people_id_links,
+export const answersPeopleTicketLinksRelations = relations(
+  answersPeopleTicketLinks,
   ({ one }) => ({
     answer: one(answers, {
-      fields: [answers_people_id_links.answer_id],
+      fields: [answersPeopleTicketLinks.answerId],
       references: [answers.id],
     }),
-    people: one(peoples, {
-      fields: [answers_people_id_links.people_id],
-      references: [peoples.id],
+    userTicket: one(userTickets, {
+      fields: [answersPeopleTicketLinks.userTicketId],
+      references: [userTickets.id],
     }),
   })
 );
 
-export const answers_question_id_linksRelations = relations(
-  answers_question_id_links,
+export const answersQuestionIdLinksRelations = relations(
+  answersQuestionIdLinks,
   ({ one }) => ({
     answer: one(answers, {
-      fields: [answers_question_id_links.answer_id],
+      fields: [answersQuestionIdLinks.answerId],
       references: [answers.id],
     }),
     question: one(questions, {
-      fields: [answers_question_id_links.question_id],
+      fields: [answersQuestionIdLinks.questionId],
       references: [questions.id],
     }),
   })
 );
 
-export const questions_ticket_id_linksRelations = relations(
-  questions_ticket_id_links,
+export const questionsTicketIdLinksRelations = relations(
+  questionsTicketIdLinks,
   ({ one }) => ({
     question: one(questions, {
-      fields: [questions_ticket_id_links.question_id],
+      fields: [questionsTicketIdLinks.questionId],
       references: [questions.id],
     }),
     ticket: one(tickets, {
-      fields: [questions_ticket_id_links.ticket_id],
+      fields: [questionsTicketIdLinks.ticketId],
       references: [tickets.id],
     }),
   })
 );
 
-export const tickets_event_id_linksRelations = relations(
-  tickets_event_id_links,
+export const ticketsEventIdLinksRelations = relations(
+  ticketsEventIdLinks,
   ({ one }) => ({
     ticket: one(tickets, {
-      fields: [tickets_event_id_links.ticket_id],
+      fields: [ticketsEventIdLinks.ticketId],
       references: [tickets.id],
     }),
     event: one(events, {
-      fields: [tickets_event_id_links.event_id],
+      fields: [ticketsEventIdLinks.eventId],
       references: [events.id],
     }),
   })
 );
 
-export const user_tickets_people_id_linksRelations = relations(
-  user_tickets_people_id_links,
+export const userTicketsPeopleIdLinksRelations = relations(
+  userTicketsPeopleIdLinks,
   ({ one }) => ({
-    user_ticket: one(user_tickets, {
-      fields: [user_tickets_people_id_links.user_ticket_id],
-      references: [user_tickets.id],
+    userTicket: one(userTickets, {
+      fields: [userTicketsPeopleIdLinks.userTicketId],
+      references: [userTickets.id],
     }),
     people: one(peoples, {
-      fields: [user_tickets_people_id_links.people_id],
+      fields: [userTicketsPeopleIdLinks.peopleId],
       references: [peoples.id],
     }),
   })
 );
 
-export const user_tickets_ticket_id_linksRelations = relations(
-  user_tickets_ticket_id_links,
+export const userTicketsTicketIdLinksRelations = relations(
+  userTicketsTicketIdLinks,
   ({ one }) => ({
-    user_ticket: one(user_tickets, {
-      fields: [user_tickets_ticket_id_links.user_ticket_id],
-      references: [user_tickets.id],
+    userTicket: one(userTickets, {
+      fields: [userTicketsTicketIdLinks.userTicketId],
+      references: [userTickets.id],
     }),
     ticket: one(tickets, {
-      fields: [user_tickets_ticket_id_links.ticket_id],
+      fields: [userTicketsTicketIdLinks.ticketId],
       references: [tickets.id],
+    }),
+  })
+);
+
+export const oauthSessionsRelations = relations(oauthSessions, ({ one }) => ({
+  oauthClient: one(oauthClients, {
+    fields: [oauthSessions.appId],
+    references: [oauthClients.appId],
+  }),
+}));
+
+export const oauthClientsRelations = relations(
+  oauthClients,
+  ({ one, many }) => ({
+    oauthSessions: many(oauthSessions),
+    oauthM2MTokens: many(oauthM2MTokens),
+    app: one(apps, {
+      fields: [oauthClients.appId],
+      references: [apps.appId],
+    }),
+    oauthLogoutChallenges: many(oauthLogoutChallenges),
+  })
+);
+
+export const rolesRelations = relations(roles, ({ one, many }) => ({
+  app: one(apps, {
+    fields: [roles.appId],
+    references: [apps.appId],
+  }),
+  rolePermissions: many(rolePermissions),
+}));
+
+export const appsRelations = relations(apps, ({ many }) => ({
+  roles: many(roles),
+  totpUsers: many(totpUsers),
+  tenants: many(tenants),
+  userLastActives: many(userLastActive),
+  sessionAccessTokenSigningKeys: many(sessionAccessTokenSigningKeys),
+  emailverificationVerifiedEmails: many(emailverificationVerifiedEmails),
+  userMetadata: many(userMetadata),
+  appIdToUserIds: many(appIdToUserId),
+  jwtSigningKeys: many(jwtSigningKeys),
+  dashboardUsers: many(dashboardUsers),
+  oauthClients: many(oauthClients),
+}));
+
+export const totpUsersRelations = relations(totpUsers, ({ one, many }) => ({
+  app: one(apps, {
+    fields: [totpUsers.appId],
+    references: [apps.appId],
+  }),
+  totpUsedCodes: many(totpUsedCodes),
+  totpUserDevices: many(totpUserDevices),
+}));
+
+export const tenantsRelations = relations(tenants, ({ one, many }) => ({
+  app: one(apps, {
+    fields: [tenants.appId],
+    references: [apps.appId],
+  }),
+  userRoles: many(userRoles),
+  keyValues: many(keyValue),
+  emailverificationTokens: many(emailverificationTokens),
+  passwordlessDevices: many(passwordlessDevices),
+  totpUsedCodes: many(totpUsedCodes),
+  allAuthRecipeUsers: many(allAuthRecipeUsers),
+  sessionInfos: many(sessionInfo),
+}));
+
+export const userLastActiveRelations = relations(userLastActive, ({ one }) => ({
+  app: one(apps, {
+    fields: [userLastActive.appId],
+    references: [apps.appId],
+  }),
+}));
+
+export const sessionAccessTokenSigningKeysRelations = relations(
+  sessionAccessTokenSigningKeys,
+  ({ one }) => ({
+    app: one(apps, {
+      fields: [sessionAccessTokenSigningKeys.appId],
+      references: [apps.appId],
+    }),
+  })
+);
+
+export const emailverificationVerifiedEmailsRelations = relations(
+  emailverificationVerifiedEmails,
+  ({ one }) => ({
+    app: one(apps, {
+      fields: [emailverificationVerifiedEmails.appId],
+      references: [apps.appId],
+    }),
+  })
+);
+
+export const userMetadataRelations = relations(userMetadata, ({ one }) => ({
+  app: one(apps, {
+    fields: [userMetadata.appId],
+    references: [apps.appId],
+  }),
+}));
+
+export const rolePermissionsRelations = relations(
+  rolePermissions,
+  ({ one }) => ({
+    role: one(roles, {
+      fields: [rolePermissions.appId],
+      references: [roles.appId],
+    }),
+  })
+);
+
+export const tenantFirstFactorsRelations = relations(
+  tenantFirstFactors,
+  ({ one }) => ({
+    tenantConfig: one(tenantConfigs, {
+      fields: [tenantFirstFactors.connectionUriDomain],
+      references: [tenantConfigs.connectionUriDomain],
+    }),
+  })
+);
+
+export const tenantConfigsRelations = relations(tenantConfigs, ({ many }) => ({
+  tenantFirstFactors: many(tenantFirstFactors),
+  tenantRequiredSecondaryFactors: many(tenantRequiredSecondaryFactors),
+  tenantThirdpartyProviders: many(tenantThirdpartyProviders),
+}));
+
+export const tenantRequiredSecondaryFactorsRelations = relations(
+  tenantRequiredSecondaryFactors,
+  ({ one }) => ({
+    tenantConfig: one(tenantConfigs, {
+      fields: [tenantRequiredSecondaryFactors.connectionUriDomain],
+      references: [tenantConfigs.connectionUriDomain],
+    }),
+  })
+);
+
+export const emailpasswordUserToTenantRelations = relations(
+  emailpasswordUserToTenant,
+  ({ one }) => ({
+    allAuthRecipeUser: one(allAuthRecipeUsers, {
+      fields: [emailpasswordUserToTenant.appId],
+      references: [allAuthRecipeUsers.appId],
+    }),
+  })
+);
+
+export const allAuthRecipeUsersRelations = relations(
+  allAuthRecipeUsers,
+  ({ one, many }) => ({
+    emailpasswordUserToTenants: many(emailpasswordUserToTenant),
+    thirdpartyUserToTenants: many(thirdpartyUserToTenant),
+    passwordlessUserToTenants: many(passwordlessUserToTenant),
+    tenant: one(tenants, {
+      fields: [allAuthRecipeUsers.appId],
+      references: [tenants.appId],
+    }),
+    appIdToUserId_appId: one(appIdToUserId, {
+      fields: [allAuthRecipeUsers.appId],
+      references: [appIdToUserId.appId],
+      relationName: "allAuthRecipeUsers_appId_appIdToUserId_appId",
+    }),
+  })
+);
+
+export const userRolesRelations = relations(userRoles, ({ one }) => ({
+  tenant: one(tenants, {
+    fields: [userRoles.appId],
+    references: [tenants.appId],
+  }),
+}));
+
+export const useridMappingRelations = relations(useridMapping, ({ one }) => ({
+  appIdToUserId: one(appIdToUserId, {
+    fields: [useridMapping.appId],
+    references: [appIdToUserId.appId],
+  }),
+}));
+
+export const appIdToUserIdRelations = relations(
+  appIdToUserId,
+  ({ one, many }) => ({
+    useridMappings: many(useridMapping),
+    appIdToUserId: one(appIdToUserId, {
+      fields: [appIdToUserId.appId],
+      references: [appIdToUserId.appId],
+      relationName: "appIdToUserId_appId_appIdToUserId_appId",
+    }),
+    appIdToUserIds: many(appIdToUserId, {
+      relationName: "appIdToUserId_appId_appIdToUserId_appId",
+    }),
+    app: one(apps, {
+      fields: [appIdToUserId.appId],
+      references: [apps.appId],
+    }),
+    emailpasswordPswdResetTokens: many(emailpasswordPswdResetTokens),
+    emailpasswordUsers: many(emailpasswordUsers),
+    passwordlessUsers: many(passwordlessUsers),
+    thirdpartyUsers: many(thirdpartyUsers),
+    allAuthRecipeUsers_appId: many(allAuthRecipeUsers, {
+      relationName: "allAuthRecipeUsers_appId_appIdToUserId_appId",
+    }),
+  })
+);
+
+export const oauthM2MTokensRelations = relations(oauthM2MTokens, ({ one }) => ({
+  oauthClient: one(oauthClients, {
+    fields: [oauthM2MTokens.appId],
+    references: [oauthClients.appId],
+  }),
+}));
+
+export const keyValueRelations = relations(keyValue, ({ one }) => ({
+  tenant: one(tenants, {
+    fields: [keyValue.appId],
+    references: [tenants.appId],
+  }),
+}));
+
+export const emailpasswordPswdResetTokensRelations = relations(
+  emailpasswordPswdResetTokens,
+  ({ one }) => ({
+    appIdToUserId: one(appIdToUserId, {
+      fields: [emailpasswordPswdResetTokens.appId],
+      references: [appIdToUserId.appId],
+    }),
+  })
+);
+
+export const emailpasswordUsersRelations = relations(
+  emailpasswordUsers,
+  ({ one }) => ({
+    appIdToUserId: one(appIdToUserId, {
+      fields: [emailpasswordUsers.appId],
+      references: [appIdToUserId.appId],
+    }),
+  })
+);
+
+export const thirdpartyUserToTenantRelations = relations(
+  thirdpartyUserToTenant,
+  ({ one }) => ({
+    allAuthRecipeUser: one(allAuthRecipeUsers, {
+      fields: [thirdpartyUserToTenant.appId],
+      references: [allAuthRecipeUsers.appId],
+    }),
+  })
+);
+
+export const jwtSigningKeysRelations = relations(jwtSigningKeys, ({ one }) => ({
+  app: one(apps, {
+    fields: [jwtSigningKeys.appId],
+    references: [apps.appId],
+  }),
+}));
+
+export const passwordlessUsersRelations = relations(
+  passwordlessUsers,
+  ({ one }) => ({
+    appIdToUserId: one(appIdToUserId, {
+      fields: [passwordlessUsers.appId],
+      references: [appIdToUserId.appId],
+    }),
+  })
+);
+
+export const passwordlessUserToTenantRelations = relations(
+  passwordlessUserToTenant,
+  ({ one }) => ({
+    allAuthRecipeUser: one(allAuthRecipeUsers, {
+      fields: [passwordlessUserToTenant.appId],
+      references: [allAuthRecipeUsers.appId],
+    }),
+  })
+);
+
+export const dashboardUsersRelations = relations(
+  dashboardUsers,
+  ({ one, many }) => ({
+    app: one(apps, {
+      fields: [dashboardUsers.appId],
+      references: [apps.appId],
+    }),
+    dashboardUserSessions: many(dashboardUserSessions),
+  })
+);
+
+export const dashboardUserSessionsRelations = relations(
+  dashboardUserSessions,
+  ({ one }) => ({
+    dashboardUser: one(dashboardUsers, {
+      fields: [dashboardUserSessions.appId],
+      references: [dashboardUsers.appId],
+    }),
+  })
+);
+
+export const emailverificationTokensRelations = relations(
+  emailverificationTokens,
+  ({ one }) => ({
+    tenant: one(tenants, {
+      fields: [emailverificationTokens.appId],
+      references: [tenants.appId],
+    }),
+  })
+);
+
+export const thirdpartyUsersRelations = relations(
+  thirdpartyUsers,
+  ({ one }) => ({
+    appIdToUserId: one(appIdToUserId, {
+      fields: [thirdpartyUsers.appId],
+      references: [appIdToUserId.appId],
+    }),
+  })
+);
+
+export const passwordlessCodesRelations = relations(
+  passwordlessCodes,
+  ({ one }) => ({
+    passwordlessDevice: one(passwordlessDevices, {
+      fields: [passwordlessCodes.appId],
+      references: [passwordlessDevices.appId],
+    }),
+  })
+);
+
+export const passwordlessDevicesRelations = relations(
+  passwordlessDevices,
+  ({ one, many }) => ({
+    passwordlessCodes: many(passwordlessCodes),
+    tenant: one(tenants, {
+      fields: [passwordlessDevices.appId],
+      references: [tenants.appId],
+    }),
+  })
+);
+
+export const totpUsedCodesRelations = relations(totpUsedCodes, ({ one }) => ({
+  totpUser: one(totpUsers, {
+    fields: [totpUsedCodes.appId],
+    references: [totpUsers.appId],
+  }),
+  tenant: one(tenants, {
+    fields: [totpUsedCodes.appId],
+    references: [tenants.appId],
+  }),
+}));
+
+export const oauthLogoutChallengesRelations = relations(
+  oauthLogoutChallenges,
+  ({ one }) => ({
+    oauthClient: one(oauthClients, {
+      fields: [oauthLogoutChallenges.appId],
+      references: [oauthClients.appId],
+    }),
+  })
+);
+
+export const totpUserDevicesRelations = relations(
+  totpUserDevices,
+  ({ one }) => ({
+    totpUser: one(totpUsers, {
+      fields: [totpUserDevices.appId],
+      references: [totpUsers.appId],
+    }),
+  })
+);
+
+export const sessionInfoRelations = relations(sessionInfo, ({ one }) => ({
+  tenant: one(tenants, {
+    fields: [sessionInfo.appId],
+    references: [tenants.appId],
+  }),
+}));
+
+export const tenantThirdpartyProviderClientsRelations = relations(
+  tenantThirdpartyProviderClients,
+  ({ one }) => ({
+    tenantThirdpartyProvider: one(tenantThirdpartyProviders, {
+      fields: [tenantThirdpartyProviderClients.connectionUriDomain],
+      references: [tenantThirdpartyProviders.connectionUriDomain],
+    }),
+  })
+);
+
+export const tenantThirdpartyProvidersRelations = relations(
+  tenantThirdpartyProviders,
+  ({ one, many }) => ({
+    tenantThirdpartyProviderClients: many(tenantThirdpartyProviderClients),
+    tenantConfig: one(tenantConfigs, {
+      fields: [tenantThirdpartyProviders.connectionUriDomain],
+      references: [tenantConfigs.connectionUriDomain],
     }),
   })
 );

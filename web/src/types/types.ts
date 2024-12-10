@@ -1,5 +1,3 @@
-// import { StringValidation } from "zod";
-
 export interface Exec {
   id: number;
   image: string;
@@ -9,33 +7,10 @@ export interface Exec {
   description: string;
 }
 
-export interface Props {
-  execs: Exec[];
-}
-
-export interface ExecCardProps {
-  exec: Exec;
-}
-
-export interface PrimaryDeveloper {
+export interface PartnerImage {
   id: number;
   name: string;
-  linkedIn: string;
-  github: string;
-}
-
-export interface SecondaryDeveloper {
-  id: number;
-  name: string;
-  github: string;
-}
-
-export interface PrimaryDeveloperCardProps {
-  primaryDeveloper: PrimaryDeveloper;
-}
-
-export interface SecondaryDeveloperCardProps {
-  secondaryDeveloper: SecondaryDeveloper;
+  image: string;
 }
 
 export interface Partner {
@@ -45,17 +20,6 @@ export interface Partner {
   description: string;
   image: string;
   location: string;
-}
-
-export interface PartnerCardProps {
-  colour: string;
-  partner: Partner;
-}
-
-export interface Social {
-  id: number;
-  type: string;
-  link: string;
 }
 
 export interface SomePhoto {
@@ -72,12 +36,7 @@ export interface Value {
   image: string;
 }
 
-export interface ValueCardProps {
-  value: Value;
-}
-
 export interface Introduction {
-  id: number;
   description: string;
   events: string;
   members: string;
@@ -91,43 +50,27 @@ export interface PreviousTeam {
   year: string;
 }
 
-export interface PreviousTeamCardProps {
-  year: string;
-  teams: {
-    Presidents: PreviousTeam[];
-    Executives: PreviousTeam[];
-  };
+export interface EventsSlider {
+  id: number;
+  title: string;
+  location: string;
+  eventDateStart: string;
+  image: string;
+  isLive: boolean;
 }
 
-export interface Event {
-  id: number;
+export interface EventAndTickets {
   title: string;
   description: string;
   subtitle: string;
   location: string;
-  locationLink: string;
   eventDateStart: string;
   eventDateEnd: string;
-  isLive: boolean;
   termsAndConditions: string;
   eventCapacityRemaining: number;
   image: string;
-}
-
-export interface EventAndTicket {
-  id: number;
-  title: string;
-  description: string;
-  subtitle: string;
-  location: string;
-  locationLink: string;
-  eventDateStart: string;
-  eventDateEnd: string;
   isLive: boolean;
-  termsAndConditions: string;
-  eventCapacityRemaining: number;
-  image: string;
-  ticket: Ticket[];
+  tickets: Ticket[];
 }
 
 export interface EventGallery {
@@ -135,17 +78,19 @@ export interface EventGallery {
   image: string;
 }
 
-export interface Question {
+interface Question {
   id: number;
   question: string;
-  checkForMemberEmail: boolean;
 }
 
-export interface Ticket {
+export interface TicketAndQuestion {
+  ticketId: number;
+  questions: Question[];
+}
+
+interface Ticket {
   id: number;
   name: string;
-  discountCode: string;
-  discountPrice: number;
   price: number;
   isMemberOnly: boolean;
   isDouble: boolean;
@@ -153,8 +98,9 @@ export interface Ticket {
   ticketDescription: string;
   startDateTicketSales: string;
   isTicketLive: boolean;
-  ticketBypassLink: boolean;
+  ticketLinkBypass: boolean;
   bypassTicketLink: string;
+  stripeLink: string;
 }
 
 export interface PurchasableMembership {
@@ -164,4 +110,27 @@ export interface PurchasableMembership {
   price: number;
   stripeLink: string;
   description: string;
+  membershipLinkBypass: boolean;
+  bypassMembershipLink: string;
+}
+
+export interface MembershipExpiryDate {
+  userExpiryDate: string;
+}
+
+export interface QuestionAnswer {
+  question: string;
+  questionId: number;
+  indexId: number;
+  answer: string;
+}
+
+export interface AttendanceList {
+  name: string;
+  id: number;
+  userTicketCode: string;
+  attendance: boolean;
+}
+export interface AttendanceReturn {
+  name: string;
 }

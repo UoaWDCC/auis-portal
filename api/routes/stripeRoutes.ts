@@ -1,19 +1,26 @@
 import express, { Router, json } from "express";
-import { protect } from "../middleware/authMiddleware";
+import { verifySession } from "supertokens-node/recipe/session/framework/express";
 import {
-  createEventCheckoutSession,
+  createCheckout,
   getSessionStatus,
   handleWebhook,
 } from "../controller/stripeController";
 
 const router = Router();
 
-// Only allowed to access if the user is logged in.
-//router.use(protect);
+// TODO: unprotect these routes
+router.get(
+  "/session-status",
+  verifySession({ sessionRequired: false }),
+  getSessionStatus
+);
+router.post(
+  "/create-checkout",
+  verifySession({ sessionRequired: false }),
+  createCheckout
+);
 
-router.get("/session-status", getSessionStatus);
-router.post("/create-event-checkout", createEventCheckoutSession);
-router.post("/create-membership-checkout", createEventCheckoutSession);
+// do not protect this route
 router.post(
   "/webhook",
   // Stripe requires the raw body to construct the event

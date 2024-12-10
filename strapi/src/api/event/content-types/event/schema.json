@@ -69,6 +69,11 @@
     "Description": {
       "type": "richtext",
       "required": true
+    },
+    "Stripe_Price_ID": {
+      "type": "string",
+      "required": true,
+      "unique": true
     }
   }
 }

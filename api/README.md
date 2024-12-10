@@ -96,31 +96,3 @@ Fulfill Orders (Webhook stuff): https://docs.stripe.com/payments/checkout/fulfil
 Register Webhook (FOR PRODUCTION): https://docs.stripe.com/webhooks#register-webhook
 
 Product and Pricing: https://docs.stripe.com/products-prices/how-products-and-prices-work
-
-# Instructions for setting up Clerk
-Follow Step 1: Connect except the "DEPLOY YOUR APP ONLINE" part: https://dashboard.ngrok.com/get-started/setup/windows
-
-Step 2: Run `ngrok http --url=https://gelding-trusty-exactly.ngrok-free.app 3000`. 
-
-Step 3: Now try to create a new user and login. You should now see an event of type "user.created" in the console. 
-
-# Instructions for testing with Clerk:
-
-Email addresses
-Any email with the +clerk_test subaddress is a test email address. No emails will be sent, and they can be verified with the code 424242.
-
-For example:
-
-jane+clerk_test@example.com
-doe+clerk_test@example.com
-
-# Additional articles for Clerk
-https://clerk.com/docs/integrations/webhooks/overview
-
-https://clerk.com/docs/integrations/webhooks/sync-data
-
-https://ngrok.com/docs/integrations/clerk/webhooks/
-
-https://docs.svix.com/receiving/verifying-payloads/how#nodejs-express
-
-https://clerk.com/docs/deployments/overview

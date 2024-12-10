@@ -12,11 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "People_Ticket_Code": {
-      "type": "integer",
-      "unique": true,
-      "required": true
-    },
     "People_ID": {
       "type": "relation",
       "relation": "manyToOne",
@@ -28,6 +23,34 @@
       "relation": "manyToOne",
       "target": "api::ticket.ticket",
       "inversedBy": "People_Ticket_ID"
+    },
+    "Name": {
+      "type": "string"
+    },
+    "Email": {
+      "type": "email"
+    },
+    "Phone_Number": {
+      "type": "string"
+    },
+    "Answers": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::answer.answer",
+      "mappedBy": "People_Ticket"
+    },
+    "People_Ticket_Code": {
+      "type": "string"
+    },
+    "Attendance": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "Paid": {
+      "type": "boolean",
+      "default": false,
+      "required": true
     }
   }
 }

@@ -6,16 +6,27 @@ import { useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 import { PurchasableMembership } from "../types/types";
 import { Mapper } from "@utils/Mapper";
-import LoadingSpinner from "@components/LoadingSpinner";
+import LoadingSpinner from "@components/navigation/LoadingSpinner";
+import { useUserMembershipExpiry } from "../hooks/api/useUserMembership";
+import { useSessionContext } from "supertokens-auth-react/recipe/session";
+import { useNavigate } from "react-router";
 
 export default function MembershipScreen({ navbar }: { navbar: JSX.Element }) {
-  const MEMBERSHIP_ACTIVE = false;
+  const session = useSessionContext();
+  const navigate = useNavigate();
+
   // Queries
   const {
     loading: purchasableMembershipsLoading,
     data: purchasableMembershipsData,
     error: purchasableMembershipsError,
   } = useQuery(GET_PURCHASEABLE_MEMBERSHIPS);
+
+  const {
+    data: userMembershipExpiry,
+    error: errorUserMembership,
+    isLoading: loadingUserMembership,
+  } = useUserMembershipExpiry();
 
   // States
   const [purchasableMemberships, setPurchasableMembership] = useState<
@@ -25,6 +36,13 @@ export default function MembershipScreen({ navbar }: { navbar: JSX.Element }) {
     useState(true);
   const [errorPurchasableMembership, setErrorPurchasableMembership] =
     useState(false);
+  const [userLoggedIn, setUserLoggedIn] = useState(false);
+
+  useEffect(() => {
+    if (session.loading === false) {
+      setUserLoggedIn(session.doesSessionExist);
+    }
+  });
 
   // useEffect
   useEffect(() => {
@@ -39,7 +57,6 @@ export default function MembershipScreen({ navbar }: { navbar: JSX.Element }) {
         const mappedPurchaseableMemberships =
           Mapper.mapToPurchasableMemberships(purchasableMembershipsData);
         setPurchasableMembership(mappedPurchaseableMemberships);
-        console.log(purchasableMemberships);
       } catch (error) {
         setErrorPurchasableMembership(true);
       }
@@ -50,6 +67,17 @@ export default function MembershipScreen({ navbar }: { navbar: JSX.Element }) {
     purchasableMembershipsLoading,
   ]);
 
+  if ((loadingUserMembership && userLoggedIn) || loadingPurchasableMembership)
+    return (
+      <>
+        <LoadingSpinner />
+      </>
+    );
+
+  if (errorUserMembership && userLoggedIn) {
+    navigate("/signup/information");
+  }
+
   return (
     <>
       <div className="from-AUIS-dark-teal to-AUIS-teal min-h-svh bg-gradient-to-b pb-20">
@@ -57,10 +85,21 @@ export default function MembershipScreen({ navbar }: { navbar: JSX.Element }) {
         <h1 className="mx-3 pb-2 text-center text-5xl font-bold text-white">
           Memberships
         </h1>
-        {MEMBERSHIP_ACTIVE ? (
+        {userMembershipExpiry &&
+        !errorUserMembership &&
+        userLoggedIn &&
+        new Date(userMembershipExpiry.userExpiryDate) >= new Date() ? (
           <div>
             <h1 className="text-center text-xl text-white">
               Your current membership expires on:{" "}
+              {new Date(userMembershipExpiry.userExpiryDate).toLocaleDateString(
+                "default",
+                {
+                  day: "2-digit",
+                  month: "long",
+                  year: "numeric",
+                }
+              )}
             </h1>
             <div className="flex justify-center">
               <div className="">
@@ -77,8 +116,6 @@ export default function MembershipScreen({ navbar }: { navbar: JSX.Element }) {
               </div>
             </div>
           </div>
-        ) : loadingPurchasableMembership ? (
-          <LoadingSpinner />
         ) : errorPurchasableMembership ||
           purchasableMemberships.length === 0 ? (
           <div className="p-5 text-center text-white">
@@ -92,7 +129,18 @@ export default function MembershipScreen({ navbar }: { navbar: JSX.Element }) {
             <div className="flex flex-wrap items-center justify-center">
               {purchasableMemberships.map((purchasableMembership) => (
                 <PurchaseMembershipCard
-                  purchasableMembership={purchasableMembership}
+                  key={purchasableMembership.id}
+                  title={purchasableMembership.title}
+                  expiry={purchasableMembership.expiry}
+                  price={purchasableMembership.price}
+                  stripeLink={purchasableMembership.stripeLink}
+                  description={purchasableMembership.description}
+                  membershipLinkBypass={
+                    purchasableMembership.membershipLinkBypass
+                  }
+                  bypassMembershipLink={
+                    purchasableMembership.bypassMembershipLink
+                  }
                 />
               ))}
             </div>

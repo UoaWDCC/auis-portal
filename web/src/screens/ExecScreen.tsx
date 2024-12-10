@@ -1,7 +1,7 @@
 import type { Exec, PreviousTeam } from "../types/types";
 import { useQuery } from "@apollo/client";
 import { GET_EXECS, GET_PREVIOUS_TEAMS } from "../graphql/queries";
-import LoadingSpinner from "../components/LoadingSpinner";
+import LoadingSpinner from "../components/navigation/LoadingSpinner";
 import { Mapper } from "../utils/Mapper";
 import ExecCard from "../components/exec-page/ExecCard";
 import PreviousTeamCard from "../components/exec-page/PreviousTeamCard";
@@ -74,23 +74,20 @@ export default function ExecScreen({ navbar }: { navbar: JSX.Element }) {
   // Function to group previous teams by year and role
   const groupByYearAndRole = (teams: PreviousTeam[]) => {
     return teams.reduce(
-      (acc, team) => {
-        // Check if the year exists in the accumulator object
-        if (!acc[team.year]) {
-          // Initialize the year key with empty arrays for Presidents and Executives
-          acc[team.year] = { Presidents: [], Executives: [] };
+      (group, team) => {
+        if (!group[team.year]) {
+          group[team.year] = { presidents: [], executives: [] };
         }
-        // Add the team to the appropriate role array based on the role
         if (team.role === "President") {
-          acc[team.year].Presidents.push(team);
+          group[team.year].presidents.push(team);
         } else if (team.role === "Executive") {
-          acc[team.year].Executives.push(team);
+          group[team.year].executives.push(team);
         }
-        return acc;
+        return group;
       },
       {} as Record<
         string,
-        { Presidents: PreviousTeam[]; Executives: PreviousTeam[] }
+        { presidents: PreviousTeam[]; executives: PreviousTeam[] }
       >
     );
   };
@@ -98,77 +95,87 @@ export default function ExecScreen({ navbar }: { navbar: JSX.Element }) {
   const groupedPreviousTeams = groupByYearAndRole(previousTeams);
 
   // Sorting keys (years) in reverse order
-  const sortedYears = Object.keys(groupedPreviousTeams).sort(
+  const sortedPreviousTeams = Object.keys(groupedPreviousTeams).sort(
     (a, b) => parseInt(b) - parseInt(a)
   );
 
+  if (loadingExecutives || loadingPreviousTeams) {
+    return (
+      <>
+        <LoadingSpinner />
+      </>
+    );
+  }
+
   return (
     <>
-      {loadingExecutives || loadingPreviousTeams ? (
-        <LoadingSpinner />
-      ) : (
-        <>
-          <div className="max-w-screen from-AUIS-dark-teal to-AUIS-teal h-auto bg-gradient-to-b">
-            {navbar}
-            <div className="flex flex-col items-center text-center">
-              <h1 className="text-5xl font-bold text-white">Meet Our Team!</h1>
-              <h3 className="my-5 px-5 text-xl text-white">
-                The faces behind AUIS that make it all happen. Hover over them
-                to find out more about them!
-              </h3>
-              <h2 className="text-tertiary-blue text-3xl font-bold">
-                PRESIDENT
-              </h2>
-              {errorExecutives ? (
-                <div className="py-10">There are no execs to display</div>
-              ) : (
-                <div className="flex flex-wrap justify-center">
-                  {presidents?.map((exec) => (
-                    <div key={exec.id} className="mx-3 my-5">
-                      <ExecCard exec={exec} />
-                    </div>
-                  ))}
-                </div>
-              )}
-              <h2 className="text-tertiary-blue text-3xl font-bold">
-                EXECUTIVE TEAM
-              </h2>
-              {errorExecutives ? (
-                <div className="py-10">There are no execs to display</div>
-              ) : (
-                <div className="mb-5 flex flex-wrap justify-center">
-                  {otherExecutives?.map((exec) => (
-                    <div key={exec.id} className="mx-3 my-5">
-                      <ExecCard exec={exec} />
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
-
-          <div className="max-w-screen flex h-auto flex-col items-center bg-white px-3 py-5">
-            <h1 className="text-center text-5xl font-bold text-black">
-              Previous Teams
-            </h1>
-            {errorPreviousTeams ? (
-              <div className="py-10">
-                There are no previous teams to display
-              </div>
+      <>
+        <div className="max-w-screen from-AUIS-dark-teal to-AUIS-teal h-auto bg-gradient-to-b">
+          {navbar}
+          <div className="flex flex-col items-center text-center">
+            <h1 className="text-5xl font-bold text-white">Meet Our Team!</h1>
+            <h3 className="my-5 px-5 text-xl text-white">
+              The faces behind AUIS that make it all happen. Hover over them to
+              find out more about them!
+            </h3>
+            <h2 className="text-tertiary-blue text-3xl font-bold">President</h2>
+            {errorExecutives ? (
+              <div className="py-10">There are no execs to display</div>
             ) : (
-              <div>
-                {sortedYears.map((year) => (
-                  <PreviousTeamCard
-                    key={year}
-                    year={year}
-                    teams={groupedPreviousTeams[year]}
-                  />
+              <div className="flex flex-wrap justify-center">
+                {presidents?.map((exec) => (
+                  <div key={exec.id} className="mx-3 my-5">
+                    <ExecCard
+                      name={exec.name}
+                      description={exec.description}
+                      image={exec.image}
+                      position={exec.position}
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
+            <h2 className="text-tertiary-blue text-3xl font-bold">
+              Executive Team
+            </h2>
+            {errorExecutives ? (
+              <div className="py-10">There are no execs to display</div>
+            ) : (
+              <div className="mb-5 flex flex-wrap justify-center">
+                {otherExecutives?.map((exec) => (
+                  <div key={exec.id} className="mx-3 my-5">
+                    <ExecCard
+                      name={exec.name}
+                      description={exec.description}
+                      image={exec.image}
+                      position={exec.position}
+                    />
+                  </div>
                 ))}
               </div>
             )}
           </div>
-        </>
-      )}
+        </div>
+
+        <div className="max-w-screen flex h-auto flex-col items-center bg-white px-3 py-5">
+          <h1 className="text-center text-5xl font-bold text-black">
+            Previous Teams
+          </h1>
+          {errorPreviousTeams ? (
+            <div className="py-10">There are no previous teams to display</div>
+          ) : (
+            <div>
+              {sortedPreviousTeams.map((year) => (
+                <PreviousTeamCard
+                  key={year}
+                  year={year}
+                  teams={groupedPreviousTeams[year]}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+      </>
     </>
   );
 }

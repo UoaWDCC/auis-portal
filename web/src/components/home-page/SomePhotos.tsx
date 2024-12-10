@@ -1,12 +1,11 @@
 import type { SomePhoto } from "../../types/types";
 
-function SomePhotos({
-  photos,
-  noPhotos,
-}: {
+interface SomePhotosProps {
   photos: SomePhoto[];
   noPhotos: boolean;
-}) {
+}
+
+function SomePhotos({ photos, noPhotos }: SomePhotosProps) {
   return (
     <>
       <div className="bg-white">
@@ -23,7 +22,7 @@ function SomePhotos({
                   {/* Only grab first 4 images */}
                   {photos.slice(0, 4).map((photo, index) => (
                     <div
-                      key={photo.title}
+                      key={photo.id}
                       className={`z-${10 + index * 10} ${
                         index % 2 === 0 ? "-rotate-3" : "rotate-3"
                       } transform rounded-lg bg-white p-4 shadow-lg transition-transform hover:rotate-0`}

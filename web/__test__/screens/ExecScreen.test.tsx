@@ -152,7 +152,9 @@ describe("ExecScreen", () => {
       </MockedProvider>
     );
 
-    // expect(await screen.findByText("CMS Offline")).toBeInTheDocument();
+    expect(
+      await screen.findAllByText("There are no execs to display")
+    ).toHaveLength(2);
   });
 
   it("renders current execs correctly", async () => {
@@ -166,7 +168,7 @@ describe("ExecScreen", () => {
 
     expect(await screen.findByText("Guryash")).toBeInTheDocument();
     expect(await screen.findByText("A great leader")).toBeInTheDocument();
-    expect(await screen.findByText("President")).toBeInTheDocument();
+    expect(await screen.findAllByText("President")).toHaveLength(2);
     expect(await screen.findByText("Jane Doe")).toBeInTheDocument();
     expect(await screen.findByText("People")).toBeInTheDocument();
     expect(await screen.findByText("An amazing executive")).toBeInTheDocument();

@@ -1,11 +1,9 @@
-// import { useNavigate } from "react-router";
 import peacockLogo from "../../assets/peacock_logo.png";
 import Socials from "./Socials";
 import { Link } from "react-router-dom";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
-  // const navigate = useNavigate();
   return (
     <>
       <footer className="w-full bg-white px-10">
@@ -20,10 +18,7 @@ export default function Footer() {
               </div>
             </div>
             <Link to={"/credits"}>
-              <button
-                // onClick={() => navigate("")}
-                className="bg-primary-orange mx-5 my-3 mr-5 rounded-3xl px-6 py-1 font-bold text-white transition-all hover:scale-110"
-              >
+              <button className="bg-primary-orange mx-5 my-3 mr-5 rounded-3xl px-6 py-1 font-bold text-white transition-all hover:scale-110">
                 Website Credits
               </button>
             </Link>

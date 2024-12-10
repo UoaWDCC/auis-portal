@@ -52,7 +52,7 @@ const partnersMock = {
             id: 3,
             attributes: {
               Type: "Bronze",
-              Name: "Beso Cafe and Kitchen",
+              Name: "Beso",
               Location: "256 Manukau Road, Epsom, Auckland",
               Description: "10% off Everything",
               Image: {
@@ -117,7 +117,15 @@ describe("PartnersScreen", () => {
       </MockedProvider>
     );
 
-    // expect(await screen.findByText("CMS Offline")).toBeInTheDocument();
+    expect(
+      await screen.findByText("No gold partners to display")
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByText("No silver partners to display")
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByText("No bronze partners to display")
+    ).toBeInTheDocument();
   });
 
   it("renders current gold partners correctly", async () => {
@@ -136,14 +144,10 @@ describe("PartnersScreen", () => {
     expect(await screen.findByText("20% off Everything")).toBeInTheDocument();
 
     // Find the image element with alt text "Partner Image" and specific src
-    const goldPartnerImages = screen.getAllByAltText(
-      "Partner Image"
-    ) as HTMLImageElement[];
-    const goldPartnerImage = goldPartnerImages.find((img) =>
-      img.src.includes("/uploads/kebab.jpg")
+    const goldPartnerImages = await screen.findByAltText(
+      "The Kebab and Chicken House"
     );
-
-    expect(goldPartnerImage).toBeInTheDocument();
+    expect(goldPartnerImages).toHaveAttribute("src", "/uploads/kebab.jpg");
   });
 
   it("renders current silver partners correctly", async () => {
@@ -162,14 +166,8 @@ describe("PartnersScreen", () => {
     expect(await screen.findByText("15% off Everything")).toBeInTheDocument();
 
     // Find the image element with alt text "Partner Image" and specific src
-    const silverPartnerImages = screen.getAllByAltText(
-      "Partner Image"
-    ) as HTMLImageElement[];
-    const silverPartnerImage = silverPartnerImages.find((img) =>
-      img.src.includes("/uploads/subi.jpg")
-    );
-
-    expect(silverPartnerImage).toBeInTheDocument();
+    const silverPartnerImages = await screen.findByAltText("Subi's Desserts");
+    expect(silverPartnerImages).toHaveAttribute("src", "/uploads/subi.jpg");
   });
 
   it("renders current bronze partners correctly", async () => {
@@ -181,23 +179,15 @@ describe("PartnersScreen", () => {
       </MockedProvider>
     );
 
-    expect(
-      await screen.findByText("Beso Cafe and Kitchen")
-    ).toBeInTheDocument();
+    expect(await screen.findByText("Beso")).toBeInTheDocument();
     expect(
       await screen.findByText("256 Manukau Road, Epsom, Auckland")
     ).toBeInTheDocument();
     expect(await screen.findByText("10% off Everything")).toBeInTheDocument();
 
     // Find the image element with alt text "Partner Image" and specific src
-    const bronzePartnerImages = screen.getAllByAltText(
-      "Partner Image"
-    ) as HTMLImageElement[];
-    const bronzePartnerImage = bronzePartnerImages.find((img) =>
-      img.src.includes("/uploads/beso.jpg")
-    );
-
-    expect(bronzePartnerImage).toBeInTheDocument();
+    const bronzePartnerImages = await screen.findByAltText("Beso");
+    expect(bronzePartnerImages).toHaveAttribute("src", "/uploads/beso.jpg");
   });
 
   it("renders no data from cms", async () => {

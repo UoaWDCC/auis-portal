@@ -27,7 +27,7 @@ export default function LocationInformation({
         </div>
         <div>
           <iframe
-            className="h-96 w-96 md:w-[40rem]"
+            className="sm:h-96 sm:w-96 md:w-[40rem]"
             src={`https://www.google.com/maps?q=${location}&output=embed`}
           ></iframe>
         </div>

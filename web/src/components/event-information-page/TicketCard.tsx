@@ -1,10 +1,14 @@
 import { useNavigate } from "react-router";
+import { useSessionContext } from "supertokens-auth-react/recipe/session";
+import { useUserMembershipExpiry } from "../../hooks/api/useUserMembership";
 
 interface LocationInformationProps {
+  ticketId: number;
   title: string;
   isDouble: boolean;
   price: number;
-  // stripeLink: string;
+  description: string;
+  stripeLink: string;
   bypass: boolean;
   bypassLink: string;
   isTicketLive: boolean;
@@ -13,10 +17,12 @@ interface LocationInformationProps {
 }
 
 export default function TicketCard({
+  ticketId,
   title,
   isDouble,
   price,
-  // stripeLink,
+  description,
+  stripeLink,
   bypass,
   bypassLink,
   isTicketLive,
@@ -24,27 +30,75 @@ export default function TicketCard({
   isMemberOnly,
 }: LocationInformationProps) {
   const navigate = useNavigate();
+  const session = useSessionContext();
+  const {
+    data: userMembershipExpiry,
+    error: errorUserMembership,
+    isLoading: loadingUserMembership,
+  } = useUserMembershipExpiry();
 
   function handleOnClick() {
-    console.log(bypass);
     if (bypass) {
       window.open(bypassLink, "_blank");
+    } else if (!(isMemberOnly || isDouble)) {
+      navigate("/checkout/information", {
+        state: {
+          data: {
+            priceId: stripeLink,
+            ticketId: ticketId,
+          },
+        },
+      });
     } else {
-      navigate("/checkout");
+      // wait to see if there is a session active
+      if (session.loading === false) {
+        // if user is not logged in take them to membership screen
+        if (!session.doesSessionExist) {
+          navigate("/membership");
+          // if user is logged
+        } else {
+          // make sure the membership isnt loading
+          if (loadingUserMembership === false) {
+            // check to see if they have completed the onboarding questions
+            if (errorUserMembership) {
+              navigate("/membership");
+            }
+            // check to see if they are a valid member
+            if (userMembershipExpiry) {
+              if (new Date(userMembershipExpiry.userExpiryDate) >= new Date()) {
+                // if all checks pass then navigate to checkout
+                navigate("/checkout/information", {
+                  state: {
+                    data: {
+                      priceId: stripeLink,
+                      ticketId: ticketId,
+                    },
+                  },
+                });
+              } else {
+                navigate("/membership");
+              }
+            } else {
+              navigate("/membership");
+            }
+          }
+        }
+      }
     }
   }
-
   const isTicketOnSale = isTicketLive && numTicketsLeft > 0;
 
   return (
     <>
       {" "}
       <div className="flex items-center justify-center pt-6">
-        <div className="mx-2 flex w-[80rem] items-center justify-between rounded-lg border-2 border-gray-200 bg-gray-100 py-3">
+        <div className="mx-2 flex w-[80rem] max-w-full items-center justify-between rounded-lg border-2 border-gray-200 bg-gray-100 py-3">
           <div>
-            <p className="pl-4 text-xl font-bold">{title}</p>
+            <p className="text-md break-words pl-4 font-bold sm:text-xl">
+              {title}
+            </p>
             {isDouble ? (
-              <p className="pl-4 text-xs text-gray-500">
+              <p className="break-words pl-4 text-xs text-gray-500">
                 Both ticket holders must be members
               </p>
             ) : isMemberOnly ? (
@@ -54,9 +108,14 @@ export default function TicketCard({
             ) : (
               <></>
             )}
+            {description.length > 0 ? (
+              <p className="pl-4 text-xs text-gray-500">{description}</p>
+            ) : (
+              <></>
+            )}
           </div>
           <div className="flex items-center justify-center">
-            <p className="text-xl font-bold">${price.toFixed(2)}</p>
+            <p className="text-md font-bold sm:text-xl">${price.toFixed(2)}</p>
             <button
               disabled={!isTicketOnSale}
               onClick={handleOnClick}

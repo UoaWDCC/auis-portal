@@ -1,11 +1,12 @@
 import { useQuery } from "@apollo/client";
-import { GET_EVENTS, GET_EVENTS_GALLERY } from "../graphql/queries";
-import LoadingSpinner from "../components/LoadingSpinner";
-import type { Event, EventGallery } from "../types/types";
+import { GET_EVENTS_GALLERY, GET_EVENTS_SLIDER } from "../graphql/queries";
+import LoadingSpinner from "../components/navigation/LoadingSpinner";
+import type { EventGallery, EventsSlider } from "../types/types";
 import { Mapper } from "../utils/Mapper";
 import EventGalleryComponent from "@components/events-page/EventGalleryComponent";
 import { useEffect, useState } from "react";
-import UpcomingEvents from "@components/events-slider/UpcomingEvents";
+import UpcomingEvents from "@components/events-slider/EventSlider";
+import EventSlider from "@components/events-slider/EventSlider";
 
 export default function EventScreen({ navbar }: { navbar: JSX.Element }) {
   // Get today's date for filtering
@@ -16,7 +17,7 @@ export default function EventScreen({ navbar }: { navbar: JSX.Element }) {
     loading: eventsLoading,
     data: eventsData,
     error: eventsError,
-  } = useQuery(GET_EVENTS);
+  } = useQuery(GET_EVENTS_SLIDER);
 
   const {
     loading: eventGalleryLoading,
@@ -25,7 +26,7 @@ export default function EventScreen({ navbar }: { navbar: JSX.Element }) {
   } = useQuery(GET_EVENTS_GALLERY);
 
   // States
-  const [events, setEvents] = useState<Event[]>([]);
+  const [events, setEvents] = useState<EventsSlider[]>([]);
   const [loadingEvents, setLoadingEvents] = useState(true);
   const [errorEvents, setErrorEvents] = useState(false);
 
@@ -43,7 +44,7 @@ export default function EventScreen({ navbar }: { navbar: JSX.Element }) {
     }
     if (eventsData) {
       try {
-        const mappedEvents = Mapper.mapToEvents(eventsData);
+        const mappedEvents = Mapper.mapToEventsSlider(eventsData);
         setEvents(mappedEvents);
       } catch (error) {
         setErrorEvents(true);
@@ -70,8 +71,8 @@ export default function EventScreen({ navbar }: { navbar: JSX.Element }) {
 
   // Filtering - can be changed to be direct API call in future
   const { upcomingEvents, pastEvents } = events.reduce<{
-    upcomingEvents: Event[];
-    pastEvents: Event[];
+    upcomingEvents: EventsSlider[];
+    pastEvents: EventsSlider[];
   }>(
     (acc, event) => {
       const eventDate = new Date(event.eventDateStart);
@@ -105,9 +106,9 @@ export default function EventScreen({ navbar }: { navbar: JSX.Element }) {
               </div>
               <div className="flex h-auto w-full flex-row items-center justify-center bg-transparent pb-10">
                 <div className="w-11/12 lg:w-3/4">
-                  <UpcomingEvents
+                  <EventSlider
                     pastEvent={false}
-                    upcomingEvents={upcomingEvents}
+                    events={upcomingEvents}
                     noEvents={errorEvents || upcomingEvents.length == 0}
                   />
                 </div>
@@ -122,7 +123,7 @@ export default function EventScreen({ navbar }: { navbar: JSX.Element }) {
               <div className="w-11/12 lg:w-3/4">
                 <UpcomingEvents
                   pastEvent={true}
-                  upcomingEvents={pastEvents}
+                  events={pastEvents}
                   noEvents={errorEvents || pastEvents.length == 0}
                 />
               </div>

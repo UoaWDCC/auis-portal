@@ -44,8 +44,9 @@
     "Status": {
       "type": "enumeration",
       "enum": [
-        "Domestic",
-        "International"
+        "Domestic Student",
+        "International Student",
+        "N/A"
       ],
       "required": true
     },
@@ -59,17 +60,11 @@
       "target": "api::user-ticket.user-ticket",
       "mappedBy": "People_ID"
     },
-    "Answer_ID": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::answer.answer",
-      "mappedBy": "People_ID"
-    },
     "Institution": {
       "type": "enumeration",
       "enum": [
-        "UoA",
-        "AUT",
+        "The University of Auckland",
+        "Auckland University of Technology",
         "Other",
         "None"
       ],

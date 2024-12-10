@@ -83,6 +83,9 @@
     },
     "Bypass_Ticket_Link": {
       "type": "string"
+    },
+    "Stripe_Link": {
+      "type": "string"
     }
   }
 }

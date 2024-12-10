@@ -1,13 +1,13 @@
 import Hero from "@components/home-page/Hero";
 import Intro from "@components/home-page/Intro";
 import SomePhotos from "@components/home-page/SomePhotos";
-import UpcomingEvents from "@components/events-slider/UpcomingEvents";
-import { GET_EVENTS, GET_SOME_PHOTOS } from "../graphql/queries";
-import LoadingSpinner from "../components/LoadingSpinner";
+import EventSlider from "@components/events-slider/EventSlider";
+import { GET_EVENTS_SLIDER, GET_SOME_PHOTOS } from "../graphql/queries";
+import LoadingSpinner from "../components/navigation/LoadingSpinner";
 import { useQuery } from "@apollo/client";
 import { Mapper } from "@utils/Mapper";
 import { useEffect, useState } from "react";
-import type { Event, SomePhoto } from "../types/types";
+import type { EventsSlider, SomePhoto } from "../types/types";
 
 export default function HomeScreen({ navbar }: { navbar: JSX.Element }) {
   // Queries
@@ -15,7 +15,7 @@ export default function HomeScreen({ navbar }: { navbar: JSX.Element }) {
     loading: eventsLoading,
     data: eventsData,
     error: eventsError,
-  } = useQuery(GET_EVENTS);
+  } = useQuery(GET_EVENTS_SLIDER);
 
   const {
     loading: photosLoading,
@@ -24,7 +24,7 @@ export default function HomeScreen({ navbar }: { navbar: JSX.Element }) {
   } = useQuery(GET_SOME_PHOTOS);
 
   // States
-  const [events, setEvents] = useState<Event[]>([]);
+  const [events, setEvents] = useState<EventsSlider[]>([]);
   const [loadingEvents, setLoadingEvents] = useState(true);
   const [errorEvents, setErrorEvents] = useState(false);
 
@@ -42,7 +42,7 @@ export default function HomeScreen({ navbar }: { navbar: JSX.Element }) {
     }
     if (eventsData) {
       try {
-        const mappedEvents = Mapper.mapToEvents(eventsData);
+        const mappedEvents = Mapper.mapToEventsSlider(eventsData);
         setEvents(mappedEvents);
       } catch (error) {
         setErrorEvents(true);
@@ -88,8 +88,8 @@ export default function HomeScreen({ navbar }: { navbar: JSX.Element }) {
             <h1 className="mx-3 py-10 text-center text-5xl font-bold text-white">
               Our Upcoming Events!
             </h1>
-            <UpcomingEvents
-              upcomingEvents={upcomingEvents}
+            <EventSlider
+              events={upcomingEvents}
               noEvents={errorEvents || upcomingEvents.length === 0}
               pastEvent={false}
             />

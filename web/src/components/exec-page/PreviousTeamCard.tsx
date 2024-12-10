@@ -1,4 +1,12 @@
-import type { PreviousTeamCardProps } from "../../types/types";
+import { PreviousTeam } from "../../types/types";
+
+interface PreviousTeamCardProps {
+  year: string;
+  teams: {
+    presidents: PreviousTeam[];
+    executives: PreviousTeam[];
+  };
+}
 
 export default function PreviousTeamCard({
   year,
@@ -12,11 +20,11 @@ export default function PreviousTeamCard({
       <h2 className="text-tertiary-blue absolute left-5 top-2 mb-3 text-4xl font-bold md:left-10 md:top-5 md:text-5xl">
         {year}
       </h2>
-      {teams.Presidents.length > 0 && (
+      {teams.presidents.length > 0 && (
         <div className="flex flex-col items-center">
           <h3 className="text-tertiary-blue text-2xl font-bold">Presidents</h3>
           <div className="mb-5 flex flex-wrap justify-center px-5">
-            {teams.Presidents.map((team) => (
+            {teams.presidents.map((team) => (
               <p
                 key={team.id}
                 className="mx-3 my-1 text-lg font-bold text-white"
@@ -27,11 +35,11 @@ export default function PreviousTeamCard({
           </div>
         </div>
       )}
-      {teams.Executives.length > 0 && (
+      {teams.executives.length > 0 && (
         <div className="flex flex-col items-center px-0">
           <h3 className="text-tertiary-blue text-2xl font-bold">Executives</h3>
           <div className="mx-40 grid w-full grid-cols-3 justify-items-center px-2">
-            {teams.Executives.map((team) => (
+            {teams.executives.map((team) => (
               <p
                 key={team.id}
                 className="mx-3 my-1 text-lg font-bold text-white"

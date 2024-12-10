@@ -1,5 +1,10 @@
 import { db } from "../db/config/db";
-import { peoples, user_tickets, events } from "../schemas/schema";
+import {
+  peoples,
+  userTickets,
+  events,
+  purchasableMemberships,
+} from "../schemas/schema";
 
 const main = async () => {
   try {
@@ -7,7 +12,8 @@ const main = async () => {
     console.log("Deleting data in database");
     await db.delete(peoples);
     await db.delete(events);
-    await db.delete(user_tickets);
+    await db.delete(userTickets);
+    await db.delete(purchasableMemberships);
 
     // Add users
     console.log("Seeding database");
@@ -17,28 +23,28 @@ const main = async () => {
         id: 0,
         email: "gury@go.at",
         upi: "gmat123",
-        university_id: "12345",
+        universityId: "12345",
         name: "Gury",
-        is_member: true,
-        member_expiry_date: new Date(
+        isMember: true,
+        memberExpiryDate: new Date(
           new Date().setFullYear(new Date().getFullYear() + 1)
         ).toLocaleDateString(),
         institution: "UoA",
-        year_of_study: "4",
+        yearOfStudy: "4",
         status: "Domestic",
       },
       {
         id: 2,
         email: "naren@go.at",
         upi: "nrnr123",
-        university_id: "23456",
+        universityId: "23456",
         name: "Naren",
-        is_member: true,
-        member_expiry_date: new Date(
+        isMember: true,
+        memberExpiryDate: new Date(
           new Date().setMonth(new Date().getMonth() + 6)
         ).toLocaleDateString(),
         institution: "UoA",
-        year_of_study: "4",
+        yearOfStudy: "4",
         status: "International",
       },
     ]);
@@ -46,52 +52,84 @@ const main = async () => {
     // Add events
     await db.insert(events).values([
       {
-        id: 3,
-        title: "Dance Series: Shawn Thomas",
-        description: "Special dance series led by the goat himself, Guryash.",
-        location: "The dance floor baby. ",
-        event_date_start: new Date(
-          new Date().setFullYear(new Date().getFullYear() + 1)
-        ).toLocaleDateString(),
-        event_date_end: new Date(
-          new Date().setFullYear(new Date().getFullYear() + 1)
-        ).toLocaleString(),
-        event_capacity: 20,
-        is_live: true,
-        event_capacity_remaining: 1,
-        terms_and_conditions: "No refunds.",
-        published_at: new Date().toISOString(),
-      },
-      {
         id: 1,
-        title: "Naren's Tech Workshop",
-        description:
-          "Informative workshop where Naren walksthrough the architecture of the AUIS App. Plenty of opportunity to network with sponsor companies and pizza is served. No pineapple pizzas.",
-        location: "Remotely from Naren's billion dollar bunker.",
-        event_date_start: new Date(
-          new Date().setMonth(new Date().getMonth() + 6)
-        ).toLocaleDateString(),
-        event_date_end: new Date(
-          new Date().setMonth(new Date().getMonth() + 6)
-        ).toLocaleString(),
-        event_capacity: 5,
-        is_live: true,
-        event_capacity_remaining: 2,
-        terms_and_conditions: "No refunds.",
-        published_at: new Date().toISOString(),
+        stripePriceId: "price_1Pwg1ZP464csY2Up9hCiwrhp",
+        title: "Gury's Cookout",
+        description: "Learn how to cook authentic indian meals.",
+        location: "Chef's kitchen",
+        eventDateStart: new Date().toLocaleString(),
+        eventDateEnd: new Date().toLocaleString(),
+        eventCapacity: 20,
+        isLive: true,
+        eventCapacityRemaining: 20,
+        termsAndConditions: "No refunds.",
+        publishedAt: new Date().toISOString(),
       },
       {
         id: 2,
-        title: "Gury's Cookout",
-        description: "Let him COOK",
-        location: "Chef's kitchen. ",
-        event_date_start: new Date().toLocaleString(),
-        event_date_end: new Date().toLocaleString(),
-        event_capacity: 20,
-        is_live: true,
-        event_capacity_remaining: 20,
-        terms_and_conditions: "No refunds.",
-        published_at: new Date().toISOString(),
+        stripePriceId: "price_1PSHWRP464csY2UpYpxvB2tk",
+        title: "Dance Series: Shawn Thomas",
+        description: "Special dance series led by the goat himself, Guryash.",
+        location: "Dance Studio",
+        eventDateStart: new Date(
+          new Date().setFullYear(new Date().getFullYear() + 1)
+        ).toLocaleDateString(),
+        eventDateEnd: new Date(
+          new Date().setFullYear(new Date().getFullYear() + 1)
+        ).toLocaleString(),
+        eventCapacity: 20,
+        isLive: true,
+        eventCapacityRemaining: 1,
+        termsAndConditions: "No refunds.",
+        publishedAt: new Date().toISOString(),
+      },
+      {
+        id: 3,
+        stripePriceId: "price_1PSHWyP464csY2UpVWjc276j",
+        title: "Pub Quiz: India Series",
+        description:
+          "Join this unique members only event to test your knowledge on Indian culture and win amazing prizes.",
+        location: "Pub",
+        eventDateStart: new Date(
+          new Date().setFullYear(new Date().getFullYear() + 1)
+        ).toLocaleDateString(),
+        eventDateEnd: new Date(
+          new Date().setFullYear(new Date().getFullYear() + 1)
+        ).toLocaleString(),
+        eventCapacity: 20,
+        isLive: true,
+        eventCapacityRemaining: 1,
+        termsAndConditions: "No refunds.",
+        publishedAt: new Date().toISOString(),
+      },
+    ]);
+
+    await db.insert(purchasableMemberships).values([
+      {
+        id: 1,
+        stripeLink: "price_1PSHXPP464csY2Up4aKoSw6r",
+        membershipLinkBypass: false,
+        bypassMembershipLink: "",
+        title: "1x Semester Membership",
+        description: "One Semester long membership.",
+        expiry: new Date(
+          new Date().setMonth(new Date().getMonth() + 6)
+        ).toLocaleDateString(),
+        price: "8.00",
+        publishedAt: new Date().toISOString(),
+      },
+      {
+        id: 2,
+        stripeLink: "price_1Q1NimP464csY2Up7A7BwMcS",
+        membershipLinkBypass: false,
+        bypassMembershipLink: "",
+        title: "2x Semester Membership",
+        description: "Two Semester long membership.",
+        expiry: new Date(
+          new Date().setFullYear(new Date().getFullYear() + 1)
+        ).toLocaleDateString(),
+        price: "15.00",
+        publishedAt: new Date().toISOString(),
       },
     ]);
 

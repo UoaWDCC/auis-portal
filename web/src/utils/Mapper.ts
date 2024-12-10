@@ -3,17 +3,16 @@ import { NoDataError } from "../classes/NoDataError";
 import type {
   Exec,
   Partner,
-  Social,
   SomePhoto,
   Value,
   Introduction,
   PreviousTeam,
-  Event,
   EventGallery,
-  Question,
-  Ticket,
   PurchasableMembership,
-  EventAndTicket,
+  EventAndTickets,
+  TicketAndQuestion,
+  PartnerImage,
+  EventsSlider,
 } from "../types/types";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -32,6 +31,26 @@ export class Mapper {
           description: attributes.Description || "",
           position: attributes.Position || "",
           role: attributes.Role || "",
+          image: imageUrl,
+        };
+      });
+    }
+  }
+
+  static mapToPartnerImage(data: any): PartnerImage[] {
+    if (
+      !data.partners ||
+      !data.partners.data ||
+      data.partners.data.length === 0
+    ) {
+      throw new NoDataError("No data");
+    } else {
+      return data.partners.data.map((item: any) => {
+        const attributes = item.attributes || {};
+        const imageUrl = attributes.Image?.data?.attributes?.url || "";
+        return {
+          id: item.id,
+          name: attributes.Name || "",
           image: imageUrl,
         };
       });
@@ -57,21 +76,6 @@ export class Mapper {
           description: attributes.Description || "",
           location: attributes.Location || "",
           image: imageUrl,
-        };
-      });
-    }
-  }
-
-  static mapToSocials(data: any): Social[] {
-    if (!data.socials || !data.socials.data || data.socials.data.length === 0) {
-      throw new NoDataError("No data");
-    } else {
-      return data.socials.data.map((item: any) => {
-        const attributes = item.attributes || {};
-        return {
-          id: item.id,
-          type: attributes.Type || "",
-          link: attributes.Link || "",
         };
       });
     }
@@ -128,7 +132,6 @@ export class Mapper {
       return data.introductions.data.map((item: any) => {
         const attributes = item.attributes || {};
         return {
-          id: item.id,
           description: attributes.Description || "",
           events: attributes.Events || "",
           members: attributes.Members || "",
@@ -158,7 +161,7 @@ export class Mapper {
     }
   }
 
-  static mapToEvents(data: any): Event[] {
+  static mapToEventsSlider(data: any): EventsSlider[] {
     if (!data.events || !data.events.data || data.events.data.length === 0) {
       throw new NoDataError("No data");
     } else {
@@ -169,61 +172,66 @@ export class Mapper {
         return {
           id: item.id,
           title: attributes.Title || "",
-          description: attributes.Description || "",
-          subtitle: attributes.Subtitle || "",
           location: attributes.Location || "",
-          locationLink: attributes.Location_Link || "",
           eventDateStart: attributes.Event_Date_Start || "",
-          eventDateEnd: attributes.Event_Date_End || "",
           isLive: attributes.Is_Live || false,
-          termsAndConditions: attributes.Terms_And_Conditions || "",
-          eventCapacityRemaining: attributes.Event_Capacity_Remaining || 0,
           image: imageUrl,
         };
       });
     }
   }
 
-  static mapToEvent(data: any): EventAndTicket {
-    console.log(data);
+  static mapToEvent(data: any): EventAndTickets {
     if (!data.event || !data.event.data || data.event.data.length === 0) {
       throw new NoDataError("No data");
     } else {
       const attributes = data.event.data.attributes || {};
       const imageUrl = attributes.Image?.data?.attributes?.url || "";
-
       return {
-        id: data.event.data.id,
         title: attributes.Title || "",
         description: attributes.Description || "",
         subtitle: attributes.Subtitle || "",
         location: attributes.Location || "",
-        locationLink: attributes.Location_Link || "",
         eventDateStart: attributes.Event_Date_Start || "",
         eventDateEnd: attributes.Event_Date_End || "",
-        isLive: attributes.Is_Live || false,
         termsAndConditions: attributes.Terms_And_Conditions || "",
         eventCapacityRemaining: attributes.Event_Capacity_Remaining || 0,
+        isLive: attributes.Is_Live || false,
         image: imageUrl,
-        ticket: attributes.Ticket_ID.data.map((item: any) => {
+        tickets: attributes.Ticket_ID.data.map((item: any) => {
           const attributesTicket = item.attributes || {};
-
           return {
             id: item.id,
             name: attributesTicket.Name || "",
-            description: attributesTicket.Ticket_Description || "",
-            discountCode: attributesTicket.Discount_Code || "",
-            discountPrice: attributesTicket.Discount_Price || 0,
             price: attributesTicket.Price || 0,
-            isMemberOnly: attributesTicket.Is_Member_Only || "",
-            isDouble: attributesTicket.Is_Double || "",
-            numTicketsLeft: attributesTicket.Number_Tickets_Left || "",
-            ticketDescription: attributesTicket.Ticket_Description || false,
+            isMemberOnly: attributesTicket.Is_Member_Only || false,
+            isDouble: attributesTicket.Is_Double || false,
+            numTicketsLeft: attributesTicket.Number_Tickets_Left || 0,
+            ticketDescription: attributesTicket.Ticket_Description || "",
             startDateTicketSales:
               attributesTicket.Start_Date_Ticket_Sales || "",
             isTicketLive: attributesTicket.Is_Ticket_Live || false,
-            ticketBypassLink: attributesTicket.Ticket_Link_Bypass || true,
+            ticketLinkBypass: attributesTicket.Ticket_Link_Bypass || false,
             bypassTicketLink: attributesTicket.Bypass_Ticket_Link || "",
+            stripeLink: attributesTicket.Stripe_Link || "",
+          };
+        }),
+      };
+    }
+  }
+
+  static mapToTicketQuestion(data: any): TicketAndQuestion {
+    if (!data.ticket || !data.ticket.data || data.ticket.data.length === 0) {
+      throw new NoDataError("No data");
+    } else {
+      const attributes = data.ticket.data.attributes || {};
+      return {
+        ticketId: data.ticket.data.id,
+        questions: attributes.Question_ID.data.map((item: any) => {
+          const attributesTicket = item.attributes || {};
+          return {
+            id: item.id,
+            question: attributesTicket.Question || "",
           };
         }),
       };
@@ -250,50 +258,6 @@ export class Mapper {
     }
   }
 
-  static mapToQuestions(data: any): Question[] {
-    if (
-      !data.questions ||
-      !data.questions.data ||
-      data.questions.data.length === 0
-    ) {
-      throw new NoDataError("No data");
-    } else {
-      return data.questions.data.map((item: any) => {
-        const attributes = item.attributes || {};
-
-        return {
-          id: item.id,
-          question: attributes.Question || "",
-          checkForMemberEmail: attributes.Check_For_Member_Email || false,
-        };
-      });
-    }
-  }
-
-  static mapToTickets(data: any): Ticket[] {
-    if (!data.tickets || !data.tickets.data || data.tickets.data.length === 0) {
-      throw new NoDataError("No data");
-    } else {
-      return data.tickets.data.map((item: any) => {
-        const attributes = item.attributes || {};
-
-        return {
-          id: item.id,
-          name: attributes.Name || "",
-          discountCode: attributes.Discount_Code || "",
-          discountPrice: attributes.Discount_Price || 0,
-          price: attributes.Price || 0,
-          isMemberOnly: attributes.Is_Member_Only || false,
-          isDouble: attributes.Is_Double || false,
-          numTicketsLeft: attributes.Number_Tickets_Left || 0,
-          ticketDescription: attributes.Ticket_Description || "",
-          startDateTicketSales: attributes.Start_Date_Ticket_Sales || "",
-          isTicketLive: attributes.Is_Ticket_Live || false,
-        };
-      });
-    }
-  }
-
   static mapToPurchasableMemberships(data: any): PurchasableMembership[] {
     if (
       !data.purchasableMemberships ||
@@ -311,6 +275,8 @@ export class Mapper {
           price: attributes.Price || 0,
           stripeLink: attributes.Stripe_Link,
           description: attributes.Description,
+          membershipLinkBypass: attributes.Membership_Link_Bypass || false,
+          bypassMembershipLink: attributes.Bypass_Membership_Link || "",
         };
       });
     }

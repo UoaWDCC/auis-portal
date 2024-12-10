@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { getEventById } from "../graphql/queries";
 import { useQuery } from "@apollo/client";
 import { Mapper } from "@utils/Mapper";
-import { EventAndTicket, Ticket } from "../types/types";
+import { EventAndTickets } from "../types/types";
 import { useParams } from "react-router-dom";
 import InformationHeader from "@components/event-information-page/InformationHeader";
 import EventDescription from "@components/event-information-page/EventDescription";
@@ -11,7 +11,7 @@ import LocationInformation from "@components/event-information-page/LocationInfo
 import TicketCard from "@components/event-information-page/TicketCard";
 import TermsAndConditions from "@components/event-information-page/TermsAndConditions";
 import ContactInformation from "@components/event-information-page/ContactInformation";
-import LoadingSpinner from "@components/LoadingSpinner";
+import LoadingSpinner from "@components/navigation/LoadingSpinner";
 import NoEventFound from "@components/event-information-page/NoEventFound";
 
 export default function EventInformationScreen({
@@ -19,45 +19,13 @@ export default function EventInformationScreen({
 }: {
   navbar: JSX.Element;
 }) {
-  const { id } = useParams();
-
-  const tic: Ticket = {
-    id: 0,
-    name: "string",
-    discountCode: "string",
-    discountPrice: 0,
-    price: 50,
-    isMemberOnly: true,
-    isDouble: false,
-    numTicketsLeft: 50,
-    ticketDescription: "descirption",
-    startDateTicketSales: "string",
-    isTicketLive: false,
-    ticketBypassLink: true,
-    bypassTicketLink: "https://google.com",
-  };
-  const a: EventAndTicket = {
-    id: 0,
-    title: "string;",
-    description: "string;",
-    subtitle: "string;",
-    location: "string;",
-    locationLink: "string;",
-    eventDateStart: "string;",
-    eventDateEnd: "string;",
-    isLive: true,
-    termsAndConditions: "string;",
-    eventCapacityRemaining: 0,
-    image: "string;",
-    ticket: [tic],
-  };
-
+  // event id handling
   let queryId = -1;
-  const q = id;
-  if (q !== undefined) {
-    queryId = parseInt(q);
+  const { id } = useParams();
+  if (id !== undefined) {
+    queryId = parseInt(id);
   }
-  console.log(id);
+
   // Queries
   const {
     loading: eventLoading,
@@ -66,7 +34,7 @@ export default function EventInformationScreen({
   } = useQuery(getEventById({ id: queryId }));
 
   // States
-  const [event, setEvent] = useState<EventAndTicket>(a);
+  const [event, setEvent] = useState<EventAndTickets>();
   const [loadingEvent, setLoadingEvent] = useState(true);
   const [errorEvent, setErrorEvent] = useState(false);
 
@@ -81,35 +49,44 @@ export default function EventInformationScreen({
     }
     if (eventError) {
       setErrorEvent(true);
-      console.log("ERROR");
     }
     if (eventData) {
       try {
         const mappedEvent = Mapper.mapToEvent(eventData);
         setEvent(mappedEvent);
-        console.log(event);
       } catch (error) {
         setErrorEvent(true);
-        console.log(error);
       }
     }
   }, [eventData, eventError, eventLoading]);
-  let ticketPrices = [];
-  //TODO: add screen for not found event
-  for (let i = 0; i < event.ticket.length; i++) {
-    ticketPrices.push(event.ticket[i].price);
-  }
-  const priceRange =
-    "$" +
-    Math.min(...ticketPrices)
-      .toFixed(2)
-      .toString() +
-    " - $" +
-    Math.max(...ticketPrices)
-      .toFixed(2)
-      .toString();
 
+  // Ticket price range
+  let ticketPrices = [];
+  if (event) {
+    for (let i = 0; i < event.tickets.length; i++) {
+      ticketPrices.push(event.tickets[i].price);
+    }
+  }
+
+  let priceRange: string = "";
+
+  if (ticketPrices.length == 0) {
+    priceRange = "Free";
+  } else if (ticketPrices.length == 1) {
+    priceRange = "$" + ticketPrices[0].toFixed(2).toString();
+  } else {
+    "$" +
+      Math.min(...ticketPrices)
+        .toFixed(2)
+        .toString() +
+      " - $" +
+      Math.max(...ticketPrices)
+        .toFixed(2)
+        .toString();
+  }
+  // Autoscroll to top of page on landing
   const ref = useRef<null | HTMLDivElement>(null);
+
   const handleClick = () => {
     ref.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -118,7 +95,7 @@ export default function EventInformationScreen({
     return <LoadingSpinner />;
   }
 
-  if (errorEvent) {
+  if (errorEvent || !event) {
     return (
       <>
         <div className="from-AUIS-dark-teal to-AUIS-teal min-h-screen bg-gradient-to-b pb-20">
@@ -138,6 +115,7 @@ export default function EventInformationScreen({
           title={event.title}
           subtitle={event.subtitle}
           startDate={event.eventDateStart}
+          endDate={event.eventDateEnd}
           location={event.location}
           scrollToTickets={handleClick}
           priceRange={priceRange}
@@ -155,19 +133,32 @@ export default function EventInformationScreen({
         Purchase Tickets
       </h2>
       <div>
-        {/* TODO: ADD STRIPE ID */}
-        {event.ticket.map((ticket) => (
+        {event.tickets.length == 0 ? (
+          <p className="px-5 pt-3 text-center text-xl md:px-3">
+            No tickets available or needed
+          </p>
+        ) : (
+          <></>
+        )}
+        {event.tickets.map((ticket) => (
           <TicketCard
+            key={ticket.id}
+            ticketId={ticket.id}
             numTicketsLeft={ticket.numTicketsLeft}
             isTicketLive={
-              ticket.isTicketLive && new Date(event.eventDateStart) > new Date()
+              event.isLive &&
+              ticket.isTicketLive &&
+              new Date(ticket.startDateTicketSales) <= new Date() &&
+              new Date(event.eventDateStart) > new Date() &&
+              event.eventCapacityRemaining > 0
             }
-            bypass={ticket.ticketBypassLink}
+            bypass={ticket.ticketLinkBypass}
             bypassLink={ticket.bypassTicketLink}
-            // stripeLink={"IDK"}
+            stripeLink={ticket.stripeLink}
             title={ticket.name}
             isDouble={ticket.isDouble}
             price={ticket.price}
+            description={ticket.ticketDescription}
             isMemberOnly={ticket.isMemberOnly}
           />
         ))}

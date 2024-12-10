@@ -16,7 +16,7 @@
     "db:seed": "node -r esbuild-register ./scripts/seed.ts",
     "db": "yarn db:generate && yarn db:migrate",
     "db:visualise": "drizzle-kit studio",
-    "db:pull": " drizzle-kit introspect --config=drizzle-schema.config.ts",
+    "db:pull": " drizzle-kit introspect --config=drizzle.config.ts",
     "db:all": "yarn db:generate && yarn db:migrate && yarn db:seed && yarn drizzle-kit studio --config=drizzle.config.ts",
     "generate-types": "quicktype ../api/types/types.ts -o ../web/src/types/backend-types.ts --just-types",
     "watch-types": "nodemon -e ts -x \"yarn generate-types\""
@@ -31,20 +31,23 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
-    "@clerk/clerk-sdk-node": "^5.0.6",
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
     "@types/nodemailer": "^6.4.14",
+    "@types/qrcode": "^1.5.5",
     "cors": "^2.8.5",
     "dotenv": "^16.4.1",
     "drizzle-orm": "^0.32.0",
     "express": "^4.18.2",
     "express-cors": "^0.0.3",
     "jsonwebtoken": "^9.0.2",
+    "nodemailer": "^6.9.16",
     "onchange": "^7.1.0",
     "postgres": "^3.4.4",
+    "qrcode": "^1.5.4",
     "quicktype": "^23.0.170",
     "stripe": "^16.1.0",
+    "supertokens-node": "^21.0.0",
     "ts-node": "^10.9.2",
     "zod": "^3.22.4"
   },
