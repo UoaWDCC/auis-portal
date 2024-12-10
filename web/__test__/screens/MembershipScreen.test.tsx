@@ -14,6 +14,7 @@ import { GraphQLError } from "graphql";
 import "@testing-library/jest-dom";
 import { MemoryRouter } from "react-router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { useUserMembershipExpiry } from "../../src/hooks/api/useUserMembership";
 
 // use navigate hook mock
 const mockedUseNavigate = vi.fn();
@@ -35,12 +36,32 @@ nextDate.setDate(nextDate.getDate() + 15);
 var prevDate = new Date();
 prevDate.setDate(prevDate.getDate() - 1);
 
-vi.mock("./myFetchFunction", () => ({
+vi.mock("../../api/apiRequests", () => ({
   fetchUserMembershipExpiry: () =>
     Promise.resolve({
-      userExpiryDate: nextDate,
+      userExpiryDate: nextDate.toString(),
     }),
 }));
+
+// const mockedUseUserMembershipExpiry = vi.fn(() => 
+//     {
+//         data: {useUserMembershipExpiry: nextDate.toString()}
+//     }
+// );
+vi.mock("../hooks/api/useUserMembership", async () => {
+  const mod =
+    await vi.importActual<typeof import("../../src/hooks/api/useUserMembership")>(
+      "../../src/hooks/api/useUserMembership"
+    );
+  return {
+    ...mod,
+    useUserMembershipExpiry: () => () => ({
+        data: { userExpiryDate : nextDate.toString()},
+        isLoading: false,
+        error: undefined
+      }),
+  };
+});
 
 // supertoken hook working
 vi.mock("supertokens-auth-react/recipe/session", async () => {
@@ -89,7 +110,7 @@ const noIntroMock = {
   },
   result: {
     data: {
-      introductions: {
+        purchasableMemberships: {
         data: [],
       },
     },
@@ -144,6 +165,7 @@ describe("Membership Screen", () => {
   // I was unable to figure out the mock for the tanstack query hook so will do this test case later
 
 //   it("renders purchase memberships correctly", async () => {
+
 //     render(
 //       <MockedProvider mocks={mocks} addTypename={false}>
 //         <QueryClientProvider client={queryClient}>
