@@ -117,9 +117,15 @@ describe("PartnersScreen", () => {
       </MockedProvider>
     );
 
-    expect(await screen.findByText("No gold partners to display")).toBeInTheDocument();
-    expect(await screen.findByText("No silver partners to display")).toBeInTheDocument();
-    expect(await screen.findByText("No bronze partners to display")).toBeInTheDocument();
+    expect(
+      await screen.findByText("No gold partners to display")
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByText("No silver partners to display")
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByText("No bronze partners to display")
+    ).toBeInTheDocument();
   });
 
   it("renders current gold partners correctly", async () => {
@@ -142,7 +148,6 @@ describe("PartnersScreen", () => {
       "The Kebab and Chicken House"
     );
     expect(goldPartnerImages).toHaveAttribute("src", "/uploads/kebab.jpg");
-
   });
 
   it("renders current silver partners correctly", async () => {
@@ -161,11 +166,8 @@ describe("PartnersScreen", () => {
     expect(await screen.findByText("15% off Everything")).toBeInTheDocument();
 
     // Find the image element with alt text "Partner Image" and specific src
-    const silverPartnerImages = await screen.findByAltText(
-      "Subi's Desserts"
-    );
+    const silverPartnerImages = await screen.findByAltText("Subi's Desserts");
     expect(silverPartnerImages).toHaveAttribute("src", "/uploads/subi.jpg");
-
   });
 
   it("renders current bronze partners correctly", async () => {
@@ -177,20 +179,15 @@ describe("PartnersScreen", () => {
       </MockedProvider>
     );
 
-    expect(
-      await screen.findByText("Beso")
-    ).toBeInTheDocument();
+    expect(await screen.findByText("Beso")).toBeInTheDocument();
     expect(
       await screen.findByText("256 Manukau Road, Epsom, Auckland")
     ).toBeInTheDocument();
     expect(await screen.findByText("10% off Everything")).toBeInTheDocument();
 
     // Find the image element with alt text "Partner Image" and specific src
-    const bronzePartnerImages = await screen.findByAltText(
-      "Beso"
-    );
+    const bronzePartnerImages = await screen.findByAltText("Beso");
     expect(bronzePartnerImages).toHaveAttribute("src", "/uploads/beso.jpg");
-
   });
 
   it("renders no data from cms", async () => {

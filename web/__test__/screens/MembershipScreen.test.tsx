@@ -176,10 +176,10 @@ describe("Membership Screen", () => {
 //       </MockedProvider>
 //     );
 
-//     expect(
-//       await screen.findByText("Your current membership expires on")
-//     ).toBeInTheDocument();
-//   });
+  //     expect(
+  //       await screen.findByText("Your current membership expires on")
+  //     ).toBeInTheDocument();
+  //   });
 
   it("renders no data from cms", async () => {
     render(
