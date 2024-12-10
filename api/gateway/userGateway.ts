@@ -164,7 +164,7 @@ export async function updateUserMembershipExpiryDate(
       .update(peoples)
       .set({ memberExpiryDate: expiryDate[0].expiry, isMember: true })
       .where(eq(peoples.email, checkoutSession.customer_details!.email!))
-      .returning({ expiryDate: peoples.memberExpiryDate });
+      .returning({ memberExpiryDate: peoples.memberExpiryDate });
 
     //update user metadata
     //getUserIdByEmail
