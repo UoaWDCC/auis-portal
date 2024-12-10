@@ -121,9 +121,9 @@ export const handleWebhook = asyncHandler(
         const session: Stripe.Checkout.Session = event.data.object;
 
         if (
-          session.metadata != null &&
-          session.metadata["priceId"] != undefined &&
-          session.metadata["isEventTicket"] != undefined
+          session.metadata !== null &&
+          session.metadata["priceId"] !== undefined &&
+          session.metadata["isEventTicket"] !== undefined
         ) {
           if (session.metadata["isEventTicket"] === "y") {
             completeTicketPurchase(session.id);
@@ -136,11 +136,10 @@ export const handleWebhook = asyncHandler(
       } else if (event.type === "checkout.session.expired") {
         const session = event.data.object;
 
-        //check if isEventTicket == 'y'
         if (
-          session.metadata != null &&
-          session.metadata["priceId"] != undefined &&
-          session.metadata["isEventTicket"] != undefined
+          session.metadata !== null &&
+          session.metadata["priceId"] !== undefined &&
+          session.metadata["isEventTicket"] !== undefined
         ) {
           if (session.metadata["isEventTicket"] === "y") {
             releaseReservedTicket(session.metadata["priceId"]);

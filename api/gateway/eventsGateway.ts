@@ -11,6 +11,8 @@ import {
 import Stripe from "stripe";
 import { stripe } from "../stripe/stripe";
 import { ticketsEventIdLinksRelations } from "../schemas/relations";
+import { sendEmail } from "../mailer/mailer";
+import { generateQRCode } from "../mailer/qrCode";
 
 export async function isTicketAvailableByPriceId(
   priceId: string
@@ -99,7 +101,7 @@ export async function completeTicketPurchase(sessionId: string) {
       .where(eq(events.stripePriceId, checkoutSession.metadata!["priceId"]))
       .limit(1);
 
-    await db
+    let updatedTicket = await db
       .update(userTickets)
       .set({
         paid: true,
@@ -108,12 +110,17 @@ export async function completeTicketPurchase(sessionId: string) {
       .where(
         eq(userTickets.id, parseInt(checkoutSession.metadata!["userTicketId"]))
       )
-      .catch((error) => {
-        console.log(
-          "An unknown error occurred while trying to update userTicket: ",
-          error
-        );
-      });
+      .returning();
+
+    //email the user ticket
+    //turn this off locally. Staging and Prod is fine.
+    sendEmail(
+      await generateQRCode(updatedTicket[0].peopleTicketCode!),
+      checkoutSession.customer_details!.email!,
+      customer[0].name!,
+      event[0].title!,
+      updatedTicket[0].peopleTicketCode!
+    );
   }
 }
 
@@ -184,7 +191,6 @@ export async function updateUserTicket() {
   //   );
   // }
 
-  // search for this priceId
   let eventTickets = await db
     .select({
       id: userTickets.id,
@@ -203,8 +209,6 @@ export async function updateUserTicket() {
     );
 
   console.log(eventTickets);
-
-  // if array is 1, true. If 0, set to false.
 
   return eventTickets;
 }
