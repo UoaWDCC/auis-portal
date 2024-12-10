@@ -143,21 +143,21 @@ describe("Membership Screen", () => {
 
   // I was unable to figure out the mock for the tanstack query hook so will do this test case later
 
-//   it("renders purchase memberships correctly", async () => {
-//     render(
-//       <MockedProvider mocks={mocks} addTypename={false}>
-//         <QueryClientProvider client={queryClient}>
-//           <MemoryRouter>
-//             <MembershipScreen navbar={<></>} />
-//           </MemoryRouter>
-//         </QueryClientProvider>
-//       </MockedProvider>
-//     );
+  //   it("renders purchase memberships correctly", async () => {
+  //     render(
+  //       <MockedProvider mocks={mocks} addTypename={false}>
+  //         <QueryClientProvider client={queryClient}>
+  //           <MemoryRouter>
+  //             <MembershipScreen navbar={<></>} />
+  //           </MemoryRouter>
+  //         </QueryClientProvider>
+  //       </MockedProvider>
+  //     );
 
-//     expect(
-//       await screen.findByText("Your current membership expires on")
-//     ).toBeInTheDocument();
-//   });
+  //     expect(
+  //       await screen.findByText("Your current membership expires on")
+  //     ).toBeInTheDocument();
+  //   });
 
   it("renders no data from cms", async () => {
     render(
