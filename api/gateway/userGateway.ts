@@ -84,8 +84,10 @@ export async function insertUserTicket(data: {
     answer: string;
   }[];
 }): Promise<{ userTicketId: number }> {
-  let updateUserInfoOrNewUser: { userTicketId: number }[];
-  updateUserInfoOrNewUser = await db
+  // return the userTicketId
+  let newUserTicket: { userTicketId: number }[];
+
+  newUserTicket = await db
     .insert(userTickets)
     .values({
       // ticketId: data.ticketId,
@@ -95,18 +97,20 @@ export async function insertUserTicket(data: {
     })
     .returning({ userTicketId: userTickets.id });
 
-  const tempID = updateUserInfoOrNewUser[0].userTicketId;
+  const tempID = newUserTicket[0].userTicketId;
 
-  const tempa: any = await db
+  const userTicketIdLink = await db
     .insert(userTicketsTicketIdLinks)
     .values({
-      userTicketId: updateUserInfoOrNewUser[0].userTicketId,
+      userTicketId: newUserTicket[0].userTicketId,
       ticketId: data.ticketId,
     })
     .returning({ id: userTicketsTicketIdLinks.id });
-  console.log(tempa.id);
+
+  console.log("insertUserTicket: userTicketIdLink: " + userTicketIdLink[0].id);
 
   const ticketId = userTickets.id;
+
   if (data.answers.length > 0) {
     const answerRecords = data.answers.map((answerData) => ({
       ticketId: ticketId,
@@ -116,7 +120,8 @@ export async function insertUserTicket(data: {
 
     await db.insert(answers).values(answerRecords);
   }
-  return updateUserInfoOrNewUser[0];
+
+  return newUserTicket[0];
 }
 
 export async function updateUserMembershipExpiryDate(
@@ -166,10 +171,6 @@ export async function updateUserMembershipExpiryDate(
     let customerEmail = await getUserEmail(
       checkoutSession.customer_details!.email!
     );
-    // console.log(
-    //   "updateUserMembershipExpiryDate: customerEmail: ",
-    //   customerEmail
-    // );
 
     let userId = await getUserIdByEmail(customerEmail);
 

@@ -1,3 +1,4 @@
+import { randomInt } from "crypto";
 import { and, eq, sql, gt } from "drizzle-orm";
 import { db } from "../db/config/db";
 import {
@@ -78,15 +79,12 @@ export async function completeTicketPurchase(sessionId: string) {
   // Check the Checkout Session's payment_status property
   // to determine if fulfillment should be peformed
   if (checkoutSession.payment_status !== "unpaid") {
-    console.log("updateUserMembershipExpiryDate: received: ", checkoutSession);
+    console.log("completeTicketPurchase: received: ", checkoutSession);
     console.log(
-      "updateUserMembershipExpiryDate: customer_email: ",
+      "completeTicketPurchase: customer_email: ",
       checkoutSession.customer_details?.email
     );
-    console.log(
-      "updateUserMembershipExpiryDate: metadata: ",
-      checkoutSession.metadata
-    );
+    console.log("completeTicketPurchase: metadata: ", checkoutSession.metadata);
 
     //since this is for memberships, get the current user by their email id
     let customer = await db
@@ -101,7 +99,21 @@ export async function completeTicketPurchase(sessionId: string) {
       .where(eq(events.stripePriceId, checkoutSession.metadata!["priceId"]))
       .limit(1);
 
-    //db.insert(userTickets);
+    await db
+      .update(userTickets)
+      .set({
+        paid: true,
+        peopleTicketCode: `${randomInt(100000, 999999)}`,
+      })
+      .where(
+        eq(userTickets.id, parseInt(checkoutSession.metadata!["userTicketId"]))
+      )
+      .catch((error) => {
+        console.log(
+          "An unknown error occurred while trying to update userTicket: ",
+          error
+        );
+      });
   }
 }
 
