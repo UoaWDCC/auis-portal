@@ -21,12 +21,11 @@ const app = express();
 config();
 
 // DELET ONC WE HAVE SUPEROTKEN THING
-let domainSuperToken = process.env.DOMAIN_DB
-if (domainSuperToken)
-{domainSuperToken = domainSuperToken.substring(0, domainSuperToken.length - 4);
-  domainSuperToken = domainSuperToken + process.env.SUPERTOKENS_PORT
+let domainSuperToken = process.env.DOMAIN_DB;
+if (domainSuperToken) {
+  domainSuperToken = domainSuperToken.substring(0, domainSuperToken.length - 4);
+  domainSuperToken = domainSuperToken + process.env.SUPERTOKENS_PORT;
 }
-
 
 supertokens.init({
   // debug: true,
