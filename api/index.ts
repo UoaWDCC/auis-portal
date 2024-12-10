@@ -20,18 +20,16 @@ import { notFound } from "./middleware/errorMiddleware";
 const app = express();
 config();
 
-// DELET ONC WE HAVE SUPEROTKEN THING
-let domainSuperToken = process.env.DOMAIN_DB;
-if (domainSuperToken) {
-  domainSuperToken = domainSuperToken.substring(0, domainSuperToken.length - 4);
-  domainSuperToken = domainSuperToken + process.env.SUPERTOKENS_PORT;
-}
+// DELET ONC WE HAVE SUPEROTKEN THING postgresql://db:5432/AUIS?user=AUIS&password=GuryIsGoat
+var domainSuperToken = `postgres://${process.env.DATABASE_USERNAME}:${process.env.DATABASE_PASSWORD}@${process.env.DATABASE_HOST}:${process.env.SUPERTOKENS_PORT}/supertokens`
+console.log(domainSuperToken)
+var domainDatabase = `postgres://${process.env.DATABASE_USERNAME}:${process.env.DATABASE_PASSWORD}@${process.env.DATABASE_HOST}:${process.env.DATABASE_PORT}`
 
 supertokens.init({
   // debug: true,
   framework: "express",
   supertokens: {
-    connectionURI: `${process.env.DOMAIN_SUPERTOKENS}`,
+    connectionURI: `${domainSuperToken}`,
     apiKey: `${process.env.SUPERTOKENS_API_KEY}`,
   },
   appInfo: {
@@ -53,8 +51,8 @@ app.use(
     origin: [
       `${process.env.DOMAIN_FRONTEND}`, //FE
       `${process.env.DOMAIN_STRAPI}`, //Strapi
-      `${process.env.DOMAIN_SUPERTOKENS}`, //ST user Dashboard
-      `${process.env.DOMAIN_DB}`, //DB
+      `${domainSuperToken}`, //ST user Dashboard
+      `${domainDatabase}`, //DB
     ],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: [
