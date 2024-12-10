@@ -1,8 +1,12 @@
 import {
   answers,
+  answersPeopleTicketLinks,
+  answersQuestionIdLinks,
   peoples,
   purchasableMemberships,
+  questions,
   userTickets,
+  userTicketsPeopleIdLinks,
   userTicketsTicketIdLinks,
 } from "../schemas/schema";
 import { db } from "../db/config/db";
@@ -74,6 +78,11 @@ export async function isMembershipActive(userEmail: string): Promise<boolean> {
   return isActive;
 }
 
+/**
+ * Inserts an unpaid ticket into the userTickets (People_Ticket) table
+ * @param data The payload containing name, email, phoneNumber, answers (q&a). ticketId isn't currently used.
+ * @returns
+ */
 export async function insertUserTicket(data: {
   ticketId: number;
   name: string;
@@ -94,10 +103,17 @@ export async function insertUserTicket(data: {
       name: data.name,
       email: data.email,
       phoneNumber: data.phoneNumber,
+      paid: false,
     })
     .returning({ userTicketId: userTickets.id });
 
-  const tempID = newUserTicket[0].userTicketId;
+  //figure out how to add People_ID link to userTickets
+  //find people id by getting the email? but it will fail if the user isn't a member
+  let people = await db
+    .select()
+    .from(peoples)
+    .where(eq(peoples.email, data.email))
+    .limit(1);
 
   const userTicketIdLink = await db
     .insert(userTicketsTicketIdLinks)
@@ -105,11 +121,13 @@ export async function insertUserTicket(data: {
       userTicketId: newUserTicket[0].userTicketId,
       ticketId: data.ticketId,
     })
-    .returning({ id: userTicketsTicketIdLinks.id });
+    .returning();
 
-  console.log("insertUserTicket: userTicketIdLink: " + userTicketIdLink[0].id);
+  console.log("insertUserTicket: userTicketIdLink: " + userTicketIdLink[0]);
 
-  const ticketId = userTickets.id;
+  const ticketId = newUserTicket[0].userTicketId;
+
+  console.dir("insertUserTicket: ticketId: " + ticketId);
 
   if (data.answers.length > 0) {
     const answerRecords = data.answers.map((answerData) => ({
@@ -118,8 +136,73 @@ export async function insertUserTicket(data: {
       answer: answerData.answer,
     }));
 
-    await db.insert(answers).values(answerRecords);
+    console.log(
+      "insertUserTicket: answerRecords: " +
+        JSON.stringify(answerRecords, null, 2)
+    );
+
+    for (let index = 0; index < data.answers.length; index++) {
+      let answer = await db
+        .insert(answers)
+        .values(answerRecords[index])
+        .returning();
+
+      let answerQuestionIdLink = await db
+        .insert(answersQuestionIdLinks)
+        .values({
+          questionId: answerRecords[index].questionId,
+          answerId: answer[0].id,
+        })
+        .returning();
+
+      let answersPeopleTicketLink = await db
+        .insert(answersPeopleTicketLinks)
+        .values({
+          userTicketId: answerRecords[index].ticketId,
+          answerId: answer[0].id,
+        })
+        .returning();
+
+      console.log(
+        "insertUserTicket: answer: " + JSON.stringify(answer, null, 2)
+      );
+      console.log(
+        "insertUserTicket: answerQuestionIdLink: " +
+          JSON.stringify(answerQuestionIdLink, null, 2)
+      );
+      console.log(
+        "insertUserTicket: answersPeopleTicketLink: " +
+          JSON.stringify(answersPeopleTicketLink, null, 2)
+      );
+    }
   }
+
+  //error occurs here
+  console.log(
+    "insertUserTicket: userTicketsPeopleIdLink: ticketId: ",
+    data.ticketId
+  );
+  let userTicketsPeopleIdLink = await db
+    .insert(userTicketsPeopleIdLinks)
+    .values({
+      peopleId: people[0].id,
+      userTicketId: ticketId,
+    })
+    .returning()
+    .catch((error) => {
+      console.log(
+        "insertUserTicket: userTicketsPeopleIdLink: error occurred: ",
+        error
+      );
+    });
+
+  console.log(
+    "insertUserTicket: userTicketsPeopleIdLink: " + userTicketsPeopleIdLink![0]!
+  );
+
+  //for question: link the answer.id to this question. More of an admin type task.
+  //let question = await db.update(questions).set().where(eq(questions.id, data.answers[0].questionId));
+  //for answer: question.id needs to be linked. People_ticket, if logged in, link it to this user to the one purchasing the ticket.
 
   return newUserTicket[0];
 }
@@ -147,6 +230,8 @@ export async function updateUserMembershipExpiryDate(
       .where(eq(peoples.email, checkoutSession.customer_details!.email!))
       .limit(1);
 
+    console.log("updateUserMembershipExpiryDate: customer: " + customer);
+
     //then, retrieve the price id from metadata from purchaseableMemberships
     let expiryDate = await db
       .select()
@@ -159,12 +244,18 @@ export async function updateUserMembershipExpiryDate(
       )
       .limit(1);
 
+    console.log("updateUserMembershipExpiryDate: expiryDate: " + expiryDate);
+
     // then, apply the retrieved expiry date into the users' field
     let updateExpiryDate = await db
       .update(peoples)
       .set({ memberExpiryDate: expiryDate[0].expiry, isMember: true })
       .where(eq(peoples.email, checkoutSession.customer_details!.email!))
       .returning({ memberExpiryDate: peoples.memberExpiryDate });
+
+    console.log(
+      "updateUserMembershipExpiryDate: updateExpiryDate: " + updateExpiryDate
+    );
 
     //update user metadata
     //getUserIdByEmail
