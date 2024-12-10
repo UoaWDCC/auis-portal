@@ -37,44 +37,44 @@ const eventSliderMock = {
     query: GET_EVENTS_SLIDER,
   },
   result: {
-    data : {
-        events: {
-          data: [
-            {
-              id: 1,
-              attributes: {
-                Title: "Event 1",
-                Location: "Location 1",
-                Event_Date_Start: nextDate,
-                isLive: true,
-                Image: {
-                  data: {
-                    attributes: {
-                      url: "/uploads/event1.jpg",
-                    },
+    data: {
+      events: {
+        data: [
+          {
+            id: 1,
+            attributes: {
+              Title: "Event 1",
+              Location: "Location 1",
+              Event_Date_Start: nextDate,
+              isLive: true,
+              Image: {
+                data: {
+                  attributes: {
+                    url: "/uploads/event1.jpg",
                   },
                 },
               },
             },
-            {
-                id: 2,
-                attributes: {
-                  Title: "Event 2",
-                  Location: "Location 2",
-                  Event_Date_Start: prevDate,
-                  isLive: true,
-                  Image: {
-                    data: {
-                      attributes: {
-                        url: "/uploads/event2.jpg",
-                      },
-                    },
+          },
+          {
+            id: 2,
+            attributes: {
+              Title: "Event 2",
+              Location: "Location 2",
+              Event_Date_Start: prevDate,
+              isLive: true,
+              Image: {
+                data: {
+                  attributes: {
+                    url: "/uploads/event2.jpg",
                   },
                 },
               },
-          ],
-        },
-      }
+            },
+          },
+        ],
+      },
+    },
   },
 };
 
@@ -84,7 +84,7 @@ const noEventSliderMock = {
   },
   result: {
     data: {
-        events: {
+      events: {
         data: [],
       },
     },
@@ -97,24 +97,24 @@ const valuesMock = {
     query: GET_EVENTS_GALLERY,
   },
   result: {
-    data : {
-        eventGalleries: {
-          data: [
-            {
-              id: 1,
-              attributes: {
-                Image: {
-                  data: {
-                    attributes: {
-                      url: "/uploads/event1.jpg",
-                    },
+    data: {
+      eventGalleries: {
+        data: [
+          {
+            id: 1,
+            attributes: {
+              Image: {
+                data: {
+                  attributes: {
+                    url: "/uploads/event1.jpg",
                   },
                 },
               },
             },
-          ],
-        },
-      }
+          },
+        ],
+      },
+    },
   },
 };
 
@@ -124,7 +124,7 @@ const noValuesMock = {
   },
   result: {
     data: {
-        eventGalleries: {
+      eventGalleries: {
         data: [],
       },
     },
@@ -174,14 +174,14 @@ describe("AboutUsScreen", () => {
     expect(
       await screen.findByText("There are no event photos to display")
     ).toBeInTheDocument();
-    
+
     expect(
       await screen.findAllByText("No Upcoming Events Right Now")
     ).toHaveLength(3);
 
-    expect(
-        await screen.findAllByText("No Past Events Right Now")
-      ).toHaveLength(3);
+    expect(await screen.findAllByText("No Past Events Right Now")).toHaveLength(
+      3
+    );
   });
 
   it("renders queries correctly", async () => {
@@ -194,9 +194,7 @@ describe("AboutUsScreen", () => {
     );
 
     expect(await screen.findByText("Event 1")).toBeInTheDocument();
-    expect(
-      await screen.findByText("Event 2")
-    ).toBeInTheDocument();
+    expect(await screen.findByText("Event 2")).toBeInTheDocument();
   });
 
   it("renders no data from cms", async () => {
@@ -208,9 +206,9 @@ describe("AboutUsScreen", () => {
       </MockedProvider>
     );
 
-    expect(
-      await screen.findAllByText("No Past Events Right Now")
-    ).toHaveLength(3);
+    expect(await screen.findAllByText("No Past Events Right Now")).toHaveLength(
+      3
+    );
     expect(
       await screen.findAllByText("No Upcoming Events Right Now")
     ).toHaveLength(3);

@@ -1,6 +1,6 @@
 import { MockedProvider } from "@apollo/client/testing";
 import { describe, expect, it, vi } from "vitest";
-import {  fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import ErrorScreen from "../../src/screens/ErrorScreen";
 import React from "react";
 import "@testing-library/jest-dom";
@@ -27,37 +27,43 @@ describe("CreditScreen", () => {
         </MemoryRouter>
       </MockedProvider>
     );
-    expect(await screen.findByText("404 page not found :(")).toBeInTheDocument();
+    expect(
+      await screen.findByText("404 page not found :(")
+    ).toBeInTheDocument();
   });
-  
+
   it("renders error", async () => {
-    
-    Object.defineProperty(window, 'location', { value: { pathname: "/error"} });
-    
+    Object.defineProperty(window, "location", {
+      value: { pathname: "/error" },
+    });
+
     render(
       <MockedProvider addTypename={false}>
         <MemoryRouter>
-          <ErrorScreen/>
+          <ErrorScreen />
         </MemoryRouter>
       </MockedProvider>
     );
-    expect(await screen.findByText("Oops... an error has occurred :(")).toBeInTheDocument();
+    expect(
+      await screen.findByText("Oops... an error has occurred :(")
+    ).toBeInTheDocument();
   });
 
   it("redirects user when return clicked", async () => {
     render(
       <MockedProvider addTypename={false}>
         <MemoryRouter>
-        <ErrorScreen/>
+          <ErrorScreen />
         </MemoryRouter>
       </MockedProvider>
     );
 
-    const button = await screen.findByRole("button", { name: "Return to Home screen" });
+    const button = await screen.findByRole("button", {
+      name: "Return to Home screen",
+    });
     expect(button).toBeDefined();
     await fireEvent.click(button);
 
     expect(mockedUseNavigate);
   });
-
 });

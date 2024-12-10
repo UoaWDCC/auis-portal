@@ -152,7 +152,9 @@ describe("ExecScreen", () => {
       </MockedProvider>
     );
 
-    expect(await screen.findAllByText("There are no execs to display")).toHaveLength(2);
+    expect(
+      await screen.findAllByText("There are no execs to display")
+    ).toHaveLength(2);
   });
 
   it("renders current execs correctly", async () => {
