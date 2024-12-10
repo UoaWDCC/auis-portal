@@ -120,7 +120,9 @@ export default function ExecScreen({ navbar }: { navbar: JSX.Element }) {
             </h3>
             <h2 className="text-tertiary-blue text-3xl font-bold">President</h2>
             {errorExecutives ? (
-              <div className="py-10 text-white">There are no execs to display</div>
+              <div className="py-10 text-white">
+                There are no execs to display
+              </div>
             ) : (
               <div className="flex flex-wrap justify-center">
                 {presidents?.map((exec) => (
@@ -139,7 +141,9 @@ export default function ExecScreen({ navbar }: { navbar: JSX.Element }) {
               Executive Team
             </h2>
             {errorExecutives ? (
-              <div className="py-10 text-white">There are no execs to display</div>
+              <div className="py-10 text-white">
+                There are no execs to display
+              </div>
             ) : (
               <div className="mb-5 flex flex-wrap justify-center">
                 {otherExecutives?.map((exec) => (
