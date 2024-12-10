@@ -46,7 +46,7 @@ const eventSliderMock = {
               Title: "Event 1",
               Location: "Location 1",
               Event_Date_Start: nextDate,
-              isLive: true,
+              Is_Live: true,
               Image: {
                 data: {
                   attributes: {
@@ -62,7 +62,7 @@ const eventSliderMock = {
               Title: "Event 2",
               Location: "Location 2",
               Event_Date_Start: prevDate,
-              isLive: true,
+              Is_Live: true,
               Image: {
                 data: {
                   attributes: {

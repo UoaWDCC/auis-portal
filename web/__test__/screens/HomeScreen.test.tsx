@@ -7,6 +7,7 @@ import React from "react";
 import { GraphQLError } from "graphql";
 import "@testing-library/jest-dom";
 import { MemoryRouter } from "react-router";
+import EventScreen from "../../src/screens/EventScreen";
 
 const mockedUseNavigate = vi.fn();
 vi.mock("react-router-dom", async () => {
@@ -21,7 +22,7 @@ vi.mock("react-router-dom", async () => {
 });
 
 var nextDate = new Date();
-nextDate.setDate(nextDate.getDate() + 1);
+nextDate.setDate(nextDate.getDate() + 15);
 var prevDate = new Date();
 prevDate.setDate(prevDate.getDate() - 1);
 const eventSliderMock = {
@@ -38,7 +39,7 @@ const eventSliderMock = {
               Title: "Event 1",
               Location: "Location 1",
               Event_Date_Start: nextDate,
-              isLive: true,
+              Is_Live: true,
               Image: {
                 data: {
                   attributes: {
@@ -54,7 +55,7 @@ const eventSliderMock = {
               Title: "Event 2",
               Location: "Location 2",
               Event_Date_Start: prevDate,
-              isLive: true,
+              Is_Live: true,
               Image: {
                 data: {
                   attributes: {
