@@ -7,6 +7,7 @@ module.exports = [
         "http://localhost:3000",
         "http://localhost:1337",
         "http://localhost:3567",
+        "https://wdcc-auis-staging.fly.dev/"
       ], // Your frontend domain
       headers: [
         "Content-Type",
