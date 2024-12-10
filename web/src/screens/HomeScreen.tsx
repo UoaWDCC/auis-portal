@@ -1,7 +1,7 @@
 import Hero from "@components/home-page/Hero";
 import Intro from "@components/home-page/Intro";
 import SomePhotos from "@components/home-page/SomePhotos";
-import UpcomingEvents from "@components/events-slider/EventSlider";
+import EventSlider from "@components/events-slider/EventSlider";
 import { GET_EVENTS_SLIDER, GET_SOME_PHOTOS } from "../graphql/queries";
 import LoadingSpinner from "../components/navigation/LoadingSpinner";
 import { useQuery } from "@apollo/client";
@@ -88,7 +88,7 @@ export default function HomeScreen({ navbar }: { navbar: JSX.Element }) {
             <h1 className="mx-3 py-10 text-center text-5xl font-bold text-white">
               Our Upcoming Events!
             </h1>
-            <UpcomingEvents
+            <EventSlider
               events={upcomingEvents}
               noEvents={errorEvents || upcomingEvents.length === 0}
               pastEvent={false}

@@ -6,6 +6,7 @@ import { Mapper } from "../utils/Mapper";
 import EventGalleryComponent from "@components/events-page/EventGalleryComponent";
 import { useEffect, useState } from "react";
 import UpcomingEvents from "@components/events-slider/EventSlider";
+import EventSlider from "@components/events-slider/EventSlider";
 
 export default function EventScreen({ navbar }: { navbar: JSX.Element }) {
   // Get today's date for filtering
@@ -105,7 +106,7 @@ export default function EventScreen({ navbar }: { navbar: JSX.Element }) {
               </div>
               <div className="flex h-auto w-full flex-row items-center justify-center bg-transparent pb-10">
                 <div className="w-11/12 lg:w-3/4">
-                  <UpcomingEvents
+                  <EventSlider
                     pastEvent={false}
                     events={upcomingEvents}
                     noEvents={errorEvents || upcomingEvents.length == 0}
