@@ -67,8 +67,8 @@ app.use(
 );
 
 // Supertokens middleware.
-// app.use(middleware());
-// app.use(express.static("public"));
+app.use(middleware());
+app.use(express.static("public"));
 
 // @Ratchet7x5: INFO: Use JSON parser for all non-webhook routes
 //              otherwise, webhook and db entries will fail
