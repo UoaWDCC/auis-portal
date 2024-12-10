@@ -77,7 +77,7 @@ export default function EventScreen({ navbar }: { navbar: JSX.Element }) {
     (acc, event) => {
       const eventDate = new Date(event.eventDateStart);
       const isEventLive = event.isLive;
-      if ((eventDate >= currentDate) && isEventLive) {
+      if (eventDate >= currentDate && isEventLive) {
         acc.upcomingEvents.push(event);
       } else {
         acc.pastEvents.push(event);
