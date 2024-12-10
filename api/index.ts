@@ -21,9 +21,9 @@ const app = express();
 config();
 
 // DELET ONC WE HAVE SUPEROTKEN THING postgresql://db:5432/AUIS?user=AUIS&password=GuryIsGoat
-var domainSuperToken = `postgres://${process.env.DATABASE_USERNAME}:${process.env.DATABASE_PASSWORD}@${process.env.DATABASE_HOST}:${process.env.SUPERTOKENS_PORT}/supertokens`
-console.log(domainSuperToken)
-var domainDatabase = `postgres://${process.env.DATABASE_USERNAME}:${process.env.DATABASE_PASSWORD}@${process.env.DATABASE_HOST}:${process.env.DATABASE_PORT}`
+var domainSuperToken = `postgres://${process.env.DATABASE_USERNAME}:${process.env.DATABASE_PASSWORD}@${process.env.DATABASE_HOST}:${process.env.SUPERTOKENS_PORT}/supertokens`;
+console.log(domainSuperToken);
+var domainDatabase = `postgres://${process.env.DATABASE_USERNAME}:${process.env.DATABASE_PASSWORD}@${process.env.DATABASE_HOST}:${process.env.DATABASE_PORT}`;
 
 supertokens.init({
   // debug: true,
