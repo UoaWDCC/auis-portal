@@ -133,7 +133,7 @@ const partnersMock = {
 
 const noPartnersMock = {
   request: {
-    query: GET_PARTNERS,
+    query: GET_PARTNER_IMAGES,
   },
   result: {
     data: {

@@ -130,7 +130,7 @@ export default function SignUpInformationScreen({
                 name="upi"
                 register={register}
                 error={errors.upi}
-                errorMessage="Please enter your field of study"
+                errorMessage="Please enter your UPI"
               />
               <TextQuestion
                 question="Enter your field of study"
@@ -138,7 +138,7 @@ export default function SignUpInformationScreen({
                 name="fieldOfStudy"
                 register={register}
                 error={errors.fieldOfStudy}
-                errorMessage="Please enter your UPI"
+                errorMessage="Please enter your field of study"
               />
               <DropdownQuestion
                 question="Enter your year of study"

@@ -13,7 +13,7 @@ import Session from "supertokens-auth-react/recipe/session";
 describe("Sign Up Screen", () => {
   //supertokens code
   SuperTokens.init({
-    enableDebugLogs: true,
+    enableDebugLogs: false,
     appInfo: {
       // learn more about this on https://supertokens.com/docs/thirdpartyemailpassword/appinfo
       appName: "AUIS",

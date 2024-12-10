@@ -197,7 +197,10 @@ describe("AboutUsScreen", () => {
         </MemoryRouter>
       </MockedProvider>
     );
-
+    const image = await screen.findByAltText("Nature");
+    expect(image).toHaveAttribute("src", "/uploads/nature.jpg");
+    const image2 = await screen.findByAltText("Cityscape");
+    expect(image2).toHaveAttribute("src", "/uploads/cityscape.jpg");
     expect(await screen.findByText("Event 1")).toBeInTheDocument();
     expect(await screen.queryByText("Event 2")).toBeNull();
   });
