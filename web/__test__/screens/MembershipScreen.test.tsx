@@ -43,23 +43,22 @@ vi.mock("../../api/apiRequests", () => ({
     }),
 }));
 
-// const mockedUseUserMembershipExpiry = vi.fn(() => 
+// const mockedUseUserMembershipExpiry = vi.fn(() =>
 //     {
 //         data: {useUserMembershipExpiry: nextDate.toString()}
 //     }
 // );
 vi.mock("../hooks/api/useUserMembership", async () => {
-  const mod =
-    await vi.importActual<typeof import("../../src/hooks/api/useUserMembership")>(
-      "../../src/hooks/api/useUserMembership"
-    );
+  const mod = await vi.importActual<
+    typeof import("../../src/hooks/api/useUserMembership")
+  >("../../src/hooks/api/useUserMembership");
   return {
     ...mod,
     useUserMembershipExpiry: () => () => ({
-        data: { userExpiryDate : nextDate.toString()},
-        isLoading: false,
-        error: undefined
-      }),
+      data: { userExpiryDate: nextDate.toString() },
+      isLoading: false,
+      error: undefined,
+    }),
   };
 });
 
@@ -110,7 +109,7 @@ const noIntroMock = {
   },
   result: {
     data: {
-        purchasableMemberships: {
+      purchasableMemberships: {
         data: [],
       },
     },
@@ -164,17 +163,17 @@ describe("Membership Screen", () => {
 
   // I was unable to figure out the mock for the tanstack query hook so will do this test case later
 
-//   it("renders purchase memberships correctly", async () => {
+  //   it("renders purchase memberships correctly", async () => {
 
-//     render(
-//       <MockedProvider mocks={mocks} addTypename={false}>
-//         <QueryClientProvider client={queryClient}>
-//           <MemoryRouter>
-//             <MembershipScreen navbar={<></>} />
-//           </MemoryRouter>
-//         </QueryClientProvider>
-//       </MockedProvider>
-//     );
+  //     render(
+  //       <MockedProvider mocks={mocks} addTypename={false}>
+  //         <QueryClientProvider client={queryClient}>
+  //           <MemoryRouter>
+  //             <MembershipScreen navbar={<></>} />
+  //           </MemoryRouter>
+  //         </QueryClientProvider>
+  //       </MockedProvider>
+  //     );
 
   //     expect(
   //       await screen.findByText("Your current membership expires on")
