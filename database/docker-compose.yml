@@ -5,9 +5,9 @@ services:
     image: postgres
     restart: always
     environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: AUIS
+      POSTGRES_PASSWORD: GuryIsGoat
+      POSTGRES_DB: AUIS
     ports:
       - 5432:5432
     expose:
@@ -24,11 +24,7 @@ services:
     image: supertokens/supertokens-postgresql
     ports:
       - 3567:3567
-    expose:
-      - 3567
     environment:
-      environment:
-        - POSTGRESQL_CONNECTION_URI=${POSTGRESQL_CONNECTION_URI}
       LOG_LEVEL: ERROR
-      POSTGRESQL_CONNECTION_URI: POSTGRESQL_CONNECTION_URI
+      POSTGRESQL_CONNECTION_URI: "postgresql://db:5432/AUIS?user=AUIS&password=GuryIsGoat"
     restart: always
