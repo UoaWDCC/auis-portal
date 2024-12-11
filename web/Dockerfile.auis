@@ -26,20 +26,16 @@ RUN yarn install --frozen-lockfile --production=false
 # Copy application code
 COPY --link . .
 
-ARG VITE_CLERK_PUBLISHABLE_KEY
-ENV VITE_CLERK_PUBLISHABLE_KEY=${VITE_CLERK_PUBLISHABLE_KEY}
 
 RUN yarn test 
 
-ENV VITE_API_URL="https://wdcc-auis-api-staging.fly.dev"
-ENV VITE_STRAPI_URL="https://wdcc-auis-strapi-staging.fly.dev"
-ENV VITE_APP_URL="https://wdcc-auis-staging.fly.dev"
+ENV VITE_API_URL="https://auis.fly.dev"
+ENV VITE_STRAPI_URL="https://auis-strapi.fly.dev"
+ENV VITE_APP_URL="https://auis-api.fly.dev"
 ENV VITE_APP_NAME="AUIS"
 
 # Mount secrets into Dockerfile and set environment variables
-RUN --mount=type=secret,id=VITE_STRIPE_PUBLISHABLE_KEY \
-    VITE_STRIPE_PUBLISHABLE_KEY="$(cat /run/secrets/VITE_STRIPE_PUBLISHABLE_KEY)" \
-    yarn run build   
+RUN yarn run build   
 
 # Remove development dependencies
 RUN yarn install --production=true

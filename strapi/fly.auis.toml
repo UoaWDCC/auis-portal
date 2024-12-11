@@ -3,7 +3,7 @@
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'wdcc-auis-strapi-staging'
+app = 'auis-strapi'
 primary_region = 'syd'
 
 [build]
@@ -19,6 +19,6 @@ primary_region = 'syd'
   processes = ['app']
 
 [[vm]]
-  memory = '1gb'
+  memory = '512mb'
   cpu_kind = 'shared'
   cpus = 1

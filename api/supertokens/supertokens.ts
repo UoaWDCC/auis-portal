@@ -163,7 +163,9 @@ export function getConfiguredRecipeList(): RecipeListFunction[] {
       },
     }),
     Session.init(), // initializes session features
-    Dashboard.init(),
+    Dashboard.init({
+      admins: ["au.indiansociety@gmail.com"],
+    }),
     UserMetadata.init(),
     UserRoles.init(),
   ];

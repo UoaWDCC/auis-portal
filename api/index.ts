@@ -20,27 +20,26 @@ import { notFound } from "./middleware/errorMiddleware";
 const app = express();
 config();
 
-// DELET ONC WE HAVE SUPEROTKEN THING
-var domainSuperToken = `postgres://${process.env.DATABASE_USERNAME}:${process.env.DATABASE_PASSWORD}@${process.env.DATABASE_HOST}:${process.env.SUPERTOKENS_PORT}/supertokens`;
-console.log(domainSuperToken);
-var domainDatabase = `postgres://${process.env.DATABASE_USERNAME}:${process.env.DATABASE_PASSWORD}@${process.env.DATABASE_HOST}:${process.env.DATABASE_PORT}`;
-
-supertokens.init({
-  // debug: true,
-  framework: "express",
-  supertokens: {
-    connectionURI: `${domainSuperToken}`,
-    apiKey: `${process.env.SUPERTOKENS_API_KEY}`,
-  },
-  appInfo: {
-    appName: "AUIS",
-    apiDomain: `${process.env.DOMAIN_API}`,
-    websiteDomain: `${process.env.DOMAIN_FRONTEND}`,
-    apiBasePath: "/api/auth",
-    websiteBasePath: "/signup",
-  },
-  recipeList: getConfiguredRecipeList(),
-});
+try {
+  supertokens.init({
+    // debug: true,
+    framework: "express",
+    supertokens: {
+      connectionURI: `${process.env.DOMAIN_SUPERTOKENS}`,
+      apiKey: `${process.env.SUPERTOKENS_API_KEY}`,
+    },
+    appInfo: {
+      appName: "AUIS",
+      apiDomain: `${process.env.DOMAIN_API}`,
+      websiteDomain: `${process.env.DOMAIN_FRONTEND}`,
+      apiBasePath: "/api/auth",
+      websiteBasePath: "/signup",
+    },
+    recipeList: getConfiguredRecipeList(),
+  });
+} catch (error) {
+  console.log(error);
+}
 
 //init user and admin roles in supertokens
 createRoles();
@@ -51,8 +50,8 @@ app.use(
     origin: [
       `${process.env.DOMAIN_FRONTEND}`, //FE
       `${process.env.DOMAIN_STRAPI}`, //Strapi
-      `${domainSuperToken}`, //ST user Dashboard
-      `${domainDatabase}`, //DB
+      `${process.env.DOMAIN_SUPERTOKENS}`, //ST user Dashboard
+      `${process.env.DATABASE_HOST}:${process.env.DATABASE_PORT}`, //DB
     ],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: [

@@ -1,24 +1,23 @@
-# fly.toml app configuration file generated for portfolio-strapi on 2024-03-30T19:59:13+13:00
+# fly.toml app configuration file generated for supertoken-core on 2024-12-11T19:36:23+13:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'wdcc-auis-strapi-staging'
+app = 'auis-supertokens'
 primary_region = 'syd'
 
 [build]
-  # dockerfile contains build time non-sensitive env vars
-  dockerfile = "Dockerfile"
+  image = 'registry.supertokens.io/supertokens/supertokens-postgresql'
 
 [http_service]
-  internal_port = 1337
+  internal_port = 3567
   force_https = true
-  auto_stop_machines = true
+  auto_stop_machines = 'stop'
   auto_start_machines = true
   min_machines_running = 0
   processes = ['app']
 
 [[vm]]
-  memory = '1gb'
   cpu_kind = 'shared'
   cpus = 1
+  memory_mb = 512

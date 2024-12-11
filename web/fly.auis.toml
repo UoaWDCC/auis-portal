@@ -1,17 +1,17 @@
-# fly.toml app configuration file generated for portfolio-strapi on 2024-03-30T19:59:13+13:00
+# fly.toml app configuration file generated for wdcc-passport on 2024-02-07T22:12:25+13:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'wdcc-auis-strapi-staging'
+app = 'auis'
 primary_region = 'syd'
 
 [build]
   # dockerfile contains build time non-sensitive env vars
-  dockerfile = "Dockerfile"
+  dockerfile = "Dockerfile.auis"
 
 [http_service]
-  internal_port = 1337
+  internal_port = 80
   force_https = true
   auto_stop_machines = true
   auto_start_machines = true
@@ -19,6 +19,6 @@ primary_region = 'syd'
   processes = ['app']
 
 [[vm]]
-  memory = '1gb'
   cpu_kind = 'shared'
   cpus = 1
+  memory_mb = 512
