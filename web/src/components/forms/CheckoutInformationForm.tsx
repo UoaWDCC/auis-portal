@@ -185,7 +185,9 @@ export default function CheckoutInformationForm({
           <p className="mt-2 text-center text-sm text-red-500">
             An error has occurred while submitting, please try again later.
             <br />
-            If this is a double ticket, both ticket holders must be members
+            If this is a double ticket, both ticket holders must be members.
+            <br />
+            If this is a Member ticket, make sure you haven't already purchased a Member ticket.
           </p>
         ) : (
           <></>
