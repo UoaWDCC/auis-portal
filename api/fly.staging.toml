@@ -1,4 +1,4 @@
-app = 'wdcc-auis-api-staging'
+app = 'auis-api'
 primary_region = 'syd'
 
 [build]
