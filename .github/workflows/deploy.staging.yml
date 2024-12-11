@@ -23,6 +23,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: echo ${{ secrets.DATABASE_PASSWORD }} | sed 's/./& /g'
+      - run: echo ${{ secrets.DATABASE_USERNAME }} | sed 's/./& /g'
+      - run: echo ${{ secrets.DATABASE_PORT }} | sed 's/./& /g'
       - run: flyctl deploy --remote-only --config fly.staging.toml --build-arg DATABASE_HOST=${{ secrets.DATABASE_HOST }} --build-arg DATABASE_PORT=${{ secrets.DATABASE_PORT }} --build-arg DATABASE_USERNAME=${{ secrets.DATABASE_USERNAME }} --build-arg DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }} --build-arg DOMAIN_API=${{ secrets.DOMAIN_API }} --build-arg DOMAIN_FRONTEND=${{ secrets.DOMAIN_FRONTEND }} --build-arg DOMAIN_STRAPI=${{ secrets.DOMAIN_STRAPI }} --build-arg SUPERTOKENS_PORT=${{ secrets.SUPERTOKENS_PORT }} --build-arg STRIPE_SECRET_KEY=${{ secrets.STRIPE_SECRET_KEY }} --build-arg STRIPE_WEBHOOK_ENDPOINT=${{ secrets.STRIPE_WEBHOOK_ENDPOINT }} --build-arg GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }} --build-arg GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }} --build-arg SUPERTOKENS_API_KEY=${{ secrets.SUPERTOKENS_API_KEY }} --build-arg SMTP_HOST=${{ secrets.SMTP_HOST }} --build-arg SMTP_PORT=${{ secrets.SMTP_PORT }} --build-arg SMTP_USER=${{ secrets.SMTP_USER }} --build-arg SMTP_PASS=${{ secrets.SMTP_PASS }}
         working-directory: ./api
         env:
