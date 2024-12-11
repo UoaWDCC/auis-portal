@@ -1,4 +1,4 @@
-# fly.toml app configuration file generated for auis-supertokens on 2024-12-11T18:44:14+13:00
+# fly.toml app configuration file generated for supertoken-core on 2024-12-11T19:36:23+13:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
@@ -10,7 +10,7 @@ primary_region = 'syd'
   image = 'registry.supertokens.io/supertokens/supertokens-postgresql'
 
 [http_service]
-  internal_port = 8080
+  internal_port = 3567
   force_https = true
   auto_stop_machines = 'stop'
   auto_start_machines = true
@@ -18,4 +18,6 @@ primary_region = 'syd'
   processes = ['app']
 
 [[vm]]
-  size = 'shared-cpu-1x'
+  cpu_kind = 'shared'
+  cpus = 1
+  memory_mb = 512

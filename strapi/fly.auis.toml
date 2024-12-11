@@ -1,4 +1,4 @@
-# fly.toml app configuration file generated for auis-strapi on 2024-12-11T18:59:18+13:00
+# fly.toml app configuration file generated for portfolio-strapi on 2024-03-30T19:59:13+13:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
@@ -7,13 +7,13 @@ app = 'auis-strapi'
 primary_region = 'syd'
 
 [build]
-# dockerfile contains build time non-sensitive env vars
+  # dockerfile contains build time non-sensitive env vars
   dockerfile = "Dockerfile"
 
 [http_service]
   internal_port = 1337
   force_https = true
-  auto_stop_machines = 'stop'
+  auto_stop_machines = true
   auto_start_machines = true
   min_machines_running = 0
   processes = ['app']
