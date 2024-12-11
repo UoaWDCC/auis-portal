@@ -100,4 +100,27 @@ const port = Number.parseInt(process.env.PORT || "3000");
 // Specify the host parameter as '0.0.0.0' to listen on all network interfaces
 app.listen(port, "0.0.0.0", () => {
   console.log(`Backend is now listening on port :${port}`);
+  console.log(`Backend en vars : ${process.env.NODE_ENV}
+     ${process.env.PORT},
+     ${process.env.DATABASE_URL},
+     ${process.env.DATABASE_HOST},
+     ${process.env.DATABASE_PORT},
+     ${process.env.DATABASE_USERNAME},
+     ${process.env.DATABASE_PASSWORD},
+     ${process.env.DATABASE_DB},
+     ${process.env.DOMAIN_API},
+     ${process.env.DOMAIN_FRONTEND},
+     ${process.env.DOMAIN_STRAPI},
+     ${process.env.DOMAIN_SUPERTOKENS},
+     ${process.env.DOMAIN_DB},
+     ${process.env.SUPERTOKENS_PORT},
+     ${process.env.STRIPE_SECRET_KEY},
+     ${process.env.STRIPE_WEBHOOK_ENDPOINT},
+     ${process.env.GOOGLE_CLIENT_ID},
+     ${process.env.GOOGLE_CLIENT_SECRET},
+     ${process.env.SUPERTOKENS_API_KEY},
+     ${process.env.SMTP_HOST},
+     ${process.env.SMTP_PORT},
+     ${process.env.SMTP_USER},
+     ${process.env.SMTP_PASS}`);
 });
