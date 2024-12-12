@@ -33,12 +33,12 @@ import Header from "@components/navigation/Header.tsx";
 import MembershipScreen from "./screens/MembershipScreen.tsx";
 import EventInformationScreen from "./screens/EventInformationScreen.tsx";
 import SignUpInformationScreen from "./screens/SignUpInformationScreen.tsx";
-import axios from "axios";
 import ErrorScreen from "./screens/ErrorScreen.tsx";
 import CheckoutInformationScreen from "./screens/CheckoutInformationScreen.tsx";
 import AttendanceScreen from "./screens/AttendanceScreen.tsx";
 import EventAttendanceSelectScreen from "./screens/EventAttendanceSelectScreen.tsx";
 import { ExecRoute } from "@utils/AdminRouteProtection.tsx";
+import { getUserMetadaData } from "./api/apiRequests.ts";
 
 console.log(`Frontend env vars : 
   VITE_API_URL=${import.meta.env.VITE_API_URL}
@@ -71,18 +71,14 @@ SuperTokens.init({
       let redirectionURL = "/";
 
       try {
-        const response = await axios.get("/api/user/get-metadata", {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+        const userMetadata = await getUserMetadaData();
 
-        if (response.status === 200) {
-          if (response.data!.bIsUserInfoComplete === false) {
+        if (userMetadata.status === 200) {
+          if (userMetadata.data!.bIsUserInfoComplete === false) {
             redirectionURL = "/signup/information";
           } else if (
-            response.data!.bIsUserInfoComplete &&
-            response.data!.bIsMembershipPaymentComplete === false
+            userMetadata.data!.bIsUserInfoComplete &&
+            userMetadata.data!.bIsMembershipPaymentComplete === false
           ) {
             redirectionURL = "/membership";
           } else {

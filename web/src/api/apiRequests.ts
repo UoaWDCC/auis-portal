@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import {
   AttendanceList,
   MembershipExpiryDate as MembershipExpiryDate,
@@ -7,6 +7,17 @@ import {
 const apiClient = axios.create({
   baseURL: `${import.meta.env.VITE_API_URL}`, // Replace with your API URL
 });
+
+// Get user metadata
+export const getUserMetadaData = async (): Promise<AxiosResponse> => {
+  const response = await apiClient.get("/api/user/get-metadata", {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  return response;
+};
 
 // User membership expiry
 export const fetchUserMembershipExpiry =
@@ -20,7 +31,7 @@ export const fetchAttendanceInformation = async (
   eventId: number
 ): Promise<AttendanceList[]> => {
   const params = { eventId: eventId };
-  const response = await axios.get("/api/event/attendance", {
+  const response = await apiClient.get("/api/event/attendance", {
     params: params,
     headers: {
       "Content-Type": "application/json",
@@ -38,7 +49,7 @@ export const postAttendanceUpdate = async (
     peopleTicketId: peopleTicketId,
     attendance: attendance,
   };
-  const response = await axios.patch("/api/event/attendance", {
+  const response = await apiClient.patch("/api/event/attendance", {
     headers: {
       "Content-Type": "application/json",
     },
