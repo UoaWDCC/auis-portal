@@ -1,7 +1,6 @@
 import { z } from "zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
 import TextQuestion from "@components/forms/TextQuestion";
 import DropdownQuestion from "@components/forms/DropdownQuestion";
 import { useState } from "react";
