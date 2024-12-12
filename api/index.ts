@@ -100,9 +100,9 @@ const port = Number.parseInt(process.env.PORT || "3000");
 // Specify the host parameter as '0.0.0.0' to listen on all network interfaces
 app.listen(port, "0.0.0.0", () => {
   console.log(`Backend is now listening on port :${port}`);
-  console.log(`Backend en vars : 
+  console.log(`Backend env vars : 
      NODE_ENV=${process.env.NODE_ENV}
-     NODE_ENV=${process.env.PORT},
+     PORT=${process.env.PORT},
      DATABASE_URL=${process.env.DATABASE_URL},
      DATABASE_HOST=${process.env.DATABASE_HOST},
      DATABASE_PORT=${process.env.DATABASE_PORT},
