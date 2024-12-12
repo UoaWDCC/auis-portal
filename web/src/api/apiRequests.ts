@@ -31,6 +31,18 @@ export const updateUserInfo = async (data: object): Promise<AxiosResponse> => {
   return response;
 };
 
+export const updateUserTicketInfo = async (
+  data: object
+): Promise<AxiosResponse> => {
+  const response = await axios.post("/api/user/user-ticket-info", data, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  return response;
+};
+
 // User membership expiry
 export const fetchUserMembershipExpiry =
   async (): Promise<MembershipExpiryDate> => {

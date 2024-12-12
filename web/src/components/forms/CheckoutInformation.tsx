@@ -1,4 +1,3 @@
-import axios from "axios";
 import { QuestionAnswer, TicketAndQuestion } from "../../types/types";
 import { useEffect, useState } from "react";
 import { useQuery } from "@apollo/client";
@@ -7,6 +6,7 @@ import { Mapper } from "@utils/Mapper";
 import LoadingSpinner from "@components/navigation/LoadingSpinner";
 import { useNavigate } from "react-router";
 import CheckoutInformationForm from "./CheckoutInformationForm";
+import { updateUserTicketInfo } from "../../api/apiRequests";
 
 interface CheckoutInformationProps {
   ticketId: number;
@@ -68,11 +68,7 @@ export default function CheckoutInformation({
   // Submit ticket information to backend
   const onSubmit = async (data: any) => {
     try {
-      const response = await axios.post("/api/user/user-ticket-info", data, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await updateUserTicketInfo(data);
       if (response.status === 200) {
         // Form Submission Successful
         setSubmitLoading(false);
