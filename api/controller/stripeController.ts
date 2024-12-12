@@ -16,6 +16,7 @@ const endpointSecret: string = process.env.STRIPE_WEBHOOK_ENDPOINT as string;
 
 export const createCheckout = asyncHandler(
   async (req: Request, res: Response) => {
+    console.log("createCheckout: req.body", req.body);
     const { priceId, userTicketId } = req.body;
     const session = req.session!;
     let email;
