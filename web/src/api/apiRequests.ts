@@ -19,6 +19,17 @@ export const getUserMetadaData = async (): Promise<AxiosResponse> => {
   return response;
 };
 
+// Update user info
+export const updateUserInfo = async (data: object): Promise<AxiosResponse> => {
+  const response = await apiClient.post("/api/user/update-user-info", data, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+    data: { data },
+  });
+  return response;
+};
+
 // User membership expiry
 export const fetchUserMembershipExpiry =
   async (): Promise<MembershipExpiryDate> => {

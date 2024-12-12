@@ -5,6 +5,7 @@ import axios from "axios";
 import TextQuestion from "@components/forms/TextQuestion";
 import DropdownQuestion from "@components/forms/DropdownQuestion";
 import { useState } from "react";
+import { updateUserInfo } from "../api/apiRequests";
 
 const SignUpSchema = z.object({
   name: z.string().max(40).min(1),
@@ -49,12 +50,8 @@ export default function SignUpInformationScreen({
 
   const sendSignUpData = async (data: object) => {
     try {
-      const response = await axios.post("/api/user/update-user-info", data, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        data: { data },
-      });
+      const response = await updateUserInfo(data);
+
       if (response.status === 200) {
         window.location.href = "/membership";
       } else {
