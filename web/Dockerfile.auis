@@ -33,7 +33,6 @@ ENV VITE_API_URL="https://auis-api.fly.dev"
 ENV VITE_STRAPI_URL="https://auis-strapi.fly.dev"
 ENV VITE_APP_URL="https://auis.fly.dev"
 ENV VITE_APP_NAME="AUIS"
-ENV VITE_STRIPE_PUBLISHABLE_KEY=pk_test_51PPclyP464csY2UpQPZ4cpWlyupAwPXfvWZRIG0zy9BhlYE8GmR4LYEytjFKOjMS6o5oXF5I0QMB8RWcc0TqsNxC00Nz3UAH14
 
 # Mount secrets into Dockerfile and set environment variables
 RUN yarn run build   

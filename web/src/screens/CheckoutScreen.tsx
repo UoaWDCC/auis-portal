@@ -1,18 +1,19 @@
 import { useCallback } from "react";
+import { loadStripe } from "@stripe/stripe-js";
 import {
   EmbeddedCheckoutProvider,
   EmbeddedCheckout,
 } from "@stripe/react-stripe-js";
 import { useLocation } from "react-router";
-import { stripeKey } from "../stripe/stripe";
 import { fetchEventOrMembershipCheckoutSecret } from "../api/apiRequests";
 import CheckoutError from "@components/checkout-page/CheckoutError";
 
+const STRIPE_PUBLISHABLE_KEY = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
+
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
-const stripePromise = stripeKey;
+const stripePromise = loadStripe(`${STRIPE_PUBLISHABLE_KEY}`);
 let bodyData: { priceId: string; userTicketId: number };
-
 export default function CheckoutScreen() {
   const location = useLocation();
   // ensure data required for checkout is here
