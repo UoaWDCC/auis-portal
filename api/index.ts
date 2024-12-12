@@ -53,12 +53,16 @@ app.use(
       `${process.env.DOMAIN_SUPERTOKENS}`, //ST user Dashboard
       `${process.env.DATABASE_HOST}:${process.env.DATABASE_PORT}`, //DB
     ],
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
     allowedHeaders: [
-      "Content-Type",
+      "Content-type",
       "Authorization",
+      "Origin",
+      "Access-Control-Allow-Origin",
+      "Accept",
+      "Options",
+      "X-Requested-With",
       "st-auth-mode",
-      "content-type",
       ...supertokens.getAllCORSHeaders(),
     ],
     credentials: true,
