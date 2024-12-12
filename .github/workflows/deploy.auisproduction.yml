@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: superfly/flyctl-actions/setup-flyctl@master
-      - run: flyctl deploy --remote-only --config fly.auis.toml
+      - run: flyctl deploy --remote-only --config fly.auis.toml --build-secret VITE_CLERK_PUBLISHABLE_KEY=${{ secrets.VITE_STRIPE_PUBLISHABLE_KEY }}
         working-directory: ./web
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_AUIS_API_TOKEN }}

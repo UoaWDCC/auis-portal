@@ -29,7 +29,9 @@ RUN yarn install --frozen-lockfile --production=false
 COPY --link . .
 
 # Build application
-RUN yarn run build
+RUN --mount=type=secret,id=VITE_STRIPE_PUBLISHABLE_KEY \
+  VITE_STRIPE_PUBLISHABLE_KEY="$(cat /run/secrets/VITE_STRIPE_PUBLISHABLE_KEY)"\
+  yarn run build
 
 # Remove development dependencies
 RUN yarn install --production=true
