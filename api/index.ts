@@ -59,6 +59,7 @@ app.use(
       "Authorization",
       "st-auth-mode",
       "content-type",
+      "application/json",
       ...supertokens.getAllCORSHeaders(),
     ],
     credentials: true,
