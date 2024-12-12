@@ -74,7 +74,7 @@ export const postAttendanceUpdate = async (
 export const fetchEventOrMembershipCheckoutSecret = async (payload: {
   priceId: string;
   userTicketId: number;
-}): Promise<AxiosResponse> => {
+}): Promise<string> => {
   const response = await apiClient.post("/api/stripe/create-checkout", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
