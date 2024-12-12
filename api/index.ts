@@ -55,8 +55,9 @@ app.use(
     ],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
     allowedHeaders: [
+      "Access-Control-Allow-Origin",
+      "Access-Control-Allow-Headers",
       "Content-type",
-      "Authorization",
       "Origin",
       "Access-Control-Allow-Origin",
       "Accept",
