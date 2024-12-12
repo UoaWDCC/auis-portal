@@ -16,8 +16,9 @@ const endpointSecret: string = process.env.STRIPE_WEBHOOK_ENDPOINT as string;
 
 export const createCheckout = asyncHandler(
   async (req: Request, res: Response) => {
-    console.log("createCheckout: req.body", req.body);
     const { priceId, userTicketId } = req.body;
+    console.log("createCheckout: priceId: " + priceId);
+    console.log("createCheckout: userTicketId: " + userTicketId);
     const session = req.session!;
     let email;
 
@@ -29,6 +30,10 @@ export const createCheckout = asyncHandler(
       email = undefined;
     }
 
+    console.log(
+      "createCheckout: priceId Check: priceId === undefined || priceId === ",
+      priceId === undefined || priceId === ""
+    );
     // if priceId is undefined, send a 404 back.
     if (priceId === undefined || priceId === "") {
       return res
