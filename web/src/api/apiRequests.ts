@@ -34,7 +34,7 @@ export const updateUserInfo = async (data: object): Promise<AxiosResponse> => {
 export const updateUserTicketInfo = async (
   data: object
 ): Promise<AxiosResponse> => {
-  const response = await axios.post("/api/user/user-ticket-info", data, {
+  const response = await apiClient.post("/api/user/user-ticket-info", data, {
     headers: {
       "Content-Type": "application/json",
     },
