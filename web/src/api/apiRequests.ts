@@ -6,6 +6,7 @@ import {
 
 const apiClient = axios.create({
   baseURL: `${import.meta.env.VITE_API_URL}`, // Replace with your API URL
+  withCredentials: true,
 });
 
 // Get user metadata
