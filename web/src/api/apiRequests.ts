@@ -74,15 +74,15 @@ export const postAttendanceUpdate = async (
 export const fetchEventOrMembershipCheckoutSecret = async (payload: {
   priceId: string;
   userTicketId: number;
-}): Promise<string> => {
-  return await fetch("/api/stripe/create-checkout", {
+}): Promise<AxiosResponse> => {
+  const response = await apiClient.post("/api/stripe/create-checkout", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     // add our own priceId here later for different products
     body: JSON.stringify(payload),
-  })
-    .then((res) => res.json())
-    .then((data) => data.clientSecret);
+  });
+
+  return response.data.clientSecret;
 };
 
 // TODO: Delete these? ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
