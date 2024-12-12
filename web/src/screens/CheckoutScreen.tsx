@@ -12,8 +12,9 @@ const STRIPE_PUBLISHABLE_KEY = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
-const stripePromise = loadStripe(`${STRIPE_PUBLISHABLE_KEY}`);
+const stripePromise = await loadStripe(`${STRIPE_PUBLISHABLE_KEY}`);
 let bodyData: { priceId: string; userTicketId: number };
+
 export default function CheckoutScreen() {
   const location = useLocation();
   // ensure data required for checkout is here
