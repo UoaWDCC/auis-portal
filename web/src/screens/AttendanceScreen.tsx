@@ -4,7 +4,11 @@ import { useAttendanceList } from "../hooks/api/useAttendanceList";
 import { AttendanceList } from "../types/types";
 import LoadingSpinner from "@components/navigation/LoadingSpinner";
 import { useUpdateAttendance } from "../hooks/api/useAttendanceUpdateMutation";
-import { IDetectedBarcode, Scanner, useDevices } from '@yudiel/react-qr-scanner';
+import {
+  IDetectedBarcode,
+  Scanner,
+  useDevices,
+} from "@yudiel/react-qr-scanner";
 
 function filterDataByUserTicketCodeOrName(
   data: AttendanceList[],
@@ -30,9 +34,8 @@ export default function AttendanceScreen({ navbar }: { navbar: JSX.Element }) {
     queryId = parseInt(id);
   }
 
-  // testing
-
-  const absc = useDevices()
+  // get all cameras
+  const cameraDevices = useDevices();
 
   // useStates
   const [scannedQRCode, setScannedQRCode] = useState("");
@@ -46,7 +49,8 @@ export default function AttendanceScreen({ navbar }: { navbar: JSX.Element }) {
   const [statusText, setStatusText] = useState("Scan first ticket");
   const [totalAttendees, setTotalAttendees] = useState(0);
   const [totalCheckedIn, setTotalCheckedIn] = useState(0);
-
+  const [cameraError, setCameraError] = useState(false);
+  const [cameraId, setCameraId] = useState("");
   // Mutation hook
   const { data: nameData, mutateAsync, status } = useUpdateAttendance();
 
@@ -81,34 +85,25 @@ export default function AttendanceScreen({ navbar }: { navbar: JSX.Element }) {
       setStatusText("Update failed");
     }
   }, [statusText, status]);
-  // QR decoding
-  // const { ref } = useZxing({
-  //   onDecodeResult(decodedQRCode) {
-  //     if (scannedQRCode != decodedQRCode.getText()) {
-  //       const filteredData = filterDataByUserTicketCodeOrName(
-  //         originalAttendanceList,
-  //         decodedQRCode.getText()
-  //       );
-  //       setScannedQRCode(decodedQRCode.getText());
-  //       setCurrentSearchField(decodedQRCode.getText());
-  //       setFilteredAttendanceList(filteredData);
-  //     }
-  //   },
-  // });
 
-  function onQRcodeScanned(decodedQRCode: IDetectedBarcode[]){
-      if (scannedQRCode != decodedQRCode[0].rawValue) {
-        const filteredData = filterDataByUserTicketCodeOrName(
-          originalAttendanceList,
-          decodedQRCode[0].rawValue
-        );
-        setScannedQRCode(decodedQRCode[0].rawValue);
-        setCurrentSearchField(decodedQRCode[0].rawValue);
-        setFilteredAttendanceList(filteredData);
-      }
+  // update values once data is fetched
+  useEffect(() => {
+    if (cameraDevices.length > 0) {
+      setCameraId(cameraDevices[0].deviceId);
+    }
+  }, [cameraId]);
+
+  function onQRcodeScanned(decodedQRCode: IDetectedBarcode[]) {
+    if (scannedQRCode != decodedQRCode[0].rawValue) {
+      const filteredData = filterDataByUserTicketCodeOrName(
+        originalAttendanceList,
+        decodedQRCode[0].rawValue
+      );
+      setScannedQRCode(decodedQRCode[0].rawValue);
+      setCurrentSearchField(decodedQRCode[0].rawValue);
+      setFilteredAttendanceList(filteredData);
+    }
   }
-
-
 
   // update search
   function handleOnSearchChanged(event: React.ChangeEvent<HTMLInputElement>) {
@@ -143,11 +138,9 @@ export default function AttendanceScreen({ navbar }: { navbar: JSX.Element }) {
     return <LoadingSpinner />;
   }
 
-  console.log(absc)
-
-  // const abc : MediaTrackConstraints = {
-  //   deviceId: "98cba60747c2d8c10ee870fae5b7a320aa26180dae4b90a6569ce6e77c6e18a1"
-  // }
+  const abc: MediaTrackConstraints = {
+    deviceId: cameraId,
+  };
 
   return (
     <div className="from-AUIS-dark-teal to-AUIS-teal min-h-[calc(100vh)] bg-gradient-to-b">
@@ -158,8 +151,21 @@ export default function AttendanceScreen({ navbar }: { navbar: JSX.Element }) {
         {/* <div>TESTING</div>
         <video className="w-[40rem] py-2" ref={ref} /> */}
         <div className="w-[35rem] py-2">
-        <Scanner  onScan={(result) =>onQRcodeScanned(result)} allowMultiple={true} scanDelay={1000}/>
-
+          {cameraError ? (
+            <p className="py-5 text-center text-white">
+              There was an error loading the camera, please try a different
+              camera, make sure that you have given access to use the camera and
+              try to refresh the page
+            </p>
+          ) : (
+            <Scanner
+              onScan={(result) => onQRcodeScanned(result)}
+              allowMultiple={true}
+              scanDelay={1000}
+              constraints={abc}
+              onError={() => setCameraError(true)}
+            />
+          )}
         </div>
       </div>
       <div className="flex items-center justify-center">
@@ -224,6 +230,32 @@ export default function AttendanceScreen({ navbar }: { navbar: JSX.Element }) {
         <p className="py-2 text-center text-white">
           Attendance: {totalCheckedIn} {" / "} {totalAttendees}
         </p>
+        <div className="flex items-center justify-center">
+          <div className="w-[40rem] pb-10 px-3">
+            <p className="text-center text-lg text-white">
+              Select the camera you wish to use
+            </p>
+            <select
+              className="input flex w-full items-center justify-center rounded-xl border px-3 py-2 text-lg leading-tight shadow focus:outline-none"
+              onChange={(e) => {
+                setCameraError(false);
+                setCameraId(e.target.value);
+              }}
+            >
+              {cameraDevices.map((cameraDevice) => {
+                return (
+                  <option
+                    className="flex w-full items-center justify-center rounded-xl border px-3 py-2 text-lg leading-tight text-gray-400 shadow focus:outline-none"
+                    key={cameraDevice.deviceId}
+                    value={cameraDevice.deviceId}
+                  >
+                    {cameraDevice.label}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+        </div>
       </div>
     </div>
   );
