@@ -82,6 +82,20 @@ export const postAttendanceUpdate = async (
   return response.data;
 };
 
+// Get session status
+export const getSessionStatus = async (
+  sessionId: string
+): Promise<AxiosResponse> => {
+  const response = await apiClient.get(
+    `/api/stripe/session-status?session_id=${sessionId}`,
+    {
+      headers: { "Content-Type": "application/json" },
+    }
+  );
+
+  return response;
+};
+
 //Use this one to automatically create an Event or Membership checkout. Event checkout will decrement a ticket.
 export const fetchEventOrMembershipCheckoutSecret = async (payload: {
   priceId: string;

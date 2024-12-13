@@ -1,23 +1,26 @@
 import { useState, useEffect } from "react";
 import { Navigate, useNavigate } from "react-router";
 import { EmailLink } from "../data/data";
+import { getSessionStatus } from "../api/apiRequests";
 
-export default function ReturnScreen() {
+export default async function ReturnScreen() {
   const navigate = useNavigate();
   const [status, setStatus] = useState(null);
   const [customerEmail, setCustomerEmail] = useState("");
 
   useEffect(() => {
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const sessionId = urlParams.get("session_id");
-    fetch(`/api/stripe/session-status?session_id=${sessionId}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setStatus(data.status);
-        setCustomerEmail(data.customer_email);
-      })
-      .catch();
+    async function getSessionData() {
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const sessionId = urlParams.get("session_id");
+      const response = await getSessionStatus(sessionId!);
+      return response;
+    }
+
+    getSessionData().then((response) => {
+      setStatus(response.data.status);
+      setCustomerEmail(response.data.customer_email);
+    });
   }, []);
 
   if (status === "open") {
