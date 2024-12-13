@@ -19,6 +19,7 @@
     "@types/react-router": "^5.1.20",
     "@types/react-router-dom": "^5.3.3",
     "@types/react-slick": "^0.23.13",
+    "@yudiel/react-qr-scanner": "^2.0.8",
     "axios": "^1.6.7",
     "dayjs": "^1.11.11",
     "graphql": "^16.8.2",

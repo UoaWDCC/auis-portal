@@ -5,6 +5,7 @@ import { useAttendanceList } from "../hooks/api/useAttendanceList";
 import { AttendanceList } from "../types/types";
 import LoadingSpinner from "@components/navigation/LoadingSpinner";
 import { useUpdateAttendance } from "../hooks/api/useAttendanceUpdateMutation";
+import { IDetectedBarcode, IScannerStyles, Scanner, useDevices } from '@yudiel/react-qr-scanner';
 
 function filterDataByUserTicketCodeOrName(
   data: AttendanceList[],
@@ -29,6 +30,10 @@ export default function AttendanceScreen({ navbar }: { navbar: JSX.Element }) {
   if (id !== undefined) {
     queryId = parseInt(id);
   }
+
+  // testing
+
+  const absc = useDevices()
 
   // useStates
   const [scannedQRCode, setScannedQRCode] = useState("");
@@ -77,21 +82,34 @@ export default function AttendanceScreen({ navbar }: { navbar: JSX.Element }) {
       setStatusText("Update failed");
     }
   }, [statusText, status]);
-
   // QR decoding
-  const { ref } = useZxing({
-    onDecodeResult(decodedQRCode) {
-      if (scannedQRCode != decodedQRCode.getText()) {
+  // const { ref } = useZxing({
+  //   onDecodeResult(decodedQRCode) {
+  //     if (scannedQRCode != decodedQRCode.getText()) {
+  //       const filteredData = filterDataByUserTicketCodeOrName(
+  //         originalAttendanceList,
+  //         decodedQRCode.getText()
+  //       );
+  //       setScannedQRCode(decodedQRCode.getText());
+  //       setCurrentSearchField(decodedQRCode.getText());
+  //       setFilteredAttendanceList(filteredData);
+  //     }
+  //   },
+  // });
+
+  function onQRcodeScanned(decodedQRCode: IDetectedBarcode[]){
+      if (scannedQRCode != decodedQRCode[0].rawValue) {
         const filteredData = filterDataByUserTicketCodeOrName(
           originalAttendanceList,
-          decodedQRCode.getText()
+          decodedQRCode[0].rawValue
         );
-        setScannedQRCode(decodedQRCode.getText());
-        setCurrentSearchField(decodedQRCode.getText());
+        setScannedQRCode(decodedQRCode[0].rawValue);
+        setCurrentSearchField(decodedQRCode[0].rawValue);
         setFilteredAttendanceList(filteredData);
       }
-    },
-  });
+  }
+
+
 
   // update search
   function handleOnSearchChanged(event: React.ChangeEvent<HTMLInputElement>) {
@@ -126,13 +144,24 @@ export default function AttendanceScreen({ navbar }: { navbar: JSX.Element }) {
     return <LoadingSpinner />;
   }
 
+  console.log(absc)
+
+  // const abc : MediaTrackConstraints = {
+  //   deviceId: "98cba60747c2d8c10ee870fae5b7a320aa26180dae4b90a6569ce6e77c6e18a1"
+  // }
+
   return (
     <div className="from-AUIS-dark-teal to-AUIS-teal min-h-[calc(100vh)] bg-gradient-to-b">
       {navbar}
       <h1 className="text-center text-white">{statusText}</h1>
       <h1 className="text-center text-white">Last Scanned: {scannedQRCode}</h1>
       <div className="flex items-center justify-center">
-        <video className="w-[40rem] py-2" ref={ref} />
+        {/* <div>TESTING</div>
+        <video className="w-[40rem] py-2" ref={ref} /> */}
+        <div className="w-[35rem] py-2">
+        <Scanner  onScan={(result) =>onQRcodeScanned(result)} allowMultiple={true} scanDelay={1000}/>
+
+        </div>
       </div>
       <div className="flex items-center justify-center">
         <input
