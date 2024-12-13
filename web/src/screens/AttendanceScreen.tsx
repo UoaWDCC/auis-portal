@@ -91,7 +91,7 @@ export default function AttendanceScreen({ navbar }: { navbar: JSX.Element }) {
     if (cameraDevices.length > 0) {
       setCameraId(cameraDevices[0].deviceId);
     }
-  }, [cameraId]);
+  }, []);
 
   function onQRcodeScanned(decodedQRCode: IDetectedBarcode[]) {
     if (scannedQRCode != decodedQRCode[0].rawValue) {
