@@ -87,11 +87,6 @@ export const fetchEventOrMembershipCheckoutSecret = async (payload: {
   priceId: string;
   userTicketId: number;
 }): Promise<string> => {
-  console.log(
-    "fetchEventOrMembershipCheckoutSecret: payload:",
-    payload.priceId,
-    payload.userTicketId
-  );
   const response = await apiClient.post(
     "/api/stripe/create-checkout",
     payload,
@@ -99,11 +94,6 @@ export const fetchEventOrMembershipCheckoutSecret = async (payload: {
       method: "POST",
       headers: { "Content-Type": "application/json" },
     }
-  );
-
-  console.log(
-    "fetchEventOrMembershipCheckoutSecret: response.data.clientSecret: ",
-    response.data
   );
 
   return response.data.clientSecret;
