@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { useZxing } from "react-zxing";
 import { useAttendanceList } from "../hooks/api/useAttendanceList";
 import { AttendanceList } from "../types/types";
 import LoadingSpinner from "@components/navigation/LoadingSpinner";
 import { useUpdateAttendance } from "../hooks/api/useAttendanceUpdateMutation";
-import { IDetectedBarcode, IScannerStyles, Scanner, useDevices } from '@yudiel/react-qr-scanner';
+import { IDetectedBarcode, Scanner, useDevices } from '@yudiel/react-qr-scanner';
 
 function filterDataByUserTicketCodeOrName(
   data: AttendanceList[],
