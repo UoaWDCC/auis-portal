@@ -3,7 +3,7 @@ import { Navigate, useNavigate } from "react-router";
 import { EmailLink } from "../data/data";
 import { getSessionStatus } from "../api/apiRequests";
 
-export default async function ReturnScreen() {
+export default function ReturnScreen() {
   const navigate = useNavigate();
   const [status, setStatus] = useState(null);
   const [customerEmail, setCustomerEmail] = useState("");
