@@ -23,6 +23,14 @@ export default function CheckoutInformationScreen() {
   try {
     priceId = location.state.data.priceId;
     ticketId = location.state.data.ticketId;
+    console.log(
+      "CheckoutInformationScreen: location.priceId" +
+        location.state.data.priceId
+    );
+    console.log(
+      "CheckoutInformationScreen: location.ticketId" +
+        location.state.data.ticketId
+    );
   } catch {
     return <CheckoutError />;
   }
