@@ -40,13 +40,6 @@ import EventAttendanceSelectScreen from "./screens/EventAttendanceSelectScreen.t
 import { ExecRoute } from "@utils/AdminRouteProtection.tsx";
 import { getUserMetadaData } from "./api/apiRequests.ts";
 
-console.log(`Frontend env vars : 
-  VITE_API_URL=${import.meta.env.VITE_API_URL}
-  VITE_STRAPI_URL=${import.meta.env.VITE_STRAPI_URL},
-  VITE_APP_URL=${import.meta.env.VITE_APP_URL},
-  VITE_APP_NAME=${import.meta.env.VITE_APP_NAME},
-  VITE_STRIPE_PUBLISHABLE_KEY=${import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY},`);
-
 //supertokens code
 SuperTokens.init({
   appInfo: {

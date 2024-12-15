@@ -31,11 +31,6 @@ export const createCheckout = asyncHandler(
       email = undefined;
     }
 
-    let checkPriceId = priceId === undefined || priceId === "";
-    console.log(
-      "createCheckout: is priceId undefined or empty: ",
-      checkPriceId
-    );
     // if priceId is undefined, send a 404 back.
     if (priceId === undefined || priceId === "") {
       return res
