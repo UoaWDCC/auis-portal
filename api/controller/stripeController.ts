@@ -42,14 +42,20 @@ export const createCheckout = asyncHandler(
     let isEventTicket = (await isPriceIdForEvent(priceId)) ? "y" : "n";
 
     if (isEventTicket === "y") {
-      let ticketAvailable = await isTicketAvailableByPriceId(priceId);
-      if (ticketAvailable == false) {
+      if (!userTicketId) {
         return res.send({
-          error:
-            "There are no tickets available for this event. Please come back later to see if more tickets become available.",
+          error: "UserTicketId provided was invalid.",
         });
       } else {
-        reserveTicket(priceId);
+        let ticketAvailable = await isTicketAvailableByPriceId(priceId);
+        if (!ticketAvailable) {
+          return res.send({
+            error:
+              "There are no tickets available for this event. Please come back later to see if more tickets become available.",
+          });
+        } else {
+          reserveTicket(priceId);
+        }
       }
     } else if (isEventTicket === "n") {
       // do nothing
