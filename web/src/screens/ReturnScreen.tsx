@@ -8,6 +8,7 @@ export default function ReturnScreen() {
   const [status, setStatus] = useState(null);
   const [customerEmail, setCustomerEmail] = useState("");
 
+  //TODO: @gmat224: Refactor this useEffect function. 
   useEffect(() => {
     async function getSessionData() {
       const queryString = window.location.search;
