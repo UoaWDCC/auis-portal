@@ -69,13 +69,9 @@ export const createCheckout = asyncHandler(
         //do not change anything below
         ui_mode: "embedded",
         customer_email: email,
-        // invoice_creation: {
-        //   enabled: true,
-        // },
         expires_at: session_expiry,
         line_items: [
           {
-            // Provide the exact Price ID (pr_1234) of the product on sale
             price: priceId,
             quantity: 1,
           },
