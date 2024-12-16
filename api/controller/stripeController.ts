@@ -123,15 +123,13 @@ export const handleWebhook = asyncHandler(
         const session: Stripe.Checkout.Session = event.data.object;
 
         if (
-          session.metadata !== null &&
-          session.metadata["priceId"] !== undefined &&
-          session.metadata["isEventTicket"] !== undefined
+          !session.metadata &&
+          !session.metadata!["priceId"] &&
+          !session.metadata!["isEventTicket"]
         ) {
-          if (session.metadata["isEventTicket"] === "y") {
+          if (session.metadata!["isEventTicket"] === "y") {
             completeTicketPurchase(session.id);
-          } else if (session.metadata["isEventTicket"] === "n") {
-            //check if isEventTicket == 'n'
-            // then we just update the membership expiry in the peoples' field for the specific user.
+          } else if (session.metadata!["isEventTicket"] === "n") {
             updateUserMembershipExpiryDate(session.id);
           }
         }
@@ -139,12 +137,12 @@ export const handleWebhook = asyncHandler(
         const session = event.data.object;
 
         if (
-          session.metadata !== null &&
-          session.metadata["priceId"] !== undefined &&
-          session.metadata["isEventTicket"] !== undefined
+          !session.metadata &&
+          !session.metadata!["priceId"] &&
+          !session.metadata!["isEventTicket"]
         ) {
-          if (session.metadata["isEventTicket"] === "y") {
-            releaseReservedTicket(session.metadata["priceId"]);
+          if (session.metadata!["isEventTicket"] === "y") {
+            releaseReservedTicket(session.metadata!["priceId"]);
           }
         }
       }
