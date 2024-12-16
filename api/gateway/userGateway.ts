@@ -21,7 +21,7 @@ export async function getUserMembershipExpiryDate(
 ): Promise<string> {
   let returnDate = "";
 
-  if (userEmail === "" || userEmail === undefined || userEmail === null) {
+  if (!userEmail) {
     throw new Error(
       "getUserMembershipExpiryDate: received invalid type for userEmail: " +
         userEmail
@@ -57,7 +57,7 @@ export async function getUserMembershipExpiryDate(
 export async function isMembershipActive(userEmail: string): Promise<boolean> {
   let isActive = false;
 
-  if (userEmail === "" || userEmail === undefined || userEmail === null) {
+  if (!userEmail) {
     throw new Error(
       "isMembershipActive: received invalid type for userEmail: " + userEmail
     );
@@ -67,7 +67,10 @@ export async function isMembershipActive(userEmail: string): Promise<boolean> {
     .select({ isMember: peoples.isMember })
     .from(peoples)
     .where(eq(peoples.email, userEmail))
-    .limit(1);
+    .limit(1)
+    .catch((error) => {
+      throw new Error(`Error occurred for email ${userEmail}: ` + error);
+    });
 
   if (isMember.length === 1) {
     if (isMember[0].isMember !== undefined || isMember[0].isMember !== null) {
@@ -107,13 +110,24 @@ export async function insertUserTicket(data: {
     })
     .returning({ userTicketId: userTickets.id });
 
-  //figure out how to add People_ID link to userTickets
-  //find people id by getting the email? but it will fail if the user isn't a member
   let people = await db
     .select()
     .from(peoples)
     .where(eq(peoples.email, data.email))
-    .limit(1);
+    .limit(1)
+    .catch((error) => {
+      throw new Error(
+        `insertUserTicket: No peoples found with corresponding ${data.email}: ` +
+          error
+      );
+    });
+
+  if (people.length === 0) {
+    throw new Error(
+      "insertUserTicket: No peoples found with corresponding email: " +
+        data.email
+    );
+  }
 
   const userTicketIdLink = await db
     .insert(userTicketsTicketIdLinks)
@@ -122,6 +136,10 @@ export async function insertUserTicket(data: {
       ticketId: data.ticketId,
     })
     .returning();
+
+  if (userTicketIdLink.length === 0) {
+    throw new Error("insertUserTicket: Unable to insert userTicketIdLink: ");
+  }
 
   console.log("insertUserTicket: userTicketIdLink: " + userTicketIdLink[0]);
 
@@ -145,7 +163,13 @@ export async function insertUserTicket(data: {
       let answer = await db
         .insert(answers)
         .values(answerRecords[index])
-        .returning();
+        .returning()
+        .catch((error) => {
+          throw new Error(
+            "insertUserTicket: error occurred while trying to insert answers: " +
+              error
+          );
+        });
 
       let answerQuestionIdLink = await db
         .insert(answersQuestionIdLinks)
@@ -153,7 +177,13 @@ export async function insertUserTicket(data: {
           questionId: answerRecords[index].questionId,
           answerId: answer[0].id,
         })
-        .returning();
+        .returning()
+        .catch((error) => {
+          throw new Error(
+            "insertUserTicket: error occurred while trying to insert answerQuestionIdLink: " +
+              error
+          );
+        });
 
       let answersPeopleTicketLink = await db
         .insert(answersPeopleTicketLinks)
@@ -161,7 +191,13 @@ export async function insertUserTicket(data: {
           userTicketId: answerRecords[index].ticketId,
           answerId: answer[0].id,
         })
-        .returning();
+        .returning()
+        .catch((error) => {
+          throw new Error(
+            "insertUserTicket: error occurred while trying to insert answersPeopleTicketLink: " +
+              error
+          );
+        });
 
       console.log(
         "insertUserTicket: answer: " + JSON.stringify(answer, null, 2)
@@ -177,11 +213,11 @@ export async function insertUserTicket(data: {
     }
   }
 
-  //error occurs here
   console.log(
     "insertUserTicket: userTicketsPeopleIdLink: ticketId: ",
     data.ticketId
   );
+
   let userTicketsPeopleIdLink = await db
     .insert(userTicketsPeopleIdLinks)
     .values({
@@ -190,9 +226,9 @@ export async function insertUserTicket(data: {
     })
     .returning()
     .catch((error) => {
-      console.log(
-        "insertUserTicket: userTicketsPeopleIdLink: error occurred: ",
-        error
+      throw new Error(
+        "insertUserTicket: error occurred while trying to insert userTicketsPeopleIdLink: " +
+          error
       );
     });
 
@@ -200,17 +236,13 @@ export async function insertUserTicket(data: {
     "insertUserTicket: userTicketsPeopleIdLink: " + userTicketsPeopleIdLink![0]!
   );
 
-  //for question: link the answer.id to this question. More of an admin type task.
-  //let question = await db.update(questions).set().where(eq(questions.id, data.answers[0].questionId));
-  //for answer: question.id needs to be linked. People_ticket, if logged in, link it to this user to the one purchasing the ticket.
-
   return newUserTicket[0];
 }
 
 export async function updateUserMembershipExpiryDate(
   sessionId: string
 ): Promise<void> {
-  if (sessionId === "" || sessionId === undefined || sessionId === null) {
+  if (!sessionId) {
     throw new Error(
       "updateUserMembershipExpiryDate: received invalid type for sessionId: " +
         sessionId
@@ -281,48 +313,59 @@ export async function insertUserBySuperToken(
   let updateUserInfoOrNewUser: User[];
   //if user exists in peoples table already, then update the info
   const userExists = await doesUserExistByEmail(data.email);
-
-  if (userExists) {
-    updateUserInfoOrNewUser = (await db
-      .update(peoples)
-      .set({
-        email: data.email,
-        name: data.name,
-        universityId: data.universityId,
-        upi: data.upi,
-        yearOfStudy: data.yearOfStudy,
-        studyField: data.fieldOfStudy,
-        status: data.isDomestic,
-        institution: data.institution,
-      })
-      .where(eq(peoples.email, data.email))
-      .returning()) as User[];
-  } else {
-    updateUserInfoOrNewUser = (await db
-      .insert(peoples)
-      .values({
-        email: data.email,
-        createdAt: new Date().toISOString(),
-        name: data.name,
-        universityId: data.universityId,
-        upi: data.upi,
-        yearOfStudy: data.yearOfStudy,
-        studyField: data.fieldOfStudy,
-        isMember: false,
-        status: data.isDomestic,
-        institution: data.institution,
-      })
-      .returning()) as User[];
+  try {
+    if (userExists) {
+      updateUserInfoOrNewUser = (await db
+        .update(peoples)
+        .set({
+          email: data.email,
+          name: data.name,
+          universityId: data.universityId,
+          upi: data.upi,
+          yearOfStudy: data.yearOfStudy,
+          studyField: data.fieldOfStudy,
+          status: data.isDomestic,
+          institution: data.institution,
+        })
+        .where(eq(peoples.email, data.email))
+        .returning()) as User[];
+    } else {
+      updateUserInfoOrNewUser = (await db
+        .insert(peoples)
+        .values({
+          email: data.email,
+          createdAt: new Date().toISOString(),
+          name: data.name,
+          universityId: data.universityId,
+          upi: data.upi,
+          yearOfStudy: data.yearOfStudy,
+          studyField: data.fieldOfStudy,
+          isMember: false,
+          status: data.isDomestic,
+          institution: data.institution,
+        })
+        .returning()) as User[];
+    }
+  } catch (error) {
+    throw new Error(
+      `insertUserBySuperToken: Error occurred for email ${data.email}: ` + error
+    );
   }
 
   return updateUserInfoOrNewUser;
 }
 
 export async function doesUserExistByEmail(email: string): Promise<boolean> {
-  const user = await db.query.peoples.findFirst({
-    columns: { id: true },
-    where: eq(peoples.email, email),
-  });
+  const user = await db.query.peoples
+    .findFirst({
+      columns: { id: true },
+      where: eq(peoples.email, email),
+    })
+    .catch((error) => {
+      throw new Error(
+        `doesUserExistByEmail: Error occurred for email ${email}: ` + error
+      );
+    });
 
   return user !== undefined && user !== null;
 }
