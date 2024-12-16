@@ -29,7 +29,7 @@ export const createCheckout = asyncHandler(
     }
 
     // if priceId is undefined, send a 404 back.
-    if (priceId === undefined || priceId === "") {
+    if (!priceId) {
       return res
         .send({
           error:
