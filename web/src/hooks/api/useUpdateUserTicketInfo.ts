@@ -1,9 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { updateUserTicketInfo } from "../../api/apiRequests";
-import {
-    AnswerList,
-  UpdateUserInfoOrNewUser,
-} from "../../types/types";
+import { AnswerList, UpdateUserInfoOrNewUser } from "../../types/types";
 
 export const useUpdateUserTicketInfo = () => {
   return useMutation<

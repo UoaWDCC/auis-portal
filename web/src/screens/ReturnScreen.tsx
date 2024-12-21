@@ -7,9 +7,7 @@ import LoadingSpinner from "@components/navigation/LoadingSpinner";
 import { useSearchParams } from "react-router-dom";
 import ErrorReturn from "@components/return-page/ErrorReturn";
 
-export default function ReturnScreen() {  
-  
-  
+export default function ReturnScreen() {
   let sessionId: string;
   const [searchParams] = useSearchParams();
   const session_id = searchParams.get("session_id");
@@ -19,15 +17,12 @@ export default function ReturnScreen() {
     return <ErrorReturn />;
   }
 
-
   const navigate = useNavigate();
   const [status, setStatus] = useState<string>("");
   const [customerEmail, setCustomerEmail] = useState("");
 
-  const {
-    data: sessionStatus,
-    status: sessionStatusHookStatus,
-  } = useSessionStatus(sessionId);
+  const { data: sessionStatus, status: sessionStatusHookStatus } =
+    useSessionStatus(sessionId);
 
   // update values once data is fetched
   useEffect(() => {
@@ -41,8 +36,8 @@ export default function ReturnScreen() {
     return <LoadingSpinner />;
   }
 
-  if (sessionStatusHookStatus === "error" ){
-    return <ErrorReturn/>
+  if (sessionStatusHookStatus === "error") {
+    return <ErrorReturn />;
   }
 
   if (sessionStatusHookStatus === "success") {
@@ -88,6 +83,6 @@ export default function ReturnScreen() {
       );
     }
   } else {
-      <ErrorReturn />
+    <ErrorReturn />;
   }
 }
