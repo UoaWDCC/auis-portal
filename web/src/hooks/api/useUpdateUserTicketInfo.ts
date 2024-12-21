@@ -10,25 +10,14 @@ export const useUpdateUserTicketInfo = () => {
     UpdateUserInfoOrNewUser,
     Error,
     {
-        ticketId: number;
-        name: string;
-        email: string;
-        phoneNumber: string;
-        answers: AnswerList[];
-      }
+      ticketId: number;
+      name: string;
+      email: string;
+      phoneNumber: string;
+      answers: AnswerList[];
+    }
   >({
-    mutationFn: ({
-        ticketId,
-        name,
-        email,
-        phoneNumber,
-        answers
-      }) => updateUserTicketInfo(
-        ticketId,
-        name,
-        email,
-        phoneNumber,
-        answers
-      ),
+    mutationFn: ({ ticketId, name, email, phoneNumber, answers }) =>
+      updateUserTicketInfo(ticketId, name, email, phoneNumber, answers),
   });
 };

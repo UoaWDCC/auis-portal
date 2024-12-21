@@ -21,8 +21,8 @@ export const getUserMetaData = async (): Promise<AxiosResponse> => {
       "Content-Type": "application/json",
     },
   });
-  console.log("getUserMetatdat")
-  console.log(response)
+  console.log("getUserMetatdat");
+  console.log(response);
   return response;
 };
 
@@ -35,33 +35,31 @@ export const updateUserInfo = async (data: object): Promise<AxiosResponse> => {
     data: { data },
   });
 
-  console.log("update user info")
-  console.log(response)
+  console.log("update user info");
+  console.log(response);
   return response;
 };
 
 export const updateUserTicketInfo = async (
-  
-    ticketId: number,
-    name: string,
-    email: string,
-    phoneNumber: string,
-    answers: AnswerList[]
-  
+  ticketId: number,
+  name: string,
+  email: string,
+  phoneNumber: string,
+  answers: AnswerList[]
 ): Promise<UpdateUserInfoOrNewUser> => {
   const data = {
     ticketId,
     name,
     email,
     phoneNumber,
-    answers
-  }
+    answers,
+  };
   const response = await apiClient.post("/api/user/user-ticket-info", data, {
     headers: {
       "Content-Type": "application/json",
     },
-  })
-  console.log("update user ticket info worked")
+  });
+  console.log("update user ticket info worked");
   return response.data;
 };
 
@@ -115,8 +113,8 @@ export const getSessionStatus = async (
     }
   );
 
-  console.log("get session id")
-  console.log(response)
+  console.log("get session id");
+  console.log(response);
 
   return response.data;
 };
@@ -134,7 +132,7 @@ export const fetchEventOrMembershipCheckoutSecret = async (payload: {
       headers: { "Content-Type": "application/json" },
     }
   );
-  console.log("FETCH EVENT OR MEBERSHcK CHECKOUT SECRETYE")
+  console.log("FETCH EVENT OR MEBERSHcK CHECKOUT SECRETYE");
   return response.data.clientSecret;
 };
 
