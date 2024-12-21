@@ -183,7 +183,7 @@ export async function insertUserTicket(data: {
     "insertUserTicket: userTicketsPeopleIdLink: ticketId: ",
     data.ticketId
   );
-  
+
   // let userTicketsPeopleIdLink = await db
   //   .insert(userTicketsPeopleIdLinks)
   //   .values({

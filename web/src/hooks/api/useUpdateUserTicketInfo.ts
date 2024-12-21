@@ -1,8 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
 import { updateUserTicketInfo } from "../../api/apiRequests";
 import {
-    AnswerList,
-    QuestionAnswer,
+  AnswerList,
+  QuestionAnswer,
   SubmitUpdateUserInfoOrNewUser,
   UpdateUserInfoOrNewUser,
 } from "../../types/types";
@@ -12,25 +12,14 @@ export const useUpdateUserTicketInfo = () => {
     UpdateUserInfoOrNewUser,
     Error,
     {
-        ticketId: number;
-        name: string;
-        email: string;
-        phoneNumber: string;
-        answers: AnswerList[];
-      }
+      ticketId: number;
+      name: string;
+      email: string;
+      phoneNumber: string;
+      answers: AnswerList[];
+    }
   >({
-    mutationFn: ({
-        ticketId,
-        name,
-        email,
-        phoneNumber,
-        answers
-      }) => updateUserTicketInfo(
-        ticketId,
-        name,
-        email,
-        phoneNumber,
-        answers
-      ),
+    mutationFn: ({ ticketId, name, email, phoneNumber, answers }) =>
+      updateUserTicketInfo(ticketId, name, email, phoneNumber, answers),
   });
 };

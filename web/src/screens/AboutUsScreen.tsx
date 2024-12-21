@@ -159,7 +159,9 @@ export default function AboutUsScreen({ navbar }: { navbar: JSX.Element }) {
           <div className="max-w-screen from-AUIS-dark-teal to-AUIS-teal flex h-auto flex-col items-center bg-gradient-to-b px-5 py-5 md:px-20">
             <h1 className="text-4xl font-bold text-white">Our Values</h1>
             {errorValues ? (
-              <div className="text-white py-10">There are no values to display</div>
+              <div className="py-10 text-white">
+                There are no values to display
+              </div>
             ) : (
               <div className="flex flex-wrap justify-center">
                 {values.map((value) => (

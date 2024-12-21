@@ -1,4 +1,8 @@
-import { AnswerList, QuestionAnswer, TicketAndQuestion } from "../../types/types";
+import {
+  AnswerList,
+  QuestionAnswer,
+  TicketAndQuestion,
+} from "../../types/types";
 import { useEffect, useState } from "react";
 import { useQuery } from "@apollo/client";
 import { getTicketQuestions } from "../../graphql/queries";
@@ -57,7 +61,6 @@ export default function CheckoutInformation({
     window.scrollTo(0, 0);
   }, []);
 
-
   // States
   const [ticketAndQuestions, setTicketAndQuestions] =
     useState<TicketAndQuestion>();
@@ -67,22 +70,24 @@ export default function CheckoutInformation({
   const [submitError, setSubmitError] = useState(false);
   const [submitLoading, setSubmitLoading] = useState(false);
 
-  
-  const { data : updateUserTicketInfoData, mutateAsync, status } = useUpdateUserTicketInfo();
+  const {
+    data: updateUserTicketInfoData,
+    mutateAsync,
+    status,
+  } = useUpdateUserTicketInfo();
   // Update status text as it changes
   useEffect(() => {
     if (status === "success") {
       navigateToPaymentScreen(
         updateUserTicketInfoData.updateUserInfoOrNewUser.userTicketId
-      )
-    }
-    
-    if (status == "pending") {
-      setSubmitLoading(true);
-    }else {
-      setSubmitLoading(false)
+      );
     }
 
+    if (status == "pending") {
+      setSubmitLoading(true);
+    } else {
+      setSubmitLoading(false);
+    }
 
     if (status == "error") {
       setSubmitError(true);
@@ -103,16 +108,16 @@ export default function CheckoutInformation({
     const answerList = answers.map(({ question, indexId, ...rest }) => {
       return rest;
     });
-    
+
     // Mutation hook
-    
+
     mutateAsync({
-        ticketId: ticketId,
-        name: name,
-        email: email,
-        phoneNumber: phoneNumber,
-        answers: answerList,
-      })
+      ticketId: ticketId,
+      name: name,
+      email: email,
+      phoneNumber: phoneNumber,
+      answers: answerList,
+    });
     // const temp = await  mutateAsync(data)
     // call post request
     // onSubmit({

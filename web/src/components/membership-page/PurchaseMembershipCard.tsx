@@ -49,7 +49,7 @@ export default function PurchaseMembershipCard({
   }
 
   return (
-    <div className="drop-shadow-all w-[30rem] m-5 rounded-lg bg-white">
+    <div className="drop-shadow-all m-5 w-[30rem] rounded-lg bg-white">
       <div>
         <div className="flex items-center justify-center">
           <img

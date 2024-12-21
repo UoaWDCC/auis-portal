@@ -13,7 +13,7 @@ import { insertUserBySuperToken } from "../gateway/userGateway";
 export const updateUserTicketInfo = asyncHandler(
   async (req: Request, res: Response) => {
     // console.log(process.env.DOMAIN_DB);
-    console.log(req.body)
+    console.log(req.body);
     try {
       const { name, email, phoneNumber, ticketId, answers } = req.body;
 
