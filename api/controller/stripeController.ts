@@ -52,7 +52,7 @@ export const createCheckout = asyncHandler(
     if (isEventTicket === "y") {
       let ticketAvailable = await isTicketAvailableByPriceId(priceId);
       if (ticketAvailable == false) {
-        return res.send({
+        return res.status(400).send({
           error:
             "There are no tickets available for this event. Please come back later to see if more tickets become available.",
         });

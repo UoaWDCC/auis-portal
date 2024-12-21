@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { postAttendanceUpdate as PatchAttendanceUpdate } from "../../api/apiRequests";
+import { postAttendanceUpdate} from "../../api/apiRequests";
 import { AttendanceReturn } from "../../types/types";
 
 export const useUpdateAttendance = () => {
@@ -9,6 +9,6 @@ export const useUpdateAttendance = () => {
     { peopleTicketId: number; attendance: boolean }
   >({
     mutationFn: ({ peopleTicketId, attendance }) =>
-      PatchAttendanceUpdate(peopleTicketId, attendance),
+      postAttendanceUpdate(peopleTicketId, attendance),
   });
 };

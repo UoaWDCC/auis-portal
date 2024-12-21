@@ -135,6 +135,11 @@ export interface AttendanceReturn {
   name: string;
 }
 
+export interface EventOrMembershipReturn {
+  clientSecret: string;
+}
+
+
 export interface stripeSessionStatus {
   customer_email: string;
   status: string;

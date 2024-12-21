@@ -2,6 +2,7 @@ import axios, { AxiosResponse } from "axios";
 import {
   AnswerList,
   AttendanceList,
+  EventOrMembershipReturn,
   MembershipExpiryDate as MembershipExpiryDate,
   QuestionAnswer,
   stripeSessionStatus,
@@ -120,10 +121,11 @@ export const getSessionStatus = async (
 };
 
 //Use this one to automatically create an Event or Membership checkout. Event checkout will decrement a ticket.
-export const fetchEventOrMembershipCheckoutSecret = async (payload: {
-  priceId: string;
-  userTicketId: number;
-}): Promise<string> => {
+export const fetchEventOrMembershipCheckoutSecret = async (
+  priceId: string,
+  userTicketId: number
+): Promise<EventOrMembershipReturn> => {
+  const payload = { priceId, userTicketId };
   const response = await apiClient.post(
     "/api/stripe/create-checkout",
     payload,
@@ -133,7 +135,7 @@ export const fetchEventOrMembershipCheckoutSecret = async (payload: {
     }
   );
   console.log("FETCH EVENT OR MEBERSHcK CHECKOUT SECRETYE");
-  return response.data.clientSecret;
+  return response.data;
 };
 
 // TODO: Delete these? ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
