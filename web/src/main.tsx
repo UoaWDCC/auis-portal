@@ -38,7 +38,7 @@ import CheckoutInformationScreen from "./screens/CheckoutInformationScreen.tsx";
 import AttendanceScreen from "./screens/AttendanceScreen.tsx";
 import EventAttendanceSelectScreen from "./screens/EventAttendanceSelectScreen.tsx";
 import { ExecRoute } from "@utils/AdminRouteProtection.tsx";
-import { getUserMetadaData } from "./api/apiRequests.ts";
+import { getUserMetaData } from "./api/apiRequests.ts";
 
 console.log(`Frontend env vars : 
   VITE_API_URL=${import.meta.env.VITE_API_URL}
@@ -71,7 +71,7 @@ SuperTokens.init({
       let redirectionURL = "/";
 
       try {
-        const userMetadata = await getUserMetadaData();
+        const userMetadata = await getUserMetaData();
 
         if (userMetadata.status === 200) {
           if (userMetadata.data!.bIsUserInfoComplete === false) {

@@ -1,4 +1,4 @@
-import { QuestionAnswer, TicketAndQuestion } from "../../types/types";
+import { AnswerList, QuestionAnswer, TicketAndQuestion } from "../../types/types";
 import { useEffect, useState } from "react";
 import { useQuery } from "@apollo/client";
 import { getTicketQuestions } from "../../graphql/queries";
@@ -7,6 +7,7 @@ import LoadingSpinner from "@components/navigation/LoadingSpinner";
 import { useNavigate } from "react-router";
 import CheckoutInformationForm from "./CheckoutInformationForm";
 import { updateUserTicketInfo } from "../../api/apiRequests";
+import { useUpdateUserTicketInfo } from "../../hooks/api/useUpdateUserTicketInfo";
 
 interface CheckoutInformationProps {
   ticketId: number;
@@ -56,6 +57,7 @@ export default function CheckoutInformation({
     window.scrollTo(0, 0);
   }, []);
 
+
   // States
   const [ticketAndQuestions, setTicketAndQuestions] =
     useState<TicketAndQuestion>();
@@ -65,32 +67,29 @@ export default function CheckoutInformation({
   const [submitError, setSubmitError] = useState(false);
   const [submitLoading, setSubmitLoading] = useState(false);
 
-  // Submit ticket information to backend
-  const onSubmit = async (data: any) => {
-    try {
-      const response = await updateUserTicketInfo(data);
-      if (response.status === 200) {
-        // Form Submission Successful
-        setSubmitLoading(false);
-        console.log(
-          "CheckoutInformation",
-          response.data.updateUserInfoOrNewUser.userTicketId
-        );
-        // Move user to payment screen after the user ticket id is received
-        navigateToPaymentScreen(
-          response.data.updateUserInfoOrNewUser.userTicketId
-        );
-      } else {
-        setSubmitLoading(false);
-        setSubmitError(true);
-      }
-    } catch (error) {
-      setSubmitLoading(false);
+  
+  const { data : updateUserTicketInfoData, mutateAsync, status } = useUpdateUserTicketInfo();
+  // Update status text as it changes
+  useEffect(() => {
+    if (status === "success") {
+      navigateToPaymentScreen(
+        updateUserTicketInfoData.updateUserInfoOrNewUser.userTicketId
+      )
+    }
+    
+    if (status == "pending") {
+      setSubmitLoading(true);
+    }else {
+      setSubmitLoading(false)
+    }
+
+
+    if (status == "error") {
       setSubmitError(true);
     }
-  };
+  }, [status]);
 
-  const handleSubmit = (
+  const onSubmit = async (
     event: React.FormEvent<HTMLFormElement>,
     name: string,
     email: string,
@@ -98,21 +97,32 @@ export default function CheckoutInformation({
     answers: QuestionAnswer[]
   ) => {
     event.preventDefault();
-    setSubmitLoading(true);
+    // setSubmitLoading(true);
 
     // remove unused information for post request
     const answerList = answers.map(({ question, indexId, ...rest }) => {
       return rest;
     });
-
+    
+    // Mutation hook
+    
+    mutateAsync({
+        ticketId: ticketId,
+        name: name,
+        email: email,
+        phoneNumber: phoneNumber,
+        answers: answerList,
+      })
+    // const temp = await  mutateAsync(data)
     // call post request
-    onSubmit({
-      ticketId: ticketId,
-      name: name,
-      email: email,
-      phoneNumber: phoneNumber,
-      answers: answerList,
-    });
+    // onSubmit({
+    //   // ticketId: ticketId,
+    //   name: name,
+    //   email: email,
+    //   phoneNumber: phoneNumber,
+    //   answers: answerList,
+    // });
+    // mutateAsync()
   };
 
   // Loading
@@ -129,7 +139,7 @@ export default function CheckoutInformation({
   return ticketAndQuestions ? (
     <div className="drop-shadow-all mb-20 w-full rounded-lg bg-white px-2 py-12 sm:px-12">
       <CheckoutInformationForm
-        handleSubmit={handleSubmit}
+        handleSubmit={onSubmit}
         questions={ticketAndQuestions}
         submitError={submitError}
       />

@@ -1,7 +1,12 @@
 import axios, { AxiosResponse } from "axios";
 import {
+  AnswerList,
   AttendanceList,
   MembershipExpiryDate as MembershipExpiryDate,
+  QuestionAnswer,
+  stripeSessionStatus,
+  SubmitUpdateUserInfoOrNewUser,
+  UpdateUserInfoOrNewUser,
 } from "../types/types";
 
 const apiClient = axios.create({
@@ -10,13 +15,14 @@ const apiClient = axios.create({
 });
 
 // Get user metadata
-export const getUserMetadaData = async (): Promise<AxiosResponse> => {
+export const getUserMetaData = async (): Promise<AxiosResponse> => {
   const response = await apiClient.get("/api/user/get-metadata", {
     headers: {
       "Content-Type": "application/json",
     },
   });
-
+  console.log("getUserMetatdat")
+  console.log(response)
   return response;
 };
 
@@ -28,19 +34,35 @@ export const updateUserInfo = async (data: object): Promise<AxiosResponse> => {
     },
     data: { data },
   });
+
+  console.log("update user info")
+  console.log(response)
   return response;
 };
 
 export const updateUserTicketInfo = async (
-  data: object
-): Promise<AxiosResponse> => {
+  
+    ticketId: number,
+    name: string,
+    email: string,
+    phoneNumber: string,
+    answers: AnswerList[]
+  
+): Promise<UpdateUserInfoOrNewUser> => {
+  const data = {
+    ticketId,
+    name,
+    email,
+    phoneNumber,
+    answers
+  }
   const response = await apiClient.post("/api/user/user-ticket-info", data, {
     headers: {
       "Content-Type": "application/json",
     },
-  });
-
-  return response;
+  })
+  console.log("update user ticket info worked")
+  return response.data;
 };
 
 // User membership expiry
@@ -85,7 +107,7 @@ export const postAttendanceUpdate = async (
 // Get session status
 export const getSessionStatus = async (
   sessionId: string
-): Promise<AxiosResponse> => {
+): Promise<stripeSessionStatus> => {
   const response = await apiClient.get(
     `/api/stripe/session-status?session_id=${sessionId}`,
     {
@@ -93,7 +115,10 @@ export const getSessionStatus = async (
     }
   );
 
-  return response;
+  console.log("get session id")
+  console.log(response)
+
+  return response.data;
 };
 
 //Use this one to automatically create an Event or Membership checkout. Event checkout will decrement a ticket.
@@ -109,7 +134,7 @@ export const fetchEventOrMembershipCheckoutSecret = async (payload: {
       headers: { "Content-Type": "application/json" },
     }
   );
-
+  console.log("FETCH EVENT OR MEBERSHcK CHECKOUT SECRETYE")
   return response.data.clientSecret;
 };
 

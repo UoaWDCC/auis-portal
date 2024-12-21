@@ -6,6 +6,7 @@ import LoadingSpinner from "@components/navigation/LoadingSpinner";
 import { useUpdateAttendance } from "../hooks/api/useAttendanceUpdateMutation";
 import {
   IDetectedBarcode,
+  IScannerStyles,
   Scanner,
   useDevices,
 } from "@yudiel/react-qr-scanner";
@@ -137,11 +138,7 @@ export default function AttendanceScreen({ navbar }: { navbar: JSX.Element }) {
   if (loadingAttendanceList) {
     return <LoadingSpinner />;
   }
-
-  const abc: MediaTrackConstraints = {
-    deviceId: cameraId,
-  };
-
+  
   return (
     <div className="from-AUIS-dark-teal to-AUIS-teal min-h-[calc(100vh)] bg-gradient-to-b">
       {navbar}
@@ -162,8 +159,9 @@ export default function AttendanceScreen({ navbar }: { navbar: JSX.Element }) {
               onScan={(result) => onQRcodeScanned(result)}
               allowMultiple={true}
               scanDelay={1000}
-              constraints={abc}
+              constraints={{deviceId: cameraId}}
               onError={() => setCameraError(true)}
+              styles={{}}
             />
           )}
         </div>
