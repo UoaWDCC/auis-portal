@@ -2,8 +2,6 @@ import { useMutation } from "@tanstack/react-query";
 import { updateUserTicketInfo } from "../../api/apiRequests";
 import {
     AnswerList,
-    QuestionAnswer,
-  SubmitUpdateUserInfoOrNewUser,
   UpdateUserInfoOrNewUser,
 } from "../../types/types";
 
