@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { postAttendanceUpdate} from "../../api/apiRequests";
+import { postAttendanceUpdate } from "../../api/apiRequests";
 import { AttendanceReturn } from "../../types/types";
 
 export const useUpdateAttendance = () => {

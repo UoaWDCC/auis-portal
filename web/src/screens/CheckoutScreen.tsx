@@ -19,7 +19,7 @@ let bodyData: { priceId: string; userTicketId: number };
 export default function CheckoutScreen() {
   const { data, mutateAsync, status } = useEventOrMembershipCheckoutSecret();
   const location = useLocation();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   // ensure data required for checkout is here
 
   try {
@@ -59,26 +59,32 @@ export default function CheckoutScreen() {
     return <LoadingSpinner />;
   }
 
-  if (status === "error" || data?.clientSecret=== undefined){
-    return (<div className="max-w-screen from-AUIS-dark-teal to-AUIS-teal min-h-screen bg-gradient-to-b">
-      <div className="flex flex-col items-center text-center">
-        <h1 className="my-12 text-5xl font-bold text-white">Checkout</h1>
+  if (status === "error" || data?.clientSecret === undefined) {
+    return (
+      <div className="max-w-screen from-AUIS-dark-teal to-AUIS-teal min-h-screen bg-gradient-to-b">
+        <div className="flex flex-col items-center text-center">
+          <h1 className="my-12 text-5xl font-bold text-white">Checkout</h1>
+        </div>
+        <div className="item flex justify-center">
+          <p className="pt-16 text-center text-xl text-white">
+            Sorry an error occurred, please try again
+            <br />
+            This could be caused by ticket being sold out, or some other error
+          </p>
+        </div>
+        <div className="flex justify-center">
+          <button
+            type="button"
+            className="bg-primary-orange mt-24 rounded-2xl px-10 py-3 text-3xl font-bold text-white transition-all hover:scale-110"
+            onClick={() => {
+              navigate("/");
+            }}
+          >
+            Return to Home screen
+          </button>
+        </div>
       </div>
-      <div className="item flex justify-center">
-        <p className="text-xl pt-16 text-white text-center">Sorry an error occurred, please try again<br/>This could be caused by ticket being sold out, or some other error</p>
-        
-      </div><div className="flex justify-center">
-              <button
-                type="button"
-                className="bg-primary-orange mt-24 rounded-2xl px-10 py-3 text-3xl font-bold text-white transition-all hover:scale-110"
-                onClick={() => {
-                  navigate("/");
-                }}
-              >
-                Return to Home screen
-              </button>
-            </div>
-    </div>)
+    );
   }
 
   if (status === "success") {
