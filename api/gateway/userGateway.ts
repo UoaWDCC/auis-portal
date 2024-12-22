@@ -239,6 +239,7 @@ export async function insertUserTicket(data: {
   return newUserTicket[0];
 }
 
+// TODO: Add check to make sure server does not crash if an expiry date already exists
 export async function updateUserMembershipExpiryDate(
   sessionId: string
 ): Promise<void> {
