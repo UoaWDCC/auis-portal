@@ -4,11 +4,8 @@ import {
   AttendanceList,
   EventOrMembershipReturn,
   MembershipExpiryDate as MembershipExpiryDate,
-  QuestionAnswer,
   stripeSessionStatus,
-  SubmitUpdateUserInfoOrNewUser,
   UpdateUserInfoOrNewUser,
-  UserMetaData,
 } from "../types/types";
 
 const apiClient = axios.create({
@@ -40,7 +37,7 @@ export const updateUserInfo = async (name:string, universityId: string, upi: str
     isDomestic,
     institution
   }
-  
+
   const response = await apiClient.post("/api/user/update-user-info", data, {
     headers: {
       "Content-Type": "application/json",

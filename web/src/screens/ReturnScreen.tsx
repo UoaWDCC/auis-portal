@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
-import { Navigate, useNavigate, useParams } from "react-router";
+import { Navigate, useNavigate } from "react-router";
 import { EmailLink } from "../data/data";
-// import { getSessionStatus } from "../api/apiRequests";
 import { useSessionStatus } from "../hooks/api/useSessionStatus";
 import LoadingSpinner from "@components/navigation/LoadingSpinner";
 import { useSearchParams } from "react-router-dom";

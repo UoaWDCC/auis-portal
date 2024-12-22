@@ -6,7 +6,6 @@ import LoadingSpinner from "@components/navigation/LoadingSpinner";
 import { useUpdateAttendance } from "../hooks/api/useAttendanceUpdateMutation";
 import {
   IDetectedBarcode,
-  IScannerStyles,
   Scanner,
   useDevices,
 } from "@yudiel/react-qr-scanner";
