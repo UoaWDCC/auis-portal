@@ -26,7 +26,15 @@ export const getUserMetaData = async (): Promise<AxiosResponse> => {
 };
 
 // Update user info
-export const updateUserInfo = async (name:string, universityId: string, upi: string, yearOfStudy:string, fieldOfStudy:string, isDomestic: string, institution: string ): Promise<AxiosResponse> => {
+export const updateUserInfo = async (
+  name: string,
+  universityId: string,
+  upi: string,
+  yearOfStudy: string,
+  fieldOfStudy: string,
+  isDomestic: string,
+  institution: string
+): Promise<AxiosResponse> => {
   // console.log(data)
   const data = {
     name,
