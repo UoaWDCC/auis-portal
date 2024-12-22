@@ -5,6 +5,7 @@ import CheckoutScreen from "../../src/screens/CheckoutScreen";
 import React from "react";
 import "@testing-library/jest-dom";
 import { MemoryRouter } from "react-router";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const mockedUseNavigate = vi.fn();
 vi.mock("react-router-dom", async () => {
@@ -24,13 +25,17 @@ vi.mock("@components/checkout-page/CheckoutError", () => ({
   },
 }));
 
+const queryClient = new QueryClient();
+
 describe("AboutUsScreen", () => {
   it("renders error screen properly", () => {
     render(
       <MockedProvider addTypename={false}>
-        <MemoryRouter>
-          <CheckoutScreen />
-        </MemoryRouter>
+        <QueryClientProvider client={queryClient}>
+          <MemoryRouter>
+            <CheckoutScreen />
+          </MemoryRouter>
+        </QueryClientProvider>
       </MockedProvider>
     );
 

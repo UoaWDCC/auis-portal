@@ -5,6 +5,7 @@ import SignUpInformationScreen from "../../src/screens/SignUpInformationScreen";
 import React from "react";
 import "@testing-library/jest-dom";
 import { MemoryRouter } from "react-router";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const mockedUseNavigate = vi.fn();
 vi.mock("react-router-dom", async () => {
@@ -17,14 +18,17 @@ vi.mock("react-router-dom", async () => {
     useNavigate: () => mockedUseNavigate,
   };
 });
+const queryClient = new QueryClient();
 
 describe("AboutUsScreen", () => {
   it("renders questions correctly", async () => {
     render(
       <MockedProvider addTypename={false}>
-        <MemoryRouter>
-          <SignUpInformationScreen navbar={<></>} />
-        </MemoryRouter>
+        <QueryClientProvider client={queryClient}>
+          <MemoryRouter>
+            <SignUpInformationScreen navbar={<></>} />
+          </MemoryRouter>
+        </QueryClientProvider>
       </MockedProvider>
     );
 
@@ -50,9 +54,11 @@ describe("AboutUsScreen", () => {
   it("does not render errors on load up", async () => {
     render(
       <MockedProvider addTypename={false}>
-        <MemoryRouter>
-          <SignUpInformationScreen navbar={<></>} />
-        </MemoryRouter>
+        <QueryClientProvider client={queryClient}>
+          <MemoryRouter>
+            <SignUpInformationScreen navbar={<></>} />
+          </MemoryRouter>
+        </QueryClientProvider>
       </MockedProvider>
     );
     expect(await screen.queryByText("Please enter your full name")).toBeNull();
@@ -73,9 +79,11 @@ describe("AboutUsScreen", () => {
   it("renders error correctly", async () => {
     render(
       <MockedProvider addTypename={false}>
-        <MemoryRouter>
-          <SignUpInformationScreen navbar={<></>} />
-        </MemoryRouter>
+        <QueryClientProvider client={queryClient}>
+          <MemoryRouter>
+            <SignUpInformationScreen navbar={<></>} />
+          </MemoryRouter>
+        </QueryClientProvider>
       </MockedProvider>
     );
 
