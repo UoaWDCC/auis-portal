@@ -49,11 +49,10 @@ export default function SignUpInformationScreen({
 
   const [formError, setFormError] = useState(false);
 
-  const {status, mutateAsync} = useUpdateUserInfo()
+  const { status, mutateAsync } = useUpdateUserInfo();
 
   const sendSignUpData = async (data: SignUpSchemaType) => {
-
-    mutateAsync(data)
+    mutateAsync(data);
   };
 
   const onSubmit: SubmitHandler<SignUpSchemaType> = (data) => {
@@ -86,16 +85,16 @@ export default function SignUpInformationScreen({
     { id: 3, text: "None" },
   ];
 
-  if (status === "success"){
+  if (status === "success") {
     window.location.href = "/membership";
   }
 
-  if (status === "error"){
+  if (status === "error") {
     setFormError(true);
   }
 
-  if (status === "pending"){
-    return <LoadingSpinner/>
+  if (status === "pending") {
+    return <LoadingSpinner />;
   }
 
   return (
