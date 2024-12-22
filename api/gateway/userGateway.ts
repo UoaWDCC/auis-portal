@@ -218,38 +218,6 @@ export async function insertUserTicket(data: {
     data.ticketId
   );
 
-  let userTicketsPeopleIdLink = await db
-    .insert(userTicketsPeopleIdLinks)
-    .values({
-      peopleId: people[0].id,
-      userTicketId: ticketId,
-    })
-    .returning()
-    .catch((error) => {
-      throw new Error(
-        "insertUserTicket: error occurred while trying to insert userTicketsPeopleIdLink: " +
-          error
-      );
-    });
-
-  // let userTicketsPeopleIdLink = await db
-  //   .insert(userTicketsPeopleIdLinks)
-  //   .values({
-  //     peopleId: people[0].id,
-  //     userTicketId: ticketId,
-  //   })
-  //   .returning()
-  //   .catch((error) => {
-  //     console.log(
-  //       "insertUserTicket: userTicketsPeopleIdLink: error occurred: ",
-  //       error
-  //     );
-  //   });
-
-  // console.log(
-  //   "insertUserTicket: userTicketsPeopleIdLink: " + userTicketsPeopleIdLink![0]!
-  // );
-
   return newUserTicket[0];
 }
 
@@ -268,57 +236,57 @@ export async function updateUserMembershipExpiryDate(
     expand: ["line_items"],
   });
 
-  // try {
-  //   //since this is for memberships, get the current user by their email id
-  //   let customer = await db
-  //     .select()
-  //     .from(peoples)
-  //     .where(eq(peoples.email, checkoutSession.customer_details!.email!))
-  //     .limit(1);
+  try {
+    //since this is for memberships, get the current user by their email id
+    let customer = await db
+      .select()
+      .from(peoples)
+      .where(eq(peoples.email, checkoutSession.customer_details!.email!))
+      .limit(1);
 
-  //   console.log("updateUserMembershipExpiryDate: customer: " + customer);
+    console.log("updateUserMembershipExpiryDate: customer: " + customer);
 
-  //   //then, retrieve the price id from metadata from purchaseableMemberships
-  //   let expiryDate = await db
-  //     .select()
-  //     .from(purchasableMemberships)
-  //     .where(
-  //       eq(
-  //         purchasableMemberships.stripeLink,
-  //         checkoutSession.metadata!["priceId"]
-  //       )
-  //     )
-  //     .limit(1);
+    //then, retrieve the price id from metadata from purchaseableMemberships
+    let expiryDate = await db
+      .select()
+      .from(purchasableMemberships)
+      .where(
+        eq(
+          purchasableMemberships.stripeLink,
+          checkoutSession.metadata!["priceId"]
+        )
+      )
+      .limit(1);
 
-  //   console.log("updateUserMembershipExpiryDate: expiryDate: " + expiryDate);
+    console.log("updateUserMembershipExpiryDate: expiryDate: " + expiryDate);
 
-  //   // then, apply the retrieved expiry date into the users' field
-  //   let updateExpiryDate = await db
-  //     .update(peoples)
-  //     .set({ memberExpiryDate: expiryDate[0].expiry, isMember: true })
-  //     .where(eq(peoples.email, checkoutSession.customer_details!.email!))
-  //     .returning({ memberExpiryDate: peoples.memberExpiryDate });
+    // then, apply the retrieved expiry date into the users' field
+    let updateExpiryDate = await db
+      .update(peoples)
+      .set({ memberExpiryDate: expiryDate[0].expiry, isMember: true })
+      .where(eq(peoples.email, checkoutSession.customer_details!.email!))
+      .returning({ memberExpiryDate: peoples.memberExpiryDate });
 
-  //   console.log(
-  //     "updateUserMembershipExpiryDate: updateExpiryDate: " + updateExpiryDate
-  //   );
+    console.log(
+      "updateUserMembershipExpiryDate: updateExpiryDate: " + updateExpiryDate
+    );
 
-  //   //update user metadata
-  //   //getUserIdByEmail
-  //   let customerEmail = await getUserEmail(
-  //     checkoutSession.customer_details!.email!
-  //   );
+    //update user metadata
+    //getUserIdByEmail
+    let customerEmail = await getUserEmail(
+      checkoutSession.customer_details!.email!
+    );
 
-  //   let userId = await getUserIdByEmail(customerEmail);
+    let userId = await getUserIdByEmail(customerEmail);
 
-  //   await updateUserMetadata(userId, {
-  //     bIsMembershipPaymentComplete: true,
-  //   });
-  // } catch (error) {
-  //   throw new Error(
-  //     "Unknown error occurred while trying to update user membership: " + error
-  //   );
-  // }
+    await updateUserMetadata(userId, {
+      bIsMembershipPaymentComplete: true,
+    });
+  } catch (error) {
+    throw new Error(
+      "Unknown error occurred while trying to update user membership: " + error
+    );
+  }
 }
 
 export async function insertUserBySuperToken(
