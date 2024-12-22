@@ -121,11 +121,13 @@ export const handleWebhook = asyncHandler(
 
       if (event.type === "checkout.session.completed") {
         const session: Stripe.Checkout.Session = event.data.object;
-        if (!(
-          !session.metadata &&
-          !session.metadata!["priceId"] &&
-          !session.metadata!["isEventTicket"]
-        )) {
+        if (
+          !(
+            !session.metadata &&
+            !session.metadata!["priceId"] &&
+            !session.metadata!["isEventTicket"]
+          )
+        ) {
           if (session.metadata!["isEventTicket"] === "y") {
             completeTicketPurchase(session.id);
           } else if (session.metadata!["isEventTicket"] === "n") {
