@@ -4,7 +4,7 @@
   "info": {
     "singularName": "value",
     "pluralName": "values",
-    "displayName": "Value"
+    "displayName": "AUIS Values"
   },
   "options": {
     "draftAndPublish": true

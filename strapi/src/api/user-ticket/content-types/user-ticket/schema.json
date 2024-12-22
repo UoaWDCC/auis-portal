@@ -4,7 +4,7 @@
   "info": {
     "singularName": "user-ticket",
     "pluralName": "user-tickets",
-    "displayName": "People_Ticket",
+    "displayName": "Tickets Purchased by Members",
     "description": ""
   },
   "options": {
