@@ -17,9 +17,6 @@ const endpointSecret: string = process.env.STRIPE_WEBHOOK_ENDPOINT as string;
 export const createCheckout = asyncHandler(
   async (req: Request, res: Response) => {
     const { priceId, userTicketId } = req.body;
-    console.log("createCheckout: req.body: ", req.body, 2);
-    console.log("createCheckout: priceId: " + priceId);
-    console.log("createCheckout: userTicketId: " + userTicketId);
     const session = req.session!;
     let email;
 
@@ -31,13 +28,8 @@ export const createCheckout = asyncHandler(
       email = undefined;
     }
 
-    let checkPriceId = priceId === undefined || priceId === "";
-    console.log(
-      "createCheckout: is priceId undefined or empty: ",
-      checkPriceId
-    );
     // if priceId is undefined, send a 404 back.
-    if (priceId === undefined || priceId === "") {
+    if (!priceId) {
       return res
         .send({
           error:
@@ -50,14 +42,20 @@ export const createCheckout = asyncHandler(
     let isEventTicket = (await isPriceIdForEvent(priceId)) ? "y" : "n";
 
     if (isEventTicket === "y") {
-      let ticketAvailable = await isTicketAvailableByPriceId(priceId);
-      if (ticketAvailable == false) {
-        return res.status(400).send({
-          error:
-            "There are no tickets available for this event. Please come back later to see if more tickets become available.",
+      if (!userTicketId) {
+        return res.send({
+          error: "UserTicketId provided was invalid.",
         });
       } else {
-        reserveTicket(priceId);
+        let ticketAvailable = await isTicketAvailableByPriceId(priceId);
+        if (!ticketAvailable) {
+          return res.status(400).send({
+            error:
+              "There are no tickets available for this event. Please come back later to see if more tickets become available.",
+          });
+        } else {
+          reserveTicket(priceId);
+        }
       }
     } else if (isEventTicket === "n") {
       // do nothing
@@ -71,13 +69,9 @@ export const createCheckout = asyncHandler(
         //do not change anything below
         ui_mode: "embedded",
         customer_email: email,
-        // invoice_creation: {
-        //   enabled: true,
-        // },
         expires_at: session_expiry,
         line_items: [
           {
-            // Provide the exact Price ID (pr_1234) of the product on sale
             price: priceId,
             quantity: 1,
           },
@@ -129,15 +123,13 @@ export const handleWebhook = asyncHandler(
         const session: Stripe.Checkout.Session = event.data.object;
 
         if (
-          session.metadata !== null &&
-          session.metadata["priceId"] !== undefined &&
-          session.metadata["isEventTicket"] !== undefined
+          !session.metadata &&
+          !session.metadata!["priceId"] &&
+          !session.metadata!["isEventTicket"]
         ) {
-          if (session.metadata["isEventTicket"] === "y") {
+          if (session.metadata!["isEventTicket"] === "y") {
             completeTicketPurchase(session.id);
-          } else if (session.metadata["isEventTicket"] === "n") {
-            //check if isEventTicket == 'n'
-            // then we just update the membership expiry in the peoples' field for the specific user.
+          } else if (session.metadata!["isEventTicket"] === "n") {
             updateUserMembershipExpiryDate(session.id);
           }
         }
@@ -145,12 +137,12 @@ export const handleWebhook = asyncHandler(
         const session = event.data.object;
 
         if (
-          session.metadata !== null &&
-          session.metadata["priceId"] !== undefined &&
-          session.metadata["isEventTicket"] !== undefined
+          !session.metadata &&
+          !session.metadata!["priceId"] &&
+          !session.metadata!["isEventTicket"]
         ) {
-          if (session.metadata["isEventTicket"] === "y") {
-            releaseReservedTicket(session.metadata["priceId"]);
+          if (session.metadata!["isEventTicket"] === "y") {
+            releaseReservedTicket(session.metadata!["priceId"]);
           }
         }
       }

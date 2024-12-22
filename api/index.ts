@@ -106,27 +106,8 @@ const port = Number.parseInt(process.env.PORT || "3000");
 app.listen(port, "0.0.0.0", () => {
   console.log(`Backend is now listening on port :${port}`);
   console.log(`Backend env vars : 
-     NODE_ENV=${process.env.NODE_ENV}
-     PORT=${process.env.PORT},
-     DATABASE_URL=${process.env.DATABASE_URL},
-     DATABASE_HOST=${process.env.DATABASE_HOST},
-     DATABASE_PORT=${process.env.DATABASE_PORT},
-     DATABASE_USERNAME=${process.env.DATABASE_USERNAME},
-     DATABASE_PASSWORD=${process.env.DATABASE_PASSWORD},
-     DATABASE_DB=${process.env.DATABASE_DB},
      DOMAIN_API=${process.env.DOMAIN_API},
      DOMAIN_FRONTEND=${process.env.DOMAIN_FRONTEND},
-     DOMAIN_STRAPI=${process.env.DOMAIN_STRAPI},
-     DOMAIN_SUPERTOKENS=${process.env.DOMAIN_SUPERTOKENS},
-     DOMAIN_DB=${process.env.DOMAIN_DB},
-     SUPERTOKENS_PORT=${process.env.SUPERTOKENS_PORT},
-     STRIPE_SECRET_KEY=${process.env.STRIPE_SECRET_KEY},
      STRIPE_WEBHOOK_ENDPOINT=${process.env.STRIPE_WEBHOOK_ENDPOINT},
-     GOOGLE_CLIENT_ID=${process.env.GOOGLE_CLIENT_ID},
-     GOOGLE_CLIENT_SECRET=${process.env.GOOGLE_CLIENT_SECRET},
-     SUPERTOKENS_API_KEY=${process.env.SUPERTOKENS_API_KEY},
-     SMTP_HOST=${process.env.SMTP_HOST},
-     SMTP_PORT=${process.env.SMTP_PORT},
-     SMTP_USER=${process.env.SMTP_USER},
-     SMTP_PASS=${process.env.SMTP_PASS}`);
+     GOOGLE_CLIENT_ID=${process.env.GOOGLE_CLIENT_ID},`);
 });

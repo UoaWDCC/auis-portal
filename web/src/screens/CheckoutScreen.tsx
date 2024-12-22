@@ -28,13 +28,6 @@ export default function CheckoutScreen() {
       userTicketId: location.state.data.userTicketId,
       // priceId: "asdfa"
     };
-
-    console.log(
-      "CheckoutScreen: location.priceId" + location.state.data.priceId
-    );
-    console.log(
-      "CheckoutScreen: location.ticketId" + location.state.data.ticketId
-    );
   } catch {
     return <CheckoutError />;
   }

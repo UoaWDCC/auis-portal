@@ -1,5 +1,4 @@
 import {
-  AnswerList,
   QuestionAnswer,
   TicketAndQuestion,
 } from "../../types/types";
@@ -10,7 +9,6 @@ import { Mapper } from "@utils/Mapper";
 import LoadingSpinner from "@components/navigation/LoadingSpinner";
 import { useNavigate } from "react-router";
 import CheckoutInformationForm from "./CheckoutInformationForm";
-import { updateUserTicketInfo } from "../../api/apiRequests";
 import { useUpdateUserTicketInfo } from "../../hooks/api/useUpdateUserTicketInfo";
 
 interface CheckoutInformationProps {
