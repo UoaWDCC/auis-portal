@@ -218,6 +218,24 @@ export async function insertUserTicket(data: {
     data.ticketId
   );
 
+  let userTicketsPeopleIdLink = await db
+    .insert(userTicketsPeopleIdLinks)
+    .values({
+      peopleId: people[0].id,
+      userTicketId: ticketId,
+    })
+    .returning()
+    .catch((error) => {
+      throw new Error(
+        "insertUserTicket: error occurred while trying to insert userTicketsPeopleIdLink: " +
+          error
+      );
+    });
+
+  console.log(
+    "insertUserTicket: userTicketsPeopleIdLink: " + userTicketsPeopleIdLink![0]!
+  );
+
   return newUserTicket[0];
 }
 
