@@ -54,11 +54,9 @@ export default function HomeScreen({ navbar }: { navbar: JSX.Element }) {
     if (!photosLoading) {
       setLoadingPhotos(false);
     }
-
     if (photosError) {
       setErrorPhotos(true);
     }
-
     if (photosData) {
       try {
         const mappedPhotos = Mapper.mapToSomePhotos(photosData);
