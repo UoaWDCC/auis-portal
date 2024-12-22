@@ -20,8 +20,6 @@ export const getUserMetaData = async (): Promise<AxiosResponse> => {
       "Content-Type": "application/json",
     },
   });
-  console.log("getUserMetatdat");
-  console.log(response.data);
   return response;
 };
 
@@ -35,7 +33,6 @@ export const updateUserInfo = async (
   isDomestic: string,
   institution: string
 ): Promise<AxiosResponse> => {
-  // console.log(data)
   const data = {
     name,
     universityId,
@@ -52,9 +49,6 @@ export const updateUserInfo = async (
     },
     data,
   });
-
-  console.log("update user info");
-  console.log(response);
   return response;
 };
 
@@ -77,7 +71,6 @@ export const updateUserTicketInfo = async (
       "Content-Type": "application/json",
     },
   });
-  console.log("update user ticket info worked");
   return response.data;
 };
 
@@ -130,10 +123,6 @@ export const getSessionStatus = async (
       headers: { "Content-Type": "application/json" },
     }
   );
-
-  console.log("get session id");
-  console.log(response);
-
   return response.data;
 };
 
@@ -151,35 +140,5 @@ export const fetchEventOrMembershipCheckoutSecret = async (
       headers: { "Content-Type": "application/json" },
     }
   );
-  console.log("FETCH EVENT OR MEBERSHcK CHECKOUT SECRETYE");
   return response.data;
-};
-
-// TODO: Delete these? ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
-
-// the ones below are for a separate approach. Safe to use.
-export const fetchEventCheckoutSecret = async (payload: {
-  stripeKey: string;
-}): Promise<string> => {
-  return await fetch("/api/stripe/create-event-checkout", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    // add our own priceId here later for different products
-    body: JSON.stringify(payload),
-  })
-    .then((res) => res.json())
-    .then((data) => data.clientSecret);
-};
-
-export const fetchMembershipCheckoutSecret = async (payload: {
-  stripeKey: string;
-}): Promise<string> => {
-  return await fetch("/api/stripe/create-membership-checkout", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    // add our own priceId here later for different products
-    body: JSON.stringify(payload),
-  })
-    .then((res) => res.json())
-    .then((data) => data.clientSecret);
 };
