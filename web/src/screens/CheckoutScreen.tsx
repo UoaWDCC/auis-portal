@@ -5,7 +5,6 @@ import {
   EmbeddedCheckout,
 } from "@stripe/react-stripe-js";
 import { useLocation, useNavigate } from "react-router";
-// import { fetchEventOrMembershipCheckoutSecret } from "../api/apiRequests";
 import CheckoutError from "@components/checkout-page/CheckoutError";
 import { useEventOrMembershipCheckoutSecret } from "../hooks/api/useEventOrMembershipCheckoutSecret";
 import LoadingSpinner from "@components/navigation/LoadingSpinner";

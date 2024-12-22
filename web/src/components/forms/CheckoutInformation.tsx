@@ -73,6 +73,7 @@ export default function CheckoutInformation({
   // Update status text as it changes
   useEffect(() => {
     if (status === "success") {
+      setSubmitLoading(false)
       navigateToPaymentScreen(
         updateUserTicketInfoData.updateUserInfoOrNewUser.userTicketId
       );
@@ -97,7 +98,7 @@ export default function CheckoutInformation({
     answers: QuestionAnswer[]
   ) => {
     event.preventDefault();
-    // setSubmitLoading(true);
+    setSubmitLoading(true);
 
     // remove unused information for post request
     const answerList = answers.map(({ question, indexId, ...rest }) => {
