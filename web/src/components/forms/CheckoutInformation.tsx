@@ -1,7 +1,4 @@
-import {
-  QuestionAnswer,
-  TicketAndQuestion,
-} from "../../types/types";
+import { QuestionAnswer, TicketAndQuestion } from "../../types/types";
 import { useEffect, useState } from "react";
 import { useQuery } from "@apollo/client";
 import { getTicketQuestions } from "../../graphql/queries";
