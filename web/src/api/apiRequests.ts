@@ -43,8 +43,8 @@ export const updateUserInfo = async (
     yearOfStudy,
     fieldOfStudy,
     isDomestic,
-    institution
-  }
+    institution,
+  };
 
   const response = await apiClient.post("/api/user/update-user-info", data, {
     headers: {
