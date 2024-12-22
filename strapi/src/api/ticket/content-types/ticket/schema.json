@@ -16,14 +16,6 @@
       "type": "string",
       "required": true
     },
-    "Discount_Code": {
-      "type": "string",
-      "required": false
-    },
-    "Discount_Price": {
-      "type": "decimal",
-      "required": false
-    },
     "Price": {
       "type": "decimal",
       "required": true

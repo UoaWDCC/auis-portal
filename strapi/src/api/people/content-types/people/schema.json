@@ -22,23 +22,14 @@
     },
     "University_ID": {
       "type": "string",
-      "required": false
+      "required": true
     },
     "UPI": {
       "type": "string",
-      "required": false
-    },
-    "Year_Of_Study": {
-      "type": "string",
-      "required": false
+      "required": true
     },
     "Study_Field": {
       "type": "string",
-      "required": false
-    },
-    "Is_Member": {
-      "type": "boolean",
-      "default": false,
       "required": true
     },
     "Status": {
@@ -52,7 +43,7 @@
     },
     "Member_Expiry_Date": {
       "type": "date",
-      "required": true
+      "required": false
     },
     "People_Ticket_ID": {
       "type": "relation",
@@ -68,6 +59,10 @@
         "Other",
         "None"
       ],
+      "required": true
+    },
+    "Year_Of_Study": {
+      "type": "string",
       "required": true
     }
   }
