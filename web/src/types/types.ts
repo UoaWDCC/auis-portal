@@ -134,3 +134,36 @@ export interface AttendanceList {
 export interface AttendanceReturn {
   name: string;
 }
+
+export interface EventOrMembershipReturn {
+  clientSecret: string;
+}
+
+export interface stripeSessionStatus {
+  customer_email: string;
+  status: string;
+}
+// data { updateUserInfoOrNewUser { userTicketId}}
+export interface UpdateUserInfoOrNewUser {
+  updateUserInfoOrNewUser: {
+    userTicketId: number;
+  };
+}
+
+export interface SubmitUpdateUserInfoOrNewUser {
+  ticketId: number;
+  name: string;
+  email: string;
+  phoneNumber: string;
+  answers: QuestionAnswer[];
+}
+
+export interface AnswerList {
+  questionId: number;
+  answer: string;
+}
+
+export interface UserMetaData {
+  bIsUserInfoComplete: boolean;
+  bIsMembershipPaymentComplete: boolean;
+}

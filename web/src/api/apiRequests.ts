@@ -1,7 +1,11 @@
 import axios, { AxiosResponse } from "axios";
 import {
+  AnswerList,
   AttendanceList,
+  EventOrMembershipReturn,
   MembershipExpiryDate as MembershipExpiryDate,
+  stripeSessionStatus,
+  UpdateUserInfoOrNewUser,
 } from "../types/types";
 
 const apiClient = axios.create({
@@ -10,37 +14,64 @@ const apiClient = axios.create({
 });
 
 // Get user metadata
-export const getUserMetadaData = async (): Promise<AxiosResponse> => {
+export const getUserMetaData = async (): Promise<AxiosResponse> => {
   const response = await apiClient.get("/api/user/get-metadata", {
     headers: {
       "Content-Type": "application/json",
     },
   });
-
   return response;
 };
 
 // Update user info
-export const updateUserInfo = async (data: object): Promise<AxiosResponse> => {
+export const updateUserInfo = async (
+  name: string,
+  universityId: string,
+  upi: string,
+  yearOfStudy: string,
+  fieldOfStudy: string,
+  isDomestic: string,
+  institution: string
+): Promise<AxiosResponse> => {
+  const data = {
+    name,
+    universityId,
+    upi,
+    yearOfStudy,
+    fieldOfStudy,
+    isDomestic,
+    institution,
+  };
+
   const response = await apiClient.post("/api/user/update-user-info", data, {
     headers: {
       "Content-Type": "application/json",
     },
-    data: { data },
+    data,
   });
   return response;
 };
 
 export const updateUserTicketInfo = async (
-  data: object
-): Promise<AxiosResponse> => {
+  ticketId: number,
+  name: string,
+  email: string,
+  phoneNumber: string,
+  answers: AnswerList[]
+): Promise<UpdateUserInfoOrNewUser> => {
+  const data = {
+    ticketId,
+    name,
+    email,
+    phoneNumber,
+    answers,
+  };
   const response = await apiClient.post("/api/user/user-ticket-info", data, {
     headers: {
       "Content-Type": "application/json",
     },
   });
-
-  return response;
+  return response.data;
 };
 
 // User membership expiry
@@ -85,22 +116,22 @@ export const postAttendanceUpdate = async (
 // Get session status
 export const getSessionStatus = async (
   sessionId: string
-): Promise<AxiosResponse> => {
+): Promise<stripeSessionStatus> => {
   const response = await apiClient.get(
     `/api/stripe/session-status?session_id=${sessionId}`,
     {
       headers: { "Content-Type": "application/json" },
     }
   );
-
-  return response;
+  return response.data;
 };
 
 //Use this one to automatically create an Event or Membership checkout. Event checkout will decrement a ticket.
-export const fetchEventOrMembershipCheckoutSecret = async (payload: {
-  priceId: string;
-  userTicketId: number;
-}): Promise<string> => {
+export const fetchEventOrMembershipCheckoutSecret = async (
+  priceId: string,
+  userTicketId: number
+): Promise<EventOrMembershipReturn> => {
+  const payload = { priceId, userTicketId };
   const response = await apiClient.post(
     "/api/stripe/create-checkout",
     payload,
@@ -109,35 +140,5 @@ export const fetchEventOrMembershipCheckoutSecret = async (payload: {
       headers: { "Content-Type": "application/json" },
     }
   );
-
-  return response.data.clientSecret;
-};
-
-// TODO: Delete these? ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
-
-// the ones below are for a separate approach. Safe to use.
-export const fetchEventCheckoutSecret = async (payload: {
-  stripeKey: string;
-}): Promise<string> => {
-  return await fetch("/api/stripe/create-event-checkout", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    // add our own priceId here later for different products
-    body: JSON.stringify(payload),
-  })
-    .then((res) => res.json())
-    .then((data) => data.clientSecret);
-};
-
-export const fetchMembershipCheckoutSecret = async (payload: {
-  stripeKey: string;
-}): Promise<string> => {
-  return await fetch("/api/stripe/create-membership-checkout", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    // add our own priceId here later for different products
-    body: JSON.stringify(payload),
-  })
-    .then((res) => res.json())
-    .then((data) => data.clientSecret);
+  return response.data;
 };

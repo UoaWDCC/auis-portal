@@ -38,7 +38,8 @@ import CheckoutInformationScreen from "./screens/CheckoutInformationScreen.tsx";
 import AttendanceScreen from "./screens/AttendanceScreen.tsx";
 import EventAttendanceSelectScreen from "./screens/EventAttendanceSelectScreen.tsx";
 import { ExecRoute } from "@utils/AdminRouteProtection.tsx";
-import { getUserMetadaData } from "./api/apiRequests.ts";
+import { getUserMetaData } from "./api/apiRequests.ts";
+import { UserRoute } from "@utils/UserRouteProtection.tsx";
 
 //supertokens code
 SuperTokens.init({
@@ -62,10 +63,8 @@ SuperTokens.init({
   getRedirectionURL: async (context) => {
     if (context.action === "SUCCESS" && context.newSessionCreated) {
       let redirectionURL = "/";
-
       try {
-        const userMetadata = await getUserMetadaData();
-
+        const userMetadata = await getUserMetaData();
         if (userMetadata.status === 200) {
           if (userMetadata.data!.bIsUserInfoComplete === false) {
             redirectionURL = "/signup/information";
@@ -87,7 +86,6 @@ SuperTokens.init({
           "There was error after logging in. Please contact the AUIS admin for further assistance."
         );
       }
-
       return redirectionURL;
     } else if (context.action === "TO_AUTH") {
       return "/signup";
@@ -127,7 +125,11 @@ const router = createBrowserRouter(
       />
       <Route
         path="/signup/information"
-        element={<SignUpInformationScreen navbar={<Header />} />}
+        element={
+          <UserRoute>
+            <SignUpInformationScreen navbar={<Header />} />
+          </UserRoute>
+        }
       />
       <Route
         path="/admin/attendance/:id"

@@ -138,10 +138,6 @@ export default function AttendanceScreen({ navbar }: { navbar: JSX.Element }) {
     return <LoadingSpinner />;
   }
 
-  const abc: MediaTrackConstraints = {
-    deviceId: cameraId,
-  };
-
   return (
     <div className="from-AUIS-dark-teal to-AUIS-teal min-h-[calc(100vh)] bg-gradient-to-b">
       {navbar}
@@ -162,8 +158,9 @@ export default function AttendanceScreen({ navbar }: { navbar: JSX.Element }) {
               onScan={(result) => onQRcodeScanned(result)}
               allowMultiple={true}
               scanDelay={1000}
-              constraints={abc}
+              constraints={{ deviceId: cameraId }}
               onError={() => setCameraError(true)}
+              styles={{}}
             />
           )}
         </div>
@@ -231,7 +228,7 @@ export default function AttendanceScreen({ navbar }: { navbar: JSX.Element }) {
           Attendance: {totalCheckedIn} {" / "} {totalAttendees}
         </p>
         <div className="flex items-center justify-center">
-          <div className="w-[40rem] pb-10 px-3">
+          <div className="w-[40rem] px-3 pb-10">
             <p className="text-center text-lg text-white">
               Select the camera you wish to use
             </p>

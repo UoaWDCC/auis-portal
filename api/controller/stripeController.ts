@@ -49,7 +49,7 @@ export const createCheckout = asyncHandler(
       } else {
         let ticketAvailable = await isTicketAvailableByPriceId(priceId);
         if (!ticketAvailable) {
-          return res.send({
+          return res.status(400).send({
             error:
               "There are no tickets available for this event. Please come back later to see if more tickets become available.",
           });
@@ -121,11 +121,12 @@ export const handleWebhook = asyncHandler(
 
       if (event.type === "checkout.session.completed") {
         const session: Stripe.Checkout.Session = event.data.object;
-
         if (
-          !session.metadata &&
-          !session.metadata!["priceId"] &&
-          !session.metadata!["isEventTicket"]
+          !(
+            !session.metadata &&
+            !session.metadata!["priceId"] &&
+            !session.metadata!["isEventTicket"]
+          )
         ) {
           if (session.metadata!["isEventTicket"] === "y") {
             completeTicketPurchase(session.id);

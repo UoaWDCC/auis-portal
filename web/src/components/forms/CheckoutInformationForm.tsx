@@ -187,7 +187,8 @@ export default function CheckoutInformationForm({
             <br />
             If this is a double ticket, both ticket holders must be members.
             <br />
-            If this is a Member ticket, make sure you haven't already purchased a Member ticket.
+            If this is a Member ticket, make sure you haven't already purchased
+            a Member ticket.
           </p>
         ) : (
           <></>

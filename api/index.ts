@@ -49,6 +49,7 @@ app.use(
   cors({
     origin: [
       `${process.env.DOMAIN_FRONTEND}`, //FE
+      `${process.env.DOMAIN_FRONTEND_AAAA}`,
       `${process.env.DOMAIN_STRAPI}`, //Strapi
       `${process.env.DOMAIN_SUPERTOKENS}`, //ST user Dashboard
       `${process.env.DATABASE_HOST}:${process.env.DATABASE_PORT}`, //DB

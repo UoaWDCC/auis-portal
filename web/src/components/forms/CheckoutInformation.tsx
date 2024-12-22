@@ -6,7 +6,7 @@ import { Mapper } from "@utils/Mapper";
 import LoadingSpinner from "@components/navigation/LoadingSpinner";
 import { useNavigate } from "react-router";
 import CheckoutInformationForm from "./CheckoutInformationForm";
-import { updateUserTicketInfo } from "../../api/apiRequests";
+import { useUpdateUserTicketInfo } from "../../hooks/api/useUpdateUserTicketInfo";
 
 interface CheckoutInformationProps {
   ticketId: number;
@@ -65,28 +65,32 @@ export default function CheckoutInformation({
   const [submitError, setSubmitError] = useState(false);
   const [submitLoading, setSubmitLoading] = useState(false);
 
-  // Submit ticket information to backend
-  const onSubmit = async (data: any) => {
-    try {
-      const response = await updateUserTicketInfo(data);
-      if (response.status === 200) {
-        // Form Submission Successful
-        setSubmitLoading(false);
-        // Move user to payment screen after the user ticket id is received
-        navigateToPaymentScreen(
-          response.data.updateUserInfoOrNewUser.userTicketId
-        );
-      } else {
-        setSubmitLoading(false);
-        setSubmitError(true);
-      }
-    } catch (error) {
+  const {
+    data: updateUserTicketInfoData,
+    mutateAsync,
+    status,
+  } = useUpdateUserTicketInfo();
+  // Update status text as it changes
+  useEffect(() => {
+    if (status === "success") {
       setSubmitLoading(false);
+      navigateToPaymentScreen(
+        updateUserTicketInfoData.updateUserInfoOrNewUser.userTicketId
+      );
+    }
+
+    if (status == "pending") {
+      setSubmitLoading(true);
+    } else {
+      setSubmitLoading(false);
+    }
+
+    if (status == "error") {
       setSubmitError(true);
     }
-  };
+  }, [status]);
 
-  const handleSubmit = (
+  const onSubmit = async (
     event: React.FormEvent<HTMLFormElement>,
     name: string,
     email: string,
@@ -101,8 +105,8 @@ export default function CheckoutInformation({
       return rest;
     });
 
-    // call post request
-    onSubmit({
+    // Mutation hook
+    mutateAsync({
       ticketId: ticketId,
       name: name,
       email: email,
@@ -125,7 +129,7 @@ export default function CheckoutInformation({
   return ticketAndQuestions ? (
     <div className="drop-shadow-all mb-20 w-full rounded-lg bg-white px-2 py-12 sm:px-12">
       <CheckoutInformationForm
-        handleSubmit={handleSubmit}
+        handleSubmit={onSubmit}
         questions={ticketAndQuestions}
         submitError={submitError}
       />
