@@ -4,7 +4,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import TextQuestion from "@components/forms/TextQuestion";
 import DropdownQuestion from "@components/forms/DropdownQuestion";
 import { useState } from "react";
-// import { updateUserInfo } from "../api/apiRequests";
 import { useUpdateUserInfo } from "../hooks/api/useUpdateUserInfo";
 import LoadingSpinner from "@components/navigation/LoadingSpinner";
 
