@@ -62,19 +62,19 @@ SuperTokens.init({
   ],
   getRedirectionURL: async (context) => {
     if (context.action === "SUCCESS" && context.newSessionCreated) {
-      let redirectionURL = "/";
+      let redirectionURL =import.meta.env.VITE_APP_URL + "/";
       try {
         const userMetadata = await getUserMetaData();
         if (userMetadata.status === 200) {
           if (userMetadata.data!.bIsUserInfoComplete === false) {
-            redirectionURL = "/signup/information";
+            redirectionURL = import.meta.env.VITE_APP_URL +"/signup/information";
           } else if (
             userMetadata.data!.bIsUserInfoComplete &&
             userMetadata.data!.bIsMembershipPaymentComplete === false
           ) {
-            redirectionURL = "/membership";
+            redirectionURL =import.meta.env.VITE_APP_URL + "/membership";
           } else {
-            redirectionURL = "/";
+            redirectionURL =import.meta.env.VITE_APP_URL + "/";
           }
         } else {
           // Request Failed
@@ -88,7 +88,7 @@ SuperTokens.init({
       }
       return redirectionURL;
     } else if (context.action === "TO_AUTH") {
-      return "/signup";
+      return import.meta.env.VITE_APP_URL + "/signup";
     }
   },
 });
