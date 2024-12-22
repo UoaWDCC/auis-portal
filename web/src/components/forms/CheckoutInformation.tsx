@@ -105,7 +105,6 @@ export default function CheckoutInformation({
     });
 
     // Mutation hook
-
     mutateAsync({
       ticketId: ticketId,
       name: name,
@@ -113,16 +112,7 @@ export default function CheckoutInformation({
       phoneNumber: phoneNumber,
       answers: answerList,
     });
-    // const temp = await  mutateAsync(data)
-    // call post request
-    // onSubmit({
-    //   // ticketId: ticketId,
-    //   name: name,
-    //   email: email,
-    //   phoneNumber: phoneNumber,
-    //   answers: answerList,
-    // });
-    // mutateAsync()
+   
   };
 
   // Loading

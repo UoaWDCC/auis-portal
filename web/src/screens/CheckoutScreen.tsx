@@ -26,7 +26,6 @@ export default function CheckoutScreen() {
     bodyData = {
       priceId: location.state.data.priceId,
       userTicketId: location.state.data.userTicketId,
-      // priceId: "asdfa"
     };
   } catch {
     return <CheckoutError />;
@@ -35,18 +34,6 @@ export default function CheckoutScreen() {
   useEffect(() => {
     mutateAsync(bodyData);
   }, []);
-
-  console.log(data?.clientSecret);
-
-  console.log(status);
-  // // Stripe payments
-  // const fetchClientSecret = useCallback(async () => {
-  //   // Create a Checkout Session
-  //   return await fetchEventOrMembershipCheckoutSecret(bodyData);
-  // }, []);
-
-  // can be null to options.clientSecret or options.fetchClientSecret if you are performing an initial server-side render or when generating a static site.
-  // const options = { fetchClientSecret };
 
   if (status === "pending") {
     return <LoadingSpinner />;
