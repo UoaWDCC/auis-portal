@@ -113,7 +113,6 @@ export default function CheckoutInformation({
       phoneNumber: phoneNumber,
       answers: answerList,
     });
-   
   };
 
   // Loading
