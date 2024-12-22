@@ -5,6 +5,8 @@ import TextQuestion from "@components/forms/TextQuestion";
 import DropdownQuestion from "@components/forms/DropdownQuestion";
 import { useState } from "react";
 import { updateUserInfo } from "../api/apiRequests";
+import { useUpdateUserInfo } from "../hooks/api/useUpdateUserInfo";
+import LoadingSpinner from "@components/navigation/LoadingSpinner";
 
 const SignUpSchema = z.object({
   name: z.string().max(40).min(1),
@@ -47,19 +49,11 @@ export default function SignUpInformationScreen({
 
   const [formError, setFormError] = useState(false);
 
-  const sendSignUpData = async (data: object) => {
-    try {
-      const response = await updateUserInfo(data);
+  const {status, mutateAsync} = useUpdateUserInfo()
 
-      if (response.status === 200) {
-        window.location.href = "/membership";
-      } else {
-        // Form Submission Failed
-        setFormError(true);
-      }
-    } catch (error) {
-      setFormError(true);
-    }
+  const sendSignUpData = async (data: SignUpSchemaType) => {
+
+    mutateAsync(data)
   };
 
   const onSubmit: SubmitHandler<SignUpSchemaType> = (data) => {
@@ -91,6 +85,18 @@ export default function SignUpInformationScreen({
     { id: 2, text: "Other" },
     { id: 3, text: "None" },
   ];
+
+  if (status === "success"){
+    window.location.href = "/membership";
+  }
+
+  if (status === "error"){
+    setFormError(true);
+  }
+
+  if (status === "pending"){
+    return <LoadingSpinner/>
+  }
 
   return (
     <div className="from-AUIS-dark-teal to-AUIS-teal min-h-[calc(100vh)] bg-gradient-to-b">

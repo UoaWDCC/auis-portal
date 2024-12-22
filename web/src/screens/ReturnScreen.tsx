@@ -42,7 +42,7 @@ export default function ReturnScreen() {
 
   if (sessionStatusHookStatus === "success") {
     if (status === "open") {
-      return <Navigate to="/checkout/payment" />;
+      return <Navigate to="/checkout/payment" />; // switch to useNavigate TODO
     }
     if (status === "complete") {
       return (

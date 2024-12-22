@@ -163,3 +163,8 @@ export interface AnswerList {
   questionId: number;
   answer: string;
 }
+
+export interface UserMetaData {
+  bIsUserInfoComplete: boolean;
+  bIsMembershipPaymentComplete: boolean;
+}

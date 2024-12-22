@@ -69,10 +69,8 @@ SuperTokens.init({
   getRedirectionURL: async (context) => {
     if (context.action === "SUCCESS" && context.newSessionCreated) {
       let redirectionURL = "/";
-
       try {
         const userMetadata = await getUserMetaData();
-
         if (userMetadata.status === 200) {
           if (userMetadata.data!.bIsUserInfoComplete === false) {
             redirectionURL = "/signup/information";
@@ -94,7 +92,6 @@ SuperTokens.init({
           "There was error after logging in. Please contact the AUIS admin for further assistance."
         );
       }
-
       return redirectionURL;
     } else if (context.action === "TO_AUTH") {
       return "/signup";

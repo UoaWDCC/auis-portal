@@ -8,6 +8,7 @@ import {
   stripeSessionStatus,
   SubmitUpdateUserInfoOrNewUser,
   UpdateUserInfoOrNewUser,
+  UserMetaData,
 } from "../types/types";
 
 const apiClient = axios.create({
@@ -23,17 +24,28 @@ export const getUserMetaData = async (): Promise<AxiosResponse> => {
     },
   });
   console.log("getUserMetatdat");
-  console.log(response);
+  console.log(response.data);
   return response;
 };
 
 // Update user info
-export const updateUserInfo = async (data: object): Promise<AxiosResponse> => {
+export const updateUserInfo = async (name:string, universityId: string, upi: string, yearOfStudy:string, fieldOfStudy:string, isDomestic: string, institution: string ): Promise<AxiosResponse> => {
+  // console.log(data)
+  const data = {
+    name,
+    universityId,
+    upi,
+    yearOfStudy,
+    fieldOfStudy,
+    isDomestic,
+    institution
+  }
+  
   const response = await apiClient.post("/api/user/update-user-info", data, {
     headers: {
       "Content-Type": "application/json",
     },
-    data: { data },
+    data,
   });
 
   console.log("update user info");
