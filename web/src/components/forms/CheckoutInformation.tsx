@@ -73,7 +73,7 @@ export default function CheckoutInformation({
   // Update status text as it changes
   useEffect(() => {
     if (status === "success") {
-      setSubmitLoading(false)
+      setSubmitLoading(false);
       navigateToPaymentScreen(
         updateUserTicketInfoData.updateUserInfoOrNewUser.userTicketId
       );
