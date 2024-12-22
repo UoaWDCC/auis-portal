@@ -39,6 +39,7 @@ import AttendanceScreen from "./screens/AttendanceScreen.tsx";
 import EventAttendanceSelectScreen from "./screens/EventAttendanceSelectScreen.tsx";
 import { ExecRoute } from "@utils/AdminRouteProtection.tsx";
 import { getUserMetaData } from "./api/apiRequests.ts";
+import { UserRoute } from "@utils/UserRouteProtection.tsx";
 
 //supertokens code
 SuperTokens.init({
@@ -124,7 +125,11 @@ const router = createBrowserRouter(
       />
       <Route
         path="/signup/information"
-        element={<SignUpInformationScreen navbar={<Header />} />}
+        element={
+          <UserRoute>
+            <SignUpInformationScreen navbar={<Header />} />
+          </UserRoute>
+        }
       />
       <Route
         path="/admin/attendance/:id"
