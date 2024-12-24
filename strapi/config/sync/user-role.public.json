@@ -4,40 +4,7 @@
   "type": "public",
   "permissions": [
     {
-      "action": "api::answer.answer.create"
-    },
-    {
-      "action": "api::answer.answer.delete"
-    },
-    {
-      "action": "api::answer.answer.find"
-    },
-    {
-      "action": "api::answer.answer.findOne"
-    },
-    {
-      "action": "api::answer.answer.update"
-    },
-    {
-      "action": "api::event-gallery.event-gallery.create"
-    },
-    {
-      "action": "api::event-gallery.event-gallery.delete"
-    },
-    {
       "action": "api::event-gallery.event-gallery.find"
-    },
-    {
-      "action": "api::event-gallery.event-gallery.findOne"
-    },
-    {
-      "action": "api::event-gallery.event-gallery.update"
-    },
-    {
-      "action": "api::event.event.create"
-    },
-    {
-      "action": "api::event.event.delete"
     },
     {
       "action": "api::event.event.find"
@@ -46,88 +13,16 @@
       "action": "api::event.event.findOne"
     },
     {
-      "action": "api::event.event.update"
-    },
-    {
-      "action": "api::exec.exec.create"
-    },
-    {
-      "action": "api::exec.exec.delete"
-    },
-    {
       "action": "api::exec.exec.find"
-    },
-    {
-      "action": "api::exec.exec.findOne"
-    },
-    {
-      "action": "api::exec.exec.update"
-    },
-    {
-      "action": "api::introduction.introduction.create"
-    },
-    {
-      "action": "api::introduction.introduction.delete"
     },
     {
       "action": "api::introduction.introduction.find"
     },
     {
-      "action": "api::introduction.introduction.findOne"
-    },
-    {
-      "action": "api::introduction.introduction.update"
-    },
-    {
-      "action": "api::partner.partner.create"
-    },
-    {
-      "action": "api::partner.partner.delete"
-    },
-    {
       "action": "api::partner.partner.find"
     },
     {
-      "action": "api::partner.partner.findOne"
-    },
-    {
-      "action": "api::partner.partner.update"
-    },
-    {
-      "action": "api::people.people.create"
-    },
-    {
-      "action": "api::people.people.delete"
-    },
-    {
-      "action": "api::people.people.find"
-    },
-    {
-      "action": "api::people.people.findOne"
-    },
-    {
-      "action": "api::people.people.update"
-    },
-    {
-      "action": "api::previous-team.previous-team.create"
-    },
-    {
-      "action": "api::previous-team.previous-team.delete"
-    },
-    {
       "action": "api::previous-team.previous-team.find"
-    },
-    {
-      "action": "api::previous-team.previous-team.findOne"
-    },
-    {
-      "action": "api::previous-team.previous-team.update"
-    },
-    {
-      "action": "api::purchasable-membership.purchasable-membership.create"
-    },
-    {
-      "action": "api::purchasable-membership.purchasable-membership.delete"
     },
     {
       "action": "api::purchasable-membership.purchasable-membership.find"
@@ -136,43 +31,13 @@
       "action": "api::purchasable-membership.purchasable-membership.findOne"
     },
     {
-      "action": "api::purchasable-membership.purchasable-membership.update"
-    },
-    {
-      "action": "api::question.question.create"
-    },
-    {
-      "action": "api::question.question.delete"
-    },
-    {
       "action": "api::question.question.find"
     },
     {
       "action": "api::question.question.findOne"
     },
     {
-      "action": "api::question.question.update"
-    },
-    {
-      "action": "api::some-photo.some-photo.create"
-    },
-    {
-      "action": "api::some-photo.some-photo.delete"
-    },
-    {
       "action": "api::some-photo.some-photo.find"
-    },
-    {
-      "action": "api::some-photo.some-photo.findOne"
-    },
-    {
-      "action": "api::some-photo.some-photo.update"
-    },
-    {
-      "action": "api::ticket.ticket.create"
-    },
-    {
-      "action": "api::ticket.ticket.delete"
     },
     {
       "action": "api::ticket.ticket.find"
@@ -181,49 +46,7 @@
       "action": "api::ticket.ticket.findOne"
     },
     {
-      "action": "api::ticket.ticket.update"
-    },
-    {
-      "action": "api::user-ticket.user-ticket.create"
-    },
-    {
-      "action": "api::user-ticket.user-ticket.delete"
-    },
-    {
-      "action": "api::user-ticket.user-ticket.find"
-    },
-    {
-      "action": "api::user-ticket.user-ticket.findOne"
-    },
-    {
-      "action": "api::user-ticket.user-ticket.update"
-    },
-    {
-      "action": "api::value.value.create"
-    },
-    {
-      "action": "api::value.value.delete"
-    },
-    {
       "action": "api::value.value.find"
-    },
-    {
-      "action": "api::value.value.findOne"
-    },
-    {
-      "action": "api::value.value.update"
-    },
-    {
-      "action": "plugin::upload.content-api.destroy"
-    },
-    {
-      "action": "plugin::upload.content-api.find"
-    },
-    {
-      "action": "plugin::upload.content-api.findOne"
-    },
-    {
-      "action": "plugin::upload.content-api.upload"
     },
     {
       "action": "plugin::users-permissions.auth.callback"
