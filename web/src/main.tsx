@@ -62,19 +62,20 @@ SuperTokens.init({
   ],
   getRedirectionURL: async (context) => {
     if (context.action === "SUCCESS" && context.newSessionCreated) {
-      let redirectionURL =import.meta.env.VITE_APP_URL + "/";
+      let redirectionURL = import.meta.env.VITE_APP_URL + "/";
       try {
         const userMetadata = await getUserMetaData();
         if (userMetadata.status === 200) {
           if (userMetadata.data!.bIsUserInfoComplete === false) {
-            redirectionURL = import.meta.env.VITE_APP_URL +"/signup/information";
+            redirectionURL =
+              import.meta.env.VITE_APP_URL + "/signup/information";
           } else if (
             userMetadata.data!.bIsUserInfoComplete &&
             userMetadata.data!.bIsMembershipPaymentComplete === false
           ) {
-            redirectionURL =import.meta.env.VITE_APP_URL + "/membership";
+            redirectionURL = import.meta.env.VITE_APP_URL + "/membership";
           } else {
-            redirectionURL =import.meta.env.VITE_APP_URL + "/";
+            redirectionURL = import.meta.env.VITE_APP_URL + "/";
           }
         } else {
           // Request Failed
