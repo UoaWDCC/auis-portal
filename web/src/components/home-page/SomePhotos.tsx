@@ -5,7 +5,7 @@ interface SomePhotosProps {
   noPhotos: boolean;
 }
 
-function SomePhotos({ photos, noPhotos }: SomePhotosProps) {
+export default function SomePhotos({ photos, noPhotos }: SomePhotosProps) {
   return (
     <>
       <div className="bg-white">
@@ -49,5 +49,3 @@ function SomePhotos({ photos, noPhotos }: SomePhotosProps) {
     </>
   );
 }
-
-export default SomePhotos;
