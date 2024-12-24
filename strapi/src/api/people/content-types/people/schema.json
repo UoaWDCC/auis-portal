@@ -32,6 +32,11 @@
       "type": "string",
       "required": true
     },
+    "Is_Member": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
     "Status": {
       "type": "enumeration",
       "enum": [
