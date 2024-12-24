@@ -132,10 +132,12 @@ export default function AboutUsScreen({ navbar }: { navbar: JSX.Element }) {
               <div className="py-10">There is no introduction to display</div>
             ) : (
               <>
-               <Markdown
-          remarkPlugins={[remarkGfm, remarkBreaks]}
-          className="markdown my-5 text-2xl"
-        >{introduction[0].description}</Markdown>
+                <Markdown
+                  remarkPlugins={[remarkGfm, remarkBreaks]}
+                  className="markdown my-5 text-2xl"
+                >
+                  {introduction[0].description}
+                </Markdown>
                 <p className=""></p>
 
                 <div className="flex w-full flex-col justify-between px-10 sm:flex-row md:w-[50rem]">
