@@ -121,29 +121,31 @@
       }
     },
     "layouts": {
-      "list": [
-        "id",
-        "Image",
-        "Title",
-        "Year"
-      ],
       "edit": [
         [
           {
-            "name": "Image",
-            "size": 6
-          },
-          {
             "name": "Title",
-            "size": 6
+            "size": 12
           }
         ],
         [
           {
             "name": "Year",
-            "size": 6
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "Image",
+            "size": 12
           }
         ]
+      ],
+      "list": [
+        "id",
+        "Image",
+        "Title",
+        "Year"
       ]
     },
     "uid": "api::some-photo.some-photo"

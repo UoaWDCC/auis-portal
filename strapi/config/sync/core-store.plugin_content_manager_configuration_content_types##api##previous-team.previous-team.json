@@ -121,29 +121,31 @@
       }
     },
     "layouts": {
-      "list": [
-        "id",
-        "Name",
-        "Role",
-        "Year"
-      ],
       "edit": [
         [
           {
             "name": "Name",
-            "size": 6
-          },
+            "size": 12
+          }
+        ],
+        [
           {
             "name": "Role",
-            "size": 6
+            "size": 12
           }
         ],
         [
           {
             "name": "Year",
-            "size": 6
+            "size": 12
           }
         ]
+      ],
+      "list": [
+        "id",
+        "Name",
+        "Role",
+        "Year"
       ]
     },
     "uid": "api::previous-team.previous-team"

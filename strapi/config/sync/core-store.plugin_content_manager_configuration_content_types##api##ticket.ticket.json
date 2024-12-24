@@ -22,7 +22,7 @@
       "Name": {
         "edit": {
           "label": "Name",
-          "description": "",
+          "description": "Name of the ticket. E.g Member Ticket",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -36,7 +36,7 @@
       "Price": {
         "edit": {
           "label": "Price",
-          "description": "",
+          "description": "Make sure the price matches the correct stripe price",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -49,8 +49,8 @@
       },
       "Is_Member_Only": {
         "edit": {
-          "label": "Is_Member_Only",
-          "description": "",
+          "label": "Member Only",
+          "description": "If this is true, it will show a hint in the events page with \"This ticket is only available for paid members\" and ONLY allow paid members to purchase a SINGLE member ticket",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -63,8 +63,8 @@
       },
       "Is_Double": {
         "edit": {
-          "label": "Is_Double",
-          "description": "",
+          "label": "Double/Couple Ticket",
+          "description": "Leave this False unless this is for a couple/double ticket. Make sure you link a question asking for the partner's email",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -77,8 +77,8 @@
       },
       "Max_Number_Tickets": {
         "edit": {
-          "label": "Max_Number_Tickets",
-          "description": "",
+          "label": "Number of Tickets",
+          "description": "The maximum number of this type of ticket. E.g if you want only 50 member tickets to be sold, put 50. If there is no limit just type 9999",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -91,8 +91,8 @@
       },
       "Number_Tickets_Left": {
         "edit": {
-          "label": "Number_Tickets_Left",
-          "description": "",
+          "label": "Number of Tickets Left",
+          "description": "Set this to the same as the Maximum Number Of Tickets when creating a ticket, it will automatically count down when a ticket is sold.",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -105,8 +105,8 @@
       },
       "Ticket_Description": {
         "edit": {
-          "label": "Ticket_Description",
-          "description": "",
+          "label": "Ticket Description",
+          "description": "This is shown as a small hint under the ticket title. Leave blank if not required, keep brief if required.",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -119,8 +119,8 @@
       },
       "Start_Date_Ticket_Sales": {
         "edit": {
-          "label": "Start_Date_Ticket_Sales",
-          "description": "",
+          "label": "Start Date of Ticket Sale",
+          "description": "Ticket sales end automatically when the event has started",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -133,8 +133,8 @@
       },
       "Is_Ticket_Live": {
         "edit": {
-          "label": "Is_Ticket_Live",
-          "description": "",
+          "label": "Ticket is Live",
+          "description": "Set to false if you want to stop sales of this ticket",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -147,12 +147,12 @@
       },
       "Question_ID": {
         "edit": {
-          "label": "Question_ID",
-          "description": "",
+          "label": "Question IDs",
+          "description": "Link all the questions that you want asked when a user purchases this ticket. Name, email, phone number, are automatically asked.",
           "placeholder": "",
           "visible": true,
           "editable": true,
-          "mainField": "Question"
+          "mainField": "id"
         },
         "list": {
           "label": "Question_ID",
@@ -162,8 +162,8 @@
       },
       "Event_ID": {
         "edit": {
-          "label": "Event_ID",
-          "description": "",
+          "label": "Event ",
+          "description": "Link the event the ticket is to be sold for",
           "placeholder": "",
           "visible": true,
           "editable": true,
@@ -177,8 +177,8 @@
       },
       "People_Ticket_ID": {
         "edit": {
-          "label": "People_Ticket_ID",
-          "description": "",
+          "label": "Member Tickets",
+          "description": "All the members (paid and unpaid) that have purchased this ticket",
           "placeholder": "",
           "visible": true,
           "editable": true,
@@ -192,8 +192,8 @@
       },
       "Ticket_Link_Bypass": {
         "edit": {
-          "label": "Ticket_Link_Bypass",
-          "description": "",
+          "label": "Redirect to External Link",
+          "description": "Set this to true if you want the user to be taken to an external website (Humanitix etc.). Use this ONLY if the payments are NOT working on the website as this would make everything manual for ticketing",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -206,8 +206,8 @@
       },
       "Bypass_Ticket_Link": {
         "edit": {
-          "label": "Bypass_Ticket_Link",
-          "description": "",
+          "label": "External Website Redirect Link",
+          "description": "Leave this blank unless External Website Redirect is true. Add the link you want to redirect to e.g. Https://www.google.co.nz",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -220,8 +220,8 @@
       },
       "Stripe_Link": {
         "edit": {
-          "label": "Stripe_Link",
-          "description": "",
+          "label": "Stripe Code",
+          "description": "COPY THE STRIPE CODE EXACTLY. E.g price_1PSHXPP464csY2Up4aKoSw6r",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -292,87 +292,103 @@
       }
     },
     "layouts": {
-      "list": [
-        "id",
-        "Name",
-        "Price",
-        "Is_Member_Only"
-      ],
       "edit": [
         [
           {
+            "name": "Event_ID",
+            "size": 12
+          }
+        ],
+        [
+          {
             "name": "Name",
-            "size": 6
-          },
+            "size": 12
+          }
+        ],
+        [
           {
             "name": "Price",
-            "size": 4
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "Stripe_Link",
+            "size": 12
           }
         ],
         [
           {
             "name": "Is_Member_Only",
-            "size": 4
-          },
+            "size": 12
+          }
+        ],
+        [
           {
             "name": "Is_Double",
-            "size": 4
-          },
+            "size": 12
+          }
+        ],
+        [
           {
             "name": "Max_Number_Tickets",
-            "size": 4
+            "size": 12
           }
         ],
         [
           {
             "name": "Number_Tickets_Left",
-            "size": 4
-          },
+            "size": 12
+          }
+        ],
+        [
           {
             "name": "Ticket_Description",
-            "size": 6
+            "size": 12
           }
         ],
         [
           {
             "name": "Start_Date_Ticket_Sales",
-            "size": 6
-          },
+            "size": 12
+          }
+        ],
+        [
           {
             "name": "Is_Ticket_Live",
-            "size": 4
+            "size": 12
           }
         ],
         [
           {
             "name": "Question_ID",
-            "size": 6
-          },
-          {
-            "name": "Event_ID",
-            "size": 6
+            "size": 12
           }
         ],
         [
           {
-            "name": "People_Ticket_ID",
-            "size": 6
-          },
-          {
             "name": "Ticket_Link_Bypass",
-            "size": 4
+            "size": 12
           }
         ],
         [
           {
             "name": "Bypass_Ticket_Link",
-            "size": 6
-          },
+            "size": 12
+          }
+        ],
+        [
           {
-            "name": "Stripe_Link",
-            "size": 6
+            "name": "People_Ticket_ID",
+            "size": 12
           }
         ]
+      ],
+      "list": [
+        "id",
+        "Name",
+        "Price",
+        "Is_Member_Only"
       ]
     },
     "uid": "api::ticket.ticket"

@@ -22,7 +22,7 @@
       "Answer": {
         "edit": {
           "label": "Answer",
-          "description": "",
+          "description": "The answer provided by someone for a particular question",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -35,8 +35,8 @@
       },
       "People_Ticket": {
         "edit": {
-          "label": "People_Ticket",
-          "description": "",
+          "label": "Ticket Purchased by Members",
+          "description": "The ticket the answer is linked to",
           "placeholder": "",
           "visible": true,
           "editable": true,
@@ -50,8 +50,8 @@
       },
       "Question_ID": {
         "edit": {
-          "label": "Question_ID",
-          "description": "",
+          "label": "Question",
+          "description": "Question being answered on the ticket",
           "placeholder": "",
           "visible": true,
           "editable": true,
@@ -123,29 +123,29 @@
       }
     },
     "layouts": {
-      "list": [
-        "id",
-        "Answer",
-        "People_Ticket",
-        "Question_ID"
-      ],
       "edit": [
         [
           {
             "name": "Answer",
-            "size": 6
-          },
-          {
-            "name": "People_Ticket",
-            "size": 6
+            "size": 12
           }
         ],
         [
+          {
+            "name": "People_Ticket",
+            "size": 6
+          },
           {
             "name": "Question_ID",
             "size": 6
           }
         ]
+      ],
+      "list": [
+        "id",
+        "Answer",
+        "People_Ticket",
+        "Question_ID"
       ]
     },
     "uid": "api::answer.answer"

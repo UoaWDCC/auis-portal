@@ -36,7 +36,7 @@
       "Image": {
         "edit": {
           "label": "Image",
-          "description": "",
+          "description": "Preferably 1:1 image, other sizes will work but not look as nice",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -64,7 +64,7 @@
       "Location": {
         "edit": {
           "label": "Location",
-          "description": "",
+          "description": "Enter the address (NOT link), e.g. 20 Symonds Street, Auckland CBD, Auckland 1010",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -78,7 +78,7 @@
       "Description": {
         "edit": {
           "label": "Description",
-          "description": "",
+          "description": "Keep it brief, this is where you put the benefits E.g. 10% off burgers ",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -149,39 +149,43 @@
       }
     },
     "layouts": {
-      "list": [
-        "id",
-        "Type",
-        "Image",
-        "Name"
-      ],
       "edit": [
         [
           {
             "name": "Type",
-            "size": 6
-          },
-          {
-            "name": "Image",
-            "size": 6
+            "size": 12
           }
         ],
         [
           {
             "name": "Name",
-            "size": 6
-          },
+            "size": 12
+          }
+        ],
+        [
           {
             "name": "Location",
-            "size": 6
+            "size": 12
           }
         ],
         [
           {
             "name": "Description",
-            "size": 6
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "Image",
+            "size": 12
           }
         ]
+      ],
+      "list": [
+        "id",
+        "Type",
+        "Image",
+        "Name"
       ]
     },
     "uid": "api::partner.partner"

@@ -22,7 +22,7 @@
       "Image": {
         "edit": {
           "label": "Image",
-          "description": "",
+          "description": "This is displayed on the event screen at the bottom of the page",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -93,19 +93,19 @@
       }
     },
     "layouts": {
+      "edit": [
+        [
+          {
+            "name": "Image",
+            "size": 12
+          }
+        ]
+      ],
       "list": [
         "id",
         "Image",
         "createdAt",
         "updatedAt"
-      ],
-      "edit": [
-        [
-          {
-            "name": "Image",
-            "size": 6
-          }
-        ]
       ]
     },
     "uid": "api::event-gallery.event-gallery"

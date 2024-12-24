@@ -36,7 +36,7 @@
       "Description": {
         "edit": {
           "label": "Description",
-          "description": "",
+          "description": "Shown when a user hovers on the Exec. Keep fairly brief ",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -50,7 +50,7 @@
       "Position": {
         "edit": {
           "label": "Position",
-          "description": "",
+          "description": "11 characters maximum",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -64,7 +64,7 @@
       "Image": {
         "edit": {
           "label": "Image",
-          "description": "",
+          "description": "1:1 Image, same as instagram",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -149,39 +149,43 @@
       }
     },
     "layouts": {
-      "list": [
-        "id",
-        "Name",
-        "Description",
-        "Position"
-      ],
       "edit": [
         [
           {
             "name": "Name",
-            "size": 6
-          },
+            "size": 12
+          }
+        ],
+        [
           {
             "name": "Description",
-            "size": 6
+            "size": 12
           }
         ],
         [
           {
             "name": "Position",
-            "size": 6
-          },
+            "size": 12
+          }
+        ],
+        [
           {
             "name": "Image",
-            "size": 6
+            "size": 12
           }
         ],
         [
           {
             "name": "Role",
-            "size": 6
+            "size": 12
           }
         ]
+      ],
+      "list": [
+        "id",
+        "Name",
+        "Description",
+        "Position"
       ]
     },
     "uid": "api::exec.exec"

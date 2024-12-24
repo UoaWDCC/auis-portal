@@ -49,7 +49,7 @@
       },
       "University_ID": {
         "edit": {
-          "label": "University_ID",
+          "label": "University ID Number",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -77,7 +77,7 @@
       },
       "Study_Field": {
         "edit": {
-          "label": "Study_Field",
+          "label": "Field of Study",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -91,8 +91,8 @@
       },
       "Is_Member": {
         "edit": {
-          "label": "Is_Member",
-          "description": "",
+          "label": "Membership Active",
+          "description": "TODO: needs to be removed, as membership expiry can be used instead",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -119,8 +119,8 @@
       },
       "Member_Expiry_Date": {
         "edit": {
-          "label": "Member_Expiry_Date",
-          "description": "",
+          "label": "Paid Membership Expiry Date",
+          "description": "This will be blank when a user uses the website to sign up, its only added once they purchase a membership",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -133,12 +133,12 @@
       },
       "People_Ticket_ID": {
         "edit": {
-          "label": "People_Ticket_ID",
-          "description": "",
+          "label": "Tickets Purchased",
+          "description": "The tickets the user has purchased",
           "placeholder": "",
           "visible": true,
           "editable": true,
-          "mainField": "Name"
+          "mainField": "People_Ticket_Code"
         },
         "list": {
           "label": "People_Ticket_ID",
@@ -162,7 +162,7 @@
       },
       "Year_Of_Study": {
         "edit": {
-          "label": "Year_Of_Study",
+          "label": "Year of Study",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -234,69 +234,79 @@
       }
     },
     "layouts": {
-      "list": [
-        "id",
-        "Name",
-        "Email",
-        "University_ID"
-      ],
       "edit": [
         [
           {
             "name": "Name",
-            "size": 6
-          },
+            "size": 12
+          }
+        ],
+        [
           {
             "name": "Email",
-            "size": 6
+            "size": 12
           }
         ],
         [
           {
             "name": "University_ID",
-            "size": 6
-          },
+            "size": 12
+          }
+        ],
+        [
           {
             "name": "UPI",
-            "size": 6
+            "size": 12
           }
         ],
         [
           {
             "name": "Study_Field",
-            "size": 6
-          },
-          {
-            "name": "Status",
-            "size": 6
+            "size": 12
           }
         ],
         [
           {
-            "name": "Member_Expiry_Date",
-            "size": 4
-          },
-          {
-            "name": "People_Ticket_ID",
-            "size": 6
+            "name": "Year_Of_Study",
+            "size": 12
           }
         ],
         [
           {
             "name": "Institution",
-            "size": 6
-          },
+            "size": 12
+          }
+        ],
+        [
           {
-            "name": "Year_Of_Study",
-            "size": 6
+            "name": "Status",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "Member_Expiry_Date",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "People_Ticket_ID",
+            "size": 12
           }
         ],
         [
           {
             "name": "Is_Member",
-            "size": 4
+            "size": 12
           }
         ]
+      ],
+      "list": [
+        "id",
+        "Name",
+        "Email",
+        "University_ID"
       ]
     },
     "uid": "api::people.people"

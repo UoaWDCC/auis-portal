@@ -10,6 +10,9 @@ import { Mapper } from "../utils/Mapper";
 import { useState, useEffect } from "react";
 import ValueCard from "../components/about-us-page/ValueCard";
 import { useNavigate } from "react-router";
+import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import remarkBreaks from "remark-breaks";
 
 export default function AboutUsScreen({ navbar }: { navbar: JSX.Element }) {
   // Navigation
@@ -129,7 +132,11 @@ export default function AboutUsScreen({ navbar }: { navbar: JSX.Element }) {
               <div className="py-10">There is no introduction to display</div>
             ) : (
               <>
-                <p className="my-5 text-2xl">{introduction[0].description}</p>
+               <Markdown
+          remarkPlugins={[remarkGfm, remarkBreaks]}
+          className="markdown my-5 text-2xl"
+        >{introduction[0].description}</Markdown>
+                <p className=""></p>
 
                 <div className="flex w-full flex-col justify-between px-10 sm:flex-row md:w-[50rem]">
                   <div className="m-5 flex flex-col items-center text-3xl">

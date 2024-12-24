@@ -22,7 +22,7 @@
       "Title": {
         "edit": {
           "label": "Title",
-          "description": "",
+          "description": "E.g. Semester 1 Membership, or Semester 2 Membership, or Semester 1 & 2 Membership",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -36,7 +36,7 @@
       "Expiry": {
         "edit": {
           "label": "Expiry",
-          "description": "",
+          "description": "When a user purchases a membership this would be the date their membership ends, ensure it lines up correctly with UoA semester dates",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -50,7 +50,7 @@
       "Price": {
         "edit": {
           "label": "Price",
-          "description": "",
+          "description": "Ensure this matches the Stripe Payment",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -63,8 +63,8 @@
       },
       "Stripe_Link": {
         "edit": {
-          "label": "Stripe_Link",
-          "description": "",
+          "label": "Stripe Code",
+          "description": "COPY THE STRIPE CODE EXACTLY. E.g price_1PSHXPP464csY2Up4aKoSw6r",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -78,7 +78,7 @@
       "Description": {
         "edit": {
           "label": "Description",
-          "description": "",
+          "description": "Description for the membership. keep it brief",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -91,8 +91,8 @@
       },
       "Membership_Link_Bypass": {
         "edit": {
-          "label": "Membership_Link_Bypass",
-          "description": "",
+          "label": "Redirect to external link",
+          "description": "Set this to true if you want the user to be taken to an external website (google form etc.). Use this ONLY if the payments are NOT working on the website as this would make everything manual for ticketing",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -105,8 +105,8 @@
       },
       "Bypass_Membership_Link": {
         "edit": {
-          "label": "Bypass_Membership_Link",
-          "description": "",
+          "label": "External Website Redirect Link",
+          "description": "Link for the website you want to redirect to. LEAVE THIS BLANK IF REDIRECT TO EXTERNAL LINK IS FALSE",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -177,49 +177,55 @@
       }
     },
     "layouts": {
-      "list": [
-        "id",
-        "Title",
-        "Expiry",
-        "Price"
-      ],
       "edit": [
         [
           {
             "name": "Title",
-            "size": 6
-          },
+            "size": 12
+          }
+        ],
+        [
           {
             "name": "Expiry",
-            "size": 6
+            "size": 12
           }
         ],
         [
           {
             "name": "Price",
-            "size": 4
-          },
+            "size": 12
+          }
+        ],
+        [
           {
             "name": "Stripe_Link",
-            "size": 6
+            "size": 12
           }
         ],
         [
           {
             "name": "Description",
-            "size": 6
-          },
+            "size": 12
+          }
+        ],
+        [
           {
             "name": "Membership_Link_Bypass",
-            "size": 4
+            "size": 12
           }
         ],
         [
           {
             "name": "Bypass_Membership_Link",
-            "size": 6
+            "size": 12
           }
         ]
+      ],
+      "list": [
+        "id",
+        "Title",
+        "Expiry",
+        "Price"
       ]
     },
     "uid": "api::purchasable-membership.purchasable-membership"

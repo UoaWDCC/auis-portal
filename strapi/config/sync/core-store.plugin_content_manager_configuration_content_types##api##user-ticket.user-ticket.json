@@ -21,8 +21,8 @@
       },
       "People_ID": {
         "edit": {
-          "label": "People_ID",
-          "description": "",
+          "label": "Member ID",
+          "description": "If the user was logged in when purchasing the ticket the user's account will be linked, otherwise it won't be linked",
           "placeholder": "",
           "visible": true,
           "editable": true,
@@ -36,12 +36,12 @@
       },
       "Ticket_ID": {
         "edit": {
-          "label": "Ticket_ID",
-          "description": "",
+          "label": "Ticket ID",
+          "description": "Ticket the user purhcased, E.g Member ticket, Non-member ticket, or Couple Ticket.",
           "placeholder": "",
           "visible": true,
           "editable": true,
-          "mainField": "Name"
+          "mainField": "id"
         },
         "list": {
           "label": "Ticket_ID",
@@ -79,7 +79,7 @@
       },
       "Phone_Number": {
         "edit": {
-          "label": "Phone_Number",
+          "label": "Phone Number",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -94,7 +94,7 @@
       "Answers": {
         "edit": {
           "label": "Answers",
-          "description": "",
+          "description": "Answers to the questions in the ticket",
           "placeholder": "",
           "visible": true,
           "editable": true,
@@ -108,8 +108,8 @@
       },
       "People_Ticket_Code": {
         "edit": {
-          "label": "People_Ticket_Code",
-          "description": "",
+          "label": "Ticket Code",
+          "description": "Ticket code that is automatically generated when a ticket is purchased. If it is blank this ticket is invalid, because the payment did NOT get completed",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -123,7 +123,7 @@
       "Attendance": {
         "edit": {
           "label": "Attendance",
-          "description": "",
+          "description": "If the member attended the event, this is set using the QR code scanner. Can be done manually through Strapi also but is inconvenient.",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -137,7 +137,7 @@
       "Paid": {
         "edit": {
           "label": "Paid",
-          "description": "",
+          "description": "This is confirmation that the user has purchased the ticket. If it is false, the user did NOT complete the ticket purchase. ",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -208,59 +208,67 @@
       }
     },
     "layouts": {
-      "list": [
-        "id",
-        "People_ID",
-        "Ticket_ID",
-        "Name"
-      ],
       "edit": [
         [
           {
-            "name": "People_ID",
-            "size": 6
-          },
-          {
-            "name": "Ticket_ID",
-            "size": 6
+            "name": "Paid",
+            "size": 12
           }
         ],
         [
           {
             "name": "Name",
-            "size": 6
-          },
+            "size": 12
+          }
+        ],
+        [
           {
             "name": "Email",
-            "size": 6
+            "size": 12
           }
         ],
         [
           {
             "name": "Phone_Number",
-            "size": 6
-          },
-          {
-            "name": "Answers",
-            "size": 6
+            "size": 12
           }
         ],
         [
           {
             "name": "People_Ticket_Code",
-            "size": 6
-          },
-          {
-            "name": "Attendance",
-            "size": 4
+            "size": 12
           }
         ],
         [
           {
-            "name": "Paid",
-            "size": 4
+            "name": "Answers",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "Attendance",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "Ticket_ID",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "People_ID",
+            "size": 12
           }
         ]
+      ],
+      "list": [
+        "id",
+        "People_ID",
+        "Ticket_ID",
+        "Name"
       ]
     },
     "uid": "api::user-ticket.user-ticket"

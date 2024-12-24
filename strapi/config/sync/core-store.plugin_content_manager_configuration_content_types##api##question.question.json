@@ -22,7 +22,7 @@
       "Question": {
         "edit": {
           "label": "Question",
-          "description": "",
+          "description": "Type the question you want displayed for a particular ticket. E.g. Dietary requirements. FOR A DOUBLE/COUPLE TICKET, one of the questions MUST be Enter partner/couple email",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -35,8 +35,8 @@
       },
       "Check_For_Member_Email": {
         "edit": {
-          "label": "Check_For_Member_Email",
-          "description": "",
+          "label": "Check For Member Email",
+          "description": "Leave this false UNLESS the question is what is your partner/couple's email. Then set this to true. What this does is checks to make sure the email entered is a valid paid member and won't let the user purchase the ticket if it isn't",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -49,12 +49,12 @@
       },
       "Ticket_ID": {
         "edit": {
-          "label": "Ticket_ID",
-          "description": "",
+          "label": "ID of Ticket",
+          "description": "Select the ticket that you want this question displayed under. Make sure the ticket ID is correct",
           "placeholder": "",
           "visible": true,
           "editable": true,
-          "mainField": "Name"
+          "mainField": "id"
         },
         "list": {
           "label": "Ticket_ID",
@@ -64,8 +64,8 @@
       },
       "Answer_ID": {
         "edit": {
-          "label": "Answer_ID",
-          "description": "",
+          "label": "Answers to Question",
+          "description": "This is automatically filled and shows all answers to this particular question",
           "placeholder": "",
           "visible": true,
           "editable": true,
@@ -137,33 +137,37 @@
       }
     },
     "layouts": {
-      "list": [
-        "id",
-        "Question",
-        "Check_For_Member_Email",
-        "Ticket_ID"
-      ],
       "edit": [
         [
           {
             "name": "Question",
-            "size": 6
-          },
+            "size": 12
+          }
+        ],
+        [
           {
             "name": "Check_For_Member_Email",
-            "size": 4
+            "size": 12
           }
         ],
         [
           {
             "name": "Ticket_ID",
-            "size": 6
-          },
+            "size": 12
+          }
+        ],
+        [
           {
             "name": "Answer_ID",
-            "size": 6
+            "size": 12
           }
         ]
+      ],
+      "list": [
+        "id",
+        "Question",
+        "Check_For_Member_Email",
+        "Ticket_ID"
       ]
     },
     "uid": "api::question.question"

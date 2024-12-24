@@ -22,7 +22,7 @@
       "Title": {
         "edit": {
           "label": "Title",
-          "description": "this is description",
+          "description": "Title for event",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -50,7 +50,7 @@
       "Location": {
         "edit": {
           "label": "Location",
-          "description": "",
+          "description": "Enter the address (NOT link), e.g. 20 Symonds Street, Auckland CBD, Auckland 1010",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -63,7 +63,7 @@
       },
       "Event_Date_Start": {
         "edit": {
-          "label": "Event_Date_Start",
+          "label": "Start Date and Time of Event",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -77,7 +77,7 @@
       },
       "Event_Date_End": {
         "edit": {
-          "label": "Event_Date_End",
+          "label": "End Date and Time of Event",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -91,8 +91,8 @@
       },
       "Event_Capacity": {
         "edit": {
-          "label": "Event_Capacity",
-          "description": "",
+          "label": "Event Capacity",
+          "description": "Total amount of tickets that can be sold. E.g. We have 5 member tickets, and 5 non-member tickets for sale. Event capacity is 7. This means that we can sell a maximum of 7 tickets (could be 2 member 5 non-member, or 3 member 4 non-member etc,)",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -105,8 +105,8 @@
       },
       "Is_Live": {
         "edit": {
-          "label": "Is_Live",
-          "description": "",
+          "label": "Is Live",
+          "description": "If you make this true it will manually place this event in \"Past Events\" and stop all ticket sales",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -120,7 +120,7 @@
       "Image": {
         "edit": {
           "label": "Image",
-          "description": "",
+          "description": "Use same size as Instagram 1:1 image",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -133,8 +133,8 @@
       },
       "Terms_And_Conditions": {
         "edit": {
-          "label": "Terms_And_Conditions",
-          "description": "",
+          "label": "Terms and Conditions",
+          "description": "Copy paste the Terms and Conditions and modify as required",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -147,8 +147,8 @@
       },
       "Event_Capacity_Remaining": {
         "edit": {
-          "label": "Event_Capacity_Remaining",
-          "description": "",
+          "label": "Event Capacity Remaining",
+          "description": "Number of tickets LEFT. Set this to the same as Event Capacity when making an event, do not touch it after that unless you want to reduce the amount of tickets left. ",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -162,11 +162,11 @@
       "Ticket_ID": {
         "edit": {
           "label": "Ticket_ID",
-          "description": "",
+          "description": "Select the tickets that you want to show for sale for the event. Match the ID of the TICKET to ensure they are correct",
           "placeholder": "",
           "visible": true,
           "editable": true,
-          "mainField": "Name"
+          "mainField": "id"
         },
         "list": {
           "label": "Ticket_ID",
@@ -264,52 +264,60 @@
         [
           {
             "name": "Location",
-            "size": 6
-          },
+            "size": 12
+          }
+        ],
+        [
           {
             "name": "Event_Date_Start",
-            "size": 6
+            "size": 12
           }
         ],
         [
           {
             "name": "Event_Date_End",
-            "size": 6
-          },
+            "size": 12
+          }
+        ],
+        [
           {
             "name": "Event_Capacity",
-            "size": 4
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "Event_Capacity_Remaining",
+            "size": 12
           }
         ],
         [
           {
             "name": "Is_Live",
-            "size": 4
-          },
+            "size": 12
+          }
+        ],
+        [
           {
             "name": "Image",
-            "size": 6
+            "size": 12
           }
         ],
         [
           {
             "name": "Terms_And_Conditions",
-            "size": 6
-          },
-          {
-            "name": "Event_Capacity_Remaining",
-            "size": 4
-          }
-        ],
-        [
-          {
-            "name": "Ticket_ID",
-            "size": 6
+            "size": 12
           }
         ],
         [
           {
             "name": "Description",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "Ticket_ID",
             "size": 12
           }
         ]

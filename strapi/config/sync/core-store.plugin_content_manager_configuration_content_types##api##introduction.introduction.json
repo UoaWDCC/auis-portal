@@ -6,7 +6,7 @@
       "filterable": true,
       "searchable": true,
       "pageSize": 10,
-      "mainField": "Events",
+      "mainField": "id",
       "defaultSortBy": "Events",
       "defaultSortOrder": "ASC"
     },
@@ -22,7 +22,7 @@
       "Description": {
         "edit": {
           "label": "Description",
-          "description": "",
+          "description": "About us page main introduction",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -36,7 +36,7 @@
       "Events": {
         "edit": {
           "label": "Events",
-          "description": "",
+          "description": "Number of events we have had in the previous year",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -50,7 +50,7 @@
       "Members": {
         "edit": {
           "label": "Members",
-          "description": "",
+          "description": "Number of PAID member we have had in the previous year",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -64,7 +64,7 @@
       "Followers": {
         "edit": {
           "label": "Followers",
-          "description": "",
+          "description": "Number of followers we have had in the previous year",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -135,35 +135,37 @@
       }
     },
     "layouts": {
-      "list": [
-        "id",
-        "Events",
-        "Members",
-        "Followers"
-      ],
       "edit": [
         [
           {
-            "name": "Description",
-            "size": 12
+            "name": "Members",
+            "size": 8
           }
         ],
         [
           {
             "name": "Events",
-            "size": 6
-          },
-          {
-            "name": "Members",
-            "size": 6
+            "size": 8
           }
         ],
         [
           {
             "name": "Followers",
-            "size": 6
+            "size": 8
+          }
+        ],
+        [
+          {
+            "name": "Description",
+            "size": 12
           }
         ]
+      ],
+      "list": [
+        "id",
+        "Events",
+        "Members",
+        "Followers"
       ]
     },
     "uid": "api::introduction.introduction"
