@@ -1,0 +1,174 @@
+{
+  "key": "plugin_content_manager_configuration_content_types::api::question.question",
+  "value": {
+    "settings": {
+      "bulkable": true,
+      "filterable": true,
+      "searchable": true,
+      "pageSize": 10,
+      "mainField": "Question",
+      "defaultSortBy": "Question",
+      "defaultSortOrder": "ASC"
+    },
+    "metadatas": {
+      "id": {
+        "edit": {},
+        "list": {
+          "label": "id",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Question": {
+        "edit": {
+          "label": "Question",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Question",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Check_For_Member_Email": {
+        "edit": {
+          "label": "Check_For_Member_Email",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Check_For_Member_Email",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Ticket_ID": {
+        "edit": {
+          "label": "Ticket_ID",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true,
+          "mainField": "Name"
+        },
+        "list": {
+          "label": "Ticket_ID",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Answer_ID": {
+        "edit": {
+          "label": "Answer_ID",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true,
+          "mainField": "id"
+        },
+        "list": {
+          "label": "Answer_ID",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "createdAt": {
+        "edit": {
+          "label": "createdAt",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true
+        },
+        "list": {
+          "label": "createdAt",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "updatedAt": {
+        "edit": {
+          "label": "updatedAt",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true
+        },
+        "list": {
+          "label": "updatedAt",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "createdBy": {
+        "edit": {
+          "label": "createdBy",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true,
+          "mainField": "firstname"
+        },
+        "list": {
+          "label": "createdBy",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "updatedBy": {
+        "edit": {
+          "label": "updatedBy",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true,
+          "mainField": "firstname"
+        },
+        "list": {
+          "label": "updatedBy",
+          "searchable": true,
+          "sortable": true
+        }
+      }
+    },
+    "layouts": {
+      "list": [
+        "id",
+        "Question",
+        "Check_For_Member_Email",
+        "Ticket_ID"
+      ],
+      "edit": [
+        [
+          {
+            "name": "Question",
+            "size": 6
+          },
+          {
+            "name": "Check_For_Member_Email",
+            "size": 4
+          }
+        ],
+        [
+          {
+            "name": "Ticket_ID",
+            "size": 6
+          },
+          {
+            "name": "Answer_ID",
+            "size": 6
+          }
+        ]
+      ]
+    },
+    "uid": "api::question.question"
+  },
+  "type": "object",
+  "environment": null,
+  "tag": null
+}

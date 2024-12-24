@@ -1,0 +1,383 @@
+{
+  "key": "plugin_content_manager_configuration_content_types::api::ticket.ticket",
+  "value": {
+    "settings": {
+      "bulkable": true,
+      "filterable": true,
+      "searchable": true,
+      "pageSize": 10,
+      "mainField": "Name",
+      "defaultSortBy": "Name",
+      "defaultSortOrder": "ASC"
+    },
+    "metadatas": {
+      "id": {
+        "edit": {},
+        "list": {
+          "label": "id",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Name": {
+        "edit": {
+          "label": "Name",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Name",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Price": {
+        "edit": {
+          "label": "Price",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Price",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Is_Member_Only": {
+        "edit": {
+          "label": "Is_Member_Only",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Is_Member_Only",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Is_Double": {
+        "edit": {
+          "label": "Is_Double",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Is_Double",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Max_Number_Tickets": {
+        "edit": {
+          "label": "Max_Number_Tickets",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Max_Number_Tickets",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Number_Tickets_Left": {
+        "edit": {
+          "label": "Number_Tickets_Left",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Number_Tickets_Left",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Ticket_Description": {
+        "edit": {
+          "label": "Ticket_Description",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Ticket_Description",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Start_Date_Ticket_Sales": {
+        "edit": {
+          "label": "Start_Date_Ticket_Sales",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Start_Date_Ticket_Sales",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Is_Ticket_Live": {
+        "edit": {
+          "label": "Is_Ticket_Live",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Is_Ticket_Live",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Question_ID": {
+        "edit": {
+          "label": "Question_ID",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true,
+          "mainField": "Question"
+        },
+        "list": {
+          "label": "Question_ID",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "Event_ID": {
+        "edit": {
+          "label": "Event_ID",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true,
+          "mainField": "Title"
+        },
+        "list": {
+          "label": "Event_ID",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "People_Ticket_ID": {
+        "edit": {
+          "label": "People_Ticket_ID",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true,
+          "mainField": "Name"
+        },
+        "list": {
+          "label": "People_Ticket_ID",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "Ticket_Link_Bypass": {
+        "edit": {
+          "label": "Ticket_Link_Bypass",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Ticket_Link_Bypass",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Bypass_Ticket_Link": {
+        "edit": {
+          "label": "Bypass_Ticket_Link",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Bypass_Ticket_Link",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Stripe_Link": {
+        "edit": {
+          "label": "Stripe_Link",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Stripe_Link",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "createdAt": {
+        "edit": {
+          "label": "createdAt",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true
+        },
+        "list": {
+          "label": "createdAt",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "updatedAt": {
+        "edit": {
+          "label": "updatedAt",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true
+        },
+        "list": {
+          "label": "updatedAt",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "createdBy": {
+        "edit": {
+          "label": "createdBy",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true,
+          "mainField": "firstname"
+        },
+        "list": {
+          "label": "createdBy",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "updatedBy": {
+        "edit": {
+          "label": "updatedBy",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true,
+          "mainField": "firstname"
+        },
+        "list": {
+          "label": "updatedBy",
+          "searchable": true,
+          "sortable": true
+        }
+      }
+    },
+    "layouts": {
+      "list": [
+        "id",
+        "Name",
+        "Price",
+        "Is_Member_Only"
+      ],
+      "edit": [
+        [
+          {
+            "name": "Name",
+            "size": 6
+          },
+          {
+            "name": "Price",
+            "size": 4
+          }
+        ],
+        [
+          {
+            "name": "Is_Member_Only",
+            "size": 4
+          },
+          {
+            "name": "Is_Double",
+            "size": 4
+          },
+          {
+            "name": "Max_Number_Tickets",
+            "size": 4
+          }
+        ],
+        [
+          {
+            "name": "Number_Tickets_Left",
+            "size": 4
+          },
+          {
+            "name": "Ticket_Description",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "Start_Date_Ticket_Sales",
+            "size": 6
+          },
+          {
+            "name": "Is_Ticket_Live",
+            "size": 4
+          }
+        ],
+        [
+          {
+            "name": "Question_ID",
+            "size": 6
+          },
+          {
+            "name": "Event_ID",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "People_Ticket_ID",
+            "size": 6
+          },
+          {
+            "name": "Ticket_Link_Bypass",
+            "size": 4
+          }
+        ],
+        [
+          {
+            "name": "Bypass_Ticket_Link",
+            "size": 6
+          },
+          {
+            "name": "Stripe_Link",
+            "size": 6
+          }
+        ]
+      ]
+    },
+    "uid": "api::ticket.ticket"
+  },
+  "type": "object",
+  "environment": null,
+  "tag": null
+}
