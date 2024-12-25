@@ -82,7 +82,7 @@ const previousTeamsMock = {
             attributes: {
               Name: "John Doe",
               Role: "President",
-              Year: "2023",
+              Year: "2022",
             },
           },
           {
@@ -90,7 +90,7 @@ const previousTeamsMock = {
             attributes: {
               Name: "Janet Doe",
               Role: "Executive",
-              Year: "2023",
+              Year: "2022",
             },
           },
         ],
@@ -168,7 +168,7 @@ describe("ExecScreen", () => {
 
     expect(await screen.findByText("Guryash")).toBeInTheDocument();
     expect(await screen.findByText("A great leader")).toBeInTheDocument();
-    expect(await screen.findAllByText("President")).toHaveLength(2);
+    expect(await screen.findAllByText("President")).toHaveLength(3);
     expect(await screen.findByText("Jane Doe")).toBeInTheDocument();
     expect(await screen.findByText("People")).toBeInTheDocument();
     expect(await screen.findByText("An amazing executive")).toBeInTheDocument();
@@ -184,8 +184,7 @@ describe("ExecScreen", () => {
     );
 
     expect(await screen.findByText("Previous Teams")).toBeInTheDocument();
-    expect(await screen.findByText("2023")).toBeInTheDocument();
-    expect(await screen.findByText("Presidents")).toBeInTheDocument();
+    expect(await screen.findByText("2022")).toBeInTheDocument();
     expect(await screen.findByText("John Doe")).toBeInTheDocument();
     expect(await screen.findByText("Executives")).toBeInTheDocument();
     expect(await screen.findByText("Janet Doe")).toBeInTheDocument();
