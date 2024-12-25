@@ -168,7 +168,7 @@ export default function ExecScreen({ navbar }: { navbar: JSX.Element }) {
           {errorPreviousTeams ? (
             <div className="py-10">There are no previous teams to display</div>
           ) : (
-            <div>
+            <div className="max-w-[60rem]">
               {sortedPreviousTeams.map((year) => (
                 <PreviousTeamCard
                   key={year}

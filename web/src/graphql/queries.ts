@@ -125,7 +125,7 @@ export const GET_VALUES = gql`
 
 export const GET_PREVIOUS_TEAMS = gql`
   query {
-    previousTeams {
+    previousTeams(pagination: { limit: 300 }) {
       data {
         id
         attributes {
