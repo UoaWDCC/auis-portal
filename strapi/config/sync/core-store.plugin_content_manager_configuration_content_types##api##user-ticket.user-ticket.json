@@ -1,0 +1,279 @@
+{
+  "key": "plugin_content_manager_configuration_content_types::api::user-ticket.user-ticket",
+  "value": {
+    "settings": {
+      "bulkable": true,
+      "filterable": true,
+      "searchable": true,
+      "pageSize": 10,
+      "mainField": "Name",
+      "defaultSortBy": "Name",
+      "defaultSortOrder": "ASC"
+    },
+    "metadatas": {
+      "id": {
+        "edit": {},
+        "list": {
+          "label": "id",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "People_ID": {
+        "edit": {
+          "label": "Member ID",
+          "description": "If the user was logged in when purchasing the ticket the user's account will be linked, otherwise it won't be linked",
+          "placeholder": "",
+          "visible": true,
+          "editable": true,
+          "mainField": "Name"
+        },
+        "list": {
+          "label": "People_ID",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Ticket_ID": {
+        "edit": {
+          "label": "Ticket ID",
+          "description": "Ticket the user purhcased, E.g Member ticket, Non-member ticket, or Couple Ticket.",
+          "placeholder": "",
+          "visible": true,
+          "editable": true,
+          "mainField": "id"
+        },
+        "list": {
+          "label": "Ticket_ID",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Name": {
+        "edit": {
+          "label": "Name",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Name",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Email": {
+        "edit": {
+          "label": "Email",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Email",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Phone_Number": {
+        "edit": {
+          "label": "Phone Number",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Phone_Number",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Answers": {
+        "edit": {
+          "label": "Answers",
+          "description": "Answers to the questions in the ticket",
+          "placeholder": "",
+          "visible": true,
+          "editable": true,
+          "mainField": "id"
+        },
+        "list": {
+          "label": "Answers",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "People_Ticket_Code": {
+        "edit": {
+          "label": "Ticket Code",
+          "description": "Ticket code that is automatically generated when a ticket is purchased. If it is blank this ticket is invalid, because the payment did NOT get completed",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "People_Ticket_Code",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Attendance": {
+        "edit": {
+          "label": "Attendance",
+          "description": "If the member attended the event, this is set using the QR code scanner. Can be done manually through Strapi also but is inconvenient.",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Attendance",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Paid": {
+        "edit": {
+          "label": "Paid",
+          "description": "This is confirmation that the user has purchased the ticket. If it is false, the user did NOT complete the ticket purchase. ",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Paid",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "createdAt": {
+        "edit": {
+          "label": "createdAt",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true
+        },
+        "list": {
+          "label": "createdAt",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "updatedAt": {
+        "edit": {
+          "label": "updatedAt",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true
+        },
+        "list": {
+          "label": "updatedAt",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "createdBy": {
+        "edit": {
+          "label": "createdBy",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true,
+          "mainField": "firstname"
+        },
+        "list": {
+          "label": "createdBy",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "updatedBy": {
+        "edit": {
+          "label": "updatedBy",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true,
+          "mainField": "firstname"
+        },
+        "list": {
+          "label": "updatedBy",
+          "searchable": true,
+          "sortable": true
+        }
+      }
+    },
+    "layouts": {
+      "edit": [
+        [
+          {
+            "name": "Paid",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "Name",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "Email",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "Phone_Number",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "People_Ticket_Code",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "Answers",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "Attendance",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "Ticket_ID",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "People_ID",
+            "size": 12
+          }
+        ]
+      ],
+      "list": [
+        "id",
+        "People_ID",
+        "Ticket_ID",
+        "Name"
+      ]
+    },
+    "uid": "api::user-ticket.user-ticket"
+  },
+  "type": "object",
+  "environment": null,
+  "tag": null
+}

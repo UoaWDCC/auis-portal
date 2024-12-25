@@ -4,7 +4,7 @@
   "info": {
     "singularName": "people",
     "pluralName": "peoples",
-    "displayName": "People",
+    "displayName": "Members",
     "description": ""
   },
   "options": {
@@ -22,19 +22,15 @@
     },
     "University_ID": {
       "type": "string",
-      "required": false
+      "required": true
     },
     "UPI": {
       "type": "string",
-      "required": false
-    },
-    "Year_Of_Study": {
-      "type": "string",
-      "required": false
+      "required": true
     },
     "Study_Field": {
       "type": "string",
-      "required": false
+      "required": true
     },
     "Is_Member": {
       "type": "boolean",
@@ -52,7 +48,7 @@
     },
     "Member_Expiry_Date": {
       "type": "date",
-      "required": true
+      "required": false
     },
     "People_Ticket_ID": {
       "type": "relation",
@@ -68,6 +64,10 @@
         "Other",
         "None"
       ],
+      "required": true
+    },
+    "Year_Of_Study": {
+      "type": "string",
       "required": true
     }
   }

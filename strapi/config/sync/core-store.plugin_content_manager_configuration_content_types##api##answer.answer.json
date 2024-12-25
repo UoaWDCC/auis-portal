@@ -1,0 +1,156 @@
+{
+  "key": "plugin_content_manager_configuration_content_types::api::answer.answer",
+  "value": {
+    "settings": {
+      "bulkable": true,
+      "filterable": true,
+      "searchable": true,
+      "pageSize": 10,
+      "mainField": "id",
+      "defaultSortBy": "id",
+      "defaultSortOrder": "ASC"
+    },
+    "metadatas": {
+      "id": {
+        "edit": {},
+        "list": {
+          "label": "id",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Answer": {
+        "edit": {
+          "label": "Answer",
+          "description": "The answer provided by someone for a particular question",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Answer",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "People_Ticket": {
+        "edit": {
+          "label": "Ticket Purchased by Members",
+          "description": "The ticket the answer is linked to",
+          "placeholder": "",
+          "visible": true,
+          "editable": true,
+          "mainField": "Name"
+        },
+        "list": {
+          "label": "People_Ticket",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Question_ID": {
+        "edit": {
+          "label": "Question",
+          "description": "Question being answered on the ticket",
+          "placeholder": "",
+          "visible": true,
+          "editable": true,
+          "mainField": "Question"
+        },
+        "list": {
+          "label": "Question_ID",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "createdAt": {
+        "edit": {
+          "label": "createdAt",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true
+        },
+        "list": {
+          "label": "createdAt",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "updatedAt": {
+        "edit": {
+          "label": "updatedAt",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true
+        },
+        "list": {
+          "label": "updatedAt",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "createdBy": {
+        "edit": {
+          "label": "createdBy",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true,
+          "mainField": "firstname"
+        },
+        "list": {
+          "label": "createdBy",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "updatedBy": {
+        "edit": {
+          "label": "updatedBy",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true,
+          "mainField": "firstname"
+        },
+        "list": {
+          "label": "updatedBy",
+          "searchable": true,
+          "sortable": true
+        }
+      }
+    },
+    "layouts": {
+      "edit": [
+        [
+          {
+            "name": "Answer",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "People_Ticket",
+            "size": 6
+          },
+          {
+            "name": "Question_ID",
+            "size": 6
+          }
+        ]
+      ],
+      "list": [
+        "id",
+        "Answer",
+        "People_Ticket",
+        "Question_ID"
+      ]
+    },
+    "uid": "api::answer.answer"
+  },
+  "type": "object",
+  "environment": null,
+  "tag": null
+}

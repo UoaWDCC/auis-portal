@@ -5,20 +5,20 @@ interface SomePhotosProps {
   noPhotos: boolean;
 }
 
-function SomePhotos({ photos, noPhotos }: SomePhotosProps) {
+export default function SomePhotos({ photos, noPhotos }: SomePhotosProps) {
   return (
     <>
       <div className="bg-white">
         <h1 className="pt-12 text-center text-4xl font-bold text-black">
           Previous Events
         </h1>
-        <div className="flex w-full flex-col justify-center py-12">
-          <div className="flex flex-col justify-center lg:flex-row">
-            <div className="relative flex flex-col items-center space-x-4 lg:flex-row">
+        <div className="flex w-full justify-center py-12">
+          <div className="flex-row justify-center">
+            <div className="relative flex-row items-center space-x-4">
               {noPhotos ? (
                 <p>Photos coming soon!</p>
               ) : (
-                <div>
+                <div className="flex-col lg:flex lg:flex-row">
                   {/* Only grab first 4 images */}
                   {photos.slice(0, 4).map((photo, index) => (
                     <div
@@ -49,5 +49,3 @@ function SomePhotos({ photos, noPhotos }: SomePhotosProps) {
     </>
   );
 }
-
-export default SomePhotos;

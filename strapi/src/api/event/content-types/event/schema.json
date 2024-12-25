@@ -4,7 +4,7 @@
   "info": {
     "singularName": "event",
     "pluralName": "events",
-    "displayName": "Event",
+    "displayName": "Events",
     "description": ""
   },
   "options": {
@@ -23,9 +23,6 @@
     "Location": {
       "type": "string",
       "required": true
-    },
-    "Location_Link": {
-      "type": "string"
     },
     "Event_Date_Start": {
       "type": "datetime",
@@ -69,11 +66,6 @@
     "Description": {
       "type": "richtext",
       "required": true
-    },
-    "Stripe_Price_ID": {
-      "type": "string",
-      "required": true,
-      "unique": true
     }
   }
 }

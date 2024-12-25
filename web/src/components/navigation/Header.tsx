@@ -7,7 +7,7 @@ import { useSessionContext } from "supertokens-auth-react/recipe/session";
 import LoadingSpinner from "@components/navigation/LoadingSpinner";
 import { signOut } from "supertokens-web-js/recipe/session";
 
-function Header() {
+export default function Header() {
   const [navBar, setNavBar] = useState(false);
   const { pathname } = useLocation();
   const session = useSessionContext();
@@ -182,5 +182,3 @@ function Header() {
     </>
   );
 }
-
-export default Header;

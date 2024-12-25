@@ -4,7 +4,7 @@
   "info": {
     "singularName": "event-gallery",
     "pluralName": "event-galleries",
-    "displayName": "Event_Gallery"
+    "displayName": "Past Event Photos"
   },
   "options": {
     "draftAndPublish": true

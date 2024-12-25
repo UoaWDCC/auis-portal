@@ -1,0 +1,178 @@
+{
+  "key": "plugin_content_manager_configuration_content_types::api::question.question",
+  "value": {
+    "settings": {
+      "bulkable": true,
+      "filterable": true,
+      "searchable": true,
+      "pageSize": 10,
+      "mainField": "Question",
+      "defaultSortBy": "Question",
+      "defaultSortOrder": "ASC"
+    },
+    "metadatas": {
+      "id": {
+        "edit": {},
+        "list": {
+          "label": "id",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Question": {
+        "edit": {
+          "label": "Question",
+          "description": "Type the question you want displayed for a particular ticket. E.g. Dietary requirements. FOR A DOUBLE/COUPLE TICKET, one of the questions MUST be Enter partner/couple email",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Question",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Check_For_Member_Email": {
+        "edit": {
+          "label": "Check For Member Email",
+          "description": "Leave this false UNLESS the question is what is your partner/couple's email. Then set this to true. What this does is checks to make sure the email entered is a valid paid member and won't let the user purchase the ticket if it isn't",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Check_For_Member_Email",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Ticket_ID": {
+        "edit": {
+          "label": "ID of Ticket",
+          "description": "Select the ticket that you want this question displayed under. Make sure the ticket ID is correct",
+          "placeholder": "",
+          "visible": true,
+          "editable": true,
+          "mainField": "id"
+        },
+        "list": {
+          "label": "Ticket_ID",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Answer_ID": {
+        "edit": {
+          "label": "Answers to Question",
+          "description": "This is automatically filled and shows all answers to this particular question",
+          "placeholder": "",
+          "visible": true,
+          "editable": true,
+          "mainField": "id"
+        },
+        "list": {
+          "label": "Answer_ID",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "createdAt": {
+        "edit": {
+          "label": "createdAt",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true
+        },
+        "list": {
+          "label": "createdAt",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "updatedAt": {
+        "edit": {
+          "label": "updatedAt",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true
+        },
+        "list": {
+          "label": "updatedAt",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "createdBy": {
+        "edit": {
+          "label": "createdBy",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true,
+          "mainField": "firstname"
+        },
+        "list": {
+          "label": "createdBy",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "updatedBy": {
+        "edit": {
+          "label": "updatedBy",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true,
+          "mainField": "firstname"
+        },
+        "list": {
+          "label": "updatedBy",
+          "searchable": true,
+          "sortable": true
+        }
+      }
+    },
+    "layouts": {
+      "edit": [
+        [
+          {
+            "name": "Question",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "Check_For_Member_Email",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "Ticket_ID",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "Answer_ID",
+            "size": 12
+          }
+        ]
+      ],
+      "list": [
+        "id",
+        "Question",
+        "Check_For_Member_Email",
+        "Ticket_ID"
+      ]
+    },
+    "uid": "api::question.question"
+  },
+  "type": "object",
+  "environment": null,
+  "tag": null
+}

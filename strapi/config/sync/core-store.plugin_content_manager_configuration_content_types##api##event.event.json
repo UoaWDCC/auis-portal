@@ -1,0 +1,337 @@
+{
+  "key": "plugin_content_manager_configuration_content_types::api::event.event",
+  "value": {
+    "settings": {
+      "bulkable": true,
+      "filterable": true,
+      "searchable": true,
+      "pageSize": 10,
+      "mainField": "Title",
+      "defaultSortBy": "Title",
+      "defaultSortOrder": "ASC"
+    },
+    "metadatas": {
+      "id": {
+        "edit": {},
+        "list": {
+          "label": "id",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Title": {
+        "edit": {
+          "label": "Title",
+          "description": "Title for event",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Title",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Subtitle": {
+        "edit": {
+          "label": "Subtitle",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Subtitle",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Location": {
+        "edit": {
+          "label": "Location",
+          "description": "Enter the address (NOT link), e.g. 20 Symonds Street, Auckland CBD, Auckland 1010",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Location",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Event_Date_Start": {
+        "edit": {
+          "label": "Start Date and Time of Event",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Event_Date_Start",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Event_Date_End": {
+        "edit": {
+          "label": "End Date and Time of Event",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Event_Date_End",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Event_Capacity": {
+        "edit": {
+          "label": "Event Capacity",
+          "description": "Total amount of tickets that can be sold. E.g. We have 5 member tickets, and 5 non-member tickets for sale. Event capacity is 7. This means that we can sell a maximum of 7 tickets (could be 2 member 5 non-member, or 3 member 4 non-member etc,)",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Event_Capacity",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Is_Live": {
+        "edit": {
+          "label": "Is Live",
+          "description": "If you make this true it will manually place this event in \"Past Events\" and stop all ticket sales",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Is_Live",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Image": {
+        "edit": {
+          "label": "Image",
+          "description": "Use same size as Instagram 1:1 image",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Image",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "Terms_And_Conditions": {
+        "edit": {
+          "label": "Terms and Conditions",
+          "description": "Copy paste the Terms and Conditions and modify as required",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Terms_And_Conditions",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Event_Capacity_Remaining": {
+        "edit": {
+          "label": "Event Capacity Remaining",
+          "description": "Number of tickets LEFT. Set this to the same as Event Capacity when making an event, do not touch it after that unless you want to reduce the amount of tickets left. ",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Event_Capacity_Remaining",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Ticket_ID": {
+        "edit": {
+          "label": "Ticket_ID",
+          "description": "Select the tickets that you want to show for sale for the event. Match the ID of the TICKET to ensure they are correct",
+          "placeholder": "",
+          "visible": true,
+          "editable": true,
+          "mainField": "id"
+        },
+        "list": {
+          "label": "Ticket_ID",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "Description": {
+        "edit": {
+          "label": "Description",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Description",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "createdAt": {
+        "edit": {
+          "label": "createdAt",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true
+        },
+        "list": {
+          "label": "createdAt",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "updatedAt": {
+        "edit": {
+          "label": "updatedAt",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true
+        },
+        "list": {
+          "label": "updatedAt",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "createdBy": {
+        "edit": {
+          "label": "createdBy",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true,
+          "mainField": "firstname"
+        },
+        "list": {
+          "label": "createdBy",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "updatedBy": {
+        "edit": {
+          "label": "updatedBy",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true,
+          "mainField": "firstname"
+        },
+        "list": {
+          "label": "updatedBy",
+          "searchable": true,
+          "sortable": true
+        }
+      }
+    },
+    "layouts": {
+      "edit": [
+        [
+          {
+            "name": "Title",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "Subtitle",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "Location",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "Event_Date_Start",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "Event_Date_End",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "Event_Capacity",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "Event_Capacity_Remaining",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "Is_Live",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "Image",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "Terms_And_Conditions",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "Description",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "Ticket_ID",
+            "size": 12
+          }
+        ]
+      ],
+      "list": [
+        "id",
+        "Title",
+        "Subtitle",
+        "Location"
+      ]
+    },
+    "uid": "api::event.event"
+  },
+  "type": "object",
+  "environment": null,
+  "tag": null
+}

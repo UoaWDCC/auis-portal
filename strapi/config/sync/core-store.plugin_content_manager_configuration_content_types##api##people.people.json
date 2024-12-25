@@ -1,0 +1,317 @@
+{
+  "key": "plugin_content_manager_configuration_content_types::api::people.people",
+  "value": {
+    "settings": {
+      "bulkable": true,
+      "filterable": true,
+      "searchable": true,
+      "pageSize": 10,
+      "mainField": "Name",
+      "defaultSortBy": "Name",
+      "defaultSortOrder": "ASC"
+    },
+    "metadatas": {
+      "id": {
+        "edit": {},
+        "list": {
+          "label": "id",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Name": {
+        "edit": {
+          "label": "Name",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Name",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Email": {
+        "edit": {
+          "label": "Email",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Email",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "University_ID": {
+        "edit": {
+          "label": "University ID Number",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "University_ID",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "UPI": {
+        "edit": {
+          "label": "UPI",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "UPI",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Study_Field": {
+        "edit": {
+          "label": "Field of Study",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Study_Field",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Is_Member": {
+        "edit": {
+          "label": "Membership Active",
+          "description": "TODO: needs to be removed, as membership expiry can be used instead",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Is_Member",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Status": {
+        "edit": {
+          "label": "Status",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Status",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Member_Expiry_Date": {
+        "edit": {
+          "label": "Paid Membership Expiry Date",
+          "description": "This will be blank when a user uses the website to sign up, its only added once they purchase a membership",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Member_Expiry_Date",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "People_Ticket_ID": {
+        "edit": {
+          "label": "Tickets Purchased",
+          "description": "The tickets the user has purchased",
+          "placeholder": "",
+          "visible": true,
+          "editable": true,
+          "mainField": "People_Ticket_Code"
+        },
+        "list": {
+          "label": "People_Ticket_ID",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "Institution": {
+        "edit": {
+          "label": "Institution",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Institution",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Year_Of_Study": {
+        "edit": {
+          "label": "Year of Study",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Year_Of_Study",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "createdAt": {
+        "edit": {
+          "label": "createdAt",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true
+        },
+        "list": {
+          "label": "createdAt",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "updatedAt": {
+        "edit": {
+          "label": "updatedAt",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true
+        },
+        "list": {
+          "label": "updatedAt",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "createdBy": {
+        "edit": {
+          "label": "createdBy",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true,
+          "mainField": "firstname"
+        },
+        "list": {
+          "label": "createdBy",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "updatedBy": {
+        "edit": {
+          "label": "updatedBy",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true,
+          "mainField": "firstname"
+        },
+        "list": {
+          "label": "updatedBy",
+          "searchable": true,
+          "sortable": true
+        }
+      }
+    },
+    "layouts": {
+      "edit": [
+        [
+          {
+            "name": "Name",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "Email",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "University_ID",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "UPI",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "Study_Field",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "Year_Of_Study",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "Institution",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "Status",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "Member_Expiry_Date",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "People_Ticket_ID",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "Is_Member",
+            "size": 12
+          }
+        ]
+      ],
+      "list": [
+        "id",
+        "Name",
+        "Email",
+        "University_ID"
+      ]
+    },
+    "uid": "api::people.people"
+  },
+  "type": "object",
+  "environment": null,
+  "tag": null
+}

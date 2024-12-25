@@ -1,0 +1,73 @@
+{
+  "name": "Public",
+  "description": "Default role given to unauthenticated user.",
+  "type": "public",
+  "permissions": [
+    {
+      "action": "api::event-gallery.event-gallery.find"
+    },
+    {
+      "action": "api::event.event.find"
+    },
+    {
+      "action": "api::event.event.findOne"
+    },
+    {
+      "action": "api::exec.exec.find"
+    },
+    {
+      "action": "api::introduction.introduction.find"
+    },
+    {
+      "action": "api::partner.partner.find"
+    },
+    {
+      "action": "api::previous-team.previous-team.find"
+    },
+    {
+      "action": "api::purchasable-membership.purchasable-membership.find"
+    },
+    {
+      "action": "api::purchasable-membership.purchasable-membership.findOne"
+    },
+    {
+      "action": "api::question.question.find"
+    },
+    {
+      "action": "api::question.question.findOne"
+    },
+    {
+      "action": "api::some-photo.some-photo.find"
+    },
+    {
+      "action": "api::ticket.ticket.find"
+    },
+    {
+      "action": "api::ticket.ticket.findOne"
+    },
+    {
+      "action": "api::value.value.find"
+    },
+    {
+      "action": "plugin::users-permissions.auth.callback"
+    },
+    {
+      "action": "plugin::users-permissions.auth.connect"
+    },
+    {
+      "action": "plugin::users-permissions.auth.emailConfirmation"
+    },
+    {
+      "action": "plugin::users-permissions.auth.forgotPassword"
+    },
+    {
+      "action": "plugin::users-permissions.auth.register"
+    },
+    {
+      "action": "plugin::users-permissions.auth.resetPassword"
+    },
+    {
+      "action": "plugin::users-permissions.auth.sendEmailConfirmation"
+    }
+  ]
+}

@@ -4,7 +4,7 @@
   "info": {
     "singularName": "ticket",
     "pluralName": "tickets",
-    "displayName": "Ticket",
+    "displayName": "Tickets",
     "description": ""
   },
   "options": {
@@ -15,14 +15,6 @@
     "Name": {
       "type": "string",
       "required": true
-    },
-    "Discount_Code": {
-      "type": "string",
-      "required": false
-    },
-    "Discount_Price": {
-      "type": "decimal",
-      "required": false
     },
     "Price": {
       "type": "decimal",

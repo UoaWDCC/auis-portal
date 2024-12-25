@@ -1,0 +1,236 @@
+{
+  "key": "plugin_content_manager_configuration_content_types::api::purchasable-membership.purchasable-membership",
+  "value": {
+    "settings": {
+      "bulkable": true,
+      "filterable": true,
+      "searchable": true,
+      "pageSize": 10,
+      "mainField": "Title",
+      "defaultSortBy": "Title",
+      "defaultSortOrder": "ASC"
+    },
+    "metadatas": {
+      "id": {
+        "edit": {},
+        "list": {
+          "label": "id",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Title": {
+        "edit": {
+          "label": "Title",
+          "description": "E.g. Semester 1 Membership, or Semester 2 Membership, or Semester 1 & 2 Membership",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Title",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Expiry": {
+        "edit": {
+          "label": "Expiry",
+          "description": "When a user purchases a membership this would be the date their membership ends, ensure it lines up correctly with UoA semester dates",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Expiry",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Price": {
+        "edit": {
+          "label": "Price",
+          "description": "Ensure this matches the Stripe Payment",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Price",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Stripe_Link": {
+        "edit": {
+          "label": "Stripe Code",
+          "description": "COPY THE STRIPE CODE EXACTLY. E.g price_1PSHXPP464csY2Up4aKoSw6r",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Stripe_Link",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Description": {
+        "edit": {
+          "label": "Description",
+          "description": "Description for the membership. keep it brief",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Description",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Membership_Link_Bypass": {
+        "edit": {
+          "label": "Redirect to external link",
+          "description": "Set this to true if you want the user to be taken to an external website (google form etc.). Use this ONLY if the payments are NOT working on the website as this would make everything manual for ticketing",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Membership_Link_Bypass",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Bypass_Membership_Link": {
+        "edit": {
+          "label": "External Website Redirect Link",
+          "description": "Link for the website you want to redirect to. LEAVE THIS BLANK IF REDIRECT TO EXTERNAL LINK IS FALSE",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Bypass_Membership_Link",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "createdAt": {
+        "edit": {
+          "label": "createdAt",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true
+        },
+        "list": {
+          "label": "createdAt",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "updatedAt": {
+        "edit": {
+          "label": "updatedAt",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true
+        },
+        "list": {
+          "label": "updatedAt",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "createdBy": {
+        "edit": {
+          "label": "createdBy",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true,
+          "mainField": "firstname"
+        },
+        "list": {
+          "label": "createdBy",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "updatedBy": {
+        "edit": {
+          "label": "updatedBy",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true,
+          "mainField": "firstname"
+        },
+        "list": {
+          "label": "updatedBy",
+          "searchable": true,
+          "sortable": true
+        }
+      }
+    },
+    "layouts": {
+      "edit": [
+        [
+          {
+            "name": "Title",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "Expiry",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "Price",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "Stripe_Link",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "Description",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "Membership_Link_Bypass",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "Bypass_Membership_Link",
+            "size": 12
+          }
+        ]
+      ],
+      "list": [
+        "id",
+        "Title",
+        "Expiry",
+        "Price"
+      ]
+    },
+    "uid": "api::purchasable-membership.purchasable-membership"
+  },
+  "type": "object",
+  "environment": null,
+  "tag": null
+}
