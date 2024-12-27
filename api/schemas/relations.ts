@@ -1,5 +1,7 @@
 import { relations } from "drizzle-orm/relations";
 import {
+  oauthClients,
+  oauthSessions,
   adminUsers,
   adminPermissions,
   adminRoles,
@@ -45,8 +47,6 @@ import {
   ticketsEventIdLinks,
   userTicketsPeopleIdLinks,
   userTicketsTicketIdLinks,
-  oauthClients,
-  oauthSessions,
   apps,
   roles,
   totpUsers,
@@ -54,8 +54,8 @@ import {
   userLastActive,
   sessionAccessTokenSigningKeys,
   emailverificationVerifiedEmails,
-  userMetadata,
   rolePermissions,
+  userMetadata,
   tenantConfigs,
   tenantFirstFactors,
   tenantRequiredSecondaryFactors,
@@ -66,8 +66,8 @@ import {
   useridMapping,
   oauthM2MTokens,
   keyValue,
-  emailpasswordPswdResetTokens,
   emailpasswordUsers,
+  emailpasswordPswdResetTokens,
   thirdpartyUserToTenant,
   jwtSigningKeys,
   passwordlessUsers,
@@ -85,6 +85,26 @@ import {
   tenantThirdpartyProviders,
   tenantThirdpartyProviderClients,
 } from "./schema";
+
+export const oauthSessionsRelations = relations(oauthSessions, ({ one }) => ({
+  oauthClient: one(oauthClients, {
+    fields: [oauthSessions.appId],
+    references: [oauthClients.appId],
+  }),
+}));
+
+export const oauthClientsRelations = relations(
+  oauthClients,
+  ({ one, many }) => ({
+    oauthSessions: many(oauthSessions),
+    oauthM2MTokens: many(oauthM2MTokens),
+    app: one(apps, {
+      fields: [oauthClients.appId],
+      references: [apps.appId],
+    }),
+    oauthLogoutChallenges: many(oauthLogoutChallenges),
+  })
+);
 
 export const adminUsersRelations = relations(adminUsers, ({ one, many }) => ({
   adminUser_createdById: one(adminUsers, {
@@ -940,26 +960,6 @@ export const userTicketsTicketIdLinksRelations = relations(
   })
 );
 
-export const oauthSessionsRelations = relations(oauthSessions, ({ one }) => ({
-  oauthClient: one(oauthClients, {
-    fields: [oauthSessions.appId],
-    references: [oauthClients.appId],
-  }),
-}));
-
-export const oauthClientsRelations = relations(
-  oauthClients,
-  ({ one, many }) => ({
-    oauthSessions: many(oauthSessions),
-    oauthM2MTokens: many(oauthM2MTokens),
-    app: one(apps, {
-      fields: [oauthClients.appId],
-      references: [apps.appId],
-    }),
-    oauthLogoutChallenges: many(oauthLogoutChallenges),
-  })
-);
-
 export const rolesRelations = relations(roles, ({ one, many }) => ({
   app: one(apps, {
     fields: [roles.appId],
@@ -1032,13 +1032,6 @@ export const emailverificationVerifiedEmailsRelations = relations(
   })
 );
 
-export const userMetadataRelations = relations(userMetadata, ({ one }) => ({
-  app: one(apps, {
-    fields: [userMetadata.appId],
-    references: [apps.appId],
-  }),
-}));
-
 export const rolePermissionsRelations = relations(
   rolePermissions,
   ({ one }) => ({
@@ -1048,6 +1041,13 @@ export const rolePermissionsRelations = relations(
     }),
   })
 );
+
+export const userMetadataRelations = relations(userMetadata, ({ one }) => ({
+  app: one(apps, {
+    fields: [userMetadata.appId],
+    references: [apps.appId],
+  }),
+}));
 
 export const tenantFirstFactorsRelations = relations(
   tenantFirstFactors,
@@ -1133,8 +1133,8 @@ export const appIdToUserIdRelations = relations(
       fields: [appIdToUserId.appId],
       references: [apps.appId],
     }),
-    emailpasswordPswdResetTokens: many(emailpasswordPswdResetTokens),
     emailpasswordUsers: many(emailpasswordUsers),
+    emailpasswordPswdResetTokens: many(emailpasswordPswdResetTokens),
     passwordlessUsers: many(passwordlessUsers),
     thirdpartyUsers: many(thirdpartyUsers),
     allAuthRecipeUsers_appId: many(allAuthRecipeUsers, {
@@ -1157,21 +1157,21 @@ export const keyValueRelations = relations(keyValue, ({ one }) => ({
   }),
 }));
 
-export const emailpasswordPswdResetTokensRelations = relations(
-  emailpasswordPswdResetTokens,
-  ({ one }) => ({
-    appIdToUserId: one(appIdToUserId, {
-      fields: [emailpasswordPswdResetTokens.appId],
-      references: [appIdToUserId.appId],
-    }),
-  })
-);
-
 export const emailpasswordUsersRelations = relations(
   emailpasswordUsers,
   ({ one }) => ({
     appIdToUserId: one(appIdToUserId, {
       fields: [emailpasswordUsers.appId],
+      references: [appIdToUserId.appId],
+    }),
+  })
+);
+
+export const emailpasswordPswdResetTokensRelations = relations(
+  emailpasswordPswdResetTokens,
+  ({ one }) => ({
+    appIdToUserId: one(appIdToUserId, {
+      fields: [emailpasswordPswdResetTokens.appId],
       references: [appIdToUserId.appId],
     }),
   })
