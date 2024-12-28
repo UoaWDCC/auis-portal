@@ -53,7 +53,6 @@ const main = async () => {
     await db.insert(events).values([
       {
         id: 1,
-        stripePriceId: "price_1Pwg1ZP464csY2Up9hCiwrhp",
         title: "Gury's Cookout",
         description: "Learn how to cook authentic indian meals.",
         location: "Chef's kitchen",
@@ -67,7 +66,6 @@ const main = async () => {
       },
       {
         id: 2,
-        stripePriceId: "price_1PSHWRP464csY2UpYpxvB2tk",
         title: "Dance Series: Shawn Thomas",
         description: "Special dance series led by the goat himself, Guryash.",
         location: "Dance Studio",
@@ -85,7 +83,6 @@ const main = async () => {
       },
       {
         id: 3,
-        stripePriceId: "price_1PSHWyP464csY2UpVWjc276j",
         title: "Pub Quiz: India Series",
         description:
           "Join this unique members only event to test your knowledge on Indian culture and win amazing prizes.",
