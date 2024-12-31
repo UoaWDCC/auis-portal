@@ -150,7 +150,7 @@ const main = async () => {
         isTicketLive: true,
         maxNumberTickets: 100,
         numberTicketsLeft: 100,
-        price: "28.00",
+        price: "6.99",
         ticketLinkBypass: false,
         startDateTicketSales: new Date().toLocaleString(),
         publishedAt: new Date().toLocaleString(),
@@ -166,7 +166,7 @@ const main = async () => {
         isTicketLive: true,
         maxNumberTickets: 190,
         numberTicketsLeft: 190,
-        price: "28.00",
+        price: "10.99",
         ticketLinkBypass: false,
         startDateTicketSales: new Date().toLocaleString(),
         publishedAt: new Date().toLocaleString(),
@@ -182,7 +182,7 @@ const main = async () => {
         isTicketLive: true,
         maxNumberTickets: 130,
         numberTicketsLeft: 130,
-        price: "28.00",
+        price: "8.99",
         ticketLinkBypass: false,
         startDateTicketSales: new Date().toLocaleString(),
         publishedAt: new Date().toLocaleString(),
@@ -232,6 +232,9 @@ const main = async () => {
         ticketId: 6,
       },
     ]);
+
+    //Questions
+    //QuestionTicketIdLink
 
     await db.insert(purchasableMemberships).values([
       {
