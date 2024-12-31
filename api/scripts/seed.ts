@@ -4,6 +4,8 @@ import {
   userTickets,
   events,
   purchasableMemberships,
+  tickets,
+  ticketsEventIdLinks,
 } from "../schemas/schema";
 
 const main = async () => {
@@ -13,41 +15,12 @@ const main = async () => {
     await db.delete(peoples);
     await db.delete(events);
     await db.delete(userTickets);
+    await db.delete(tickets);
+    await db.delete(ticketsEventIdLinks);
     await db.delete(purchasableMemberships);
 
-    // Add users
+    // Add data
     console.log("Seeding database");
-
-    await db.insert(peoples).values([
-      {
-        id: 0,
-        email: "gury@go.at",
-        upi: "gmat123",
-        universityId: "12345",
-        name: "Gury",
-        isMember: true,
-        memberExpiryDate: new Date(
-          new Date().setFullYear(new Date().getFullYear() + 1)
-        ).toLocaleDateString(),
-        institution: "UoA",
-        yearOfStudy: "4",
-        status: "Domestic",
-      },
-      {
-        id: 2,
-        email: "naren@go.at",
-        upi: "nrnr123",
-        universityId: "23456",
-        name: "Naren",
-        isMember: true,
-        memberExpiryDate: new Date(
-          new Date().setMonth(new Date().getMonth() + 6)
-        ).toLocaleDateString(),
-        institution: "UoA",
-        yearOfStudy: "4",
-        status: "International",
-      },
-    ]);
 
     // Add events
     await db.insert(events).values([
@@ -58,7 +31,7 @@ const main = async () => {
         location: "Chef's kitchen",
         eventDateStart: new Date().toLocaleString(),
         eventDateEnd: new Date().toLocaleString(),
-        eventCapacity: 20,
+        eventCapacity: 999,
         isLive: true,
         eventCapacityRemaining: 20,
         termsAndConditions: "No refunds.",
@@ -75,14 +48,31 @@ const main = async () => {
         eventDateEnd: new Date(
           new Date().setFullYear(new Date().getFullYear() + 1)
         ).toLocaleString(),
-        eventCapacity: 20,
+        eventCapacity: 30,
         isLive: true,
-        eventCapacityRemaining: 1,
+        eventCapacityRemaining: 30,
         termsAndConditions: "No refunds.",
         publishedAt: new Date().toISOString(),
       },
       {
         id: 3,
+        title: "Dance Ball",
+        description: "Special dance series led by the goat himself, Guryash.",
+        location: "Dance Studio",
+        eventDateStart: new Date(
+          new Date().setFullYear(new Date().getFullYear() + 1)
+        ).toLocaleDateString(),
+        eventDateEnd: new Date(
+          new Date().setFullYear(new Date().getFullYear() + 1)
+        ).toLocaleString(),
+        eventCapacity: 350,
+        isLive: true,
+        eventCapacityRemaining: 350,
+        termsAndConditions: "No refunds.",
+        publishedAt: new Date().toISOString(),
+      },
+      {
+        id: 4,
         title: "Pub Quiz: India Series",
         description:
           "Join this unique members only event to test your knowledge on Indian culture and win amazing prizes.",
@@ -98,6 +88,148 @@ const main = async () => {
         eventCapacityRemaining: 1,
         termsAndConditions: "No refunds.",
         publishedAt: new Date().toISOString(),
+      },
+    ]);
+
+    await db.insert(tickets).values([
+      {
+        id: 1,
+        stripeLink: "price_1Pwg1ZP464csY2Up9hCiwrhp",
+        name: "Gury's Cookout - Single Entry",
+        ticketDescription: "A single entry ticket for everyone.",
+        isDouble: false,
+        isMemberOnly: false,
+        isTicketLive: true,
+        maxNumberTickets: 999,
+        numberTicketsLeft: 999,
+        price: "0.00",
+        ticketLinkBypass: false,
+        startDateTicketSales: new Date().toLocaleString(),
+        publishedAt: new Date().toLocaleString(),
+        bypassTicketLink: null,
+      },
+      {
+        id: 2,
+        stripeLink: "price_1PSHWRP464csY2UpYpxvB2tk",
+        name: "Dance Series: Shawn Thomas (Single Entry - Members Only)",
+        ticketDescription: "A single entry ticket for members only.",
+        isDouble: false,
+        isMemberOnly: true,
+        isTicketLive: true,
+        maxNumberTickets: 25,
+        numberTicketsLeft: 25,
+        price: "15.00",
+        ticketLinkBypass: false,
+        startDateTicketSales: new Date().toLocaleString(),
+        publishedAt: new Date().toLocaleString(),
+        bypassTicketLink: null,
+      },
+      {
+        id: 3,
+        stripeLink: "price_1QbvgLP464csY2UpjsrFgW9L",
+        name: "Dance Series: Shawn Thomas (Double Entry - Members Only)",
+        ticketDescription: "A double entry ticket for members only.",
+        isDouble: true,
+        isMemberOnly: true,
+        isTicketLive: true,
+        maxNumberTickets: 25,
+        numberTicketsLeft: 25,
+        price: "28.00",
+        ticketLinkBypass: false,
+        startDateTicketSales: new Date().toLocaleString(),
+        publishedAt: new Date().toLocaleString(),
+        bypassTicketLink: null,
+      },
+      {
+        id: 4,
+        stripeLink: "price_1QbvjJP464csY2UpygSQe65A",
+        name: "Ball (Single Entry - Members Only)",
+        ticketDescription: "A double entry ticket for members only.",
+        isDouble: true,
+        isMemberOnly: true,
+        isTicketLive: true,
+        maxNumberTickets: 25,
+        numberTicketsLeft: 25,
+        price: "28.00",
+        ticketLinkBypass: false,
+        startDateTicketSales: new Date().toLocaleString(),
+        publishedAt: new Date().toLocaleString(),
+        bypassTicketLink: null,
+      },
+      {
+        id: 5,
+        stripeLink: "price_1QbvkIP464csY2UpOshxO9RY",
+        name: "Ball (Double Entry - Members Only)",
+        ticketDescription: "A double entry ticket for members only.",
+        isDouble: true,
+        isMemberOnly: true,
+        isTicketLive: true,
+        maxNumberTickets: 25,
+        numberTicketsLeft: 25,
+        price: "28.00",
+        ticketLinkBypass: false,
+        startDateTicketSales: new Date().toLocaleString(),
+        publishedAt: new Date().toLocaleString(),
+        bypassTicketLink: null,
+      },
+      {
+        id: 6,
+        stripeLink: "price_1QbzpKP464csY2UpdWSHGXgb",
+        name: "Ball (Single Entry - Non-Members)",
+        ticketDescription: "A double entry ticket for members only.",
+        isDouble: true,
+        isMemberOnly: true,
+        isTicketLive: true,
+        maxNumberTickets: 25,
+        numberTicketsLeft: 25,
+        price: "28.00",
+        ticketLinkBypass: false,
+        startDateTicketSales: new Date().toLocaleString(),
+        publishedAt: new Date().toLocaleString(),
+        bypassTicketLink: null,
+      },
+    ]);
+
+    /**
+     * Event ID: 1 (Gury's Cookout)
+     * Event ID: 2 (Dance Series: Shawn Thomas)
+     * Event ID: 3 (Dance Ball)
+     * Event ID: 4 (Pub Quiz: India Series)
+     */
+
+    await db.insert(ticketsEventIdLinks).values([
+      //Gury's Cookout
+      {
+        id: 1,
+        eventId: 1,
+        ticketId: 1,
+      },
+      // Dance Series: Shawn Thomas
+      {
+        id: 2,
+        eventId: 2,
+        ticketId: 2,
+      },
+      {
+        id: 3,
+        eventId: 2,
+        ticketId: 3,
+      },
+      // Dance Ball
+      {
+        id: 4,
+        eventId: 3,
+        ticketId: 4,
+      },
+      {
+        id: 5,
+        eventId: 3,
+        ticketId: 5,
+      },
+      {
+        id: 6,
+        eventId: 3,
+        ticketId: 6,
       },
     ]);
 
