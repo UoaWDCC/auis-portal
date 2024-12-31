@@ -42,7 +42,7 @@ export async function isTicketAvailableByPriceId(
   let eventId = await db
     .select()
     .from(ticketsEventIdLinks)
-    .where(eq(ticketsEventIdLinks.eventId, ticketsCapacityRemaining[0].id))
+    .where(eq(ticketsEventIdLinks.ticketId, ticketsCapacityRemaining[0].id))
     .catch((error) => {
       throw new Error(
         `isTicketAvailableByPriceId: Ran into error while query ticketsEventIdLinks table: ${error}`
@@ -93,13 +93,13 @@ export async function reserveTicket(priceId: string) {
       .where(eq(tickets.stripeLink, priceId))
       .returning();
 
-    //get eventId by using the ticketsEventIdLinks table. Then reduce the events' ticket capacity too
+    // get eventId by using the ticketsEventIdLinks table.
     let eventId = await db
       .select()
       .from(ticketsEventIdLinks)
-      .where(eq(ticketsEventIdLinks.eventId, reservedTicket[0].id));
+      .where(eq(ticketsEventIdLinks.ticketId, reservedTicket[0].id));
 
-    //decrement event ticket capacity
+    // decrement event ticket capacity
     let eventReservedTicket = await db
       .update(events)
       .set({
@@ -129,7 +129,7 @@ export async function releaseReservedTicket(priceId: string) {
   let eventId = await db
     .select()
     .from(ticketsEventIdLinks)
-    .where(eq(ticketsEventIdLinks.eventId, releasedTicket[0].id));
+    .where(eq(ticketsEventIdLinks.ticketId, releasedTicket[0].id));
 
   // increment event ticket capacity
   let eventReleasedTicket = await db
