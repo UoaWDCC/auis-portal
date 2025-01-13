@@ -105,7 +105,7 @@ export async function reserveTicket(priceId: string) {
       .set({
         eventCapacityRemaining: sql`${events.eventCapacityRemaining} - 1`,
       })
-      .where(eq(events.id, eventId[0].id))
+      .where(eq(events.id, eventId[0].eventId!))
       .returning();
   }
 
@@ -137,7 +137,7 @@ export async function releaseReservedTicket(priceId: string) {
     .set({
       eventCapacityRemaining: sql`${events.eventCapacityRemaining} + 1`,
     })
-    .where(eq(events.id, eventId[0].id))
+    .where(eq(events.id, eventId[0].eventId!))
     .returning();
 
   return releasedTicket;
