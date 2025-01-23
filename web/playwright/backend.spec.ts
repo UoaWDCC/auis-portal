@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-// Base file - DELETE LATER 
+// Base file - DELETE LATER
 
 test("signup1 - membership purchase", async ({ page }) => {
   console.log("Navigating to signup page...");
