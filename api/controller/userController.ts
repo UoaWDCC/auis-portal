@@ -19,15 +19,15 @@ export const updateUserTicketInfo = asyncHandler(
         return res.status(400).json({ message: "All fields are required" });
       }
 
-      let updateUserInfoOrNewUser = await insertUserTicket(req.body);
+      let userTicketId = await insertUserTicket(req.body);
 
       res.status(200).json({
-        updateUserInfoOrNewUser,
+        updateUserInfoOrNewUser: userTicketId,
       });
     } catch (error) {
+      console.log(error);
       res.status(500).json({
-        message:
-          "Error occured while trying to update/insert a user ticket: " + error,
+        message: error,
       });
     }
   }

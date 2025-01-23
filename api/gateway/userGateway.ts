@@ -5,13 +5,15 @@ import {
   peoples,
   purchasableMemberships,
   questions,
+  tickets,
+  ticketsEventIdLinks,
   userTickets,
   userTicketsPeopleIdLinks,
   userTicketsTicketIdLinks,
 } from "../schemas/schema";
 import { db } from "../db/config/db";
 import { User, UpdateUserInfoBody } from "../types/types";
-import { eq } from "drizzle-orm";
+import { eq, and, gte } from "drizzle-orm";
 import { stripe } from "../stripe/stripe";
 import { getUserEmail, getUserIdByEmail } from "./authGateway";
 import { updateUserMetadata } from "supertokens-node/recipe/usermetadata";
@@ -54,6 +56,7 @@ export async function getUserMembershipExpiryDate(
   return returnDate;
 }
 
+// refactor the logic: If the current date is past the expiry, they are no longer a member.
 export async function isMembershipActive(userEmail: string): Promise<boolean> {
   let isActive = false;
 
@@ -83,7 +86,7 @@ export async function isMembershipActive(userEmail: string): Promise<boolean> {
 
 /**
  * Inserts an unpaid ticket into the userTickets (People_Ticket) table
- * @param data The payload containing name, email, phoneNumber, answers (q&a). ticketId isn't currently used.
+ * @param data The payload containing name, email, phoneNumber, answers (q&a). ticketId is tickets.id
  * @returns
  */
 export async function insertUserTicket(data: {
@@ -96,9 +99,60 @@ export async function insertUserTicket(data: {
     answer: string;
   }[];
 }): Promise<{ userTicketId: number }> {
+  /**
+   * Three secnarios can occur in this function:
+   * 1. Paid ticket: Throw error [DONE]
+   * 2. Unpaid ticket: return the ticketId (or update info on the existing ticket?) [DONE]
+   * 3. Uninserted ticket: Insert a new ticket. [PARTIALLY DONE]
+   *
+   * A potential refactor of this function may be needed.
+   *
+   * Another issue is, a user can purchase different tickets for the same event.
+   * The caveat is that the second ticket will always be unpaid, but gets inserted into user tickets.
+   * Since Tickets are linked to the Event, probably use this to prevent the user from buying
+   */
   // return the userTicketId
   let newUserTicket: { userTicketId: number }[];
 
+  // if the user already has a paid ticket, then we send an error back.
+  // You will have to use the ticketsEventIdLinks to detect if the ticket belongs to an event.
+  let prepaidTicket = await db
+    .select()
+    .from(userTickets)
+    .innerJoin(
+      userTicketsTicketIdLinks,
+      eq(userTickets.id, userTicketsTicketIdLinks.userTicketId)
+    )
+    .innerJoin(
+      ticketsEventIdLinks,
+      eq(userTicketsTicketIdLinks.ticketId, ticketsEventIdLinks.ticketId)
+    )
+    .where(
+      and(
+        eq(userTickets.email, data.email),
+        eq(userTickets.paid, true),
+        eq(ticketsEventIdLinks.ticketId, data.ticketId) // Ensure ticket ID matches
+      )
+    );
+  if (prepaidTicket.length > 0) {
+    console.log(
+      "insertUserTicket: prepaidTicket: " +
+        JSON.stringify(prepaidTicket[0], null, 2)
+    );
+    //if paid, throw error
+    if (prepaidTicket[0].user_tickets.paid) {
+      throw new Error(
+        `You have already purchased a ticket. Contact admin if issue persists.`
+      );
+    }
+    //NOTE: THIS ELSE IF BLOCK HAS BEEN DISABLED
+    //if unpaid, return ticketId
+    /*else if (!prepaidTicket[0].user_tickets.paid) {
+      return { userTicketId: prepaidTicket[0].user_tickets.id };
+    }*/
+  }
+
+  //insert a new ticket
   newUserTicket = await db
     .insert(userTickets)
     .values({
@@ -141,11 +195,13 @@ export async function insertUserTicket(data: {
     throw new Error("insertUserTicket: Unable to insert userTicketIdLink: ");
   }
 
-  console.log("insertUserTicket: userTicketIdLink: " + userTicketIdLink[0]);
+  console.log(
+    "insertUserTicket: userTicketIdLink: " + JSON.stringify(userTicketIdLink)
+  );
 
   const ticketId = newUserTicket[0].userTicketId;
 
-  console.dir("insertUserTicket: ticketId: " + ticketId);
+  console.log("insertUserTicket: ticketId: " + JSON.stringify(ticketId));
 
   if (data.answers.length > 0) {
     const answerRecords = data.answers.map((answerData) => ({
@@ -160,6 +216,56 @@ export async function insertUserTicket(data: {
     );
 
     for (let index = 0; index < data.answers.length; index++) {
+      //TODO: if questions.checkForMemberEmail == true, check for email. If the email is not a member, throw an error.
+      let question = await db
+        .select()
+        .from(questions)
+        .where(eq(questions.id, answerRecords[index].questionId));
+
+      console.log(
+        "insertUserTicket: question: " + JSON.stringify(question, null, 2)
+      );
+
+      // if specified email is a member email, then create a new ticket for this user as well
+      if (question[0].checkForMemberEmail) {
+        let isMemberEmail = await db
+          .select()
+          .from(peoples)
+          .where(
+            and(
+              eq(peoples.email, answerRecords[index].answer),
+              gte(peoples.memberExpiryDate, new Date().toISOString())
+            )
+          )
+          .catch((error) => {
+            throw new Error(
+              `insertUserTicket: isMemberEmail: Error while trying to retrieve ${answerRecords[index].answer} from database: ${error}`
+            );
+          });
+
+        console.log(
+          "insertUserTicket: isMemberEmail: " +
+            JSON.stringify(isMemberEmail, null, 2)
+        );
+
+        // member is either not a paid member, or doesn't exist.
+        if (isMemberEmail.length == 0) {
+          throw new Error(
+            `insertUserTicket: ${answerRecords[index].answer} is not a paid member of AUIS. Contact admin if they are. Use ticketId ${ticketId} as reference.`
+          );
+        } else if (
+          isMemberEmail.length > 0 &&
+          isMemberEmail[0].memberExpiryDate !== undefined &&
+          isMemberEmail[0].memberExpiryDate !== null
+        ) {
+          console.log(
+            "insertUserTicket: isMember date comparison: " +
+              new Date().toISOString() >=
+              isMemberEmail[0].memberExpiryDate
+          );
+        }
+      }
+
       let answer = await db
         .insert(answers)
         .values(answerRecords[index])

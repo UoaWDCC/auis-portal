@@ -93,6 +93,7 @@ export const createCheckout = asyncHandler(
       res.send({ clientSecret: session.client_secret });
     } catch (error) {
       res.send({ error }).status(404);
+      return;
     }
   }
 );

@@ -77,7 +77,11 @@ export async function isTicketAvailableByPriceId(
   return isTicketAvailable;
 }
 
-// @Ratchet7x5: Reserve one ticket
+/**
+ * Decrements an event ticket from the tickets (numberTicketsLeft) and events (eventRemainingCapacity) table.
+ * @param priceId The stripe price ID
+ * @returns
+ */
 export async function reserveTicket(priceId: string) {
   let canReserveTicket = await isTicketAvailableByPriceId(priceId);
   let reservedTicket;
@@ -112,7 +116,11 @@ export async function reserveTicket(priceId: string) {
   return reservedTicket;
 }
 
-// @Ratchet7x5: Release one reserved ticket
+/**
+ * Increments an event ticket from the tickets (numberTicketsLeft) and events (eventRemainingCapacity) table.
+ * @param priceId The stripe price ID
+ * @returns
+ */
 export async function releaseReservedTicket(priceId: string) {
   let releasedTicket;
 

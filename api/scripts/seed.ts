@@ -6,6 +6,8 @@ import {
   purchasableMemberships,
   tickets,
   ticketsEventIdLinks,
+  questions,
+  questionsTicketIdLinks,
 } from "../schemas/schema";
 
 const main = async () => {
@@ -18,6 +20,8 @@ const main = async () => {
     await db.delete(tickets);
     await db.delete(ticketsEventIdLinks);
     await db.delete(purchasableMemberships);
+    await db.delete(questions);
+    await db.delete(questionsTicketIdLinks);
 
     // Add data
     console.log("Seeding database");
@@ -234,7 +238,47 @@ const main = async () => {
     ]);
 
     //Questions
+    await db.insert(questions).values([
+      {
+        id: 1,
+        question: "What is your dance partners' email?",
+        checkForMemberEmail: true,
+        publishedAt: new Date().toLocaleString(),
+      },
+      {
+        id: 2,
+        question: "What is your dance partners' name?",
+        checkForMemberEmail: false,
+        publishedAt: new Date().toLocaleString(),
+      },
+      {
+        id: 3,
+        question:
+          "Do you have any food allergies? Examples: Peanuts, Gluten, Milk",
+        checkForMemberEmail: false,
+        publishedAt: new Date().toLocaleString(),
+      },
+    ]);
+
     //QuestionTicketIdLink
+    await db.insert(questionsTicketIdLinks).values([
+      // Dance Series: Shawn Thomas
+      {
+        id: 1,
+        questionId: 1,
+        ticketId: 3,
+      },
+      {
+        id: 2,
+        questionId: 2,
+        ticketId: 3,
+      },
+      {
+        id: 3,
+        questionId: 3,
+        ticketId: 3,
+      },
+    ]);
 
     await db.insert(purchasableMemberships).values([
       {
@@ -260,7 +304,7 @@ const main = async () => {
         expiry: new Date(
           new Date().setFullYear(new Date().getFullYear() + 1)
         ).toLocaleDateString(),
-        price: "15.00",
+        price: "16.00",
         publishedAt: new Date().toISOString(),
       },
     ]);

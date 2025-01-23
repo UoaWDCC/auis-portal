@@ -1,6 +1,5 @@
 import { Router } from "express";
 import { verifySession } from "supertokens-node/recipe/session/framework/express";
-import UserMetadata from "supertokens-node/recipe/usermetadata";
 import {
   getUserMetadata,
   updateUserInfo,
