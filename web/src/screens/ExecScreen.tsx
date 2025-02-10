@@ -67,6 +67,7 @@ export default function ExecScreen({ navbar }: { navbar: JSX.Element }) {
 
   // Filtering the execs based on their role
   const presidents = executives.filter((exec) => exec.role === "President");
+  const leads = executives.filter((exec) => exec.role === "Lead");
   const otherExecutives = executives.filter(
     (exec) => exec.role === "Executive"
   );
@@ -136,6 +137,31 @@ export default function ExecScreen({ navbar }: { navbar: JSX.Element }) {
                   </div>
                 ))}
               </div>
+            )}
+            {leads.length == 0 ? (
+              <></>
+            ) : (
+              <>
+                <h2 className="text-tertiary-blue text-3xl font-bold">Leads</h2>
+                {errorExecutives ? (
+                  <div className="py-10 text-white">
+                    There are no execs to display
+                  </div>
+                ) : (
+                  <div className="flex flex-wrap justify-center">
+                    {leads?.map((exec) => (
+                      <div key={exec.id} className="mx-3 my-5">
+                        <ExecCard
+                          name={exec.name}
+                          description={exec.description}
+                          image={exec.image}
+                          position={exec.position}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </>
             )}
             <h2 className="text-tertiary-blue text-3xl font-bold">
               Executive Team

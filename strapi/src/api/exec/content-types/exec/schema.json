@@ -36,7 +36,8 @@
       "type": "enumeration",
       "enum": [
         "President",
-        "Executive"
+        "Executive",
+        "Lead"
       ],
       "required": true
     }
