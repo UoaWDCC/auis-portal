@@ -1,4 +1,4 @@
-import { ThirdPartyPreBuiltUI } from "supertokens-auth-react/recipe/thirdparty/prebuiltui";
+// import { ThirdPartyPreBuiltUI } from "supertokens-auth-react/recipe/thirdparty/prebuiltui";
 import { EmailPasswordPreBuiltUI } from "supertokens-auth-react/recipe/emailpassword/prebuiltui";
 import { AuthPage } from "supertokens-auth-react/ui";
 import auisLogo from "../assets/peacock_white_inner_big.png";
