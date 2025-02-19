@@ -21,7 +21,7 @@ export function sendEmail(
 
   // Setup email data
   const mailOptions = {
-    from: '"mailsender df" <MS_DQ3NfP@trial-zr6ke4nk9094on12.mlsender.net>', // sender address
+    from: '"AUIS events - no reply" <MS_5fFA0W@auis.co.nz>', // sender address
     to: sendTo, // list of receivers
     subject: "Ticket for AUIS Event: " + eventName, // Subject line
     // text: 'Hey there! Welcome to Your Business, we\'re happy to have you here! You\'ll be happy to know that your free trial awaits, all you need to do is head to your account, log in and start playing. Remember to check out our guides and contact support if you need anything. Regards, The Your Business Team', // plain text body
