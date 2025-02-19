@@ -52,11 +52,11 @@ SuperTokens.init({
   },
   disableAuthRoute: true,
   recipeList: [
-    ThirdParty.init({
-      signInAndUpFeature: {
-        providers: [Google.init()],
-      },
-    }),
+    // ThirdParty.init({
+    //   signInAndUpFeature: {
+    //     providers: [Google.init()],
+    //   },
+    // }),
     EmailPassword.init(),
     Session.init(),
   ],

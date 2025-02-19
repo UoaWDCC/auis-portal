@@ -129,6 +129,7 @@ export default function ExecScreen({ navbar }: { navbar: JSX.Element }) {
                 {presidents?.map((exec) => (
                   <div key={exec.id} className="mx-3 my-5">
                     <ExecCard
+                      linkedInLink={exec.linkedInLink}
                       name={exec.name}
                       description={exec.description}
                       image={exec.image}
@@ -152,6 +153,7 @@ export default function ExecScreen({ navbar }: { navbar: JSX.Element }) {
                     {leads?.map((exec) => (
                       <div key={exec.id} className="mx-3 my-5">
                         <ExecCard
+                          linkedInLink={exec.linkedInLink}
                           name={exec.name}
                           description={exec.description}
                           image={exec.image}
@@ -175,6 +177,7 @@ export default function ExecScreen({ navbar }: { navbar: JSX.Element }) {
                 {otherExecutives?.map((exec) => (
                   <div key={exec.id} className="mx-3 my-5">
                     <ExecCard
+                      linkedInLink={exec.linkedInLink}
                       name={exec.name}
                       description={exec.description}
                       image={exec.image}

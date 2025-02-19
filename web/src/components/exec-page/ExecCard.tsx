@@ -1,8 +1,11 @@
+import { FaLinkedin } from "react-icons/fa";
+
 interface ExecCardProps {
   image: string;
   name: string;
   position: string;
   description: string;
+  linkedInLink: string;
 }
 
 export default function ExecCard({
@@ -10,6 +13,7 @@ export default function ExecCard({
   name,
   position,
   description,
+  linkedInLink,
 }: ExecCardProps) {
   return (
     <>
@@ -28,6 +32,17 @@ export default function ExecCard({
         {/* Description Overlay */}
         <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-95 p-4 opacity-0 transition-opacity duration-300 hover:opacity-100">
           <p className="text-center text-black">{description}</p>
+          <div className="absolute bottom-2 z-10">
+            <a
+              href={linkedInLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              className="flex h-full w-full items-center justify-center"
+            >
+              <FaLinkedin className="h-10 w-10 text-black" />
+            </a>
+          </div>
         </div>
       </div>
     </>

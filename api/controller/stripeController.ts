@@ -54,6 +54,7 @@ export const createCheckout = asyncHandler(
               "There are no tickets available for this event. Please come back later to see if more tickets become available.",
           });
         } else {
+          console.log("why is this called twice")
           reserveTicket(priceId);
         }
       }
@@ -129,7 +130,7 @@ export const handleWebhook = asyncHandler(
           )
         ) {
           if (session.metadata!["isEventTicket"] === "y") {
-            completeTicketPurchase(session.id);
+            completeTicketPurchase(session.id, session.metadata!["userTicketId"]);
           } else if (session.metadata!["isEventTicket"] === "n") {
             updateUserMembershipExpiryDate(session.id);
           }

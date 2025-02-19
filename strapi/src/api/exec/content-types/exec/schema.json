@@ -40,6 +40,10 @@
         "Lead"
       ],
       "required": true
+    },
+    "Linked_In_Link": {
+      "type": "string",
+      "required": true
     }
   }
 }
