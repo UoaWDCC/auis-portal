@@ -114,20 +114,21 @@ export async function insertUserTicket(data: {
     .select()
     .from(peoples)
     .where(eq(peoples.email, data.email))
-    .limit(1)
-    .catch((error) => {
-      throw new Error(
-        `insertUserTicket: No peoples found with corresponding ${data.email}: ` +
-          error
-      );
-    });
+    .limit(1);
+  // .catch(() => {
+  //   console.log(`No peoples found with corresponding ${data.email}:`)
+  // throw new Error(
+  //   `insertUserTicket: No peoples found with corresponding ${data.email}: ` +
+  //     error
+  // );
+  // });
 
-  if (people.length === 0) {
-    throw new Error(
-      "insertUserTicket: No peoples found with corresponding email: " +
-        data.email
-    );
-  }
+  // if (people.length === 0) {
+  //   throw new Error(
+  //     "insertUserTicket: No peoples found with corresponding email: " +
+  //       data.email
+  //   );
+  // }
 
   const userTicketIdLink = await db
     .insert(userTicketsTicketIdLinks)
@@ -217,25 +218,36 @@ export async function insertUserTicket(data: {
     "insertUserTicket: userTicketsPeopleIdLink: ticketId: ",
     data.ticketId
   );
+  // console.log("LOOK HERE")
+  // if(people.length == 0 ){
+  //   console.log("not bs")
+  // }
+  // else {
+  //   console.log(":thisdf")
+  // }
+  // console.log(people[0].id)
 
-  let userTicketsPeopleIdLink = await db
-    .insert(userTicketsPeopleIdLinks)
-    .values({
-      peopleId: people[0].id,
-      userTicketId: ticketId,
-    })
-    .returning()
-    .catch((error) => {
-      throw new Error(
-        "insertUserTicket: error occurred while trying to insert userTicketsPeopleIdLink: " +
-          error
-      );
-    });
+  if (people.length !== 0) {
+    let userTicketsPeopleIdLink = await db
+      .insert(userTicketsPeopleIdLinks)
+      .values({
+        peopleId: people[0].id,
+        userTicketId: ticketId,
+      })
+      .returning()
+      .catch((error) => {
+        console.log("dyumb");
+        throw new Error(
+          "insertUserTicket: error occurred while trying to insert userTicketsPeopleIdLink: " +
+            error
+        );
+      });
 
-  console.log(
-    "insertUserTicket: userTicketsPeopleIdLink: " + userTicketsPeopleIdLink![0]!
-  );
-
+    console.log(
+      "insertUserTicket: userTicketsPeopleIdLink: " +
+        userTicketsPeopleIdLink![0]!
+    );
+  }
   return newUserTicket[0];
 }
 

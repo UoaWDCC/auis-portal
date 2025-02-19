@@ -5,6 +5,7 @@ export interface Exec {
   role: string;
   name: string;
   description: string;
+  linkedInLink: string;
 }
 
 export interface PartnerImage {

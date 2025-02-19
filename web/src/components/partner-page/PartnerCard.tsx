@@ -32,7 +32,7 @@ export default function PartnerCard({
   return (
     <>
       <div
-        className="flex h-auto w-72 flex-col items-center overflow-hidden rounded-2xl border-4 p-5"
+        className="flex h-full w-72 flex-col items-center overflow-hidden rounded-2xl border-4 p-5"
         style={{ borderColor: colour, backgroundColor: bgColorWithOpacity }}
       >
         <div

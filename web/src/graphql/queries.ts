@@ -10,6 +10,7 @@ export const GET_EXECS = gql`
           Description
           Position
           Role
+          Linked_In_Link
           Image {
             data {
               attributes {

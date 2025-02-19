@@ -79,7 +79,7 @@ export default function PartnersScreen({ navbar }: { navbar: JSX.Element }) {
                 <h1 className="text-3xl font-bold text-[#F3CF0B]">
                   Gold Partners
                 </h1>
-                <div className="flex flex-wrap items-center justify-center">
+                <div className="flex flex-wrap items-stretch justify-center">
                   {goldPartners.map((goldPartner) => (
                     <div className="my-5 px-10" key={goldPartner.id}>
                       <PartnerCard

@@ -22,7 +22,8 @@ export default function SignInScreen({ navbar }: { navbar: JSX.Element }) {
         <div className="flex flex-grow justify-center pb-12 xl:justify-start xl:pl-24">
           <div data-testid="supertokens-sign-in" className="flex">
             <AuthPage
-              preBuiltUIList={[EmailPasswordPreBuiltUI, ThirdPartyPreBuiltUI]}
+              preBuiltUIList={[EmailPasswordPreBuiltUI]}
+              // preBuiltUIList={[EmailPasswordPreBuiltUI, ThirdPartyPreBuiltUI]}
               isSignUp={false}
             />
           </div>
