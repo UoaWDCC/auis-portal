@@ -11,7 +11,7 @@ import { ApolloProvider } from "@apollo/client";
 
 //supertokens
 import SuperTokens, { SuperTokensWrapper } from "supertokens-auth-react";
-import ThirdParty, { Google } from "supertokens-auth-react/recipe/thirdparty";
+// import ThirdParty, { Google } from "supertokens-auth-react/recipe/thirdparty";
 import EmailPassword from "supertokens-auth-react/recipe/emailpassword";
 import Session from "supertokens-auth-react/recipe/session";
 import { SignInAndUpCallback } from "supertokens-auth-react/recipe/thirdparty/prebuiltui";
