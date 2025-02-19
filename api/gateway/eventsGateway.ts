@@ -231,6 +231,33 @@ export async function completeTicketPurchase(
   }
 }
 
+// export async function isEventMemberOnly(priceId: string) {
+//   let isMemberOnly = false;
+
+//   if (priceId === "" || priceId === undefined || priceId === null) {
+//     throw new Error(
+//       "received invalid type for isPriceIdForEvent() in eventsGateway" + priceId
+//     );
+//   }
+
+//   // search for this priceId
+
+//   let ticketMember = await db
+//     .select()
+//     .from(tickets)
+//     .where(eq(tickets.stripeLink, priceId));
+
+//   if (ticketMember.length == 1){
+//     if(ticketMember[0].isMemberOnly == true){
+//       isMemberOnly = true
+//     }
+//   } else {
+//     isMemberOnly = false
+//   }
+//   console.log("Member Only Ticket")
+//   return isMemberOnly;
+// }
+
 export async function isPriceIdForEvent(priceId: string) {
   let isPriceIdUsedForEventOrMembership = false;
 
