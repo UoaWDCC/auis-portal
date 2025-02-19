@@ -187,7 +187,8 @@ export default function CheckoutInformationForm({
             <br />
             If this is a double ticket, both ticket holders must be members.
             <br />
-            If this is a member ticket, please make sure the email is the same as the account email.
+            If this is a member ticket, please make sure the email is the same
+            as the account email.
             <br />
             If this is a Member ticket, make sure you haven't already purchased
             a Member ticket.
