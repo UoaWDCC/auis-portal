@@ -40,7 +40,7 @@ export default function ExecCard({
               aria-label="LinkedIn"
               className="flex h-full w-full items-center justify-center"
             >
-              <FaLinkedin className="h-10 w-10 text-black" />
+              <FaLinkedin className="h-7 w-7 text-black" />
             </a>
           </div>
         </div>
