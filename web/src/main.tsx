@@ -58,7 +58,9 @@ SuperTokens.init({
     //   },
     // }),
     EmailPassword.init(),
-    Session.init(),
+    Session.init({
+      tokenTransferMethod: "header" // or "cookie"
+  })
   ],
   getRedirectionURL: async (context) => {
     if (context.action === "SUCCESS" && context.newSessionCreated) {
