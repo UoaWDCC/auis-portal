@@ -31,7 +31,7 @@ export default function ExecCard({
         </div>
         {/* Description Overlay */}
         <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-95 p-4 opacity-0 transition-opacity duration-300 hover:opacity-100">
-          <p className="text-center text-black">{description}</p>
+          <p className="text-center text-xs text-black">{description}</p>
           <div className="absolute bottom-2 z-10">
             <a
               href={linkedInLink}

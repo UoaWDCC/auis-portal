@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 
 export const GET_EXECS = gql`
   query {
-    execs {
+    execs(pagination: { limit: 300 }) {
       data {
         id
         attributes {
@@ -26,7 +26,7 @@ export const GET_EXECS = gql`
 
 export const GET_PARTNERS = gql`
   query {
-    partners {
+    partners(pagination: { limit: 300 }) {
       data {
         id
         attributes {
@@ -49,7 +49,7 @@ export const GET_PARTNERS = gql`
 
 export const GET_PARTNER_IMAGES = gql`
   query {
-    partners {
+    partners(pagination: { limit: 300 }) {
       data {
         id
         attributes {
@@ -141,7 +141,7 @@ export const GET_PREVIOUS_TEAMS = gql`
 
 export const GET_EVENTS_SLIDER = gql`
   query {
-    events {
+    events(pagination: { limit: 300 }) {
       data {
         id
         attributes {
@@ -164,7 +164,7 @@ export const GET_EVENTS_SLIDER = gql`
 
 export const GET_EVENTS_GALLERY = gql`
   query {
-    eventGalleries {
+    eventGalleries(pagination: { limit: 300 }) {
       data {
         id
         attributes {
