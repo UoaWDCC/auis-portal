@@ -50,7 +50,7 @@ SuperTokens.init({
     apiBasePath: "/api/auth",
     websiteBasePath: "/signup",
   },
-  disableAuthRoute: true,
+  disableAuthRoute: true, 
   recipeList: [
     // ThirdParty.init({
     //   signInAndUpFeature: {
