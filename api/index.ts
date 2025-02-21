@@ -106,9 +106,4 @@ const port = Number.parseInt(process.env.PORT || "3000");
 // Specify the host parameter as '0.0.0.0' to listen on all network interfaces
 app.listen(port, "0.0.0.0", () => {
   console.log(`Backend is now listening on port :${port}`);
-  console.log(`Backend env vars : 
-     DOMAIN_API=${process.env.DOMAIN_API},
-     DOMAIN_FRONTEND=${process.env.DOMAIN_FRONTEND},
-     STRIPE_WEBHOOK_ENDPOINT=${process.env.STRIPE_WEBHOOK_ENDPOINT},
-     GOOGLE_CLIENT_ID=${process.env.GOOGLE_CLIENT_ID},`);
 });
