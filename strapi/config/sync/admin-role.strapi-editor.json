@@ -193,7 +193,8 @@
           "Description",
           "Position",
           "Image",
-          "Role"
+          "Role",
+          "Linked_In_Link"
         ]
       },
       "conditions": []
@@ -222,7 +223,8 @@
           "Description",
           "Position",
           "Image",
-          "Role"
+          "Role",
+          "Linked_In_Link"
         ]
       },
       "conditions": []
@@ -237,7 +239,8 @@
           "Description",
           "Position",
           "Image",
-          "Role"
+          "Role",
+          "Linked_In_Link"
         ]
       },
       "conditions": []
@@ -307,7 +310,6 @@
           "Type",
           "Image",
           "Name",
-          "Location",
           "Description"
         ]
       },
@@ -336,7 +338,6 @@
           "Type",
           "Image",
           "Name",
-          "Location",
           "Description"
         ]
       },
@@ -351,7 +352,6 @@
           "Type",
           "Image",
           "Name",
-          "Location",
           "Description"
         ]
       },

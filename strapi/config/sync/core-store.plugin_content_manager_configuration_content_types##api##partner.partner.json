@@ -61,16 +61,16 @@
           "sortable": true
         }
       },
-      "Location": {
+      "Link": {
         "edit": {
-          "label": "Location",
-          "description": "Enter the address (NOT link), e.g. 20 Symonds Street, Auckland CBD, Auckland 1010",
+          "label": "Link",
+          "description": "Only use this for gold sponsors",
           "placeholder": "",
           "visible": true,
           "editable": true
         },
         "list": {
-          "label": "Location",
+          "label": "Link",
           "searchable": true,
           "sortable": true
         }
@@ -78,7 +78,7 @@
       "Description": {
         "edit": {
           "label": "Description",
-          "description": "Keep it brief, this is where you put the benefits E.g. 10% off burgers ",
+          "description": "Keep it brief, this is where you put the benefits E.g. 10% off burgers. Only for gold and silver ",
           "placeholder": "",
           "visible": true,
           "editable": true
@@ -164,7 +164,7 @@
         ],
         [
           {
-            "name": "Location",
+            "name": "Link",
             "size": 12
           }
         ],
