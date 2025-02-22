@@ -14,7 +14,7 @@ describe("mapToPartner", () => {
               Type: "Gold",
               Name: "Partner One",
               Description: "A leading business partner",
-              Location: "Farm",
+              Link: "Farm",
               Image: {
                 data: {
                   attributes: {
@@ -34,7 +34,7 @@ describe("mapToPartner", () => {
         type: "Gold",
         name: "Partner One",
         description: "A leading business partner",
-        location: "Farm",
+        link: "Farm",
         image: "/uploads/partner_one.jpg",
       },
     ];
@@ -52,7 +52,7 @@ describe("mapToPartner", () => {
               Type: "Silver",
               Name: "Partner Two",
               Description: "A technology partner",
-              Location: "City",
+              Link: "City",
               Image: null,
             },
           },
@@ -66,7 +66,7 @@ describe("mapToPartner", () => {
         type: "Silver",
         name: "Partner Two",
         description: "A technology partner",
-        location: "City",
+        link: "City",
         image: "",
       },
     ];
@@ -84,7 +84,7 @@ describe("mapToPartner", () => {
               Type: "Bronze",
               Name: null,
               Description: "A finance partner",
-              Location: "Town",
+              Link: "Town",
               Image: {
                 data: {
                   attributes: {
@@ -104,7 +104,7 @@ describe("mapToPartner", () => {
         type: "Bronze",
         name: "",
         description: "A finance partner",
-        location: "Town",
+        link: "Town",
         image: "/uploads/partner_three.jpg",
       },
     ];
@@ -122,7 +122,7 @@ describe("mapToPartner", () => {
               Type: "Healthcare",
               Name: "Partner Four",
               Description: null,
-              Location: "Village",
+              Link: "Village",
               Image: {
                 data: {
                   attributes: {
@@ -142,7 +142,7 @@ describe("mapToPartner", () => {
         type: "Healthcare",
         name: "Partner Four",
         description: "",
-        location: "Village",
+        link: "Village",
         image: "/uploads/partner_four.jpg",
       },
     ];
@@ -160,7 +160,7 @@ describe("mapToPartner", () => {
               Type: null,
               Name: "Partner Five",
               Description: "A healthcare partner",
-              Location: "Island",
+              Link: "Island",
               Image: {
                 data: {
                   attributes: {
@@ -180,7 +180,7 @@ describe("mapToPartner", () => {
         type: "",
         name: "Partner Five",
         description: "A healthcare partner",
-        location: "Island",
+        link: "Island",
         image: "/uploads/partner_five.jpg",
       },
     ];
@@ -206,7 +206,7 @@ describe("mapToPartner", () => {
         type: "",
         name: "",
         description: "",
-        location: "",
+        link: "",
         image: "",
       },
     ];
@@ -214,7 +214,7 @@ describe("mapToPartner", () => {
     expect(Mapper.mapToPartner(data)).toEqual(expected);
   });
 
-  it("should handle missing location field gracefully", () => {
+  it("should handle missing link field gracefully", () => {
     const data = {
       partners: {
         data: [
@@ -243,7 +243,7 @@ describe("mapToPartner", () => {
         type: "Education",
         name: "Partner Seven",
         description: "An education partner",
-        location: "",
+        link: "",
         image: "/uploads/partner_seven.jpg",
       },
     ];

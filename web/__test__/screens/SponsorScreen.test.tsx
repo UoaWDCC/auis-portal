@@ -2,7 +2,7 @@ import { MockedProvider } from "@apollo/client/testing";
 import { GET_PARTNERS } from "../../src/graphql/queries";
 import { describe, expect, it } from "vitest";
 import { render, screen } from "@testing-library/react";
-import PartnersScreen from "../../src/screens/PartnersScreen";
+import SponsorsScreen from "../../src/screens/SponsorsScreen";
 import React from "react";
 import { GraphQLError } from "graphql";
 import "@testing-library/jest-dom";
@@ -91,7 +91,7 @@ describe("PartnersScreen", () => {
     render(
       <MockedProvider mocks={mocks} addTypename={false}>
         <MemoryRouter>
-          <PartnersScreen navbar={<></>} />
+          <SponsorsScreen navbar={<></>} />
         </MemoryRouter>
       </MockedProvider>
     );
@@ -112,7 +112,7 @@ describe("PartnersScreen", () => {
     render(
       <MockedProvider mocks={errorMocks} addTypename={false}>
         <MemoryRouter>
-          <PartnersScreen navbar={<></>} />
+          <SponsorsScreen navbar={<></>} />
         </MemoryRouter>
       </MockedProvider>
     );
@@ -132,7 +132,7 @@ describe("PartnersScreen", () => {
     render(
       <MockedProvider mocks={mocks} addTypename={false}>
         <MemoryRouter>
-          <PartnersScreen navbar={<></>} />
+          <SponsorsScreen navbar={<></>} />
         </MemoryRouter>
       </MockedProvider>
     );
@@ -140,7 +140,6 @@ describe("PartnersScreen", () => {
     expect(
       await screen.findByText("The Kebab and Chicken House")
     ).toBeInTheDocument();
-    expect(await screen.findByText("17 Mount Street")).toBeInTheDocument();
     expect(await screen.findByText("20% off Everything")).toBeInTheDocument();
 
     // Find the image element with alt text "Partner Image" and specific src
@@ -154,15 +153,12 @@ describe("PartnersScreen", () => {
     render(
       <MockedProvider mocks={mocks} addTypename={false}>
         <MemoryRouter>
-          <PartnersScreen navbar={<></>} />
+          <SponsorsScreen navbar={<></>} />
         </MemoryRouter>
       </MockedProvider>
     );
 
     expect(await screen.findByText("Subi's Desserts")).toBeInTheDocument();
-    expect(
-      await screen.findByText("128 White Swan Road, Mount Roskil")
-    ).toBeInTheDocument();
     expect(await screen.findByText("15% off Everything")).toBeInTheDocument();
 
     // Find the image element with alt text "Partner Image" and specific src
@@ -174,16 +170,12 @@ describe("PartnersScreen", () => {
     render(
       <MockedProvider mocks={mocks} addTypename={false}>
         <MemoryRouter>
-          <PartnersScreen navbar={<></>} />
+          <SponsorsScreen navbar={<></>} />
         </MemoryRouter>
       </MockedProvider>
     );
 
     expect(await screen.findByText("Beso")).toBeInTheDocument();
-    expect(
-      await screen.findByText("256 Manukau Road, Epsom, Auckland")
-    ).toBeInTheDocument();
-    expect(await screen.findByText("10% off Everything")).toBeInTheDocument();
 
     // Find the image element with alt text "Partner Image" and specific src
     const bronzePartnerImages = await screen.findByAltText("Beso");
@@ -194,7 +186,7 @@ describe("PartnersScreen", () => {
     render(
       <MockedProvider mocks={noDataMocks} addTypename={false}>
         <MemoryRouter>
-          <PartnersScreen navbar={<></>} />
+          <SponsorsScreen navbar={<></>} />
         </MemoryRouter>
       </MockedProvider>
     );

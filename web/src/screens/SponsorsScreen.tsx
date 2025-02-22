@@ -4,9 +4,11 @@ import { useQuery } from "@apollo/client";
 import { GET_PARTNERS } from "../graphql/queries";
 import { Mapper } from "../utils/Mapper";
 import LoadingSpinner from "../components/navigation/LoadingSpinner";
-import PartnerCard from "../components/partner-page/PartnerCard";
+import GoldPartnerCard from "../components/partner-page/GoldPartnerCard";
+import SilverPartnerCard from "@components/partner-page/SilverPartnerCard";
+import BronzePartnerCard from "@components/partner-page/BronzePartnerCard";
 
-export default function PartnersScreen({ navbar }: { navbar: JSX.Element }) {
+export default function SponsorsScreen({ navbar }: { navbar: JSX.Element }) {
   // Queries
   const {
     loading: partnersLoading,
@@ -61,9 +63,9 @@ export default function PartnersScreen({ navbar }: { navbar: JSX.Element }) {
           <div className="max-w-screen from-AUIS-dark-teal to-AUIS-teal h-72 bg-gradient-to-b">
             {navbar}
             <div className="flex flex-col items-center text-center text-white">
-              <h1 className="text-4xl font-bold md:text-6xl">Our Partners</h1>
+              <h1 className="text-4xl font-bold md:text-6xl">Our Sponsors</h1>
               <h3 className="my-5 text-2xl">
-                Collaborating with amazing partners to enhance your AUIS
+                Collaborating with amazing sponsors to enhance your AUIS
                 experience
               </h3>
             </div>
@@ -82,10 +84,10 @@ export default function PartnersScreen({ navbar }: { navbar: JSX.Element }) {
                 <div className="flex flex-wrap items-stretch justify-center">
                   {goldPartners.map((goldPartner) => (
                     <div className="my-5 px-10" key={goldPartner.id}>
-                      <PartnerCard
+                      <GoldPartnerCard
                         key={goldPartner.id}
                         image={goldPartner.image}
-                        location={goldPartner.location}
+                        link={goldPartner.link}
                         description={goldPartner.description}
                         name={goldPartner.name}
                         colour="#F3CF0B"
@@ -105,13 +107,12 @@ export default function PartnersScreen({ navbar }: { navbar: JSX.Element }) {
                 <h1 className="my-2 text-3xl font-bold text-[#C0C0C0]">
                   Silver Partners
                 </h1>
-                <div className="flex flex-wrap items-center justify-center">
+                <div className="flex flex-wrap items-stretch justify-center">
                   {silverPartners.map((silverPartner) => (
                     <div className="my-5 px-10" key={silverPartner.id}>
-                      <PartnerCard
+                      <SilverPartnerCard
                         key={silverPartner.id}
                         image={silverPartner.image}
-                        location={silverPartner.location}
                         description={silverPartner.description}
                         name={silverPartner.name}
                         colour="#C0C0C0"
@@ -131,14 +132,12 @@ export default function PartnersScreen({ navbar }: { navbar: JSX.Element }) {
                 <h1 className="my-2 text-3xl font-bold text-[#C88039]">
                   Bronze Partners
                 </h1>
-                <div className="flex flex-wrap items-center justify-center">
+                <div className="flex flex-wrap items-stretch justify-center">
                   {bronzePartners.map((bronzePartner) => (
                     <div className="my-5 px-10" key={bronzePartner.id}>
-                      <PartnerCard
+                      <BronzePartnerCard
                         key={bronzePartner.id}
                         image={bronzePartner.image}
-                        location={bronzePartner.location}
-                        description={bronzePartner.description}
                         name={bronzePartner.name}
                         colour="#C88039"
                       />

@@ -28,7 +28,6 @@ import SignInScreen from "./screens/SignInScreen.tsx";
 import CheckoutScreen from "./screens/CheckoutScreen.tsx";
 import ReturnScreen from "./screens/ReturnScreen.tsx";
 import EventScreen from "./screens/EventScreen.tsx";
-import PartnersScreen from "./screens/PartnersScreen.tsx";
 import Header from "@components/navigation/Header.tsx";
 import MembershipScreen from "./screens/MembershipScreen.tsx";
 import EventInformationScreen from "./screens/EventInformationScreen.tsx";
@@ -40,6 +39,7 @@ import EventAttendanceSelectScreen from "./screens/EventAttendanceSelectScreen.t
 import { ExecRoute } from "@utils/AdminRouteProtection.tsx";
 import { getUserMetaData } from "./api/apiRequests.ts";
 import { UserRoute } from "@utils/UserRouteProtection.tsx";
+import SponsorsScreen from "./screens/SponsorsScreen.tsx";
 
 //supertokens code
 SuperTokens.init({
@@ -106,7 +106,7 @@ const router = createBrowserRouter(
       <Route path="/exec" element={<ExecScreen navbar={<Header />} />} />
       <Route
         path="/sponsors"
-        element={<PartnersScreen navbar={<Header />} />}
+        element={<SponsorsScreen navbar={<Header />} />}
       />
       <Route path="/login" element={<SignInScreen navbar={<Header />} />} />
       <Route path="/signup" element={<SignUpScreen navbar={<Header />} />} />
