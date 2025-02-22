@@ -31,7 +31,7 @@
     },
     "Name": {
       "type": "string",
-      "required": false
+      "required": true
     },
     "Link": {
       "type": "text",

@@ -89,6 +89,20 @@
           "sortable": true
         }
       },
+      "Linked_In_Link": {
+        "edit": {
+          "label": "Linked In link",
+          "description": "Make sure the URL looks like this https://www.linkedin.com/in/g-s-m/",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Linked_In_Link",
+          "searchable": true,
+          "sortable": true
+        }
+      },
       "createdAt": {
         "edit": {
           "label": "createdAt",
@@ -177,6 +191,12 @@
         [
           {
             "name": "Role",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "Linked_In_Link",
             "size": 12
           }
         ]

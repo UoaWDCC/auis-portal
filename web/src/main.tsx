@@ -40,6 +40,7 @@ import { ExecRoute } from "@utils/AdminRouteProtection.tsx";
 import { getUserMetaData } from "./api/apiRequests.ts";
 import { UserRoute } from "@utils/UserRouteProtection.tsx";
 import SponsorsScreen from "./screens/SponsorsScreen.tsx";
+import ResetPasswordScreen from "./screens/ResetPasswordScreen.tsx";
 
 //supertokens code
 SuperTokens.init({
@@ -57,7 +58,11 @@ SuperTokens.init({
     //     providers: [Google.init()],
     //   },
     // }),
-    EmailPassword.init(),
+    EmailPassword.init({
+      resetPasswordUsingTokenFeature: {
+        disableDefaultUI: true,
+      },
+    }),
     Session.init({
       tokenTransferMethod: "header", // or "cookie"
     }),
@@ -109,6 +114,7 @@ const router = createBrowserRouter(
         element={<SponsorsScreen navbar={<Header />} />}
       />
       <Route path="/login" element={<SignInScreen navbar={<Header />} />} />
+      <Route path="/signup/reset-password" element={<ResetPasswordScreen />} />
       <Route path="/signup" element={<SignUpScreen navbar={<Header />} />} />
       <Route path="/signup/callback/google" element={<SignInAndUpCallback />} />
       <Route path="/aboutus" element={<AboutUsScreen navbar={<Header />} />} />
