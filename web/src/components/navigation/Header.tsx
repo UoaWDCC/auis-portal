@@ -21,7 +21,7 @@ export default function Header() {
     { title: "Events", page: "/events" },
     { title: "About Us", page: "/aboutus" },
     { title: "Team", page: "/exec" },
-    { title: "Partners", page: "/sponsors" },
+    { title: "Sponsors", page: "/sponsors" },
     { title: "Membership", page: "/membership" },
   ];
 

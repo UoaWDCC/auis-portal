@@ -4,7 +4,8 @@
   "info": {
     "singularName": "partner",
     "pluralName": "partners",
-    "displayName": "Sponsors"
+    "displayName": "Sponsors",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -21,24 +22,24 @@
       "required": true
     },
     "Image": {
-      "allowedTypes": [
-        "images"
-      ],
       "type": "media",
       "multiple": false,
-      "required": true
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
     },
     "Name": {
       "type": "string",
-      "required": true
+      "required": false
     },
-    "Location": {
+    "Link": {
       "type": "text",
-      "required": true
+      "required": false
     },
     "Description": {
       "type": "text",
-      "required": true
+      "required": false
     }
   }
 }

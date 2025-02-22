@@ -32,7 +32,7 @@ export const GET_PARTNERS = gql`
         attributes {
           Type
           Name
-          Location
+          Link
           Description
           Image {
             data {

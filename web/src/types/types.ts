@@ -20,7 +20,7 @@ export interface Partner {
   name: string;
   description: string;
   image: string;
-  location: string;
+  link: string;
 }
 
 export interface SomePhoto {

@@ -75,7 +75,7 @@ export class Mapper {
           type: attributes.Type || "",
           name: attributes.Name || "",
           description: attributes.Description || "",
-          location: attributes.Location || "",
+          link: attributes.Link || "",
           image: imageUrl,
         };
       });
