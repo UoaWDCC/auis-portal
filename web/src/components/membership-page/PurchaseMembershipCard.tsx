@@ -27,12 +27,15 @@ export default function PurchaseMembershipCard({
   const session = useSessionContext();
 
   function handleClick() {
-    console.log(membershipLinkBypass);
-    if (membershipLinkBypass) {
-      window.open(bypassMembershipLink, "_blank");
-    } else {
-      if (!session.loading) {
-        if (session.doesSessionExist) {
+    // console.log(bypassMembershipLink)
+    // if (membershipLinkBypass) {
+    //   window.open(bypassMembershipLink, "_blank");
+    // } else {
+    if (!session.loading) {
+      if (session.doesSessionExist) {
+        if (membershipLinkBypass) {
+          window.open(bypassMembershipLink, "_blank");
+        } else {
           navigate("/checkout/payment", {
             state: {
               data: {
@@ -41,11 +44,12 @@ export default function PurchaseMembershipCard({
               },
             },
           });
-        } else {
-          navigate("/signup");
         }
+      } else {
+        navigate("/signup");
       }
     }
+    // }
   }
 
   return (
