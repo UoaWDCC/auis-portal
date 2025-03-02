@@ -31,24 +31,24 @@ export default function PurchaseMembershipCard({
     // if (membershipLinkBypass) {
     //   window.open(bypassMembershipLink, "_blank");
     // } else {
-      if (!session.loading) {
-        if (session.doesSessionExist) {
-          if (membershipLinkBypass) {
-            window.open(bypassMembershipLink, "_blank");
-          } else {
-            navigate("/checkout/payment", {
-              state: {
-                data: {
-                  priceId: stripeLink,
-                  isTicket: false,
-                },
-              },
-            });
-          }
+    if (!session.loading) {
+      if (session.doesSessionExist) {
+        if (membershipLinkBypass) {
+          window.open(bypassMembershipLink, "_blank");
         } else {
-          navigate("/signup");
+          navigate("/checkout/payment", {
+            state: {
+              data: {
+                priceId: stripeLink,
+                isTicket: false,
+              },
+            },
+          });
         }
+      } else {
+        navigate("/signup");
       }
+    }
     // }
   }
 
