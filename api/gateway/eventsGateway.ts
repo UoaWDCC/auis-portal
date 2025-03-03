@@ -7,7 +7,6 @@ import {
   userTickets,
   tickets,
   ticketsEventIdLinks,
-  tickets,
 } from "../schemas/schema";
 import { stripe } from "../stripe/stripe";
 import { sendEmail } from "../mailer/mailer";
@@ -225,7 +224,7 @@ export async function completeTicketPurchase(
       await generateQRCode(updatedTicket[0].peopleTicketCode!),
       checkoutSession.customer_details!.email!,
       customer[0].name!,
-      ticket[0].name!,
+      ticket[0].title!,
       updatedTicket[0].peopleTicketCode!
     );
   }
@@ -278,15 +277,16 @@ export async function isPriceIdForEvent(priceId: string) {
 
     // if array is 1, true. If 0, set to false.
     if (isUsedForEvent.length == 1) {
-      isPriceIdUsedForEventOrMembership = true;
+      isEventPriceId = true;
     } else if (isUsedForEvent.length == 0) {
-      isPriceIdUsedForEventOrMembership = false;
+      isEventPriceId = false;
     }
   }
 
-  return isPriceIdUsedForEventOrMembership;
+  return isEventPriceId;
 }
 
+/*
 export async function getUserTickets(eventId: number) {
   console.log("I WAS CALLED");
   console.log(eventId);
@@ -350,3 +350,4 @@ export async function updateUserTicket() {
 
   return eventTickets;
 }
+*/
