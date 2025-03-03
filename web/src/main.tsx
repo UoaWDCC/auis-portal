@@ -11,7 +11,7 @@ import { ApolloProvider } from "@apollo/client";
 
 //supertokens
 import SuperTokens, { SuperTokensWrapper } from "supertokens-auth-react";
-import ThirdParty, { Google } from "supertokens-auth-react/recipe/thirdparty";
+// import ThirdParty, { Google } from "supertokens-auth-react/recipe/thirdparty";
 import EmailPassword from "supertokens-auth-react/recipe/emailpassword";
 import Session from "supertokens-auth-react/recipe/session";
 import { SignInAndUpCallback } from "supertokens-auth-react/recipe/thirdparty/prebuiltui";
@@ -28,7 +28,6 @@ import SignInScreen from "./screens/SignInScreen.tsx";
 import CheckoutScreen from "./screens/CheckoutScreen.tsx";
 import ReturnScreen from "./screens/ReturnScreen.tsx";
 import EventScreen from "./screens/EventScreen.tsx";
-import PartnersScreen from "./screens/PartnersScreen.tsx";
 import Header from "@components/navigation/Header.tsx";
 import MembershipScreen from "./screens/MembershipScreen.tsx";
 import EventInformationScreen from "./screens/EventInformationScreen.tsx";
@@ -40,6 +39,8 @@ import EventAttendanceSelectScreen from "./screens/EventAttendanceSelectScreen.t
 import { ExecRoute } from "@utils/AdminRouteProtection.tsx";
 import { getUserMetaData } from "./api/apiRequests.ts";
 import { UserRoute } from "@utils/UserRouteProtection.tsx";
+import SponsorsScreen from "./screens/SponsorsScreen.tsx";
+import ResetPasswordScreen from "./screens/ResetPasswordScreen.tsx";
 
 //supertokens code
 SuperTokens.init({
@@ -52,13 +53,19 @@ SuperTokens.init({
   },
   disableAuthRoute: true,
   recipeList: [
-    ThirdParty.init({
-      signInAndUpFeature: {
-        providers: [Google.init()],
+    // ThirdParty.init({
+    //   signInAndUpFeature: {
+    //     providers: [Google.init()],
+    //   },
+    // }),
+    EmailPassword.init({
+      resetPasswordUsingTokenFeature: {
+        disableDefaultUI: true,
       },
     }),
-    EmailPassword.init(),
-    Session.init(),
+    Session.init({
+      tokenTransferMethod: "header", // or "cookie"
+    }),
   ],
   getRedirectionURL: async (context) => {
     if (context.action === "SUCCESS" && context.newSessionCreated) {
@@ -104,9 +111,10 @@ const router = createBrowserRouter(
       <Route path="/exec" element={<ExecScreen navbar={<Header />} />} />
       <Route
         path="/sponsors"
-        element={<PartnersScreen navbar={<Header />} />}
+        element={<SponsorsScreen navbar={<Header />} />}
       />
       <Route path="/login" element={<SignInScreen navbar={<Header />} />} />
+      <Route path="/signup/reset-password" element={<ResetPasswordScreen />} />
       <Route path="/signup" element={<SignUpScreen navbar={<Header />} />} />
       <Route path="/signup/callback/google" element={<SignInAndUpCallback />} />
       <Route path="/aboutus" element={<AboutUsScreen navbar={<Header />} />} />

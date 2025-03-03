@@ -31,6 +31,7 @@ export class Mapper {
           description: attributes.Description || "",
           position: attributes.Position || "",
           role: attributes.Role || "",
+          linkedInLink: attributes.Linked_In_Link || "",
           image: imageUrl,
         };
       });
@@ -74,7 +75,7 @@ export class Mapper {
           type: attributes.Type || "",
           name: attributes.Name || "",
           description: attributes.Description || "",
-          location: attributes.Location || "",
+          link: attributes.Link || "",
           image: imageUrl,
         };
       });

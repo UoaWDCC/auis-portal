@@ -36,8 +36,13 @@
       "type": "enumeration",
       "enum": [
         "President",
-        "Executive"
+        "Executive",
+        "Lead"
       ],
+      "required": true
+    },
+    "Linked_In_Link": {
+      "type": "string",
       "required": true
     }
   }

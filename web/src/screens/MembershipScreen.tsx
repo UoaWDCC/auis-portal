@@ -126,7 +126,7 @@ export default function MembershipScreen({ navbar }: { navbar: JSX.Element }) {
           </div>
         ) : (
           <div className="h-full">
-            <div className="flex flex-wrap items-center justify-center">
+            <div className="flex flex-wrap items-stretch justify-center">
               {purchasableMemberships.map((purchasableMembership) => (
                 <PurchaseMembershipCard
                   key={purchasableMembership.id}

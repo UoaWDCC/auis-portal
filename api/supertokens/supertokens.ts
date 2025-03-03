@@ -162,7 +162,9 @@ export function getConfiguredRecipeList(): RecipeListFunction[] {
         ],
       },
     }),
-    Session.init(), // initializes session features
+    Session.init({
+      getTokenTransferMethod: () => "header",
+    }), // initializes session features
     Dashboard.init(),
     UserMetadata.init(),
     UserRoles.init(),

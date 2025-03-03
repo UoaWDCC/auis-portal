@@ -15,6 +15,7 @@ describe("mapToExec", () => {
               Description: "A great leader",
               Position: "President",
               Role: "Leader",
+              Linked_In_Link: "",
               Image: {
                 data: {
                   attributes: {
@@ -36,6 +37,7 @@ describe("mapToExec", () => {
         position: "President",
         role: "Leader",
         image: "/uploads/john_doe.jpg",
+        linkedInLink: "",
       },
     ];
 
@@ -53,6 +55,7 @@ describe("mapToExec", () => {
               Description: "A great vice president",
               Position: "Vice President",
               Role: "Vice Leader",
+              Linked_In_Link: "",
               Image: null,
             },
           },
@@ -68,6 +71,7 @@ describe("mapToExec", () => {
         position: "Vice President",
         role: "Vice Leader",
         image: "",
+        linkedInLink: "",
       },
     ];
 
@@ -85,6 +89,7 @@ describe("mapToExec", () => {
               Description: "A great treasurer",
               Position: "Treasurer",
               Role: "Finance",
+              Linked_In_Link: "",
               Image: {
                 data: {
                   attributes: {
@@ -106,6 +111,7 @@ describe("mapToExec", () => {
         position: "Treasurer",
         role: "Finance",
         image: "/uploads/jane_doe.jpg",
+        linkedInLink: "",
       },
     ];
 
@@ -123,6 +129,7 @@ describe("mapToExec", () => {
               Description: null,
               Position: "Secretary",
               Role: "Organizer",
+              Linked_In_Link: "",
               Image: {
                 data: {
                   attributes: {
@@ -144,6 +151,7 @@ describe("mapToExec", () => {
         position: "Secretary",
         role: "Organizer",
         image: "/uploads/john_smith.jpg",
+        linkedInLink: "",
       },
     ];
 
@@ -160,6 +168,7 @@ describe("mapToExec", () => {
               Name: "Guryash",
               Description: "A great secretary",
               Position: null,
+              Linked_In_Link: "",
               Role: "Organizer",
               Image: {
                 data: {
@@ -182,6 +191,7 @@ describe("mapToExec", () => {
         position: "",
         role: "Organizer",
         image: "/uploads/john_smith.jpg",
+        linkedInLink: "",
       },
     ];
 
@@ -199,6 +209,7 @@ describe("mapToExec", () => {
               Description: "A great member",
               Position: "Member",
               Role: null,
+              Linked_In_Link: "",
               Image: {
                 data: {
                   attributes: {
@@ -220,6 +231,7 @@ describe("mapToExec", () => {
         position: "Member",
         role: "",
         image: "/uploads/john_doe.jpg",
+        linkedInLink: "",
       },
     ];
 
@@ -245,6 +257,7 @@ describe("mapToExec", () => {
         description: "",
         position: "",
         role: "",
+        linkedInLink: "",
         image: "",
       },
     ];

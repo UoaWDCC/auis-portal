@@ -1,4 +1,4 @@
-import { ThirdPartyPreBuiltUI } from "supertokens-auth-react/recipe/thirdparty/prebuiltui";
+// import { ThirdPartyPreBuiltUI } from "supertokens-auth-react/recipe/thirdparty/prebuiltui";
 import { EmailPasswordPreBuiltUI } from "supertokens-auth-react/recipe/emailpassword/prebuiltui";
 import { AuthPage } from "supertokens-auth-react/ui";
 import auisLogo from "../assets/peacock_white_inner_big.png";
@@ -22,7 +22,8 @@ export default function SignInScreen({ navbar }: { navbar: JSX.Element }) {
         <div className="flex flex-grow justify-center pb-12 xl:justify-start xl:pl-24">
           <div data-testid="supertokens-sign-in" className="flex">
             <AuthPage
-              preBuiltUIList={[EmailPasswordPreBuiltUI, ThirdPartyPreBuiltUI]}
+              preBuiltUIList={[EmailPasswordPreBuiltUI]}
+              // preBuiltUIList={[EmailPasswordPreBuiltUI, ThirdPartyPreBuiltUI]}
               isSignUp={false}
             />
           </div>
