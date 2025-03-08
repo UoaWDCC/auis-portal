@@ -213,10 +213,10 @@ export async function completeTicketPurchase(
       .returning();
 
     //prod fail:
-    console.dir("eventsGateway.ts: ticketId" + ticketId);
-    console.dir("eventsGateway.ts: eventId" + eventId);
-    console.dir("eventsGateway.ts: event" + event);
-    console.dir("eventsGateway.ts: updatedTicket" + updatedTicket);
+    console.dir("eventsGateway.ts: ticketId" + JSON.stringify(ticketId, null, 2));
+    console.dir("eventsGateway.ts: eventId" + JSON.stringify(eventId, null, 2));
+    console.dir("eventsGateway.ts: event" + JSON.stringify(event, null, 2));
+    console.dir("eventsGateway.ts: updatedTicket" + JSON.stringify(updatedTicket, null, 2));
 
     //turn this off locally. Staging and Prod is fine.
     sendEmail(
