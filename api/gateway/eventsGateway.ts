@@ -105,7 +105,6 @@ export async function reserveTicket(priceId: string) {
     //if ticket available, reduce by 1
     if (canReserveTicket === true) {
       // sql for reserving statement EVENT
-      console.log("WHY AM I RUNNING TWICE");
       reservedTicket = await db
         .update(events)
         .set({

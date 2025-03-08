@@ -54,7 +54,6 @@ export const createCheckout = asyncHandler(
               "There are no tickets available for this event. Please come back later to see if more tickets become available.",
           });
         } else {
-          console.log("why is this called twice");
           reserveTicket(priceId);
         }
       }
