@@ -164,7 +164,7 @@ export async function completeTicketPurchase(
   });
 
   if (checkoutSession.payment_status !== "unpaid") {
-    console.log("completeTicketPurchase: received: ", checkoutSession);
+    //console.log("completeTicketPurchase: received: ", checkoutSession);
     console.log(
       "completeTicketPurchase: customer_email: ",
       checkoutSession.customer_details?.email
