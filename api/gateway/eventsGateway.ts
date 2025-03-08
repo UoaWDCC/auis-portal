@@ -160,16 +160,10 @@ export async function completeTicketPurchase(
   sessionId: string,
   userTicketId: string
 ) {
-  //retrieve session from API with line_items expanded
-  console.log("I RAN");
   const checkoutSession = await stripe.checkout.sessions.retrieve(sessionId, {
     expand: ["line_items"],
   });
 
-  console.log(checkoutSession);
-  // Check the Checkout Session's payment_status property
-  // to determine if fulfillment should be peformed
-  // check for something here idk : ()
   if (checkoutSession.payment_status !== "unpaid") {
     console.log("completeTicketPurchase: received: ", checkoutSession);
     console.log(
@@ -219,13 +213,18 @@ export async function completeTicketPurchase(
       )
       .returning();
 
-    //email the user ticket
+    //prod fail:
+    console.log("eventsGateway.ts: ticketId" + ticketId);
+    console.log("eventsGateway.ts: eventId" + eventId);
+    console.log("eventsGateway.ts: event" + event);
+    console.log("eventsGateway.ts: updatedTicket" + updatedTicket);
+
     //turn this off locally. Staging and Prod is fine.
     sendEmail(
       await generateQRCode(updatedTicket[0].peopleTicketCode!),
       checkoutSession.customer_details!.email!,
       customer[0].name!,
-      event[0].title!,
+      event[0].title!, // @Ratchet7x5: THIS IS FAILING IN PROD
       updatedTicket[0].peopleTicketCode!
     );
   }
