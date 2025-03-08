@@ -213,10 +213,7 @@ export async function completeTicketPurchase(
       .returning();
 
     //prod fail:
-    console.dir("eventsGateway.ts: ticketId" + JSON.stringify(ticketId, null, 2));
-    console.dir("eventsGateway.ts: eventId" + JSON.stringify(eventId, null, 2));
-    console.dir("eventsGateway.ts: event" + JSON.stringify(event, null, 2));
-    console.dir("eventsGateway.ts: updatedTicket" + JSON.stringify(updatedTicket, null, 2));
+
 
     //turn this off locally. Staging and Prod is fine.
     sendEmail(
@@ -283,68 +280,4 @@ export async function isPriceIdForEvent(priceId: string) {
   }
 
   return isPriceIdUsedForEventOrMembership;
-}
-
-export async function getUserTickets(eventId: number) {
-  console.log("I WAS CALLED");
-  console.log(eventId);
-  if (eventId < 0 || eventId === undefined || eventId === null) {
-    throw new Error(
-      "received invalid type for getUserTickets() in eventsGateway" + eventId
-    );
-  }
-
-  // search for this priceId
-  let eventTickets = await db
-    .select({
-      id: userTickets.id,
-      userTicketCode: userTickets.peopleTicketCode,
-      name: userTickets.name,
-    })
-    .from(ticketsEventIdLinks)
-    .where(eq(ticketsEventIdLinks.eventId, eventId))
-    .leftJoin(
-      userTicketsTicketIdLinks,
-      eq(ticketsEventIdLinks.ticketId, userTicketsTicketIdLinks.ticketId)
-    )
-    .leftJoin(
-      userTickets,
-      eq(userTicketsTicketIdLinks.userTicketId, userTickets.id)
-    );
-
-  console.log(eventTickets);
-
-  // if array is 1, true. If 0, set to false.
-
-  return eventTickets;
-}
-
-export async function updateUserTicket() {
-  console.log("I WAS CALLED");
-  // if (eventId < 0 || eventId === undefined || eventId === null) {
-  //   throw new Error(
-  //     "received invalid type for getUserTickets() in eventsGateway" + eventId
-  //   );
-  // }
-
-  let eventTickets = await db
-    .select({
-      id: userTickets.id,
-      userTicketCode: userTickets.peopleTicketCode,
-      name: userTickets.name,
-    })
-    .from(ticketsEventIdLinks)
-    .where(eq(ticketsEventIdLinks.eventId, 3)) // TODO WTF IS THIS
-    .leftJoin(
-      userTicketsTicketIdLinks,
-      eq(ticketsEventIdLinks.ticketId, userTicketsTicketIdLinks.ticketId)
-    )
-    .leftJoin(
-      userTickets,
-      eq(userTicketsTicketIdLinks.userTicketId, userTickets.id)
-    );
-
-  console.log(eventTickets);
-
-  return eventTickets;
 }
