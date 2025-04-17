@@ -118,13 +118,13 @@ describe("PartnersScreen", () => {
     );
 
     expect(
-      await screen.findByText("No gold partners to display")
+      await screen.findByText("No gold sponsors to display")
     ).toBeInTheDocument();
     expect(
-      await screen.findByText("No silver partners to display")
+      await screen.findByText("No silver sponsors to display")
     ).toBeInTheDocument();
     expect(
-      await screen.findByText("No bronze partners to display")
+      await screen.findByText("No bronze sponsors to display")
     ).toBeInTheDocument();
   });
 
@@ -192,13 +192,13 @@ describe("PartnersScreen", () => {
     );
 
     expect(
-      await screen.findByText("No gold partners to display")
+      await screen.findByText("No gold sponsors to display")
     ).toBeInTheDocument();
     expect(
-      await screen.findByText("No silver partners to display")
+      await screen.findByText("No silver sponsors to display")
     ).toBeInTheDocument();
     expect(
-      await screen.findByText("No bronze partners to display")
+      await screen.findByText("No bronze sponsors to display")
     ).toBeInTheDocument();
   });
 });
