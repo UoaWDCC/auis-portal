@@ -74,12 +74,12 @@ export default function SponsorsScreen({ navbar }: { navbar: JSX.Element }) {
             {/* Gold Partners */}
             {errorPartners ? (
               <div className="my-5 text-center">
-                No gold partners to display
+                No gold sponsors to display
               </div>
             ) : (
               <>
                 <h1 className="text-3xl font-bold text-[#F3CF0B]">
-                  Gold Partners
+                  Gold Sponsors
                 </h1>
                 <div className="flex flex-wrap items-stretch justify-center">
                   {goldPartners.map((goldPartner) => (
@@ -100,12 +100,12 @@ export default function SponsorsScreen({ navbar }: { navbar: JSX.Element }) {
             {/* Silver Partners */}
             {errorPartners ? (
               <div className="my-5 text-center">
-                No silver partners to display
+                No silver sponsors to display
               </div>
             ) : (
               <>
                 <h1 className="my-2 text-3xl font-bold text-[#C0C0C0]">
-                  Silver Partners
+                  Silver Sponsors
                 </h1>
                 <div className="flex flex-wrap items-stretch justify-center">
                   {silverPartners.map((silverPartner) => (
@@ -125,12 +125,12 @@ export default function SponsorsScreen({ navbar }: { navbar: JSX.Element }) {
             {/* Bronze Partners */}
             {errorPartners ? (
               <div className="my-5 text-center">
-                No bronze partners to display
+                No bronze sponsors to display
               </div>
             ) : (
               <>
                 <h1 className="my-2 text-3xl font-bold text-[#C88039]">
-                  Bronze Partners
+                  Bronze Sponsors
                 </h1>
                 <div className="flex flex-wrap items-stretch justify-center">
                   {bronzePartners.map((bronzePartner) => (
@@ -149,7 +149,7 @@ export default function SponsorsScreen({ navbar }: { navbar: JSX.Element }) {
           </div>
           <div className="max-w-screen flex flex-col items-center bg-white py-5 text-center">
             <h1 className="text-5xl font-bold text-black">
-              Want To Partner With Us?
+              Want To Sponsor or Partner With Us?
             </h1>
             <a
               href="mailto:au.indiansociety@gmail.com"
