@@ -54,7 +54,7 @@ export async function isTicketAvailableByPriceId(
           gt(tickets.numberTicketsLeft, 0)
           // TODO: Check for event start date, and invalid checkout if the event is started already.
           // and(
-          //   and(
+          //   and( 
           //     eq(tickets.stripeLink, priceId),
           //     eq(tickets.isTicketLive, true)
           //   ),
