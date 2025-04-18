@@ -14,6 +14,10 @@ primary_region = 'syd'
   # dockerfile contains build time non-sensitive env vars
   dockerfile = "docker-compose.yml"
 
+[vm]
+  size = "performance-4x"
+  memory = 16384
+
 [[mounts]]
   source = 'pg_data'
   destination = '/data'
