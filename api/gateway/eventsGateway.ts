@@ -227,7 +227,6 @@ export async function completeTicketPurchase(
       await generateQRCode(updatedTicket[0].peopleTicketCode!),
       checkoutSession.customer_details!.email!,
       customer[0].name!,
-      event[0].title!, // @Ratchet7x5: THIS IS FAILING IN PROD
       updatedTicket[0].peopleTicketCode!
     );
   }
