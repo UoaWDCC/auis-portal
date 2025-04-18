@@ -57,7 +57,11 @@ export default function ReturnScreen() {
             <h1 className="pt-12 text-center text-lg text-white">
               {/* Payment successful, a confirmation email will be sent to{" "}
               {customerEmail}. */}
-              Payment successful. Thank you for purchasing a ticket. Please provide your Full Name and any proof of name like driver license, student id etc. at the door. That will be your ticket. You will NOT recive a confirmation email. Feel free to screenshot this as proof of purchase.
+              Payment successful. Thank you for purchasing a ticket. Please
+              provide your Full Name and any proof of name like driver license,
+              student id etc. at the door. That will be your ticket. You will
+              NOT recive a confirmation email. Feel free to screenshot this as
+              proof of purchase.
             </h1>
             <p className="text-center text-lg text-white">
               If you have any questions, please email{" "}
