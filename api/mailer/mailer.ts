@@ -4,7 +4,6 @@ export function sendEmail(
   imageSVG: string,
   sendTo: string,
   name: string,
-  eventName: string,
   ticketCode: string
 ) {
   console.log("Sending email");
@@ -23,7 +22,7 @@ export function sendEmail(
   const mailOptions = {
     from: '"AUIS events - no reply" <MS_5fFA0W@auis.co.nz>', // sender address
     to: sendTo, // list of receivers
-    subject: "Ticket for AUIS Event: " + eventName, // Subject line
+    subject: "Ticket for AUIS Event", // Subject line
     // text: 'Hey there! Welcome to Your Business, we\'re happy to have you here! You\'ll be happy to know that your free trial awaits, all you need to do is head to your account, log in and start playing. Remember to check out our guides and contact support if you need anything. Regards, The Your Business Team', // plain text body
     html: `
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -34,7 +33,7 @@ export function sendEmail(
                 <div style="background-color:#07242F; color:#FFFFFF">
                     <h2 style="font-size: 1.25rem;
     line-height: 1.75rem; text-align: center; padding-bottom: 0.5rem; padding-top: 2rem; font-weight:400;">${name}, here is your ticket for: </h2>
-                    <h1 style="text-align:center; padding-top:1rem; padding-bottom:1rem; font-size:1.5rm; line-height:2rm; font-weight:400;">${eventName}</h1>
+                    <h1 style="text-align:center; padding-top:1rem; padding-bottom:1rem; font-size:1.5rm; line-height:2rm; font-weight:400;">EVENT</h1>
                     <div>
                         <h3 style="text-align:center; padding-bottom:0.5rem; font-weight:400;">Your ticket</h3>
                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
