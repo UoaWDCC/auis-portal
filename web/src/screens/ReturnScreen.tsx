@@ -18,7 +18,7 @@ export default function ReturnScreen() {
 
   const navigate = useNavigate();
   const [status, setStatus] = useState<string>("");
-  const [customerEmail, setCustomerEmail] = useState("");
+  // const [customerEmail, setCustomerEmail] = useState("");
 
   const { data: sessionStatus, status: sessionStatusHookStatus } =
     useSessionStatus(sessionId);
@@ -27,7 +27,7 @@ export default function ReturnScreen() {
   useEffect(() => {
     if (sessionStatusHookStatus === "success") {
       setStatus(sessionStatus.status);
-      setCustomerEmail(sessionStatus.customer_email);
+      // setCustomerEmail(sessionStatus.customer_email);
     }
   }, [sessionStatusHookStatus, sessionStatus]);
 
