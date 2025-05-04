@@ -36,21 +36,20 @@ export default function EventInformationScreen({
   } = useQuery(getEventById({ id: queryId }));
 
   // Get current member ticket info
-  const {
-    data: TicketInfoData,
-    status: statusTicketInfoData,
-  } = useUserMemberTicketInfo(queryId);
+  const { data: TicketInfoData, status: statusTicketInfoData } =
+    useUserMemberTicketInfo(queryId);
 
   // States
   const [event, setEvent] = useState<EventAndTickets>();
   const [loadingEvent, setLoadingEvent] = useState(true);
   const [errorEvent, setErrorEvent] = useState(false);
 
-  const [userTicketInfoData, setUserTicketInfoData] = useState<MembershipTicketInfo>({
-    ticketIdCode: "",
-    ticketName: "",
-    qrCode: ""
-  });
+  const [userTicketInfoData, setUserTicketInfoData] =
+    useState<MembershipTicketInfo>({
+      ticketIdCode: "",
+      ticketName: "",
+      qrCode: "",
+    });
 
   // update values once data is fetched
   useEffect(() => {
@@ -185,7 +184,18 @@ export default function EventInformationScreen({
         ))}
       </div>
       <LineBreak />
-      {statusTicketInfoData === "success" ? <><YourTicket name={TicketInfoData.ticketName} qrCode={TicketInfoData.qrCode} ticketNumber={TicketInfoData.ticketIdCode} /><LineBreak /></> : <></>}
+      {statusTicketInfoData === "success" ? (
+        <>
+          <YourTicket
+            name={TicketInfoData.ticketName}
+            qrCode={TicketInfoData.qrCode}
+            ticketNumber={TicketInfoData.ticketIdCode}
+          />
+          <LineBreak />
+        </>
+      ) : (
+        <></>
+      )}
       <TermsAndConditions termsAndConditions={event.termsAndConditions} />
       <LineBreak />
       <ContactInformation />

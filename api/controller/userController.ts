@@ -46,7 +46,7 @@ function isInt(value: any) {
 export const getUserTicketInfo = asyncHandler(
   async (req: Request<{}, {}, { eventId: number }>, res: Response) => {
     try {
-      const { eventId : eventID} = req.query;
+      const { eventId: eventID } = req.query;
 
       if (!eventID) {
         return res.status(400).json({ message: "All fields are required" });
@@ -62,12 +62,16 @@ export const getUserTicketInfo = asyncHandler(
       const user = await getUser(userId);
       const userEmail = user?.emails[0];
 
-      let ticketInformation = await getUserTicketCode(userEmail as string, eventID.toString());
+      let ticketInformation = await getUserTicketCode(
+        userEmail as string,
+        eventID.toString()
+      );
 
       res.status(200).json({ ticketInformation: ticketInformation });
     } catch (error) {
       res.status(500).json({
-        message: "Unknown error occurred while trying to get User TicketInformation",
+        message:
+          "Unknown error occurred while trying to get User TicketInformation",
       });
     }
   }

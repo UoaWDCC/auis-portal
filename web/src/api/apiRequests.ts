@@ -93,10 +93,9 @@ export const fetchUserMemberTicketInfo = async (
       "Content-Type": "application/json",
     },
   });
-  console.log(response.data.ticketInformation)
+  console.log(response.data.ticketInformation);
   return response.data.ticketInformation;
 };
-
 
 // Admin to see attendance information
 export const fetchAttendanceInformation = async (

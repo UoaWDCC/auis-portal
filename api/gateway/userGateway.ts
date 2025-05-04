@@ -59,8 +59,8 @@ export async function getUserMembershipExpiryDate(
 export async function getUserTicketCode(
   userEmail: string,
   eventID: string
-): Promise<{ticketIdCode: string, ticketName: string, qrCode: string}> {
-  let returnInfo = {ticketIdCode: "", ticketName: "", qrCode: ""};
+): Promise<{ ticketIdCode: string; ticketName: string; qrCode: string }> {
+  let returnInfo = { ticketIdCode: "", ticketName: "", qrCode: "" };
 
   if (!userEmail) {
     throw new Error(
@@ -72,20 +72,30 @@ export async function getUserTicketCode(
   if (!eventID) {
     throw new Error(
       "getUserMembershipExpiryDate: received invalid type for eventID: " +
-       eventID
+        eventID
     );
   }
 
-  let ticketIdsFromEventID = await db.select({ticketId: ticketsEventIdLinks.ticketId})
-  .from(ticketsEventIdLinks)
-  .where(eq(ticketsEventIdLinks.eventId, parseInt(eventID)))
-  
-  let arr = (ticketIdsFromEventID.filter(item => item.ticketId !== null)
-  .map(item => item.ticketId!))
+  let ticketIdsFromEventID = await db
+    .select({ ticketId: ticketsEventIdLinks.ticketId })
+    .from(ticketsEventIdLinks)
+    .where(eq(ticketsEventIdLinks.eventId, parseInt(eventID)));
+
+  let arr = ticketIdsFromEventID
+    .filter((item) => item.ticketId !== null)
+    .map((item) => item.ticketId!);
 
   let ticketIdCodeDB = await db
-    .select({ ticketName: userTickets.name,  ticketCode: userTickets.peopleTicketCode}).from(userTickets)
-    .where(and(eq(userTickets.email, userEmail), eq(userTickets.paid, true))).innerJoin(userTicketsTicketIdLinks,  inArray(userTicketsTicketIdLinks.ticketId, arr))
+    .select({
+      ticketName: userTickets.name,
+      ticketCode: userTickets.peopleTicketCode,
+    })
+    .from(userTickets)
+    .where(and(eq(userTickets.email, userEmail), eq(userTickets.paid, true)))
+    .innerJoin(
+      userTicketsTicketIdLinks,
+      inArray(userTicketsTicketIdLinks.ticketId, arr)
+    )
     .limit(1);
 
   if (ticketIdCodeDB.length >= 1) {
@@ -103,13 +113,11 @@ export async function getUserTicketCode(
     ) {
       returnInfo.ticketName = ticketIdCodeDB[0].ticketName;
       returnInfo.ticketIdCode = ticketIdCodeDB[0].ticketCode;
-      let qrCode : string = await generateQRCode(ticketIdCodeDB[0].ticketCode)
+      let qrCode: string = await generateQRCode(ticketIdCodeDB[0].ticketCode);
       returnInfo.qrCode = qrCode;
     }
   } else if (ticketIdCodeDB.length === 0) {
-    throw new Error(
-      "getUserMembershipExpiryDate: ticketIdCodeDB.length was 0"
-    );
+    throw new Error("getUserMembershipExpiryDate: ticketIdCodeDB.length was 0");
   }
 
   return returnInfo;
