@@ -7,6 +7,7 @@ import {
   updateUserMetadata,
   getUserMembershipExpiry,
   updateUserTicketInfo,
+  getUserTicketInfo,
 } from "../controller/userController";
 
 const router = Router();
@@ -16,5 +17,6 @@ router.post("/update-metadata", verifySession(), updateUserMetadata);
 router.post("/user-ticket-info", updateUserTicketInfo);
 router.get("/get-metadata", verifySession(), getUserMetadata);
 router.get("/get-membership-expiry", verifySession(), getUserMembershipExpiry);
+router.get("/get-ticket-code", verifySession(), getUserTicketInfo);
 
 export default router;

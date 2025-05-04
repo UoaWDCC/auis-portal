@@ -4,6 +4,7 @@ import {
   AttendanceList,
   EventOrMembershipReturn,
   MembershipExpiryDate as MembershipExpiryDate,
+  MembershipTicketInfo,
   stripeSessionStatus,
   UpdateUserInfoOrNewUser,
 } from "../types/types";
@@ -80,6 +81,22 @@ export const fetchUserMembershipExpiry =
     const response = await apiClient.get("/api/user/get-membership-expiry");
     return response.data;
   };
+
+// Admin to see attendance information
+export const fetchUserMemberTicketInfo = async (
+  eventId: number
+): Promise<MembershipTicketInfo> => {
+  const params = { eventId: eventId };
+  const response = await apiClient.get("/api/user/get-ticket-code", {
+    params: params,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  console.log(response.data.ticketInformation)
+  return response.data.ticketInformation;
+};
+
 
 // Admin to see attendance information
 export const fetchAttendanceInformation = async (

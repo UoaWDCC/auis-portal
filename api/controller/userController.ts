@@ -3,6 +3,7 @@ import asyncHandler from "../middleware/asyncHandler";
 import {
   doesUserExistByEmail,
   getUserMembershipExpiryDate,
+  getUserTicketCode,
   insertUserTicket,
 } from "../gateway/userGateway";
 import UserMetadata from "supertokens-node/recipe/usermetadata";
@@ -28,6 +29,45 @@ export const updateUserTicketInfo = asyncHandler(
       res.status(500).json({
         message:
           "Error occured while trying to update/insert a user ticket: " + error,
+      });
+    }
+  }
+);
+
+function isInt(value: any) {
+  return (
+    !isNaN(value) &&
+    (function (x) {
+      return (x | 0) === x;
+    })(parseFloat(value))
+  );
+}
+
+export const getUserTicketInfo = asyncHandler(
+  async (req: Request<{}, {}, { eventId: number }>, res: Response) => {
+    try {
+      const { eventId : eventID} = req.query;
+
+      if (!eventID) {
+        return res.status(400).json({ message: "All fields are required" });
+      }
+      if (!isInt(eventID)) {
+        return res.status(400).json({ message: "All fields are required" });
+      }
+
+      const session = req.session!;
+      const userId = session.getUserId();
+
+      //get user email
+      const user = await getUser(userId);
+      const userEmail = user?.emails[0];
+
+      let ticketInformation = await getUserTicketCode(userEmail as string, eventID.toString());
+
+      res.status(200).json({ ticketInformation: ticketInformation });
+    } catch (error) {
+      res.status(500).json({
+        message: "Unknown error occurred while trying to get User TicketInformation",
       });
     }
   }

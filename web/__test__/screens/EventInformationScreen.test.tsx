@@ -13,6 +13,9 @@ import React from "react";
 import { GraphQLError } from "graphql";
 import "@testing-library/jest-dom";
 import { MemoryRouter } from "react-router";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 // // Mock data for GET_INTRODUCTION query
 // const introMock = {
@@ -84,12 +87,62 @@ import { MemoryRouter } from "react-router";
 // const mocks = [introMock];
 // const noDataMocks = [noIntroMock];
 
+vi.mock("../../api/apiRequests", () => ({
+  useUserMemberTicketInfo: () =>
+    Promise.resolve({
+      ticketIdCode: "ticketIdCode",
+      ticketName: "ticketName",
+      qrCode: "qrCode",
+    }),
+}));
+
+// const mockedUseUserMembershipExpiry = vi.fn(() =>
+//     {
+//         data: {useUserMembershipExpiry: nextDate.toString()}
+//     }
+// );
+vi.mock("../hooks/api/useUserMemberTicketInfo", async () => {
+  const mod = await vi.importActual<
+    typeof import("../../src/hooks/api/useUserMemberTicketInfo")
+  >("../../src/hooks/api/useUserMemberTicketInfo");
+  return {
+    ...mod,
+    useUserMemberTicketInfo: () => () => ({
+      data: {
+        ticketIdCode: "ticketIdCode",
+        ticketName: "ticketName",
+        qrCode: "qrCode",
+      },
+      isLoading: false,
+      error: undefined,
+    }),
+  };
+});
+
+// supertoken hook working
+vi.mock("supertokens-auth-react/recipe/session", async () => {
+  const mod = await vi.importActual<
+    typeof import("supertokens-auth-react/recipe/session")
+  >("supertokens-auth-react/recipe/session");
+  return {
+    ...mod,
+    useSessionContext: () => ({
+      loading: false,
+      doesSessionExist: false,
+    }),
+  };
+});
+
+
+
 describe("EventInformationScreen", () => {
   it("renders loading spinner initially", () => {
     render(
       <MockedProvider addTypename={false}>
         <MemoryRouter>
-          <EventInformationScreen navbar={<></>} />
+          <QueryClientProvider client={queryClient}>
+            <EventInformationScreen navbar={<></>} />
+          </QueryClientProvider>
         </MemoryRouter>
       </MockedProvider>
     );
@@ -113,7 +166,9 @@ describe("EventInformationScreen", () => {
     render(
       <MockedProvider mocks={errorMocks} addTypename={false}>
         <MemoryRouter>
-          <EventInformationScreen navbar={<></>} />
+        <QueryClientProvider client={queryClient}>
+            <EventInformationScreen navbar={<></>} />
+          </QueryClientProvider>
         </MemoryRouter>
       </MockedProvider>
     );

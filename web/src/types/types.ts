@@ -119,6 +119,12 @@ export interface MembershipExpiryDate {
   userExpiryDate: string;
 }
 
+export interface MembershipTicketInfo {
+  ticketIdCode: string;
+  ticketName: string;
+  qrCode: string;
+}
+
 export interface QuestionAnswer {
   question: string;
   questionId: number;
