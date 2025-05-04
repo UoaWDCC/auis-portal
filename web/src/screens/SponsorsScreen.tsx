@@ -47,6 +47,9 @@ export default function SponsorsScreen({ navbar }: { navbar: JSX.Element }) {
   const bronzePartners = partners.filter(
     (partner) => partner.type === "Bronze"
   );
+  const partnerPartners = partners.filter(
+    (partner) => partner.type === "Partner"
+  );
 
   if (loadingPartners) {
     return (
@@ -140,6 +143,29 @@ export default function SponsorsScreen({ navbar }: { navbar: JSX.Element }) {
                         image={bronzePartner.image}
                         name={bronzePartner.name}
                         colour="#C88039"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
+            {/* Partners */}
+            {errorPartners ? (
+              <div className="my-5 text-center">No partners to display</div>
+            ) : (
+              <>
+                <h1 className="my-2 text-3xl font-bold text-[#0F4A57]">
+                  Partners
+                </h1>
+                <div className="flex flex-wrap items-stretch justify-center">
+                  {partnerPartners.map((partnerPartners) => (
+                    <div className="my-5 px-10" key={partnerPartners.id}>
+                      <SilverPartnerCard
+                        key={partnerPartners.id}
+                        image={partnerPartners.image}
+                        description={partnerPartners.description}
+                        name={partnerPartners.name}
+                        colour="#0F4A57"
                       />
                     </div>
                   ))}

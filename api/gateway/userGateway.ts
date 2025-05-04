@@ -5,16 +5,18 @@ import {
   peoples,
   purchasableMemberships,
   questions,
+  ticketsEventIdLinks,
   userTickets,
   userTicketsPeopleIdLinks,
   userTicketsTicketIdLinks,
 } from "../schemas/schema";
 import { db } from "../db/config/db";
 import { User, UpdateUserInfoBody } from "../types/types";
-import { eq } from "drizzle-orm";
+import { eq, and, inArray } from "drizzle-orm";
 import { stripe } from "../stripe/stripe";
 import { getUserEmail, getUserIdByEmail } from "./authGateway";
 import { updateUserMetadata } from "supertokens-node/recipe/usermetadata";
+import { generateQRCode } from "../mailer/qrCode";
 
 export async function getUserMembershipExpiryDate(
   userEmail: string
@@ -52,6 +54,73 @@ export async function getUserMembershipExpiryDate(
   }
 
   return returnDate;
+}
+
+export async function getUserTicketCode(
+  userEmail: string,
+  eventID: string
+): Promise<{ ticketIdCode: string; ticketName: string; qrCode: string }> {
+  let returnInfo = { ticketIdCode: "", ticketName: "", qrCode: "" };
+
+  if (!userEmail) {
+    throw new Error(
+      "getUserMembershipExpiryDate: received invalid type for userEmail: " +
+        userEmail
+    );
+  }
+
+  if (!eventID) {
+    throw new Error(
+      "getUserMembershipExpiryDate: received invalid type for eventID: " +
+        eventID
+    );
+  }
+
+  let ticketIdsFromEventID = await db
+    .select({ ticketId: ticketsEventIdLinks.ticketId })
+    .from(ticketsEventIdLinks)
+    .where(eq(ticketsEventIdLinks.eventId, parseInt(eventID)));
+
+  let arr = ticketIdsFromEventID
+    .filter((item) => item.ticketId !== null)
+    .map((item) => item.ticketId!);
+
+  let ticketIdCodeDB = await db
+    .select({
+      ticketName: userTickets.name,
+      ticketCode: userTickets.peopleTicketCode,
+    })
+    .from(userTickets)
+    .where(and(eq(userTickets.email, userEmail), eq(userTickets.paid, true)))
+    .innerJoin(
+      userTicketsTicketIdLinks,
+      inArray(userTicketsTicketIdLinks.ticketId, arr)
+    )
+    .limit(1);
+
+  if (ticketIdCodeDB.length >= 1) {
+    if (
+      ticketIdCodeDB[0].ticketName === undefined ||
+      ticketIdCodeDB[0].ticketName === null ||
+      ticketIdCodeDB[0].ticketCode === undefined ||
+      ticketIdCodeDB[0].ticketCode === null
+    ) {
+    } else if (
+      ticketIdCodeDB[0].ticketName !== undefined ||
+      ticketIdCodeDB[0].ticketName !== null ||
+      ticketIdCodeDB[0].ticketCode !== undefined ||
+      ticketIdCodeDB[0].ticketCode !== null
+    ) {
+      returnInfo.ticketName = ticketIdCodeDB[0].ticketName;
+      returnInfo.ticketIdCode = ticketIdCodeDB[0].ticketCode;
+      let qrCode: string = await generateQRCode(ticketIdCodeDB[0].ticketCode);
+      returnInfo.qrCode = qrCode;
+    }
+  } else if (ticketIdCodeDB.length === 0) {
+    throw new Error("getUserMembershipExpiryDate: ticketIdCodeDB.length was 0");
+  }
+
+  return returnInfo;
 }
 
 export async function isMembershipActive(userEmail: string): Promise<boolean> {

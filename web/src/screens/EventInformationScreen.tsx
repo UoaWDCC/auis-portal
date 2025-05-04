@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { getEventById } from "../graphql/queries";
 import { useQuery } from "@apollo/client";
 import { Mapper } from "@utils/Mapper";
-import { EventAndTickets } from "../types/types";
+import { EventAndTickets, MembershipTicketInfo } from "../types/types";
 import { useParams } from "react-router-dom";
 import InformationHeader from "@components/event-information-page/InformationHeader";
 import EventDescription from "@components/event-information-page/EventDescription";
@@ -13,6 +13,8 @@ import TermsAndConditions from "@components/event-information-page/TermsAndCondi
 import ContactInformation from "@components/event-information-page/ContactInformation";
 import LoadingSpinner from "@components/navigation/LoadingSpinner";
 import NoEventFound from "@components/event-information-page/NoEventFound";
+import { useUserMemberTicketInfo } from "../hooks/api/useUserMemberTicketInfo";
+import YourTicket from "@components/event-information-page/YourTicket";
 
 export default function EventInformationScreen({
   navbar,
@@ -33,10 +35,28 @@ export default function EventInformationScreen({
     error: eventError,
   } = useQuery(getEventById({ id: queryId }));
 
+  // Get current member ticket info
+  const { data: TicketInfoData, status: statusTicketInfoData } =
+    useUserMemberTicketInfo(queryId);
+
   // States
   const [event, setEvent] = useState<EventAndTickets>();
   const [loadingEvent, setLoadingEvent] = useState(true);
   const [errorEvent, setErrorEvent] = useState(false);
+
+  const [userTicketInfoData, setUserTicketInfoData] =
+    useState<MembershipTicketInfo>({
+      ticketIdCode: "",
+      ticketName: "",
+      qrCode: "",
+    });
+
+  // update values once data is fetched
+  useEffect(() => {
+    if (statusTicketInfoData === "success") {
+      setUserTicketInfoData(TicketInfoData);
+    }
+  }, [userTicketInfoData]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -164,6 +184,18 @@ export default function EventInformationScreen({
         ))}
       </div>
       <LineBreak />
+      {statusTicketInfoData === "success" ? (
+        <>
+          <YourTicket
+            name={TicketInfoData.ticketName}
+            qrCode={TicketInfoData.qrCode}
+            ticketNumber={TicketInfoData.ticketIdCode}
+          />
+          <LineBreak />
+        </>
+      ) : (
+        <></>
+      )}
       <TermsAndConditions termsAndConditions={event.termsAndConditions} />
       <LineBreak />
       <ContactInformation />

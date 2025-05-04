@@ -17,7 +17,8 @@
       "enum": [
         "Gold",
         "Silver",
-        "Bronze"
+        "Bronze",
+        "Partner"
       ],
       "required": true
     },

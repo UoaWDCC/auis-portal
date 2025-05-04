@@ -50,13 +50,14 @@ jobs:
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_SUPERTOKENS_AUIS_API_TOKEN }}
 
-  deploy-database:
-    name: Deploy Database
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: superfly/flyctl-actions/setup-flyctl@master
-      - run: flyctl deploy --remote-only --config fly.toml
-        working-directory: ./database
-        env:
-          FLY_API_TOKEN: ${{ secrets.FLY_SUPERTOKENS_AUIS_API_TOKEN }}
+  # Note this does not work. It needs to be changed to scale up and down the postgres database
+  # deploy-database:
+  #   name: Deploy Database
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - uses: superfly/flyctl-actions/setup-flyctl@master
+  #     - run: flyctl deploy --remote-only --config fly.toml
+  #       working-directory: ./database
+  #       env:
+  #         FLY_API_TOKEN: ${{ secrets.FLY_SUPERTOKENS_AUIS_API_TOKEN }}

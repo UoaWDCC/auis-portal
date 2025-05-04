@@ -65,6 +65,7 @@ app.use(
       "Options",
       "X-Requested-With",
       "st-auth-mode",
+      "front-token",
       ...supertokens.getAllCORSHeaders(),
     ],
     credentials: true,
