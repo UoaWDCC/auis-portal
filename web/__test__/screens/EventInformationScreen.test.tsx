@@ -133,8 +133,6 @@ vi.mock("supertokens-auth-react/recipe/session", async () => {
   };
 });
 
-
-
 describe("EventInformationScreen", () => {
   it("renders loading spinner initially", () => {
     render(
@@ -166,7 +164,7 @@ describe("EventInformationScreen", () => {
     render(
       <MockedProvider mocks={errorMocks} addTypename={false}>
         <MemoryRouter>
-        <QueryClientProvider client={queryClient}>
+          <QueryClientProvider client={queryClient}>
             <EventInformationScreen navbar={<></>} />
           </QueryClientProvider>
         </MemoryRouter>

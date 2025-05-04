@@ -151,9 +151,7 @@ export default function SponsorsScreen({ navbar }: { navbar: JSX.Element }) {
             )}
             {/* Partners */}
             {errorPartners ? (
-              <div className="my-5 text-center">
-                No partners to display
-              </div>
+              <div className="my-5 text-center">No partners to display</div>
             ) : (
               <>
                 <h1 className="my-2 text-3xl font-bold text-[#0F4A57]">
