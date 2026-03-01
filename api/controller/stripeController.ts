@@ -77,6 +77,7 @@ export const createCheckout = asyncHandler(
           },
         ],
         mode: "payment",
+        payment_method_types: ["card"],
         currency: "NZD",
         return_url: `${process.env.DOMAIN_FRONTEND}/return?session_id={CHECKOUT_SESSION_ID}`,
         allow_promotion_codes: true,
