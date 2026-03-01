@@ -67,7 +67,7 @@ export const createCheckout = asyncHandler(
     try {
       const session = await stripe.checkout.sessions.create({
         //do not change anything below
-        ui_mode: "embedded",
+        ui_mode: "hosted",
         customer_email: email,
         expires_at: session_expiry,
         line_items: [
@@ -77,6 +77,7 @@ export const createCheckout = asyncHandler(
           },
         ],
         mode: "payment",
+        payment_method_types: ["card"],
         currency: "NZD",
         return_url: `${process.env.DOMAIN_FRONTEND}/return?session_id={CHECKOUT_SESSION_ID}`,
         allow_promotion_codes: true,
