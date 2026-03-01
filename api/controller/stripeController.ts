@@ -67,7 +67,7 @@ export const createCheckout = asyncHandler(
     try {
       const session = await stripe.checkout.sessions.create({
         //do not change anything below
-        ui_mode: "hosted",
+        ui_mode: "embedded",
         customer_email: email,
         expires_at: session_expiry,
         line_items: [
