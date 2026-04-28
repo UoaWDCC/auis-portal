@@ -27,7 +27,7 @@ export default function ExecCard({
         </div>
         <h1 className="text-xl font-bold text-black">{name}</h1>
         <div className="bg-primary-orange flex h-10 w-full items-center justify-center">
-          <p className="text-xl font-bold text-white">{position}</p>
+          <p className="text-[17px] font-bold text-white">{position}</p>
         </div>
         {/* Description Overlay */}
         <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-95 p-4 opacity-0 transition-opacity duration-300 hover:opacity-100">
