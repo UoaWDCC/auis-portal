@@ -15,10 +15,12 @@
     "Type": {
       "type": "enumeration",
       "enum": [
+        "Platinum",
         "Gold",
         "Silver",
         "Bronze",
-        "Partner"
+        "Partner",
+        "Affiliate"
       ],
       "required": true
     },

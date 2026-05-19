@@ -996,7 +996,7 @@ export interface ApiPartnerPartner extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    Type: Attribute.Enumeration<["Gold", "Silver", "Bronze"]> &
+    Type: Attribute.Enumeration<["Platinum", "Gold", "Silver", "Bronze"]> &
       Attribute.Required;
     Image: Attribute.Media<"images"> & Attribute.Required;
     Name: Attribute.String & Attribute.Required;
