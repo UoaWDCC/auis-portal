@@ -12,7 +12,10 @@ export default function AffiliatePartnerCard({
       <div className="flex h-full w-48 flex-col items-center">
         <div
           className="group relative flex h-full w-48 flex-col items-center justify-center overflow-hidden rounded-2xl border-4 p-5"
-          style={{ borderColor: "#000000", backgroundColor: "rgba(0, 0, 0, 0.05)" }}
+          style={{
+            borderColor: "#000000",
+            backgroundColor: "rgba(0, 0, 0, 0.05)",
+          }}
         >
           <div
             className="flex h-auto w-full items-center justify-center"

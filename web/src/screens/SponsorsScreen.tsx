@@ -45,9 +45,7 @@ export default function SponsorsScreen({ navbar }: { navbar: JSX.Element }) {
   const platinumPartners = partners.filter(
     (partner) => partner.type === "Platinum"
   );
-  const goldPartners = partners.filter(
-    (partner) => partner.type === "Gold"
-  );
+  const goldPartners = partners.filter((partner) => partner.type === "Gold");
   const silverPartners = partners.filter(
     (partner) => partner.type === "Silver"
   );
@@ -91,7 +89,7 @@ export default function SponsorsScreen({ navbar }: { navbar: JSX.Element }) {
               </div>
             ) : (
               <>
-                <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+                <h1 className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-3xl font-bold text-transparent">
                   Platinum Sponsors
                 </h1>
                 <div className="flex flex-wrap items-stretch justify-center">
@@ -210,7 +208,9 @@ export default function SponsorsScreen({ navbar }: { navbar: JSX.Element }) {
             )}
             {/* Affiliate Partners */}
             {errorPartners ? (
-              <div className="my-5 text-center">No affiliate partners to display</div>
+              <div className="my-5 text-center">
+                No affiliate partners to display
+              </div>
             ) : (
               <>
                 <h1 className="my-2 text-3xl font-bold text-black">
