@@ -4,9 +4,11 @@ import { useQuery } from "@apollo/client";
 import { GET_PARTNERS } from "../graphql/queries";
 import { Mapper } from "../utils/Mapper";
 import LoadingSpinner from "../components/navigation/LoadingSpinner";
+import PlatinumPartnerCard from "../components/partner-page/PlatinumPartnerCard";
 import GoldPartnerCard from "../components/partner-page/GoldPartnerCard";
 import SilverPartnerCard from "@components/partner-page/SilverPartnerCard";
 import BronzePartnerCard from "@components/partner-page/BronzePartnerCard";
+import AffiliatePartnerCard from "@components/partner-page/AffiliatePartnerCard";
 
 export default function SponsorsScreen({ navbar }: { navbar: JSX.Element }) {
   // Queries
@@ -40,6 +42,9 @@ export default function SponsorsScreen({ navbar }: { navbar: JSX.Element }) {
   }, [partnersData, partnersError, partnersLoading]);
 
   // Filtering the partners based on their type
+  const platinumPartners = partners.filter(
+    (partner) => partner.type === "Platinum"
+  );
   const goldPartners = partners.filter((partner) => partner.type === "Gold");
   const silverPartners = partners.filter(
     (partner) => partner.type === "Silver"
@@ -49,6 +54,9 @@ export default function SponsorsScreen({ navbar }: { navbar: JSX.Element }) {
   );
   const partnerPartners = partners.filter(
     (partner) => partner.type === "Partner"
+  );
+  const affiliatePartners = partners.filter(
+    (partner) => partner.type === "Affiliate"
   );
 
   if (loadingPartners) {
@@ -74,6 +82,32 @@ export default function SponsorsScreen({ navbar }: { navbar: JSX.Element }) {
             </div>
           </div>
           <div className="max-w-screen flex h-auto flex-col items-center bg-white py-5">
+            {/* Platinum Partners */}
+            {errorPartners ? (
+              <div className="my-5 text-center">
+                No platinum sponsors to display
+              </div>
+            ) : (
+              <>
+                <h1 className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-3xl font-bold text-transparent">
+                  Platinum Sponsors
+                </h1>
+                <div className="flex flex-wrap items-stretch justify-center">
+                  {platinumPartners.map((platinumPartner) => (
+                    <div className="my-5 px-10" key={platinumPartner.id}>
+                      <PlatinumPartnerCard
+                        key={platinumPartner.id}
+                        image={platinumPartner.image}
+                        link={platinumPartner.link}
+                        description={platinumPartner.description}
+                        name={platinumPartner.name}
+                        colour="#9370DB"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
             {/* Gold Partners */}
             {errorPartners ? (
               <div className="my-5 text-center">
@@ -166,6 +200,29 @@ export default function SponsorsScreen({ navbar }: { navbar: JSX.Element }) {
                         description={partnerPartners.description}
                         name={partnerPartners.name}
                         colour="#0F4A57"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
+            {/* Affiliate Partners */}
+            {errorPartners ? (
+              <div className="my-5 text-center">
+                No affiliate partners to display
+              </div>
+            ) : (
+              <>
+                <h1 className="my-2 text-3xl font-bold text-black">
+                  Affiliate Partners
+                </h1>
+                <div className="flex flex-wrap items-stretch justify-center">
+                  {affiliatePartners.map((affiliatePartner) => (
+                    <div className="my-5 px-10" key={affiliatePartner.id}>
+                      <AffiliatePartnerCard
+                        key={affiliatePartner.id}
+                        image={affiliatePartner.image}
+                        name={affiliatePartner.name}
                       />
                     </div>
                   ))}
