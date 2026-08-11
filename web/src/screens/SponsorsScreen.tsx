@@ -88,25 +88,26 @@ export default function SponsorsScreen({ navbar }: { navbar: JSX.Element }) {
                 No platinum sponsors to display
               </div>
             ) : (
-              <>
-                <h1 className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-3xl font-bold text-transparent">
-                  Platinum Sponsors
-                </h1>
-                <div className="flex flex-wrap items-stretch justify-center">
-                  {platinumPartners.map((platinumPartner) => (
-                    <div className="my-5 px-10" key={platinumPartner.id}>
-                      <PlatinumPartnerCard
-                        key={platinumPartner.id}
-                        image={platinumPartner.image}
-                        link={platinumPartner.link}
-                        description={platinumPartner.description}
-                        name={platinumPartner.name}
-                        colour="#9370DB"
-                      />
-                    </div>
-                  ))}
-                </div>
-              </>
+              platinumPartners.length > 0 && (
+                <>
+                  <h1 className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-3xl font-bold text-transparent">
+                    Platinum Sponsors
+                  </h1>
+                  <div className="flex flex-wrap items-stretch justify-center">
+                    {platinumPartners.map((platinumPartner) => (
+                      <div className="my-5 px-10" key={platinumPartner.id}>
+                        <PlatinumPartnerCard
+                          image={platinumPartner.image}
+                          link={platinumPartner.link}
+                          description={platinumPartner.description}
+                          name={platinumPartner.name}
+                          colour="#9370DB"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )
             )}
             {/* Gold Partners */}
             {errorPartners ? (
@@ -114,25 +115,27 @@ export default function SponsorsScreen({ navbar }: { navbar: JSX.Element }) {
                 No gold sponsors to display
               </div>
             ) : (
-              <>
-                <h1 className="text-3xl font-bold text-[#F3CF0B]">
-                  Gold Sponsors
-                </h1>
-                <div className="flex flex-wrap items-stretch justify-center">
-                  {goldPartners.map((goldPartner) => (
-                    <div className="my-5 px-10" key={goldPartner.id}>
-                      <GoldPartnerCard
-                        key={goldPartner.id}
-                        image={goldPartner.image}
-                        link={goldPartner.link}
-                        description={goldPartner.description}
-                        name={goldPartner.name}
-                        colour="#F3CF0B"
-                      />
-                    </div>
-                  ))}
-                </div>
-              </>
+              goldPartners.length > 0 && (
+                <>
+                  <h1 className="text-3xl font-bold text-[#F3CF0B]">
+                    Gold Sponsors
+                  </h1>
+                  <div className="flex flex-wrap items-stretch justify-center">
+                    {goldPartners.map((goldPartner) => (
+                      <div className="my-5 px-10" key={goldPartner.id}>
+                        <GoldPartnerCard
+                          key={goldPartner.id}
+                          image={goldPartner.image}
+                          link={goldPartner.link}
+                          description={goldPartner.description}
+                          name={goldPartner.name}
+                          colour="#F3CF0B"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )
             )}
             {/* Silver Partners */}
             {errorPartners ? (
@@ -140,24 +143,26 @@ export default function SponsorsScreen({ navbar }: { navbar: JSX.Element }) {
                 No silver sponsors to display
               </div>
             ) : (
-              <>
-                <h1 className="my-2 text-3xl font-bold text-[#C0C0C0]">
-                  Silver Sponsors
-                </h1>
-                <div className="flex flex-wrap items-stretch justify-center">
-                  {silverPartners.map((silverPartner) => (
-                    <div className="my-5 px-10" key={silverPartner.id}>
-                      <SilverPartnerCard
-                        key={silverPartner.id}
-                        image={silverPartner.image}
-                        description={silverPartner.description}
-                        name={silverPartner.name}
-                        colour="#C0C0C0"
-                      />
-                    </div>
-                  ))}
-                </div>
-              </>
+              silverPartners.length > 0 && (
+                <>
+                  <h1 className="my-2 text-3xl font-bold text-[#C0C0C0]">
+                    Silver Sponsors
+                  </h1>
+                  <div className="flex flex-wrap items-stretch justify-center">
+                    {silverPartners.map((silverPartner) => (
+                      <div className="my-5 px-10" key={silverPartner.id}>
+                        <SilverPartnerCard
+                          key={silverPartner.id}
+                          image={silverPartner.image}
+                          description={silverPartner.description}
+                          name={silverPartner.name}
+                          colour="#C0C0C0"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )
             )}
             {/* Bronze Partners */}
             {errorPartners ? (
@@ -165,46 +170,50 @@ export default function SponsorsScreen({ navbar }: { navbar: JSX.Element }) {
                 No bronze sponsors to display
               </div>
             ) : (
-              <>
-                <h1 className="my-2 text-3xl font-bold text-[#C88039]">
-                  Bronze Sponsors
-                </h1>
-                <div className="flex flex-wrap items-stretch justify-center">
-                  {bronzePartners.map((bronzePartner) => (
-                    <div className="my-5 px-10" key={bronzePartner.id}>
-                      <BronzePartnerCard
-                        key={bronzePartner.id}
-                        image={bronzePartner.image}
-                        name={bronzePartner.name}
-                        colour="#C88039"
-                      />
-                    </div>
-                  ))}
-                </div>
-              </>
+              bronzePartners.length > 0 && (
+                <>
+                  <h1 className="my-2 text-3xl font-bold text-[#C88039]">
+                    Bronze Sponsors
+                  </h1>
+                  <div className="flex flex-wrap items-stretch justify-center">
+                    {bronzePartners.map((bronzePartner) => (
+                      <div className="my-5 px-10" key={bronzePartner.id}>
+                        <BronzePartnerCard
+                          key={bronzePartner.id}
+                          image={bronzePartner.image}
+                          name={bronzePartner.name}
+                          colour="#C88039"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )
             )}
             {/* Partners */}
             {errorPartners ? (
               <div className="my-5 text-center">No partners to display</div>
             ) : (
-              <>
-                <h1 className="my-2 text-3xl font-bold text-[#0F4A57]">
-                  Partners
-                </h1>
-                <div className="flex flex-wrap items-stretch justify-center">
-                  {partnerPartners.map((partnerPartners) => (
-                    <div className="my-5 px-10" key={partnerPartners.id}>
-                      <SilverPartnerCard
-                        key={partnerPartners.id}
-                        image={partnerPartners.image}
-                        description={partnerPartners.description}
-                        name={partnerPartners.name}
-                        colour="#0F4A57"
-                      />
-                    </div>
-                  ))}
-                </div>
-              </>
+              partnerPartners.length > 0 && (
+                <>
+                  <h1 className="my-2 text-3xl font-bold text-[#0F4A57]">
+                    Partners
+                  </h1>
+                  <div className="flex flex-wrap items-stretch justify-center">
+                    {partnerPartners.map((partnerPartners) => (
+                      <div className="my-5 px-10" key={partnerPartners.id}>
+                        <SilverPartnerCard
+                          key={partnerPartners.id}
+                          image={partnerPartners.image}
+                          description={partnerPartners.description}
+                          name={partnerPartners.name}
+                          colour="#0F4A57"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )
             )}
             {/* Affiliate Partners */}
             {errorPartners ? (
@@ -212,22 +221,24 @@ export default function SponsorsScreen({ navbar }: { navbar: JSX.Element }) {
                 No affiliate partners to display
               </div>
             ) : (
-              <>
-                <h1 className="my-2 text-3xl font-bold text-black">
-                  Affiliate Partners
-                </h1>
-                <div className="flex flex-wrap items-stretch justify-center">
-                  {affiliatePartners.map((affiliatePartner) => (
-                    <div className="my-5 px-10" key={affiliatePartner.id}>
-                      <AffiliatePartnerCard
-                        key={affiliatePartner.id}
-                        image={affiliatePartner.image}
-                        name={affiliatePartner.name}
-                      />
-                    </div>
-                  ))}
-                </div>
-              </>
+              affiliatePartners.length > 0 && (
+                <>
+                  <h1 className="my-2 text-3xl font-bold text-black">
+                    Affiliate Partners
+                  </h1>
+                  <div className="flex flex-wrap items-stretch justify-center">
+                    {affiliatePartners.map((affiliatePartner) => (
+                      <div className="my-5 px-10" key={affiliatePartner.id}>
+                        <AffiliatePartnerCard
+                          key={affiliatePartner.id}
+                          image={affiliatePartner.image}
+                          name={affiliatePartner.name}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )
             )}
           </div>
           <div className="max-w-screen flex flex-col items-center bg-white py-5 text-center">
