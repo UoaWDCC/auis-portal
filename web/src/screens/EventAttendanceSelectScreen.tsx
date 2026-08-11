@@ -7,6 +7,19 @@ import LoadingSpinner from "@components/navigation/LoadingSpinner";
 import EventCard from "@components/events-slider/EventCard";
 import { useNavigate } from "react-router";
 
+const sortEventsByDate = (items: EventsSlider[]) => {
+  return [...items].sort((a, b) => {
+    const aTime = new Date(a.eventDateStart).getTime();
+    const bTime = new Date(b.eventDateStart).getTime();
+
+    if (Number.isNaN(aTime) && Number.isNaN(bTime)) return 0;
+    if (Number.isNaN(aTime)) return 1;
+    if (Number.isNaN(bTime)) return -1;
+
+    return bTime - aTime;
+  });
+};
+
 export default function EventAttendanceSelectScreen({
   navbar,
 }: {
@@ -46,7 +59,8 @@ export default function EventAttendanceSelectScreen({
   if (loadingEvents) {
     return <LoadingSpinner />;
   }
-  console.log(errorEvents);
+
+  const sortedEvents = sortEventsByDate(events);
 
   return (
     <div className="from-AUIS-dark-teal to-AUIS-teal min-h-[calc(100vh)] bg-gradient-to-b">
@@ -64,7 +78,7 @@ export default function EventAttendanceSelectScreen({
             </>
           ) : (
             <>
-              {events.map((event) => {
+              {sortedEvents.map((event) => {
                 return (
                   <div
                     onClick={() => navigate(`/admin/attendance/${event.id}`)}
