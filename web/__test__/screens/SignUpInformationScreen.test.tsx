@@ -35,9 +35,7 @@ describe("AboutUsScreen", () => {
     expect(
       await screen.findByText("Enter your first name")
     ).toBeInTheDocument();
-    expect(
-      await screen.findByText("Enter your last name")
-    ).toBeInTheDocument();
+    expect(await screen.findByText("Enter your last name")).toBeInTheDocument();
     expect(await screen.findByText("University ID number")).toBeInTheDocument();
     expect(
       await screen.findByText("Enter your UPI number")
@@ -66,9 +64,7 @@ describe("AboutUsScreen", () => {
         </QueryClientProvider>
       </MockedProvider>
     );
-    expect(
-      await screen.queryByText("Please enter your first name")
-    ).toBeNull();
+    expect(await screen.queryByText("Please enter your first name")).toBeNull();
     expect(await screen.queryByText("Please enter your last name")).toBeNull();
     expect(await screen.queryByText("Please enter your ID number")).toBeNull();
     expect(
