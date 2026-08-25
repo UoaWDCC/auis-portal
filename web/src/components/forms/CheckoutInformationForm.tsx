@@ -32,8 +32,10 @@ export default function CheckoutInformationForm({
   }
 
   // Initialise all states
-  const [nameInput, setNameInput] = useState<string>("");
-  const [errorName, setErrorName] = useState(false);
+  const [firstNameInput, setFirstNameInput] = useState<string>("");
+  const [errorFirstName, setErrorFirstName] = useState(false);
+  const [lastNameInput, setLastNameInput] = useState<string>("");
+  const [errorLastName, setErrorLastName] = useState(false);
   const [emailInput, setEmailInput] = useState<string>("");
   const [errorEmail, setErrorEmail] = useState(false);
   const [phoneNumberInput, setPhoneNumberInput] = useState<string>("");
@@ -76,10 +78,15 @@ export default function CheckoutInformationForm({
     } else {
       setErrorEmail(false);
     }
-    if (!FormValidate.validateName(nameInput)) {
-      setErrorName(true);
+    if (!FormValidate.validateName(firstNameInput)) {
+      setErrorFirstName(true);
     } else {
-      setErrorName(false);
+      setErrorFirstName(false);
+    }
+    if (!FormValidate.validateName(lastNameInput)) {
+      setErrorLastName(true);
+    } else {
+      setErrorLastName(false);
     }
     if (!FormValidate.validatePhoneNumber(phoneNumberInput)) {
       setErrorPhoneNumber(true);
@@ -95,7 +102,7 @@ export default function CheckoutInformationForm({
     // send post request
     if (
       FormValidate.validateAll(
-        (name = nameInput),
+        (name = `${firstNameInput} ${lastNameInput}`.trim()),
         (email = emailInput),
         (phoneNumber = phoneNumberInput),
         (answers = answerList)
@@ -109,21 +116,42 @@ export default function CheckoutInformationForm({
     <>
       <form
         onSubmit={(e) =>
-          handleSubmit(e, nameInput, emailInput, phoneNumberInput, answerList)
+          handleSubmit(
+            e,
+            `${firstNameInput} ${lastNameInput}`.trim(),
+            emailInput,
+            phoneNumberInput,
+            answerList
+          )
         }
         className="form"
       >
         <label className="flex items-center justify-center py-3 text-center text-xl">
-          Enter your name:
+          Enter your first name:
         </label>
         <input
           type="text"
-          onChange={(e) => setNameInput(e.target.value)}
+          onChange={(e) => setFirstNameInput(e.target.value)}
           className="input flex w-full items-center justify-center rounded-xl border px-3 py-2 text-lg leading-tight shadow focus:outline-none"
         />
-        {errorName ? (
+        {errorFirstName ? (
           <p className="mt-1 text-center text-red-500">
-            Please enter your name
+            Please enter your first name
+          </p>
+        ) : (
+          <></>
+        )}
+        <label className="flex items-center justify-center py-3 text-center text-xl">
+          Enter your last name:
+        </label>
+        <input
+          type="text"
+          onChange={(e) => setLastNameInput(e.target.value)}
+          className="input flex w-full items-center justify-center rounded-xl border px-3 py-2 text-lg leading-tight shadow focus:outline-none"
+        />
+        {errorLastName ? (
+          <p className="mt-1 text-center text-red-500">
+            Please enter your last name
           </p>
         ) : (
           <></>
