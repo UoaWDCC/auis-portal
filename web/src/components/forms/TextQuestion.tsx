@@ -9,7 +9,8 @@ interface QuestionProps {
   errorMessage: string;
 }
 type FormData = {
-  name: string;
+  firstName: string;
+  lastName: string;
   universityId: string;
   upi: string;
   yearOfStudy:
@@ -33,7 +34,8 @@ type FormData = {
 };
 
 type ValidFieldNames =
-  | "name"
+  | "firstName"
+  | "lastName"
   | "universityId"
   | "upi"
   | "yearOfStudy"

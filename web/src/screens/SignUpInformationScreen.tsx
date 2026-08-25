@@ -8,7 +8,8 @@ import { useUpdateUserInfo } from "../hooks/api/useUpdateUserInfo";
 import LoadingSpinner from "@components/navigation/LoadingSpinner";
 
 const SignUpSchema = z.object({
-  name: z.string().max(40).min(1),
+  firstName: z.string().max(40).min(1),
+  lastName: z.string().max(40).min(1),
   universityId: z.string().max(15).min(2),
   upi: z.string().max(15).min(2),
   yearOfStudy: z.enum([
@@ -51,7 +52,8 @@ export default function SignUpInformationScreen({
   const { status, mutateAsync } = useUpdateUserInfo();
 
   const sendSignUpData = async (data: SignUpSchemaType) => {
-    mutateAsync(data);
+    const { firstName, lastName, ...rest } = data;
+    mutateAsync({ name: `${firstName} ${lastName}`.trim(), ...rest });
   };
 
   const onSubmit: SubmitHandler<SignUpSchemaType> = (data) => {
@@ -109,12 +111,20 @@ export default function SignUpInformationScreen({
           <div>
             <form onSubmit={handleSubmit(onSubmit)} className="form">
               <TextQuestion
-                question="Enter your name"
-                placeholder="Eg. John Smith"
-                name="name"
+                question="Enter your first name"
+                placeholder="Eg. John"
+                name="firstName"
                 register={register}
-                error={errors.name}
-                errorMessage="Please enter your full name"
+                error={errors.firstName}
+                errorMessage="Please enter your first name"
+              />
+              <TextQuestion
+                question="Enter your last name"
+                placeholder="Eg. Smith"
+                name="lastName"
+                register={register}
+                error={errors.lastName}
+                errorMessage="Please enter your last name"
               />
               <TextQuestion
                 question="University ID number"
