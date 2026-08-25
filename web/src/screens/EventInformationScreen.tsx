@@ -184,7 +184,7 @@ export default function EventInformationScreen({
         ))}
       </div>
       <LineBreak />
-      {statusTicketInfoData === "success" ? (
+      {statusTicketInfoData === "success" && TicketInfoData?.ticketIdCode ? (
         <>
           <YourTicket
             name={TicketInfoData.ticketName}

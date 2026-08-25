@@ -67,6 +67,15 @@ export const getUserTicketInfo = asyncHandler(
         eventID.toString()
       );
 
+      // No paid ticket for this event. Respond 404 so every version of the
+      // frontend (old and new) treats it as "nothing to show" rather than
+      // rendering an empty ticket card.
+      if (!ticketInformation.ticketIdCode) {
+        return res
+          .status(404)
+          .json({ message: "No paid ticket found for this event" });
+      }
+
       res.status(200).json({ ticketInformation: ticketInformation });
     } catch (error) {
       res.status(500).json({

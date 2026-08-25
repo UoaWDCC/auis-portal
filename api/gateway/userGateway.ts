@@ -12,7 +12,7 @@ import {
 } from "../schemas/schema";
 import { db } from "../db/config/db";
 import { User, UpdateUserInfoBody } from "../types/types";
-import { eq, and, inArray } from "drizzle-orm";
+import { eq, and, inArray, isNotNull } from "drizzle-orm";
 import { stripe } from "../stripe/stripe";
 import { getUserEmail, getUserIdByEmail } from "./authGateway";
 import { updateUserMetadata } from "supertokens-node/recipe/usermetadata";
@@ -85,16 +85,32 @@ export async function getUserTicketCode(
     .filter((item) => item.ticketId !== null)
     .map((item) => item.ticketId!);
 
+  // This event has no ticket types, so the user cannot hold a ticket for it.
+  if (arr.length === 0) {
+    return returnInfo;
+  }
+
   let ticketIdCodeDB = await db
     .select({
       ticketName: userTickets.name,
       ticketCode: userTickets.peopleTicketCode,
     })
     .from(userTickets)
-    .where(and(eq(userTickets.email, userEmail), eq(userTickets.paid, true)))
+    // The join condition MUST tie the link row back to this user ticket.
+    // Without eq(userTicketsTicketIdLinks.userTicketId, userTickets.id) this is
+    // a cross join: any paid ticket the user holds (for ANY event) matches every
+    // event, so an unpaid attendee was shown an old ticket's QR code.
     .innerJoin(
       userTicketsTicketIdLinks,
-      inArray(userTicketsTicketIdLinks.ticketId, arr)
+      eq(userTicketsTicketIdLinks.userTicketId, userTickets.id)
+    )
+    .where(
+      and(
+        eq(userTickets.email, userEmail),
+        eq(userTickets.paid, true),
+        isNotNull(userTickets.peopleTicketCode),
+        inArray(userTicketsTicketIdLinks.ticketId, arr)
+      )
     )
     .limit(1);
 
@@ -116,10 +132,10 @@ export async function getUserTicketCode(
       let qrCode: string = await generateQRCode(ticketIdCodeDB[0].ticketCode);
       returnInfo.qrCode = qrCode;
     }
-  } else if (ticketIdCodeDB.length === 0) {
-    throw new Error("getUserMembershipExpiryDate: ticketIdCodeDB.length was 0");
   }
 
+  // No paid ticket for this event: return blank fields (not an error). The
+  // frontend hides the ticket section when ticketIdCode is empty.
   return returnInfo;
 }
 
