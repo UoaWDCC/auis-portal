@@ -42,7 +42,7 @@ export class FormValidate {
   ) {
     var valid: boolean = true;
     text.map((item) => {
-      if (item.answer.length > 50) {
+      if (item.answer.length === 0 || item.answer.length > 50) {
         valid = false;
       }
     });
