@@ -16,10 +16,10 @@ describe("Validate Text", () => {
     expect(output).toEqual(expected);
   });
 
-  it("should return true without an empty string", () => {
+  it("should return false with an empty string", () => {
     const answer = "";
     const output = FormValidate.validateAnswers([{ answer: answer }]);
-    const expected = true;
+    const expected = false;
     expect(output).toEqual(expected);
   });
 
@@ -60,7 +60,7 @@ describe("Validate Text", () => {
     expect(output).toEqual(expected);
   });
 
-  it("should return true without an empty string multiple answers", () => {
+  it("should return false with an empty string multiple answers", () => {
     const validAnswer = "Test";
     const answer = "";
     const output = FormValidate.validateAnswers([
@@ -68,7 +68,7 @@ describe("Validate Text", () => {
       { answer: answer },
       { answer: validAnswer },
     ]);
-    const expected = true;
+    const expected = false;
     expect(output).toEqual(expected);
   });
 

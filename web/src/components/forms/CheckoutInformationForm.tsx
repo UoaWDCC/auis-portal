@@ -196,7 +196,8 @@ export default function CheckoutInformationForm({
         ))}
         {errorAnswer ? (
           <p className="mt-1 text-center text-red-500">
-            The maximum length for each answer is 50 characters
+            Please answer all questions. Each answer must be between 1 and 50
+            characters
           </p>
         ) : (
           <></>
