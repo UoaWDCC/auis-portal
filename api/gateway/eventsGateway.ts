@@ -92,67 +92,25 @@ export async function getEventIdFromPriceId(priceId: string) {
   return eventId[0].eventId;
 }
 
-// @Ratchet7x5: Reserve one ticket
-
-// reserve ticket from EVENT, and also Ticket
-export async function reserveTicket(priceId: string) {
-  let canReserveTicket = await isTicketAvailableByPriceId(priceId);
-  let reservedTicket;
-  let reservedTicketTicket;
+// decrement one ticket from EVENT and TICKET remaining counts
+async function consumeTicket(priceId: string) {
   const eventId = await getEventIdFromPriceId(priceId);
 
   if (eventId) {
-    //if ticket available, reduce by 1
-    if (canReserveTicket === true) {
-      // sql for reserving statement EVENT
-      reservedTicket = await db
-        .update(events)
-        .set({
-          eventCapacityRemaining: sql`${events.eventCapacityRemaining} - 1`,
-        })
-        .where(eq(events.id, eventId))
-        .returning();
-
-      // reserve ticket
-      reservedTicketTicket = await db
-        .update(tickets)
-        .set({
-          numberTicketsLeft: sql`${tickets.numberTicketsLeft} - 1`,
-        })
-        .where(eq(tickets.stripeLink, priceId))
-        .returning();
-    }
-  }
-  return reservedTicket;
-}
-
-// @Ratchet7x5: Release one reserved ticket
-// relese ticket and also event
-export async function releaseReservedTicket(priceId: string) {
-  let releasedTicket;
-  let releasedTicketTicket;
-
-  const eventId = await getEventIdFromPriceId(priceId);
-
-  if (eventId) {
-    // increment event_remaining_ticket by 1
-    releasedTicket = await db
+    await db
       .update(events)
       .set({
-        eventCapacityRemaining: sql`${events.eventCapacityRemaining} + 1`,
+        eventCapacityRemaining: sql`${events.eventCapacityRemaining} - 1`,
       })
-      .where(eq(events.id, eventId))
-      .returning();
+      .where(eq(events.id, eventId));
 
-    releasedTicketTicket = await db
+    await db
       .update(tickets)
       .set({
-        numberTicketsLeft: sql`${tickets.numberTicketsLeft} + 1`,
+        numberTicketsLeft: sql`${tickets.numberTicketsLeft} - 1`,
       })
-      .where(eq(events.id, eventId))
-      .returning();
+      .where(eq(tickets.stripeLink, priceId));
   }
-  return releasedTicket;
 }
 
 export async function completeTicketPurchase(
@@ -201,6 +159,9 @@ export async function completeTicketPurchase(
       .where(eq(events.id, eventId[0].id))
       .limit(1);
 
+    // guard against Stripe redelivering the webhook and double-consuming a ticket
+    const alreadyPaid = customer[0]?.paid === true;
+
     let updatedTicket = await db
       .update(userTickets)
       .set({
@@ -211,6 +172,10 @@ export async function completeTicketPurchase(
         eq(userTickets.id, parseInt(checkoutSession.metadata!["userTicketId"]))
       )
       .returning();
+
+    if (!alreadyPaid) {
+      await consumeTicket(checkoutSession.metadata!["priceId"]);
+    }
 
     //prod fail:
     console.dir(

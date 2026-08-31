@@ -2,8 +2,6 @@ import express, { Request, Response, Router, json } from "express";
 import asyncHandler from "../middleware/asyncHandler";
 import {
   isTicketAvailableByPriceId,
-  reserveTicket,
-  releaseReservedTicket,
   completeTicketPurchase,
   isPriceIdForEvent,
 } from "../gateway/eventsGateway";
@@ -53,8 +51,6 @@ export const createCheckout = asyncHandler(
             error:
               "There are no tickets available for this event. Please come back later to see if more tickets become available.",
           });
-        } else {
-          reserveTicket(priceId);
         }
       }
     } else if (isEventTicket === "n") {
@@ -135,18 +131,6 @@ export const handleWebhook = asyncHandler(
             );
           } else if (session.metadata!["isEventTicket"] === "n") {
             updateUserMembershipExpiryDate(session.id);
-          }
-        }
-      } else if (event.type === "checkout.session.expired") {
-        const session = event.data.object;
-
-        if (
-          !session.metadata &&
-          !session.metadata!["priceId"] &&
-          !session.metadata!["isEventTicket"]
-        ) {
-          if (session.metadata!["isEventTicket"] === "y") {
-            releaseReservedTicket(session.metadata!["priceId"]);
           }
         }
       }
