@@ -14,7 +14,6 @@ import { stripe } from "../stripe/stripe";
 import { ticketsEventIdLinksRelations } from "../schemas/relations";
 import { sendEmail } from "../mailer/mailer";
 import { generateQRCode } from "../mailer/qrCode";
-import { process } from "zod/v4/core";
 
 // Check to make sure the session is valid Ticket is live, event is live, ticket left, event amount left, event is NOT over - done
 // If it is memeer ticket - make sure that the ticket is not already purchased AND PAID - TODO:
