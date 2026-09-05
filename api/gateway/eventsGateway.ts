@@ -14,6 +14,7 @@ import { stripe } from "../stripe/stripe";
 import { ticketsEventIdLinksRelations } from "../schemas/relations";
 import { sendEmail } from "../mailer/mailer";
 import { generateQRCode } from "../mailer/qrCode";
+import { process } from "zod/v4/core";
 
 // Check to make sure the session is valid Ticket is live, event is live, ticket left, event amount left, event is NOT over - done
 // If it is memeer ticket - make sure that the ticket is not already purchased AND PAID - TODO:
@@ -97,19 +98,52 @@ async function consumeTicket(priceId: string) {
   const eventId = await getEventIdFromPriceId(priceId);
 
   if (eventId) {
-    await db
+    const updatedEvents = await db
       .update(events)
       .set({
         eventCapacityRemaining: sql`${events.eventCapacityRemaining} - 1`,
       })
-      .where(eq(events.id, eventId));
+      .where(eq(events.id, eventId))
+      .returning();
 
     await db
       .update(tickets)
       .set({
         numberTicketsLeft: sql`${tickets.numberTicketsLeft} - 1`,
       })
-      .where(eq(tickets.stripeLink, priceId));
+      .where(eq(tickets.stripeLink, priceId))
+
+    const updatedEvent = updatedEvents[0];
+
+    if (updatedEvent && updatedEvent.eventCapacityRemaining === 0) {
+      // Event is sold out, send a notification to Discord
+      notifyDiscordEventSoldOut(updatedEvent.title);
+    }
+  }
+}
+
+async function notifyDiscordEventSoldOut(eventTitle: string | null | undefined) {
+  const DISCORD_WEBHOOK_URL = process.env.DISCORD_WEBHOOK_URL || '';
+
+  if (!DISCORD_WEBHOOK_URL) {
+    console.error('DISCORD_WEBHOOK_URL is not set, skipping Discord notification.');
+    return;
+  }
+
+  try {
+    const res = await fetch(DISCORD_WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        content: `🎟️ **Sold out!** "${eventTitle ?? 'An event'}" has 0 tickets remaining.`,
+      }),
+    });
+
+    if (!res.ok) {
+      console.error(`Discord webhook failed: ${res.status} ${res.statusText}`);
+    }
+  } catch (err) {
+    console.error('Failed to send Discord webhook:', err instanceof Error ? err.message : String(err));
   }
 }
 
