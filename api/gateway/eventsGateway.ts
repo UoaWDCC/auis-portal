@@ -111,7 +111,7 @@ async function consumeTicket(priceId: string) {
       .set({
         numberTicketsLeft: sql`${tickets.numberTicketsLeft} - 1`,
       })
-      .where(eq(tickets.stripeLink, priceId))
+      .where(eq(tickets.stripeLink, priceId));
 
     const updatedEvent = updatedEvents[0];
 
@@ -122,20 +122,24 @@ async function consumeTicket(priceId: string) {
   }
 }
 
-async function notifyDiscordEventSoldOut(eventTitle: string | null | undefined) {
-  const DISCORD_WEBHOOK_URL = process.env.DISCORD_WEBHOOK_URL || '';
+async function notifyDiscordEventSoldOut(
+  eventTitle: string | null | undefined
+) {
+  const DISCORD_WEBHOOK_URL = process.env.DISCORD_WEBHOOK_URL || "";
 
   if (!DISCORD_WEBHOOK_URL) {
-    console.error('DISCORD_WEBHOOK_URL is not set, skipping Discord notification.');
+    console.error(
+      "DISCORD_WEBHOOK_URL is not set, skipping Discord notification."
+    );
     return;
   }
 
   try {
     const res = await fetch(DISCORD_WEBHOOK_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        content: `🎟️ **Sold out!** "${eventTitle ?? 'An event'}" has 0 tickets remaining.`,
+        content: `🎟️ **Sold out!** "${eventTitle ?? "An event"}" has 0 tickets remaining.`,
       }),
     });
 
@@ -143,7 +147,10 @@ async function notifyDiscordEventSoldOut(eventTitle: string | null | undefined) 
       console.error(`Discord webhook failed: ${res.status} ${res.statusText}`);
     }
   } catch (err) {
-    console.error('Failed to send Discord webhook:', err instanceof Error ? err.message : String(err));
+    console.error(
+      "Failed to send Discord webhook:",
+      err instanceof Error ? err.message : String(err)
+    );
   }
 }
 
