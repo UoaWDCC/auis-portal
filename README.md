@@ -36,5 +36,6 @@ On VS Code install the extensions: TailwindCSS Intellisense, and Biome
 - Tarun
 - Diya
 - Gury
+- Dhruv
 - Sai Kiran
 - Naren
