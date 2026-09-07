@@ -125,6 +125,10 @@ async function consumeTicket(priceId: string) {
   }
 }
 
+// Peoples team role ID and Sai's user ID, pinged when an event sells out
+const DISCORD_PEOPLES_ROLE_ID = "1431462646741205052";
+const DISCORD_SAI_USER_ID = "426544868064624645";
+
 async function notifyDiscordEventSoldOut(
   eventTitle: string | null | undefined
 ) {
@@ -142,7 +146,11 @@ async function notifyDiscordEventSoldOut(
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        content: `🎟️ **Sold out!** "${eventTitle ?? "An event"}" has 0 tickets remaining.`,
+        content: `<@&${DISCORD_PEOPLES_ROLE_ID}> <@${DISCORD_SAI_USER_ID}> 🎟️ **Sold out!**  ${eventTitle ?? "An event"} has **0** tickets remaining.`,
+        allowed_mentions: {
+          roles: [DISCORD_PEOPLES_ROLE_ID],
+          users: [DISCORD_SAI_USER_ID],
+        },
       }),
     });
 
