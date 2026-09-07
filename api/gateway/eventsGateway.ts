@@ -114,7 +114,11 @@ async function consumeTicket(priceId: string) {
 
     const updatedEvent = updatedEvents[0];
 
-    if (updatedEvent && updatedEvent.eventCapacityRemaining === 0) {
+    if (
+      updatedEvent &&
+      updatedEvent.eventCapacityRemaining != null &&
+      updatedEvent.eventCapacityRemaining <= 0
+    ) {
       // Event is sold out, send a notification to Discord
       notifyDiscordEventSoldOut(updatedEvent.title);
     }
