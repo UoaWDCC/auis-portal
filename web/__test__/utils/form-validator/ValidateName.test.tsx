@@ -23,6 +23,13 @@ describe("Validate Name", () => {
     expect(output).toEqual(expected);
   });
 
+  it("should return false with a whitespace-only string", () => {
+    const name = "   ";
+    const output = FormValidate.validateName(name);
+    const expected = false;
+    expect(output).toEqual(expected);
+  });
+
   it("should return false without an large string", () => {
     const name =
       "1234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345@gmail.com";
