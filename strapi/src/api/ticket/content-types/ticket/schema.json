@@ -51,12 +51,6 @@
       "default": false,
       "required": true
     },
-    "Has_Ticket_Auto_Activated": {
-      "type": "boolean",
-      "default": false,
-      "required": true,
-      "private": true
-    },
     "Question_ID": {
       "type": "relation",
       "relation": "oneToMany",
