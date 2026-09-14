@@ -103,12 +103,9 @@ export default function CheckoutInformationForm({
     if (
       FormValidate.validateAll(
         (name = `${firstNameInput} ${lastNameInput}`.trim()),
-        (email = emailInput.trim()),
-        (phoneNumber = phoneNumberInput.trim()),
-        (answers = answerList.map((item) => ({
-          ...item,
-          answer: item.answer.trim(),
-        })))
+        (email = emailInput),
+        (phoneNumber = phoneNumberInput),
+        (answers = answerList)
       )
     ) {
       postInformation(event, name, email, phoneNumber, answers);

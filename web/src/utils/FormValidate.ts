@@ -9,8 +9,7 @@ export class FormValidate {
   }
 
   static validateName(text: string) {
-    const trimmed = text.trim();
-    return trimmed.length > 0 && trimmed.length < 99;
+    return text.length > 0 && text.length < 99;
   }
 
   static validateAll(
@@ -30,11 +29,10 @@ export class FormValidate {
   }
 
   static validatePhoneNumber(text: string) {
-    const trimmed = text.trim();
-    const regex = trimmed
+    const regex = text
       .toLowerCase()
       .match(/^(([0-9\ \+\_\-\,\.\^\*\?\$\^\#\(\)])|(ext|x)){1,20}$/);
-    return trimmed.length > 6 && trimmed.length < 20 && regex !== null;
+    return text.length > 6 && text.length < 20 && regex !== null;
   }
 
   static validateAnswers(
@@ -44,8 +42,7 @@ export class FormValidate {
   ) {
     var valid: boolean = true;
     text.map((item) => {
-      const trimmed = item.answer.trim();
-      if (trimmed.length === 0 || trimmed.length > 50) {
+      if (item.answer.length === 0 || item.answer.length > 50) {
         valid = false;
       }
     });

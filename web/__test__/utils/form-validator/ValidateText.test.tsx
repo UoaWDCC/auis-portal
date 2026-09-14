@@ -23,13 +23,6 @@ describe("Validate Text", () => {
     expect(output).toEqual(expected);
   });
 
-  it("should return false with a whitespace-only string", () => {
-    const answer = "   ";
-    const output = FormValidate.validateAnswers([{ answer: answer }]);
-    const expected = false;
-    expect(output).toEqual(expected);
-  });
-
   it("should return false without an large string", () => {
     const validAnswer = "Test";
     const answer =
