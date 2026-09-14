@@ -15,7 +15,23 @@ module.exports = [
       },
     },
   },
-  "strapi::cors",
+  {
+    name: "strapi::cors",
+    config: {
+      headers: [
+        "Content-Type",
+        "Authorization",
+        "Origin",
+        "Accept",
+        // SuperTokens' frontend SDK attaches these to same-hostname requests
+        // regardless of port, so it also sends them to Strapi in local dev.
+        "rid",
+        "fdi-version",
+        "st-auth-mode",
+        "anti-csrf",
+      ],
+    },
+  },
   "strapi::poweredBy",
   "strapi::query",
   "strapi::body",

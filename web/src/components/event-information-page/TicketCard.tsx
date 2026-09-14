@@ -87,6 +87,12 @@ export default function TicketCard({
     }
   }
   const isTicketOnSale = isTicketLive && numTicketsLeft > 0;
+  const isSoldOut = isTicketLive && numTicketsLeft <= 0;
+  const buttonLabel = isSoldOut
+    ? "Sold out"
+    : !isTicketLive
+      ? "Coming soon"
+      : "Get Tickets";
 
   return (
     <>
@@ -121,7 +127,7 @@ export default function TicketCard({
               onClick={handleOnClick}
               className={` ${!isTicketOnSale ? "text-md mx-4 cursor-not-allowed rounded-lg bg-gray-300 px-5 py-3 font-bold text-black" : "bg-primary-orange text-md mx-4 rounded-lg px-5 py-3 font-bold text-white transition-all hover:scale-105"} `}
             >
-              {!isTicketOnSale ? "Sold out" : "Get Tickets"}
+              {buttonLabel}
             </button>
           </div>
         </div>
