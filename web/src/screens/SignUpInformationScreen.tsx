@@ -8,10 +8,10 @@ import { useUpdateUserInfo } from "../hooks/api/useUpdateUserInfo";
 import LoadingSpinner from "@components/navigation/LoadingSpinner";
 
 const SignUpSchema = z.object({
-  firstName: z.string().max(40).min(1),
-  lastName: z.string().max(40).min(1),
-  universityId: z.string().max(15).min(2),
-  upi: z.string().max(15).min(2),
+  firstName: z.string().trim().max(40).min(1),
+  lastName: z.string().trim().max(40).min(1),
+  universityId: z.string().trim().max(15).min(2),
+  upi: z.string().trim().max(15).min(2),
   yearOfStudy: z.enum([
     "0",
     "1",
@@ -24,7 +24,7 @@ const SignUpSchema = z.object({
     "Postgraduate",
     "Alumni",
   ]),
-  fieldOfStudy: z.string().max(40).min(1),
+  fieldOfStudy: z.string().trim().max(40).min(1),
   isDomestic: z.enum(["Domestic Student", "International Student", "N/A"]),
   institution: z.enum([
     "The University of Auckland",
