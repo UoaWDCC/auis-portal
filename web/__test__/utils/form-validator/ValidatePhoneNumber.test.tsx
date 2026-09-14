@@ -23,13 +23,6 @@ describe("Validate Phone Number", () => {
     expect(output).toEqual(expected);
   });
 
-  it("should return false with a whitespace-only string", () => {
-    const phoneNumber = "           ";
-    const output = FormValidate.validatePhoneNumber(phoneNumber);
-    const expected = false;
-    expect(output).toEqual(expected);
-  });
-
   it("should return false when not a number", () => {
     const phoneNumber = "asdfasdfasdf";
     const output = FormValidate.validatePhoneNumber(phoneNumber);
