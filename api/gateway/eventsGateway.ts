@@ -125,9 +125,10 @@ async function consumeTicket(priceId: string) {
   }
 }
 
-// Peoples team role ID and President's role ID is pinged when an event sells out
-const DISCORD_PEOPLES_ROLE_ID = "1431462646741205052";
-const DISCORD_PRESIDENT_ROLE_ID = "1431463767790714940";
+// Digital operations role ID, Core role ID, and Socials role ID is pinged when an event sells out
+const DISCORD_DIGITAL_OPERATIONS_ROLE_ID = "1557218366723461195";
+const DISCORD_CORE_ROLE_ID = "1557222453263208571";
+const DISCORD_SOCIALS_ROLE_ID = "1558304105825312799";
 
 async function notifyDiscordEventSoldOut(
   eventTitle: string | null | undefined
@@ -146,9 +147,9 @@ async function notifyDiscordEventSoldOut(
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        content: `<@&${DISCORD_PEOPLES_ROLE_ID}> <@&${DISCORD_PRESIDENT_ROLE_ID}> 🎟️ **Sold out!**  ${eventTitle ?? "An event"} has **0** tickets remaining.`,
+        content: `<@&${DISCORD_DIGITAL_OPERATIONS_ROLE_ID}> <@&${DISCORD_CORE_ROLE_ID}> <@&${DISCORD_SOCIALS_ROLE_ID}> 🎟️ **Sold out!**  ${eventTitle ?? "An event"} has **0** tickets remaining.`,
         allowed_mentions: {
-          roles: [DISCORD_PEOPLES_ROLE_ID, DISCORD_PRESIDENT_ROLE_ID],
+          roles: [DISCORD_DIGITAL_OPERATIONS_ROLE_ID, DISCORD_CORE_ROLE_ID, DISCORD_SOCIALS_ROLE_ID],
         },
       }),
     });
