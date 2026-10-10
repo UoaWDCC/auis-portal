@@ -149,7 +149,11 @@ async function notifyDiscordEventSoldOut(
       body: JSON.stringify({
         content: `<@&${DISCORD_DIGITAL_OPERATIONS_ROLE_ID}> <@&${DISCORD_CORE_ROLE_ID}> <@&${DISCORD_SOCIALS_ROLE_ID}> 🎟️ **Sold out!**  ${eventTitle ?? "An event"} has **0** tickets remaining.`,
         allowed_mentions: {
-          roles: [DISCORD_DIGITAL_OPERATIONS_ROLE_ID, DISCORD_CORE_ROLE_ID, DISCORD_SOCIALS_ROLE_ID],
+          roles: [
+            DISCORD_DIGITAL_OPERATIONS_ROLE_ID,
+            DISCORD_CORE_ROLE_ID,
+            DISCORD_SOCIALS_ROLE_ID,
+          ],
         },
       }),
     });
